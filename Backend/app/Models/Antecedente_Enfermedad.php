@@ -10,7 +10,7 @@ class Antecedente_Enfermedad extends Model
     use HasFactory;
     public $timestamps=false;
     protected $table = 'antecedentes_enfermedades';
-    protected $primaryKey = 'id_antecedente_enfermedad';
+    protected $primaryKey = 'id_a_enfermedad';
      protected $fillable = [
          'descripcion',
     ];

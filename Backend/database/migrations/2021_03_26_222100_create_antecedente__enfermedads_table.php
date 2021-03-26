@@ -14,7 +14,7 @@ class CreateAntecedenteEnfermedadsTable extends Migration
     public function up()
     {
         Schema::create('antecedentes_enfermedades', function (Blueprint $table) {
-            $table->bigIncrements('id_antecedente_enfermedad');
+            $table->bigIncrements('id_a_enfermedad');
             $table->string('descripcion');
         });
     }

@@ -14,7 +14,7 @@ class CreateExamenFisicosTable extends Migration
     public function up()
     {
         Schema::create('examen_fisicos', function (Blueprint $table) {
-            $table->bigIncrements('id_examen_fisico');
+            $table->bigIncrements('id_e_fisico');
             $table->string('cabeza');
             $table->string('cuello');
             $table->string('torax');

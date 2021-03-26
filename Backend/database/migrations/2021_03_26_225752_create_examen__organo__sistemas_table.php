@@ -14,7 +14,7 @@ class CreateExamenOrganoSistemasTable extends Migration
     public function up()
     {
         Schema::create('examen_organo_sistemas', function (Blueprint $table) {
-            $table->bigIncrements('id_examen_organo_sistema');
+            $table->bigIncrements('id_e_organo_sistema');
             $table->string('sistema_digestivo');
             $table->string('sistema_respiratorio');
             $table->string('sistema_cardiaco');
