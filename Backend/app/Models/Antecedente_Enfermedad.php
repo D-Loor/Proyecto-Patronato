@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Antecedente_Enfermedad extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    protected $table = 'roles';
-    protected $primaryKey = 'id_rol';
+    protected $table = 'antecedentes_enfermedades';
+    protected $primaryKey = 'id_antecedente_enfermedad';
      protected $fillable = [
-       'rol',
+         'descripcion',
     ];
-
 }

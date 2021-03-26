@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Familia extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    protected $table = 'roles';
-    protected $primaryKey = 'id_rol';
+    protected $table = 'familiares';
+    protected $primaryKey = 'id_familiar';
      protected $fillable = [
-       'rol',
+         'nombres',  'union',  'vida',  'causas',
     ];
-
 }
