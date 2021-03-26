@@ -13,9 +13,12 @@ class CreateExamenesComplementariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('examenes__complementarios', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('examenes_complementarios', function (Blueprint $table) {
+            $table->bigIncrements('id_e_complementario');
+            $table->string('laboratorio');
+            $table->string('electrocardiograma');
+            $table->string('radiografia_torax');
+            $table->string('otros');
         });
     }
 
@@ -26,6 +29,6 @@ class CreateExamenesComplementariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('examenes__complementarios');
+        Schema::dropIfExists('examenes_complementarios');
     }
 }

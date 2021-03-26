@@ -14,8 +14,16 @@ class CreateTratamientosTable extends Migration
     public function up()
     {
         Schema::create('tratamientos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id_tratamiento');
+            $table->string('estimulacion_temprana');
+            $table->string('magnetoterapia');
+            $table->string('electroestimulacion');
+            $table->string('ultrasonido');
+            $table->string('CQCOH');
+            $table->string('masaje');
+            $table->string('ejercicios_pasivos_resistidos');
+            $table->string('laser');
+            $table->string('otros');
         });
     }
 
