@@ -14,8 +14,13 @@ class CreateHabitosTable extends Migration
     public function up()
     {
         Schema::create('habitos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id_habito');
+            $table->string('alcohol');
+            $table->string('tabaco');
+            $table->string('drogas');
+            $table->string('alimentacion');
+            $table->string('diuresis');
+            $table->string('somnia');
         });
     }
 
