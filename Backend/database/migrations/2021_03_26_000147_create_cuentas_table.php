@@ -14,8 +14,14 @@ class CreateCuentasTable extends Migration
     public function up()
     {
         Schema::create('cuentas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id_cuenta');
+            $table->unsignedBigInteger('id_rol');
+            $table->string('nombres');
+            $table->string('correo');
+            $table->string('password');
+            $table->string('imagen');
+
+            $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
         });
     }
 
