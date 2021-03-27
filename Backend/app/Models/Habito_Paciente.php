@@ -11,7 +11,5 @@ class Habito_Paciente extends Model
     public $timestamps=false;
     protected $table = 'habito_pacientes';
     protected $primaryKey = 'id_habito_paciente';
-    protected $fillable = [
-        'cedula',
-    ];
+    protected $fillable = [];
 }

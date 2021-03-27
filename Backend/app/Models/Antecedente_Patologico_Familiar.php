@@ -11,7 +11,5 @@ class Antecedente_Patologico_Familiar extends Model
     public $timestamps=false;
     protected $table = 'antecedente_patologico_familiares';
     protected $primaryKey = 'id_a_p_familiar';
-    protected $fillable = [
-        'cedula',
-    ];
+    protected $fillable = [];
 }
