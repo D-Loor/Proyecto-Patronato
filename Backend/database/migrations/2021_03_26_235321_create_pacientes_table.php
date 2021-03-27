@@ -29,7 +29,7 @@ class CreatePacientesTable extends Migration
             $table->string('estado_civil');
             $table->string('raza');
             $table->string('religion');
-            $table->string('fecha_nacimiento');
+            $table->date('fecha_nacimiento');
             $table->string('nivel_instruccion');
 
             $table->foreign('id_patologico')->references('id_patologico')->on('antecedentes_patologicos_personales')->onDelete('cascade');

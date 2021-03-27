@@ -17,7 +17,7 @@ class CreateCitasTable extends Migration
             $table->bigIncrements('id_cita');
             $table->string('nombres');
             $table->string('cedula');
-            $table->integer('especialidad');
+            $table->string('especialidad');
             $table->date('fecha');
             $table->string('hora');
         });

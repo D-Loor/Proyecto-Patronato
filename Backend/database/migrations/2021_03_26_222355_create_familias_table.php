@@ -17,7 +17,7 @@ class CreateFamiliasTable extends Migration
             $table->bigIncrements('id_familiar');
             $table->string('nombres');
             $table->string('union');
-            $table->integer('vida');
+            $table->boolean('vida');
             $table->string('causas');
         });
     }
