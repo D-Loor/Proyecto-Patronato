@@ -35,7 +35,11 @@ class EnfermedadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Enfermedad();
+        $datos->enfermedad=$request->enfermedad;
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +48,15 @@ class EnfermedadController extends Controller
      * @param  \App\Models\Enfermedad  $enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function show(Enfermedad $enfermedad)
+    public function show( $id_enfermedad)
     {
-        //
+        $datos=Enfermedad::where('id_enfermedad', $id_enfermedad)->get();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+
+
     }
 
     /**
@@ -67,9 +77,13 @@ class EnfermedadController extends Controller
      * @param  \App\Models\Enfermedad  $enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Enfermedad $enfermedad)
+    public function update(Request $request)
     {
-        //
+        $datos=Enfermedad::find($request->id_enfermedad);
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->enfermedad=$request->enfermedad;
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +92,14 @@ class EnfermedadController extends Controller
      * @param  \App\Models\Enfermedad  $enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Enfermedad $enfermedad)
+    public function destroy( $id_enfermedad)
     {
-        //
+        $datos=Enfermedad::where('id_enfermedad', $id_enfermedad)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+
     }
 }
