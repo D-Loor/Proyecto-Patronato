@@ -14,7 +14,13 @@ class FamiliaController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Familia::all();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos]);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
@@ -35,7 +41,14 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Familia();
+        $datos->nombres=$request->nombres;
+        $datos->union=$request->union;
+        $datos->vida=$request->vida;
+        $datos->causas=$request->causas;
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +57,13 @@ class FamiliaController extends Controller
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function show(Familia $familia)
+    public function show($id_familiar)
     {
-        //
+        $datos=Familia::where('id_familiar', $id_familiar)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +84,16 @@ class FamiliaController extends Controller
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Familia $familia)
+    public function update(Request $request)
     {
-        //
+        $datos=Familia::find($request->id_familiar);
+        $datos->id_familiar=$request->id_familiar;
+        $datos->nombres=$request->nombres;
+        $datos->union=$request->union;
+        $datos->vida=$request->vida;
+        $datos->causas=$request->causas;
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +102,13 @@ class FamiliaController extends Controller
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Familia $familia)
+    public function destroy($id_familiar)
     {
-        //
+        $datos=Familia::where('id_familiar', $id_familiar)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

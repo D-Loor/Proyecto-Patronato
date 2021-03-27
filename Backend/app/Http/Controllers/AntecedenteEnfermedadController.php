@@ -35,7 +35,11 @@ class AntecedenteEnfermedadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Antecedente_Enfermedad();
+        $datos->descripcion=$request->descripcion;
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +48,13 @@ class AntecedenteEnfermedadController extends Controller
      * @param  \App\Models\Antecedente_Enfermedad  $antecedente_Enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function show(Antecedente_Enfermedad $antecedente_Enfermedad)
+    public function show($id_a_enfermedad)
     {
-        //
+        $datos=Antecedente_Enfermedad::where('id_a_enfermedad', $id_a_enfermedad)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +75,13 @@ class AntecedenteEnfermedadController extends Controller
      * @param  \App\Models\Antecedente_Enfermedad  $antecedente_Enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antecedente_Enfermedad $antecedente_Enfermedad)
+    public function update(Request $request)
     {
-        //
+        $datos=Antecedente_Enfermedad::find($request->id_a_enfermedad);
+        $datos->id_a_enfermedad=$request->id_a_enfermedad;
+        $datos->descripcion=$request->descripcion;
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +90,13 @@ class AntecedenteEnfermedadController extends Controller
      * @param  \App\Models\Antecedente_Enfermedad  $antecedente_Enfermedad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Antecedente_Enfermedad $antecedente_Enfermedad)
+    public function destroy($id_a_enfermedad)
     {
-        //
+        $datos=Antecedente_Enfermedad::where('id_a_enfermedad', $id_a_enfermedad)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

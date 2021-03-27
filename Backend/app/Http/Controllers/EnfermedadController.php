@@ -14,7 +14,13 @@ class EnfermedadController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Enfermedad::all();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos]);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
@@ -50,7 +56,7 @@ class EnfermedadController extends Controller
      */
     public function show( $id_enfermedad)
     {
-        $datos=Enfermedad::where('id_enfermedad', $id_enfermedad)->get();
+        $datos=Enfermedad::where('id_enfermedad', $id_enfermedad)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else

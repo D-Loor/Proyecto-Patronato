@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('Enfermedad','EnfermedadController');
+Route::resource('Cita','CitaController');
+Route::resource('AntecedenteEnfermedad','AntecedenteEnfermedadController');
+Route::resource('Familiar','FamiliaController');
+Route::resource('AntecedentePatologicoFamiliar','AntecedentePatologicoFamiliarController');
+Route::resource('Paciente','PacienteController');
+Route::resource('HistorialClinicoMedicinaGeneral','HistoriaClinicaMGController');
