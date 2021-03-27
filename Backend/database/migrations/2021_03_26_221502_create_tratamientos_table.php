@@ -19,7 +19,7 @@ class CreateTratamientosTable extends Migration
             $table->string('magnetoterapia');
             $table->string('electroestimulacion');
             $table->string('ultrasonido');
-            $table->string('CQCOH');
+            $table->string('C_Q_C_O_H');
             $table->string('masaje');
             $table->string('ejercicios_pasivos_resistidos');
             $table->string('laser');

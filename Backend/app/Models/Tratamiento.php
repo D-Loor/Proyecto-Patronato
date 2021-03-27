@@ -12,6 +12,6 @@ class Tratamiento extends Model
     protected $table = 'tratamientos';
     protected $primaryKey = 'id_tratamiento';
     protected $fillable = [
-        'estimulacion_temprana','magnetoterapia','electroestimulacion','ultrasonido','CQCOH','masaje','ejercicios_pasivos_resistidos','laser','otros'
+        'estimulacion_temprana','magnetoterapia','electroestimulacion','ultrasonido','C_Q_C_O_H','masaje','ejercicios_pasivos_resistidos','laser','otros'
     ];
 }
