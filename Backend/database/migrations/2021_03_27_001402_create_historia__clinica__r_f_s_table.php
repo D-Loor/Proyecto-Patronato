@@ -13,12 +13,13 @@ class CreateHistoriaClinicaRFSTable extends Migration
      */
     public function up()
     {
-        Schema::create('historias_clinicas_r_f', function (Blueprint $table) {
+        Schema::create('historias_clinicas_rf', function (Blueprint $table) {
             $table->bigIncrements('id_rf');
             $table->unsignedBigInteger('cedula');
             $table->unsignedBigInteger('id_tratamiento');
             $table->string('diagnostico');
             $table->string('lugar_atencion');
+            $table->boolean('certificado');
             $table->date('fecha');
 
             $table->foreign('cedula')->references('cedula')->on('pacientes')->onDelete('cascade');
@@ -33,6 +34,6 @@ class CreateHistoriaClinicaRFSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('historias_clinicas_r_f');
+        Schema::dropIfExists('historias_clinicas_rf');
     }
 }

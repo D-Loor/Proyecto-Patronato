@@ -9,7 +9,7 @@ class Historia_Clinica_RF extends Model
 {
     //use HasFactory;
     public $timestamps=false;
-    protected $table = 'historias_clinicas_r_f';
+    protected $table = 'historias_clinicas_rf';
     protected $primaryKey = 'id_rf';
     protected $fillable = [
         'cedula','id_tratamiento','diagnostico','lugar_atencion','fecha'
