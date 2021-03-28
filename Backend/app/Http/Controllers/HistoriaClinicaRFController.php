@@ -14,7 +14,13 @@ class HistoriaClinicaRFController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Historia_Clinica_RF::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
+
     }
 
     /**
@@ -35,7 +41,15 @@ class HistoriaClinicaRFController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Historia_Clinica_RF();
+        $datos->id_paciente=$request->id_paciente;
+        $datos->id_tratamiento=$request->id_tratamiento;
+        $datos->diagnostico=$request->diagnostico;
+        $datos->lugar_atencion=$request->lugar_atencion;
+        $datos->certificado=$request->certificado;
+        $datos->fecha=$request->fecha;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +58,13 @@ class HistoriaClinicaRFController extends Controller
      * @param  \App\Models\Historia_Clinica_RF  $historia_Clinica_RF
      * @return \Illuminate\Http\Response
      */
-    public function show(Historia_Clinica_RF $historia_Clinica_RF)
+    public function show($id)
     {
-        //
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +85,18 @@ class HistoriaClinicaRFController extends Controller
      * @param  \App\Models\Historia_Clinica_RF  $historia_Clinica_RF
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Historia_Clinica_RF $historia_Clinica_RF)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first(); 
+        $datos->id_paciente=$request->id_paciente;
+        $datos->id_tratamiento=$request->id_tratamiento;
+        $datos->diagnostico=$request->diagnostico;
+        $datos->lugar_atencion=$request->lugar_atencion;
+        $datos->certificado=$request->certificado;
+        $datos->fecha=$request->fecha;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +105,13 @@ class HistoriaClinicaRFController extends Controller
      * @param  \App\Models\Historia_Clinica_RF  $historia_Clinica_RF
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Historia_Clinica_RF $historia_Clinica_RF)
+    public function destroy($id)
     {
-        //
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }
