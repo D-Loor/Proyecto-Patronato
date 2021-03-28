@@ -84,9 +84,9 @@ class FamiliaController extends Controller
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id_familiar)
     {
-        $datos=Familia::find($request->id_familiar);
+        $datos=Familia::find($id_familiar);
         $datos->nombres=$request->nombres;
         $datos->union=$request->union;
         $datos->vida=$request->vida;

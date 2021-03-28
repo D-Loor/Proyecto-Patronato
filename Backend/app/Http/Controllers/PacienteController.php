@@ -14,7 +14,13 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Cita::all();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos]);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
@@ -35,7 +41,15 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Cita();
+        $datos->nombres=$request->nombres;
+        $datos->cedula=$request->cedula;
+        $datos->especialidad=$request->especialidad;
+        $datos->fecha=$request->fecha;
+        $datos->hora=$request->hora;
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -46,7 +60,11 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
+        $datos=Cita::where('id_cita', $id_cita)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -69,7 +87,14 @@ class PacienteController extends Controller
      */
     public function update(Request $request, Paciente $paciente)
     {
-        //
+        $datos=Cita::find($request->id_cita);
+        $datos->nombres=$request->nombres;
+        $datos->cedula=$request->cedula;
+        $datos->especialidad=$request->especialidad;
+        $datos->fecha=$request->fecha;
+        $datos->hora=$request->hora;
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -80,6 +105,11 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-        //
+        $datos=Cita::where('id_cita', $id_cita)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

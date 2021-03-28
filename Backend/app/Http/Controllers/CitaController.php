@@ -87,9 +87,9 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id_cita)
     {
-        $datos=Cita::find($request->id_cita);
+        $datos=Cita::find($id_cita);
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
         $datos->especialidad=$request->especialidad;
