@@ -86,7 +86,6 @@ class EnfermedadController extends Controller
     public function update(Request $request)
     {
         $datos=Enfermedad::find($request->id_enfermedad);
-        $datos->id_enfermedad=$request->id_enfermedad;
         $datos->enfermedad=$request->enfermedad;
         $datos->update();
         return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);

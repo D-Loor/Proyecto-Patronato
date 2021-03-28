@@ -87,7 +87,6 @@ class FamiliaController extends Controller
     public function update(Request $request)
     {
         $datos=Familia::find($request->id_familiar);
-        $datos->id_familiar=$request->id_familiar;
         $datos->nombres=$request->nombres;
         $datos->union=$request->union;
         $datos->vida=$request->vida;
