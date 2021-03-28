@@ -14,7 +14,13 @@ class HistoriaClinicaMGController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Historia_Clinica_MG::all();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos]);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
@@ -35,7 +41,28 @@ class HistoriaClinicaMGController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Historia_Clinica_MG();
+        $datos->cedula=$request->cedula;
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->id_a_enfermedad=$request->id_a_enfermedad;
+        $datos->fecha=$request->fecha;
+        $datos->motivo_consulta=$request->motivo_consulta;
+        $datos->tipo_atencion=$request->tipo_atencion;
+        $datos->condicion_diagnostico=$request->condicion_diagnostico;
+        $datos->diagnostico_presuntivo=$request->diagnostico_presuntivo;
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->id_a_enfermedad=$request->id_a_enfermedad;
+        $datos->diagnostico_diferencial=$request->diagnostico_diferencial;
+        $datos->plan_terapeutico=$request->plan_terapeutico;
+        $datos->lugar_atencion=$request->lugar_atencion;
+        $datos->raza=$request->raza;
+        $datos->certificado=$request->certificado;
+
+
+
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +71,13 @@ class HistoriaClinicaMGController extends Controller
      * @param  \App\Models\Historia_Clinica_MG  $historia_Clinica_MG
      * @return \Illuminate\Http\Response
      */
-    public function show(Historia_Clinica_MG $historia_Clinica_MG)
+    public function show($id_paciente)
     {
-        //
+        $datos=Historia_Clinica_MG::where('id_paciente', $id_paciente)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +98,25 @@ class HistoriaClinicaMGController extends Controller
      * @param  \App\Models\Historia_Clinica_MG  $historia_Clinica_MG
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Historia_Clinica_MG $historia_Clinica_MG)
+    public function update(Request $request, $id_historia_clinica_mg)
     {
-        //
+        $datos=Historia_Clinica_MG::find($id_historia_clinica_mg);
+
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->id_a_enfermedad=$request->id_a_enfermedad;
+        $datos->fecha=$request->fecha;
+        $datos->motivo_consulta=$request->motivo_consulta;
+        $datos->tipo_atencion=$request->tipo_atencion;
+        $datos->condicion_diagnostico=$request->condicion_diagnostico;
+        $datos->diagnostico_presuntivo=$request->diagnostico_presuntivo;
+        $datos->diagnostico_diferencial=$request->diagnostico_diferencial;
+        $datos->plan_terapeutico=$request->plan_terapeutico;
+        $datos->lugar_atencion=$request->lugar_atencion;
+        $datos->raza=$request->raza;
+        $datos->certificado=$request->certificado;
+
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +125,13 @@ class HistoriaClinicaMGController extends Controller
      * @param  \App\Models\Historia_Clinica_MG  $historia_Clinica_MG
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Historia_Clinica_MG $historia_Clinica_MG)
+    public function destroy( $id_historia_Clinica_MG)
     {
-        //
+        $datos=Historia_Clinica_MG::where('id_historia_clinica_mg', $id_historia_clinica_mg)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

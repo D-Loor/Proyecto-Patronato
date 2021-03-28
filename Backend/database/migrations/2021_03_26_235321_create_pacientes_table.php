@@ -14,11 +14,12 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->bigIncrements('cedula');
+            $table->bigIncrements('id_paciente');
             $table->unsignedBigInteger('id_patologico');
             $table->unsignedBigInteger('id_e_fisico');
             $table->unsignedBigInteger('id_e_organo_sistema');
             $table->unsignedBigInteger('id_e_complementario');
+            $table->string('cedula');
             $table->string('nombres');
             $table->string('apellidas');
             $table->integer('edad');

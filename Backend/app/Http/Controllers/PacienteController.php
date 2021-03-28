@@ -14,7 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos=Cita::all();
+        $datos=Paciente::all();
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -41,12 +41,25 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        $datos=new Cita();
+        $datos=new Paciente();
+        $datos->id_patologico=$request->id_patologico;
+        $datos->id_e_fisico=$request->id_e_fisico;
+        $datos->id_e_organo_sistema=$request->id_e_organo_sistema;
+        $datos->id_e_complementario=$request->id_e_complementario;
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
-        $datos->especialidad=$request->especialidad;
-        $datos->fecha=$request->fecha;
-        $datos->hora=$request->hora;
+        $datos->apellidos=$request->apellidos;
+        $datos->edad=$request->edad;
+        $datos->sexo=$request->sexo;
+        $datos->ocupacion=$request->ocupacion;
+        $datos->residencia=$request->residencia;
+        $datos->procedencia=$request->procedencia;
+        $datos->estado_civil=$request->estado_civil;
+        $datos->raza=$request->raza;
+        $datos->religion=$request->religion;
+        $datos->fecha_nacimiento=$request->fecha_nacimiento;
+        $datos->nivel_instruccion=$request->nivel_instruccion;
+
         $datos->save();
 
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
@@ -58,9 +71,9 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $paciente)
+    public function show($cedula)
     {
-        $datos=Cita::where('id_cita', $id_cita)->get()->first();
+        $datos=Paciente::where('cedula', $cedula)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
@@ -85,14 +98,23 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $id_paciente)
     {
-        $datos=Cita::find($request->id_cita);
+        $datos=Paciente::find($id_paciente);
+        $datos->cedula=$request->cedula;
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
-        $datos->especialidad=$request->especialidad;
-        $datos->fecha=$request->fecha;
-        $datos->hora=$request->hora;
+        $datos->apellidos=$request->apellidos;
+        $datos->edad=$request->edad;
+        $datos->sexo=$request->sexo;
+        $datos->ocupacion=$request->ocupacion;
+        $datos->residencia=$request->residencia;
+        $datos->procedencia=$request->procedencia;
+        $datos->estado_civil=$request->estado_civil;
+        $datos->raza=$request->raza;
+        $datos->religion=$request->religion;
+        $datos->fecha_nacimiento=$request->fecha_nacimiento;
+        $datos->nivel_instruccion=$request->nivel_instruccion;
         $datos->update();
         return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
@@ -103,9 +125,9 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $paciente)
+    public function destroy( $id_paciente)
     {
-        $datos=Cita::where('id_cita', $id_cita)->get()->first();
+        $datos=Paciente::where('id_cita', $id_paciente)->get()->first();
         if($datos != null){
             $datos->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);

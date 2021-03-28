@@ -12,6 +12,6 @@ class Historia_Clinica_RF extends Model
     protected $table = 'historias_clinicas_rf';
     protected $primaryKey = 'id_rf';
     protected $fillable = [
-        'cedula','id_tratamiento','diagnostico','lugar_atencion','fecha'
+        'id_paciente','id_tratamiento','diagnostico','lugar_atencion','fecha'
     ];
 }

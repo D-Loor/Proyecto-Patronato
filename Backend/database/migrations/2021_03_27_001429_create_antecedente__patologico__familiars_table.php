@@ -16,11 +16,11 @@ class CreateAntecedentePatologicoFamiliarsTable extends Migration
         Schema::create('antecedente_patologico_familiares', function (Blueprint $table) {
             $table->bigIncrements('id_a_p_familiar');
             $table->unsignedBigInteger('id_familiar');
-            $table->unsignedBigInteger('cedula');
+            $table->unsignedBigInteger('id_paciente');
 
-            $table->foreign('cedula')->references('cedula')->on('pacientes')->onDelete('cascade');
+            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
             $table->foreign('id_familiar')->references('id_familiar')->on('familiares')->onDelete('cascade');
-            
+
         });
     }
 

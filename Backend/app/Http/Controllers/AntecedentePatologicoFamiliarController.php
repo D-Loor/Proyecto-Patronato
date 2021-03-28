@@ -35,7 +35,12 @@ class AntecedentePatologicoFamiliarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Antecedente_Patologico_Familiar();
+        $datos->id_familiar=$request->id_familiar;
+        $datos->id_paciente=$request->id_paciente;
+        $datos->save();
+
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +49,13 @@ class AntecedentePatologicoFamiliarController extends Controller
      * @param  \App\Models\Antecedente_Patologico_Familiar  $antecedente_Patologico_Familiar
      * @return \Illuminate\Http\Response
      */
-    public function show(Antecedente_Patologico_Familiar $antecedente_Patologico_Familiar)
+    public function show( $id_a_p_familiar)
     {
-        //
+        $datos=Antecedente_Patologico_Familiar::where('id_a_p_familiar', $id_a_p_familiar)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +76,9 @@ class AntecedentePatologicoFamiliarController extends Controller
      * @param  \App\Models\Antecedente_Patologico_Familiar  $antecedente_Patologico_Familiar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antecedente_Patologico_Familiar $antecedente_Patologico_Familiar)
+    public function update(Request $request)
     {
-        //
+
     }
 
     /**
@@ -78,8 +87,14 @@ class AntecedentePatologicoFamiliarController extends Controller
      * @param  \App\Models\Antecedente_Patologico_Familiar  $antecedente_Patologico_Familiar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Antecedente_Patologico_Familiar $antecedente_Patologico_Familiar)
+    public function destroy( $id_a_p_familiar)
     {
-        //
+        $datos=Antecedente_Patologico_Familiar::where('id_a_p_familiar', $id_a_p_familiar)->get()->first();
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+
     }
 }

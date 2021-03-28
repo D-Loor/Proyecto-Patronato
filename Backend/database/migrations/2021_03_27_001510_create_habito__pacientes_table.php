@@ -16,9 +16,9 @@ class CreateHabitoPacientesTable extends Migration
         Schema::create('habito_pacientes', function (Blueprint $table) {
             $table->bigIncrements('id_habito_paciente');
             $table->unsignedBigInteger('id_habito');
-            $table->unsignedBigInteger('cedula');
+            $table->unsignedBigInteger('id_paciente');
 
-            $table->foreign('cedula')->references('cedula')->on('pacientes')->onDelete('cascade');
+            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
             $table->foreign('id_habito')->references('id_habito')->on('habitos')->onDelete('cascade');
         });
     }
