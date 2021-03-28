@@ -14,7 +14,14 @@ class AntecedentesPatologicosPersonaleController extends Controller
      */
     public function index()
     {
-        //
+
+        $datos=Antecedentes_Patologicos_Personale::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
+        
     }
 
     /**
@@ -35,7 +42,20 @@ class AntecedentesPatologicosPersonaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Antecedentes_Patologicos_Personale();
+        $datos->id_gineco=$request->id_gineco;
+        $datos->infancia=$request->infancia;
+        $datos->adolecencia=$request->adolecencia;
+        $datos->adultez=$request->adultez;
+        $datos->DBT=$request->DBT;
+        $datos->HTA=$request->HTA;
+        $datos->TBC=$request->TBC;
+        $datos->GEMELAR=$request->GEMELAR;
+        $datos->quirujircos=$request->quirujircos;
+        $datos->alergias=$request->alergias;
+        $datos->traumas=$request->traumas;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +64,13 @@ class AntecedentesPatologicosPersonaleController extends Controller
      * @param  \App\Models\Antecedentes_Patologicos_Personale  $antecedentes_Patologicos_Personale
      * @return \Illuminate\Http\Response
      */
-    public function show(Antecedentes_Patologicos_Personale $antecedentes_Patologicos_Personale)
+    public function show($id)
     {
-        //
+        $datos=Antecedentes_Patologicos_Personale::where('id_patologico', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +91,23 @@ class AntecedentesPatologicosPersonaleController extends Controller
      * @param  \App\Models\Antecedentes_Patologicos_Personale  $antecedentes_Patologicos_Personale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antecedentes_Patologicos_Personale $antecedentes_Patologicos_Personale)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Antecedentes_Patologicos_Personale::where('id_patologico', $id)->get()->first(); 
+        $datos->id_gineco=$request->id_gineco;
+        $datos->infancia=$request->infancia;
+        $datos->adolecencia=$request->adolecencia;
+        $datos->adultez=$request->adultez;
+        $datos->DBT=$request->DBT;
+        $datos->HTA=$request->HTA;
+        $datos->TBC=$request->TBC;
+        $datos->GEMELAR=$request->GEMELAR;
+        $datos->quirujircos=$request->quirujircos;
+        $datos->alergias=$request->alergias;
+        $datos->traumas=$request->traumas;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +116,13 @@ class AntecedentesPatologicosPersonaleController extends Controller
      * @param  \App\Models\Antecedentes_Patologicos_Personale  $antecedentes_Patologicos_Personale
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Antecedentes_Patologicos_Personale $antecedentes_Patologicos_Personale)
+    public function destroy($id)
     {
-        //
+        $datos=Antecedentes_Patologicos_Personale::where('id_patologico', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

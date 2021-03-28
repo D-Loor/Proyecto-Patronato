@@ -14,7 +14,12 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Tratamiento::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,7 +40,18 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Tratamiento();
+        $datos->estimulacion_temprana=$request->estimulacion_temprana;
+        $datos->magnetoterapia=$request->magnetoterapia;
+        $datos->electroestimulacion=$request->electroestimulacion;
+        $datos->ultrasonido=$request->ultrasonido;
+        $datos->C_Q_C_O_H=$request->C_Q_C_O_H;
+        $datos->masaje=$request->masaje;
+        $datos->ejercicios_pasivos_resistidos=$request->ejercicios_pasivos_resistidos;
+        $datos->laser=$request->laser;
+        $datos->otros=$request->otros;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +60,13 @@ class TratamientoController extends Controller
      * @param  \App\Models\Tratamiento  $tratamiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Tratamiento $tratamiento)
+    public function show($id)
     {
-        //
+        $datos=Tratamiento::where('id_tratamiento', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +87,21 @@ class TratamientoController extends Controller
      * @param  \App\Models\Tratamiento  $tratamiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tratamiento $tratamiento)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Tratamiento::where('id_tratamiento', $id)->get()->first(); 
+        $datos->estimulacion_temprana=$request->estimulacion_temprana;
+        $datos->magnetoterapia=$request->magnetoterapia;
+        $datos->electroestimulacion=$request->electroestimulacion;
+        $datos->ultrasonido=$request->ultrasonido;
+        $datos->C_Q_C_O_H=$request->C_Q_C_O_H;
+        $datos->masaje=$request->masaje;
+        $datos->ejercicios_pasivos_resistidos=$request->ejercicios_pasivos_resistidos;
+        $datos->laser=$request->laser;
+        $datos->otros=$request->otros;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +110,13 @@ class TratamientoController extends Controller
      * @param  \App\Models\Tratamiento  $tratamiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tratamiento $tratamiento)
+    public function destroy($id)
     {
-        //
+        $datos=Tratamiento::where('id_tratamiento', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

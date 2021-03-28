@@ -14,7 +14,12 @@ class AntecedentesGinecosObstreticoController extends Controller
      */
     public function index()
     {
-        //
+       $datos=Antecedentes_Ginecos_Obstretico::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,7 +40,17 @@ class AntecedentesGinecosObstreticoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Antecedentes_Ginecos_Obstretico();
+        $datos->FUM=$request->FUM;
+        $datos->FPP=$request->FPP;
+        $datos->edad_gestional=$request->edad_gestional;
+        $datos->menarquia=$request->menarquia;
+        $datos->flujo_genital=$request->flujo_genital;
+        $datos->gestas=$request->gestas;
+        $datos->partos=$request->partos;
+        $datos->cesareas=$request->cesareas;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +59,14 @@ class AntecedentesGinecosObstreticoController extends Controller
      * @param  \App\Models\Antecedentes_Ginecos_Obstretico  $antecedentes_Ginecos_Obstretico
      * @return \Illuminate\Http\Response
      */
-    public function show(Antecedentes_Ginecos_Obstretico $antecedentes_Ginecos_Obstretico)
+    public function show($id)
     {
-        //
+        $datos=Antecedentes_Ginecos_Obstretico::where('id_gineco', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
+        
     }
 
     /**
@@ -67,9 +87,20 @@ class AntecedentesGinecosObstreticoController extends Controller
      * @param  \App\Models\Antecedentes_Ginecos_Obstretico  $antecedentes_Ginecos_Obstretico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antecedentes_Ginecos_Obstretico $antecedentes_Ginecos_Obstretico)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Antecedentes_Ginecos_Obstretico::where('id_gineco', $id)->get()->first(); 
+        $datos->FUM=$request->FUM;
+        $datos->FPP=$request->FPP;
+        $datos->edad_gestional=$request->edad_gestional;
+        $datos->menarquia=$request->menarquia;
+        $datos->flujo_genital=$request->flujo_genital;
+        $datos->gestas=$request->gestas;
+        $datos->partos=$request->partos;
+        $datos->cesareas=$request->cesareas;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +109,13 @@ class AntecedentesGinecosObstreticoController extends Controller
      * @param  \App\Models\Antecedentes_Ginecos_Obstretico  $antecedentes_Ginecos_Obstretico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Antecedentes_Ginecos_Obstretico $antecedentes_Ginecos_Obstretico)
+    public function destroy($id)
     {
-        //
+        $datos=Antecedentes_Ginecos_Obstretico::where('id_gineco', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

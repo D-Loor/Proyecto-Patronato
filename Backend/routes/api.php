@@ -26,3 +26,8 @@ Route::resource('Familiar','FamiliaController');
 Route::resource('AntecedentePatologicoFamiliar','AntecedentePatologicoFamiliarController');
 Route::resource('Paciente','PacienteController');
 Route::resource('HistorialClinicoMedicinaGeneral','HistoriaClinicaMGController');
+Route::resource('AGO','AntecedentesGinecosObstreticoController');
+Route::resource('APP','AntecedentesPatologicosPersonaleController');
+Route::resource('Tratamiento','TratamientoController');
+Route::resource('Complementarios','ExamenesComplementarioController');
+Route::resource('HistoriasClinicasRF','HistoriaClinicaRFController');
