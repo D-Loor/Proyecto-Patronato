@@ -20,7 +20,11 @@ p.large {
   margin-top: 40px;
   font-size: 16px;
 }
-
+.cita{
+  text-align: end;
+  font-size: 12px !important;
+  margin-top: 0px !important;
+}
 a,
 a:hover,
 a:focus,
@@ -394,19 +398,21 @@ header .intro-text .intro-heading {
 @media (min-width: 768px) {
   header .intro-text {
     padding-top: 300px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
   }
 
   header .intro-text .intro-lead-in {
-    margin-bottom: 25px;
+    margin-bottom: 55px;
+    margin-right: 92px;
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 40px;
+    font-size: 25px;
     font-style: italic;
+    text-align: end;
     line-height: 40px;
   }
 
   header .intro-text .intro-heading {
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     text-transform: uppercase;
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 58px;
@@ -416,6 +422,8 @@ header .intro-text .intro-heading {
 }
 .textomargin {
   margin-bottom: 30px !important;
+  text-align: justify;
+
 }
 section {
   padding: 100px 0;
@@ -432,10 +440,9 @@ section h3.section-subheading {
   text-transform: none;
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
-  font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 1px;
-  line-height: 1.75;
+  line-height: 1.55;
 }
 
 @media (min-width: 768px) {
@@ -992,7 +999,7 @@ h1 {
 }
 p {
   font-family: "Lato", sans-serif;
-  letter-spacing: 1px;
+  letter-spacing: 0.2px;
   font-size: 14px;
 }
 
@@ -1440,10 +1447,12 @@ p {
 }
 .card__content p {
   margin: 0;
-  padding-top: 67px;
-  padding-bottom: 57px;
+  padding-top: 50px;
+  padding-bottom: 25px;
   padding-left: 32px;
   padding-right: 32px;
+  text-align: justify;
+
 }
 .card-deck--half-and-half .card__content h3 {
   text-transform: none !important;
@@ -1471,6 +1480,10 @@ p {
 .icon--smallest {
   height: 74%;
   width: 74%;
+}
+
+.img12{
+  padding-top: 12px !important;
 }
 
 .icon-credit {
