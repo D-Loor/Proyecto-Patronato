@@ -14,7 +14,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Role::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,7 +40,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Role();
+        $datos->rol=$request->rol;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +52,13 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
-        //
+        $datos=Role::where('id_rol', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +79,13 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Role::where('id_rol', $id)->get()->first(); 
+        $datos->rol=$request->rol;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +94,13 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        //
+        $datos=Role::where('id_rol', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

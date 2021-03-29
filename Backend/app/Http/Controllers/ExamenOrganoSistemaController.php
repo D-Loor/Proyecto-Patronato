@@ -14,7 +14,12 @@ class ExamenOrganoSistemaController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Examen_Organo_Sistema::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,7 +40,15 @@ class ExamenOrganoSistemaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Examen_Organo_Sistema();
+        $datos->sistema_digestivo=$request->sistema_digestivo;
+        $datos->sistema_respiratorio=$request->sistema_respiratorio;
+        $datos->sistema_cardiaco=$request->sistema_cardiaco;
+        $datos->sistema_genitourinarion=$request->sistema_genitourinarion;
+        $datos->sistema_osteomuscular=$request->sistema_osteomuscular;
+        $datos->sistema_nervioso=$request->sistema_nervioso;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +57,13 @@ class ExamenOrganoSistemaController extends Controller
      * @param  \App\Models\Examen_Organo_Sistema  $examen_Organo_Sistema
      * @return \Illuminate\Http\Response
      */
-    public function show(Examen_Organo_Sistema $examen_Organo_Sistema)
+    public function show( $id )
     {
-        //
+        $datos=Examen_Organo_Sistema::where('id_e_organo_sistema', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +84,18 @@ class ExamenOrganoSistemaController extends Controller
      * @param  \App\Models\Examen_Organo_Sistema  $examen_Organo_Sistema
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examen_Organo_Sistema $examen_Organo_Sistema)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Examen_Organo_Sistema::where('id_e_organo_sistema', $id)->get()->first(); 
+        $datos->sistema_digestivo=$request->sistema_digestivo;
+        $datos->sistema_respiratorio=$request->sistema_respiratorio;
+        $datos->sistema_cardiaco=$request->sistema_cardiaco;
+        $datos->sistema_genitourinarion=$request->sistema_genitourinarion;
+        $datos->sistema_osteomuscular=$request->sistema_osteomuscular;
+        $datos->sistema_nervioso=$request->sistema_nervioso;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +104,13 @@ class ExamenOrganoSistemaController extends Controller
      * @param  \App\Models\Examen_Organo_Sistema  $examen_Organo_Sistema
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Examen_Organo_Sistema $examen_Organo_Sistema)
+    public function destroy( $id )
     {
-        //
+        $datos=Examen_Organo_Sistema::where('id_e_organo_sistema', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

@@ -14,7 +14,12 @@ class HabitoController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Habito::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,7 +40,15 @@ class HabitoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Habito();
+        $datos->alcohol=$request->alcohol;
+        $datos->tabaco=$request->tabaco;
+        $datos->drogas=$request->drogas;
+        $datos->alimentacion=$request->alimentacion;
+        $datos->diuresis=$request->diuresis;
+        $datos->somnia=$request->somnia;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
     /**
@@ -44,9 +57,13 @@ class HabitoController extends Controller
      * @param  \App\Models\Habito  $habito
      * @return \Illuminate\Http\Response
      */
-    public function show(Habito $habito)
+    public function show($id)
     {
-        //
+        $datos=Habito::where('id_habito', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +84,18 @@ class HabitoController extends Controller
      * @param  \App\Models\Habito  $habito
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Habito $habito)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Habito::where('id_habito', $id)->get()->first(); 
+        $datos->alcohol=$request->alcohol;
+        $datos->tabaco=$request->tabaco;
+        $datos->drogas=$request->drogas;
+        $datos->alimentacion=$request->alimentacion;
+        $datos->diuresis=$request->diuresis;
+        $datos->somnia=$request->somnia;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +104,13 @@ class HabitoController extends Controller
      * @param  \App\Models\Habito  $habito
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Habito $habito)
+    public function destroy($id)
     {
-        //
+        $datos=Habito::where('id_habito', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

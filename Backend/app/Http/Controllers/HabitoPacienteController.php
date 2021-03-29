@@ -14,7 +14,12 @@ class HabitoPacienteController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Habito_Paciente::all();  
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]); 
+       }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
     }
 
     /**
@@ -35,8 +40,12 @@ class HabitoPacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $datos=new Habito_Paciente();
+        $datos->id_habito=$request->id_habito;
+        $datos->id_paciente=$request->id_paciente;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+    } 
 
     /**
      * Display the specified resource.
@@ -44,9 +53,13 @@ class HabitoPacienteController extends Controller
      * @param  \App\Models\Habito_Paciente  $habito_Paciente
      * @return \Illuminate\Http\Response
      */
-    public function show(Habito_Paciente $habito_Paciente)
+    public function show($id)
     {
-        //
+        $datos=Habito_Paciente::where('id_habito_paciente', $id)->get()->first(); 
+        if($datos != null){
+            return response()->json(['result'=>$datos]);
+        }else
+        return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +80,14 @@ class HabitoPacienteController extends Controller
      * @param  \App\Models\Habito_Paciente  $habito_Paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Habito_Paciente $habito_Paciente)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Habito_Paciente::where('id_habito_paciente', $id)->get()->first(); 
+        $datos->id_habito=$request->id_habito;
+        $datos->id_paciente=$request->id_paciente;
+        $datos->update();
+        
+        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +96,13 @@ class HabitoPacienteController extends Controller
      * @param  \App\Models\Habito_Paciente  $habito_Paciente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Habito_Paciente $habito_Paciente)
+    public function destroy($id)
     {
-        //
+        $datos=Habito_Paciente::where('id_habito_paciente', $id)->get()->first();  
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }

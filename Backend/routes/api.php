@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+ 
 
 Route::resource('Enfermedad','EnfermedadController');
 Route::resource('Cita','CitaController');
@@ -31,3 +31,9 @@ Route::resource('APP','AntecedentesPatologicosPersonaleController');
 Route::resource('Tratamiento','TratamientoController');
 Route::resource('Complementarios','ExamenesComplementarioController');
 Route::resource('HistoriasClinicasRF','HistoriaClinicaRFController');
+Route::resource('ExamenesFisicos','ExamenFisicoController');
+Route::resource('ExamenesOrganosSistemas','ExamenOrganoSistemaController');
+Route::resource('HabitosPaciente','HabitoPacienteController');
+Route::resource('Habitos','HabitoController'); 
+Route::resource('Roles','RoleController'); 
+Route::resource('Cuentas','CuentaController'); 
