@@ -197,7 +197,7 @@
     </section>
 
 
-    <!-- Services Section -->
+    <!-- Departamentos Section -->
     <section id="services">
         <div class="container">
             <div class="row">
@@ -361,7 +361,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Historia Section -->
     <section id="about">
         <div class="container">
             <div class="row">
@@ -455,7 +455,7 @@
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Equipo Section -->
     <section id="team" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -545,7 +545,7 @@
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Agendar Section -->
     <div id="site-content">
         <section id="contact">
             <div class="container">
@@ -558,27 +558,35 @@
                 <div class="row">
                     <div class="col-lg-12">
                         
-                        <form name="sentMessage" id="contactForm" novalidate="" action="#">
+                        <form name="sentMessage" id="contactForm"  action="#" >
+
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group ">
                                         <label class="label-co"> Ingrese sus nombres completos *</label>
-                                        <input type="text" class="form-control" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
-                                            required data-validation-required-message="Escriba sus nombres completos.">
+                                        
+                                        <input type="text" class="form-control  form-input" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
+                                            required autocomplete="off" data-validation-required-message="Escriba sus nombres completos.">
+                                           
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="form-group">
                                         <label class="label-co"> Ingrese su cédula de identidad *</label>
-                                        <input type="text" class="form-control" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
-                                            required
-                                            data-validation-required-message="Escriba su cédula de identidad.">
-                                        <p class="help-block text-danger"></p>
+                                        <div class="input-group">
+                                           
+                                            <input type="number" class="form-control form-input " onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
+                                                required autocomplete="off"
+                                                data-validation-required-message="Escriba su cédula de identidad.">
+                                            <span class="input-group-addon" id="basic-addon1" >
+                                                <i class="fa fa-check fa-2x" id="vcedula"></i>'
+                                            </span>
+                                        </div>
+                                       
                                     </div>
                                     <div class="form-group">
                                         <label class="label-co"> Seleccione la especialidad *</label>
-                                        <select class="form-control form-select"  id="especialidad" name="especialidad" aria-label=".form-select-lg example"> 
-                                            <option selected hidden>Seleccione especialidad *</option>
-                                            <option value="Medicina General" class="op-select">Medicina General</option>
+                                        <select class="form-control form-select form-input"  id="especialidad"  name="especialidad" aria-label=".form-select-lg example"> 
+                                            <option selected value="Medicina General" class="op-select">Medicina General</option>
                                             <option value="Rehabilitación Física" class="op-select">Rehabilitación Física</option>
                                         </select>
 
@@ -597,9 +605,8 @@
 
                                     <div class="form-group">
                                       
-                                        <label class="label-co"> Seleccione la hora que consulta *</label>
-                                        <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example">
-                                            <option selected>Open this select menu</option>
+                                        <label class="label-co"> Seleccione la hora de consulta *</label>
+                                        <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" required>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
@@ -622,7 +629,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group chec">
                                        
-                                        <input type="checkbox" id="cbox2" value="second_checkbox" >  <label class="label-co"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
+                                        <input type="checkbox" id="cbox2" value="second_checkbox" required >  <label class="label-co"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
                                     </div>    
                                 </div>
 
@@ -645,19 +652,40 @@
         <footer class="site-footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 contefo">
-                        <h6>About</h6>
-                        <p class="text-justify encima">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to
-                            help
-                            the
-                            upcoming programmers with the code. Scanfcode focuses on providing the most efficient code
-                            or
-                            snippets as the code wants to be simple. We will help programmers build up concepts in
-                            different
-                            programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP,
-                            Android,
-                            SQL and Algorithm.</p>
-                        <img src="./Images/logo-patro.png" class="imgfon">
+                    <div class="col-sm-12 col-md-6 ">
+                        <h6>Datos</h6>
+                        <div class=" footer-centro">
+                            <div class="footer-dato">
+                                <div class="dato-titulo">
+                                   <strong>Horario de atención:</strong> 
+                                </div>
+                                
+                                <i class="fa fa-clock-o " > </i>  <spam>08:00 AM-13:00 PM / 14:00 PM-16:00 PM</spam>
+                            </div>
+                           
+                            <div class="footer-dato">
+                                <div class="dato-titulo"> 
+                                    <strong>Contactos:</strong>
+                                </div>
+                                
+                                <i class="fa fa-phone" ></i> <span>05 2689 421 – 05 2689 458</span>
+                                <div>
+                                    <i class="fa fa-envelope" ></i> <span>patronato@municipiojunin.gob.ec</span>
+                                </div>                           
+                                
+                            </div>
+
+                            <div class="footer-dato"> 
+                                <div class="dato-titulo">
+                                    <strong>Dirección:</strong>
+                                </div>
+                                
+                                <i class="fa fa-map-marker" >  </i><span>Av. Benito Pinargote</span>
+                            </div>
+
+                            
+                        </div>
+                    <!--   <img src="./Images/logo-patro.png" class="imgfon">    --> 
 
                     </div>
 
