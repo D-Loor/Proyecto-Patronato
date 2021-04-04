@@ -546,196 +546,194 @@
     </section>
 
     <!-- Agendar Section -->
-    <div id="site-content">
-        <section id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h2 class="section-heading">Agendar cita médica</h2>
-                        <h3 class="section-subheading text-muted space2">Completando el siguiente formulario puede sacar o agendar su cita, eligiendo la fecha y hora a su disposición.</h3>
-                    </div>
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Agendar cita médica</h2>
+                    <h3 class="section-subheading text-muted space2">Completando el siguiente formulario puede sacar o agendar su cita, eligiendo la fecha y hora a su disposición.</h3>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        
-                        <form name="sentMessage" id="contactForm"  action="#" >
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <form name="sentMessage" id="contactForm"  action="#" >
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label class="label-co"> Ingrese sus nombres completos *</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="label-co"> Ingrese sus nombres completos *</label>
+                                    
+                                    <input type="text" class="form-control  form-input" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
+                                        required autocomplete="off" data-validation-required-message="Escriba sus nombres completos.">
                                         
-                                        <input type="text" class="form-control  form-input" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
-                                            required autocomplete="off" data-validation-required-message="Escriba sus nombres completos.">
-                                           
-                                        <p class="help-block text-danger"></p>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-co"> Ingrese su cédula de identidad *</label>
+                                    <div class="input-group">
+                                        
+                                        <input type="number"  class="form-control form-input select-number " onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
+                                            required autocomplete="off"
+                                            data-validation-required-message="Escriba su cédula de identidad.">
+                                        <span class="input-group-addon" id="basic-addon1" >
+                                            <i class="fa fa-check fa-2x" id="vcedula"></i>'
+                                        </span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="label-co"> Ingrese su cédula de identidad *</label>
-                                        <div class="input-group">
-                                           
-                                            <input type="number" class="form-control form-input " onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
-                                                required autocomplete="off"
-                                                data-validation-required-message="Escriba su cédula de identidad.">
-                                            <span class="input-group-addon" id="basic-addon1" >
-                                                <i class="fa fa-check fa-2x" id="vcedula"></i>'
-                                            </span>
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-co"> Seleccione la especialidad *</label>
-                                        <select class="form-control form-select form-input"  id="especialidad"  name="especialidad" aria-label=".form-select-lg example"> 
-                                            <option selected value="Medicina General" class="op-select">Medicina General</option>
-                                            <option value="Rehabilitación Física" class="op-select">Rehabilitación Física</option>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-co"> Seleccione la especialidad *</label>
+                                    <select class="form-control form-select "  id="especialidad"  name="especialidad" aria-label=".form-select-lg example"> 
+                                        <option selected value="Medicina General" class="op-select">Medicina General</option>
+                                        <option value="Rehabilitación Física" class="op-select">Rehabilitación Física</option>
+                                    </select>
+
+                                    
+
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="label-co"> Seleccione la fecha de consulta *</label>
+                                    <input type="date" class="form-control fecha" id="fecha" name="fecha"  required
+                                        data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-03-03" onload="validarf()">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    
+                                    <label class="label-co"> Seleccione la hora de consulta *</label>
+                                    <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" required>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
                                         </select>
 
-                                        
-
-                                    </div>
-                                  
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="label-co"> Seleccione la fecha de consulta *</label>
-                                        <input type="date" class="form-control fecha" id="fecha" name="fecha"  required
-                                            data-validation-required-message="Seleccione o ingrese la fecha de la cita.">
-                                        <p class="help-block text-danger"></p>
-                                    </div>
 
-                                    <div class="form-group">
-                                      
-                                        <label class="label-co"> Seleccione la hora de consulta *</label>
-                                        <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" required>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                          </select>
-
-                                    </div>
-
-                                   
-                                </div>
                                 
-                                <div class="col-md-12">
-                                    <div class="form-group chec">
-                                       
-                                        <input type="checkbox" id="cbox2" value="second_checkbox" required >  <label class="label-co"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
-                                    </div>    
-                                </div>
-
-
-                                <div class="clearfix"></div>
-                                <div class="col-lg-12 text-center">
-                                    <div id="success"></div>
-                                    <button type="submit" class="custom-btn btn-11"> Agendar cita</button>
-                                </div>
                             </div>
-                        </form>
-                    </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group chec">
+                                    
+                                    <input type="checkbox" id="cbox2" value="second_checkbox" required >  <label class="label-co"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
+                                </div>    
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="custom-btn btn-11"> Agendar cita</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+    
 
     <!-- Footer -->
-    <div id="site-foot">
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 ">
-                        <h6>Datos</h6>
-                        <div class=" footer-centro">
-                            <div class="footer-dato">
-                                <div class="dato-titulo">
-                                   <strong>Horario de atención:</strong> 
-                                </div>
-                                
-                                <i class="fa fa-clock-o " > </i>  <spam>08:00 AM-13:00 PM / 14:00 PM-16:00 PM</spam>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 ">
+                    <h6>Datos</h6>
+                    <div class=" footer-centro">
+                        <div class="footer-dato">
+                            <div class="dato-titulo">
+                                <strong>Horario de atención:</strong> 
                             </div>
-                           
-                            <div class="footer-dato">
-                                <div class="dato-titulo"> 
-                                    <strong>Contactos:</strong>
-                                </div>
-                                
-                                <i class="fa fa-phone" ></i> <span>05 2689 421 – 05 2689 458</span>
-                                <div>
-                                    <i class="fa fa-envelope" ></i> <span>patronato@municipiojunin.gob.ec</span>
-                                </div>                           
-                                
+                            
+                            <i class="fa fa-clock-o " > </i>  <spam>08:00 AM-13:00 PM / 14:00 PM-16:00 PM</spam>
+                        </div>
+                        
+                        <div class="footer-dato">
+                            <div class="dato-titulo"> 
+                                <strong>Contactos:</strong>
                             </div>
-
-                            <div class="footer-dato"> 
-                                <div class="dato-titulo">
-                                    <strong>Dirección:</strong>
-                                </div>
-                                
-                                <i class="fa fa-map-marker" >  </i><span>Av. Benito Pinargote</span>
-                            </div>
-
+                            
+                            <i class="fa fa-phone" ></i> <span>05 2689 421 – 05 2689 458</span>
+                            <div>
+                                <i class="fa fa-envelope" ></i> <span>patronato@municipiojunin.gob.ec</span>
+                            </div>                           
                             
                         </div>
-                    <!--   <img src="./Images/logo-patro.png" class="imgfon">    --> 
 
-                    </div>
+                        <div class="footer-dato"> 
+                            <div class="dato-titulo">
+                                <strong>Dirección:</strong>
+                            </div>
+                            
+                            <i class="fa fa-map-marker" >  </i><span>Av. Benito Pinargote</span>
+                        </div>
 
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Categories</h6>
-                        <ul class="footer-links">
-                            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                            <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                            <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                            <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                            <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                            <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-                        </ul>
+                        
                     </div>
+                <!--   <img src="./Images/logo-patro.png" class="imgfon">    --> 
 
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Secciones</h6>
-                        <ul class="footer-links">
-                            <li><a class="page-scroll" href="#services">Departamentos</a></li>
-                            <li><a class="page-scroll" href="#portfolio">Galería</a></li>
-                            <li><a class="page-scroll" href="#about">Historia</a></li>
-                            <li><a class="page-scroll" href="#team">Equipo</a></li>
-                            <li><a class="page-scroll" href="#contact">Agendar</a></li>
-                        </ul>
-                    </div>
                 </div>
-                <hr>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <strong>
-                            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                                <a href="#">DLZ</a>.
-                        </strong>
-                        </p>
-                    </div>
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
+                <div class="col-xs-6 col-md-3">
+                    <h6>Categories</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                        <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                        <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                        <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+                        <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+                        <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Secciones</h6>
+                    <ul class="footer-links">
+                        <li><a class="page-scroll" href="#services">Departamentos</a></li>
+                        <li><a class="page-scroll" href="#portfolio">Galería</a></li>
+                        <li><a class="page-scroll" href="#about">Historia</a></li>
+                        <li><a class="page-scroll" href="#team">Equipo</a></li>
+                        <li><a class="page-scroll" href="#contact">Agendar</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <strong>
+                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                            <a href="#">DLZ</a>.
+                    </strong>
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
 
 
     <!-- Portfolio Modals -->

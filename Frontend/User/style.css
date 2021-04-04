@@ -801,7 +801,15 @@ section h3.section-subheading {
 }
 
 section#contact {
-  background-color: transparent;
+  min-height: 100%;
+  min-height: 100%;
+  padding-top: 65px;
+  position: relative;
+  z-index: 1;
+  background-image: url(Images/citas.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 section#contact .section-heading {
@@ -1126,9 +1134,7 @@ p {
 }
 
 /*Footer*/
-#site-foot {
-  padding: 0px !important;
-}
+
 .site-footer {
   text-align: center;
   background-color: #222;
@@ -1279,27 +1285,16 @@ p {
 /*Footer Animation*/
 #site-content {
   margin-bottom: 336px !important;
-  min-height: 100%;
-  min-height: 100%;
-  padding-top: 65px;
-  position: relative;
-  z-index: 1;
-  background-image: url(Images/citas.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+ 
 }
 
-#site-foot {
-  padding: 25px 0;
-  font-size: 85%;
-  position: fixed;
-  z-index: -1;
-  left: 0;
-  right: 0;
-  bottom: 0;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
+input[type=number] { -moz-appearance:textfield; }
 /*Profiles Animation*/
 
 .teaming {

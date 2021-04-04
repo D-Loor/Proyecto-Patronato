@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 function validarC() {
 	var valido=document.getElementById("vcedula");
-	debugger
+	
 	var cedula = document.getElementById("cedula").value;
   var num = 0;
  array =cedula.split(""); num=array.length; if( num==10) { total=0; digito=(array[9]*1); for(i=0;i<(num-1);i++) { if((i%2)!=0)
@@ -73,10 +73,29 @@ function validarC() {
     valido.style.color="red";
     valido.style.visibility="visible";     
           } 
-       
          
-
-   
   }
+  
+ //Validar Fecha
+    window.onload=function validarf() {
+        
+        var fec='2021-02-01';
+        var fecha = new Date();
+        var anio = fecha.getFullYear();
+        var dia = fecha.getDate();
+        var _mes = fecha.getMonth();//viene con valores de 0 al 11
+        _mes = _mes + 1;//ahora lo tienes de 1 al 12
+        if (_mes < 10)//ahora le agregas un 0 para el formato date
+        { var mes = "0" + _mes;}
+        else
+        { var mes = _mes.toString;}
+        if(dia<10){
+          var _dia= "0"+ dia;
+        }
+        document.getElementById("fecha").min = anio+'-'+mes+'-'+_dia; 
+        
+        //fecha.min = new Date().toISOString().split("T")[0];
+    }
 
+    
 
