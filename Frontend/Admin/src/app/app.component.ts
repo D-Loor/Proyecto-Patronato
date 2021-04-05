@@ -1,23 +1,30 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsService } from './@core/utils/analytics.service';
-import { SeoService } from './@core/utils/seo.service';
+import { Router, NavigationEnd } from '@angular/router';
+
+import { IconSetService } from '@coreui/icons-angular';
+import { freeSet } from '@coreui/icons';
 
 @Component({
-  selector: 'ngx-app',
+  // tslint:disable-next-line
+  selector: 'body',
   template: '<router-outlet></router-outlet>',
+  providers: [IconSetService],
 })
 export class AppComponent implements OnInit {
-
-  constructor(private analytics: AnalyticsService, private seoService: SeoService) {
+  constructor(
+    private router: Router,
+    public iconSet: IconSetService
+  ) {
+    // iconSet singleton
+    iconSet.icons = { ...freeSet };
   }
 
-  ngOnInit(): void {
-    this.analytics.trackPageViews();
-    this.seoService.trackCanonicalChanges();
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 }

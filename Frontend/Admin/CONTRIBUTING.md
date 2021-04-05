@@ -1,221 +1,172 @@
-# Contributing to ngx-admin
+# Contributing to CoreUI Free Angular Admin Template
 
-We would love for you to contribute to ngx-admin and help make it ever better together! :rocket:
+Looking to contribute something to CoreUI Free Angular Admin Template? **Here's how you can help.**
 
- - [Code of Conduct](#coc)
- - [Question or Problem?](#question)
- - [Issues and Bugs](#issue)
- - [Feature Requests](#feature)
- - [Submission Guidelines](#submit-pr)
- - [Coding Rules](#rules)
- - [Commit Message Guidelines](#commit)
+Please take a moment to review this document in order to make the contribution process easy and effective for everyone involved.
 
-## <a name="coc"></a> Code of Conduct
-Help us keep ngx-admin open and inclusive. Please read and follow our [Code of Conduct][coc].
+Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue or assessing patches and features.
 
-## <a name="question"></a> Got a Question or Problem?
+## Using the issue tracker
 
-Please do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on [StackOverflow][stackoverflow] where the questions should be tagged with tag `ngx-admin`.
+The [issue tracker](https://github.com/coreui/coreui-free-angular-admin-template/issues) is the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests) and [submitting pull requests](#pull-requests), but please respect the following restrictions:
 
-StackOverflow is a much better place to ask questions since:
+* Please **do not** use the issue tracker for personal support requests.
 
-- there are thousands of people willing to help on StackOverflow
-- questions and answers stay available for public viewing so your question / answer might help someone else
-- StackOverflow's voting system assures that the best answers are prominently visible.
+* Please **do not** post comments consisting solely of "+1" or ":thumbsup:".
+  Use [GitHub's "reactions" feature](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments)
+  instead.
 
-To save your and our time, we will be systematically closing all the issues that are requests for general support and redirecting people to StackOverflow.
+* Please **do not** open issues or pull requests regarding the code in  [`@coreui/coreui`](https://github.com/coreui/coreui) and [`@coreui/coreui-angular`](https://github.com/coreui/coreui) (open them in their respective repositories).
 
+## Bug reports
 
-## <a name="issue"></a> Found an Issue?
-If you find a bug in the source code or a mistake in the documentation, you can help us by
-[submitting an issue](#submit-issue) to our [GitHub Repository][github]. Including an issue 
-reproduction (via CodePen, JsBin, Plunkr, GitHub repo, etc.) is the absolute best way to help the team quickly
-diagnose the problem. Screenshots and error stack traces are also helpful.
+A bug is a _demonstrable problem_ that is caused by the code in the repository.
+Good bug reports are extremely helpful, so thanks!
 
-Please follow this simple checklist before submitting:
+Guidelines for bug reports:
 
-* If you have a question about using ngx-admin, please ask on the [StackOverflow][stackoverflow].
+0. **Validate and lint your code** &mdash; to ensure your problem isn't caused by a simple error in your own code.
 
-* It is required that you clearly describe the steps necessary to reproduce the issue you are running into. Although we would love to help our users as much as possible, diagnosing issues without clear reproduction steps is extremely time-consuming and simply not sustainable.
+1. **Use the GitHub issue search** &mdash; check if the issue has already been reported.
 
-* The issue list of this repository is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately.
+2. **Check if the issue has been fixed** &mdash; try to reproduce it using the latest `master` or development branch in the repository.
 
-* Issues with no clear steps to reproduce will not be triaged. If an issue is labeled with "needs info" and receives no further replies from the author of the issue for more than 5 days, it will be closed.
-
-* If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported][issues]. You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.
-
-* Next, [create a new issue](#submit-issue) that thoroughly explains the problem. Please fill out the populated issue form before submitting the issue.
-
-## <a name="feature"></a> Want a Feature?
-You can *request* a new feature by [submitting an issue](#submit-issue) to our [GitHub
-Repository][github]. If you would like to *implement* a new feature, please submit an issue with
-a proposal for your work first, to be sure that we can use it. 
-Please consider what kind of change it is:
-
-* For a **Major Feature**, first open an issue and outline your proposal so that it can be
-discussed. This will also allow us to better coordinate our efforts, prevent duplication of work,
-and help you to craft the change so that it is successfully accepted into the project.
-* **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
-
-### <a name="submit-issue"></a> Submitting an Issue
-Before you submit an issue, search the archive, maybe your question was already answered.
-
-If your issue appears to be a bug, and hasn't been reported, open a new issue.
-Help us to maximize the effort we can spend fixing issues and adding new
-features by not reporting duplicate issues. Please make sure to fill out the populated issue form before submitting the issue.
-
-You can file new issues by providing the information [here][new_issue].
+3. **Isolate the problem** &mdash; ideally create a [reduced test case](https://css-tricks.com/reduced-test-cases/) and a live example. [This JS Bin](http://jsbin.com/lefey/1/edit?html,output) is a helpful template.
 
 
-### <a name="submit-pr"></a> Submitting a Pull Request (PR)
-Before you submit your Pull Request (PR) consider the following guidelines:
+A good bug report shouldn't leave others needing to chase you up for more
+information. Please try to be as detailed as possible in your report. What is
+your environment? What steps will reproduce the issue? What browser(s) and OS
+experience the problem? Do other browsers show the bug differently? What
+would you expect to be the outcome? All these details will help people to fix
+any potential bugs.
 
-* Search [GitHub][pulls] for an open or closed PR
-  that relates to your submission. You don't want to duplicate effort.
-* Make your changes in a new git branch:
+Example:
 
-     ```shell
-     git checkout -b my-fix-branch master
-     ```
-* Read the [developer documentation][dev-doc].
-* Create your patch, **including appropriate test cases**.
-* Follow our [Coding Rules](#rules).
-* Test your changes with our supported browsers and screen readers.
-* Commit your changes using a descriptive commit message that follows our
-  [commit message conventions](#commit). Adherence to these conventions
-  is necessary because release notes are automatically generated from these messages.
+> Short and descriptive example bug report title
+>
+> A summary of the issue and the browser/OS environment in which it occurs. If
+> suitable, include the steps required to reproduce the bug.
+>
+> 1. This is the first step
+> 2. This is the second step
+> 3. Further steps, etc.
+>
+> `<url>` - a link to the reduced test case
+>
+> Any other information you want to share that is relevant to the issue being
+> reported. This might include the lines of code that you have identified as
+> causing the bug, and potential solutions (and your opinions on their
+> merits).
 
-     ```shell
-     git commit -a
-     ```
-  Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
+## Feature requests
 
-* Push your branch to GitHub:
+Feature requests are welcome. Before opening a feature request, please take a moment to find out whether your idea
+fits with the scope and aims of the project. It's up to *you* to make a strong
+case to convince the project's developers of the merits of this feature. Please
+provide as much detail and context as possible.
 
-    ```shell
-    git push my-fork my-fix-branch
-    ```
 
-* In GitHub, send a pull request to `ngx-admin:master`.
-* If we suggest changes then:
-  * Make the required updates.
-  * Re-run `npm run release:validate` to ensure tests are still passing, linter & build has no errors.
-  * Rebase your branch and force push to your GitHub repository (this will update your Pull
-    Request):
+## Pull requests
 
-    ```shell
-    git rebase master -i
-    git push -f
-    ```
+Good pull requests—patches, improvements, new features—are a fantastic
+help. They should remain focused in scope and avoid containing unrelated
+commits.
 
-That's it! Thank you for your contribution!
+**Please ask first** before embarking on any significant pull request (e.g.
+implementing features, refactoring code, porting to a different language),
+otherwise you risk spending a lot of time working on something that the
+project's developers might not want to merge into the project.
 
-#### After your pull request is merged
+Adhering to the following process is the best way to get your work
+included in the project:
 
-After your pull request is merged, you can safely delete your branch and pull the changes
-from the main (upstream) repository:
+1. [Fork](https://help.github.com/fork-a-repo/) the project, clone your fork,
+   and configure the remotes:
 
-* Delete the remote branch on GitHub either through the GitHub web UI or your local shell as
-    follows:
+   ```bash
+   # Clone your fork of the repo into the current directory
+   git clone https://github.com/<your-username>/free-angular-admin-template.git
+   # Navigate to the newly cloned directory
+   cd free-angular-admin-template
+   # Assign the original repo to a remote called "upstream"
+   git remote add upstream https://github.com/coreui/coreui-free-angular-admin-template.git
+   ```
 
-    ```shell
-    git push my-fork --delete my-fix-branch
-    ```
+2. If you cloned a while ago, get the latest changes from upstream:
 
-* Check out the master branch:
+   ```bash
+   git checkout master
+   git pull upstream master
+   ```
 
-    ```shell
-    git checkout master -f
-    ```
+3. Create a new topic branch (off the main project development branch) to
+   contain your feature, change, or fix:
 
-* Delete the local branch:
+   ```bash
+   git checkout -b <topic-branch-name>
+   ```
 
-    ```shell
-    git branch -D my-fix-branch
-    ```
+4. Commit your changes in logical chunks. Please adhere to these [git commit
+   message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+   or your code is unlikely to be merged into the main project. Use Git's
+   [interactive rebase](https://help.github.com/articles/interactive-rebase)
+   feature to tidy up your commits before making them public.
 
-* Update your master with the latest upstream version:
+5. Locally merge (or rebase) the upstream development branch into your topic branch:
 
-    ```shell
-    git pull --ff upstream master
-    ```
+   ```bash
+   git pull [--rebase] upstream master
+   ```
 
-## <a name="rules"></a> Coding Rules
-To ensure consistency throughout the source code, keep these rules in mind as you are working:
+6. Push your topic branch up to your fork:
 
-* All features or bug fixes **must be tested** by one or more specs (unit-tests).
-* All public API methods **must be documented** following JsDoc notation.
+   ```bash
+   git push origin <topic-branch-name>
+   ```
 
-## <a name="commit"></a> Commit Message Guidelines
+7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/) with a clear title and description against the `master` branch.
 
-We have very precise rules over how our git commit messages can be formatted.  This leads to **more
-readable messages** that are easy to follow when looking through the **project history**.  But also,
-we use the git commit messages to **generate the ngx-admin change log**.
+**IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work under the terms of the [MIT License](LICENSE).
 
-### Commit Message Format
-Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
-format that includes a **type**, a **scope** and a **subject**:
+### Semantic Git commit messages
 
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
+Inspired by Sparkbox's awesome article on [semantic commit messages](http://seesparkbox.com/foundry/semantic_commit_messages). Please use following commit message format.
 
-The **header** is mandatory and the **scope** of the header is optional.
+* chore (updating npm tasks etc; no production code change) -> ```git test -m 'chore: commit-message-here'```
+* docs (changes to documentation) -> ```git commit -m 'docs: commit-message-here'```
+* feat (new feature) -> ```git commit -m 'feat: commit-message-here'```
+* fix (bug fix) -> ```git commit -m 'fix: commit-message-here'```
+* refactor (refactoring production code) -> ```git commit -m 'refactor: commit-message-here'```
+* style (formatting, missing semi colons, etc; no code change) -> ```git commit -m 'style: commit-message-here'```
+* test (adding missing tests, refactoring tests; no production code change) -> ```git test -m 'refactor: commit-message-here'```
 
-Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
-to read on GitHub as well as in various git tools.
 
-### Revert
-If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of
-the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is
-the SHA of the commit being reverted.
+## Code guidelines
 
-### Type
-Must be one of the following:
+### HTML
 
-* **feat**: A new feature
-* **fix**: A bug fix
-* **docs**: Documentation only changes
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
-  semi-colons, etc)
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **perf**: A code change that improves performance
-* **test**: Adding missing tests or correcting existing tests
-* **build**: Changes that affect the build system, CI configuration or external dependencies
-            (example scopes: gulp, broccoli, npm)
-* **chore**: Other changes that don't modify `src` or `test` files
-* **release**: Release version commit
+[Adhere to the Code Guide.](http://codeguide.co/#html)
 
-### Scope
-The scope could be anything specifying place of the commit change. For example
-`menu`, `sidebar`, etc.
+- Use tags and elements appropriate for an HTML5 doctype (e.g., self-closing tags).
+- Use CDNs and HTTPS for third-party JS when possible. We don't use protocol-relative URLs in this case because they break when viewing the page locally via `file://`.
+- Use [WAI-ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) attributes in documentation examples to promote accessibility.
 
-### Subject
-The subject contains succinct description of the change:
+### CSS
 
-* use the imperative, present tense: "change" not "changed" nor "changes"
-* don't capitalize first letter
-* no dot (.) at the end
+[Adhere to the Code Guide.](http://codeguide.co/#css)
 
-### Body
-Optional. Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
-The body should include the motivation for the change and contrast this with previous behavior.
+- When feasible, default color palettes should comply with [WCAG color contrast guidelines](http://www.w3.org/TR/WCAG20/#visual-audio-contrast).
+- Except in rare cases, don't remove default `:focus` styles (via e.g. `outline: none;`) without providing alternative styles. See [this A11Y Project post](http://a11yproject.com/posts/never-remove-css-outlines) for more details.
 
-### Footer
-Optional. The footer should contain any information about **Breaking Changes** and is also the place to
-reference GitHub issues that this commit **Closes**.
+### JS
 
-**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
-The rest of the commit message is then used for this.
+- No semicolons (in client-side JS)
+- 2 spaces (no tabs)
+- strict mode
+- "Attractive"
+- Don't use [jQuery event alias convenience methods](https://github.com/jquery/jquery/blob/master/src/event/alias.js) (such as `$().focus()`). Instead, use [`$().trigger(eventType, ...)`](http://api.jquery.com/trigger/) or [`$().on(eventType, ...)`](http://api.jquery.com/on/), depending on whether you're firing an event or listening for an event. (For example, `$().trigger('focus')` or `$().on('focus', function (event) { /* handle focus event */ })`) We do this to be compatible with custom builds of jQuery where the event aliases module has been excluded.
 
-[coc]: CODE_OF_CONDUCT.md
-[dev-doc]: DEV_DOCS.md
-[github]: https://github.com/akveo/ngx-admin
-[stackoverflow]: https://stackoverflow.com/questions/tagged/ngx-admin
-[issues]: https://github.com/akveo/ngx-admin/issues
-[new_issue]: https://github.com/akveo/ngx-admin/issues/new
-[pulls]: https://github.com/akveo/ngx-admin/pulls
+## License
+
+By contributing your code, you agree to license your contribution under the [MIT License](LICENSE).
