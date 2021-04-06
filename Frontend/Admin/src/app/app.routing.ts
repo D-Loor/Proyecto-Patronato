@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { GloginGuard } from './guards/glogin.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -21,6 +22,7 @@ export const routes: Routes = [
   {
     path: '404',
     component: P404Component,
+    canActivate:[GloginGuard],
     data: {
       title: 'Page 404'
     }
@@ -28,6 +30,7 @@ export const routes: Routes = [
   {
     path: 'medicinageneral',
     component: MedicinaGeneralComponent,
+    canActivate:[GloginGuard],
     data: {
       title: 'Medicina General'
     }
@@ -35,6 +38,7 @@ export const routes: Routes = [
   {
     path: 'medicinageneralcitas',
     component: MedicinaGeneralCitasComponent,
+    canActivate:[GloginGuard],
     data: {
       title: 'Citas-Medicina General '
     }
@@ -42,6 +46,7 @@ export const routes: Routes = [
   {
     path: '500',
     component: P500Component,
+    canActivate:[GloginGuard],
     data: {
       title: 'Page 500'
     }
@@ -56,6 +61,7 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate:[GloginGuard],
     data: {
       title: 'Register Page'
     }
@@ -63,6 +69,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate:[GloginGuard],
     data: {
       title: 'Home'
     },

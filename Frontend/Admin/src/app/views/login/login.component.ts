@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'OK'
           })
         }else{
+          localStorage.setItem('sesionLogin', 'true');
           this.arraydat=data['result'];
           this.rutas.navigate(['/dashboard']);
           Swal.fire({
