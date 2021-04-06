@@ -23,6 +23,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -65,6 +66,8 @@ import { FormsModule } from '@angular/forms';
     IconSetModule.forRoot(),
     HttpClientModule,
     FormsModule,
+    CollapseModule,
+    
   ],
   declarations: [
     AppComponent,

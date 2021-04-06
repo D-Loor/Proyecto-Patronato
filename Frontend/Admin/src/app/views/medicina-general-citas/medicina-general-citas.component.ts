@@ -5,14 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './medicina-general-citas.component.html',
   styleUrls: ['./medicina-general-citas.component.scss']
 })
-export class MedicinaGeneralCitasComponent implements OnInit {
+export class MedicinaGeneralCitasComponent  {
 
+ 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  isCollapsed: boolean = false;
+  isCollapsed2: boolean = false;
 
   collapsed(event: any): void {
     // console.log(event);
