@@ -22,7 +22,6 @@ export const routes: Routes = [
   {
     path: '404',
     component: P404Component,
-    canActivate:[GloginGuard],
     data: {
       title: 'Page 404'
     }
@@ -30,7 +29,6 @@ export const routes: Routes = [
   {
     path: 'medicinageneral',
     component: MedicinaGeneralComponent,
-    canActivate:[GloginGuard],
     data: {
       title: 'Medicina General'
     }
@@ -38,7 +36,6 @@ export const routes: Routes = [
   {
     path: 'medicinageneralcitas',
     component: MedicinaGeneralCitasComponent,
-    canActivate:[GloginGuard],
     data: {
       title: 'Citas-Medicina General '
     }
