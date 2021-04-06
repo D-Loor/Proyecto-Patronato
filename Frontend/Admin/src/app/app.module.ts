@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
+
 import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
@@ -30,6 +32,7 @@ const APP_CONTAINERS = [
 ];
 
 import {
+
   AppAsideModule,
   AppBreadcrumbModule,
   AppHeaderModule,
@@ -44,12 +47,14 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { MedicinaGeneralComponent } from './views/medicina-general/medicina-general.component';
-import { MedicinaGeneralCitasComponent } from './views/medicina-general-citas/medicina-general-citas.component';
-import { FormsModule } from '@angular/forms'; 
+import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
+import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
+import { FormsModule } from '@angular/forms';
+import { MedicinaGeneralConsultasComponent } from './views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.component';
 
 @NgModule({
   imports: [
+    CollapseModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -67,7 +72,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     CollapseModule,
-    
+
   ],
   declarations: [
     AppComponent,
@@ -77,7 +82,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     MedicinaGeneralComponent,
-    MedicinaGeneralCitasComponent
+    MedicinaGeneralCitasComponent,
+    MedicinaGeneralConsultasComponent
   ],
   providers: [
     {

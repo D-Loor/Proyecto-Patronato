@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { navItems } from '../../../_nav';
 
 @Component({
   selector: 'app-medicina-general-citas',
@@ -7,16 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicinaGeneralCitasComponent  {
 
- 
+
   constructor() { }
 
-  isCollapsed2: boolean = false;
+  isCollapsed2 = false;
+  isCollapsed = false;
 
-  collapsed(event: any): void {
-    // console.log(event);
+  public sidebarMinimized = false;
+  public navItems = navItems;
+
+  toggleMinimize(e) {
+    this.sidebarMinimized = e;
   }
 
-  expanded(event: any): void {
-    // console.log(event);
-  }
 }
