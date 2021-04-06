@@ -22,13 +22,10 @@ export class LoginComponent implements OnInit {
   IniciarSesion(){ 
     if(this.correo==null || this.pass==null || this.correo=="" || this.pass==""){
       Swal.fire({
-        title: 'Existen campos vacios!',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
+        title: 'Error!',
+        text: 'Existen campos vacios',
+        icon: 'warning',
+        confirmButtonText: 'OK'
       })
     }else{
       this.login.ValidarLogin(this.correo, this.pass).then(data =>{
@@ -37,17 +34,17 @@ export class LoginComponent implements OnInit {
             title: 'Error!',
             text: 'El correo o la contraseña estan incorrectos',
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'OK'
           })
         }else{
           this.arraydat=data['result'];
           this.rutas.navigate(['/dashboard']);
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
             title: 'Bienvenido',
-            showConfirmButton: false,
-            timer: 1500
+            text: 'Sesión Iniciada',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            timer:1900
           })
         }
         }).catch(error =>{
