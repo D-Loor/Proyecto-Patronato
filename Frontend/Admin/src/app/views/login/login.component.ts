@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(public login:LoginService, public rutas:Router) { }
 
   ngOnInit() {
-  
+    localStorage.removeItem('sesionLogin');
   }
 
   correo: string;
