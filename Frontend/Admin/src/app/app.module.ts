@@ -45,6 +45,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { MedicinaGeneralComponent } from './views/medicina-general/medicina-general.component';
 import { MedicinaGeneralCitasComponent } from './views/medicina-general-citas/medicina-general-citas.component';
+import { FormsModule } from '@angular/forms'; 
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { MedicinaGeneralCitasComponent } from './views/medicina-general-citas/me
     IconModule,
     IconSetModule.forRoot(),
     HttpClientModule,
+    FormsModule,
   ],
   declarations: [
     AppComponent,

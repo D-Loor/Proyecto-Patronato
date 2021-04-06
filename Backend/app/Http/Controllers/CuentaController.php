@@ -111,4 +111,15 @@ class CuentaController extends Controller
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
+
+    public function validar ($correo, $pass){
+
+        $datos=Cuenta::where('correo', $correo)->where('password', $pass)->get();
+        $num_rows = count($datos);
+        if($num_rows != 0){
+           return response()->json(['result'=>$datos]); 
+        }else
+           return response()->json(['mensaje'=>"Usuario no encontrado", 'code'=>'202']); 
+    }
+
 }
