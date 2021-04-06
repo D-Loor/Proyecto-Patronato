@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
@@ -60,6 +61,7 @@ import { MedicinaGeneralComponent } from './views/medicina-general/medicina-gene
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    HttpClientModule,
   ],
   declarations: [
     AppComponent,
