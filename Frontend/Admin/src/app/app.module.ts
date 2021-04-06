@@ -44,6 +44,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { MedicinaGeneralComponent } from './views/medicina-general/medicina-general.component';
+import { MedicinaGeneralCitasComponent } from './views/medicina-general-citas/medicina-general-citas.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { MedicinaGeneralComponent } from './views/medicina-general/medicina-gene
     P500Component,
     LoginComponent,
     RegisterComponent,
-    MedicinaGeneralComponent
+    MedicinaGeneralComponent,
+    MedicinaGeneralCitasComponent
   ],
   providers: [
     {

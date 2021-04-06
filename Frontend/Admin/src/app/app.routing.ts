@@ -7,6 +7,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { MedicinaGeneralCitasComponent } from './views/medicina-general-citas/medicina-general-citas.component';
 import { MedicinaGeneralComponent } from './views/medicina-general/medicina-general.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -29,6 +30,13 @@ export const routes: Routes = [
     component: MedicinaGeneralComponent,
     data: {
       title: 'Medicina General'
+    }
+  },
+  {
+    path: 'medicinageneralcitas',
+    component: MedicinaGeneralCitasComponent,
+    data: {
+      title: 'Citas-Medicina General '
     }
   },
   {
