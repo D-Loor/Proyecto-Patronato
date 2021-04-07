@@ -12,6 +12,25 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'Medicina General'
+  },
+  {
+    name: 'Citas',
+    url: '/medicinageneralcitas',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'Historia Clínica',
+    url: '/medicinageneral',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Consulta',
+    url: '/medicinageneralconsultas',
+    icon: 'icon-pencil'
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {
