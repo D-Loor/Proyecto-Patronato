@@ -1,38 +1,50 @@
 <?php
 
-$usuario = "root"; 
-$password = ""; 
-$endpoint = "localhost";
-$basedatos = "patronato";
-
-$conn = mysqli_connect($endpoint, $usuario, $password, $basedatos);
 
 
-$nombres = $_POST['nombres'];
-$cedula = $_POST['cedula'];
-$especialidad = $_POST['especialidad'];
-$fecha = $_POST['fecha'];
-$hora = $_POST['hora'];
+$data = array(
+    'nombres' => $_POST["nombres"],
+    'cedula' => $_POST["cedula"],
+    'especialidad' => $_POST["especialidad"],
+    'fecha' => $_POST["fecha"],
+    'hora' => $_POST["hora"]
+);
 
-    $insertar = "INSERT INTO citas (nombres, cedula, especialidad, fecha, hora) VALUES ('$nombres', '$cedula', '$especialidad', '$fecha', '$hora')";
-    $validar = "SELECT * FROM citas WHERE cedula = '$cedula'";
-    $verificar =  mysqli_query($conn, $validar);
+$datosCodificados = json_encode($data);
+$url = "http://127.0.0.1:8000/api/agendarCita";
+$ch = curl_init($url);
 
-    
-    if (mysqli_num_rows($verificar) > 0){
-      echo '<script>
-      alert ("Usuario ya registrado")
-      window.location.href="index.html";
-      </script>';
-    }else{
-    $ingreso = mysqli_query($conn, $insertar);
-      echo '<script>
-      alert ("Registro con exito")
-      window.location.href="index.html";
-      </script>';
-    }
-   
+curl_setopt_array($ch, array(
+  // Indicar que vamos a hacer una petición POST
+  CURLOPT_CUSTOMREQUEST => "POST",
+  // Justo aquí ponemos los datos dentro del cuerpo
+  CURLOPT_POSTFIELDS => $datosCodificados,
+  // Encabezados
+  //CURLOPT_HEADER => true,
+  CURLOPT_HTTPHEADER => array(
+      'Content-Type: application/json',
+      'Content-Length: ' . strlen($datosCodificados), // Abajo podríamos agregar más encabezados
+      'Personalizado: ¡Hola mundo!', # Un encabezado personalizado
+  ),
+  # indicar que regrese los datos, no que los imprima directamente
+  CURLOPT_RETURNTRANSFER => true,
+));
 
-mysqli_close($conn);
+$resultado = curl_exec($ch);
+$codigoRespuesta = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+if($codigoRespuesta === 200){
+    # Decodificar JSON porque esa es la respuesta
+    $respuestaDecodificada = json_decode($resultado);
+    # Simplemente los imprimimos
+    echo "<strong> </strong>" . $respuestaDecodificada->result;
+}else{
+    # Error
+    echo "Error consultando. Código de respuesta: $codigoRespuesta";
+}
+curl_close($ch);
+
+
+
 
 ?>
