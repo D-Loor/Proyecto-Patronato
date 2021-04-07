@@ -28,27 +28,6 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'medicinageneral',
-    component: MedicinaGeneralComponent,
-    data: {
-      title: 'Medicina General'
-    }
-  },
-  {
-    path: 'medicinageneralcitas',
-    component: MedicinaGeneralCitasComponent,
-    data: {
-      title: 'Citas-Medicina General '
-    }
-  },
-  {
-    path: 'medicinageneraldatospaciente',
-    component: MedicinaGeneralDatosPacientesComponent,
-    data: {
-      title: 'Datos Paciente-Medicina General '
-    }
-  },
-  {
     path: '500',
     component: P500Component,
     canActivate:[GloginGuard],
@@ -79,6 +58,26 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: 'medicinageneral',
+        loadChildren: () => import('./views/MedicinaGeneral/medicina-general/medicina-general.module').then(m => m.MedicinaGeneralModule)
+      },
+      {
+        path: 'medicinageneralcitas',
+        loadChildren: () => import('./views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.module').then(m => m.MedicinaGeneralCitasModule)
+      },
+      {
+        path: 'medicinageneralconsultas',
+        loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
+      },
+
+
+
+
+
+
+
+
       {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
