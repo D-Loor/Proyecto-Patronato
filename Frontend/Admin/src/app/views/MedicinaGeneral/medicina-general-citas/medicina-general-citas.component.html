@@ -313,10 +313,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="table-titulo">Vishnu Serghei</td>
-                <td>130345678</td>
-                <td>12:00</td>
+              <tr *ngFor="let item of citasTotal">
+                <td class="table-titulo">{{item.nombres}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.hora}}</td>
                 <td>
 
                   <span class="badge badge-success">Active</span>
@@ -331,57 +331,7 @@
 
                 </td>
               </tr>
-              <tr>
-                <td class="table-titulo">Zbyněk Phoibos</td>
-                <td>130345678</td>
-                <td>12:30</td>
-                <td>
-                  <span class="badge badge-danger">Banned</span>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
-              <tr>
-                <td class="table-titulo">Einar Randall</td>
-                <td>130345678</td>
-                <td>02:00</td>
-                <td>
-                  <span class="badge badge-secondary">Inactive</span>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
-              <tr>
-                <td class="table-titulo">Félixito Alwexander Penarrieta Zambrano</td>
-                <td>130345678</td>
-                <td>02:30</td>
-                <td>
-                  <span class="badge badge-warning">Pending</span>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
+              
 
             </tbody>
           </table>
