@@ -1,0 +1,61 @@
+<div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+    <div class="form-group">
+      <div class="col-md-4 searcht">
+        <div class="input-group">
+          <input type="text" id="input1-group2" name="input1-group2" class="form-control" placeholder="Username">
+          <span class="input-group-prepend">
+            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombres</th>
+            <th>Apellido</th>
+            <th>Sexo</th>
+            <th>Edad</th>
+            <th>Residencia</th>
+            <th>CRUD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pacientesTotal">
+            <td >{{item.cedula}}</td>
+            <td>{{item.nombres}}</td>
+            <td>{{item.apellidas}}</td>
+            <td>{{item.sexo}}</td>
+            <td>{{item.edad}}</td>
+            <td>{{item.residencia}}</td>
+            <td>
+              <button type="button" class="btn btn-ghost-info botont"><i
+                  class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+              <button type="button" class="btn btn-ghost-success botont"><i
+                  class="fa fa-eye"></i>&nbsp;Consultas</button>
+              <button type="button" class="btn btn-ghost-danger botont"><i
+                  class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+            </td>
+          </tr>
+          
+
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </div>
+   </div>
