@@ -51,6 +51,7 @@ import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-gener
 import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
 import { FormsModule } from '@angular/forms';
 import { MedicinaGeneralConsultasComponent } from './views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.component';
+import { MedicinaGeneralDatosPacientesComponent } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.component';
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { MedicinaGeneralConsultasComponent } from './views/MedicinaGeneral/medic
     RegisterComponent,
     MedicinaGeneralComponent,
     MedicinaGeneralCitasComponent,
-    MedicinaGeneralConsultasComponent
+    MedicinaGeneralConsultasComponent,
+    MedicinaGeneralDatosPacientesComponent
   ],
   providers: [
     {

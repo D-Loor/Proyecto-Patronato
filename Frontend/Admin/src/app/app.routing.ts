@@ -9,6 +9,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
+import { MedicinaGeneralDatosPacientesComponent } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.component';
 import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -38,6 +39,13 @@ export const routes: Routes = [
     component: MedicinaGeneralCitasComponent,
     data: {
       title: 'Citas-Medicina General '
+    }
+  },
+  {
+    path: 'medicinageneraldatospaciente',
+    component: MedicinaGeneralDatosPacientesComponent,
+    data: {
+      title: 'Datos Paciente-Medicina General '
     }
   },
   {
