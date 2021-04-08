@@ -55,5 +55,6 @@ export class MedicinaGeneralDatosPacientesComponent implements OnInit {
       this.Ver3 = true;
       this.Ocultar3 = true;
   }
+  
 
 }

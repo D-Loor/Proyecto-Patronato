@@ -18,100 +18,100 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="text-input">Apellidos</label>
-                                            <input type="text" id="apellidos"  autocomplete="off" [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos">
+                                            <input  required type="text" id="apellidos"  autocomplete="off" [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="text-input">Nombres</label>
-                                            <input type="text" id="apellidos"  [(ngModel)]="nombres"  autocomplete="off" name="nombres" class="form-control" placeholder="Ingrese los nombres">
+                                            <input required type="text" id="apellidos"  [(ngModel)]="nombres"  autocomplete="off" name="nombres" class="form-control" placeholder="Ingrese los nombres">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-8">
                                             <label for="text-input">Cédula</label>
-                                            <input type="number" id="cedula" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="cedula" name="cedula" class="form-control" placeholder="Ingrese la cédula">
+                                            <div class="input-group">
+                                                <input  required type="number" id="cedula" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="cedula" name="cedula" class="form-control" placeholder="Ingrese la cédula">
+                                                <span class="input-group-append">
+                                                    <button type="button" class="btn btn-primary">Consultar</button>
+                                                </span>
+                                            </div>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="text-input">Edad</label>
-                                            <input type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
+                                            <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
                                         </div>
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-8">
                                             <label for="text-input">Ocupación</label>
-                                            <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">
+                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="select1">Sexo</label>
-                                            <select id="select1" name="select1" class="form-control">
-                                                <option label="--Seleccione una opción--"></option>
-                                                <option value="1">Hombre</option>
-                                                <option value="0">Mujer</option>
+                                            <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo" required>
+                                                <option value="Hombre">Hombre</option>
+                                                <option value="Mujer">Mujer</option>
                                             </select>
                                         </div>
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="text-input">Lugar de residencia</label>
-                                            <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia">    
+                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia">    
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="text-input">Lugar de procedencia</label>
-                                            <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia">
+                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia">
                                         </div>
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label for="date-input">Fecha de nacimiento</label>
-                                            <input class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento">    
+                                            <input required class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento">    
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="select1">Raza</label>
-                                            <select id="select1" name="select1" class="form-control">
-                                                <option label="--Seleccione una opción--"></option>
-                                                <option value="1">Mestizos</option>
-                                                <option value="2">Blancos</option>
-                                                <option value="3">Montubios</option>
-                                                <option value="4">Afroecuatorianos</option>
-                                                <option value="5">Indígenas</option>
-                                                <option value="6">Otros</option>
+                                            <label for="raza">Raza</label>
+                                            <select id="raza" name="raza" class="form-control" [(ngModel)]="raza" required>
+                                                <option value="Mestizos">Mestizos</option>
+                                                <option value="Blancos">Blancos</option>
+                                                <option value="Montubios">Montubios</option>
+                                                <option value="Afroecuatorianos">Afroecuatorianos</option>
+                                                <option value="Indígenas">Indígenas</option>
+                                                <option value="Otros">Otros</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="select1">Religión</label>
-                                            <select id="select1" name="select1" class="form-control">
-                                                <option label="--Seleccione una opción--"></option>
-                                                <option value="1">Cristiana Católica</option>
-                                                <option value="2">Cristiana Evangélica</option>
-                                                <option value="3">Testigos de Jehová</option>
-                                                <option value="4">Ateos</option>
-                                                <option value="5">Agnósticos</option>
-                                                <option value="6">Otros</option>
+                                            <label for="religion">Religión</label>
+                                            <select id="religion" name="religion" class="form-control" [(ngModel)]="religion" required>
+                                                <option value="Cristiana Católica">Cristiana Católica</option>
+                                                <option value="Cristiana Evangélica">Cristiana Evangélica</option>
+                                                <option value="Testigos de Jehová">Testigos de Jehová</option>
+                                                <option value="Ateos">Ateos</option>
+                                                <option value="Agnósticos">Agnósticos</option>
+                                                <option value="Otros">Otros</option>
                                             </select>
                                         </div>
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-8">
-                                            <label for="select1">Nivel de instrucción</label>    
-                                            <select id="select1" name="select1" class="form-control">
-                                                <option label="--Seleccione una opción--"></option>
-                                                <option value="1">Educación Básica</option>
-                                                <option value="2">Bachillerato</option>
-                                                <option value="3">Técnico Superior</option>
-                                                <option value="4">Tercer Nivel</option>
-                                                <option value="5">Postgrado</option>
-                                                <option value="6">Ninguno</option>
+                                            <label for="nivel_instruccion">Nivel de instrucción</label>    
+                                            <select id="nivel_instruccion" name="nivel_instruccion" class="form-control" [(ngModel)]="nivel_instruccion" required>
+                                                <option value="Educación Básica">Educación Básica</option>
+                                                <option value="Bachillerato">Bachillerato</option>
+                                                <option value="Técnico Superior">Técnico Superior</option>
+                                                <option value="Tercer Nivel">Tercer Nivel</option>
+                                                <option value="Postgrado">Postgrado</option>
+                                                <option value="Ninguno">Ninguno</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="select1">Estado Civil</label>
-                                            <select id="select1" name="select1" class="form-control">
-                                                <option label="--Seleccione una opción--"></option>
-                                                <option value="1">Soltero(a)</option>
-                                                <option value="2">Casado(a)</option>
-                                                <option value="3">Viudo(a)</option>
-                                                <option value="4">Divorciado(a)</option>
+                                            <label for="estado_civil">Estado Civil</label>
+                                            <select id="estado_civil" name="estado_civil" class="form-control" [(ngModel)]="estado_civil" required>
+                                                <option value="Soltero(a)">Soltero(a)</option>
+                                                <option value="Casado(a)">Casado(a)</option>
+                                                <option value="Viudo(a)">Viudo(a)</option>
+                                                <option value="Divorciado(a)">Divorciado(a)</option>
                                             </select>
                                         </div>
                                       </div><!--/.row-->
@@ -134,11 +134,11 @@
                         <div class="card-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                   <div class="row">
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-sm-8">
                                         <label >Niñez</label>
-                                        <div>
+                                        <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                                <input class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="1" (click)="funcionVer()">
+                                                <input required class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="1" (click)="funcionVer()">
                                                 <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline mr-1">
@@ -147,43 +147,150 @@
                                             </div>
                                         </div>
                                         <div id="collapseBasic" *ngIf="Ver==false && Ocultar==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
-                                        </div>    
-                                    </div>
-                                    <div class="form-group col-sm-4">
+                                            <textarea required [(ngModel)]="ninezT" id="ninezT" name="ninezT" rows="3" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
+                                        </div> 
                                         <label for="inline-radios">Adolescencia</label>
-                                        <div>
+                                        <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosA">
-                                                <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="1" (click)="funcionVer2()">
+                                                <input required class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="1" (click)="funcionVer2()">
                                                 <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline mr-1">
-                                                <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="0" (click)="funcionOcultar2()">
+                                                <input required class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="0" (click)="funcionOcultar2()">
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
                                         <div id="collapseBasic" *ngIf="Ver2==false && Ocultar2==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-4">
+                                            <textarea required [(ngModel)]="adolescenciaT" id="adolescenciaT" name="adolescenciaT" rows="3" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
+                                        </div>   
                                         <label for="inline-radios">Adultez</label>  
-                                        <div>
+                                        <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="1" (click)="funcionVer3()">
+                                                <input required class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="1" (click)="funcionVer3()">
                                                 <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline mr-1">
-                                                <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="0" (click)="funcionOcultar3()">
+                                                <input required class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="0" (click)="funcionOcultar3()">
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
                                         <div id="collapseBasic" *ngIf="Ver3==false && Ocultar3==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
+                                            <textarea required  [(ngModel)]="adultezT" id="adultezT" name="adultezT" rows="3" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label >DBT</label>
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosN">
+                                                <input required class="form-check-input" type="radio" name="DBT"  [(ngModel)]="DBT" id="DBT" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input required class="form-check-input" type="radio" name="DBT"  [(ngModel)]="DBT" id="DBT" value="0" >
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>    
+                                        <label for="inline-radios">HTA</label>
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosA">
+                                                <input required class="form-check-input" type="radio" name="HTA"  [(ngModel)]="HTA" id="HTA" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input required class="form-check-input" type="radio" name="HTA"  [(ngModel)]="HTA" id="HTA" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
+                                        <label for="inline-radios">TBC</label>  
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                <input required class="form-check-input" type="radio" name="TBC"  [(ngModel)]="TBC" id="TBC" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input required class="form-check-input" type="radio" name="TBC"  [(ngModel)]="TBC" id="TBC" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
+                                        <label for="inline-radios">GEMELAR</label>  
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                <input required class="form-check-input" type="radio" name="GEMELAR"  [(ngModel)]="GEMELAR" id="GEMELAR" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input required class="form-check-input" type="radio" name="GEMELAR"  [(ngModel)]="GEMELAR" id="GEMELAR" value="0" >
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
                                         </div>
                                     </div>
                                   </div><!--/.row-->
+                                  <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label for="text-input">Antecedentes quirúrgicos</label>
+                                        <textarea required [(ngModel)]="antecedentes_quirurgicos" id="antecedentes_quirurgicos" name="antecedentes_quirurgicos" rows="3" class="form-control" placeholder="Descripción de los antecedentes quirúrgicos.."></textarea>
+                                    </div>
+                                </div>
+                                <div *ngIf="sexo=='Mujer'">
+                                    <label for="">Antecedentes ginecos obstétricos</label>
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="text-input">FUM</label>
+                                            <input  required type="text" id="fum" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="fum" name="fum" class="form-control" placeholder="Ingrese el FUM">
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="text-input">FPP</label>
+                                            <input  required type="text" id="fpp" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="fpp" name="fpp" class="form-control" placeholder="Ingrese el FPP" >
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="text-input">Edad gestacional (semanas) </label>
+                                            <input required type="number" id="edad_gestional"  autocomplete="off"  [(ngModel)]="edad_gestional" name="edad_gestional" class="form-control" placeholder="Ingrese la edad gestional">
+                                        </div>
+                                    </div><!--/.row-->
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="text-input">Menarquia</label>
+                                            <input  required type="text" id="menarquia" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="menarquia" name="menarquia" class="form-control" placeholder="Ingrese la menarquia">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="text-input">Flujo genital</label>
+                                            <input  required type="text" id="flujo_genital" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="flujo_genital" name="flujo_genital" class="form-control" placeholder="Ingrese el flujo genital">
+                                        </div>
+                                    </div><!--/.row-->
+                                    <div class="row">
+                                        <div class="form-group col-sm-3">
+                                            <label for="text-input">Gestas</label>
+                                            <input  required type="text" id="Gestas" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Gestas" name="Gestas" class="form-control" placeholder="Ingrese el número de gestas">
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="text-input">Partos</label>
+                                            <input  required type="text" id="Partos" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Partos" name="Partos" class="form-control" placeholder="Ingrese el número de partos" >
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="text-input">Abortos</label>
+                                            <input required type="number" id="abortos"  autocomplete="off"  [(ngModel)]="abortos" name="abortos" class="form-control" placeholder="Ingrese el número de abortos">
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="text-input">Cesareas</label>
+                                            <input required type="number" id="cesareas"  autocomplete="off"  [(ngModel)]="cesareas" name="cesareas" class="form-control" placeholder="Ingrese el número de cesareas">
+                                        </div>
+                                    </div><!--/.row-->
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="text-input">Antecedentes alérgicos </label>
+                                        <textarea required [(ngModel)]="antecedentes_alergicos" id="antecedentes_alergicos" name="antecedentes_alergicos" rows="3" class="form-control" placeholder="Descripción de los antecedentes alérgicos.."></textarea>
+                                    </div>
+                                </div><!--/.row-->
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="text-input">Antecedentes traumatológicos</label>
+                                        <textarea required [(ngModel)]="antecedentes_traumatologicos" id="antecedentes_traumatologicos" name="antecedentes_traumatologicos" rows="3" class="form-control" placeholder="Descripción de los antecedentes traumatológicos.."></textarea>
+                                    </div>
+                                </div><!--/.row-->
 
+                                
+                                
                             </form>
                         </div>
                     </div>
