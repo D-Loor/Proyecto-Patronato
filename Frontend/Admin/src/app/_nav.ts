@@ -25,8 +25,13 @@ export const navItems: INavData[] = [
     icon: 'icon-pencil'
   },
   {
-    name: 'Consulta',
+    name: 'Consultas',
     url: '/medicinageneralconsultas',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Datos Paciente',
+    url: '/medicinageneraldatospacientes',
     icon: 'icon-pencil'
   },
   {

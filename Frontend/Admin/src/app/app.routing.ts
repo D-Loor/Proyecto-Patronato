@@ -70,6 +70,10 @@ export const routes: Routes = [
         path: 'medicinageneralconsultas',
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
       },
+      {
+        path: 'medicinageneraldatospacientes',
+        loadChildren: () => import('./views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module').then(m => m.MedicinaGeneralDatosPacientesModule)
+      },
 
 
 
