@@ -9,7 +9,18 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   constructor() { }
   isCollapsed = false;
+  presun=false;
+  defini=false;
   ngOnInit(): void {
+  }
+
+  funcionPreventivo(){
+    this.presun=true;
+    this.defini=false;
+  }
+  funcionDefinitivo(){
+    this.presun=false;
+    this.defini=true;
   }
 
 }
