@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MedicinaGeneralConsultasComponent implements OnInit {
 
   constructor() { }
-
+  isCollapsed = false;
   ngOnInit(): void {
   }
 
