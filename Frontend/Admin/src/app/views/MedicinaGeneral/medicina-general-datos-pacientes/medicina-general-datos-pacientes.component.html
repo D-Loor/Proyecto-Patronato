@@ -133,54 +133,57 @@
                     <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
                         <div class="card-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="inline-radios">Niñez</label>
-                                    <div class="col-md-9 col-form-label">
-                                      <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                        <input class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="1" (click)="funcionVer()">
-                                        <label class="form-check-label" for="inlineRadio1">Si</label>
-                                      </div>
-                                      <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="0" (click)="funcionOcultar()">
-                                        <label class="form-check-label" for="inlineRadio2">No</label>
-                                      </div>
+                                  <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label >Niñez</label>
+                                        <div>
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosN">
+                                                <input class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="1" (click)="funcionVer()">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input class="form-check-input" type="radio" name="ninez"  [(ngModel)]="ninez" id="ninez" value="0" (click)="funcionOcultar()">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
                                         <div id="collapseBasic" *ngIf="Ver==false && Ocultar==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Contenido.."></textarea>
-                                        </div>
+                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
+                                        </div>    
                                     </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="inline-radios">Adolescencia</label>
-                                    <div class="col-md-9 col-form-label">
-                                      <div class="form-check form-check-inline mr-1" id="inline-radiosA">
-                                        <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="1" (click)="funcionVer2()">
-                                        <label class="form-check-label" for="inlineRadio1">Si</label>
-                                      </div>
-                                      <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="0" (click)="funcionOcultar2()">
-                                        <label class="form-check-label" for="inlineRadio2">No</label>
-                                      </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Adolescencia</label>
+                                        <div>
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosA">
+                                                <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="1" (click)="funcionVer2()">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input class="form-check-input" type="radio" name="adolescencia"  [(ngModel)]="adolescencia" id="adolescencia" value="0" (click)="funcionOcultar2()">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
                                         <div id="collapseBasic" *ngIf="Ver2==false && Ocultar2==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Contenido.."></textarea>
+                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
                                         </div>
                                     </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="inline-radios">Adultez</label>
-                                    <div class="col-md-9 col-form-label">
-                                      <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                        <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="1" (click)="funcionVer3()">
-                                        <label class="form-check-label" for="inlineRadio1">Si</label>
-                                      </div>
-                                      <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="0" (click)="funcionOcultar3()">
-                                        <label class="form-check-label" for="inlineRadio2">No</label>
-                                      </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Adultez</label>  
+                                        <div>
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="1" (click)="funcionVer3()">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input class="form-check-input" type="radio" name="adultez"  [(ngModel)]="adultez" id="adultez" value="0" (click)="funcionOcultar3()">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
                                         <div id="collapseBasic" *ngIf="Ver3==false && Ocultar3==false">
-                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
                                         </div>
                                     </div>
-                                  </div>
+                                  </div><!--/.row-->
+
                             </form>
                         </div>
                     </div>
