@@ -149,16 +149,14 @@
                                     <label class="col-md-3 col-form-label" for="inline-radios">Niñez</label>
                                     <div class="col-md-9 col-form-label">
                                       <div class="form-check form-check-inline mr-1" id="inline-radios">
-                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" value="option1" (click)="isCollapsed3 = false"
-                                        >
+                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" value="option1" (click)="funcionVer()">
                                         <label class="form-check-label" for="inlineRadio1">Si</label>
                                       </div>
                                       <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" value="option2" (click)="isCollapsed3 = true"
-                                        [attr.aria-expanded]="!isCollapsed3">
+                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" value="option2" (click)="funcionOcultar()">
                                         <label class="form-check-label" for="inlineRadio2">No</label>
                                       </div>
-                                        <div id="collapseBasic" [collapse]="isCollapsed3" [isAnimated]="true">
+                                        <div id="collapseBasic" *ngIf="Ver==false && Ocultar==false">
                                             <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
                                         </div>
                                     </div>

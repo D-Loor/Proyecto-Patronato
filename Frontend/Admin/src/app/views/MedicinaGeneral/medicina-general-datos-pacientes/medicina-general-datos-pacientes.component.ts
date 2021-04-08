@@ -14,7 +14,8 @@ export class MedicinaGeneralDatosPacientesComponent implements OnInit {
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = true;
-  Ver: boolean=false;
+  Ver: boolean = true;
+  Ocultar: boolean = false;
 
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -26,7 +27,15 @@ export class MedicinaGeneralDatosPacientesComponent implements OnInit {
     this.sidebarMinimized = e;
   }
 
-  VerFunction(){
-    this.Ver=!this.Ver;
+  funcionVer(){
+    if(this.Ver == true){
+      this.Ocultar = false;
+      this.Ver = false;
+    }
   }
+  funcionOcultar(){
+      this.Ver = true;
+      this.Ocultar = true;
+  }
+
 }
