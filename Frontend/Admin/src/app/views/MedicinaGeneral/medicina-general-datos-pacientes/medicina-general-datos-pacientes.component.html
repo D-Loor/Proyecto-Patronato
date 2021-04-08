@@ -1,6 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-md-12">
+
             <div class="card">
                 
                     <div class="card-header">
@@ -14,243 +15,160 @@
                         <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
                             <div class="card-body">
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="text-input">Apellidos</label>
-                                    <div class="col-md-9">
-                                    <input type="text" id="text-input"  autocomplete="off" [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Apellidos">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Apellidos</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  autocomplete="off" [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="text-input">Nombres</label>
-                                    <div class="col-md-9">
-                                    <input type="text" id="text-input"  [(ngModel)]="nombres"  autocomplete="off" name="nombres" class="form-control" placeholder="Nombres">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Nombres</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  [(ngModel)]="nombres"  autocomplete="off" name="nombres" class="form-control" placeholder="Ingrese los nombres">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="text-input">Cedula</label>
-                                    <div class="col-md-9">
-                                    <input type="number" id="text-input" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="cedula" name="cedula" class="form-control" placeholder="Cedula">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Cédula</label>
+                                        <div class="col-md-9">
+                                        <input type="number" id="text-input" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="cedula" name="cedula" class="form-control" placeholder="Ingrese la cédula">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="text-input">Edad</label>
-                                    <div class="col-md-9">
-                                    <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Edad">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Edad</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="select1">Sexo</label>
-                                    <div class="col-md-9">
-                                    <select id="select1" name="select1" class="form-control">
-                                        <option label="--Seleccione una opción --"></option>
-                                        <option value="1">Hombre</option>
-                                        <option value="0">Mujer</option>
-                                    </select>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="select1">Sexo</label>
+                                        <div class="col-md-9">
+                                        <select id="select1" name="select1" class="form-control">
+                                            <option label="--Seleccione una opción--"></option>
+                                            <option value="1">Hombre</option>
+                                            <option value="0">Mujer</option>
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="email-input">Email Input</label>
-                                    <div class="col-md-9">
-                                    <input type="email" id="email-input" name="email-input" class="form-control" placeholder="Enter Email" autocomplete="email">
-                                    <span class="help-block">Please enter your email</span>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Ocupación</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="password-input">Password</label>
-                                    <div class="col-md-9">
-                                    <input type="password" id="password-input" name="password-input" class="form-control" placeholder="Password" autocomplete="current-password">
-                                    <span class="help-block">Please enter a complex password</span>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Lugar de residencia</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="date-input">Date Input</label>
-                                    <div class="col-md-9">
-                                    <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
-                                    <span class="help-block">Please enter a valid date</span>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="text-input">Lugar de procedencia</label>
+                                        <div class="col-md-9">
+                                        <input type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="disabled-input">Disabled Input</label>
-                                    <div class="col-md-9">
-                                    <input type="text" id="disabled-input" name="disabled-input" class="form-control" placeholder="Disabled" disabled>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="select1">Estado Civil</label>
+                                        <div class="col-md-9">
+                                        <select id="select1" name="select1" class="form-control">
+                                            <option label="--Seleccione una opción--"></option>
+                                            <option value="1">Soltero(a)</option>
+                                            <option value="2">Casado(a)</option>
+                                            <option value="3">Viudo(a)</option>
+                                            <option value="4">Divorciado(a)</option>
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="textarea-input">Textarea</label>
-                                    <div class="col-md-9">
-                                    <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="select1">Raza</label>
+                                        <div class="col-md-9">
+                                        <select id="select1" name="select1" class="form-control">
+                                            <option label="--Seleccione una opción--"></option>
+                                            <option value="1">Mestizos</option>
+                                            <option value="2">Blancos</option>
+                                            <option value="3">Montubios</option>
+                                            <option value="4">Afroecuatorianos</option>
+                                            <option value="5">Indígenas</option>
+                                            <option value="6">Otros</option>
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="select1">Select</label>
-                                    <div class="col-md-9">
-                                    <select id="select1" name="select1" class="form-control">
-                                        <option value="0">Please select</option>
-                                        <option value="1">Option #1</option>
-                                        <option value="2">Option #2</option>
-                                        <option value="3">Option #3</option>
-                                    </select>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="select1">Religión</label>
+                                        <div class="col-md-9">
+                                        <select id="select1" name="select1" class="form-control">
+                                            <option label="--Seleccione una opción--"></option>
+                                            <option value="1">Cristiana Católica</option>
+                                            <option value="2">Cristiana Evangélica</option>
+                                            <option value="3">Testigos de Jehová</option>
+                                            <option value="4">Ateos</option>
+                                            <option value="5">Agnósticos</option>
+                                            <option value="6">Otros</option>
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="select2">Select Large</label>
-                                    <div class="col-md-9">
-                                    <select id="select2" name="select2" class="form-control form-control-lg">
-                                        <option value="0">Please select</option>
-                                        <option value="1">Option #1</option>
-                                        <option value="2">Option #2</option>
-                                        <option value="3">Option #3</option>
-                                    </select>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="date-input">Fecha de nacimiento</label>
+                                        <div class="col-md-9">
+                                        <input class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="select3">Select Small</label>
-                                    <div class="col-md-9">
-                                    <select id="select3" name="select3" class="form-control form-control-sm">
-                                        <option value="0">Please select</option>
-                                        <option value="1">Option #1</option>
-                                        <option value="2">Option #2</option>
-                                        <option value="3">Option #3</option>
-                                    </select>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="select1">Nivel de instrucción</label>
+                                        <div class="col-md-9">
+                                        <select id="select1" name="select1" class="form-control">
+                                            <option label="--Seleccione una opción--"></option>
+                                            <option value="1">Educación Básica</option>
+                                            <option value="2">Bachillerato</option>
+                                            <option value="3">Técnico Superior</option>
+                                            <option value="4">Tercer Nivel</option>
+                                            <option value="5">Postgrado</option>
+                                            <option value="6">Ninguno</option>
+                                        </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="disabledSelect">Disabled Select</label>
-                                    <div class="col-md-9">
-                                    <select id="disabledSelect" class="form-control" disabled>
-                                        <option value="0">Please select</option>
-                                        <option value="1">Option #1</option>
-                                        <option value="2">Option #2</option>
-                                        <option value="3">Option #3</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="multiple-select">Multiple select</label>
-                                    <div class="col-md-9">
-                                    <select id="multiple-select" name="multiple-select" class="form-control" size="5" multiple>
-                                        <option value="1">Option #1</option>
-                                        <option value="2">Option #2</option>
-                                        <option value="3">Option #3</option>
-                                        <option value="4">Option #4</option>
-                                        <option value="5">Option #5</option>
-                                        <option value="6">Option #6</option>
-                                        <option value="7">Option #7</option>
-                                        <option value="8">Option #8</option>
-                                        <option value="9">Option #9</option>
-                                        <option value="10">Option #10</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" >Radios</label>
-                                    <div class="col-md-9 col-form-label">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1" checked>
-                                        <label class="form-check-label" for="radio1">
-                                        Option 1
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radios" id="radio2" value="option2">
-                                        <label class="form-check-label" for="radio2">
-                                        Option 2
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radios" id="radio3" value="option3">
-                                        <label class="form-check-label" for="radio3">
-                                        Option 3
-                                        </label>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="inline-radios">Inline Radios</label>
-                                    <div class="col-md-9 col-form-label">
-                                    <div class="form-check form-check-inline mr-1" id="inline-radios">
-                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">One</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Two</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio3" value="option3">
-                                        <label class="form-check-label" for="inlineRadio3">Three</label>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Checkboxes</label>
-                                    <div class="col-md-9 col-form-label">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                        Option 1
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="option1" id="checkbox2">
-                                        <label class="form-check-label" for="checkbox2">
-                                        Option 2
-                                        </label>
-                                    </div>
-                                    <div class="form-check checkbox">
-                                        <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
-                                        <label class="form-check-label" for="checkbox3">
-                                        Option 3
-                                        </label>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Inline Checkboxes</label>
-                                    <div class="col-md-9 col-form-label">
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="checkbox" id="inline-checkbox1" value="option1">
-                                        <label class="form-check-label" for="inline-checkbox1">One</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="checkbox" id="inline-checkbox2" value="option2">
-                                        <label class="form-check-label" for="inline-checkbox2">Two</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="checkbox" id="inline-checkbox3" value="option3">
-                                        <label class="form-check-label" for="inline-checkbox3">Three</label>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="file-input">File input</label>
-                                    <div class="col-md-9">
-                                    <input type="file" id="file-input" name="file-input">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="file-multiple-input">Multiple File input</label>
-                                    <div class="col-md-9">
-                                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
-                                    </div>
-                                </div>
                                 </form>
                             </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                            </div>
                         </div>
-                
             </div>
 
-          
-          
+            <div class="card">
+                
+                <div class="card-header">
+                    <i class="fa fa-asterisk"></i>
+                        <strong>Antecedentes Patológicos personales</strong>
+                        <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
+                        [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic"><i
+                        class="fa fa-chevron-down"></i>&nbsp;</button>
+                </div>
+
+                    <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+                        <div class="card-body">
+                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="inline-radios">Niñez</label>
+                                    <div class="col-md-9 col-form-label">
+                                      <div class="form-check form-check-inline mr-1" id="inline-radios">
+                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" value="option1" (click)="isCollapsed3 = false"
+                                        >
+                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                      </div>
+                                      <div class="form-check form-check-inline mr-1">
+                                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" value="option2" (click)="isCollapsed3 = true"
+                                        [attr.aria-expanded]="!isCollapsed3">
+                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                      </div>
+                                        <div id="collapseBasic" [collapse]="isCollapsed3" [isAnimated]="true">
+                                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+
         </div>
-
-        
-
-        
         
     </div><!--/.row-->
 
