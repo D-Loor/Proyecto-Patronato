@@ -18,4 +18,14 @@ export class CitasService {
       });
     });
   }
+  elicitas($id) {
+    let  url = 'http://127.0.0.1:8000/api/Cita/'+$id;
+    return new Promise ((resolve, reject) => {
+      this.http.delete(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
