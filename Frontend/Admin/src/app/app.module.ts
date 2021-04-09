@@ -25,7 +25,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import {NgxPaginationModule} from 'ngx-pagination';
+
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -75,7 +75,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     HttpClientModule,
     FormsModule,
     CollapseModule,
-    NgxPaginationModule,
+    
 
   ],
   declarations: [
