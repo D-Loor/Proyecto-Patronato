@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -598,21 +599,19 @@
                                 <div class="form-group">
                         
                                     <label class="label-co"> Seleccione la fecha de consulta *</label>
-                                    <input id="fecha" name="fecha" onchange="ver()" type="date" class="form-control fecha"  required
+                                    <input method="POST" id="fecha" name="fecha" onchange="ver()" type="date" class="form-control fecha"  required
                                         data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-03-03" onload="validarf()">
                                     <p class="help-block text-danger"></p>
                             
                                 </div>
-                            <script>
-                                function ver(){
-                                <?php
-                                    $valor = "<script>var miVariable = document.getElementById('fecha').value;</script>";
-                                    echo $valor;
-                                ?>
-                                
+                        <script>
+                            function ver(){
+                            
                             }
-                            </script>
+                        </script>
                                 
+                                
+                                <!-- PARA LLENAR EL OPTION -->
                                 <?php
                                 function llenarSelect($regiones){
                                     foreach ($regiones as $region)
