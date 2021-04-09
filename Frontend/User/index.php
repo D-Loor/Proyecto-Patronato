@@ -614,7 +614,7 @@
                                 <!-- PARA LLENAR EL OPTION -->
                                 <?php
                                 function llenarSelect($regiones){
-                                    foreach ($regiones as $region)
+                                foreach ($regiones as $region)
                                       $html.= "<option value=".$region['id'].">".$region['nombre']."</option>";
                                  return $html;
                                 }

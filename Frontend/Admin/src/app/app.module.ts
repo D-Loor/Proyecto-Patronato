@@ -8,7 +8,6 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HttpClientModule } from '@angular/common/http';
-
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -26,6 +25,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -54,6 +54,7 @@ import { MedicinaGeneralConsultasComponent } from './views/MedicinaGeneral/medic
 import { MedicinaGeneralDatosPacientesComponent } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
 
+
 @NgModule({
   imports: [
     CollapseModule.forRoot(),
@@ -74,6 +75,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     HttpClientModule,
     FormsModule,
     CollapseModule,
+    NgxPaginationModule,
 
   ],
   declarations: [
