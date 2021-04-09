@@ -1,7 +1,5 @@
 <?php
 
-
-
 $data = array(
     'nombres' => $_POST["nombres"],
     'cedula' => $_POST["cedula"],
@@ -44,18 +42,11 @@ if($codigoRespuesta === 200){
 }
 curl_close($ch);
 
-
-
-$fechaHora = $_POST["fecha"];
-//Peticion GET
-$urlHora = "http://127.0.0.1:8000/api/validarHora/{$fechaHora}";
-$datos = file_get_contents($urlHora);
-$horas = array("8:00","8:20","8:40");
-//$horario = json_decode($datos);
-//echo $horario->result->hora;
-
-//foreach($horario->result as $res){
-//echo ($res->hora),' \n';
-//}
-
 ?>
+    <script>
+        function ver(){
+        select.addEventListener("change", 
+        console.log("Fecha seleccionada: "+document.getElementById("select").value)
+        );
+    }
+    </script>

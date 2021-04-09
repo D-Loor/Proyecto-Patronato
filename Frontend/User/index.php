@@ -596,29 +596,38 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                        
                                     <label class="label-co"> Seleccione la fecha de consulta *</label>
-                                    <input type="date" class="form-control fecha" id="fecha" name="fecha"  required
+                                    <input id="fecha" name="fecha" onchange="ver()" type="date" class="form-control fecha"  required
                                         data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-03-03" onload="validarf()">
                                     <p class="help-block text-danger"></p>
+                            
                                 </div>
-
+                            <script>
+                                function ver(){
+                                <?php
+                                    $valor = "<script>var miVariable = document.getElementById('fecha').value;</script>";
+                                    echo $valor;
+                                ?>
+                                
+                            }
+                            </script>
+                                
+                                <?php
+                                function llenarSelect($regiones){
+                                    foreach ($regiones as $region)
+                                      $html.= "<option value=".$region['id'].">".$region['nombre']."</option>";
+                                 return $html;
+                                }
+                                ?>
                                 <div class="form-group">
                                     
                                     <label class="label-co"> Seleccione la hora de consulta *</label>
                                     <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" name="hora" id="hora" required>
-                                        <option value="8:00">8:00</option>
-                                        <option value="9:00">9:00</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="16:00">16:00</option>
+                                        
                                     </select>
-
                                 </div>
 
-                                
                             </div>
                             
                             <div class="col-md-12">

@@ -69,9 +69,9 @@ class CitaController extends Controller
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
-    public function validarHora( $fecha)
+    public function validarHora($fecha)
     {
-        $datos=Cita::where('fecha', $fecha)->get()->first();
+        $datos=Cita::all()->where('fecha', $fecha);;
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
