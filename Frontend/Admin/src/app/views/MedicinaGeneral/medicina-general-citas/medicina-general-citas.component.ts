@@ -13,7 +13,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   constructor(public citas:CitasService, public rutas:Router) { }
 
   isCollapsed2 = false;
-  isCollapsed = false;
+  isCollapsed = true;
+  search="";
 
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -24,7 +25,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     }).catch(error =>{
       console.log(error);
   });
-    
+
+
   }
 
   toggleMinimize(e) {

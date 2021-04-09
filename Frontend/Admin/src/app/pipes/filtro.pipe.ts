@@ -5,17 +5,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FiltroPipe implements PipeTransform {
 
-  transform(arreglo: any[], texto: string, columna: string, ): any[] {
+  transform( arreglo: any, arg: any, ): any {
 
+     const resultado=[];
 
-    if(texto =='' || texto==null){
-      return arreglo;
-    }else{
-      return arreglo.filter(items =>{
-        return items[columna].toLowerCase().includes(texto.toLowerCase());
-      });
-    }
+     for (const x of arreglo) {
 
+       if(x.cedula.indexOf(arg)> -1){
+        resultado.push(x);
+      };
+
+     };
+
+     return resultado;
 
   }
 
