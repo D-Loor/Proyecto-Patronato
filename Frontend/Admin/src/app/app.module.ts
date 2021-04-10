@@ -48,7 +48,6 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
 import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
 import { FormsModule } from '@angular/forms';
 import { FiltroPipe } from './pipes/filtro.pipe';
@@ -85,7 +84,6 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    MedicinaGeneralComponent,
     MedicinaGeneralCitasComponent,
     FiltroPipe
   ],

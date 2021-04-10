@@ -14,4 +14,5 @@ import { MedicinaGeneralComponent } from './medicina-general.component';
     MedicinaGeneralComponent
   ]
 })
+
 export class MedicinaGeneralModule { }
