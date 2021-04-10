@@ -12,7 +12,7 @@ export class MedicinaGeneralComponent implements OnInit {
 
   constructor(public pacientes:PacientesService, public rutas:Router) { }
 
-
+  data
   isCollapsed2 = false;
   isCollapsed = false;
 
@@ -23,6 +23,10 @@ export class MedicinaGeneralComponent implements OnInit {
   pacientesTotalTotal:any[];
   ngOnInit(): void {
     this.cargar();
+  }
+
+  getHClinica(event){
+    debugger
   }
 
   cargar(){this.pacientes.pacientes().then(data =>{
