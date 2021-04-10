@@ -16,10 +16,23 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   salida:"No se encontró..";
   public enferme='name';
   enfermedades: any[];
-  
+  enfermedadesC:any[];
+  data = [
+    {
+      id: 1,
+      name: 'Usa'
+    },
+    {
+      id: 2,
+      name: 'England'
+    }
+ ];
+
   ngOnInit(): void {
     this.cargar();
   }
+
+
 
   funcionPreventivo(){
     this.presun=true;
@@ -30,18 +43,27 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.defini=true;
   }
 
-  
+
 
   cargar(){
 
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
-    
+
     }).catch(error =>{
       console.log(error);
   });
- 
-    
+
+  debugger
+    // Obteniendo todas las claves del JSON
+  for (var clave in this.enfermedades){
+    // Controlando que json realmente tenga esa propiedad
+    if (this.enfermedades.hasOwnProperty(clave)) {
+      // Mostrando en pantalla la clave junto a su valor
+      alert("La clave es " + clave+ " y el valor es " + this.enfermedades[clave]);
+    }
+  }
+
   }
 
 }

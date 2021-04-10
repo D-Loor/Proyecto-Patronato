@@ -51,8 +51,6 @@ import { ChartsModule } from 'ng2-charts';
 import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
 import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
 import { FormsModule } from '@angular/forms';
-import { MedicinaGeneralConsultasComponent } from './views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.component';
-import { MedicinaGeneralDatosPacientesComponent } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
 
 
@@ -76,7 +74,6 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     IconSetModule.forRoot(),
     HttpClientModule,
     FormsModule,
-    CollapseModule,
     PaginationModule,
 
 
@@ -90,8 +87,6 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     RegisterComponent,
     MedicinaGeneralComponent,
     MedicinaGeneralCitasComponent,
-    MedicinaGeneralConsultasComponent,
-    MedicinaGeneralDatosPacientesComponent,
     FiltroPipe
   ],
   providers: [
