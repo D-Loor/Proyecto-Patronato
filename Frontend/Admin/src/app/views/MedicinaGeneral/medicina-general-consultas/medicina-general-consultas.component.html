@@ -82,7 +82,7 @@
                   <label for="company">Enfermedad</label>
                   <div class="input-group">
                       <ng-autocomplete
-                        [data]="enfeComplete"
+                        [data]="enfermedades"
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
                         [itemTemplate]="itemTemplate"
@@ -90,7 +90,7 @@
                       </ng-autocomplete>
 
                       <ng-template #itemTemplate let-item>
-                      <a [innerHTML]="item.name"></a>
+                      <a [innerHTML]="item.enfermedad"></a>
                       </ng-template>
 
                       <ng-template #notFoundTemplate let-notFound>

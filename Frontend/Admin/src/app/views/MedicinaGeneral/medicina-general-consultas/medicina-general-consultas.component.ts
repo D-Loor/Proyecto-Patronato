@@ -16,7 +16,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   salida:"No se encontró..";
   public enferme='name';
   enfermedades: any[];
-  enfeComplete: any[];
+  
   ngOnInit(): void {
     this.cargar();
   }
@@ -30,20 +30,18 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.defini=true;
   }
 
+  
 
   cargar(){
 
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
-      debugger
+    
     }).catch(error =>{
       console.log(error);
   });
-  debugger
-    for (let x in this.enfermedades){
-
-      this.enfeComplete.push(this.enfermedades[x]["enfermedad"]);
-    }
+ 
+    
   }
 
 }
