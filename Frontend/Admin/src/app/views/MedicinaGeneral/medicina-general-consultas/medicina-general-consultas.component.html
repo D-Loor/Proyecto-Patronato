@@ -81,10 +81,23 @@
                 <div class="form-group col-sm-6">
                   <label for="company">Enfermedad</label>
                   <div class="input-group">
-                    <input type="" class="form-control" id="enfermedad" name="enfermedad" [(ngModel)]="enfermedad" required>
-                    <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Agregar</button>
-                    </span>
+                      <ng-autocomplete
+                        [data]="enfeComplete"
+                        [searchKeyword]="enferme"
+                        placeholder="Escriba la enfermedad"
+                        [itemTemplate]="itemTemplate"
+                        [notFoundTemplate]="notFoundTemplate">
+                      </ng-autocomplete>
+
+                      <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.name"></a>
+                      </ng-template>
+
+                      <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="salida"></div>
+                      </ng-template>
+
+
                   </div>
 
                 </div>

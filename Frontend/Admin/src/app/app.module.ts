@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
 // Import containers
 
 import { DefaultLayoutComponent } from './containers';
-
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
@@ -63,6 +63,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
+    AutocompleteLibModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
     AppHeaderModule,
@@ -77,7 +78,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     FormsModule,
     CollapseModule,
     PaginationModule,
-    
+
 
   ],
   declarations: [
