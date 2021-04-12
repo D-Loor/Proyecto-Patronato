@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -49,13 +49,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
-import { FiltroPipe } from './pipes/filtro.pipe';
 import { MedicinaGeneralConsultasModule } from './views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module';
 import { MedicinaGeneralDatosPacientesModule } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module';
 import { PacientesModule } from './views/MedicinaGeneral/pacientes/pacientes.module';
 import { MedicinaGeneralModule } from './views/MedicinaGeneral/medicina-general/medicina-general.module';
 import { MedicinaGeneralCitasModule } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.module';
-import { PipesModule } from './pipes/filtro.module';
+import { FiltroModule } from './pipes/filtro.module';
+
 
 
 
@@ -84,7 +84,8 @@ import { PipesModule } from './pipes/filtro.module';
     MedicinaGeneralDatosPacientesModule,
     PacientesModule,
     MedicinaGeneralModule,
-    MedicinaGeneralCitasModule
+    MedicinaGeneralCitasModule, 
+    FiltroModule
   ],
   declarations: [
     AppComponent,
@@ -92,8 +93,7 @@ import { PipesModule } from './pipes/filtro.module';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-    FiltroPipe,
+    RegisterComponent
   ],
   providers: [
     {

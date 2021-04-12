@@ -9,4 +9,4 @@ import { FiltroPipe } from './filtro.pipe';
   imports: [
   ]
 })
-export class PipesModule { }
+export class FiltroModule { }

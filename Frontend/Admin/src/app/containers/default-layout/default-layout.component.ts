@@ -12,17 +12,14 @@ export class DefaultLayoutComponent implements OnInit {
 
   public sidebarMinimized = false;
   public navItems = navItems;
-  @Input () id;
-  ID:number;
+  @Input () usuario: string;
+  Usuario:string="Como estas";
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
   ngOnInit() {
-    this.ID = this.id;
-    debugger
-    console.log(this.ID);
   }
 
 }

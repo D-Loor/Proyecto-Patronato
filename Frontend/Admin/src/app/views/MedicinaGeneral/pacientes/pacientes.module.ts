@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
+import { FiltroModule } from '../../../pipes/filtro.module';
 import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesComponent } from './pacientes.component';
 
@@ -10,7 +12,9 @@ import { PacientesComponent } from './pacientes.component';
   imports: [
     PacientesRoutingModule,
     CommonModule,
-    PaginationModule
+    PaginationModule,
+    FiltroModule,
+    FormsModule
   ],
   declarations: [
     PacientesComponent

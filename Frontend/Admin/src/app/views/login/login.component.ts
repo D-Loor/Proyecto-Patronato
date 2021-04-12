@@ -12,11 +12,10 @@ export class LoginComponent implements OnInit {
   correo: string;
   pass: string;
   arraydat:any = [];
-  usuario:string []
+  usuario:string [];
 
   constructor(public login:LoginService, public rutas:Router) {
-    this.usuario = this.arraydat;
-   }
+  }
 
   ngOnInit() {
     localStorage.removeItem('sesionLogin');
