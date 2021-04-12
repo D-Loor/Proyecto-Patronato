@@ -74,14 +74,6 @@ export const routes: Routes = [
         path: 'medicinageneraldatospacientes',
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module').then(m => m.MedicinaGeneralDatosPacientesModule)
       },
-
-
-
-
-
-
-
-
       {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)

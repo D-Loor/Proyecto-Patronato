@@ -9,15 +9,19 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit { 
 
-  constructor(public login:LoginService, public rutas:Router) { }
+  correo: string;
+  pass: string;
+  arraydat:any = [];
+  usuario:string []
+
+  constructor(public login:LoginService, public rutas:Router) {
+    this.usuario = this.arraydat;
+   }
 
   ngOnInit() {
     localStorage.removeItem('sesionLogin');
   }
 
-  correo: string;
-  pass: string;
-  arraydat:any = [];
   
   IniciarSesion(){ 
     if(this.correo==null || this.pass==null || this.correo=="" || this.pass==""){
