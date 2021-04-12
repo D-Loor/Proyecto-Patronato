@@ -6,7 +6,7 @@
                 
                     <div class="card-header">
                         <i class="icon-user-follow"></i>
-                            <strong>Datos de Afiliación</strong>
+                            <strong>Datos de la consulta</strong>
                             <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed = !isCollapsed"
                             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i
                             class="fa fa-chevron-down"></i>&nbsp;</button>
@@ -17,61 +17,55 @@
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <div class="form-group row">
                                         <div class="col-md-12">
-                                            <label for="text-input">Apellidos</label>
-                                            <input  autocomplete="off" required type="text" id="apellidos"   [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
                                             <label for="text-input">Nombres</label>
-                                            <input autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="nombres"   name="nombres" class="form-control" placeholder="Ingrese los nombres">
+                                            <input  autocomplete="off" required type="text" id="nombres"   [(ngModel)]="nombres" name="nombres" class="form-control" placeholder="Ingrese los nombres completos">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-5">
                                             <label for="text-input">Edad</label>
                                             <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-5">
+                                            <label for="text-input">Ocupación</label>
+                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">                                 
+                                        </div>
+                                        <div class="form-group col-sm-2">
                                             <label for="select1">Sexo</label>
                                             <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo" required>
                                                 <option value="Hombre">Hombre</option>
                                                 <option value="Mujer">Mujer</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
-                                            <label for="text-input">Ocupación</label>
-                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">                                 
-                                        </div>
                                       </div><!--/.row-->
                                       <div class="row">
-                                        <div class="form-group col-sm-6">
+                                        <div class="form-group col-sm-5">
                                             <label for="text-input">Lugar de residencia</label>
                                             <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia">    
                                         </div>
-                                        <div class="form-group col-sm-6">
+                                        <div class="form-group col-sm-5">
                                             <label for="text-input">Lugar de procedencia</label>
                                             <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia">
                                         </div>
-                                      </div><!--/.row-->
-                                      <div class="row">
-                                        <div class="form-group col-sm-8">
-                                            <label for="text-input">Motivo de la consulta</label>
-                                            <textarea autocomplete="off" required  [(ngModel)]="motivo_consultaT" id="motivo_consultaT" name="motivo_consultaT" rows="3" class="form-control" placeholder="Descripción del motivo de la consulta.."></textarea>    
-                                        </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="inline-radios">Lugar de atención</label>
+                                        <div class="form-group col-sm-2">
+                                            <label for="inline-radios">Lugar de atención</label>
                                                 <div class="col-md-8 col-form-label">
-                                                    <div class="form-check form-check-inline mr-3">
+                                                    <div class="form-check form-check-inline mr-1">
                                                     <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
                                                     <label class="form-check-label" for="inlineRadio1">Patronato</label>
                                                     </div>
-                                                    <div class="form-check form-check-inline ">
+                                                    <div class="form-check form-check-inline mr-1">
                                                     <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
                                                     <label class="form-check-label" for="inlineRadio3">Domicilio</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                        </div>
+                                      </div><!--/.row-->
+                                      <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label for="text-input">Motivo de la consulta</label>
+                                            <textarea autocomplete="off" required  [(ngModel)]="motivo_consultaT" id="motivo_consultaT" name="motivo_consultaT" rows="3" class="form-control" placeholder="Descripción del motivo de la consulta.."></textarea>    
+                                        </div>
                                         </div><!--/.row-->
                                         <div class="row">
                                             <div class="form-group col-sm-12">
@@ -91,6 +85,15 @@
                                                 <textarea autocomplete="off" required  [(ngModel)]="tratamientoT" id="tratamientoT" name="tratamientoT" rows="3" class="form-control" placeholder="Descripción del tratamiento.."></textarea>    
                                             </div>
                                         </div><!--/.row-->
+                                        <div class="form-group ">
+                                            <div class="col-md-9 col-form-label">
+                                              <div class="form-check form-check-inline mr-1">
+                                                <input class="form-check-input" type="checkbox" id="certificado" name="certificado" value="Si">
+                                                <label class="form-check-label" for="inline-checkbox1">Se entregó certificado</label>
+                                              </div>
+                            
+                                            </div>
+                                          </div>
                                             
                                         <button type="submit" class="btn btn-lg btn-primary boto">Registrar Consulta</button>
                                 </form>
