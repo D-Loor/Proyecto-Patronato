@@ -31,11 +31,12 @@
                                         <div class="form-group col-sm-8">
                                             <label for="text-input">Cédula</label>
                                             <div class="input-group">
-                                                <input  required type="number" id="cedula" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="cedula" name="cedula" class="form-control" placeholder="Ingrese la cédula">
+                                                <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
                                                 <span class="input-group-append">
                                                     <button type="button" class="btn btn-primary">Consultar</button>
                                                 </span>
                                             </div>
+                                            
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="text-input">Edad</label>
