@@ -15,7 +15,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   isCollapsed2 = false;
   isCollapsed = true;
-  search="";
+  buscar:string="";
 
   public sidebarMinimized = false;
   public navItems = navItems;

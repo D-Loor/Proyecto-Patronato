@@ -10,7 +10,7 @@ export class MedicinaGeneralDatosPacientesComponent implements OnInit {
 
   constructor() {  }
 
-  
+  edad;
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = false;

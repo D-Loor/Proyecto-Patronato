@@ -6,17 +6,19 @@ import { MedicinaGeneralCitasRoutingModule } from './medicina-general-citas-rout
 import { MedicinaGeneralCitasComponent } from './medicina-general-citas.component';
 
 
+
 @NgModule({
   imports: [
-
-    CommonModule,
+    MedicinaGeneralCitasRoutingModule,
     CollapseModule.forRoot(),
     CollapseModule,
-    MedicinaGeneralCitasRoutingModule
+    CommonModule
+  
+    
   ],
   declarations: [
-    MedicinaGeneralCitasComponent
-
+    MedicinaGeneralCitasComponent,
+    
   ]
 })
 export class MedicinaGeneralCitasModule { }

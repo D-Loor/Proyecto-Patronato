@@ -6,12 +6,13 @@ import { MedicinaGeneralDatosPacientesComponent } from './medicina-general-datos
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 
+ 
 @NgModule({
   imports: [
     MedicinaGeneralDatosPacientesRoutingModule,
     CollapseModule.forRoot(),
-    CollapseModule,
-    CommonModule
+    CollapseModule
+    
   ],
   declarations: [
     MedicinaGeneralDatosPacientesComponent

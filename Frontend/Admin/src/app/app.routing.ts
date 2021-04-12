@@ -69,7 +69,7 @@ export const routes: Routes = [
       },
       {
         path: 'pacientes',
-        loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PaceintesModule)
+        loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PacientesModule)
       },
       {
         path: 'medicinageneraldatospacientes',

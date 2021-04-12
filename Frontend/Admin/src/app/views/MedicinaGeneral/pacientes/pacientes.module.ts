@@ -5,6 +5,7 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesComponent } from './pacientes.component';
 
 
+
 @NgModule({
   imports: [
     PacientesRoutingModule,
@@ -16,5 +17,5 @@ import { PacientesComponent } from './pacientes.component';
   ]
 })
 
-export class PaceintesModule { }
+export class PacientesModule { }
 

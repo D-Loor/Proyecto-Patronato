@@ -29,7 +29,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
  ];
 
   ngOnInit(): void {
+    
     this.cargar();
+    
   }
 
 
@@ -49,19 +51,20 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
-
+      this.completar();
     }).catch(error =>{
       console.log(error);
   });
 
-  debugger
-
-  for (let x in this.enfermedades){
-    debugger
-    this.autoenfer.push({ "id":this.enfermedades[x]["id"], "name":this.enfermedades[x]["enfermedad"]
-
-    });
+  
   }
+
+  completar(){
+    for (let x in this.enfermedades){
+      this.autoenfer.push({ "id":this.enfermedades[x]["id"], "name":this.enfermedades[x]["enfermedad"]});
+      debugger
+    }
+    
   }
 
 }

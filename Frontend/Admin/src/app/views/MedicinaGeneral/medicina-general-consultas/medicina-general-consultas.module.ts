@@ -6,11 +6,13 @@ import { MedicinaGeneralConsultasComponent } from './medicina-general-consultas.
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     AutocompleteLibModule,
-    MedicinaGeneralConsultasRoutingModule
+    MedicinaGeneralConsultasRoutingModule,
+    
   ],
   declarations: [
     MedicinaGeneralConsultasComponent
