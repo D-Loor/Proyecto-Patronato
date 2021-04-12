@@ -8,9 +8,6 @@ import { GloginGuard } from './guards/glogin.guard';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
-import { MedicinaGeneralDatosPacientesComponent } from './views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.component';
-import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
 import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
@@ -69,6 +66,10 @@ export const routes: Routes = [
       {
         path: 'medicinageneralconsultas',
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
+      },
+      {
+        path: 'pacientes',
+        loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PaceintesModule)
       },
       {
         path: 'medicinageneraldatospacientes',

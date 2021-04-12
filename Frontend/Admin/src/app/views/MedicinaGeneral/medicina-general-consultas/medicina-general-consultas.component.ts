@@ -16,7 +16,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   salida:"No se encontró..";
   public enferme='name';
   enfermedades: any[];
-  enfermedadesC:any[];
+  autoenfer:any[];
   data = [
     {
       id: 1,
@@ -55,15 +55,13 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   });
 
   debugger
-    // Obteniendo todas las claves del JSON
-  for (var clave in this.enfermedades){
-    // Controlando que json realmente tenga esa propiedad
-    if (this.enfermedades.hasOwnProperty(clave)) {
-      // Mostrando en pantalla la clave junto a su valor
-      alert("La clave es " + clave+ " y el valor es " + this.enfermedades[clave]);
-    }
-  }
 
+  for (let x in this.enfermedades){
+    debugger
+    this.autoenfer.push({ "id":this.enfermedades[x]["id"], "name":this.enfermedades[x]["enfermedad"]
+
+    });
+  }
   }
 
 }

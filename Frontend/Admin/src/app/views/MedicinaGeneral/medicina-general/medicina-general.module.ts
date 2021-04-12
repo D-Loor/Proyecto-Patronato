@@ -17,3 +17,4 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
 })
 
 export class MedicinaGeneralModule { }
+

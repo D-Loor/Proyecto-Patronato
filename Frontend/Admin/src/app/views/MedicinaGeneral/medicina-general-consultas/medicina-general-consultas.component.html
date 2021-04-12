@@ -81,8 +81,9 @@
                 <div class="form-group col-sm-6">
                   <label for="company">Enfermedad</label>
                   <div class="input-group">
+                    <div class="ng-autocomplete">
                       <ng-autocomplete
-                        [data]="data"
+                        [data]="autoenfer"
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
                         [itemTemplate]="itemTemplate"
@@ -96,8 +97,8 @@
                       <ng-template #notFoundTemplate let-notFound>
                       <div [innerHTML]="salida"></div>
                       </ng-template>
-
-
+                    </div>
+                      <button type="submit" class="btn btn-lg btn-primary boto">Agregar</button>
                   </div>
 
                 </div>

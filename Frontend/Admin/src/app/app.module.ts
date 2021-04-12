@@ -88,7 +88,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     RegisterComponent,
     MedicinaGeneralCitasComponent,
     MedicinaGeneralComponent,
-    FiltroPipe
+    FiltroPipe,
   ],
   providers: [
     {
