@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { MedicinaGeneralCitasRoutingModule } from './medicina-general-citas-routing.module';
 import { MedicinaGeneralCitasComponent } from './medicina-general-citas.component';
 
 
 @NgModule({
   imports: [
-    MedicinaGeneralCitasRoutingModule,
+
+    CommonModule,
     CollapseModule.forRoot(),
     CollapseModule,
-    CommonModule,
+    MedicinaGeneralCitasRoutingModule
   ],
   declarations: [
     MedicinaGeneralCitasComponent

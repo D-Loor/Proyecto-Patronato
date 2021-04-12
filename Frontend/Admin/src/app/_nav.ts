@@ -40,6 +40,15 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'Rehabilitación Física'
+  },
+  {
+    title: true,
+    name: 'Secretaría'
+  },
+
+  {
+    title: true,
     name: 'Theme'
   },
   {

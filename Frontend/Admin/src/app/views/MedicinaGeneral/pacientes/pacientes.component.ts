@@ -13,9 +13,6 @@ export class PacientesComponent implements OnInit {
   constructor(public pacientes:PacientesService, public rutas:Router) { }
 
 
-  isCollapsed2 = false;
-  isCollapsed = false;
-
   public sidebarMinimized = false;
   public navItems = navItems;
   search="";
