@@ -43,6 +43,31 @@ export const navItems: INavData[] = [
     name: 'Rehabilitación Física'
   },
   {
+    name: 'Citas',
+    url: '/#',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'Historia Clínica',
+    url: '/rehabilitacionfisica',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Consultas',
+    url: '/rehabilitacionfisicaconsultas',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Pacientes',
+    url: '/pacientes',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Datos Paciente',
+    url: '/#',
+    icon: 'icon-pencil'
+  },
+  {
     title: true,
     name: 'Secretaría'
   },

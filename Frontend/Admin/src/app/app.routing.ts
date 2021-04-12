@@ -74,9 +74,15 @@ export const routes: Routes = [
       {
         path: 'medicinageneraldatospacientes',
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module').then(m => m.MedicinaGeneralDatosPacientesModule),
-        data: {
-          title: 'Datos Pacientes'
-        }
+
+      },
+      {
+        path: 'rehabilitacionfisica',
+        loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module').then(m => m.RehabilitacionFisicaModule)
+      },
+      {
+        path: 'rehabilitacionfisicaconsultas',
+        loadChildren: () => import('./views/RehabilitacionFisica/consultas/consultas.module').then(m => m.RehabilitacionFisicaConsultaModule)
       },
       {
         path: 'base',

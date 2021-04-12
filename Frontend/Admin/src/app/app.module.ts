@@ -55,6 +55,8 @@ import { PacientesModule } from './views/MedicinaGeneral/pacientes/pacientes.mod
 import { MedicinaGeneralModule } from './views/MedicinaGeneral/medicina-general/medicina-general.module';
 import { MedicinaGeneralCitasModule } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.module';
 import { FiltroModule } from './pipes/filtro.module';
+import { RehabilitacionFisicaComponent } from './views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.component';
+import { ConsultasComponent } from './views/RehabilitacionFisica/consultas/consultas.component';
 
 
 
@@ -93,7 +95,9 @@ import { FiltroModule } from './pipes/filtro.module';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RehabilitacionFisicaComponent,
+    ConsultasComponent
   ],
   providers: [
     {
