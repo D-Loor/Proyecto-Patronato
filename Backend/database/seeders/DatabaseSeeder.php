@@ -158,6 +158,7 @@ class DatabaseSeeder extends Seeder
             'apellidas' => Str::random(10),
             'edad' => 25,
             'sexo' => Str::random(10),
+            'gad' => false,
             'ocupacion' => Str::random(10),
             'residencia' => Str::random(10),
             'procedencia' => Str::random(10),

@@ -34,21 +34,25 @@
                   <th>Cédula</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
-                  <th>Sexo</th>
                   <th>Edad</th>
-                  <th>Residencia</th>
+                  <th>Fecha</th>
+                  <th>Enfermedad</th>
+                  <th>Lugar de Atencion</th>
+                  <th>GAD</th>
                   <th>CRUD</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of pacientesTotalTotal | filtro:search">
-                  <td>{{item.id_paciente}}</td>
-                  <td >{{item.cedula}}</td>
-                  <td>{{item.nombres}}</td>
-                  <td>{{item.apellidas}}</td>
-                  <td>{{item.sexo}}</td>
-                  <td>{{item.edad}}</td>
-                  <td>{{item.residencia}}</td>
+                <tr *ngFor="let item of pacientesTotal">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>{{item.fecha}}</td>
+                  <td></td>
+                  <td>{{item.lugar_atencion}}</td>
+                  <td></td>
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"><i
                         class="fa fa-stethoscope"></i>&nbsp;Atender</button>

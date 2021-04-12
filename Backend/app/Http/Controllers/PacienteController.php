@@ -14,7 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos=Paciente::all();
+        $datos=Paciente::all(); 
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -51,6 +51,7 @@ class PacienteController extends Controller
         $datos->apellidos=$request->apellidos;
         $datos->edad=$request->edad;
         $datos->sexo=$request->sexo;
+        $datos->gad=$request->gad;
         $datos->ocupacion=$request->ocupacion;
         $datos->residencia=$request->residencia;
         $datos->procedencia=$request->procedencia;
@@ -107,6 +108,7 @@ class PacienteController extends Controller
         $datos->apellidos=$request->apellidos;
         $datos->edad=$request->edad;
         $datos->sexo=$request->sexo;
+        $datos->gad=$request->gad;
         $datos->ocupacion=$request->ocupacion;
         $datos->residencia=$request->residencia;
         $datos->procedencia=$request->procedencia;

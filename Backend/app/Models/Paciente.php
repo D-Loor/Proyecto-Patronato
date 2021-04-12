@@ -13,6 +13,6 @@ class Paciente extends Model
     protected $primaryKey = 'id_paciente';
 
      protected $fillable = [
-        'id_patologico',  'id_e_fisico',  'id_e_organo_sistema',  'id_e_complementario','cedula', 'nombres',  'apellidas',  'edad',  'sexo', 'ocupacion',  'residencia', 'procedencia', 'estado_civil', 'raza', 'religion', 'fecha_nacimiento', 'nivel_instruccion',
+        'id_patologico',  'id_e_fisico',  'id_e_organo_sistema',  'id_e_complementario','cedula', 'nombres',  'apellidas',  'edad',  'sexo', 'gad', 'ocupacion',  'residencia', 'procedencia', 'estado_civil', 'raza', 'religion', 'fecha_nacimiento', 'nivel_instruccion',
     ];
 }

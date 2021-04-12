@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
-import { PacientesService } from '../../../servicios/pacientes.service';
+import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 @Component({
@@ -10,7 +10,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class PacientesComponent implements OnInit {
 
-  constructor(public pacientes:PacientesService, public rutas:Router) { }
+  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
 
   public sidebarMinimized = false;
@@ -23,9 +23,8 @@ export class PacientesComponent implements OnInit {
     this.cargar();
   }
 
-  cargar(){this.pacientes.pacientes().then(data =>{
+  cargar(){this.medicina_general.pacientes().then(data =>{
     this.pacientesTotal=data['result'];
-    debugger
     this.pacientesTotalTotal = this.pacientesTotal.slice(0, 10);
     debugger
   }).catch(error =>{
@@ -40,12 +39,9 @@ export class PacientesComponent implements OnInit {
   }
 
   pageChanged(event: PageChangedEvent): void {
-    debugger
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
-    debugger
     const endItem = event.page * event.itemsPerPage;
-    debugger
     this.pacientesTotalTotal = this.pacientesTotal.slice(startItem, endItem);
     debugger
   }

@@ -24,6 +24,7 @@ class CreatePacientesTable extends Migration
             $table->string('apellidas');
             $table->integer('edad');
             $table->string('sexo');
+            $table->boolean('gad');
             $table->string('ocupacion');
             $table->string('residencia');
             $table->string('procedencia');
