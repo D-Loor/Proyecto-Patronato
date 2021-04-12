@@ -12,21 +12,18 @@ export class MedicinaGeneralComponent implements OnInit {
 
   constructor(public pacientes:PacientesService, public rutas:Router) { }
 
-  data
+
   isCollapsed2 = false;
   isCollapsed = false;
 
   public sidebarMinimized = false;
   public navItems = navItems;
-
+  search="";
+  dataFechaFiltro;
   pacientesTotal:any[];
   pacientesTotalTotal:any[];
   ngOnInit(): void {
     this.cargar();
-  }
-
-  getHClinica(event){
-    debugger
   }
 
   cargar(){this.pacientes.pacientes().then(data =>{
@@ -38,6 +35,11 @@ export class MedicinaGeneralComponent implements OnInit {
     console.log(error);
 });
     
+  }
+  
+  fechaFiltre(event){
+    this.dataFechaFiltro;
+    debugger
   }
 
   pageChanged(event: PageChangedEvent): void {

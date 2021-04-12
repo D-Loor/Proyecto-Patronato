@@ -7,14 +7,26 @@
           <i class="fa fa-archive "></i> Historia Cínica
         </div>
 
-        
-
-          <div class="card-body">
-            <div class="form-group row">
-              <div class="col-sm-3 d-none d-md-block">
-                <input id="data" name="data" [(ngModel)]="data" (change)="getHClinica($event)" class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+          <div class="form-group">
+            <div class="col-md-4 searcht">
+              <div class="input-group">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Username" [(ngModel)]="search">
+                <span class="input-group-prepend">
+                  <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                </span>
+                
               </div>
+              
             </div>
+            <div class="row">
+            <div class="col-md-3 searcht">
+              <input name="dataFechaFiltro" id="dataFechaFiltro" [(ngModel)]="dataFechaFiltro" (change)="fechaFiltre($event)" id="date-input" type="date" name="date-input" placeholder="date" class="form-control">
+            </div>
+          </div>
+        </div>
+
+          
+          <div class="card-body">
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
@@ -29,7 +41,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of pacientesTotalTotal">
+                <tr *ngFor="let item of pacientesTotalTotal | filtro:search">
                   <td>{{item.id_paciente}}</td>
                   <td >{{item.cedula}}</td>
                   <td>{{item.nombres}}</td>

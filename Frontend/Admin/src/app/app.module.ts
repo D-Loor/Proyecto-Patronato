@@ -49,8 +49,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { MedicinaGeneralCitasComponent } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.component';
+import { MedicinaGeneralComponent } from './views/MedicinaGeneral/medicina-general/medicina-general.component';
 import { FormsModule } from '@angular/forms';
 import { FiltroPipe } from './pipes/filtro.pipe';
+
 
 
 @NgModule({
@@ -85,6 +87,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     LoginComponent,
     RegisterComponent,
     MedicinaGeneralCitasComponent,
+    MedicinaGeneralComponent,
     FiltroPipe
   ],
   providers: [
