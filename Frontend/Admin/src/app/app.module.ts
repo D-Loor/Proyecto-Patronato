@@ -55,8 +55,8 @@ import { PacientesModule } from './views/MedicinaGeneral/pacientes/pacientes.mod
 import { MedicinaGeneralModule } from './views/MedicinaGeneral/medicina-general/medicina-general.module';
 import { MedicinaGeneralCitasModule } from './views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.module';
 import { FiltroModule } from './pipes/filtro.module';
-import { RehabilitacionFisicaComponent } from './views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.component';
-import { ConsultasComponent } from './views/RehabilitacionFisica/consultas/consultas.component';
+import { RehabilitacionFisicaConsultaModule } from './views/RehabilitacionFisica/consultas/consultas.module';
+import { RehabilitacionFisicaModule } from './views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module';
 
 
 
@@ -86,8 +86,10 @@ import { ConsultasComponent } from './views/RehabilitacionFisica/consultas/consu
     MedicinaGeneralDatosPacientesModule,
     PacientesModule,
     MedicinaGeneralModule,
-    MedicinaGeneralCitasModule, 
-    FiltroModule
+    MedicinaGeneralCitasModule,
+    FiltroModule,
+    RehabilitacionFisicaConsultaModule,
+    RehabilitacionFisicaModule
   ],
   declarations: [
     AppComponent,
@@ -95,9 +97,7 @@ import { ConsultasComponent } from './views/RehabilitacionFisica/consultas/consu
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-    RehabilitacionFisicaComponent,
-    ConsultasComponent
+    RegisterComponent
   ],
   providers: [
     {
