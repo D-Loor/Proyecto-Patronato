@@ -3,6 +3,7 @@ import { navItems } from '../../../_nav';
 import {CitasService} from '../../../servicios/citas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 @Component({
   selector: 'app-medicina-general-citas',
   templateUrl: './medicina-general-citas.component.html',
@@ -19,6 +20,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   especialidad:string="MedicinaGeneral";
   public sidebarMinimized = false;
   public navItems = navItems;
+  Citas:any[];
   citasTotal:any[];
   ngOnInit(): void {
     this.cargar(this.especialidad);
@@ -26,7 +28,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
  
   cargar(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
-      this.citasTotal=data['result'];
+    this.Citas=data['result'];
+    this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
@@ -84,6 +87,20 @@ export class MedicinaGeneralCitasComponent implements OnInit {
         )
       }
     })
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasTotal = this.Citas.slice(startItem, endItem);
+    debugger
+  }
+
+  ngOnDestroy(): void{
+    debugger
+    this.Citas = null;
+    this.citasTotal = null;
   }
 
 }

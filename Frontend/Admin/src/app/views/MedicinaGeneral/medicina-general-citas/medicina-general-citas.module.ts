@@ -5,7 +5,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { MedicinaGeneralCitasRoutingModule } from './medicina-general-citas-routing.module';
 import { MedicinaGeneralCitasComponent } from './medicina-general-citas.component';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination'
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { MedicinaGeneralCitasComponent } from './medicina-general-citas.componen
     CollapseModule,
     CommonModule,
     FiltroModule,
-    FormsModule
+    FormsModule,
+    PaginationModule
   
     
   ],
