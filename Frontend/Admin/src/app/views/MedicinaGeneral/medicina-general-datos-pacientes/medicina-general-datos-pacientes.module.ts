@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     CollapseModule.forRoot(),
     CollapseModule,
     FormsModule,
+    CommonModule,
     
   ],
   declarations: [
