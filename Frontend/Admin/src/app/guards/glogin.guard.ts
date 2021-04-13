@@ -10,7 +10,7 @@ export class GloginGuard implements CanActivate {
   constructor(private rutas:Router){}
 
   canActivate(){
-    let inicio = localStorage.getItem('sesionLogin');
+    let inicio = sessionStorage.getItem('sesionLogin');
     if(!inicio){
       this.rutas.navigate(["login"]);
       return false;

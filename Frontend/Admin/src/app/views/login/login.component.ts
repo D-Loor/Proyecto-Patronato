@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../servicios/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.removeItem('sesionLogin');
+    sessionStorage.removeItem('sesionLogin');
   }
 
   
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'OK'
           })
         }else{
-          localStorage.setItem('sesionLogin', 'true');
+          sessionStorage.setItem('sesionLogin', 'true');
           this.arraydat=data['result'];
           this.rutas.navigate(['/dashboard']);
           Swal.fire({
