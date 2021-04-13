@@ -55,6 +55,7 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      //Medicina General
       {
         path: 'medicinageneral',
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general/medicina-general.module').then(m => m.MedicinaGeneralModule)
@@ -76,6 +77,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module').then(m => m.MedicinaGeneralDatosPacientesModule),
 
       },
+      //Rehabilitación Física
       {
         path: 'rehabilitacionfisica',
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module').then(m => m.RehabilitacionFisicaModule)
@@ -88,6 +90,20 @@ export const routes: Routes = [
         path: 'rehabilitacionfisicacitas',
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module').then(m => m.RehabilitacionFisicaCitasModule)
       },
+      //Secretaría
+      {
+        path: 'agendarcita',
+        loadChildren: () => import('./views/Secretaria/agendar-cita/agendar-cita.module').then(m => m.AgendarCitaModule)
+      },
+      {
+        path: 'citas',
+        loadChildren: () => import('./views/Secretaria/citas/citas.module').then(m => m.CitasModule)
+      },
+      {
+        path: 'registrarhistoriaclinica',
+        loadChildren: () => import('./views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module').then(m => m.RegistrarHistoriaClinicaModule)
+      },
+      //Otros
       {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)

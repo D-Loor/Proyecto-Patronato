@@ -13,17 +13,17 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   isCollapsed = false;
   presun=false;
   defini=false;
-  salida:"No se encontró..";
+  salida="¡No se encontró!";
   public enferme='name';
   enfermedades: any[];
   data = [
-    
+
  ];
 
   ngOnInit(): void {
-    
+
     this.cargar();
-    
+
   }
 
 
@@ -43,24 +43,24 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
-      
+
       this.completar();
     }).catch(error =>{
       console.log(error);
   });
 
-  
+
   }
 
   completar(){
     debugger
-    
+
     for (let x in this.enfermedades){
       this.data.push({ "id":this.enfermedades[x]["id_enfermedad"], "name":this.enfermedades[x]["enfermedad"]});
       console.log(this.data);
       debugger
     }
-    
+
   }
 
 }

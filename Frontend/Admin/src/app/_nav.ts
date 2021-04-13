@@ -71,6 +71,21 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Secretaría'
   },
+  {
+    name: 'Agendar Cita',
+    url: '/agendarcita',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Mostrar Citas',
+    url: '/citas',
+    icon: 'icon-pencil'
+  },
+  {
+    name: 'Registrar Historia Clínica',
+    url: '/registrarhistoriaclinica',
+    icon: 'icon-pencil'
+  },
 
   {
     title: true,

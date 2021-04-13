@@ -43,7 +43,7 @@ import {
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -59,6 +59,9 @@ import { FiltroModule } from './pipes/filtro.module';
 import { RehabilitacionFisicaConsultaModule } from './views/RehabilitacionFisica/consultas/consultas.module';
 import { RehabilitacionFisicaModule } from './views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module';
 import { RehabilitacionFisicaCitasModule } from './views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module';
+import { CitasModule } from './views/Secretaria/citas/citas.module';
+import { RegistrarHistoriaClinicaModule } from './views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module';
+import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.module';
 
 
 
@@ -93,7 +96,11 @@ import { RehabilitacionFisicaCitasModule } from './views/RehabilitacionFisica/re
     RehabilitacionFisicaConsultaModule,
     RehabilitacionFisicaModule,
     CommonModule,
-    RehabilitacionFisicaCitasModule
+    RehabilitacionFisicaCitasModule,
+    CitasModule,
+    RegistrarHistoriaClinicaModule,
+    AgendarCitaModule,
+
   ],
   declarations: [
     AppComponent,
@@ -102,7 +109,7 @@ import { RehabilitacionFisicaCitasModule } from './views/RehabilitacionFisica/re
     P500Component,
     LoginComponent,
     RegisterComponent,
-    
+
   ],
   providers: [
     {
