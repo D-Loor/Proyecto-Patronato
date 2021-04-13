@@ -85,6 +85,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/RehabilitacionFisica/consultas/consultas.module').then(m => m.RehabilitacionFisicaConsultaModule)
       },
       {
+        path: 'rehabilitacionfisicacitas',
+        loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module').then(m => m.RehabilitacionFisicaCitasModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },

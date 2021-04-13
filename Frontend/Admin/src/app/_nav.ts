@@ -44,7 +44,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Citas',
-    url: '/#',
+    url: '/rehabilitacionfisicacitas',
     icon: 'icon-drop'
   },
   {
