@@ -58,7 +58,7 @@ import { MedicinaGeneralCitasModule } from './views/MedicinaGeneral/medicina-gen
 import { FiltroModule } from './pipes/filtro.module';
 import { RehabilitacionFisicaConsultaModule } from './views/RehabilitacionFisica/consultas/consultas.module';
 import { RehabilitacionFisicaModule } from './views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module';
-import { RehabilitacionFisicaCitasComponent } from './views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.component';
+import { RehabilitacionFisicaCitasModule } from './views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module';
 
 
 
@@ -93,7 +93,7 @@ import { RehabilitacionFisicaCitasComponent } from './views/RehabilitacionFisica
     RehabilitacionFisicaConsultaModule,
     RehabilitacionFisicaModule,
     CommonModule,
-    RehabilitacionFisicaCitasComponent
+    RehabilitacionFisicaCitasModule
   ],
   declarations: [
     AppComponent,
@@ -101,7 +101,8 @@ import { RehabilitacionFisicaCitasComponent } from './views/RehabilitacionFisica
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    
   ],
   providers: [
     {
