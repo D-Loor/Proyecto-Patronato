@@ -16,16 +16,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   salida:"No se encontró..";
   public enferme='name';
   enfermedades: any[];
-  autoenfer:any[];
   data = [
-    {
-      id: 1,
-      name: 'Usa'
-    },
-    {
-      id: 2,
-      name: 'England'
-    }
+    
  ];
 
   ngOnInit(): void {
@@ -51,6 +43,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
+      
       this.completar();
     }).catch(error =>{
       console.log(error);
@@ -60,8 +53,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
 
   completar(){
+    debugger
+    
     for (let x in this.enfermedades){
-      this.autoenfer.push({ "id":this.enfermedades[x]["id"], "name":this.enfermedades[x]["enfermedad"]});
+      this.data.push({ "id":this.enfermedades[x]["id_enfermedad"], "name":this.enfermedades[x]["enfermedad"]});
+      console.log(this.data);
       debugger
     }
     
