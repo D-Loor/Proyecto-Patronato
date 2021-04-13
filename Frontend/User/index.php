@@ -586,8 +586,8 @@
                                 <div class="form-group">
                                     <label class="label-co"> Seleccione la especialidad *</label>
                                     <select class="form-control form-select "  id="especialidad"  name="especialidad" aria-label=".form-select-lg example"> 
-                                        <option selected value="Medicina General" class="op-select">Medicina General</option>
-                                        <option value="Rehabilitación Física" class="op-select">Rehabilitación Física</option>
+                                        <option selected value="MedicinaGeneral" class="op-select">Medicina General</option>
+                                        <option value="RehabilitaciónFísica" class="op-select">Rehabilitación Física</option>
                                     </select>
 
                                     

@@ -92,7 +92,8 @@ import { RehabilitacionFisicaCitasComponent } from './views/RehabilitacionFisica
     FiltroModule,
     RehabilitacionFisicaConsultaModule,
     RehabilitacionFisicaModule,
-    CommonModule
+    CommonModule,
+    RehabilitacionFisicaCitasComponent
   ],
   declarations: [
     AppComponent,
@@ -100,8 +101,7 @@ import { RehabilitacionFisicaCitasComponent } from './views/RehabilitacionFisica
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-    RehabilitacionFisicaCitasComponent
+    RegisterComponent
   ],
   providers: [
     {

@@ -25,6 +25,14 @@ class CitaController extends Controller
 
     }
 
+    public function validarMGandRF($especialidad){
+        $datos=Cita::where('especialidad', $especialidad)->get()->all();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

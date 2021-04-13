@@ -16,16 +16,16 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
-
+  especialidad:string="MedicinaGeneral";
   public sidebarMinimized = false;
   public navItems = navItems;
   citasTotal:any[];
   ngOnInit(): void {
-    this.cargar();
+    this.cargar(this.especialidad);
   }
-
-  cargar(){
-    this.citas.citas().then(data =>{
+ 
+  cargar(especialidad:string){
+    this.citas.citas(especialidad).then(data =>{
       this.citasTotal=data['result'];
     }).catch(error =>{
       console.log(error);
@@ -67,7 +67,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.eliminar(id);
-        this.cargar();
+        this.cargar(this.especialidad);
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
