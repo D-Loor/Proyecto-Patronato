@@ -43,6 +43,7 @@ import {
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
+import { CommonModule } from '@angular/common';  
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -89,7 +90,8 @@ import { RehabilitacionFisicaModule } from './views/RehabilitacionFisica/rehabil
     MedicinaGeneralCitasModule,
     FiltroModule,
     RehabilitacionFisicaConsultaModule,
-    RehabilitacionFisicaModule
+    RehabilitacionFisicaModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,

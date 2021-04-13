@@ -4,8 +4,7 @@ import { MedicinaGeneralDatosPacientesRoutingModule } from './medicina-general-d
 import { MedicinaGeneralDatosPacientesComponent } from './medicina-general-datos-pacientes.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { FormsModule } from '@angular/forms';
-import { FiltroModule } from '../../../pipes/filtro.module';
+
 
 
  
@@ -14,8 +13,6 @@ import { FiltroModule } from '../../../pipes/filtro.module';
     MedicinaGeneralDatosPacientesRoutingModule,
     CollapseModule.forRoot(),
     CollapseModule,
-    FiltroModule,
-    FormsModule
     
   ],
   declarations: [

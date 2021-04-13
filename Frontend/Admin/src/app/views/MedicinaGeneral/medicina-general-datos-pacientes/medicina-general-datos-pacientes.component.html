@@ -147,7 +147,7 @@
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
-                                        <div id="collapseBasic" *ngIf="Ver==false && Ocultar==false">
+                                        <div id="collapseBasic" [ngIf]="Ver==false && Ocultar==false">
                                             <textarea autocomplete="off" required [(ngModel)]="ninezT" id="ninezT" name="ninezT" rows="3" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
                                         </div> 
                                         <label for="inline-radios">Adolescencia</label>
@@ -232,7 +232,7 @@
                                         <textarea autocomplete="off" required [(ngModel)]="antecedentes_quirurgicos" id="antecedentes_quirurgicos" name="antecedentes_quirurgicos" rows="3" class="form-control" placeholder="Descripción de los antecedentes quirúrgicos.."></textarea>
                                     </div>
                                 </div>
-                                <div *ngIf="sexo=='Mujer'">
+                                <div [ngIf]="sexo=='Mujer'">
                                     <label for="">Antecedentes ginecos obstétricos</label>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
