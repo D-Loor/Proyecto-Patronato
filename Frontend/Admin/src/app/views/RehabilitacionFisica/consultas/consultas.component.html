@@ -18,32 +18,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-5">
-                                            <label for="text-input">Edad</label>
-                                            <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
-                                        </div>
-                                        <div class="form-group col-sm-5">
+                                        <div class="form-group col-sm-6">
                                             <label for="text-input">Ocupación</label>
                                             <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">                                 
                                         </div>
                                         <div class="form-group col-sm-2">
-                                            <label for="select1">Sexo</label>
-                                            <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo" required>
-                                                <option value="Hombre">Hombre</option>
-                                                <option value="Mujer">Mujer</option>
-                                            </select>
+                                            <label for="text-input">Edad</label>
+                                            <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
                                         </div>
-                                      </div><!--/.row-->
-                                      <div class="row">
-                                        <div class="form-group col-sm-5">
-                                            <label for="text-input">Lugar de residencia</label>
-                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia">    
-                                        </div>
-                                        <div class="form-group col-sm-5">
-                                            <label for="text-input">Lugar de procedencia</label>
-                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia">
-                                        </div>
-                                        <div class="form-group col-sm-2">
+                                        <div class="form-group col-sm-4">
                                             <label for="inline-radios">Lugar de atención</label>
                                                 <div class="col-md-8 col-form-label">
                                                     <div class="form-check form-check-inline mr-1">
@@ -77,8 +60,50 @@
                                         </div><!--/.row-->
                                         <div class="row">
                                             <div class="form-group col-sm-12">
-                                                <label for="text-input">Tratamiento</label>
-                                                <textarea autocomplete="off" required  [(ngModel)]="tratamientoT" id="tratamientoT" name="tratamientoT" rows="3" class="form-control" placeholder="Descripción del tratamiento.."></textarea>    
+                                                <label for="inline-radios">Tratamiento</label>
+                                                <div class="col-md-12 col-form-label">
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="estimulacion_temprana" id="estimulacion_temprana" name="estimulacion_temprana" value="Estimulación temprana">
+                                                        <label class="form-check-label" for="inline-checkbox1">Estimulación temprana</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="magnetoterapia" id="magnetoterapia" name="magnetoterapia" value="Magnetoterapia">
+                                                        <label class="form-check-label" for="inline-checkbox2">Magnetoterapia</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="electroestimulacion" id="electroestimulacion" name="electroestimulacion" value="Electroestimulación">
+                                                        <label class="form-check-label" for="inline-checkbox3">Electroestimulación</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="ultrasonido" id="ultrasonido" name="ultrasonido" value="Ultrasonido">
+                                                        <label class="form-check-label" for="inline-checkbox3">Ultrasonido</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="CQC_OH" id="CQC_OH" name="CQC_OH" value="C.Q.C. O H.">
+                                                        <label class="form-check-label" for="inline-checkbox3">C.Q.C. O H.</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="masaje" id="masaje" name="masaje" value="Masaje">
+                                                        <label class="form-check-label" for="inline-checkbox3">Masaje</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-12">
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="ejercicios_PR" id="ejercicios_PR" name="ejercicios_PR" value="Ejercicios pasivos y resistidos">
+                                                        <label class="form-check-label" for="inline-checkbox3">Ejercicios pasivos y resistidos</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="laser" id="laser" name="laser" value="Láser">
+                                                        <label class="form-check-label" for="inline-checkbox3">Láser</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-5">
+                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="otros" id="otros" name="otros" value="1">
+                                                        <label class="form-check-label" for="inline-checkbox3">Otros</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div  *ngIf="otros==1" class="form-group col-sm-12">
+                                                <textarea autocomplete="off" required  [(ngModel)]="otrosT" id="otrosT" name="otrosT" rows="3" class="form-control" placeholder="Descripción del tratamiento.."></textarea>    
                                             </div>
                                         </div><!--/.row-->
                                         <div class="form-group ">
