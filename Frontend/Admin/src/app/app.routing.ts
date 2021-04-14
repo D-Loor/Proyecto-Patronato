@@ -72,11 +72,6 @@ export const routes: Routes = [
         path: 'pacientes',
         loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PacientesModule)
       },
-      {
-        path: 'medicinageneraldatospacientes',
-        loadChildren: () => import('./views/MedicinaGeneral/medicina-general-datos-pacientes/medicina-general-datos-pacientes.module').then(m => m.MedicinaGeneralDatosPacientesModule),
-
-      },
       //Rehabilitación Física
       {
         path: 'rehabilitacionfisica',
