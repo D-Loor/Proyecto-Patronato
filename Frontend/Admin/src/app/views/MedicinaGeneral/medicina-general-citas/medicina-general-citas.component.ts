@@ -19,7 +19,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   isCollapsed = true;
   buscar:string="";
   especialidad:string="Medicina General";
-  Estado:number;
+  Estado:number=1;
   validacion:string;
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -30,30 +30,33 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(especialidad:string){
-    debugger
     this.citas.citas(especialidad).then(data =>{
     this.Citas=data['result'];
-    debugger
     for (var item in this.Citas){
-     this.ValidarAntecedentes(this.Citas[item].cedula);
+    this.ValidarAntecedentes(this.Citas[item].cedula);
     }
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
       console.log(error);
-  });
+  });   
   }
+   
+  // for (var item in this.Citas){
+  //   this.ValidarAntecedentes(this.Citas[item].cedula);
+  //  }
 
   ValidarAntecedentes(cedula:string){
     debugger
     this.medicina.PacientesAntecedentes(cedula).then(data =>{
       this.validacion=data['code'];
+      if(this.validacion=='201'){
+        this.Estado=1;
+      }else
+        this.Estado=0;
       }).catch(error =>{
         console.log(error);
     });
-    if(this.validacion=='201'){
-      this.Estado=1;
-    }else
-    this.Estado=0;
+    
   }
 
   citasEliminar:any[];
