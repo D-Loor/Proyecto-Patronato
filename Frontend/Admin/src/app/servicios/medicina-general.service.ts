@@ -43,6 +43,19 @@ export class MedicinaGeneralService {
     });
   }
 
+  PacientesAntecedentes($cedula) {
+    debugger
+    let  url = 'http://127.0.0.1:8000/api/Paciente/'+$cedula;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+        debugger
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   
 
 }

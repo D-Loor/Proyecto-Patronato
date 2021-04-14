@@ -4,6 +4,7 @@ import {CitasService} from '../../../servicios/citas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 @Component({
   selector: 'app-medicina-general-citas',
   templateUrl: './medicina-general-citas.component.html',
@@ -12,12 +13,14 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 export class MedicinaGeneralCitasComponent implements OnInit {
 
 
-  constructor(public citas:CitasService, public rutas:Router) { }
+  constructor(public citas:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
 
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
   especialidad:string="Medicina General";
+  Estado:number;
+  validacion:string;
   public sidebarMinimized = false;
   public navItems = navItems;
   Citas:any[];
@@ -27,12 +30,30 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(especialidad:string){
+    debugger
     this.citas.citas(especialidad).then(data =>{
     this.Citas=data['result'];
+    debugger
+    for (var item in this.Citas){
+     this.ValidarAntecedentes(this.Citas[item].cedula);
+    }
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
+  }
+
+  ValidarAntecedentes(cedula:string){
+    debugger
+    this.medicina.PacientesAntecedentes(cedula).then(data =>{
+      this.validacion=data['code'];
+      }).catch(error =>{
+        console.log(error);
+    });
+    if(this.validacion=='201'){
+      this.Estado=1;
+    }else
+    this.Estado=0;
   }
 
   citasEliminar:any[];
