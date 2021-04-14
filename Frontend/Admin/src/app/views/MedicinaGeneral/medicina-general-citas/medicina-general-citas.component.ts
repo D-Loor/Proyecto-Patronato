@@ -25,6 +25,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   public navItems = navItems;
   Citas:any[];
   citasTotal:any[];
+  Valida=[];
   ngOnInit(): void {
     this.cargar(this.especialidad);
   }
@@ -32,31 +33,42 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   cargar(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
     this.Citas=data['result'];
-    for (var item in this.Citas){
-    this.ValidarAntecedentes(this.Citas[item].cedula);
-    }
+    this.validar();
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
       console.log(error);
-  });   
+  });
   }
-   
+  validar(){
+
+    for (let x in this.Citas){
+      this.ValidarAntecedentes(this.Citas[x]["cedula"],this.Citas[x]["nombres"],this.Citas[x]["hora"]);
+      console.log(this.Valida);
+      console.log(this.Citas);
+    }
+
+
+  }
   // for (var item in this.Citas){
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
   //  }
 
-  ValidarAntecedentes(cedula:string){
-    debugger
+  ValidarAntecedentes(cedula:string, nombre:string, hora:string){
+
     this.medicina.PacientesAntecedentes(cedula).then(data =>{
       this.validacion=data['code'];
+
       if(this.validacion=='201'){
-        this.Estado=1;
+
+        this.Valida.push({ "valor":1,"nombres":nombre,"cedula":cedula,"hora":hora});
+
       }else
-        this.Estado=0;
-      }).catch(error =>{
+      this.Valida.push({ "valor":0,"nombres":nombre,"cedula":cedula,"hora":hora});
+     }).catch(error =>{
+
         console.log(error);
     });
-    
+
   }
 
   citasEliminar:any[];
@@ -116,14 +128,16 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.citasTotal = this.Citas.slice(startItem, endItem);
+    this.Valida = this.Citas.slice(startItem, endItem);
   }
 
   ngOnDestroy(): void{
     this.Citas = null;
+    this.Valida = null;
+
     this.citasTotal = null;
   }
-  
+
   ConsultarPaciente(){
     this.rutas.navigate(['/medicinageneralconsultas']);
   }

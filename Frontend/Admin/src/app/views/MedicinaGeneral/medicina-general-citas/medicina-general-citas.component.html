@@ -313,13 +313,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotal | filtro:buscar">
-                <td class="table-titulo">{{item.nombres}}</td>
-                <td>{{item.cedula}}</td>
-                <td>{{item.hora}}</td>
+              <tr *ngFor="let item of Valida | filtro:buscar" >
+                <td class="table-titulo">{{item[0].nombres}}</td>
+                <td>{{item[0].cedula}}</td>
+                <td>{{item[0].hora}}</td>
                 <td>
-                  <span *ngIf="Estado==1" class="badge badge-success">Registrado</span>
-                  <span *ngIf="Estado==0" class="badge badge-secondary">Sin registro</span>
+                  <span  *ngIf="item[0].valor==1"  class="badge badge-success">Si</span>
+                  <span *ngIf="item[0].valor==0"class="badge badge-secondary">No</span>
                 </td>
                 <td>
                   <button type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente()"><i

@@ -15,30 +15,32 @@ export class MedicinaGeneralComponent implements OnInit {
 
 
   @ViewChild('Principal') public Principal: ModalDirective;
-  @ViewChild('DatosAfiliacion') public DatosAfiliacion: ModalDirective;
-  @ViewChild('AntecedentesPersonales') public AntecedentesPersonales: ModalDirective;
-  @ViewChild('AntecedentesFamiliares') public AntecedentesFamiliares: ModalDirective;
-  @ViewChild('HabitosPersonales') public HabitosPersonales: ModalDirective;
-  @ViewChild('ExamenesFisicos') public ExamenesFisicos: ModalDirective;
-  @ViewChild('ExamenesOrganos') public ExamenesOrganos: ModalDirective;
-  @ViewChild('ExamenesComplementarios') public ExamenesComplementarios: ModalDirective;
 
-  
-
-  
 
   public sidebarMinimized = false;
   public navItems = navItems;
   search="";
+
+  isCollapsed = false;
+  isCollapsed2 = false;
+  isCollapsed3 = false;
+  isCollapsed4 = false;
+  isCollapsed5 = false;
+  isCollapsed6 = false;
+  isCollapsed7 = false;
+
+
+
   dataFechaFiltro;
   pacientes:any[];
   pacientesTotal:any[];
+
   ngOnInit(): void {
     this.cargar();
   }
- 
+
   cargar(){this.medicina_general.historiasClinicasMg().then(data =>{
-    this.pacientes=data['result'];
+    this.pacientes=data['result']['data'];
     this.pacientesTotal = this.pacientes.slice(0, 10);
     debugger
   }).catch(error =>{
@@ -46,7 +48,7 @@ export class MedicinaGeneralComponent implements OnInit {
 });
 
   }
-  
+
   fechaFiltre(event){
     this.dataFechaFiltro;
     debugger
