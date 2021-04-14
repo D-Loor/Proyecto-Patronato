@@ -37,7 +37,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   citasEliminar:any[];
   eliminar(id:string) {
-    debugger
     this.citas.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
       })
@@ -94,13 +93,18 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasTotal = this.Citas.slice(startItem, endItem);
-    debugger
   }
 
   ngOnDestroy(): void{
-    debugger
     this.Citas = null;
     this.citasTotal = null;
+  }
+  
+  ConsultarPaciente(){
+    this.rutas.navigate(['/medicinageneralconsultas']);
+  }
+  HistoriaPaciente(){
+    this.rutas.navigate(['/medicinageneral']);
   }
 
 }

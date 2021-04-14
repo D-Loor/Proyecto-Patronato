@@ -322,10 +322,10 @@
                   <span class="badge badge-success">Active</span>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
+                  <button type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente()"><i
+                      class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
+                  <button type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                      class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                   <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 

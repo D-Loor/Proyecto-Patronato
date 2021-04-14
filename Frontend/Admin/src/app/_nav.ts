@@ -56,11 +56,6 @@ export const navItems: INavData[] = [
     icon: 'icon-star'
   },
   {
-    name: 'Consultas',
-    url: '/medicinageneralconsultas',
-    icon: 'icon-pencil'
-  },
-  {
     title: true,
     name: 'Rehabilitación Física'
   },
