@@ -17,7 +17,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   search="";
-  dataFechaFiltro;
+  
   pacientesTotal:any[];
   pacientesTotalTotal:any[];
   ngOnInit(): void {
@@ -35,14 +35,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
   }
 
-  fechaFiltre(event){
-    this.dataFechaFiltro;
 
-  }
 
-  hola(){
-    debugger
-  }
 
   pageChanged(event: PageChangedEvent): void {
 

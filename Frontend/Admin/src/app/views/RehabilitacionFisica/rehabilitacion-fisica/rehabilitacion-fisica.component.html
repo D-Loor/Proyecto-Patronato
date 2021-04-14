@@ -20,7 +20,7 @@
             </div>
             <div class="row">
             <div class="col-md-3 searcht">
-              <input name="dataFechaFiltro" id="dataFechaFiltro" [(ngModel)]="dataFechaFiltro" (change)="fechaFiltre($event)" id="date-input" type="date" name="date-input" placeholder="date" class="form-control">
+              <input  id="date-input" type="date" name="date-input" placeholder="date" class="form-control">
             </div>
           </div>
         </div>
@@ -48,9 +48,10 @@
                   <td>{{item.paciente.edad}}</td>
                   <td>{{item.fecha}}</td>
                   <td>{{item.lugar_atencion}}</td>
-                  <td><ng-container *ngIf="item.paciente.gad != 1; else success">
-                    <span class="badge badge-secondary">NO</span>
-                  </ng-container></td>
+                  <td>
+                    <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
+                    <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
+                  </td>
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"><i
                         class="fa fa-stethoscope"></i>&nbsp;Atender</button>
@@ -59,9 +60,7 @@
                     <button type="button" class="btn btn-ghost-danger botont"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
-                  <ng-template #success>
-                    <span class="badge badge-success">SI</span>
-                  </ng-template>
+                  
                 </tr>
 
                 

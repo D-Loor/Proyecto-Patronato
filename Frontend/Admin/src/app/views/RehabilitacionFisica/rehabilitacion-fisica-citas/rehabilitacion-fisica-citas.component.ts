@@ -20,13 +20,14 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   public navItems = navItems;
   Citas:any[];
   citasTotal:any[];
-
-
+  today = new Date();
+  fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
   ngOnInit(): void {
-    this.cargar(this.especialidad);
+    this.cargar(this.especialidad,this.fechaActual);
   }
 
-  cargar(especialidad:string){
+  cargar(especialidad:string,fechaActual:string){
+    debugger
     this.citas.citas(especialidad).then(data =>{
       this.Citas=data['result'];
     this.citasTotal = this.Citas.slice(0, 10);
@@ -70,7 +71,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.eliminar(id);
-        this.cargar(this.especialidad);
+        this.cargar(this.especialidad,this.fechaActual);
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
