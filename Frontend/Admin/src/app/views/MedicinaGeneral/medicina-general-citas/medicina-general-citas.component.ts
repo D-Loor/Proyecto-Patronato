@@ -17,7 +17,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
-  especialidad:string="MedicinaGeneral";
+  especialidad:string="Medicina General";
   public sidebarMinimized = false;
   public navItems = navItems;
   Citas:any[];
@@ -25,7 +25,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   ngOnInit(): void {
     this.cargar(this.especialidad);
   }
- 
+
   cargar(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
     this.Citas=data['result'];

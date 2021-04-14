@@ -15,7 +15,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
-  especialidad:string="RehabilitaciónFísica";
+  especialidad:string="Rehabilitacion Fisica";
   public sidebarMinimized = false;
   public navItems = navItems;
   Citas:any[];
@@ -25,7 +25,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   ngOnInit(): void {
     this.cargar(this.especialidad);
   }
- 
+
   cargar(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
       this.Citas=data['result'];
@@ -102,5 +102,5 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.Citas = null;
     this.citasTotal = null;
   }
- 
+
 }

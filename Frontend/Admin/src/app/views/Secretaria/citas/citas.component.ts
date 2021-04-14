@@ -13,54 +13,64 @@ import { CitasService } from '../../../servicios/citas.service';
 export class CitasComponent implements OnInit {
 
   constructor(public citas:CitasService, public rutas:Router) { }
-  isCollapsed2 = false;
-  isCollapsed = true;
-  buscar:string="";
-  especialidad:string="RehabilitaciónFísica";
+
+  isCollapsedMG = false;
+  isCollapsedRF = false;
+  buscarMG:string="";
+  buscarRF:string="";
+
   public sidebarMinimized = false;
   public navItems = navItems;
-  Citas:any[];
-  citasTotal:any[];
+
+  CitasMG:any[];
+  citasTotalMG:any[];
+  CitasRF:any[];
+  citasTotalRF:any[];
 
 
   ngOnInit(): void {
-    this.cargar(this.especialidad);
+    this.cargarRF("Rehabilitacion Fisica");
+    this.cargarMG("Medicina General");
+
   }
 
-  cargar2(especialidad:string){
+  cargarMG(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
-      this.Citas=data['result'];
-    this.citasTotal = this.Citas.slice(0, 10);
+      this.CitasMG=data['result'];
+    this.citasTotalMG = this.CitasMG.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
   }
 
-  citasEliminar2:any[];
-  eliminar2(id:string) {
+  citasEliminarMG:any[];
+  eliminarMG(id:string) {
     debugger
     this.citas.elicitas(id).then(data => {
-        this.citasEliminar=data['result'];
+        this.citasEliminarMG=data['result'];
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  cargar(especialidad:string){
+
+
+  cargarRF(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
-    this.Citas=data['result'];
-    this.citasTotal = this.Citas.slice(0, 10);
+    this.CitasRF=data['result'];
+    debugger
+    this.citasTotalRF = this.CitasRF.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
   }
 
-  citasEliminar:any[];
-  eliminar(id:string) {
+  citasEliminarRF:any[];
+  eliminarRF(id:string) {
     debugger
     this.citas.elicitas(id).then(data => {
-        this.citasEliminar=data['result'];
+        this.citasEliminarRF=data['result'];
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +81,7 @@ export class CitasComponent implements OnInit {
     this.sidebarMinimized = e;
   }
 
-  notificacion(id:string){
+  notificacion(id:string, especialidad:string){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -90,8 +100,14 @@ export class CitasComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.eliminar(id);
-        this.cargar(this.especialidad);
+        if(especialidad=="MG"){
+          this.eliminarMG(id);
+          this.cargarMG("Medicina General");
+        }else{
+          this.eliminarRF(id);
+          this.cargarMG("Rehabilitacion Fisica");
+        }
+
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
@@ -110,18 +126,27 @@ export class CitasComponent implements OnInit {
     })
   }
 
-  pageChanged(event: PageChangedEvent): void {
+  pageChangedMG(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.citasTotal = this.Citas.slice(startItem, endItem);
+    this.citasTotalMG = this.CitasMG.slice(startItem, endItem);
+    debugger
+  }
+  pageChangedRF(event: PageChangedEvent): void {
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasTotalRF = this.CitasRF.slice(startItem, endItem);
     debugger
   }
 
   ngOnDestroy(): void{
-    debugger
-    this.Citas = null;
-    this.citasTotal = null;
+
+    this.CitasMG = null;
+    this.citasTotalMG = null;
+    this.CitasRF = null;
+    this.citasTotalRF = null;
   }
 
 
