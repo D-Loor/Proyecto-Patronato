@@ -20,8 +20,7 @@ class CreateCuentasTable extends Migration
             $table->string('correo');
             $table->string('password');
             $table->string('imagen');
-
-            $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
+            $table->foreign('id_rol')->references('id_rol')->on('roles');
         });
     }
 

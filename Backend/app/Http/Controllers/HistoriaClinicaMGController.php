@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historia_Clinica_MG;
+
 use Illuminate\Http\Request;
 
 class HistoriaClinicaMGController extends Controller
@@ -15,6 +16,7 @@ class HistoriaClinicaMGController extends Controller
     public function index()
     {
         $datos=Historia_Clinica_MG::all();
+
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -64,7 +66,7 @@ class HistoriaClinicaMGController extends Controller
 
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
-
+ 
     /**
      * Display the specified resource.
      *

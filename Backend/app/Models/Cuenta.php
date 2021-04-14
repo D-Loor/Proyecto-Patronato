@@ -13,5 +13,9 @@ class Cuenta extends Model
     protected $primaryKey = 'id_cuenta';
      protected $fillable = [
         'id_rol', 'nombres', 'correo', 'password', 'imagen',
-    ];
+     ];
+
+    //public function role(){
+    //	return $this->hasOne('App\Models\Role','id_rol','id_cuenta');
+    //}
 }

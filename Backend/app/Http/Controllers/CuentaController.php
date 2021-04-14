@@ -14,6 +14,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
+        //$datos=Cuenta::with('role')->paginate(5);
         $datos=Cuenta::all();  
         $num_rows = count($datos);
         if($num_rows!=0){
