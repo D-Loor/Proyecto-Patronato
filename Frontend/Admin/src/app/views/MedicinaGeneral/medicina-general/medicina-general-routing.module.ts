@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MedicinaGeneralComponent } from './medicina-general.component';
 
 
+
 const routes: Routes = [
   {
     path: '',

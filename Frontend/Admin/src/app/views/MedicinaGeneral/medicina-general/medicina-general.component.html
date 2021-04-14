@@ -30,7 +30,6 @@
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
-                  <th>id</th>
                   <th>Cédula</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
@@ -48,7 +47,6 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td></td>
                   <td>{{item.fecha}}</td>
                   <td></td>
                   <td>{{item.lugar_atencion}}</td>
@@ -56,8 +54,8 @@
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"><i
                         class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                    <button type="button" class="btn btn-ghost-success botont"><i
-                        class="fa fa-eye"></i>&nbsp;Consultas</button>
+                    <button type="button" class="btn btn-ghost-success botont" data-toggle="modal" (click)="Principal.show()"><i
+                        class="fa fa-eye"></i>&nbsp;Modal</button>
                     <button type="button" class="btn btn-ghost-danger botont"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
@@ -79,6 +77,170 @@
 
 </div>
 
+<div bsModal #Principal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="Principal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="DatosAfiliacion.show()" >Datos de Afiliación</button>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="AntecedentesPersonales.show()" >Antecedentes Patológicos Personales</button>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="AntecedentesFamiliares.show()" >Antecedentes Patológicos Familiares</button>
+        </div>
+        <br>
+        <div>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="HabitosPersonales.show()" >Hábitos Personales</button>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="ExamenesFisicos.show()" >Examenes Físicos Generales</button>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="ExamenesOrganos.show()" >Examenes de Organos y Sistemas</button>  
+        </div>
+       <br>
+        <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="ExamenesComplementarios.show()" >Examenes Complementarios</button>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="Principal.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #DatosAfiliacion="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="DatosAfiliacion.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>Hola compita</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="DatosAfiliacion.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #AntecedentesPersonales="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="AntecedentesPersonales.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>AntecedentesPersonales</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="AntecedentesPersonales.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #AntecedentesFamiliares="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="AntecedentesFamiliares.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>AntecedentesFamiliares</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="AntecedentesFamiliares.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #HabitosPersonales="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="HabitosPersonales.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>HabitosPersonales</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="HabitosPersonales.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #ExamenesFisicos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="ExamenesFisicos.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>ExamenesFisicos</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="ExamenesFisicos.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #ExamenesOrganos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="ExamenesOrganos.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>ExamenesOrganos</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="ExamenesOrganos.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #ExamenesComplementarios="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos</h4>
+        <button type="button" class="close" (click)="ExamenesComplementarios.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <p>ExamenesComplementarios</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="ExamenesComplementarios.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-medicina-general',
   templateUrl: './medicina-general.component.html',
@@ -12,6 +13,17 @@ export class MedicinaGeneralComponent implements OnInit {
 
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
+
+  @ViewChild('Principal') public Principal: ModalDirective;
+  @ViewChild('DatosAfiliacion') public DatosAfiliacion: ModalDirective;
+  @ViewChild('AntecedentesPersonales') public AntecedentesPersonales: ModalDirective;
+  @ViewChild('AntecedentesFamiliares') public AntecedentesFamiliares: ModalDirective;
+  @ViewChild('HabitosPersonales') public HabitosPersonales: ModalDirective;
+  @ViewChild('ExamenesFisicos') public ExamenesFisicos: ModalDirective;
+  @ViewChild('ExamenesOrganos') public ExamenesOrganos: ModalDirective;
+  @ViewChild('ExamenesComplementarios') public ExamenesComplementarios: ModalDirective;
+
+  
 
   
 

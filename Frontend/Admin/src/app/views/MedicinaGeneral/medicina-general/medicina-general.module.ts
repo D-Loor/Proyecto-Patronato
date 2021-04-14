@@ -5,6 +5,8 @@ import { MedicinaGeneralComponent } from './medicina-general.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalsComponent } from '../../notifications/modals.component';
 
 
 @NgModule({
@@ -13,10 +15,12 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PaginationModule,
     FiltroModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot()
   ],
   declarations: [
-    MedicinaGeneralComponent
+    MedicinaGeneralComponent,
+    ModalsComponent
   ]
 })
 
