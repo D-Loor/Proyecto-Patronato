@@ -14,4 +14,9 @@ class Historia_Clinica_RF extends Model
     protected $fillable = [
         'id_paciente','id_tratamiento','diagnostico','lugar_atencion','certificado','fecha'
     ];
+
+    public function paciente(){
+       return $this->hasOne('App\Models\Paciente','id_paciente','id_rf');
+    }
+
 }

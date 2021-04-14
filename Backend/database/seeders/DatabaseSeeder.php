@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
         DB::table('citas')->insert([
             'nombres' => Str::random(10),
             'cedula' => Str::random(10),
-            'especialidad' => Str::random(10),
+            'especialidad' => 'RehabilitaciónFísica',
             'fecha' => Carbon::parse('2001-03-09'),
             'hora' => Str::random(10),
             //'email' => Str::random(10).'@gmail.com',

@@ -14,7 +14,8 @@ class HistoriaClinicaRFController extends Controller
      */
     public function index()
     {
-        $datos=Historia_Clinica_RF::all();  
+        //$datos=Historia_Clinica_RF::all();  
+        $datos=Historia_Clinica_RF::with('paciente')->paginate();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]); 

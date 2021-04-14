@@ -16,7 +16,7 @@ class Historia_Clinica_MG extends Model
     ];
 
     public function paciente(){
-        return $this->hasOne('App\Paciente');
+        return $this->hasOne('App\Models\Paciente','id_paciente','id_historia_clinica_mg');
     }
 
 }

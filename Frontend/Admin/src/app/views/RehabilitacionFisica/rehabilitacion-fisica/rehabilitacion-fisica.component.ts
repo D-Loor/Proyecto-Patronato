@@ -25,7 +25,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }
 
   cargar(){this.historial.historialrf().then(data =>{
-    this.pacientesTotal=data['result'];
+    debugger
+    this.pacientesTotal=data['result']['data'];
     this.pacientesTotalTotal = this.pacientesTotal.slice(0, 10);
     debugger
   }).catch(error =>{
@@ -37,6 +38,10 @@ export class RehabilitacionFisicaComponent implements OnInit {
   fechaFiltre(event){
     this.dataFechaFiltro;
 
+  }
+
+  hola(){
+    debugger
   }
 
   pageChanged(event: PageChangedEvent): void {
