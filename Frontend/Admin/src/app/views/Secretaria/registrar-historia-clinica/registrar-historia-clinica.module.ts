@@ -5,6 +5,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { RegistrarHistoriaClinicaRoutingModule } from './registrar-historia-clinica-routing.module';
 import { RegistrarHistoriaClinicaComponent } from './registrar-historia-clinica.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   imports: [
@@ -12,7 +13,9 @@ import { RegistrarHistoriaClinicaComponent } from './registrar-historia-clinica.
     CommonModule,
     PaginationModule,
     FiltroModule,
-    FormsModule
+    FormsModule,
+    CollapseModule.forRoot(),
+    CollapseModule,
   ],
   declarations: [
     RegistrarHistoriaClinicaComponent
