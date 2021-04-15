@@ -308,7 +308,7 @@
                   <th>Nombres</th>
                   <th>Cédula</th>
                   <th>Hora</th>
-                  <th>Historial</th>
+                  <th>Antecedente</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -318,8 +318,8 @@
                   <td>{{item.cedula}}</td>
                   <td>{{item.hora}}</td>
                   <td>
-  
-                    <span class="badge badge-success">Active</span>
+                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"><i

@@ -8,20 +8,22 @@ export class CitasService {
 
   constructor(private http:HttpClient) { }
 
-  citas($especialidad) {
-    let  url = 'http://127.0.0.1:8000/api/citasMGandRF/'+$especialidad;
+  
+  elicitas($id) {
+    let  url = 'http://127.0.0.1:8000/api/Cita/'+$id;
     return new Promise ((resolve, reject) => {
-      this.http.get(url).subscribe(res => {
+      this.http.delete(url).subscribe(res => {
         resolve(res);
       }, error => {
         reject(error);
       });
     });
   }
-  elicitas($id) {
-    let  url = 'http://127.0.0.1:8000/api/Cita/'+$id;
+
+  citas(especialidad:string,fecha:string) {
+    let  url = 'http://127.0.0.1:8000/api/citasMGandRF/'+especialidad+'/'+fecha;
     return new Promise ((resolve, reject) => {
-      this.http.delete(url).subscribe(res => {
+      this.http.get(url).subscribe(res => {
         resolve(res);
       }, error => {
         reject(error);

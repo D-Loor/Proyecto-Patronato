@@ -26,8 +26,8 @@ class CitaController extends Controller
 
     }
 
-    public function validarMGandRF($especialidad){
-        $datos=Cita::where('especialidad', $especialidad)->get()->all();
+    public function validarMGandRF($especialidad,$fechaActual){
+        $datos=Cita::where('especialidad', $especialidad)->where('fecha',$fechaActual)->get()->all();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else

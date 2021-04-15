@@ -12,7 +12,7 @@ import { CitasService } from '../../../servicios/citas.service';
 })
 export class CitasComponent implements OnInit {
 
-  constructor(public citas:CitasService, public rutas:Router) { }
+  constructor(public citasser:CitasService, public rutas:Router) { }
 
   isCollapsedMG = false;
   isCollapsedRF = false;
@@ -27,15 +27,18 @@ export class CitasComponent implements OnInit {
   CitasRF:any[];
   citasTotalRF:any[];
 
+  today = new Date();
+  fechaActual:string;
 
   ngOnInit(): void {
-    this.cargarRF("Rehabilitacion Fisica");
-    this.cargarMG("Medicina General");
+    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+    this.cargarRF("RehabilitaciónFísica",this.fechaActual);
+    this.cargarMG("MedicinaGeneral",this.fechaActual);
 
   }
 
-  cargarMG(especialidad:string){
-    this.citas.citas(especialidad).then(data =>{
+  cargarMG(especialidad:string,fechaActual:string){
+    this.citasser.citas(especialidad,fechaActual).then(data =>{
       this.CitasMG=data['result'];
     this.citasTotalMG = this.CitasMG.slice(0, 10);
     }).catch(error =>{
@@ -46,7 +49,7 @@ export class CitasComponent implements OnInit {
   citasEliminarMG:any[];
   eliminarMG(id:string) {
     debugger
-    this.citas.elicitas(id).then(data => {
+    this.citasser.elicitas(id).then(data => {
         this.citasEliminarMG=data['result'];
       })
       .catch((error) => {
@@ -56,8 +59,8 @@ export class CitasComponent implements OnInit {
 
 
 
-  cargarRF(especialidad:string){
-    this.citas.citas(especialidad).then(data =>{
+  cargarRF(especialidad:string,fechaActual:string){
+    this.citasser.citas(especialidad,fechaActual).then(data =>{
     this.CitasRF=data['result'];
     debugger
     this.citasTotalRF = this.CitasRF.slice(0, 10);
@@ -69,7 +72,7 @@ export class CitasComponent implements OnInit {
   citasEliminarRF:any[];
   eliminarRF(id:string) {
     debugger
-    this.citas.elicitas(id).then(data => {
+    this.citasser.elicitas(id).then(data => {
         this.citasEliminarRF=data['result'];
       })
       .catch((error) => {
@@ -102,10 +105,10 @@ export class CitasComponent implements OnInit {
       if (result.isConfirmed) {
         if(especialidad=="MG"){
           this.eliminarMG(id);
-          this.cargarMG("Medicina General");
+          this.cargarMG("MedicinaGeneral",this.fechaActual);
         }else{
           this.eliminarRF(id);
-          this.cargarMG("Rehabilitacion Fisica");
+          this.cargarMG("RehabilitaciónFísica",this.fechaActual);
         }
 
         swalWithBootstrapButtons.fire(
