@@ -33,43 +33,14 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   cargar(especialidad:string){
     this.citas.citas(especialidad).then(data =>{
     this.Citas=data['result'];
-    this.validar();
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
   }
-  validar(){
-
-    for (let x in this.Citas){
-      this.ValidarAntecedentes(this.Citas[x]["cedula"],this.Citas[x]["nombres"],this.Citas[x]["hora"]);
-      console.log(this.Valida);
-      console.log(this.Citas);
-    }
-
-
-  }
   // for (var item in this.Citas){
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
   //  }
-
-  ValidarAntecedentes(cedula:string, nombre:string, hora:string){
-
-    this.medicina.PacientesAntecedentes(cedula).then(data =>{
-      this.validacion=data['code'];
-
-      if(this.validacion=='201'){
-
-        this.Valida.push({ "valor":1,"nombres":nombre,"cedula":cedula,"hora":hora});
-
-      }else
-      this.Valida.push({ "valor":0,"nombres":nombre,"cedula":cedula,"hora":hora});
-     }).catch(error =>{
-
-        console.log(error);
-    });
-
-  }
 
   citasEliminar:any[];
   eliminar(id:string) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cita;
 use Illuminate\Http\Request;
+use App\Models\Paciente;
 
 class CitaController extends Controller
 {
@@ -57,8 +58,13 @@ class CitaController extends Controller
         $datos->especialidad=$request->especialidad;
         $datos->fecha=$request->fecha;
         $datos->hora=$request->hora;
+        $datosP=Paciente::where('cedula', $request->cedula)->get()->first();
+        if($datosP != null){
+            $datos->estado=1;
+        }else{
+            $datos->estado=0;
+        }
         $datos->save();
-
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 

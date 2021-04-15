@@ -114,6 +114,7 @@ class DatabaseSeeder extends Seeder
             'especialidad' => 'RehabilitaciónFísica',
             'fecha' => Carbon::parse('2001-03-09'),
             'hora' => Str::random(10),
+            'estado' => Str::random(10),
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);

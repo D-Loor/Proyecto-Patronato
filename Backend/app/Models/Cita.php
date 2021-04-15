@@ -12,6 +12,6 @@ class Cita extends Model
     protected $table = 'citas';
     protected $primaryKey = 'id_cita';
     protected $fillable = [
-         'nombres',  'cedula',  'especialidad',  'fecha', 'hora',
+         'nombres',  'cedula',  'especialidad',  'fecha', 'hora','estado',
     ];
 }

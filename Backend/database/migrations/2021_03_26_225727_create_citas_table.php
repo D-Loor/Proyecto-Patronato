@@ -20,6 +20,7 @@ class CreateCitasTable extends Migration
             $table->string('especialidad');
             $table->date('fecha');
             $table->string('hora');
+            $table->string('estado');
         });
     }
 
