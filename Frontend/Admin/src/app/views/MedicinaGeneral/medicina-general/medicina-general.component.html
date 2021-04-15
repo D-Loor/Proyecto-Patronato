@@ -43,14 +43,17 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of pacientesTotal">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{item.paciente.cedula}}</td>
+                  <td>{{item.paciente.nombres}}</td>
+                  <td>{{item.paciente.apellidas}}</td>
+                  <td>{{item.paciente.edad}}</td>
                   <td>{{item.fecha}}</td>
-                  <td></td>
+                  <td>{{item.enfermedad}}</td>
                   <td>{{item.lugar_atencion}}</td>
-                  <td></td>
+                  <td>
+                    <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
+                    <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
+                  </td>
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"><i
                         class="fa fa-stethoscope"></i>&nbsp;Atender</button>
@@ -77,7 +80,7 @@
 
 </div>
 
-<div bsModal #Principal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div  bsModal #Principal="bs-modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -86,12 +89,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div >
 
-        <div class="col-md-12 mb-4">
+        <div class="col-md-12 mb-4" >
           <!-- Nav tabs -->
-          <tabset>
-            <tab>
+          <tabset >
+            <tab class="modal-body">
               <ng-template tabHeading><i class="icon-user"></i> Datos de Afiliación</ng-template>
 
               <div class="card">
@@ -254,7 +257,7 @@
                     </div>
               </div>
             </tab>
-            <tab>
+            <tab class="modal-body">
               <ng-template tabHeading><i class="icon-note"></i> Antecedentes Patológicos </ng-template>
               <div class="card">
 
@@ -453,7 +456,7 @@
                     </div>
               </div>
            </tab>
-            <tab>
+            <tab class="modal-body">
               <ng-template tabHeading><i class="icon-book-open"></i> Exámenes</ng-template>
               <div class="card">
 
