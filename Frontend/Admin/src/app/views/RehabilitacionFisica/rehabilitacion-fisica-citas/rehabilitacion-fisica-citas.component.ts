@@ -18,8 +18,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   especialidad:string="RehabilitaciónFísica";
   public sidebarMinimized = false;
   public navItems = navItems;
-  Citas:any[];
-  citasTotal:any[];
+  citasRF:any[];
+  citasRFPaginate:any[];
   today = new Date();
   fechaActual:string;
   ngOnInit(): void {
@@ -31,8 +31,9 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   cargar(especialidad:string,fechaActual:string){
     debugger
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-      this.Citas=data['result'];
-    this.citasTotal = this.Citas.slice(0, 10);
+      this.citasRF=data['result'];
+    this.citasRFPaginate = this.citasRF.slice(0, 10);
+    debugger
     }).catch(error =>{
       console.log(error);
   });
@@ -96,14 +97,14 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.citasTotal = this.Citas.slice(startItem, endItem);
+    this.citasRFPaginate = this.citasRF.slice(startItem, endItem);
     debugger
   }
 
   ngOnDestroy(): void{
     debugger
-    this.Citas = null;
-    this.citasTotal = null;
+    this.citasRFPaginate = null;
+    this.citasRF = null;
   }
 
 }

@@ -313,7 +313,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotal | filtro:buscar" >
+              <tr *ngFor="let item of citasMGPaginate | filtro:buscar" >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.hora}}</td>
@@ -336,7 +336,7 @@
             </tbody>
           </table>
           <nav>
-            <pagination  [totalItems]="citasTotal.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination  [totalItems]="citasMG.length" (pageChanged)="pageChanged($event)"></pagination>
           </nav>
         </div>
        </div>

@@ -31,17 +31,17 @@ export class MedicinaGeneralComponent implements OnInit {
 
 
 
-  dataFechaFiltro;
-  pacientes:any[];
-  pacientesTotal:any[];
+ 
+  historialMG:any[];
+  historialMGPaginate:any[];
 
   ngOnInit(): void {
     this.cargar();
   }
 
   cargar(){this.medicina_general.historiasClinicasMg().then(data =>{
-    this.pacientes=data['result']['data'];
-    this.pacientesTotal = this.pacientes.slice(0, 10);
+    this.historialMG=data['result']['data'];
+    this.historialMGPaginate = this.historialMG.slice(0, 10);
     debugger
   }).catch(error =>{
     console.log(error);
@@ -49,23 +49,20 @@ export class MedicinaGeneralComponent implements OnInit {
 
   }
 
-  fechaFiltre(event){
-    this.dataFechaFiltro;
-    debugger
-  }
+
 
   pageChanged(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.pacientesTotal = this.pacientes.slice(startItem, endItem);
+    this.historialMGPaginate = this.historialMG.slice(startItem, endItem);
     debugger
   }
 
   ngOnDestroy(): void{
     debugger
-    this.pacientes = null;
-    this.pacientesTotal = null;
+    this.historialMG = null;
+    this.historialMGPaginate = null;
   }
 
 }

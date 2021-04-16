@@ -16,16 +16,17 @@ export class PacientesComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   search="";
+  pacien="";
   dataFechaFiltro;
-  pacientesTotal:any[];
-  pacientesTotalTotal:any[];
+  pacientesMG:any[];
+  pacientesMGPaginate:any[];
   ngOnInit(): void {
     this.cargar();
   }
 
   cargar(){this.medicina_general.pacientes().then(data =>{
-    this.pacientesTotal=data['result'];
-    this.pacientesTotalTotal = this.pacientesTotal.slice(0, 10);
+    this.pacientesMG=data['result'];
+    this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
     debugger
   }).catch(error =>{
     console.log(error);
@@ -34,7 +35,12 @@ export class PacientesComponent implements OnInit {
   }
 
   fechaFiltre(event){
-    this.dataFechaFiltro;
+    this.pacien;
+    debugger
+  }
+
+  dataPaginate(event){
+    this.pacien;
     debugger
   }
 
@@ -42,14 +48,14 @@ export class PacientesComponent implements OnInit {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.pacientesTotalTotal = this.pacientesTotal.slice(startItem, endItem);
+    this.pacientesMGPaginate = this.pacientesMG.slice(startItem, endItem);
     debugger
   }
 
   ngOnDestroy(): void{
     debugger
-    this.pacientesTotal = null;
-    this.pacientesTotalTotal = null;
+    this.pacientesMG = null;
+    this.pacientesMGPaginate = null;
   }
 
 }

@@ -154,7 +154,7 @@ class DatabaseSeeder extends Seeder
             'id_patologico' => 1,
             'id_e_organo_sistema' => 1,
             'id_e_complementario' => 1,
-            'cedula' => Str::random(10),
+            'cedula' => '1314567908',
             'nombres' => Str::random(10),
             'apellidas' => Str::random(10),
             'edad' => 25,

@@ -10,7 +10,7 @@
           <div class="col-md-4 searcht">
             <div class="input-group">
               <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.."
-                [(ngModel)]="search">
+                [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
               <span class="input-group-prepend">
                 <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
               </span>
@@ -36,7 +36,29 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of pacientesTotalTotal | filtro:search">
+              <ng-container *ngIf="search == ''; else filtro2">
+                <tr *ngFor="let item of pacientesMGPaginate ">
+                  <td>{{item.cedula}}</td>
+                  <td>{{item.nombres}}</td>
+                  <td>{{item.apellidas}}</td>
+                  <td>{{item.sexo}}</td>
+                  <td>{{item.edad}}</td>
+                  <td>{{item.residencia}}</td>
+                  <td>
+                    <button type="button" class="btn btn-ghost-info botont"><i
+                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                    <button type="button" class="btn btn-ghost-success botont"><i
+                        class="fa fa-eye"></i>&nbsp;Consultas</button>
+                    <button type="button" class="btn btn-ghost-danger botont"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                  </td>
+                </tr>
+              </ng-container>
+              
+            <ng-template #filtro2>
+              <tr  *ngFor="let item of pacientesMG | filtro:search">
+               
+                
                 <td>{{item.cedula}}</td>
                 <td>{{item.nombres}}</td>
                 <td>{{item.apellidas}}</td>
@@ -52,12 +74,11 @@
                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                 </td>
               </tr>
-
-
+            </ng-template>
             </tbody>
           </table>
           <nav>
-            <pagination [totalItems]="pacientesTotal.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination [totalItems]="" (pageChanged)="pageChanged($event)"></pagination>
           </nav>
         </div>
 

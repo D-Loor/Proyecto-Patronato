@@ -23,8 +23,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   validacion:string;
   public sidebarMinimized = false;
   public navItems = navItems;
-  Citas:any[];
-  citasTotal:any[];
+  citasMG:any[];
+  citasMGPaginate:any[];
   Valida=[];
   today = new Date();
   fechaActual:string;
@@ -37,8 +37,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   cargar(){
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
-    this.Citas=data['result'];
-    this.citasTotal = this.Citas.slice(0, 10);
+    this.citasMG=data['result'];
+    this.citasMGPaginate = this.citasMG.slice(0, 10);
+    debugger
     }).catch(error =>{
       console.log(error);
   });
@@ -104,13 +105,14 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.Valida = this.Citas.slice(startItem, endItem);
+    this.citasMGPaginate = this.citasMG.slice(startItem, endItem);
+    debugger
   }
 
   ngOnDestroy(): void{
-    this.Citas = null;
+    this.citasMG = null;
     this.Valida = null;
-    this.citasTotal = null;
+    this.citasMGPaginate = null;
   }
 
   ConsultarPaciente(){

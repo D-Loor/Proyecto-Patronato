@@ -16,7 +16,7 @@ export class FiltroPipe implements PipeTransform {
       };
 
      };
-
+     debugger
      return resultado;
 
   }

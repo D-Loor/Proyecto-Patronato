@@ -18,16 +18,16 @@ export class RehabilitacionFisicaComponent implements OnInit {
   public navItems = navItems;
   search="";
   
-  pacientesTotal:any[];
-  pacientesTotalTotal:any[];
+  historialRF:any[];
+  historialRFPaginate:any[];
   ngOnInit(): void {
     this.cargar();
   }
 
   cargar(){this.historial.historialrf().then(data =>{
     debugger
-    this.pacientesTotal=data['result']['data'];
-    this.pacientesTotalTotal = this.pacientesTotal.slice(0, 10);
+    this.historialRF=data['result']['data'];
+    this.historialRFPaginate = this.historialRF.slice(0, 10);
     debugger
   }).catch(error =>{
     console.log(error);
@@ -45,14 +45,14 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
     const endItem = event.page * event.itemsPerPage;
 
-    this.pacientesTotalTotal = this.pacientesTotal.slice(startItem, endItem);
+    this.historialRFPaginate = this.historialRF.slice(startItem, endItem);
 
   }
 
   ngOnDestroy(): void{
 
-    this.pacientesTotal = null;
-    this.pacientesTotalTotal = null;
+    this.historialRFPaginate = null;
+    this.historialRF = null;
   }
 
 }
