@@ -573,10 +573,9 @@
                                 <div class="form-group">
                                     <label class="label-co"> Ingrese su cédula de identidad *</label>
                                     <div class="input-group">
-                                        
-                                        <input type="number"   onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
+                                        <input type="number"  class="form-control  form-input" onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
                                             required autocomplete="off"
-                                            data-validation-required-message="Escriba su cédula de identidad.">
+                                            data-validation-required-message="Escriba su cédula de identidad." >
                                         <span class="input-group-addon" id="basic-addon1" >
                                             <i class="fa fa-check fa-2x" id="vcedula"></i>'
                                         </span>
