@@ -13,12 +13,12 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 export class MedicinaGeneralCitasComponent implements OnInit {
 
 
-  constructor(public citas:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
+  constructor(public citasser:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
 
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
-  especialidad:string="Medicina General";
+  especialidad:string="MedicinaGeneral";
   Estado:number=1;
   validacion:string;
   public sidebarMinimized = false;
@@ -26,12 +26,17 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   Citas:any[];
   citasTotal:any[];
   Valida=[];
+  today = new Date();
+  fechaActual:string;
+  
+  
   ngOnInit(): void {
-    this.cargar(this.especialidad);
+    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+    this.cargar();
   }
 
-  cargar(especialidad:string){
-    this.citas.citas(especialidad).then(data =>{
+  cargar(){
+    this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.Citas=data['result'];
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
@@ -44,7 +49,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   citasEliminar:any[];
   eliminar(id:string) {
-    this.citas.elicitas(id).then(data => {
+    this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
       })
       .catch((error) => {
@@ -76,7 +81,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.eliminar(id);
-        this.cargar(this.especialidad);
+        this.cargar();
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
@@ -105,7 +110,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   ngOnDestroy(): void{
     this.Citas = null;
     this.Valida = null;
-
     this.citasTotal = null;
   }
 

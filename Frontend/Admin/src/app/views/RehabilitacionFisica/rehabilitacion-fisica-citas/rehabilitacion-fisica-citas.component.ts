@@ -11,7 +11,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class RehabilitacionFisicaCitasComponent implements OnInit {
 
-  constructor(public citas:CitasService, public rutas:Router) { }
+  constructor(public citasser:CitasService, public rutas:Router) { }
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
@@ -21,14 +21,16 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   Citas:any[];
   citasTotal:any[];
   today = new Date();
-  fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+  fechaActual:string;
   ngOnInit(): void {
+    
+    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar(this.especialidad,this.fechaActual);
   }
 
   cargar(especialidad:string,fechaActual:string){
     debugger
-    this.citas.citas(especialidad).then(data =>{
+    this.citasser.citas(especialidad,fechaActual).then(data =>{
       this.Citas=data['result'];
     this.citasTotal = this.Citas.slice(0, 10);
     }).catch(error =>{
@@ -39,7 +41,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   citasEliminar:any[];
   eliminar(id:string) {
     debugger
-    this.citas.elicitas(id).then(data => {
+    this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
       })
       .catch((error) => {
