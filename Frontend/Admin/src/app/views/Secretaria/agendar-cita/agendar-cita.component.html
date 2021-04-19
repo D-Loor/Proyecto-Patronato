@@ -6,51 +6,51 @@
 
                   <div class="card-header">
                       <i class="icon-user-follow"></i>
-                          <strong>Datos de la consulta</strong>
+                          <strong>Angendar Cita</strong>
                   </div>
 
                           <div class="card-body">
                               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                  <div class="form-group row">
-                                      <div class="col-md-12">
-                                          <label for="text-input">Nombres</label>
-                                          <input  autocomplete="off" required type="text" id="nombres"   [(ngModel)]="nombres" name="nombres" class="form-control" placeholder="Ingrese los nombres completos">
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="form-group col-sm-6">
-                                          <label for="text-input">Ocupación</label>
-                                          <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación">
-                                      </div>
-                                      <div class="form-group col-sm-2">
-                                          <label for="text-input">Edad</label>
-                                          <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
-                                      </div>
-                                      <div class="form-group col-sm-4">
-                                          <label for="inline-radios">Lugar de atención</label>
-                                              <div class="col-md-8 col-form-label">
-                                                  <div class="form-check form-check-inline mr-1">
-                                                  <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
-                                                  <label class="form-check-label" for="inlineRadio1">Patronato</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mr-1">
-                                                  <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
-                                                  <label class="form-check-label" for="inlineRadio3">Domicilio</label>
-                                                  </div>
-                                              </div>
-                                      </div>
-                                    </div><!--/.row-->
-
-
-                                      <div class="form-group ">
-                                          <div class="col-md-9 col-form-label">
-                                            <div class="form-check form-check-inline mr-1">
-                                              <input class="form-check-input" type="checkbox" id="certificado" name="certificado" value="Si">
-                                              <label class="form-check-label" for="inline-checkbox1">Se entregó certificado</label>
+                                    <div class="row">
+                                        <div class=" form-group col-md-6">
+                                            <label for="text-input">Nombres</label>
+                                            <input  autocomplete="off" required type="text" id="nombres"   [(ngModel)]="nombres" name="nombres" class="form-control" placeholder="Ingrese los nombres completos">
+                                        </div>           
+                                        <div class=" form-group col-md-6">
+                                            <label for="date-input">Fecha de nacimiento</label>
+                                            <input required class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento">
+                                        </div>                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="text-input">Cédula</label>
+                                                    <div class="input-group">
+                                                        <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
+                                                        <span class="input-group-append">
+                                                            <button type="button" class="btn btn-primary">Consultar</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                          </div>
-                                        </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="text-input">Especialidad</label>
+                                                    <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo" required>
+                                                        <option value="Medicina General">Medicina General</option>
+                                                        <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
+                                                    </select>
+                                                </div>
+                                            </div>        
+                                        </div>     
+                                        <div class="form-group col-md-6">
+                                            <label for="date-input"> Seleccione la hora de consulta</label>
+                                            <select  class="form-control sel-opcion" size="5" multiple aria-label=" multiple select example" name="hora" id="hora" required>
+                                                
+                                            </select>
+                                        </div>                                  
+                                    </div>
 
                                       <button type="submit" class="btn btn-lg btn-primary boto">Registrar Consulta</button>
                               </form>

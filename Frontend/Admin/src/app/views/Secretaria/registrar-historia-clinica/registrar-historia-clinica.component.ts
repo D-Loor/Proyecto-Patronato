@@ -74,7 +74,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
-    if (cedula.length === 10) {
+    
+    if(cedula.length === 9 || cedula === "undefined" ||  cedula === "null"){
+      this.ClaseCdula="form-control form-input select-number"; 
+    }
+
+    else if (cedula.length === 10) {
   
       // Obtenemos el digito de la region que sonlos dos primeros digitos
       const digitoRegion = cedula.substring(0, 2);
