@@ -58,7 +58,6 @@
             <ng-template #filtro2>
               <tr  *ngFor="let item of pacientesMG | filtro:search">
                
-                
                 <td>{{item.cedula}}</td>
                 <td>{{item.nombres}}</td>
                 <td>{{item.apellidas}}</td>
@@ -78,7 +77,8 @@
             </tbody>
           </table>
           <nav>
-            <pagination [totalItems]="" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="search==''" [totalItems]="pacientesMG.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="search!=''" [totalItems]="pacientesMG.length | filtro:search" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
           </nav>
         </div>
 

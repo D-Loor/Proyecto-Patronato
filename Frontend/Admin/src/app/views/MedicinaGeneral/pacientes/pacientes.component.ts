@@ -52,6 +52,11 @@ export class PacientesComponent implements OnInit {
     debugger
   }
 
+  pageChangedFiltro(event: PageChangedEvent,pacientesFiltro:any[]) :void{
+    pacientesFiltro;
+    debugger
+  }
+
   ngOnDestroy(): void{
     debugger
     this.pacientesMG = null;
