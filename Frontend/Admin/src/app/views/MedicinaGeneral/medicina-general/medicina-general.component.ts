@@ -35,14 +35,14 @@ export class MedicinaGeneralComponent implements OnInit {
   historialMG:any[];
   historialMGPaginate:any[];
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.cargar();
   }
 
-  cargar(){this.medicina_general.historiasClinicasMg().then(data =>{
+  cargar(){
+    this.medicina_general.historiasClinicasMg().then(data =>{
     this.historialMG=data['result']['data'];
     this.historialMGPaginate = this.historialMG.slice(0, 10);
-    debugger
   }).catch(error =>{
     console.log(error);
 });
@@ -60,9 +60,13 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    debugger
     this.historialMG = null;
     this.historialMGPaginate = null;
+  }
+  
+  DatosPaciente(cedula:string){
+   this.Principal.show();
+
   }
 
 }

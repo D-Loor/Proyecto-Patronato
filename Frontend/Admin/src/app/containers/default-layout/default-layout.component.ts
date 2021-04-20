@@ -13,15 +13,18 @@ export class DefaultLayoutComponent implements OnInit {
 
   public sidebarMinimized = false;
   public navItems = navItems;
-  @Input () usuario: string;
-  Usuario:string="Como estas";
+ 
+  id:string=localStorage.getItem('sesionLogin');
+  usuario:any [];
+  Nombre:string;
+  Imagen:string;
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
   ngOnInit() {
-
+    this.user();
   }
 
   salir(){
@@ -29,5 +32,16 @@ export class DefaultLayoutComponent implements OnInit {
     localStorage.removeItem('sesionLoginInicio');
     this.rutas.navigate(['/login']);
   }
+
+  user(){
+    this.login.Usuario(this.id).then(data =>{
+      this.usuario=data['result'];
+      this.Nombre=this.usuario['nombres'];
+      this.Imagen=this.usuario['imagen'];
+    }).catch(error =>{
+      console.log(error);
+  });
+  }
+
 
 }

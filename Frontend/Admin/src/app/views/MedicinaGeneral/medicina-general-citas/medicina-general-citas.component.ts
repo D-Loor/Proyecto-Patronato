@@ -18,7 +18,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   buscar:string="";
-  especialidad:string="MedicinaGeneral";
+  especialidad:string="Medicina General";
   Estado:number=1;
   validacion:string;
   public sidebarMinimized = false;
@@ -26,6 +26,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   citasMG:any[];
   citasMGPaginate:any[];
   Valida=[];
+  citasEliminar:any[];
   today = new Date();
   fechaActual:string;
   
@@ -39,7 +40,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
-    debugger
     }).catch(error =>{
       console.log(error);
   });
@@ -48,7 +48,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
   //  }
 
-  citasEliminar:any[];
+  
   eliminar(id:string) {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
@@ -106,7 +106,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasMGPaginate = this.citasMG.slice(startItem, endItem);
-    debugger
   }
 
   ngOnDestroy(): void{
@@ -115,11 +114,15 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGPaginate = null;
   }
 
-  ConsultarPaciente(){
+  ConsultarPaciente(cedula:string){
     this.rutas.navigate(['/medicinageneralconsultas']);
+    localStorage.setItem('cedulaMG', cedula);
   }
   HistoriaPaciente(){
     this.rutas.navigate(['/medicinageneral']);
+  }
+  CrearHistoriaClinica(){
+    this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 
 }

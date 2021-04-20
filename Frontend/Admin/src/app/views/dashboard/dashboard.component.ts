@@ -385,6 +385,5 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
     
-    console.log('id',localStorage.getItem('sesionLogin'));
   }
 }

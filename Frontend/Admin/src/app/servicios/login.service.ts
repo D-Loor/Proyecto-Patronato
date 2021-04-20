@@ -19,7 +19,7 @@ export class LoginService {
   }
 
   Usuario(id:string) {
-    let  url = 'http://127.0.0.1:8000/api/login/'+id;
+    let  url = 'http://127.0.0.1:8000/api/Cuentas/'+id;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);

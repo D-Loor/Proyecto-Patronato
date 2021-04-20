@@ -41,12 +41,19 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
+        $file=$request->file('Aqui va el ID');
+        $nombre=$file->getClientMimeType();
+        $tipoImagen=str_replace('image/', '.',$nombre);
+        $fileName=uniqid() . $tipoImagen;
+        $path=public_path().'/imagenes';
+        $file->move($path,$fileName);
+
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$request->imagen;
+        $datos->imagen=$fileName;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
@@ -86,12 +93,20 @@ class CuentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Cuenta::where('id_cuenta', $id)->get()->first(); 
+        $datos=Cuenta::where('id_cuenta', $id)->get()->first();
+
+        $file=$request->file('Aqui va el ID');
+        $nombre=$file->getClientMimeType();
+        $tipoImagen=str_replace('image/', '.',$nombre);
+        $fileName=uniqid() . $tipoImagen;
+        $path=public_path().'/imagenes';
+        $file->move($path,$fileName); 
+
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$request->imagen;
+        $datos->imagen=$fileName;
         $datos->update();
         
         return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);

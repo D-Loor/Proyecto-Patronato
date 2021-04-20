@@ -156,7 +156,7 @@ class DatabaseSeeder extends Seeder
             'id_e_complementario' => 1,
             'cedula' => '1314567908',
             'nombres' => Str::random(10),
-            'apellidas' => Str::random(10),
+            'apellidos' => Str::random(10),
             'edad' => 25,
             'sexo' => Str::random(10),
             'gad' => false,

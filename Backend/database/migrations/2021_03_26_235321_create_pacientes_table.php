@@ -21,7 +21,7 @@ class CreatePacientesTable extends Migration
             $table->unsignedBigInteger('id_e_complementario');
             $table->string('cedula');
             $table->string('nombres');
-            $table->string('apellidas');
+            $table->string('apellidos');
             $table->integer('edad');
             $table->string('sexo');
             $table->boolean('gad');
