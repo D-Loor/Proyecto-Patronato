@@ -14,7 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos=Paciente::all(); 
+        $datos=Paciente::with('historias_clinicas_mg')->paginate(2); 
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -23,6 +23,15 @@ class PacienteController extends Controller
             return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
+    public function pacienteindex(){
+        $datos=Paciente::all(); 
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos]);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
+    }
     /**
      * Show the form for creating a new resource.
      *

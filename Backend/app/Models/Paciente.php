@@ -15,4 +15,11 @@ class Paciente extends Model
      protected $fillable = [
         'id_patologico',  'id_e_fisico',  'id_e_organo_sistema',  'id_e_complementario','cedula', 'nombres',  'apellidos',  'edad',  'sexo', 'gad', 'ocupacion',  'residencia', 'procedencia', 'estado_civil', 'raza', 'religion', 'fecha_nacimiento', 'nivel_instruccion',
     ];
+    
+    public function historias_clinicas_mg(){
+       return $this->hasMany('App\Models\Historia_Clinica_MG','id_paciente');
+    }
+    public function historias_clinicas_rf(){
+        return $this->hasMany('App\Models\Historia_Clinica_MG','id_paciente');
+     }
 }

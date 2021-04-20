@@ -16,8 +16,8 @@ class HistoriaClinicaMGController extends Controller
     public function index()
     {
         //$datos=Historia_Clinica_MG::all();
-        $datos=Historia_Clinica_MG::with('paciente')->simplePaginate(1000);
-        $num_rows = count($datos);
+        $datos=Historia_Clinica_MG::with('paciente')->Paginate(1000);
+        $num_rows = count($datos); 
 
         if($num_rows!=0){
             return response()->json(['result'=>$datos]);

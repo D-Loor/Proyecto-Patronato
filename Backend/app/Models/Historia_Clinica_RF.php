@@ -16,7 +16,7 @@ class Historia_Clinica_RF extends Model
     ];
 
     public function paciente(){
-       return $this->hasOne('App\Models\Paciente','id_paciente','id_rf');
+       return $this->belongsTo('App\Models\Paciente','id_paciente');
     }
 
 }

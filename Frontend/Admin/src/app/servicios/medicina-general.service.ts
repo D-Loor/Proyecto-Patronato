@@ -18,6 +18,17 @@ export class MedicinaGeneralService {
       });
     });
   }
+
+  pacientesIndex() {
+    let  url = 'http://127.0.0.1:8000/api/PacienteIndex';
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
   
   enfermedad() {
     let  url = 'http://127.0.0.1:8000/api/Enfermedad';
@@ -53,7 +64,7 @@ export class MedicinaGeneralService {
       });
     });
   }
-
+ 
   
 
 }
