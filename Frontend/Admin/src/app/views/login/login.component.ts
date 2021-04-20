@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    sessionStorage.removeItem('sesionLogin');
+    //localStorage.removeItem('sesionLogin');
   }
 
   
@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'OK'
           })
         }else{
-          sessionStorage.setItem('sesionLogin', 'true');
+          localStorage.setItem('sesionLogin', data['result'][0].id_cuenta);
+          localStorage.setItem('sesionLoginInicio', 'true');
           this.arraydat=data['result'];
           this.rutas.navigate(['/dashboard']);
           Swal.fire({

@@ -24,8 +24,9 @@ export class DefaultLayoutComponent implements OnInit {
 
   }
 
-  Salir(){
-    //sessionStorage.removeItem('sesionLogin');
+  salir(){
+    localStorage.removeItem('sesionLogin');
+    localStorage.removeItem('sesionLoginInicio');
     this.rutas.navigate(['/login']);
   }
 
