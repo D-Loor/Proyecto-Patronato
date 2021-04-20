@@ -28,6 +28,8 @@ export class MedicinaGeneralComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
+  apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
+  sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string;
 
 
 
@@ -65,8 +67,25 @@ export class MedicinaGeneralComponent implements OnInit {
   }
   
   DatosPaciente(cedula:string){
-   this.Principal.show();
+    this.Principal.show();
+    this.medicina_general.PacientesAntecedentes(cedula).then(data =>{
+    this.apellidos=data['result'].apellidos;
+    this.nombres=data['result'].nombres;
+    this.cedula=data['result'].cedula;
+    this.edad=data['result'].edad;
+    this.ocupacion=data['result'].ocupacion;
+    this.sexo=data['result'].sexo;
+    this.Lresidencia=data['result'].residencia;
+    this.Lprocedencia=data['result'].procedencia;
+    this.fechanacimiento=data['result'].fecha_nacimiento;
+    this.raza=data['result'].raza;
+    this.religion=data['result'].religion;
+    this.nivel_instruccion=data['result'].nivel_instruccion;
+    this.estado_civil=data['result'].estado_civil;
 
+  }).catch(error =>{
+    console.log(error);
+});
   }
 
 }
