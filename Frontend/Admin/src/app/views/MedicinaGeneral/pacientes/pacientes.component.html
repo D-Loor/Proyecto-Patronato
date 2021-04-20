@@ -20,7 +20,7 @@
           </div>
 
         </div>
-
+ 
 
         <div class="card-body">
           <table class="table table-bordered table-striped table-sm">
@@ -56,7 +56,7 @@
               </ng-container>
               
             <ng-template #filtro2>
-              <tr  *ngFor="let item of pacientesMG | filtro:search">
+              <tr  *ngFor="let item of pacientesMGPaginateFilter">
                
                 <td>{{item.cedula}}</td>
                 <td>{{item.nombres}}</td>
@@ -78,7 +78,7 @@
           </table>
           <nav>
             <pagination *ngIf="search==''" [totalItems]="pacientesMG.length" (pageChanged)="pageChanged($event)"></pagination>
-            <pagination *ngIf="search!=''" [totalItems]="pacientesMG.length | filtro:search" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
+            <pagination *ngIf="search!=''" [totalItems]="pacientesMGFilter.length" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
           </nav>
         </div>
 
