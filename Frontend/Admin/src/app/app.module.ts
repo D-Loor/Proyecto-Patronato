@@ -61,6 +61,7 @@ import { RehabilitacionFisicaCitasModule } from './views/RehabilitacionFisica/re
 import { CitasModule } from './views/Secretaria/citas/citas.module';
 import { RegistrarHistoriaClinicaModule } from './views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module';
 import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.module';
+import { PrincipalComponent } from './views/principal/principal.component';
 
 
 
@@ -107,6 +108,7 @@ import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.
     P500Component,
     LoginComponent,
     RegisterComponent,
+    PrincipalComponent,
 
   ],
   providers: [

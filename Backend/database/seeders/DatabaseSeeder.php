@@ -107,13 +107,20 @@ class DatabaseSeeder extends Seeder
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
+        DB::table('turnos')->insert(
+            ['hora' => "08:00 AM",], ['hora' => "08:20 AM",], ['hora' => "08:40 AM",], ['hora' => "09:00 AM",], ['hora' => "09:20 AM",],
+            ['hora' => "09:40 AM",], ['hora' => "10:00 AM",], ['hora' => "10:20 AM",], ['hora' => "10:40 AM",], ['hora' => "11:00 AM",],
+            ['hora' => "11:20 AM",], ['hora' => "11:40 AM",], ['hora' => "12:00 PM",], ['hora' => "12:20 PM",], ['hora' => "02:00 PM",],
+            ['hora' => "02:20 PM",], ['hora' => "02:40 PM",], ['hora' => "03:00 PM",],['hora' => "03:20 PM",], ['hora' => "03:40 PM",],
+
+        );
 
         DB::table('citas')->insert([
             'nombres' => Str::random(10),
             'cedula' => Str::random(10),
             'especialidad' => 'RehabilitaciónFísica',
             'fecha' => Carbon::parse('2001-03-09'),
-            'hora' => Str::random(10),
+            'hora' => 1,
             'estado' => Str::random(10),
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
@@ -128,8 +135,8 @@ class DatabaseSeeder extends Seeder
         DB::table('cuentas')->insert([
             "id_rol" => 1,
             "nombres" => "Fisioterapista",
-            "correo" => Str::random(10).'@gmail.com',
-            "password" => Str::random(10),
+            "correo" => "q",
+            "password" => "q",
             "imagen" => Str::random(10),
         ]);
 

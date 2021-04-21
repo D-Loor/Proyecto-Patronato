@@ -15,12 +15,13 @@ class CreateCitasTable extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->bigIncrements('id_cita');
+            $table->unsignedBigInteger('id_turno');
             $table->string('nombres');
             $table->string('cedula');
             $table->string('especialidad');
             $table->date('fecha');
-            $table->string('hora');
             $table->string('estado');
+            $table->foreign('id_turno')->references('id_turno')->on('turnos')->onDelete('cascade');
         });
     }
 
