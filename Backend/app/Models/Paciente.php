@@ -20,6 +20,10 @@ class Paciente extends Model
        return $this->hasMany('App\Models\Historia_Clinica_MG','id_paciente');
     }
     public function historias_clinicas_rf(){
-        return $this->hasMany('App\Models\Historia_Clinica_MG','id_paciente');
+        return $this->hasMany('App\Models\Historia_Clinica_RF','id_paciente');
+     }
+
+     public function habitos(){
+        return $this->belongsToMany('App\Models\Habito','habito_pacientes','id_paciente','id_habito');
      }
 }

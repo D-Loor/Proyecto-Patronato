@@ -17,9 +17,10 @@ class CreateHabitoPacientesTable extends Migration
             $table->bigIncrements('id_habito_paciente');
             $table->unsignedBigInteger('id_habito');
             $table->unsignedBigInteger('id_paciente');
-
-            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
+            
             $table->foreign('id_habito')->references('id_habito')->on('habitos')->onDelete('cascade');
+            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
+           
         });
     }
 

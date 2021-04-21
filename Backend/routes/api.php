@@ -37,10 +37,10 @@ Route::resource('HabitosPaciente','HabitoPacienteController');
 Route::resource('Habitos','HabitoController'); 
 Route::resource('Roles','RoleController'); 
 Route::resource('Cuentas','CuentaController'); 
+
+
 Route::get('login/{correo}/{pass}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
-
-Route::get('PacienteIndex','PacienteController@pacienteindex');
 Route::post('agendarCita','CitaController@store'); 
 Route::get('validarHora/{fecha}', 'CitaController@validarHora');
 Route::get('filtroFecha/{fecha}', 'PacienteController@filtro');

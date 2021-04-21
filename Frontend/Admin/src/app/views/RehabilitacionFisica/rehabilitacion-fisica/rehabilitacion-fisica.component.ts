@@ -26,7 +26,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
   cargar(){this.historial.historialrf().then(data =>{
     debugger
-    this.historialRF=data['result']['data'];
+    this.historialRF=data['result'];
     this.historialRFPaginate = this.historialRF.slice(0, 10);
     debugger
   }).catch(error =>{

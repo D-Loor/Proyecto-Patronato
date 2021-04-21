@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historia_Clinica_MG;
-
 use Illuminate\Http\Request;
 
 class HistoriaClinicaMGController extends Controller
@@ -16,7 +15,7 @@ class HistoriaClinicaMGController extends Controller
     public function index()
     {
         //$datos=Historia_Clinica_MG::all();
-        $datos=Historia_Clinica_MG::with('paciente')->Paginate(1000);
+        $datos=Historia_Clinica_MG::with('paciente')->get();
         $num_rows = count($datos); 
 
         if($num_rows!=0){

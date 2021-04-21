@@ -18,5 +18,7 @@ class Historia_Clinica_MG extends Model
     public function paciente(){
         return $this->belongsTo('App\Models\Paciente','id_paciente');
     }
-
+    //public function habitos(){
+      //  return $this->hasOne('App\Models\Habito','id_habito');
+     //}
 }

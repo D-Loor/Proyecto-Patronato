@@ -27,7 +27,8 @@ export class PacientesComponent implements OnInit {
   }
 
   cargar(){
-    this.medicina_general.pacientesIndex().then(data =>{
+    this.medicina_general.pacientes().then(data =>{
+    debugger
     this.pacientesMG=data['result'];
     this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
     debugger

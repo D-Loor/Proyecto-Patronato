@@ -29,7 +29,8 @@ export class MedicinaGeneralComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
-  sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string;
+  sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
+  tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string;
 
 
 
@@ -43,7 +44,8 @@ export class MedicinaGeneralComponent implements OnInit {
 
   cargar(){
     this.medicina_general.historiasClinicasMg().then(data =>{
-    this.historialMG=data['result']['data'];
+    this.historialMG=data['result'];
+    debugger
     this.historialMGPaginate = this.historialMG.slice(0, 10);
   }).catch(error =>{
     console.log(error);
@@ -66,9 +68,9 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = null;
   }
   
-  DatosPaciente(cedula:string){
+  DatosPaciente(id_paciente:string){
     this.Principal.show();
-    this.medicina_general.PacientesAntecedentes(cedula).then(data =>{
+    this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
     this.apellidos=data['result'].apellidos;
     this.nombres=data['result'].nombres;
     this.cedula=data['result'].cedula;
@@ -82,6 +84,13 @@ export class MedicinaGeneralComponent implements OnInit {
     this.religion=data['result'].religion;
     this.nivel_instruccion=data['result'].nivel_instruccion;
     this.estado_civil=data['result'].estado_civil;
+    this.alcoholT=data['result']['habitos']['0'].alcohol;
+    this.tabacoT=data['result']['habitos']['0'].tabaco;
+    this.drogasT=data['result']['habitos']['0'].drogas;
+    this.alimentacionT=data['result']['habitos']['0'].alimentacion;
+    this.diuresisT=data['result']['habitos']['0'].diuresis;
+    this.somniaT=data['result']['habitos']['0'].somnia;
+    debugger
 
   }).catch(error =>{
     console.log(error);

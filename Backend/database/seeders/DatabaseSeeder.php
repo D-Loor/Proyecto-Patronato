@@ -107,6 +107,7 @@ class DatabaseSeeder extends Seeder
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
+        
         DB::table('turnos')->insert(
             ['hora' => "08:00 AM",], ['hora' => "08:20 AM",], ['hora' => "08:40 AM",], ['hora' => "09:00 AM",], ['hora' => "09:20 AM",],
             ['hora' => "09:40 AM",], ['hora' => "10:00 AM",], ['hora' => "10:20 AM",], ['hora' => "10:40 AM",], ['hora' => "11:00 AM",],
@@ -118,10 +119,10 @@ class DatabaseSeeder extends Seeder
         DB::table('citas')->insert([
             'nombres' => Str::random(10),
             'cedula' => Str::random(10),
-            'especialidad' => 'RehabilitaciónFísica',
-            'fecha' => Carbon::parse('2001-03-09'),
-            'hora' => 1,
+            'especialidad' => 'Medicina General',
+            'fecha' => Carbon::parse('2021-04-21'),
             'estado' => Str::random(10),
+            'id_turno' => 1,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);

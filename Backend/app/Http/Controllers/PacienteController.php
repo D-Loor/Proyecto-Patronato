@@ -14,7 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos=Paciente::with('historias_clinicas_mg')->paginate(2); 
+        $datos=Paciente::with('historias_clinicas_mg','historias_clinicas_rf','habitos')->get(); 
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -23,15 +23,7 @@ class PacienteController extends Controller
             return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
-    public function pacienteindex(){
-        $datos=Paciente::all(); 
-        $num_rows = count($datos);
-
-        if($num_rows!=0){
-            return response()->json(['result'=>$datos]);
-        }else
-            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
-    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -81,9 +73,9 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function show($cedula)
+    public function show($id_paciente)
     {
-        $datos=Paciente::where('cedula', $cedula)->get()->first();
+        $datos=Paciente::with('habitos')->where('id_paciente', $id_paciente)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
