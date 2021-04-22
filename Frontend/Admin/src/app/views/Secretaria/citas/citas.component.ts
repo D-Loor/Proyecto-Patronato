@@ -32,8 +32,8 @@ export class CitasComponent implements OnInit {
 
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF("RehabilitaciónFísica",this.fechaActual);
-    this.cargarMG("MedicinaGeneral",this.fechaActual);
+    this.cargarRF("Rehabilitacion Fisica",this.fechaActual);
+    this.cargarMG("Medicina General",this.fechaActual);
 
   }
 
@@ -48,7 +48,6 @@ export class CitasComponent implements OnInit {
 
   citasEliminarMG:any[];
   eliminarMG(id:string) {
-    debugger
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarMG=data['result'];
       })
@@ -62,7 +61,6 @@ export class CitasComponent implements OnInit {
   cargarRF(especialidad:string,fechaActual:string){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
     this.CitasRF=data['result'];
-    debugger
     this.citasTotalRF = this.CitasRF.slice(0, 10);
     }).catch(error =>{
       console.log(error);
@@ -71,7 +69,6 @@ export class CitasComponent implements OnInit {
 
   citasEliminarRF:any[];
   eliminarRF(id:string) {
-    debugger
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarRF=data['result'];
       })
@@ -90,7 +87,7 @@ export class CitasComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
-      buttonsStyling: false
+      buttonsStyling: true
     })
 
     swalWithBootstrapButtons.fire({
@@ -100,6 +97,8 @@ export class CitasComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar registro!',
       cancelButtonText: 'No, cancelar!',
+      confirmButtonColor: '#4BB543',
+      cancelButtonColor: '#d33',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -134,14 +133,13 @@ export class CitasComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasTotalMG = this.CitasMG.slice(startItem, endItem);
-    debugger
+    
   }
   pageChangedRF(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasTotalRF = this.CitasRF.slice(startItem, endItem);
-    debugger
   }
 
   ngOnDestroy(): void{

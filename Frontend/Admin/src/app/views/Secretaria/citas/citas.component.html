@@ -37,13 +37,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotalMG | filtro:buscarMG">
+              <tr *ngFor="let item of citasTotalMG ">
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.hora}}</td>
                 <td>
-
-                  <span class="badge badge-success">Active</span>
+                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
                   <button type="button" class="btn btn-ghost-info botont"><i
@@ -106,13 +106,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotalRF | filtro:buscarRF">
+              <tr *ngFor="let item of citasTotalRF ">
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.hora}}</td>
                 <td>
-
-                  <span class="badge badge-success">Active</span>
+                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
                   <button type="button" class="btn btn-ghost-info botont"><i

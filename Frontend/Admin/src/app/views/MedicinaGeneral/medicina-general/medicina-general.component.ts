@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import {ModalDirective} from 'ngx-bootstrap/modal';
 @Component({
@@ -45,7 +45,6 @@ export class MedicinaGeneralComponent implements OnInit {
   cargar(){
     this.medicina_general.historiasClinicasMg().then(data =>{
     this.historialMG=data['result'];
-    debugger
     this.historialMGPaginate = this.historialMG.slice(0, 10);
   }).catch(error =>{
     console.log(error);
@@ -60,7 +59,6 @@ export class MedicinaGeneralComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.historialMGPaginate = this.historialMG.slice(startItem, endItem);
-    debugger
   }
 
   ngOnDestroy(): void{
@@ -90,7 +88,6 @@ export class MedicinaGeneralComponent implements OnInit {
     this.alimentacionT=data['result']['habitos']['0'].alimentacion;
     this.diuresisT=data['result']['habitos']['0'].diuresis;
     this.somniaT=data['result']['habitos']['0'].somnia;
-    debugger
 
   }).catch(error =>{
     console.log(error);

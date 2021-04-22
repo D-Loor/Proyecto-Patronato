@@ -25,7 +25,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
   ],
   declarations: [
     MedicinaGeneralComponent,
-    ModalsComponent
+    //ModalsComponent
   ]
 })
 

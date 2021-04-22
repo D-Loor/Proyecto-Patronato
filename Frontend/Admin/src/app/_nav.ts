@@ -103,11 +103,6 @@ export const navItems: INavData[] = [
     icon: 'icon-star'
   },
   {
-    name: 'Consultas',
-    url: '/rehabilitacionfisicaconsultas',
-    icon: 'icon-pencil'
-  },
-  {
     title: true,
     name: 'Secretaría'
   },

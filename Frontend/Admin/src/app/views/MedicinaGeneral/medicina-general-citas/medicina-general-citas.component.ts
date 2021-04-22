@@ -67,8 +67,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
+        
       },
-      buttonsStyling: false
+      buttonsStyling: true
     })
 
     swalWithBootstrapButtons.fire({
@@ -78,6 +79,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar registro!',
       cancelButtonText: 'No, cancelar!',
+      confirmButtonColor: '#4BB543',
+      cancelButtonColor: '#d33',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {

@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FiltroPipe implements PipeTransform {
 
   transform( arreglo: any, arg: any, arg2:any, ): any { // definir si se borra
-    debugger
      const resultado=[];
      let resultadoPaginate=[];
 
@@ -19,10 +18,8 @@ export class FiltroPipe implements PipeTransform {
       };
       if(arg2==0){
       resultadoPaginate=resultado.slice(0,10);
-      debugger
       return resultadoPaginate;
      }else{
-       debugger
       return resultado.length;
      }
   }

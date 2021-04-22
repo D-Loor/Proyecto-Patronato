@@ -4,6 +4,8 @@ import {CitasService} from '../../../servicios/citas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { ViewChild } from '@angular/core';
+
 @Component({
   selector: 'app-rehabilitacion-fisica-citas',
   templateUrl: './rehabilitacion-fisica-citas.component.html',
@@ -22,6 +24,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   citasRFPaginate:any[];
   today = new Date();
   fechaActual:string;
+  
   ngOnInit(): void {
     
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
@@ -29,11 +32,9 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   }
 
   cargar(especialidad:string,fechaActual:string){
-    debugger
     this.citasser.citas(especialidad,fechaActual).then(data =>{
       this.citasRF=data['result'];
     this.citasRFPaginate = this.citasRF.slice(0, 10);
-    debugger
     }).catch(error =>{
       console.log(error);
   });
@@ -41,7 +42,6 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
 
   citasEliminar:any[];
   eliminar(id:string) {
-    debugger
     this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
       })
@@ -60,7 +60,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
-      buttonsStyling: false
+      buttonsStyling: true 
     })
 
     swalWithBootstrapButtons.fire({
@@ -70,6 +70,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar registro!',
       cancelButtonText: 'No, cancelar!',
+      confirmButtonColor: '#4BB543',
+      cancelButtonColor: '#d33',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -102,9 +104,14 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    debugger
     this.citasRFPaginate = null;
     this.citasRF = null;
   }
+  ConsultarPaciente(cedula:string){
+    this.rutas.navigate(['/rehabilitacionfisicaconsultas']);
+    localStorage.setItem('cedulaRF', cedula);
+  }
+
+  
 
 }

@@ -28,10 +28,8 @@ export class PacientesComponent implements OnInit {
 
   cargar(){
     this.medicina_general.pacientes().then(data =>{
-    debugger
     this.pacientesMG=data['result'];
     this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
-    debugger
   }).catch(error =>{
     console.log(error);
 });
@@ -43,7 +41,6 @@ export class PacientesComponent implements OnInit {
     this.pacientesMGFilter=[];
       this.pacientesMGPaginateFilter=[];
     if(this.search==''){
-      debugger
     }else{
       for (const x of this.pacientesMG) {
 
@@ -52,7 +49,6 @@ export class PacientesComponent implements OnInit {
        };
       };
       this.pacientesMGPaginateFilter = this.pacientesMGFilter.slice(0, 10);
-      debugger
     }
     
   }
@@ -62,7 +58,6 @@ export class PacientesComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.pacientesMGPaginate = this.pacientesMG.slice(startItem, endItem);
-    debugger
   }
 
   pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
@@ -73,7 +68,6 @@ export class PacientesComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    debugger
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
   }
