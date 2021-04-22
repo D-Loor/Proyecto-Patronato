@@ -58,8 +58,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   CargarDatos(){
     let cedula = localStorage.getItem('cedulaMG');
-    this.medicinag.PacientesAntecedentes(cedula).then(data => {      
-      this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
+    this.medicinag.AtenderPaciente(cedula).then(data => {      
+      this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
       this.edad = data['result'].edad;
     })

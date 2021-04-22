@@ -38,7 +38,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   cargar(){
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
-    debugger
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
     }).catch(error =>{

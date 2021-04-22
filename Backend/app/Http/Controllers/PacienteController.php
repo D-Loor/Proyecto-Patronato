@@ -137,4 +137,13 @@ class PacienteController extends Controller
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
+
+    public function Atender( $cedula)
+    {
+        $datos=Paciente::where('cedula', $cedula)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+    }
 }

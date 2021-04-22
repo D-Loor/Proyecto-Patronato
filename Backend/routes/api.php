@@ -44,3 +44,4 @@ Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarM
 Route::post('agendarCita','CitaController@store'); 
 Route::get('validarHora/{fecha}', 'CitaController@validarHora');
 Route::get('filtroFecha/{fecha}', 'PacienteController@filtro');
+Route::get('atender/{cedula}','PacienteController@Atender');
