@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FiltroModule } from '../../../pipes/filtro.module';
+import { ModalsComponent } from '../../notifications/modals.component';
 import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesComponent } from './pacientes.component';
 
@@ -14,10 +17,13 @@ import { PacientesComponent } from './pacientes.component';
     CommonModule,
     PaginationModule,
     FiltroModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    TabsModule.forRoot(),
   ],
   declarations: [
-    PacientesComponent
+    PacientesComponent,
+    ModalsComponent
   ]
 })
 

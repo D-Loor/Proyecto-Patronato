@@ -14,7 +14,7 @@ export class MedicinaGeneralComponent implements OnInit {
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
 
-  @ViewChild('Principal') public Principal: ModalDirective;
+  
 
 
   public sidebarMinimized = false;
@@ -28,9 +28,7 @@ export class MedicinaGeneralComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
-  apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
-  sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
-  tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string;
+  
 
 
 
@@ -66,32 +64,6 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = null;
   }
   
-  DatosPaciente(id_paciente:string){
-    this.Principal.show();
-    this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
-    this.apellidos=data['result'].apellidos;
-    this.nombres=data['result'].nombres;
-    this.cedula=data['result'].cedula;
-    this.edad=data['result'].edad;
-    this.ocupacion=data['result'].ocupacion;
-    this.sexo=data['result'].sexo;
-    this.Lresidencia=data['result'].residencia;
-    this.Lprocedencia=data['result'].procedencia;
-    this.fechanacimiento=data['result'].fecha_nacimiento;
-    this.raza=data['result'].raza;
-    this.religion=data['result'].religion;
-    this.nivel_instruccion=data['result'].nivel_instruccion;
-    this.estado_civil=data['result'].estado_civil;
-    this.alcoholT=data['result']['habitos']['0'].alcohol;
-    this.tabacoT=data['result']['habitos']['0'].tabaco;
-    this.drogasT=data['result']['habitos']['0'].drogas;
-    this.alimentacionT=data['result']['habitos']['0'].alimentacion;
-    this.diuresisT=data['result']['habitos']['0'].diuresis;
-    this.somniaT=data['result']['habitos']['0'].somnia;
-
-  }).catch(error =>{
-    console.log(error);
-});
-  }
+  
 
 }
