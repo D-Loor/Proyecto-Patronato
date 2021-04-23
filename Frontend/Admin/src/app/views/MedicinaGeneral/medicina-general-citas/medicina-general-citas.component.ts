@@ -42,7 +42,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGPaginate = this.citasMG.slice(0, 10);
     }).catch(error =>{
       console.log(error);
-  });
+  }); 
   }
   // for (var item in this.Citas){
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
