@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
@@ -27,6 +28,13 @@ export class PacientesComponent implements OnInit {
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string;
+  isCollapsed = false;
+  isCollapsed2 = false;
+  isCollapsed3 = false;
+  isCollapsed4 = false;
+  isCollapsed5 = false;
+  isCollapsed6 = false;
+  isCollapsed7 = false;
   ngOnInit(): void {
     this.cargar();
   }
@@ -76,7 +84,7 @@ export class PacientesComponent implements OnInit {
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
   }
-  
+
   DatosPaciente(id_paciente:string){
     this.Principal.show();
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{

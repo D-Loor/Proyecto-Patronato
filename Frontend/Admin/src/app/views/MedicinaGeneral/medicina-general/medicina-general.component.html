@@ -53,7 +53,7 @@
                       <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
                     </td>
                   <td>
-                    <button type="button" class="btn btn-ghost-info botont"><i
+                    <button type="button" class="btn btn-ghost-info botont"  (click)="DatosConsulta(item.paciente.gad)"><i
                         class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
                     
                     <button type="button" class="btn btn-ghost-danger botont"><i
@@ -77,3 +77,120 @@
 
 </div>
 
+<div bsModal #DatosdeConsultas="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-info  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Datos de la consulta</h4>
+        <button type="button" class="close" (click)="DatosdeConsultas.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label for="inline-radios">Lugar de atención</label>
+            <div class="col-md-8 col-form-label">
+              <div class="form-check form-check-inline mr-5">
+                <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
+                <label class="form-check-label" for="inlineRadio1">Patronato</label>
+              </div>
+              <div class="form-check form-check-inline mr-5">
+                <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Comunidad">
+                <label class="form-check-label" for="inlineRadio2">Comunidad</label>
+              </div>
+              <div class="form-check form-check-inline mr-5">
+                <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
+                <label class="form-check-label" for="inlineRadio3">Domicilio</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-4">
+            <label for="inline-radios">Condición de diagnóstico</label>
+            <div class="col-md-4 col-form-label">
+              <div class="form-check form-check-inline mr-5" id="inline-radios">
+                <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [(ngModel)]="condicion_diagnostico" value="Presuntivo" (click)="funcionPreventivo()">
+                <label class="form-check-label" for="inlineRadio1">Presuntivo</label>
+              </div>
+              <div class="form-check form-check-inline mr-5">
+                <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [(ngModel)]="condicion_diagnostico" value="Definitivo" (click)="funcionDefinitivo()">
+                <label class="form-check-label" for="inlineRadio2">Definitivo</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-4">
+            <label for="inline-radios">Tipo de atención</label>
+                  <div class="col-md-12 col-form-label">
+                    <div class="form-check form-check-inline mr-5" id="inline-radios">
+                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Prevención">
+                      <label class="form-check-label" for="inlineRadio1">Prevención</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-5">
+                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Primera">
+                      <label class="form-check-label" for="inlineRadio2">Primera</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-5">
+                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Subsecuente">
+                      <label class="form-check-label" for="inlineRadio3">Subsecuente</label>
+                    </div>
+                  </div>
+          </div>
+
+        </div>
+
+        <div class="row" >
+          <div class="form-group col-sm-12">
+            <div class="form-group">
+              <label for="vat">Enfermedades</label>
+                 <textarea id="enfermedades" name="enfermedades" rows="4" class="form-control"  required></textarea>
+
+            </div>
+            <div class="form-group">
+              <label for="vat">Motivo de la consulta</label>
+                 <textarea id="motivo" name="motivo" rows="4" class="form-control"  required></textarea>
+
+            </div>
+            <div class="form-group">
+              <label for="vat">Antecedentes de la enfermedad</label>
+                 <textarea id="antecedentes_enfermedad" name="antecedentes_enfermedad" rows="4" class="form-control"  required></textarea>
+
+            </div>
+            
+            <div class="form-group " *ngIf="gad==1">
+              <label for="vat">Diagnóstico presuntivo</label>
+                 <textarea id="diagnostico_presuntivo" name="diagnostico_presuntivo" rows="4" class="form-control"  required></textarea>
+
+            </div>
+
+            <div class="form-group " *ngIf="gad==1">
+              <label for="vat">Diagnóstico definitivo</label>
+                 <textarea id="diagnostico_definitivo" name="diagnostico_definitivo" rows="4" class="form-control"  required></textarea>
+
+            </div>
+            <div class="form-group " *ngIf="gad==1">
+              <label for="vat">Plan terapéutico</label>
+                 <textarea id="plan_terapeutico" name="plan_terapeutico" rows="4" class="form-control" required></textarea>
+            </div>
+
+            <div class="form-group ">
+
+              <div class="col-md-9 col-form-label">
+                <div class="form-check form-check-inline mr-1">
+                  <input class="form-check-input" type="checkbox" id="certificado" name="certificado" value="Si">
+                  <label class="form-check-label" for="inline-checkbox1">Se entregó certificado</label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="DatosdeConsultas.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

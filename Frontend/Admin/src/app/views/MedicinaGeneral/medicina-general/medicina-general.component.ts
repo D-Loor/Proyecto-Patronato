@@ -13,28 +13,13 @@ export class MedicinaGeneralComponent implements OnInit {
 
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
-
-  
-
-
+  @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
   public sidebarMinimized = false;
   public navItems = navItems;
-  search="";
-
-  isCollapsed = false;
-  isCollapsed2 = false;
-  isCollapsed3 = false;
-  isCollapsed4 = false;
-  isCollapsed5 = false;
-  isCollapsed6 = false;
-  isCollapsed7 = false;
-  
-
-
-
- 
+  search=""; 
   historialMG:any[];
   historialMGPaginate:any[];
+  gad:string;
 
   ngOnInit() {
     this.cargar();
@@ -64,6 +49,10 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = null;
   }
   
+  DatosConsulta(gad:string){
+    this.gad = gad;
+    this.DatosdeConsultas.show();
+  }
   
 
 }
