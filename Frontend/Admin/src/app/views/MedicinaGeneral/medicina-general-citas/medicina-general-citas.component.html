@@ -316,7 +316,7 @@
               <tr *ngFor="let item of citasMGPaginate " >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
-                <td>{{item.hora}}</td>
+                <td>{{item.turno.hora}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                   <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
@@ -330,7 +330,7 @@
                         class="fa fa-medkit" ></i>&nbsp;Crear Historia Clinica</button>
                   <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-                  
+
 
                 </td>
               </tr>

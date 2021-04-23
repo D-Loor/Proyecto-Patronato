@@ -9,7 +9,7 @@ class Turno extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    protected $table = 'trunos';
+    protected $table = 'turnos';
     protected $primaryKey = 'id_turno';
     protected $fillable = [
          'hora',

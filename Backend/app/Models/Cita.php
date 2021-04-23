@@ -14,7 +14,7 @@ class Cita extends Model
     protected $fillable = [
          'nombres', 'id_turno', 'cedula',  'especialidad',  'fecha', 'estado',
     ];
-    public function rturno(){
+    public function turno(){
         return $this->belongsTo('App\Models\Turno','id_turno');
     }
 }

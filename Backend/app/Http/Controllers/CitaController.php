@@ -15,7 +15,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $datos=Cita::all();
+        $datos=Cita::with('turno')->get();
         $num_rows = count($datos);
 
         if($num_rows!=0){
