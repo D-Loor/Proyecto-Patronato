@@ -12,7 +12,7 @@ class Historia_Clinica_MG extends Model
     protected $table = 'historias_clinicas_mg';
     protected $primaryKey = 'id_historia_clinica_mg';
     protected $fillable = [
-        'id_paciente','id_enfermedad','id_a_enfermedad','fecha','motivo_consulta','tipo_atencion','condicion_diagnostico','diagnostico_presuntivo','diagnostico_diferencial','plan_terapeutico','lugar_atencion','raza','certificado'
+        'id_paciente','fecha','motivo_consulta','tipo_atencion','condicion_diagnostico','diagnostico_presuntivo','diagnostico_diferencial','plan_terapeutico','lugar_atencion','raza','certificado'
     ];
 
     public function paciente(){

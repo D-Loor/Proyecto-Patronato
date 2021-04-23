@@ -16,7 +16,7 @@ class HistoriaClinicaMGController extends Controller
     {
         //$datos=Historia_Clinica_MG::all();
         $datos=Historia_Clinica_MG::with('paciente')->get();
-        $num_rows = count($datos); 
+        $num_rows = count($datos);
 
         if($num_rows!=0){
             return response()->json(['result'=>$datos]);
@@ -44,8 +44,6 @@ class HistoriaClinicaMGController extends Controller
     {
         $datos=new Historia_Clinica_MG();
         $datos->cedula=$request->cedula;
-        $datos->id_enfermedad=$request->id_enfermedad;
-        $datos->id_a_enfermedad=$request->id_a_enfermedad;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;
@@ -65,7 +63,7 @@ class HistoriaClinicaMGController extends Controller
 
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -103,8 +101,7 @@ class HistoriaClinicaMGController extends Controller
     {
         $datos=Historia_Clinica_MG::find($id_historia_clinica_mg);
 
-        $datos->id_enfermedad=$request->id_enfermedad;
-        $datos->id_a_enfermedad=$request->id_a_enfermedad;
+
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;
