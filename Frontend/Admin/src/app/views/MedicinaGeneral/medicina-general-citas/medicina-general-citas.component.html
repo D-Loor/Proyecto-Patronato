@@ -300,7 +300,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="card-body">
           <table class="table table-bordered table-striped table-sm">
             <thead>
@@ -326,8 +326,8 @@
                       class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
                   <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
                       class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                  <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-success botont"  (click)="CrearHistoriaClinica()"><i
-                        class="fa fa-medkit" ></i>&nbsp;Crear Historia Clinica</button>
+                  <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
+                        class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
                   <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 
