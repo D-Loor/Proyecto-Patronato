@@ -16,16 +16,20 @@ export class CitasComponent implements OnInit {
 
   isCollapsedMG = false;
   isCollapsedRF = false;
-  buscarMG:string="";
-  buscarRF:string="";
+  searchMG:string="";
+  searchRF:string="";
 
   public sidebarMinimized = false;
   public navItems = navItems;
 
-  CitasMG:any[];
-  citasTotalMG:any[];
-  CitasRF:any[];
-  citasTotalRF:any[];
+  citasMG:any[];
+  citasMGFilter:any[];
+  citasMGPaginate:any[];
+  citasMGPaginateFilter:any[];
+  citasRF:any[];
+  citasRFFilter:any[];
+  citasRFPaginate:any[];
+  citasRFPaginateFilter:any[];
 
   today = new Date();
   fechaActual:string;
@@ -39,11 +43,36 @@ export class CitasComponent implements OnInit {
 
   cargarMG(especialidad:string,fechaActual:string){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-      this.CitasMG=data['result'];
-    this.citasTotalMG = this.CitasMG.slice(0, 10);
+    this.citasMG=data['result'];
+    this.citasMGPaginate = this.citasMG.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
+  }
+
+  dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
+    this.citasMGFilter=[];
+      this.citasMGPaginateFilter=[];
+    if(this.searchMG==''){
+    }else{
+      debugger
+      for (const x of this.citasMG) {
+        debugger
+        if(x.cedula.indexOf(this.searchMG)> -1){
+         this.citasRFFilter.push(x);
+       };
+      };
+      debugger
+      this.citasMGPaginateFilter = this.citasMGFilter.slice(0, 10);
+    }
+    
+  }
+
+  pageChangedFiltroMG(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasMGPaginateFilter = this.citasMGFilter.slice(startItem, endItem);
   }
 
   citasEliminarMG:any[];
@@ -60,11 +89,36 @@ export class CitasComponent implements OnInit {
 
   cargarRF(especialidad:string,fechaActual:string){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-    this.CitasRF=data['result'];
-    this.citasTotalRF = this.CitasRF.slice(0, 10);
+    this.citasRF=data['result'];
+    this.citasRFPaginate = this.citasRF.slice(0, 10);
     }).catch(error =>{
       console.log(error);
   });
+  }
+
+  dataPaginateRF(event){//Función para el filtrado con paginado sin los pipes
+    this.citasRFFilter=[];
+      this.citasRFPaginateFilter=[];
+    if(this.searchRF==''){
+    }else{
+      debugger
+      for (const x of this.citasRF) {
+        debugger
+        if(x.cedula.indexOf(this.searchRF)> -1){
+         this.citasRFFilter.push(x);
+       };
+      };
+      debugger
+      this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
+    }
+    
+  }
+
+  pageChangedFiltroRF(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasRFPaginateFilter = this.citasRFFilter.slice(startItem, endItem);
   }
 
   citasEliminarRF:any[];
@@ -132,22 +186,22 @@ export class CitasComponent implements OnInit {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.citasTotalMG = this.CitasMG.slice(startItem, endItem);
+    this.citasMGPaginate = this.citasMG.slice(startItem, endItem);
     
   }
   pageChangedRF(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.citasTotalRF = this.CitasRF.slice(startItem, endItem);
+    this.citasRFPaginate = this.citasRF.slice(startItem, endItem);
   }
 
   ngOnDestroy(): void{
 
-    this.CitasMG = null;
-    this.citasTotalMG = null;
-    this.CitasRF = null;
-    this.citasTotalRF = null;
+    this.citasMG = null;
+    this.citasMGPaginate = null;
+    this.citasRF = null;
+    this.citasRFPaginate = null;
   }
 
 

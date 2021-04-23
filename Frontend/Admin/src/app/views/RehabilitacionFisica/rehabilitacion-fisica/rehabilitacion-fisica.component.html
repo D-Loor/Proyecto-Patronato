@@ -10,13 +10,13 @@
           <div class="form-group">
             <div class="col-md-4 searcht">
               <div class="input-group">
-                <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">
                   <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                 </span>
 
               </div>
-
+ 
             </div>
             <div class="row">
             <div class="col-md-3 searcht">
@@ -41,13 +41,14 @@
                 </tr>
               </thead>
               <tbody> 
+                  <ng-container *ngIf="search == ''; else filtro2">
                 <tr *ngFor="let item of historialRFPaginate">
                   <td>{{item.paciente.cedula}}</td>
                   <td>{{item.paciente.nombres}}</td>
                   <td>{{item.paciente.apellidos}}</td>
                   <td>{{item.paciente.edad}}</td>
                   <td>{{item.fecha}}</td>
-                  <td>{{item.lugar_atencion}}</td>
+                  <td>{{item.lugar_atencion}}</td> 
                   <td>
                     <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
                     <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
@@ -59,16 +60,38 @@
                           class="fa fa-eye"></i>&nbsp;Datos del paciente</button>
                     <button type="button" class="btn btn-ghost-danger botont"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-                  </td>
-                  
+                  </td> 
                 </tr>
-
+            </ng-container>
                 
+            <ng-template #filtro2>
+                <tr *ngFor="let item of historialRFPaginateFilter">
+                    <td>{{item.paciente.cedula}}</td>
+                    <td>{{item.paciente.nombres}}</td>
+                    <td>{{item.paciente.apellidos}}</td>
+                    <td>{{item.paciente.edad}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.lugar_atencion}}</td>
+                    <td>
+                      <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
+                      <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-ghost-info botont"><i
+                          class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                          <button type="button" class="btn btn-ghost-success botont" data-toggle="modal" (click)="DatosPaciente(item.paciente.id_paciente)"><i
+                            class="fa fa-eye"></i>&nbsp;Datos del paciente</button>
+                      <button type="button" class="btn btn-ghost-danger botont"><i
+                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                    </td> 
+                  </tr>
+            </ng-template>
 
               </tbody>
             </table>
             <nav>
-              <pagination  [totalItems]="historialRF.length" (pageChanged)="pageChanged($event)"></pagination>
+                <pagination *ngIf="search==''" [totalItems]="historialRF.length" (pageChanged)="pageChanged($event)"></pagination>
+                <pagination *ngIf="search!=''" [totalItems]="historialRFFilter.length" (pageChanged)="pageChangedFiltro($event,historialRF)"></pagination>
             </nav>
           </div>
 

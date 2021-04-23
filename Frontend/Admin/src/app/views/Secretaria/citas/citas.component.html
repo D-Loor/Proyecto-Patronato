@@ -15,8 +15,8 @@
         <div id="collapseBasic" [collapse]="isCollapsedMG" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
-            <div class="input-group">
-              <input type="text" id="buscarMG" name="buscarMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="buscarMG">
+            <div class="input-group"> 
+              <input type="text" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
               <span class="input-group-prepend">
                 <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
               </span>
@@ -37,30 +37,54 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotalMG ">
-                <td class="table-titulo">{{item.nombres}}</td>
-                <td>{{item.cedula}}</td>
-                <td>{{item.hora}}</td>
-                <td>
-                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
-
+              <ng-container *ngIf="searchMG == ''; else filtro2">
+                <tr *ngFor="let item of citasMGPaginate ">
+                  <td class="table-titulo">{{item.nombres}}</td>
+                  <td>{{item.cedula}}</td>
+                  <td>{{item.hora}}</td>
+                  <td>
+                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-ghost-info botont"><i
+                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                    <button type="button" class="btn btn-ghost-success botont"><i
+                        class="fa fa-eye"></i>&nbsp;Consultas</button>
+                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+  
+                  </td>
+                </tr>
+              </ng-container>
+              
+              <ng-template #filtro2>
+                <tr *ngFor="let item of citasMGPaginateFilter ">
+                  <td class="table-titulo">{{item.nombres}}</td>
+                  <td>{{item.cedula}}</td>
+                  <td>{{item.hora}}</td>
+                  <td>
+                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-ghost-info botont"><i
+                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                    <button type="button" class="btn btn-ghost-success botont"><i
+                        class="fa fa-eye"></i>&nbsp;Consultas</button>
+                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+  
+                  </td>
+                </tr>
+              </ng-template>
+              
 
             </tbody>
           </table>
           <nav>
-            <pagination  [totalItems]="CitasMG.length" (pageChanged)="pageChangedMG($event)"></pagination>
+            <pagination *ngIf="searchMG==''" [totalItems]="citasMG.length" (pageChanged)="pageChangedMG($event)"></pagination>
+            <pagination *ngIf="searchMG!=''" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltroMG($event)"></pagination>
           </nav>
         </div>
        </div>
@@ -85,7 +109,7 @@
         <div class="form-group">
           <div class="col-md-4 searcht">
             <div class="input-group">
-              <input type="text" id="buscarRF" name="buscarRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="buscarRF">
+              <input type="text" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
               <span class="input-group-prepend">
                 <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
               </span>
@@ -106,7 +130,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasTotalRF ">
+              <tr *ngFor="let item of citasMGPaginate ">
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.hora}}</td>
@@ -129,7 +153,7 @@
             </tbody>
           </table>
           <nav>
-            <pagination  [totalItems]="CitasRF.length" (pageChanged)="pageChangedRF($event)"></pagination>
+            <pagination  [totalItems]="citasMG.length" (pageChanged)="pageChangedRF($event)"></pagination>
           </nav>
         </div>
        </div>

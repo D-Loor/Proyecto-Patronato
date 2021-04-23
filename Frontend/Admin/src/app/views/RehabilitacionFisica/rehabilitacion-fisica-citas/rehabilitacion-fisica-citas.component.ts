@@ -16,15 +16,17 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   constructor(public citasser:CitasService, public rutas:Router) { }
   isCollapsed2 = false;
   isCollapsed = true;
-  buscar:string="";
+  search:string="";
   especialidad:string="Rehabilitacion Fisica";
   public sidebarMinimized = false;
   public navItems = navItems;
   citasRF:any[];
   citasRFPaginate:any[];
+  citasRFPaginateFilter:any[];
+  citasRFFilter:any[];
   today = new Date();
   fechaActual:string;
-  
+   
   ngOnInit(): void {
     
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
@@ -39,6 +41,44 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       console.log(error);
   });
   }
+
+  dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    this.citasRFFilter=[];
+      this.citasRFPaginateFilter=[];
+    if(this.search==''){
+    }else{
+      debugger
+      for (const x of this.citasRF) {
+        debugger
+        if(x.cedula.indexOf(this.search)> -1){
+         this.citasRFFilter.push(x);
+       };
+      };
+      debugger
+      this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
+    }
+    
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasRFPaginate = this.citasRF.slice(startItem, endItem);
+    debugger
+  }
+
+  pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasRFPaginateFilter = this.citasRFFilter.slice(startItem, endItem);
+  }
+
+
+
+
+
 
   citasEliminar:any[];
   eliminar(id:string) {
@@ -95,13 +135,6 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     })
   }
 
-  pageChanged(event: PageChangedEvent): void {
-    event.itemsPerPage = 10; //opcional
-    const startItem = (event.page - 1) * event.itemsPerPage;
-    const endItem = event.page * event.itemsPerPage;
-    this.citasRFPaginate = this.citasRF.slice(startItem, endItem);
-    debugger
-  }
 
   ngOnDestroy(): void{
     this.citasRFPaginate = null;

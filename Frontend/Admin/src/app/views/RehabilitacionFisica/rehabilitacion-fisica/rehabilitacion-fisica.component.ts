@@ -20,6 +20,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
   search="";
   historialRF:any[];
   historialRFPaginate:any[];
+  historialRFFilter:any[];
+  historialRFPaginateFilter:any[];
   @ViewChild('Principal') public Principal: ModalDirective;
   ngOnInit(): void {
     this.cargar();
@@ -32,20 +34,39 @@ export class RehabilitacionFisicaComponent implements OnInit {
     console.log(error);
 });
 
+  } 
+
+  dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    this.historialRFFilter=[];
+      this.historialRFPaginateFilter=[];
+    if(this.search==''){
+    }else{
+      debugger
+      for (const x of this.historialRF) {
+        debugger
+        if(x['paciente'].cedula.indexOf(this.search)> -1){
+         this.historialRFFilter.push(x);
+       };
+      };
+      debugger
+      this.historialRFPaginateFilter = this.historialRFFilter.slice(0, 10);
+    }
+    
   }
 
 
-
-
   pageChanged(event: PageChangedEvent): void {
-
     event.itemsPerPage = 10; //opcional
     const startItem = (event.page - 1) * event.itemsPerPage;
-
     const endItem = event.page * event.itemsPerPage;
-
     this.historialRFPaginate = this.historialRF.slice(startItem, endItem);
+  }
 
+  pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.historialRFPaginateFilter = this.historialRFFilter.slice(startItem, endItem);
   }
 
   ngOnDestroy(): void{
