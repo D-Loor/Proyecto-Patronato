@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group col-sm-4">
-                  <label for="inline-radios">Condición de diagnostico</label>
+                  <label for="inline-radios">Condición de diagnóstico</label>
                   <div class="col-md-4 col-form-label">
                     <div class="form-check form-check-inline mr-5" id="inline-radios">
                       <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [(ngModel)]="condicion_diagnostico" value="Presuntivo" (click)="funcionPreventivo()">
@@ -114,15 +114,21 @@
                    <textarea id="antecedentes_enfermedad" name="antecedentes_enfermedad" rows="4" class="form-control" placeholder="Escriba el antecedente de la enfermedad..." required></textarea>
 
               </div>
-              <div class="form-group " *ngIf="presun==true">
-                <label for="vat">Diagnostico presuntivo</label>
+              
+              <div class="form-group " *ngIf="gad==1">
+                <label for="vat">Diagnóstico presuntivo</label>
                    <textarea id="diagnostico_presuntivo" name="diagnostico_presuntivo" rows="4" class="form-control" placeholder="Escriba el diagnostico presuntivo..." required></textarea>
 
               </div>
-              <div class="form-group " *ngIf="defini==true">
-                <label for="vat">Diagnostico definitivo</label>
+
+              <div class="form-group " *ngIf="gad==1">
+                <label for="vat">Diagnóstico definitivo</label>
                    <textarea id="diagnostico_definitivo" name="diagnostico_definitivo" rows="4" class="form-control" placeholder="Escriba el diagnostico definitivo..." required></textarea>
 
+              </div>
+              <div class="form-group " *ngIf="gad==1">
+                <label for="vat">Plan terapéutico</label>
+                   <textarea id="plan_terapeutico" name="plan_terapeutico" rows="4" class="form-control" placeholder="Escriba el plan terapéutico..." required></textarea>
               </div>
 
               <div class="form-group ">

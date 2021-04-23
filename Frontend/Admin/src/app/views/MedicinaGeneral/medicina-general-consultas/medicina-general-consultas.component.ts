@@ -17,7 +17,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   public enferme='name';
   enfermedades: any[];
   data = [];
-  nombres:string; cedula:string; edad:string;
+  nombres:string; cedula:string; edad:string; gad:string;
 
   ngOnInit(): void {
     this.cargar();
@@ -62,6 +62,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
       this.edad = data['result'].edad;
+      this.gad = data['result'].gad;
     })
     .catch((error) => {
       console.log(error);
