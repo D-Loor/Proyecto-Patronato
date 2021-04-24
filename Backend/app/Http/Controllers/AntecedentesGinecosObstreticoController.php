@@ -51,8 +51,8 @@ class AntecedentesGinecosObstreticoController extends Controller
         $datos->cesareas=$request->cesareas;
         $datos->abortos=$request->abortos;
         $datos->save();
-        $idAreaRecienGuardada = $datos->id_gineco;
-    return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idAreaRecienGuardada]);
+        $idRecienGuardado = $datos->id_gineco;
+    return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

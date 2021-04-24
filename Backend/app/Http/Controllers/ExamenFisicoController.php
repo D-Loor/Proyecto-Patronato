@@ -50,7 +50,8 @@ class ExamenFisicoController extends Controller
         $datos->region_genital=$request->region_genital;
         $datos->region_anal=$request->region_anal;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_e_fisico;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

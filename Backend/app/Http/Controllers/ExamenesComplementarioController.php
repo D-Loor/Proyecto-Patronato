@@ -46,7 +46,8 @@ class ExamenesComplementarioController extends Controller
         $datos->radiografia_torax=$request->radiografia_torax;
         $datos->otros=$request->otros;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_e_complementario;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

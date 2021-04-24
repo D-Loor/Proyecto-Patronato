@@ -254,7 +254,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
   }
 
-  ingresarObstetrico(){
+  IngresarObstetrico(){
     let obstetricos = {
       'FUM':this.fum,
       'FPP':this.fpp,
@@ -269,6 +269,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
       this.id_obstetrico = data['id'];
       this.IngresarAntecedesPersonales();
+      this.ExamenesFisicos();
+      this.ExamenesOrganos();
+      this.ExamenesComplemenrarios();
     });
   }
 
@@ -290,6 +293,48 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'traumas': this.traumatologicosT,
     }
     this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
+      
+    });
+  }
+
+  ExamenesFisicos(){
+    let EFisicos = {
+      'cabeza':this.examen_cabezaT,
+      'cuello':this.examen_cuelloT,
+      'torax': this.examen_toraxT,
+      'abdomen':this.examen_abdomenT,
+      'miembros_superiores':this.examen_msuperiorT,
+      'miembros_inferiores': this.examen_minferioresT,
+      'region_genital': this.examen_genitalT,
+      'region_anal': this.examen_analT,
+    }
+    this.ServicioSecretaria.ExamenesFisicos(EFisicos).then(data =>{
+     
+    });
+  }
+
+  ExamenesOrganos(){
+    let ESitemas = {
+      'sistema_digestivo':this.examen_digestivoT,
+      'sistema_respiratorio':this.examen_respiratorioT,
+      'sistema_cardiaco': this.examen_cardiacoT,
+      'sistema_genitourinarion':this.examen_genitourinarioT,
+      'sistema_osteomuscular':this.examen_osteomuscularT,
+      'sistema_nervioso': this.examen_nerviosoT,
+    }
+    this.ServicioSecretaria.ExamenesOrganosSistema(ESitemas).then(data =>{
+     
+    });
+  }
+
+  ExamenesComplemenrarios(){
+    let EComplementarios = {
+      'laboratorio':this.examen_laboratorioT,
+      'electrocardiograma':this.examen_electrocardiogramaT,
+      'radiografia_torax': this.examen_toraxT,
+      'otros':this.examen_otrosT,
+    }
+    this.ServicioSecretaria.ExamenesComple(EComplementarios).then(data =>{
       Swal.fire(
         'Guardado',
         'Los datos se guardaron correctamente',
@@ -298,17 +343,16 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     });
   }
 
+
   IngresarDatosPaciente(){
     if(this.sexo=="Mujer"){
-      this.ingresarObstetrico()
+      this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
+     this.ExamenesFisicos();
+     this.ExamenesOrganos();
+     this.ExamenesComplemenrarios();
     }
-
-    
-    
-    
-
   }
   
 

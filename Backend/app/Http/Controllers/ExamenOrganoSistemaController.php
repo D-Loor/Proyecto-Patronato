@@ -48,7 +48,8 @@ class ExamenOrganoSistemaController extends Controller
         $datos->sistema_osteomuscular=$request->sistema_osteomuscular;
         $datos->sistema_nervioso=$request->sistema_nervioso;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_e_organo_sistema;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**
