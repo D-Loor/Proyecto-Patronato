@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
             "nombres" => "Fisioterapista",
             "correo" => "q",
             "password" => "q",
-            "imagen" => Str::random(10),
+            "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
         ]);
 
         DB::table('antecedentes_patologicos_personales')->insert([

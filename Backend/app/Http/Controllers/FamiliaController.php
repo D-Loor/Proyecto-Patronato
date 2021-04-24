@@ -47,8 +47,8 @@ class FamiliaController extends Controller
         $datos->vida=$request->vida;
         $datos->causas=$request->causas;
         $datos->save();
-
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_familiar;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

@@ -91,6 +91,21 @@ export class SecretariaService {
       });
     });
   }
+
+  Familiares(data:any) {
+    debugger
+    let  url = 'http://127.0.0.1:8000/api/Familiar';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        debugger
+        reject(error);
+      });
+    });
+  }
+  
   
 
 
@@ -100,7 +115,6 @@ export class SecretariaService {
       this.http.put(url, data).subscribe(res => {
         resolve(res);
       }, error => {
-        debugger
         reject(error);
       });
     });

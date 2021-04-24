@@ -25,15 +25,19 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
   orden:number = 1;
-  id_obstetrico:number; id_patologico:number; id_e_fisico:number; id_sistema:number; id_complementario:number; id_habito:number;
   EstadoVida: boolean = true;
   number: number = 0;
   DatosFamiliares: any = [];
   edit:number = 0;
 
+  //id para relaciones
+  id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
+  id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
+  id_familiar:number;
+  
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
-  raza; religion; nivel_instrucciong; estado_civil;
+  raza; religion; nivel_instruccion; estado_civil; gad;
 
   //Variables de datos de Antecedentes Patológicos Personales
   ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
@@ -54,7 +58,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   //Variables de Examenes Complementarios
   examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
   
-
 
   ngOnInit(): void {
   }
@@ -79,10 +82,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
     let DatosFamiliares2 = [
       {
-          "nombresF": this.nombres,
-          "unionF": this.union,
-          "estadoF": this.estado,
-          "causasF":this.estadoT,
+          "nombres": this.nombres,
+          "union": this.union,
+          "vida": this.estado,
+          "causas":this.estadoT,
       }];
       this.DatosFamiliares.push(DatosFamiliares2);
   }
@@ -190,7 +193,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   Consultar(){
-    debugger
     if(this.cedula== undefined || this.cedula=="undefined"){
       Swal.fire(
         'Campo vacío',
@@ -204,7 +206,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           customClass: {
             confirmButton: 'btn btn-success',
             cancelButton: 'btn btn-danger'
-            
           },
           buttonsStyling: true
           })
@@ -356,18 +357,18 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   Pacientes(){
-    debugger
     let pacientesA = {
       'id_patologico':this.id_patologico,
       'id_e_fisico':this.id_e_fisico,
       'id_e_organo_sistema': this.id_sistema,
       'id_e_complementario':this.id_complementario,
+      'id_habito':this.id_habito,
       'nombres':this.nombresP,
       'cedula':this.cedula,
       'apellidos':this.apellidos,
       'edad':this.edad,
       'sexo':this.sexo,
-      'gad':1,
+      'gad':this.gad,
       'ocupacion':this.ocupacion,
       'residencia':this.Lresidencia,
       'procedencia':this.Lprocedencia,
@@ -375,23 +376,29 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'raza':this.raza,
       'religion':this.religion,
       'fecha_nacimiento':this.fechanacimiento,
-      'nivel_instruccion':this.nivel_instrucciong,
+      'nivel_instruccion':this.nivel_instruccion,
     }
     this.ServicioSecretaria.AgregarPaciente(pacientesA).then(data =>{
-      Swal.fire(
-        'Guardado',
-        'Los datos se guardaron correctamente',
-        'success'
-      )
+      this.id_paciente = data['id'];
+      this.AntecedentesFamiliares();
+    });
+  }
+
+  AntecedentesFamiliares(){
+    debugger
+    this.ServicioSecretaria.Familiares(this.DatosFamiliares).then(data =>{
+      debugger
+      this.id_familiar = data['id'];
     });
   }
 
   IngresarDatosPaciente(){
-    if(this.sexo=="Mujer"){
+    /* if(this.sexo=="Mujer"){
       this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
-    }
+    } */
+    this.AntecedentesFamiliares();
   }
   
 
