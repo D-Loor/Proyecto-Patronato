@@ -48,6 +48,7 @@ class PacienteController extends Controller
         $datos->id_e_fisico=$request->id_e_fisico;
         $datos->id_e_organo_sistema=$request->id_e_organo_sistema;
         $datos->id_e_complementario=$request->id_e_complementario;
+        $datos->id_habito=$request->id_habito;
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
         $datos->apellidos=$request->apellidos;
@@ -62,10 +63,9 @@ class PacienteController extends Controller
         $datos->religion=$request->religion;
         $datos->fecha_nacimiento=$request->fecha_nacimiento;
         $datos->nivel_instruccion=$request->nivel_instruccion;
-
         $datos->save();
-
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_paciente;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

@@ -48,7 +48,8 @@ class HabitoController extends Controller
         $datos->diuresis=$request->diuresis;
         $datos->somnia=$request->somnia;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_habito;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**

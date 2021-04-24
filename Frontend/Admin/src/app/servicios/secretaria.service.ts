@@ -67,6 +67,19 @@ export class SecretariaService {
       });
     });
   }
+
+  HabitosPaciente(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/Habitos';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  
   
 
 

@@ -25,7 +25,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
   orden:number = 1;
-  id_obstetrico:number;
+  id_obstetrico:number; id_patologico:number; id_e_fisico:number; id_sistema:number; id_complementario:number; id_habito:number;
   EstadoVida: boolean = true;
   number: number = 0;
   DatosFamiliares: any = [];
@@ -272,6 +272,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.ExamenesFisicos();
       this.ExamenesOrganos();
       this.ExamenesComplemenrarios();
+      this.Habitos();
     });
   }
 
@@ -335,6 +336,33 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'otros':this.examen_otrosT,
     }
     this.ServicioSecretaria.ExamenesComple(EComplementarios).then(data =>{
+    });
+  }
+
+  Habitos(){
+    let habitosA = {
+      'alcohol':this.alcoholT,
+      'tabaco':this.tabacoT,
+      'drogas': this.drogasT,
+      'alimentacion':this.alimentacionT,
+      'diuresis':this.diuresisT,
+      'somnia':this.somniaT,
+    }
+    this.ServicioSecretaria.HabitosPaciente(habitosA).then(data =>{
+      
+    });
+  }
+
+  Pacientes(){
+    let pacientesA = {
+      'alcohol':this.alcoholT,
+      'tabaco':this.tabacoT,
+      'drogas': this.drogasT,
+      'alimentacion':this.alimentacionT,
+      'diuresis':this.diuresisT,
+      'somnia':this.somniaT,
+    }
+    this.ServicioSecretaria.HabitosPaciente(pacientesA).then(data =>{
       Swal.fire(
         'Guardado',
         'Los datos se guardaron correctamente',
@@ -342,7 +370,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       )
     });
   }
-
 
   IngresarDatosPaciente(){
     if(this.sexo=="Mujer"){
@@ -352,6 +379,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
      this.ExamenesFisicos();
      this.ExamenesOrganos();
      this.ExamenesComplemenrarios();
+     this.Habitos();
     }
   }
   
