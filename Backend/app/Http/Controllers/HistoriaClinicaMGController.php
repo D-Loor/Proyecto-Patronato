@@ -15,7 +15,7 @@ class HistoriaClinicaMGController extends Controller
     public function index()
     {
         //$datos=Historia_Clinica_MG::all();
-        $datos=Historia_Clinica_MG::with('paciente')->get();
+        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
         $num_rows = count($datos);
 
         if($num_rows!=0){
@@ -43,14 +43,14 @@ class HistoriaClinicaMGController extends Controller
     public function store(Request $request)
     {
         $datos=new Historia_Clinica_MG();
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->a_enfermedad=$request->a_enfermedad;
         $datos->cedula=$request->cedula;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;
         $datos->condicion_diagnostico=$request->condicion_diagnostico;
         $datos->diagnostico_presuntivo=$request->diagnostico_presuntivo;
-        $datos->id_enfermedad=$request->id_enfermedad;
-        $datos->id_a_enfermedad=$request->id_a_enfermedad;
         $datos->diagnostico_diferencial=$request->diagnostico_diferencial;
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
@@ -101,7 +101,8 @@ class HistoriaClinicaMGController extends Controller
     {
         $datos=Historia_Clinica_MG::find($id_historia_clinica_mg);
 
-
+        $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->a_enfermedad=$request->a_enfermedad;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;

@@ -4,6 +4,7 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import { VariableAst, VariableBinding } from '@angular/compiler';
 @Component({
   selector: 'app-medicina-general',
   templateUrl: './medicina-general.component.html',
@@ -45,7 +46,7 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = this.historialMG.slice(0, 10);
   }).catch(error =>{
     console.log(error);
-});
+  });
 
   }
 
@@ -84,17 +85,15 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = null;
   }
 
+
+
   DatosConsulta(arreglo:[]){
-    debugger
 
     var paciente=arreglo['paciente'];
-    console.log(arreglo);
+    var enferme=arreglo['enfermedad'];
     this.NPaciente=paciente['nombres']+" "+paciente['apellidos'];
     this.Fecha=arreglo['fecha'];
     this.gad =paciente['gad'];
-
-    this.enfermedades=arreglo[''];
-    this.antecedentes_enfermedad=arreglo[''];
 
     this.lugar_atencion=arreglo['lugar_atencion'];
     this.tipo_atencion=arreglo['tipo_atencion'];
@@ -114,9 +113,16 @@ export class MedicinaGeneralComponent implements OnInit {
     if(arreglo['certificado']==1){
       this.certificado="Se entregó certificado al paciente.";
     }else
-    this.certificado="No se entregó certificado al paciente.";
+      this.certificado="No se entregó certificado al paciente.";
 
 
+      this.enfermedades=enferme['enfermedad'];
+      debugger
+
+
+    this.antecedentes_enfermedad=enferme['enfermedad'];
+
+    console.log(arreglo);
 
     this.DatosdeConsultas.show();
   }

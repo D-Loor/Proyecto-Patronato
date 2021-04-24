@@ -12,13 +12,15 @@ class Historia_Clinica_MG extends Model
     protected $table = 'historias_clinicas_mg';
     protected $primaryKey = 'id_historia_clinica_mg';
     protected $fillable = [
-        'id_paciente','fecha','motivo_consulta','tipo_atencion','condicion_diagnostico','diagnostico_presuntivo','diagnostico_diferencial','plan_terapeutico','lugar_atencion','raza','certificado'
+        'id_enfermedad','id_paciente','a_enfermedad','fecha','motivo_consulta','tipo_atencion','condicion_diagnostico','diagnostico_presuntivo','diagnostico_diferencial','plan_terapeutico','lugar_atencion','raza','certificado'
     ];
 
     public function paciente(){
         return $this->belongsTo('App\Models\Paciente','id_paciente');
     }
-    //public function habitos(){
-      //  return $this->hasOne('App\Models\Habito','id_habito');
-     //}
+    public function enfermedad(){
+        return $this->belongsTo('App\Models\Enfermedad','id_enfermedad');
+    }
+
+
 }

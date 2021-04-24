@@ -110,20 +110,28 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('turnos')->insert(
-            ['hora' => "08:00 AM",], ['hora' => "08:20 AM",], ['hora' => "08:40 AM",], ['hora' => "09:00 AM",], ['hora' => "09:20 AM",],
-            ['hora' => "09:40 AM",], ['hora' => "10:00 AM",], ['hora' => "10:20 AM",], ['hora' => "10:40 AM",], ['hora' => "11:00 AM",],
-            ['hora' => "11:20 AM",], ['hora' => "11:40 AM",], ['hora' => "12:00 PM",], ['hora' => "12:20 PM",], ['hora' => "02:00 PM",],
-            ['hora' => "02:20 PM",], ['hora' => "02:40 PM",], ['hora' => "03:00 PM",],['hora' => "03:20 PM",], ['hora' => "03:40 PM",],
-
-        );
+            ['hora' => "08:00 AM",],
+         );
+         DB::table('turnos')->insert(
+            ['hora' => "08:20 AM",],
+         );
 
         DB::table('citas')->insert([
-            'nombres' => Str::random(10),
-            'cedula' => Str::random(10),
+            'nombres' => 'Alex Dario Zambrano Falconez',
+            'cedula' => '1314567908',
             'especialidad' => 'Medicina General',
             'fecha' => Carbon::parse('2021-04-21'),
-            'estado' => Str::random(10),
+            'estado' => true,
             'id_turno' => 1,
+            //'email' => Str::random(10).'@gmail.com',
+            //'password' => Hash::make('password'),
+        ]); DB::table('citas')->insert([
+            'nombres' => 'Bryan Aldair Mendoza Loor',
+            'cedula' => '1314567903',
+            'especialidad' => 'Medicina General',
+            'fecha' => Carbon::parse('2021-04-21'),
+            'estado' => false,
+            'id_turno' => 2,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
@@ -183,25 +191,20 @@ class DatabaseSeeder extends Seeder
 
         DB::table('historias_clinicas_mg')->insert([
             'id_paciente' => 1,
-            'fecha' => Carbon::parse('2001-03-09'),
+            'id_enfermedad' => 1,
+            'a_enfermedad' => Str::random(10),
+            'fecha' => Carbon::parse('2021-04-24'),
             'motivo_consulta' => Str::random(10),
-            'tipo_atencion' => Str::random(10),
-            'condicion_diagnostico' => Str::random(10),
-            'diagnostico_presuntivo' => Str::random(10),
-            'diagnostico_diferencial' => Str::random(10),
+            'tipo_atencion' => 'Presuntivo',
+            'condicion_diagnostico' => 'Presuntivo',
+            'diagnostico' => Str::random(10),
             'plan_terapeutico' => Str::random(10),
-            'lugar_atencion' => Str::random(10),
-            'raza' => Str::random(10),
+            'lugar_atencion' => 'Patronato',
             'certificado' => true,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
-        DB::table('historial_enfermedades')->insert([
-            'id_historia_clinica_mg' => 1,
-            'id_enfermedad' => 1,
-            'id_a_enfermedad' => 1,
 
-        ]);
 
         DB::table('historias_clinicas_rf')->insert([
             'id_paciente' => 1,
