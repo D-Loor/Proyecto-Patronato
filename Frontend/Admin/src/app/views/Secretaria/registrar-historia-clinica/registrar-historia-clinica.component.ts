@@ -25,6 +25,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
   orden:number = 1;
+  id_obstetrico:number;
   EstadoVida: boolean = true;
   number: number = 0;
   DatosFamiliares: any = [];
@@ -253,47 +254,60 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
   }
 
-  IngresarDatosPaciente(){
-    
-    let id_obstetrico;
-    this.orden=1;
-    if(this.orden == 1){
-      let obstetricos = {
-        'FUM':this.fum,
-        'FPP':this.fpp,
-        'edad_gestional': this.edad_gestional,
-        'menarquia':this.menarquia,
-        'flujo_genital':this.flujo_genital,
-        'gestas': this.Gestas,
-        'partos': this.Partos,
-        'cesareas': this.cesareas,
-        'abortos': this.abortos,
-      }
-      
-    this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
-      id_obstetrico = data['id'];
-      this.orden++;
-        if(this.orden == 2){
-          let APerosonales = {
-            'id_gineco':id_obstetrico,
-            'infancia':this.ninezT,
-            'adolecencia': this.adolescenciaT,
-            'adultez':this.adultezT,
-            'DBT':this.DBT,
-            'HTA': this.HTA,
-            'TBC': this.TBC,
-            'GEMELAR': this.GEMELAR,
-            'quirujircos': this.quirurgicosT,
-            'alergias': this.alergicosT,
-            'traumas': this.traumatologicosT,
-          }
-          this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
-            this.orden++;
-          });
-        }
-
-    });
+  ingresarObstetrico(){
+    let obstetricos = {
+      'FUM':this.fum,
+      'FPP':this.fpp,
+      'edad_gestional': this.edad_gestional,
+      'menarquia':this.menarquia,
+      'flujo_genital':this.flujo_genital,
+      'gestas': this.Gestas,
+      'partos': this.Partos,
+      'cesareas': this.cesareas,
+      'abortos': this.abortos,
     }
+    this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
+      this.id_obstetrico = data['id'];
+      this.IngresarAntecedesPersonales();
+    });
+  }
+
+  IngresarAntecedesPersonales(){
+    if(this.sexo=="Hombre"){
+      this.id_obstetrico = 1;
+    }
+    let APerosonales = {
+      'id_gineco':this.id_obstetrico,
+      'infancia':this.ninezT,
+      'adolecencia': this.adolescenciaT,
+      'adultez':this.adultezT,
+      'DBT':this.DBT,
+      'HTA': this.HTA,
+      'TBC': this.TBC,
+      'GEMELAR': this.GEMELAR,
+      'quirujircos': this.quirurgicosT,
+      'alergias': this.alergicosT,
+      'traumas': this.traumatologicosT,
+    }
+    this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
+      Swal.fire(
+        'Guardado',
+        'Los datos se guardaron correctamente',
+        'success'
+      )
+    });
+  }
+
+  IngresarDatosPaciente(){
+    if(this.sexo=="Mujer"){
+      this.ingresarObstetrico()
+    }else{
+     this.IngresarAntecedesPersonales();
+    }
+
+    
+    
+    
 
   }
   
