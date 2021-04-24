@@ -24,7 +24,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="text-input">Nombres</label>
-                                            <input autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="nombres"   name="nombres" class="form-control" placeholder="Ingrese los nombres">
+                                            <input autocomplete="off" required type="text" id="nombresP"  [(ngModel)]="nombresP"   name="nombresP" class="form-control" placeholder="Ingrese los nombres">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -33,7 +33,7 @@
                                             <div class="input-group">
                                                 <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
                                                 <span class="input-group-append">
-                                                    <button type="button" class="btn btn-primary">Consultar</button>
+                                                    <button type="button" class="btn btn-primary" (click)="Consultar()">Consultar</button>
                                                 </span>
                                             </div>
                                             
@@ -239,11 +239,11 @@
                                         <div class="row">
                                             <div class="form-group col-sm-3">
                                                 <label for="text-input">Gestas</label>
-                                                <input autocomplete="off" required type="text" id="Gestas" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Gestas" name="Gestas" class="form-control" placeholder="Ingrese el número de gestas">
+                                                <input autocomplete="off" required type="number" id="Gestas" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Gestas" name="Gestas" class="form-control" placeholder="Ingrese el número de gestas">
                                             </div>
                                             <div class="form-group col-sm-3">
                                                 <label for="text-input">Partos</label>
-                                                <input autocomplete="off" required type="text" id="Partos" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Partos" name="Partos" class="form-control" placeholder="Ingrese el número de partos" >
+                                                <input autocomplete="off" required type="number" id="Partos" class="form-control form-input select-number " autocomplete="off" [(ngModel)]="Partos" name="Partos" class="form-control" placeholder="Ingrese el número de partos" >
                                             </div>
                                             <div class="form-group col-sm-3">
                                                 <label for="text-input">Abortos</label>
@@ -776,8 +776,11 @@
                                 </div><!--/.row-->
 
                             </form>
+                            <button *ngIf="edit==0" type="submit" class="btn btn-lg btn-primary boto" (click)="IngresarDatosPaciente()">Registrar Paciente</button>
+                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto">Editar Datos del Paciente</button>
                         </div>
                     </div>
+                   
             </div>
             
         </div>

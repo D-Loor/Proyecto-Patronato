@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
-
+import Swal from 'sweetalert2';
+import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
+import { SecretariaService } from '../../../servicios/secretaria.service';
 @Component({
   selector: 'app-registrar-historia-clinica',
   templateUrl: './registrar-historia-clinica.component.html',
@@ -8,8 +10,10 @@ import { navItems } from '../../../_nav';
 })
 export class RegistrarHistoriaClinicaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService ) { }
 
+  public sidebarMinimized = false;
+  public navItems = navItems;
   inputCedula: boolean = false;
   inputCedula2: boolean = false;
   ClaseCdula:string="form-control form-input select-number"; 
@@ -21,18 +25,32 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
   EstadoVida: boolean = true;
-  nombres:string;
-  estado:string;
-  estadoT:string;
-  union:string;
-  union2:string;
   number: number = 0;
   DatosFamiliares: any = [];
+  edit:number = 0;
 
-  public sidebarMinimized = false;
-  public navItems = navItems;
+  //Variables de  Datos de Afiliación
+  apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
+  raza; religion; nivel_instrucciong; estado_civil;
 
-  
+  //Variables de datos de Antecedentes Patológicos Personales
+  ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
+  menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBT; HTA; TBC; GEMELAR; 
+
+  //Variables de Antecedentes Patológicos Familiares
+  nombres; union; estado; estadoT; union2;
+
+  //Variables de Hábitos Personales
+  alcoholT; tabacoT; drogasT; alimentacionT; diuresisT; somniaT; 
+
+  //Variables de Examenes Físicos Generales
+  examen_cabezaT; examen_cuelloT; examen_toraxT; examen_abdomenT; examen_msuperiorT; examen_minferioresT; examen_genitalT; examen_analT;
+
+  //Variables de Examenes de Organos y Sistemas
+  examen_digestivoT; examen_respiratorioT; examen_cardiacoT; examen_genitourinarioT; examen_osteomuscularT; examen_nerviosoT;
+
+  //Variables de Examenes Complementarios
+  examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
   
 
 
@@ -72,7 +90,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     this.number --;
   }
 
-ValidarCedula(cedulaV: number) {
+  ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
     
     if(cedula.length === 9 || cedula === "undefined" ||  cedula === "null"){
@@ -167,6 +185,94 @@ ValidarCedula(cedulaV: number) {
       return false;
     }
   
+  }
+
+  Consultar(){
+    debugger
+    if(this.cedula== undefined || this.cedula=="undefined"){
+      Swal.fire(
+        'Campo vacío',
+        'Ingrese un número de cédula',
+        'warning'
+      )
+    }else{
+      this.medicinag.AtenderPaciente(this.cedula).then(data => {      
+        if(data['code'] === '201'){
+          const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+            
+          },
+          buttonsStyling: true
+          })
+    
+          swalWithBootstrapButtons.fire({
+            title: 'El paciente cuenta con historial clínico',
+            text: "Desea observar sus datos para poderlos editar",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Si, editar registros!',
+            cancelButtonText: 'No, cancelar!',
+            confirmButtonColor: '#4BB543',
+            cancelButtonColor: '#d33',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+            //llamar los datos y llenarlos
+            this.edit=1;
+            
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              this.edit=0;
+              swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'Se ha cancelado correctamente',
+                'error'
+              )
+            }
+          })
+         }
+         else{
+          Swal.fire(
+            'Paciente no encontrado',
+            'El paciente con la cedula ' + this.cedula + ' no cuenta con historial clínico',
+            'error'
+          )
+         }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+    }
+    
+  
+  }
+
+  IngresarDatosPaciente(){
+    let id_obstetrico;
+    let obstetricos = {
+      'FUM':this.fum,
+      'FPP':this.fpp,
+      'edad_gestional': this.edad_gestional,
+      'menarquia':this.menarquia,
+      'flujo_genital':this.flujo_genital,
+      'gestas': this.Gestas,
+      'partos': this.Partos,
+      'cesareas': this.cesareas,
+      'abortos': this.abortos,
+    }
+    
+    this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
+      id_obstetrico = data['id'];
+      debugger
+    });
+
+
+
   }
   
 
