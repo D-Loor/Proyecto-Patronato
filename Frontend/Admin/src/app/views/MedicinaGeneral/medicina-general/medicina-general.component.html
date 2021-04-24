@@ -10,7 +10,7 @@
           <div class="form-group">
             <div class="col-md-4 searcht">
               <div class="input-group">
-                <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">
                   <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                 </span>
@@ -41,7 +41,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of historialMGPaginate">
+                <ng-container *ngIf="search == ''; else filtroMG">
+                  <tr *ngFor="let item of historialMGPaginate">
                     <td>{{item.paciente.cedula}}</td>
                     <td>{{item.paciente.nombres}}</td>
                     <td>{{item.paciente.apellidos}}</td>
@@ -60,12 +61,34 @@
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
                 </tr>
-
-
+                </ng-container>
+                
+                <ng-template #filtroMG>
+                  <tr *ngFor="let item of historialMGPaginateFilter">
+                    <td>{{item.paciente.cedula}}</td>
+                    <td>{{item.paciente.nombres}}</td>
+                    <td>{{item.paciente.apellidos}}</td>
+                    <td>{{item.paciente.edad}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.lugar_atencion}}</td>
+                    <td>
+                      <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
+                      <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
+                    </td>
+                  <td>
+                    <button type="button" class="btn btn-ghost-info botont"  (click)="DatosConsulta(item.paciente.gad)"><i
+                        class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
+                    
+                    <button type="button" class="btn btn-ghost-danger botont"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                  </td>
+                </tr>
+                </ng-template>
               </tbody>
             </table>
             <nav>
-              <pagination  [totalItems]="historialMG.length" (pageChanged)="pageChanged($event)"></pagination>
+              <pagination *ngIf="search==''" [totalItems]="historialMG.length" (pageChanged)="pageChanged($event)"></pagination>
+              <pagination *ngIf="search!=''" [totalItems]="historialMGFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
             </nav>
           </div>
 

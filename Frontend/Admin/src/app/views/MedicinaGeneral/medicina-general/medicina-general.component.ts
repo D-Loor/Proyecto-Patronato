@@ -10,7 +10,7 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
   styleUrls: ['./medicina-general.component.scss']
 })
 export class MedicinaGeneralComponent implements OnInit {
-
+ 
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
   @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
@@ -19,6 +19,8 @@ export class MedicinaGeneralComponent implements OnInit {
   search=""; 
   historialMG:any[];
   historialMGPaginate:any[];
+  historialMGFilter=[];
+  historialMGPaginateFilter=[];
   gad:string;
 
   ngOnInit() {
@@ -35,7 +37,28 @@ export class MedicinaGeneralComponent implements OnInit {
 
   }
 
+  dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    this.historialMGFilter=[];
+      this.historialMGPaginateFilter=[];
+    if(this.search==''){
+    }else{
+      for (const x of this.historialMG) {
 
+        if(x['paciente'].cedula.indexOf(this.search)> -1){
+         this.historialMGFilter.push(x);
+       };
+      };
+      this.historialMGPaginateFilter = this.historialMGFilter.slice(0, 10);
+    }
+    
+  }
+
+  pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.historialMGPaginateFilter = this.historialMGFilter.slice(startItem, endItem);
+  }
 
   pageChanged(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional

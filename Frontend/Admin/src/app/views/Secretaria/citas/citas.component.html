@@ -37,49 +37,47 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="searchMG == ''; else filtro2">
-                <tr *ngFor="let item of citasMGPaginate ">
+              <ng-container *ngIf="searchMG == ''; else filtroMG">
+                <tr *ngFor="let item of citasMGPaginate" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
-                  <td>{{item.hora}}</td>
+                  <td>{{item.turno.hora}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-ghost-info botont"><i
-                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                    <button type="button" class="btn btn-ghost-success botont"><i
-                        class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
+                    
+                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                        class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                    <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
+                          class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-  
                   </td>
                 </tr>
               </ng-container>
               
-              <ng-template #filtro2>
-                <tr *ngFor="let item of citasMGPaginateFilter ">
+              <ng-template #filtroMG>
+                <tr *ngFor="let item of citasMGPaginateFilter" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
-                  <td>{{item.hora}}</td>
+                  <td>{{item.turno.hora}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-ghost-info botont"><i
-                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                    <button type="button" class="btn btn-ghost-success botont"><i
-                        class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
+                   
+                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                        class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                    <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
+                          class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-  
                   </td>
                 </tr>
               </ng-template>
-              
-
             </tbody>
           </table>
           <nav>
@@ -130,30 +128,54 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of citasMGPaginate ">
+              <ng-container *ngIf="searchRF == ''; else filtroRF">
+              <tr *ngFor="let item of citasRFPaginate" >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
-                <td>{{item.hora}}</td>
+                <td>{{item.turno.hora}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                   <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-ghost-info botont"><i
-                      class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                  <button type="button" class="btn btn-ghost-success botont"><i
-                      class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'RF')"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                  
+                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                    class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
+                      class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                    class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 
                 </td>
               </tr>
+            </ng-container>
+      
+            <ng-template #filtroRF>
+              <tr *ngFor="let item of citasRFPaginateFilter" >
+                <td class="table-titulo">{{item.nombres}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.turno.hora}}</td>
+                <td>
+                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
+                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                </td>
+                <td>
+                  
+                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                    class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
+                      class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                    class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 
-
+                </td>
+              </tr>
+            </ng-template>
             </tbody>
           </table>
           <nav>
-            <pagination  [totalItems]="citasMG.length" (pageChanged)="pageChangedRF($event)"></pagination>
+            <pagination *ngIf="searchRF==''" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="searchRF!=''" [totalItems]="citasRFFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
           </nav>
         </div>
        </div>

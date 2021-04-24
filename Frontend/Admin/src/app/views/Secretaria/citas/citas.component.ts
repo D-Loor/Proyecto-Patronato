@@ -23,13 +23,13 @@ export class CitasComponent implements OnInit {
   public navItems = navItems;
 
   citasMG:any[];
-  citasMGFilter:any[];
+  citasMGFilter=[];
   citasMGPaginate:any[];
-  citasMGPaginateFilter:any[];
+  citasMGPaginateFilter=[];
   citasRF:any[];
-  citasRFFilter:any[];
+  citasRFFilter=[];
   citasRFPaginate:any[];
-  citasRFPaginateFilter:any[];
+  citasRFPaginateFilter=[];
 
   today = new Date();
   fechaActual:string;
@@ -59,7 +59,7 @@ export class CitasComponent implements OnInit {
       for (const x of this.citasMG) {
         debugger
         if(x.cedula.indexOf(this.searchMG)> -1){
-         this.citasRFFilter.push(x);
+         this.citasMGFilter.push(x);
        };
       };
       debugger

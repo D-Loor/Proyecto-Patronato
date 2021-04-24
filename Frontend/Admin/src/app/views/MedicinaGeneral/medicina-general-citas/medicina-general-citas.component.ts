@@ -16,8 +16,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   constructor(public citasser:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
 
   isCollapsed2 = false;
-  isCollapsed = true;
-  buscar:string="";
+  isCollapsed = true; 
+  search:string="";
   especialidad:string="Medicina General";
   Estado:number=1;
   validacion:string;
@@ -25,6 +25,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   public navItems = navItems;
   citasMG:any[];
   citasMGPaginate:any[];
+  citasMGFilter=[];
+  citasMGPaginateFilter=[];
   Valida=[];
   citasEliminar:any[];
   today = new Date();
@@ -48,6 +50,28 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
   //  }
 
+  dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    this.citasMGFilter=[];
+      this.citasMGPaginateFilter=[];
+    if(this.search==''){
+    }else{
+      for (const x of this.citasMG) {
+
+        if(x.cedula.indexOf(this.search)> -1){
+         this.citasMGFilter.push(x);
+       };
+      };
+      this.citasMGPaginateFilter = this.citasMGFilter.slice(0, 10);
+    }
+    
+  }
+
+  pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
+    event.itemsPerPage = 10; //opcional
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.citasMGPaginateFilter = this.citasMGFilter.slice(startItem, endItem);
+  }
   
   eliminar(id:string) {
     this.citasser.elicitas(id).then(data => {
