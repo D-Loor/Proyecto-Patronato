@@ -14,7 +14,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   presun=false;
   defini=false;
   salida="¡No se encontró!";
-  enferme='name';
+  enferme="name";
   valor;
   lugar_atencion;
   condicion_diagnostico;
@@ -57,6 +57,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   cargar(){
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
+      
       this.completar();
     }).catch(error =>{
       console.log(error);
@@ -68,7 +69,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   completar(){
     for (let x in this.enfermedades){
       this.data.push({ "id":this.enfermedades[x]["id_enfermedad"], "name":this.enfermedades[x]["enfermedad"]});
-
+      
     }
 
   }
@@ -115,7 +116,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       'diagnostico': this.diagnostico,
       'plan_terapeutico': this.plan_terapeutico,
       'lugar_atencion': this.lugar_atencion,
-      'certificado': this.certificado,
+      'certificado': true,
     }
     this.medicinag.AgregarConsulta(data).then(data =>{
 
