@@ -22,11 +22,9 @@ class CreateHistoriaClinicaMGSTable extends Migration
             $table->string('motivo_consulta');
             $table->string('tipo_atencion');
             $table->string('condicion_diagnostico');
-            $table->string('diagnostico_presuntivo');
-            $table->string('diagnostico_diferencial');
+            $table->string('diagnostico');
             $table->string('plan_terapeutico');
             $table->string('lugar_atencion');
-            $table->string('raza');
             $table->boolean('certificado');
 
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');

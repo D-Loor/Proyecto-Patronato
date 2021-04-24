@@ -15,9 +15,22 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   defini=false;
   salida="¡No se encontró!";
   public enferme='name';
+
+  lugar_atencion;
+  condicion_diagnostico;
+  tipo_atencion;
+  motivo;
+  antecedentes_enfermedad;
+  diagnostico;
+  plan_terapeutico;
+  certificado;
   enfermedades: any[];
   data = [];
-  nombres:string; cedula:string; edad:string; gad:string;
+  nombres:string;
+  cedula:string;
+  edad:string;
+  gad;
+  gadv;
 
   ngOnInit(): void {
     this.cargar();
@@ -58,11 +71,15 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   CargarDatos(){
     let cedula = localStorage.getItem('cedulaMG');
-    this.medicinag.AtenderPaciente(cedula).then(data => {      
+    this.medicinag.AtenderPaciente(cedula).then(data => {
       this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
       this.edad = data['result'].edad;
       this.gad = data['result'].gad;
+      if(this.gad==1)
+       this.gadv="Miembro activo";
+      else
+        this.gadv="No consta como miembro activo";
     })
     .catch((error) => {
       console.log(error);
