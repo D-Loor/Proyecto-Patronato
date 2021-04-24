@@ -68,6 +68,16 @@ export class MedicinaGeneralService {
     });
   }
 
-
+  AgregarConsulta(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/HistorialClinicoMedicinaGeneral';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
 }

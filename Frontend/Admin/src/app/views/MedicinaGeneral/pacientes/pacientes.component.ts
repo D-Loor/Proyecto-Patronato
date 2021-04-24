@@ -108,12 +108,12 @@ export class PacientesComponent implements OnInit {
     this.religion=data['result'].religion;
     this.nivel_instruccion=data['result'].nivel_instruccion;
     this.estado_civil=data['result'].estado_civil;
-    this.alcoholT=data['result']['habitos']['0'].alcohol;
-    this.tabacoT=data['result']['habitos']['0'].tabaco;
-    this.drogasT=data['result']['habitos']['0'].drogas;
-    this.alimentacionT=data['result']['habitos']['0'].alimentacion;
-    this.diuresisT=data['result']['habitos']['0'].diuresis;
-    this.somniaT=data['result']['habitos']['0'].somnia;
+    this.alcoholT=data['result']['habitos'].alcohol;
+    this.tabacoT=data['result']['habitos'].tabaco;
+    this.drogasT=data['result']['habitos'].drogas;
+    this.alimentacionT=data['result']['habitos'].alimentacion;
+    this.diuresisT=data['result']['habitos'].diuresis;
+    this.somniaT=data['result']['habitos'].somnia;
 
     this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
     this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
