@@ -10,18 +10,30 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
   styleUrls: ['./medicina-general.component.scss']
 })
 export class MedicinaGeneralComponent implements OnInit {
- 
+
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
 
   @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
   public sidebarMinimized = false;
   public navItems = navItems;
-  search=""; 
+  search="";
   historialMG:any[];
   historialMGPaginate:any[];
   historialMGFilter=[];
   historialMGPaginateFilter=[];
-  gad:string;
+  gad;
+  NPaciente="";
+  Fecha="";
+  motivo;
+  enfermedades;
+  lugar_atencion;
+  condicion_diagnostico;
+  tipo_atencion;
+  antecedentes_enfermedad;
+  diagnostico;
+  diagno;
+  plan_terapeutico;
+  certificado;
 
   ngOnInit() {
     this.cargar();
@@ -50,7 +62,7 @@ export class MedicinaGeneralComponent implements OnInit {
       };
       this.historialMGPaginateFilter = this.historialMGFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
@@ -71,11 +83,43 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMG = null;
     this.historialMGPaginate = null;
   }
-  
-  DatosConsulta(gad:string){
-    this.gad = gad;
+
+  DatosConsulta(arreglo:[]){
+    debugger
+
+    var paciente=arreglo['paciente'];
+    console.log(arreglo);
+    this.NPaciente=paciente['nombres']+" "+paciente['apellidos'];
+    this.Fecha=arreglo['fecha'];
+    this.gad =paciente['gad'];
+
+    this.enfermedades=arreglo[''];
+    this.antecedentes_enfermedad=arreglo[''];
+
+    this.lugar_atencion=arreglo['lugar_atencion'];
+    this.tipo_atencion=arreglo['tipo_atencion'];
+    this.motivo=arreglo["motivo_consulta"];
+    this.lugar_atencion=arreglo['lugar_atencion'];
+    this.condicion_diagnostico=arreglo['condicion_diagnostico'];
+    this.plan_terapeutico=arreglo['plan_terapeutico'];
+
+    if(arreglo['condicion_diagnostico']=="Presuntivo"){
+      this.diagnostico=arreglo['diagnostico_presuntivo'];
+      this.diagno="Diagnóstio Presuntivo";
+    }else{
+      this.diagnostico=arreglo['diagnostico_diferencial'];
+      this.diagno="Diagnóstio Diferencial";
+    }
+
+    if(arreglo['certificado']==1){
+      this.certificado="Se entregó certificado al paciente.";
+    }else
+    this.certificado="No se entregó certificado al paciente.";
+
+
+
     this.DatosdeConsultas.show();
   }
-  
+
 
 }
