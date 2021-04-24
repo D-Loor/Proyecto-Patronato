@@ -20,6 +20,18 @@ export class SecretariaService {
     });
   }
 
+  AtecedentesPersonales(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/APP';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   Actualizar(data:any,id:string) {
     let  url = 'http://127.0.0.1:8000/api/AGO'+id;
     return new Promise ((resolve, reject) => {

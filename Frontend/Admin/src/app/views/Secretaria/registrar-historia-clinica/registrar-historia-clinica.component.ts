@@ -24,6 +24,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
+  orden:number = 1;
   EstadoVida: boolean = true;
   number: number = 0;
   DatosFamiliares: any = [];
@@ -253,25 +254,46 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   IngresarDatosPaciente(){
-    let id_obstetrico;
-    let obstetricos = {
-      'FUM':this.fum,
-      'FPP':this.fpp,
-      'edad_gestional': this.edad_gestional,
-      'menarquia':this.menarquia,
-      'flujo_genital':this.flujo_genital,
-      'gestas': this.Gestas,
-      'partos': this.Partos,
-      'cesareas': this.cesareas,
-      'abortos': this.abortos,
-    }
     
+    let id_obstetrico;
+    this.orden=1;
+    if(this.orden == 1){
+      let obstetricos = {
+        'FUM':this.fum,
+        'FPP':this.fpp,
+        'edad_gestional': this.edad_gestional,
+        'menarquia':this.menarquia,
+        'flujo_genital':this.flujo_genital,
+        'gestas': this.Gestas,
+        'partos': this.Partos,
+        'cesareas': this.cesareas,
+        'abortos': this.abortos,
+      }
+      
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
       id_obstetrico = data['id'];
-      debugger
+      this.orden++;
+        if(this.orden == 2){
+          let APerosonales = {
+            'id_gineco':id_obstetrico,
+            'infancia':this.ninezT,
+            'adolecencia': this.adolescenciaT,
+            'adultez':this.adultezT,
+            'DBT':this.DBT,
+            'HTA': this.HTA,
+            'TBC': this.TBC,
+            'GEMELAR': this.GEMELAR,
+            'quirujircos': this.quirurgicosT,
+            'alergias': this.alergicosT,
+            'traumas': this.traumatologicosT,
+          }
+          this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
+            this.orden++;
+          });
+        }
+
     });
-
-
+    }
 
   }
   
