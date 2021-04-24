@@ -269,10 +269,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
       this.id_obstetrico = data['id'];
       this.IngresarAntecedesPersonales();
-      this.ExamenesFisicos();
-      this.ExamenesOrganos();
-      this.ExamenesComplemenrarios();
-      this.Habitos();
     });
   }
 
@@ -294,7 +290,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'traumas': this.traumatologicosT,
     }
     this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
-      
+      this.id_patologico = data['id'];
+      this.ExamenesFisicos();
     });
   }
 
@@ -310,7 +307,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'region_anal': this.examen_analT,
     }
     this.ServicioSecretaria.ExamenesFisicos(EFisicos).then(data =>{
-     
+     this.id_e_fisico = data['id'];
+     this.ExamenesOrganos();
     });
   }
 
@@ -324,7 +322,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'sistema_nervioso': this.examen_nerviosoT,
     }
     this.ServicioSecretaria.ExamenesOrganosSistema(ESitemas).then(data =>{
-     
+     this.id_sistema = data['id'];
+     this.ExamenesComplemenrarios();
     });
   }
 
@@ -336,6 +335,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'otros':this.examen_otrosT,
     }
     this.ServicioSecretaria.ExamenesComple(EComplementarios).then(data =>{
+      this.id_complementario = data['id'];
+      this.Habitos();
     });
   }
 
@@ -349,20 +350,34 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'somnia':this.somniaT,
     }
     this.ServicioSecretaria.HabitosPaciente(habitosA).then(data =>{
-      
+      this.id_habito = data['id'];
+      this.Pacientes();
     });
   }
 
   Pacientes(){
+    debugger
     let pacientesA = {
-      'alcohol':this.alcoholT,
-      'tabaco':this.tabacoT,
-      'drogas': this.drogasT,
-      'alimentacion':this.alimentacionT,
-      'diuresis':this.diuresisT,
-      'somnia':this.somniaT,
+      'id_patologico':this.id_patologico,
+      'id_e_fisico':this.id_e_fisico,
+      'id_e_organo_sistema': this.id_sistema,
+      'id_e_complementario':this.id_complementario,
+      'nombres':this.nombresP,
+      'cedula':this.cedula,
+      'apellidos':this.apellidos,
+      'edad':this.edad,
+      'sexo':this.sexo,
+      'gad':1,
+      'ocupacion':this.ocupacion,
+      'residencia':this.Lresidencia,
+      'procedencia':this.Lprocedencia,
+      'estado_civil':this.estado_civil,
+      'raza':this.raza,
+      'religion':this.religion,
+      'fecha_nacimiento':this.fechanacimiento,
+      'nivel_instruccion':this.nivel_instrucciong,
     }
-    this.ServicioSecretaria.HabitosPaciente(pacientesA).then(data =>{
+    this.ServicioSecretaria.AgregarPaciente(pacientesA).then(data =>{
       Swal.fire(
         'Guardado',
         'Los datos se guardaron correctamente',
@@ -376,10 +391,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
-     this.ExamenesFisicos();
-     this.ExamenesOrganos();
-     this.ExamenesComplemenrarios();
-     this.Habitos();
     }
   }
   
