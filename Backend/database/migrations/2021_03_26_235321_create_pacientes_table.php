@@ -19,6 +19,7 @@ class CreatePacientesTable extends Migration
             $table->unsignedBigInteger('id_e_fisico');
             $table->unsignedBigInteger('id_e_organo_sistema');
             $table->unsignedBigInteger('id_e_complementario');
+            $table->unsignedBigInteger('id_habito');
             $table->string('cedula');
             $table->string('nombres');
             $table->string('apellidos');
@@ -38,6 +39,7 @@ class CreatePacientesTable extends Migration
             $table->foreign('id_e_fisico')->references('id_e_fisico')->on('examen_fisicos')->onDelete('cascade');
             $table->foreign('id_e_organo_sistema')->references('id_e_organo_sistema')->on('examen_organo_sistemas')->onDelete('cascade');
             $table->foreign('id_e_complementario')->references('id_e_complementario')->on('examenes_complementarios')->onDelete('cascade');
+            $table->foreign('id_habito')->references('id_habito')->on('habitos')->onDelete('cascade');
         });
     }
 

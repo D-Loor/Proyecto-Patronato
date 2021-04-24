@@ -171,6 +171,7 @@ class DatabaseSeeder extends Seeder
             'id_patologico' => 1,
             'id_e_organo_sistema' => 1,
             'id_e_complementario' => 1,
+            'id_habito' => 1,
             'cedula' => '1314567908',
             'nombres' => Str::random(10),
             'apellidos' => Str::random(10),
@@ -197,14 +198,16 @@ class DatabaseSeeder extends Seeder
             'motivo_consulta' => Str::random(10),
             'tipo_atencion' => 'Presuntivo',
             'condicion_diagnostico' => 'Presuntivo',
-            'diagnostico' => Str::random(10),
+            'diagnostico_diferencial' => Str::random(10),
+            'diagnostico_presuntivo' => Str::random(10),
             'plan_terapeutico' => Str::random(10),
+            'raza' => Str::random(10),
             'lugar_atencion' => 'Patronato',
             'certificado' => true,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
-
+ 
 
         DB::table('historias_clinicas_rf')->insert([
             'id_paciente' => 1,
@@ -218,10 +221,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        DB::table('habito_pacientes')->insert([
-            "id_habito" => 1,
-            "id_paciente" => 1,
-        ]);
+        
 
         DB::table('antecedente_patologico_familiares')->insert([
             "id_familiar" => 1,

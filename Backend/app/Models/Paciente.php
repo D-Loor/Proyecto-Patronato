@@ -13,7 +13,7 @@ class Paciente extends Model
     protected $primaryKey = 'id_paciente';
 
      protected $fillable = [
-        'id_patologico',  'id_e_fisico',  'id_e_organo_sistema',  'id_e_complementario','cedula', 'nombres',  'apellidos',  'edad',  'sexo', 'gad', 'ocupacion',  'residencia', 'procedencia', 'estado_civil', 'raza', 'religion', 'fecha_nacimiento', 'nivel_instruccion',
+        'id_patologico', 'id_habito',  'id_e_fisico',  'id_e_organo_sistema',  'id_e_complementario','cedula', 'nombres',  'apellidos',  'edad',  'sexo', 'gad', 'ocupacion',  'residencia', 'procedencia', 'estado_civil', 'raza', 'religion', 'fecha_nacimiento', 'nivel_instruccion',
     ];
     
     public function historias_clinicas_mg(){
@@ -24,7 +24,7 @@ class Paciente extends Model
      }
 
    public function habitos(){
-        return $this->belongsToMany('App\Models\Habito','habito_pacientes','id_paciente','id_habito');
+        return $this->belongsTo('App\Models\Habito','id_habito');
      }
 
    public function familiares(){

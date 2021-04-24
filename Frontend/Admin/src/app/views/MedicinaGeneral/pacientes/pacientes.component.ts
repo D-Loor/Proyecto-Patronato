@@ -148,9 +148,6 @@ export class PacientesComponent implements OnInit {
     this.examen_electrocardiogramaT=data['result']['examene_complementarios'].laboratorio;
     this.examen_RToraxT=data['result']['examene_complementarios'].laboratorio;
     this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
-
-
-
   }).catch(error =>{
     console.log(error);
 });

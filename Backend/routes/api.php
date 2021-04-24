@@ -33,7 +33,6 @@ Route::resource('Complementarios','ExamenesComplementarioController');
 Route::resource('HistoriasClinicasRF','HistoriaClinicaRFController');
 Route::resource('ExamenesFisicos','ExamenFisicoController');
 Route::resource('ExamenesOrganosSistemas','ExamenOrganoSistemaController');
-Route::resource('HabitosPaciente','HabitoPacienteController');
 Route::resource('Habitos','HabitoController');
 Route::resource('Roles','RoleController');
 Route::resource('Cuentas','CuentaController');
