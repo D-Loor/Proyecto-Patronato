@@ -76,7 +76,7 @@ class PacienteController extends Controller
      */
     public function show($id_paciente)
     {
-        $datos=Paciente::with('habitos')->where('id_paciente', $id_paciente)->get()->first();
+        $datos=Paciente::with('habitos','antecedentes_patologicos_personales','familiares','examen_fisicos','examen_organo_sistemas','examene_complementarios')->where('id_paciente', $id_paciente)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else

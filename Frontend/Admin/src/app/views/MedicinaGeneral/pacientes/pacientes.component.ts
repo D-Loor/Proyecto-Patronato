@@ -25,9 +25,15 @@ export class PacientesComponent implements OnInit {
   pacientesMGPaginate:any[];//variable para el paginado
   pacientesMGFilter=[];//variable para el paginado sin el pipe
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
+  APF:any[];
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
-  tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string;
+  tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
+  adultezT:string; quirurgicosT:string; alergicosT:string; traumatologicosT:string; fum:string; fpp:string; edad_gestional:string;
+  menarquia:string; flujo_genital:string; Gestas:string; Partos:string; abortos:string; cesareas:string; DBT:string; HTA:string; TBC:string;
+  GEMELAR:string; examen_cabezaT:string; examen_cuelloT:string; examen_toraxT:string; examen_abdomenT:string; examen_msuperiorT:string; examen_minferioresT:string;
+  examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string; 
+  examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string;
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = false;
@@ -88,6 +94,7 @@ export class PacientesComponent implements OnInit {
   DatosPaciente(id_paciente:string){
     this.Principal.show();
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
+    debugger
     this.apellidos=data['result'].apellidos;
     this.nombres=data['result'].nombres;
     this.cedula=data['result'].cedula;
@@ -107,6 +114,42 @@ export class PacientesComponent implements OnInit {
     this.alimentacionT=data['result']['habitos']['0'].alimentacion;
     this.diuresisT=data['result']['habitos']['0'].diuresis;
     this.somniaT=data['result']['habitos']['0'].somnia;
+
+    this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
+    this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
+    this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
+    this.DBT=data['result']['antecedentes_patologicos_personales'].DBT;
+    this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
+    this.TBC=data['result']['antecedentes_patologicos_personales'].TBC;
+    this.GEMELAR=data['result']['antecedentes_patologicos_personales'].GEMELAR;
+    this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
+    this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
+    this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
+    
+    this.APF=data['result']['familiares'];
+    
+    this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
+    this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
+    this.examen_toraxT=data['result']['examen_fisicos'].torax;
+    this.examen_abdomenT=data['result']['examen_fisicos'].abdomen;
+    this.examen_msuperiorT=data['result']['examen_fisicos'].miembros_superiores;
+    this.examen_minferioresT=data['result']['examen_fisicos'].miembros_inferiores;
+    this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
+    this.examen_analT=data['result']['examen_fisicos'].region_anal;
+
+    this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
+    this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;
+    this.examen_cardiacoT=data['result']['examen_organo_sistemas'].sistema_cardiaco;
+    this.examen_genitourinarioT=data['result']['examen_organo_sistemas'].sistema_genitourinarion;
+    this.examen_osteomuscularT=data['result']['examen_organo_sistemas'].sistema_osteomuscular;
+    this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
+
+    this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
+    this.examen_electrocardiogramaT=data['result']['examene_complementarios'].laboratorio;
+    this.examen_RToraxT=data['result']['examene_complementarios'].laboratorio;
+    this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
+
+
 
   }).catch(error =>{
     console.log(error);
