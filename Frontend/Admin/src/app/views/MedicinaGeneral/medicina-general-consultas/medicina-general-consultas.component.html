@@ -91,7 +91,10 @@
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
                         [itemTemplate]="itemTemplate"
-                        [notFoundTemplate]="notFoundTemplate">
+                        [notFoundTemplate]="notFoundTemplate"
+                        paramName="valor"
+                         payloadPropName="valor"
+                        >
                       </ng-autocomplete>
 
                       <ng-template #itemTemplate let-item>

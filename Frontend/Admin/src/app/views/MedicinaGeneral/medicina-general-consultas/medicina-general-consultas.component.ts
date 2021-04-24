@@ -15,7 +15,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   defini=false;
   salida="¡No se encontró!";
   enferme='name';
-
+  valor;
   lugar_atencion;
   condicion_diagnostico;
   tipo_atencion;
@@ -68,7 +68,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   completar(){
     for (let x in this.enfermedades){
       this.data.push({ "id":this.enfermedades[x]["id_enfermedad"], "name":this.enfermedades[x]["enfermedad"]});
-      console.log(this.data);
+
     }
 
   }
@@ -90,8 +90,14 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     });
   }
 
+  selectEvent(event) {
+    debugger
+    console.log(event)
+  }
+
   IngresarConsulta(){
     var id;
+    console.log(this.enferme);
     for (let item of this.enfermedades){
       debugger
       if(this.enferme==item['enfermedad']){
@@ -100,7 +106,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     }
 
     let data = {
-      'id_enfermedad':id,
+      'id_enfermedad':1,
       'a_enfermedad':this.antecedentes_enfermedad,
       'fecha': this.fechaActual,
       'motivo_consulta':this.motivo,
