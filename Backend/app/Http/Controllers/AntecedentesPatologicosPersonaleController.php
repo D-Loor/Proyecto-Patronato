@@ -55,7 +55,8 @@ class AntecedentesPatologicosPersonaleController extends Controller
         $datos->alergias=$request->alergias;
         $datos->traumas=$request->traumas;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_patologico;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id' => $idRecienGuardado]);
     }
 
     /**
