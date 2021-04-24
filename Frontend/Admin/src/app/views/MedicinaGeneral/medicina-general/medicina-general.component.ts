@@ -122,7 +122,6 @@ export class MedicinaGeneralComponent implements OnInit {
 
     this.antecedentes_enfermedad=enferme['enfermedad'];
 
-    console.log(arreglo);
 
     this.DatosdeConsultas.show();
   }

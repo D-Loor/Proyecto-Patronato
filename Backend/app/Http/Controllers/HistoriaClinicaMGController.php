@@ -50,11 +50,9 @@ class HistoriaClinicaMGController extends Controller
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;
         $datos->condicion_diagnostico=$request->condicion_diagnostico;
-        $datos->diagnostico_presuntivo=$request->diagnostico_presuntivo;
-        $datos->diagnostico_diferencial=$request->diagnostico_diferencial;
+        $datos->diagnostico=$request->diagnostico;
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
-        $datos->raza=$request->raza;
         $datos->certificado=$request->certificado;
 
 
@@ -107,11 +105,9 @@ class HistoriaClinicaMGController extends Controller
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;
         $datos->condicion_diagnostico=$request->condicion_diagnostico;
-        $datos->diagnostico_presuntivo=$request->diagnostico_presuntivo;
-        $datos->diagnostico_diferencial=$request->diagnostico_diferencial;
+        $datos->diagnostico=$request->diagnostico;
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
-        $datos->raza=$request->raza;
         $datos->certificado=$request->certificado;
 
         $datos->update();

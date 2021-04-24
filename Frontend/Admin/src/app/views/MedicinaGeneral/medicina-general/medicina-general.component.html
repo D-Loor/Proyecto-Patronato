@@ -136,19 +136,19 @@
               <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="inline-radios">Lugar de atención</label>
-                  <input type="text" class="form-control" id="lugar_atencion" name="lugar_atencion" [(ngModel)]="lugar_atencion">
+                  <input type="text" class="form-control" id="lugar_atencion" disabled name="lugar_atencion" [(ngModel)]="lugar_atencion">
 
                 </div>
 
                 <div class="form-group col-sm-4">
                   <label for="inline-radios">Condición de diagnóstico</label>
-                  <input type="text" class="form-control" id="condicion_diagnostico" name="condicion_diagnostico" [(ngModel)]="condicion_diagnostico">
+                  <input type="text" class="form-control" id="condicion_diagnostico" disabled name="condicion_diagnostico" [(ngModel)]="condicion_diagnostico">
 
                 </div>
 
                 <div class="form-group col-sm-4">
                   <label for="inline-radios">Tipo de atención</label>
-                  <input type="text" class="form-control" id="tipo_atencion" name="tipo_atencion" [(ngModel)]="tipo_atencion">
+                  <input type="text" class="form-control" id="tipo_atencion" disabled name="tipo_atencion" [(ngModel)]="tipo_atencion">
 
                 </div>
 
@@ -158,29 +158,29 @@
                 <div class="form-group col-sm-12">
                   <div class="form-group">
                     <label for="vat">Enfermedades</label>
-                       <textarea id="enfermedades" name="enfermedades" [(ngModel)]="enfermedades" rows="2" class="form-control"  required></textarea>
+                       <textarea id="enfermedades" name="enfermedades" disabled [(ngModel)]="enfermedades" rows="2" class="form-control"  required></textarea>
 
                   </div>
                   <div class="form-group">
                     <label for="vat">Antecedentes de la enfermedad</label>
-                       <textarea id="antecedentes_enfermedad" name="antecedentes_enfermedad" [(ngModel)]="antecedentes_enfermedad" rows="2" class="form-control"  required></textarea>
+                       <textarea id="antecedentes_enfermedad" disabled name="antecedentes_enfermedad" [(ngModel)]="antecedentes_enfermedad" rows="2" class="form-control"  required></textarea>
 
                   </div>
                   <div class="form-group">
                     <label for="vat">Motivo de la consulta</label>
-                       <textarea id="motivo" name="motivo" rows="2" [(ngModel)]="motivo" class="form-control"  required></textarea>
+                       <textarea id="motivo" name="motivo" rows="2" disabled [(ngModel)]="motivo" class="form-control"  required></textarea>
 
                   </div>
 
 
                   <div class="form-group " *ngIf="gad==1">
                     <label for="vat">{{diagno}} </label>
-                       <textarea id="diagnostico" name="diagnostico" [(ngModel)]="diagnostico" rows="2" class="form-control"  required></textarea>
+                       <textarea id="diagnostico" name="diagnostico" disabled [(ngModel)]="diagnostico" rows="2" class="form-control"  required></textarea>
                   </div>
 
                   <div class="form-group " *ngIf="gad==1">
                     <label for="vat">Plan terapéutico</label>
-                       <textarea id="plan_terapeutico" name="plan_terapeutico" rows="2" [(ngModel)]="plan_terapeutico" class="form-control" required></textarea>
+                       <textarea id="plan_terapeutico" name="plan_terapeutico" disabled rows="2" [(ngModel)]="plan_terapeutico" class="form-control" required></textarea>
                   </div>
 
                   <div class="form-group ">
