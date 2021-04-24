@@ -23,7 +23,29 @@ class Paciente extends Model
         return $this->hasMany('App\Models\Historia_Clinica_RF','id_paciente');
      }
 
-     public function habitos(){
+   public function habitos(){
         return $this->belongsToMany('App\Models\Habito','habito_pacientes','id_paciente','id_habito');
      }
+
+   public function familiares(){
+      return $this->belongsToMany('App\Models\Familia','antecedente_patologico_familiares','id_paciente','id_familiar');
+   }
+
+   public function examen_organo_sistemas(){
+      return $this->belongsTo('App\Models\Examen_Organo_Sistema','id_e_organo_sistema');
+  }
+
+   public function examen_fisicos(){
+      return $this->belongsTo('App\Models\Examen_Fisico','id_e_fisico');
+   }
+
+   public function examene_complementarios(){
+      return $this->belongsTo('App\Models\Examenes_Complementario','id_e_complementario');
+   }
+
+   public function antecedentes_patologicos_personales(){
+      return $this->belongsTo('App\Models\Antecedentes_Patologicos_Personale','id_patologico');
+   }
+
+
 }
