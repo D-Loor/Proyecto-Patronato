@@ -14,7 +14,7 @@ class AntecedentesGinecosObstreticoController extends Controller
      */
     public function index()
     {
-       $datos=Antecedentes_Ginecos_Obstretico::all();  
+       $datos=Antecedentes_Ginecos_Obstretico::with('antecedentes_patologicos_personales')->get();  
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]); 

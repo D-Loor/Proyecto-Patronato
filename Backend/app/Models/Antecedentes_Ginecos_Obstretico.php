@@ -12,6 +12,11 @@ class Antecedentes_Ginecos_Obstretico extends Model
     protected $table = 'antecedentes_ginecos_obstreticos';
     protected $primaryKey = 'id_gineco';
     protected $fillable = [
-        'FUM','FPP','edad_gestional','menarquia','flujo_genital','gestas','partos','cesareas'
+        'FUM','FPP','edad_gestional','menarquia','flujo_genital','gestas','partos','cesareas','abortos'
     ];
+
+    public function antecedentes_patologicos_personales(){
+        return $this->hasMany('App\Models\Antecedentes_Patologicos_Personale','id_gineco');
+    }
 }
+ 

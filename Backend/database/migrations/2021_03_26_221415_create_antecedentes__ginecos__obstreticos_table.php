@@ -23,6 +23,7 @@ class CreateAntecedentesGinecosObstreticosTable extends Migration
             $table->string('gestas');
             $table->string('partos');
             $table->string('cesareas');
+            $table->string('abortos');
         });
     }
 

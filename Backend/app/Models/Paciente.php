@@ -47,5 +47,9 @@ class Paciente extends Model
       return $this->belongsTo('App\Models\Antecedentes_Patologicos_Personale','id_patologico');
    }
 
+   public function antecedentes_ginecos_obstreticos(){
+      return $this->belongsTo('App\Models\Antecedentes_Ginecos_Obstretico','id_gineco','id_patologico');
+  }
+
 
 }
