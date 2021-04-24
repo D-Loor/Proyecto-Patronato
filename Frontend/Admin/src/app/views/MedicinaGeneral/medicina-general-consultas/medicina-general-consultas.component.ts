@@ -14,7 +14,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   presun=false;
   defini=false;
   salida="¡No se encontró!";
-  public enferme='name';
+  enferme='name';
 
   lugar_atencion;
   condicion_diagnostico;
@@ -31,10 +31,14 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   edad:string;
   gad;
   gadv;
+  today = new Date();
+  fechaActual;
 
   ngOnInit(): void {
     this.cargar();
     this.CargarDatos();
+    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+
   }
 
 
@@ -83,6 +87,32 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     })
     .catch((error) => {
       console.log(error);
+    });
+  }
+
+  IngresarConsulta(){
+    var id;
+    for (let item of this.enfermedades){
+      debugger
+      if(this.enferme==item['enfermedad']){
+        id=item['id_enfermedad'];
+      }
+    }
+
+    let data = {
+      'id_enfermedad':id,
+      'a_enfermedad':this.antecedentes_enfermedad,
+      'fecha': this.fechaActual,
+      'motivo_consulta':this.motivo,
+      'tipo_atencion':this.tipo_atencion,
+      'condicion_diagnostico': this.condicion_diagnostico,
+      'diagnostico': this.diagnostico,
+      'plan_terapeutico': this.plan_terapeutico,
+      'lugar_atencion': this.lugar_atencion,
+      'certificado': this.certificado,
+    }
+    this.medicinag.AgregarConsulta(data).then(data =>{
+
     });
   }
 
