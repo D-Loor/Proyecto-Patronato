@@ -57,7 +57,7 @@ class CitaController extends Controller
         $datos->cedula=$request->cedula;
         $datos->especialidad=$request->especialidad;
         $datos->fecha=$request->fecha;
-        $datos->hora=$request->hora;
+        $datos->id_turno=$request->id_turno;
         $datosP=Paciente::where('cedula', $request->cedula)->get()->first();
         if($datosP != null){
             $datos->estado=1;
@@ -110,16 +110,29 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_cita)
+    public function update(Request $request, $cedula)
     {
-        $datos=Cita::find($id_cita);
-        $datos->nombres=$request->nombres;
-        $datos->cedula=$request->cedula;
-        $datos->especialidad=$request->especialidad;
-        $datos->fecha=$request->fecha;
-        $datos->hora=$request->hora;
-        $datos->update();
-        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
+        $datos=Cita::where("cedula", '=', $cedula)->first();
+        //$rol = role::where("cedula", '=', $id_cita)->first();
+        if($datos != null){
+            $datos->id_cita =$datos->id_cita;
+            $datos->nombres=$request->nombres;
+            $datos->cedula=$request->cedula;
+            $datos->especialidad=$request->especialidad;
+            $datos->fecha=$request->fecha;
+            $datos->id_turno=$request->id_turno;
+            $datosP=Paciente::where('cedula', $cedula)->get()->first();
+            if($datosP != null){
+                $datos->estado=1;
+            }else{
+                $datos->estado=0;
+            }
+            $datos->update();
+            return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
+        } else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+        
     }
 
     /**
@@ -137,4 +150,6 @@ class CitaController extends Controller
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
+
+    
 }
