@@ -150,4 +150,16 @@ export class SecretariaService {
     });
   }
 
+  updateDatosAfilicaion(data:any,id:string){
+    let  url = 'http://127.0.0.1:8000/api/Paciente/'+id;
+    debugger
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 }

@@ -89,7 +89,7 @@ class ExamenFisicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Examen_Fisico::where('id_e_fisico', $id)->get()->first(); 
+        $datos=Examen_Fisico::find($id); 
         $datos->cabeza=$request->cabeza;
         $datos->cuello=$request->cuello;
         $datos->torax=$request->torax;

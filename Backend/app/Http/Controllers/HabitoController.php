@@ -87,7 +87,7 @@ class HabitoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Habito::where('id_habito', $id)->get()->first(); 
+        $datos=Habito::find($id); 
         $datos->alcohol=$request->alcohol;
         $datos->tabaco=$request->tabaco;
         $datos->drogas=$request->drogas;

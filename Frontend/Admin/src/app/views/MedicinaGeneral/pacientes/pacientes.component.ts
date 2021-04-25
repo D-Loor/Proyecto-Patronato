@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-
+import { SecretariaService } from '../../../servicios/secretaria.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
@@ -13,7 +14,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 })
 export class PacientesComponent implements OnInit {
 
-  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
+  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router, private ServicioSecretaria:SecretariaService) { }
 
   @ViewChild('Principal') public Principal: ModalDirective;
   public sidebarMinimized = false;
@@ -27,6 +28,7 @@ export class PacientesComponent implements OnInit {
   pacientesMGFilter=[];//variable para el paginado sin el pipe
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
   APF:any[];
+  pacientesActualizar=[];
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
@@ -59,6 +61,7 @@ export class PacientesComponent implements OnInit {
   inputEdit(){//editar los input (abilitarlos) 
     this.edit=0;
   }
+  
   
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
@@ -120,6 +123,7 @@ export class PacientesComponent implements OnInit {
     this.alimentacionT=data['result']['habitos'].alimentacion;
     this.diuresisT=data['result']['habitos'].diuresis;
     this.somniaT=data['result']['habitos'].somnia;
+    
 
     this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
     this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
@@ -157,6 +161,17 @@ export class PacientesComponent implements OnInit {
   }).catch(error =>{
     console.log(error);
 });
+  }
+
+  actualizarDatosAfiliacion(){
+    
+    this.ServicioSecretaria.updateDatosAfilicaion( this.pacientesActualizar[0], this.cedula ).then(data =>{
+      Swal.fire(
+        'Correcto',
+        'Datos guardados correctamente',
+        'success'
+      )
+    });
   }
 
 }

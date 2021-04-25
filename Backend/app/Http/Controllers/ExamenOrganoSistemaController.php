@@ -87,7 +87,7 @@ class ExamenOrganoSistemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Examen_Organo_Sistema::where('id_e_organo_sistema', $id)->get()->first(); 
+        $datos=Examen_Organo_Sistema::find($id); 
         $datos->sistema_digestivo=$request->sistema_digestivo;
         $datos->sistema_respiratorio=$request->sistema_respiratorio;
         $datos->sistema_cardiaco=$request->sistema_cardiaco;

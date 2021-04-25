@@ -94,7 +94,7 @@ class AntecedentesPatologicosPersonaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Antecedentes_Patologicos_Personale::where('id_patologico', $id)->get()->first(); 
+        $datos=Antecedentes_Patologicos_Personale::find($id); 
         $datos->id_gineco=$request->id_gineco;
         $datos->infancia=$request->infancia;
         $datos->adolecencia=$request->adolecencia;
