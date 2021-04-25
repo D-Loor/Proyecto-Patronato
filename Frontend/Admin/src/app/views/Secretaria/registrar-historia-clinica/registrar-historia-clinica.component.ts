@@ -419,7 +419,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'success'
       )
     });
-    return true;
   }
 
   IngresarDatosPaciente(){
