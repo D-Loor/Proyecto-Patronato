@@ -106,7 +106,6 @@ class PacienteController extends Controller
         $datos=Paciente::find($id_paciente);
         $datos->cedula=$request->cedula;
         $datos->nombres=$request->nombres;
-        $datos->cedula=$request->cedula;
         $datos->apellidos=$request->apellidos;
         $datos->edad=$request->edad;
         $datos->sexo=$request->sexo;
@@ -119,6 +118,11 @@ class PacienteController extends Controller
         $datos->religion=$request->religion;
         $datos->fecha_nacimiento=$request->fecha_nacimiento;
         $datos->nivel_instruccion=$request->nivel_instruccion;
+        $datos->id_patologico=$request->id_patologico;
+        $datos->id_e_fisico=$request->id_e_fisico;
+        $datos->id_e_organo_sistema=$request->id_e_organo_sistema;
+        $datos->id_e_complementario=$request->id_e_complementario;
+        $datos->id_habito=$request->id_habito;
         $datos->update();
         return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }

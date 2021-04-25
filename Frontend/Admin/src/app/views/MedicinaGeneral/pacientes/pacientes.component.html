@@ -65,7 +65,7 @@
                 <td>{{item.edad}}</td>
                 <td>{{item.residencia}}</td>
                 <td>
-                  <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item.id_paciente)"><i
+                  <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item.id_paciente)" ><i
                     class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                   <button type="button" class="btn btn-ghost-success botont"><i
                       class="fa fa-eye"></i>&nbsp;Consultas</button>
@@ -90,7 +90,7 @@
 
 </div>
 
-<div  bsModal #Principal="bs-modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div  bsModal  #Principal="bs-modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -113,90 +113,95 @@
                     <i class="icon-user-follow"></i>
                         <strong>Datos de Afiliación</strong>
                         <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed = !isCollapsed"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i
-                        class="fa fa-chevron-down"></i>&nbsp;</button>
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+                        <i class="fa fa-chevron-down"></i>&nbsp;</button>
+                        <button type="button" class="btn btn-ghost collaps botont" >
+                        <i name="edit" id="edit" [(ngModel)]="edit" class="fa fa-edit" (click)="inputEdit()"></i>&nbsp;</button>
                 </div>
 
-                    <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+                    <div  id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
                         <div class="card-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label for="text-input">Apellidos:</label>
-                                        <input  autocomplete="off" required type="text" id="apellidos"   [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos" disabled>
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="apellidos"   [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="apellidos"   [(ngModel)]="apellidos" name="apellidos" class="form-control" placeholder="Ingrese los apellidos" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label for="text-input">Nombres:</label>
-                                        <input autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="nombres"   name="nombres" class="form-control" placeholder="Ingrese los nombres" disabled>
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="nombres"   name="nombres" class="form-control" placeholder="Ingrese los nombres" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="nombres"   name="nombres" class="form-control" placeholder="Ingrese los nombres" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-8">
                                         <label for="text-input">Cédula:</label>
                                         <div class="input-group">
-                                          <input autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" disabled>
-
+                                          <input *ngIf="edit==0" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" >
+                                          <input *ngIf="edit==1" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" disabled>
                                         </div>
 
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="text-input">Edad:</label>
-                                        <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad" disabled>
+                                        <input *ngIf="edit==0" required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad" >
+                                        <input *ngIf="edit==1" required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad" disabled>
                                     </div>
                                   </div><!--/.row-->
                                   <div class="row">
                                     <div class="form-group col-sm-8">
                                         <label for="text-input">Ocupación:</label>
-                                        <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación" disabled>
+                                        <input *ngIf="edit==0" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación" >
+                                        <input *ngIf="edit==1" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="ocupacion" name="ocupacion" class="form-control" placeholder="Ingrese la ocupación" disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="select1">Sexo:</label>
-                                        <input autocomplete="off" required type="text" id="sexo"  [(ngModel)]="sexo"   name="sexo" class="form-control" placeholder="Ingrese el sexo" disabled>
-
-
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="sexo"  [(ngModel)]="sexo"   name="sexo" class="form-control" placeholder="Ingrese el sexo" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="sexo"  [(ngModel)]="sexo"   name="sexo" class="form-control" placeholder="Ingrese el sexo" disabled>
                                     </div>
                                   </div><!--/.row-->
                                   <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label for="text-input">Lugar de residencia:</label>
-                                        <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia" disabled>
+                                        <input *ngIf="edit==0" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia" >
+                                        <input *ngIf="edit==1" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" class="form-control" placeholder="Ingrese el lugar de residencia" disabled>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="text-input">Lugar de procedencia:</label>
-                                        <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia" disabled>
+                                        <input *ngIf="edit==0" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia" >
+                                        <input *ngIf="edit==1" required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lprocedencia" name="Lprocedencia" class="form-control" placeholder="Ingrese el lugar de procedencia" disabled>
                                     </div>
                                   </div><!--/.row-->
                                   <div class="row">
                                     <div class="form-group col-sm-4">
                                         <label for="date-input">Fecha de nacimiento:</label>
-                                        <input required class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento" disabled>
+                                        <input *ngIf="edit==0" required class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento" >
+                                        <input *ngIf="edit==1" required class="form-control" id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" placeholder="Seleccione la fecha de nacimiento" disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="raza">Raza:</label>
-                                        <input autocomplete="off" required type="text" id="raza"  [(ngModel)]="raza"   name="raza" class="form-control" placeholder="Ingrese la raza" disabled>
-
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="raza"  [(ngModel)]="raza"   name="raza" class="form-control" placeholder="Ingrese la raza" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="raza"  [(ngModel)]="raza"   name="raza" class="form-control" placeholder="Ingrese la raza" disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="religion">Religión:</label>
-                                        <input autocomplete="off" required type="text" id="religion"  [(ngModel)]="religion"   name="religion" class="form-control" placeholder="Ingrese la religion" disabled>
-
-
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="religion"  [(ngModel)]="religion"   name="religion" class="form-control" placeholder="Ingrese la religion" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="religion"  [(ngModel)]="religion"   name="religion" class="form-control" placeholder="Ingrese la religion" disabled>
                                     </div>
                                   </div><!--/.row-->
                                   <div class="row">
                                     <div class="form-group col-sm-8">
                                         <label for="nivel_instruccion">Nivel de instrucción:</label>
-                                        <input autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" disabled>
-
-
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" > 
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" disabled> 
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="estado_civil">Estado Civil:</label>
-                                        <input autocomplete="off" required type="text" id="estado_civil"  [(ngModel)]="estado_civil"   name="estado_civil" class="form-control" placeholder="Ingrese el estado civil" disabled>
-
-
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="estado_civil"  [(ngModel)]="estado_civil"   name="estado_civil" class="form-control" placeholder="Ingrese el estado civil" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="estado_civil"  [(ngModel)]="estado_civil"   name="estado_civil" class="form-control" placeholder="Ingrese el estado civil" disabled>
                                     </div>
                                   </div><!--/.row-->
                             </form>

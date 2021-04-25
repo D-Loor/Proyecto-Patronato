@@ -20,6 +20,7 @@ export class PacientesComponent implements OnInit {
   public navItems = navItems;
   search="";
   pacien="";
+  edit=1;
   dataFechaFiltro;
   pacientesMG:any[];//variable para el paginado
   pacientesMGPaginate:any[];//variable para el paginado
@@ -55,6 +56,10 @@ export class PacientesComponent implements OnInit {
 
   }
 
+  inputEdit(){//editar los input (abilitarlos) 
+    this.edit=0;
+  }
+  
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.pacientesMGFilter=[];
@@ -93,6 +98,7 @@ export class PacientesComponent implements OnInit {
 
   DatosPaciente(id_paciente:string){
     this.Principal.show();
+    this.edit=1;
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
     debugger
     this.apellidos=data['result'].apellidos;
