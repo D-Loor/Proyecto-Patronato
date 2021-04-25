@@ -39,6 +39,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   fechaActual;
   NuevaEnfermedad;
   confirma= false;
+  pase=false;
+  tipo="Dianóstico";
 
   ngOnInit(): void {
     this.cargar();
@@ -50,12 +52,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
 
   funcionPreventivo(){
-    this.presun=true;
-    this.defini=false;
+    this.tipo="Dianóstico Presuntivo";
   }
   funcionDefinitivo(){
-    this.presun=false;
-    this.defini=true;
+    this.tipo="Dianósticos Diferenciales";
   }
 
 
@@ -102,48 +102,63 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   selectEvent(item) {
     this.valor=item.id;
-    this.confirma=false;
+    this.confirma=true;
+    this.pase=true;
   }
+
+  onChangeSearch(){
+    this.confirma=false;
+    this.pase=false;
+  }
+
   notificacion(){
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-info',
-        cancelButton: 'btn btn-danger'
 
-      },
-      buttonsStyling: true
-    })
+    if(this.pase==false){
+      Swal.fire(
+        'Advertencia!',
+        'La enfermedad no se encuentra registrada.',
+        'warning'
+      )
+    }
+    else{
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-info',
+          cancelButton: 'btn btn-danger'
 
-    swalWithBootstrapButtons.fire({
-      title: '¿Está seguro de guardar?',
-      text: "Una vez guardada no se podrá cambiar!",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Guardar consulta!',
-      cancelButtonText: 'No, cancelar!',
-      confirmButtonColor: '#20a8d8',
-      cancelButtonColor: '#f86c6b',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.IngresarConsulta();
-        this.cargar();
-        swalWithBootstrapButtons.fire(
-          'Guardado!',
-          'La consulta ha sido guardada.',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelado',
-          'Se ha cancelado',
-          'error'
-        )
-      }
-    })
+        },
+        buttonsStyling: true
+      })
+      swalWithBootstrapButtons.fire({
+        title: '¿Está seguro de guardar?',
+        text: "Una vez guardada no se podrá cambiar.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.IngresarConsulta();
+          swalWithBootstrapButtons.fire(
+            '¡Guardado!',
+            'La consulta ha sido guardada.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado!',
+            'No se ha resgistrado.',
+            'error'
+          )
+        }
+      })
+    }
   }
 
   eliminarCita(id:string) {
@@ -156,22 +171,81 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
 
   IngresarEnfermedad(){
-    let data;
-     if(this.gad==0){
-      data = {
-        'enfermedad':this.NuevaEnfermedad,
+
+    if(this.NuevaEnfermedad!=undefined){
+      if(this.confirma==false){
+
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-info',
+            cancelButton: 'btn btn-danger'
+
+          },
+          buttonsStyling: true
+        })
+        swalWithBootstrapButtons.fire({
+          title: '¿Agregar enfermedad?',
+          text: "Una vez agregada no se podrá cambiar.",
+          showCancelButton: true,
+          confirmButtonText: 'Agregar',
+          cancelButtonText: 'Cancelar',
+          confirmButtonColor: '#20a8d8',
+          cancelButtonColor: '#f86c6b',
+          reverseButtons: true
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            let datos;
+            let id;
+            datos = {
+              'enfermedad':this.NuevaEnfermedad,
+            }
+            debugger
+            this.medicinag.AgregarEnfermedad(datos).then(data =>{
+              id = data['id'];
+
+            });
+            debugger
+            this.data.push({ "id":id, "name":this.NuevaEnfermedad});
+
+            console.log(this.data);
+            this.valor=id;
+            this.confirma=true;
+            this.pase=true;
+            debugger
+            Swal.fire('¡Enfermedad agregada!', '', 'success')
+          } else if (result.isDenied) {
+            Swal.fire('¡Se ha cancelado!', '', 'error')
+          }
+        })
+
+
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: '¡Ya existe..!',
+          text: 'Esta enfermedad ya se encuentra registrada.'
+        })
       }
-     }
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: '¡Campo vacío..!',
+        text: 'Ingrese el nombre de la enfermedad a registrar.'
+      })
+    }
 
-    debugger
-    this.medicinag.AgregarEnfermedad(data).then(data =>{
+    console.log(this.NuevaEnfermedad);
 
-    });
-    this.cargar();
   }
 
   IngresarConsulta(){
+
     let data;
+    let cert=0;
+    if(this.certificado==true){
+      cert=1;
+    }
      if(this.gad==0){
       data = {
         'id_enfermedad':this.valor,
@@ -180,11 +254,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'fecha': this.fechaActual,
         'motivo_consulta':this.motivo,
         'tipo_atencion':this.tipo_atencion,
-        'condicion_diagnostico': this.condicion_diagnostico,
+        'condicion_diagnostico': 'Presuntivo',
         'diagnostico': 'No admite',
         'plan_terapeutico': 'No admite',
         'lugar_atencion': this.lugar_atencion,
-        'certificado': true,
+        'certificado': cert,
       }
      }else{
        data = {
@@ -198,10 +272,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'diagnostico': this.diagnostico,
         'plan_terapeutico': this.plan_terapeutico,
         'lugar_atencion': this.lugar_atencion,
-        'certificado': true,
+        'certificado': cert,
       }
      }
-     this.eliminarCita(this.idCitas);
+   //  this.eliminarCita(this.idCitas);
 
     debugger
     this.medicinag.AgregarConsulta(data).then(data =>{

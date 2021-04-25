@@ -44,8 +44,8 @@ class EnfermedadController extends Controller
         $datos=new Enfermedad();
         $datos->enfermedad=$request->enfermedad;
         $datos->save();
-
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_enfermedad;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201',  'id' => $idRecienGuardado]);
     }
 
     /**

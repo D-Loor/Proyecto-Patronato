@@ -62,7 +62,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4" *ngIf="gad==1">
                   <label for="inline-radios">Condición de diagnóstico</label>
                   <div class="col-md-8 col-form-label">
                     <div class="form-check form-check-inline mr-3" id="inline-radios">
@@ -91,10 +91,13 @@
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
                         (selected)='selectEvent($event)'
+                        (inputChanged)='onChangeSearch($event)'
                         [itemTemplate]="itemTemplate"
                         [notFoundTemplate]="notFoundTemplate"
                         paramName="valor"
                          payloadPropName="valor"
+                         name="NuevaEnfermedad"
+                         [(ngModel)]="NuevaEnfermedad"
                         >
                       </ng-autocomplete>
 
@@ -106,7 +109,7 @@
                       <div [innerHTML]="salida"></div>
                       </ng-template>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-outline-info btex"><i class="fa fa-heartbeat spa"></i>Agregar enfermedad</button>
+                    <button type="submit" class="btn btn-lg btn-outline-info btex" (click)="IngresarEnfermedad()" ><i class="fa fa-heartbeat spa"></i>Agregar enfermedad</button>
                   </div>
 
                 </div>
@@ -126,7 +129,7 @@
               </div>
 
               <div class="form-group " *ngIf="gad==1">
-                <label for="vat">Diagnóstico presuntivo</label>
+                <label for="vat">{{tipo}}</label>
                    <textarea id="diagnostico" name="diagnostico" [(ngModel)]="diagnostico" rows="4" class="form-control" placeholder="Escriba el diagnostico..." required></textarea>
 
               </div>
@@ -140,7 +143,7 @@
 
                 <div class="col-md-9 col-form-label">
                   <div class="form-check form-check-inline mr-1">
-                    <input class="form-check-input" [(ngModel)]="certificado" type="checkbox" id="certificado" name="certificado" value="Si">
+                    <input class="form-check-input" [(ngModel)]="certificado" type="checkbox" id="certificado" name="certificado" value="1">
                     <label class="form-check-label" for="inline-checkbox1">Se entregó certificado</label>
                   </div>
 
