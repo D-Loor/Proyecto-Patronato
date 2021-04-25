@@ -1,62 +1,63 @@
 <div class="animated fadeIn">
-  <div class="row">
-      <div class="col-md-12">
-
-          <div class="card">
-
-                  <div class="card-header">
-                      <i class="icon-user-follow"></i>
-                          <strong>Angendar Cita</strong>
-                  </div>
-
-                          <div class="card-body">
-                              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                    <div class="row">
-                                        <div class=" form-group col-md-6">
-                                            <label for="text-input">Nombres</label>
-                                            <input  autocomplete="off" required type="text" id="nombres"   [(ngModel)]="nombres" name="nombres" class="form-control" placeholder="Ingrese los nombres completos">
-                                        </div>           
-                                        <div class=" form-group col-md-6">
-                                            <label for="date-input">Fecha de la cita</label>
-                                            <input required class="form-control" id="fecha_consulta" type="date" autocomplete="off"  [(ngModel)]="fecha_consulta" name="fecha_consulta" >
-                                        </div>                            
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <div class="row">
-                                                <div class="form-group col-md-12">
-                                                    <label for="text-input">Cédula</label>
-                                                    <div class="input-group">
-                                                        <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-12">
-                                                    <label for="text-input">Especialidad</label>
-                                                    <select id="especialidad" class="form-control" [(ngModel)]="especialidad" name="especialidad" required>
-                                                        <option value="Medicina General">Medicina General</option>
-                                                        <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
-                                                    </select>
-                                                </div>
-                                            </div>        
-                                        </div>     
-                                        <div class="form-group col-md-6">
-                                            <label for="date-input"> Seleccione la hora de consulta</label>
-                                            <select  class="form-control sel-opcion" size="5" multiple aria-label=" multiple select example" name="id_turno" [(ngModel)]="id_turno" id="id_turno" required>
-                                            </select>
-                                        </div>                                  
-                                    </div>
-
-                                      <button type="submit" class="btn btn-lg btn-primary boto" (click)="AgendarCita()">Registrar Consulta</button>
-                              </form>
-                          </div>
-
-          </div>
-
-      </div>
-
-  </div><!--/.row-->
-
-</div>
+    <div class="row">
+        <div class="col-md-12">
+  
+            <div class="card">
+  
+                    <div class="card-header">
+                        <i class="icon-user-follow"></i>
+                            <strong>Angendar Cita</strong>
+                    </div>
+  
+                            <div class="card-body">
+                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                      <div class="row">
+                                          <div class=" form-group col-md-6">
+                                              <label for="text-input">Nombres</label>
+                                              <input  autocomplete="off" required type="text" id="nombres"   [(ngModel)]="nombres" name="nombres" class="form-control" placeholder="Ingrese los nombres completos">
+                                          </div>           
+                                          <div class=" form-group col-md-6">
+                                              <label for="date-input">Fecha de la cita</label>
+                                              <input required class="form-control" id="fecha_consulta" type="date" autocomplete="off"  [(ngModel)]="fecha_consulta" name="fecha_consulta" >
+                                          </div>                            
+                                      </div>
+                                      <div class="row">
+                                          <div class="form-group col-md-6">
+                                              <div class="row">
+                                                  <div class="form-group col-md-12">
+                                                      <label for="text-input">Cédula</label>
+                                                      <div class="input-group">
+                                                          <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
+                                                     
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="form-group col-md-12">
+                                                      <label for="text-input">Especialidad</label>
+                                                      <select id="especialidad" class="form-control" [(ngModel)]="especialidad" name="especialidad" required>
+                                                          <option value="Medicina General">Medicina General</option>
+                                                          <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
+                                                      </select>
+                                                  </div>
+                                              </div>        
+                                          </div>     
+                                          <div class="form-group col-md-6">
+                                              <label for="date-input"> Seleccione la hora de consulta</label>
+                                              <select  class="form-control sel-opcion" size="5" multiple aria-label=" multiple select example" name="id_turno" [(ngModel)]="id_turno" id="id_turno" required>
+                                              </select>
+                                          </div>                                  
+                                      </div>
+  
+                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarCita()">Registrar Consulta</button>
+                                </form>
+                            </div>
+  
+            </div>
+  
+        </div>
+  
+    </div><!--/.row-->
+  
+  </div>
+  

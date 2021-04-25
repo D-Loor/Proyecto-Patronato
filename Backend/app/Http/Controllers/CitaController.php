@@ -151,5 +151,14 @@ class CitaController extends Controller
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
+
+    public function ValidarCita($cedula,$fechaActual){
+        $datos=Cita::where('cedula', $cedula)->where('fecha',$fechaActual)->get();
+        $num_rows = count($datos);
+        if($num_rows != 0){
+            return response()->json(['code'=>'201']);
+        }else
+            return response()->json(['result'=>"Proceda con el registro", 'code'=>'202']);
+    }
     
 }

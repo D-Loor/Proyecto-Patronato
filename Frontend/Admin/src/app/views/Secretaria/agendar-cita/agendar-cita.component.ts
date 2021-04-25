@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { SecretariaService } from '../../../servicios/secretaria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agendar-cita',
@@ -16,12 +17,13 @@ export class AgendarCitaComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   ClaseCdula:string="form-control form-input select-number"; 
-
   //Variables para datos pacientes 
-  nombres; fecha_consulta; cedula; especialidad; id_hora;
+  nombres; fecha_consulta; cedula; especialidad; id_turno;
 
-  ngOnInit(): void {
+  ngOnInit() {
+    
   }
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -125,11 +127,34 @@ export class AgendarCitaComponent implements OnInit {
 
   AgendarCita(){
     let paciente = {
-
+      'nombres':this.nombres,
+      'cedula':this.cedula,
+      'fecha':this.fecha_consulta,
+      'especialidad':this.especialidad,
+      'id_turno':1,
     }
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
-
+      Swal.fire(
+        'Correcto',
+        'Cita agendada correctamente',
+        'success'
+      )
     });
   }
+
+  ValidarCita(){
+    this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
+      if(data ['code'] == '201'){
+        Swal.fire(
+          'Error!',
+          'El usuaria ya cuenta con una cita en esta fecha',
+          'error'
+        )
+      }else
+        this.AgendarCita();
+    });
+  }
+
+
 
 }
