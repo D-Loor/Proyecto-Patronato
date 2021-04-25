@@ -196,24 +196,20 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             let datos;
-            let id;
             datos = {
               'enfermedad':this.NuevaEnfermedad,
             }
-            debugger
+
             this.medicinag.AgregarEnfermedad(datos).then(data =>{
-              id = data['id'];
+              this.valor = data['id'];
+              this.data.push({ "id": this.valor, "name":this.NuevaEnfermedad});
+              this.confirma=true;
+              this.pase=true;
+              Swal.fire('¡Enfermedad agregada!', '', 'success')
 
             });
-            debugger
-            this.data.push({ "id":id, "name":this.NuevaEnfermedad});
 
-            console.log(this.data);
-            this.valor=id;
-            this.confirma=true;
-            this.pase=true;
-            debugger
-            Swal.fire('¡Enfermedad agregada!', '', 'success')
+
           } else if (result.isDenied) {
             Swal.fire('¡Se ha cancelado!', '', 'error')
           }
@@ -275,9 +271,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'certificado': cert,
       }
      }
-   //  this.eliminarCita(this.idCitas);
+    this.eliminarCita(this.idCitas);
 
-    debugger
+
     this.medicinag.AgregarConsulta(data).then(data =>{
 
     });
