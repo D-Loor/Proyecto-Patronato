@@ -423,30 +423,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   IngresarDatosPaciente(){
-    /* if(this.sexo=="Mujer"){
+    if(this.sexo=="Mujer"){
       this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
-    }  */
-    const ipAPI = '//api.ipify.org?format=json'
-
-    Swal.queue([{
-      title: 'Desea guardar los datos',
-      confirmButtonText: 'Si',
-      text:'Los datos se estan guardando',
-      showLoaderOnConfirm: this.AntecedentesPatologicosF(),
-      preConfirm: () => {
-        return fetch(ipAPI)
-          .then(response => response.json())
-          .then(data => Swal.insertQueueStep(data.ip))
-          .catch(() => {
-            Swal.insertQueueStep({
-              icon: 'error',
-              title: 'Los datos no se fuardaron correctamente'
-            })
-          })
-      }
-    }])
+    }  
+    
   }
   
 
