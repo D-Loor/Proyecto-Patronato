@@ -101,9 +101,9 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_paciente)
+    public function update(Request $request, $id)
     {
-        $datos=Paciente::find($id_paciente);
+        $datos=Paciente::find($id);
         $datos->cedula=$request->cedula;
         $datos->nombres=$request->nombres;
         $datos->apellidos=$request->apellidos;
