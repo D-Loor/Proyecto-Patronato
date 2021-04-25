@@ -45,7 +45,6 @@ class HistoriaClinicaMGController extends Controller
         $datos=new Historia_Clinica_MG();
         $datos->id_enfermedad=$request->id_enfermedad;
         $datos->a_enfermedad=$request->a_enfermedad;
-        $datos->cedula=$request->cedula;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->tipo_atencion=$request->tipo_atencion;

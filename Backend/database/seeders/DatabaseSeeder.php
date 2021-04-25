@@ -97,16 +97,22 @@ class DatabaseSeeder extends Seeder
             //'password' => Hash::make('password'),
         ]);
 
-        DB::table('antecedentes_enfermedades')->insert([
-            'descripcion' => Str::random(10),
-            //'email' => Str::random(10).'@gmail.com',
-            //'password' => Hash::make('password'),
-        ]);
+
 
         DB::table('enfermedades')->insert([
-            'enfermedad' => Str::random(10),
-            //'email' => Str::random(10).'@gmail.com',
-            //'password' => Hash::make('password'),
+            'enfermedad' => 'Gripe',
+        ]);
+        DB::table('enfermedades')->insert([
+            'enfermedad' => 'Fiebre',
+        ]);
+        DB::table('enfermedades')->insert([
+            'enfermedad' => 'Tos',
+        ]);
+        DB::table('enfermedades')->insert([
+            'enfermedad' => 'Alergia',
+        ]);
+        DB::table('enfermedades')->insert([
+            'enfermedad' => 'Migraña',
         ]);
 
         DB::table('turnos')->insert(
@@ -115,12 +121,15 @@ class DatabaseSeeder extends Seeder
          DB::table('turnos')->insert(
             ['hora' => "08:20 AM",],
          );
+         DB::table('turnos')->insert(
+            ['hora' => "08:40 AM",],
+         );
 
         DB::table('citas')->insert([
             'nombres' => 'Alex Dario Zambrano Falconez',
             'cedula' => '1314567908',
             'especialidad' => 'Medicina General',
-            'fecha' => Carbon::parse('2021-04-21'),
+            'fecha' => Carbon::parse('2021-04-24'),
             'estado' => true,
             'id_turno' => 1,
             //'email' => Str::random(10).'@gmail.com',
@@ -129,9 +138,18 @@ class DatabaseSeeder extends Seeder
             'nombres' => 'Bryan Aldair Mendoza Loor',
             'cedula' => '1314567903',
             'especialidad' => 'Medicina General',
-            'fecha' => Carbon::parse('2021-04-21'),
+            'fecha' => Carbon::parse('2021-04-24'),
             'estado' => false,
             'id_turno' => 2,
+            //'email' => Str::random(10).'@gmail.com',
+            //'password' => Hash::make('password'),
+        ]); DB::table('citas')->insert([
+            'nombres' => 'Diego Oswaldo Loor Moran',
+            'cedula' => '1316870706',
+            'especialidad' => 'Medicina General',
+            'fecha' => Carbon::parse('2021-04-24'),
+            'estado' => true,
+            'id_turno' => 3,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
@@ -176,35 +194,72 @@ class DatabaseSeeder extends Seeder
             'nombres' => Str::random(10),
             'apellidos' => Str::random(10),
             'edad' => 25,
-            'sexo' => Str::random(10),
+            'sexo' => 'Masculino',
             'gad' => false,
-            'ocupacion' => Str::random(10),
-            'residencia' => Str::random(10),
-            'procedencia' => Str::random(10),
-            'estado_civil' => Str::random(10),
-            'raza' => Str::random(10),
-            'religion' => Str::random(10),
-            'fecha_nacimiento' => Carbon::parse('2001-03-09'),
-            'nivel_instruccion' => Str::random(10),
+            'ocupacion' => 'Estudiante',
+            'residencia' => 'Flavio Alfaro',
+            'procedencia' => 'Chone',
+            'estado_civil' => 'Viudo',
+            'raza' => 'Mulato',
+            'religion' => 'Cristiana',
+            'fecha_nacimiento' => Carbon::parse('1998-05-28'),
+            'nivel_instruccion' => 'Universidad',
+            //'email' => Str::random(10).'@gmail.com',
+            //'password' => Hash::make('password'),
+        ]);
+        DB::table('pacientes')->insert([
+            'id_e_fisico' => 1,
+            'id_patologico' => 1,
+            'id_e_organo_sistema' => 1,
+            'id_e_complementario' => 1,
+            'id_habito' => 1,
+            'cedula' => '13168687076',
+            'nombres' => 'Diego Oswaldo',
+            'apellidos' => 'Loor Moran',
+            'edad' => 21,
+            'sexo' => 'Masculino',
+            'gad' => true,
+            'ocupacion' => 'Obrero',
+            'residencia' => 'Junin',
+            'procedencia' => 'Chone',
+            'estado_civil' => 'Soltero',
+            'raza' => 'Mestizo',
+            'religion' => 'Cristiana',
+            'fecha_nacimiento' => Carbon::parse('1999-11-18'),
+            'nivel_instruccion' => 'Universidad',
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
 
         DB::table('historias_clinicas_mg')->insert([
-            'id_paciente' => 1,
+            'id_paciente' => 2,
             'id_enfermedad' => 1,
-            'fecha' => Carbon::parse('2021-04-24'),
-            'motivo_consulta' => Str::random(10),
+            'fecha' => Carbon::parse('2021-04-20'),
+            'motivo_consulta' => 'Dolor de cabeza',
             'tipo_atencion' => 'Presuntivo',
             'condicion_diagnostico' => 'Presuntivo',
-            'diagnostico' => Str::random(10),
-            'plan_terapeutico' => Str::random(10),
+            'diagnostico' => '',
+            'plan_terapeutico' => 'Pastillas paracetamol',
             'lugar_atencion' => 'Patronato',
             'certificado' => true,
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);
- 
+        DB::table('historias_clinicas_mg')->insert([
+            'id_paciente' => 1,
+            'id_enfermedad' => 4,
+            'fecha' => Carbon::parse('2021-03-24'),
+            'motivo_consulta' => 'Cansancio y dolor a los musculos',
+            'tipo_atencion' => 'Presuntivo',
+            'condicion_diagnostico' => 'Presuntivo',
+            'diagnostico' => '',
+            'plan_terapeutico' => 'Pastillas paracetamol y descanso',
+            'lugar_atencion' => 'Patronato',
+            'certificado' => false,
+            //'email' => Str::random(10).'@gmail.com',
+            //'password' => Hash::make('password'),
+        ]);
+
 
         DB::table('historias_clinicas_rf')->insert([
             'id_paciente' => 1,
@@ -218,7 +273,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        
+
 
         DB::table('antecedente_patologico_familiares')->insert([
             "id_familiar" => 1,

@@ -80,7 +80,7 @@
               </div>
               <div class="row">
 
-
+ 
 
                 <div class="form-group col-sm-8">
                   <label for="company">Enfermedad</label>
@@ -91,7 +91,10 @@
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
                         [itemTemplate]="itemTemplate"
-                        [notFoundTemplate]="notFoundTemplate">
+                        [notFoundTemplate]="notFoundTemplate"
+                        paramName="valor"
+                         payloadPropName="valor"
+                        >
                       </ng-autocomplete>
 
                       <ng-template #itemTemplate let-item>
