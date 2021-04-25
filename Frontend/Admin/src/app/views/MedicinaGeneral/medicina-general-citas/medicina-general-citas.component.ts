@@ -16,7 +16,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   constructor(public citasser:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
 
   isCollapsed2 = false;
-  isCollapsed = true; 
+  isCollapsed = true;
   search:string="";
   especialidad:string="Medicina General";
   Estado:number=1;
@@ -31,8 +31,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   citasEliminar:any[];
   today = new Date();
   fechaActual:string;
-  
-  
+
+
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
@@ -44,7 +44,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGPaginate = this.citasMG.slice(0, 10);
     }).catch(error =>{
       console.log(error);
-  }); 
+  });
   }
   // for (var item in this.Citas){
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
@@ -63,7 +63,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       };
       this.citasMGPaginateFilter = this.citasMGFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes
@@ -72,7 +72,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     const endItem = event.page * event.itemsPerPage;
     this.citasMGPaginateFilter = this.citasMGFilter.slice(startItem, endItem);
   }
-  
+
   eliminar(id:string) {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
@@ -91,7 +91,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
-        
+
       },
       buttonsStyling: true
     })
@@ -103,8 +103,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar registro!',
       cancelButtonText: 'No, cancelar!',
-      confirmButtonColor: '#4BB543',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -141,9 +141,10 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGPaginate = null;
   }
 
-  ConsultarPaciente(cedula:string){
+  ConsultarPaciente(cedula:string,idCita:string){
     this.rutas.navigate(['/medicinageneralconsultas']);
     localStorage.setItem('cedulaMG', cedula);
+    localStorage.setItem('idCita', idCita);
   }
   HistoriaPaciente(){
     this.rutas.navigate(['/medicinageneral']);

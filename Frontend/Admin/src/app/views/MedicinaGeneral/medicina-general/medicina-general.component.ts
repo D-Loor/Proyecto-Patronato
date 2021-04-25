@@ -103,10 +103,10 @@ export class MedicinaGeneralComponent implements OnInit {
     this.plan_terapeutico=arreglo['plan_terapeutico'];
     this.diagnostico=arreglo['diagnostico'];
     if(arreglo['condicion_diagnostico']=="Presuntivo"){
-      
+
       this.diagno="Diagnóstio Presuntivo";
     }else{
-      
+
       this.diagno="Diagnóstio Diferencial";
     }
 
@@ -120,7 +120,7 @@ export class MedicinaGeneralComponent implements OnInit {
       debugger
 
 
-    this.antecedentes_enfermedad=enferme['enfermedad'];
+    this.antecedentes_enfermedad=arreglo['a_enfermedad'];
 
 
     this.DatosdeConsultas.show();

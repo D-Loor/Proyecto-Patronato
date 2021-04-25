@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
+import Swal from 'sweetalert2';
+import { CitasService } from '../../../servicios/citas.service';
 
 @Component({
   selector: 'app-medicina-general-consultas',
@@ -9,7 +11,7 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 })
 export class MedicinaGeneralConsultasComponent implements OnInit {
 
-  constructor(public medicinag:MedicinaGeneralService, public rutas:Router) { }
+  constructor(public medicinag:MedicinaGeneralService, public rutas:Router,public citasser:CitasService) { }
   isCollapsed = false;
   presun=false;
   defini=false;
@@ -30,10 +32,13 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   cedula:string;
   edad:string;
   idPaciente;
+  idCitas;
   gad;
   gadv;
   today = new Date();
   fechaActual;
+  NuevaEnfermedad;
+  confirma= false;
 
   ngOnInit(): void {
     this.cargar();
@@ -58,7 +63,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   cargar(){
       this.medicinag.enfermedad().then(data =>{
       this.enfermedades=data['result'];
-      
+
       this.completar();
     }).catch(error =>{
       console.log(error);
@@ -70,13 +75,15 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   completar(){
     for (let x in this.enfermedades){
       this.data.push({ "id":this.enfermedades[x]["id_enfermedad"], "name":this.enfermedades[x]["enfermedad"]});
-      
+
     }
 
   }
 
   CargarDatos(){
     let cedula = localStorage.getItem('cedulaMG');
+    this.idCitas = localStorage.getItem('idCita');
+
     this.medicinag.AtenderPaciente(cedula).then(data => {
       this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
@@ -94,29 +101,114 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
 
   selectEvent(item) {
-    this.valor=item.id; 
+    this.valor=item.id;
+    this.confirma=false;
+  }
+  notificacion(){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-info',
+        cancelButton: 'btn btn-danger'
+
+      },
+      buttonsStyling: true
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Está seguro de guardar?',
+      text: "Una vez guardada no se podrá cambiar!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Guardar consulta!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.IngresarConsulta();
+        this.cargar();
+        swalWithBootstrapButtons.fire(
+          'Guardado!',
+          'La consulta ha sido guardada.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'Se ha cancelado',
+          'error'
+        )
+      }
+    })
+  }
+
+  eliminarCita(id:string) {
+    this.citasser.elicitas(id).then(data => {
+      this.rutas.navigate(['/medicinageneralcitas']);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  IngresarEnfermedad(){
+    let data;
+     if(this.gad==0){
+      data = {
+        'enfermedad':this.NuevaEnfermedad,
+      }
+     }
+
+    debugger
+    this.medicinag.AgregarEnfermedad(data).then(data =>{
+
+    });
+    this.cargar();
   }
 
   IngresarConsulta(){
-    
-    let data = {
-      'id_enfermedad':this.valor,
-      'id_paciente':this.idPaciente,
-      'a_enfermedad':this.antecedentes_enfermedad,
-      'fecha': this.fechaActual,
-      'motivo_consulta':this.motivo,
-      'tipo_atencion':this.tipo_atencion,
-      'condicion_diagnostico': this.condicion_diagnostico,
-      'diagnostico': this.diagnostico,
-      'plan_terapeutico': this.plan_terapeutico,
-      'lugar_atencion': this.lugar_atencion,
-      'certificado': true,
-    }
+    let data;
+     if(this.gad==0){
+      data = {
+        'id_enfermedad':this.valor,
+        'id_paciente':this.idPaciente,
+        'a_enfermedad':this.antecedentes_enfermedad,
+        'fecha': this.fechaActual,
+        'motivo_consulta':this.motivo,
+        'tipo_atencion':this.tipo_atencion,
+        'condicion_diagnostico': this.condicion_diagnostico,
+        'diagnostico': 'No admite',
+        'plan_terapeutico': 'No admite',
+        'lugar_atencion': this.lugar_atencion,
+        'certificado': true,
+      }
+     }else{
+       data = {
+        'id_enfermedad':this.valor,
+        'id_paciente':this.idPaciente,
+        'a_enfermedad':this.antecedentes_enfermedad,
+        'fecha': this.fechaActual,
+        'motivo_consulta':this.motivo,
+        'tipo_atencion':this.tipo_atencion,
+        'condicion_diagnostico': this.condicion_diagnostico,
+        'diagnostico': this.diagnostico,
+        'plan_terapeutico': this.plan_terapeutico,
+        'lugar_atencion': this.lugar_atencion,
+        'certificado': true,
+      }
+     }
+     this.eliminarCita(this.idCitas);
+
     debugger
     this.medicinag.AgregarConsulta(data).then(data =>{
 
     });
   }
+
 
 }
 
