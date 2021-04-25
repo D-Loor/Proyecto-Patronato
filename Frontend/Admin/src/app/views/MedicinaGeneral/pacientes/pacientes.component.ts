@@ -28,7 +28,7 @@ export class PacientesComponent implements OnInit {
   pacientesMGFilter=[];//variable para el paginado sin el pipe
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
   APF:any[];
-  pacientesActualizar=[];
+  
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
@@ -36,7 +36,10 @@ export class PacientesComponent implements OnInit {
   menarquia:string; flujo_genital:string; Gestas:string; Partos:string; abortos:string; cesareas:string; DBT:string; HTA:string; TBC:string;
   GEMELAR:string; examen_cabezaT:string; examen_cuelloT:string; examen_toraxT:string; examen_abdomenT:string; examen_msuperiorT:string; examen_minferioresT:string;
   examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string; 
-  examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string;
+  examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string; gad:string;
+
+  idPaciente:string; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string; 
+
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = false;
@@ -104,6 +107,12 @@ export class PacientesComponent implements OnInit {
     this.edit=1;
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
     debugger
+    this.idPaciente=data['result'].id_paciente;
+    this.idPatologico=data['result'].id_patologico;
+    this.idEFisico=data['result'].id_e_fisico;
+    this.idEOrganoSistema=data['result'].id_e_organo_sistema;
+    this.idEComplementario=data['result'].id_e_complementario;
+    this.idHabito=data['result'].id_habito;
     this.apellidos=data['result'].apellidos;
     this.nombres=data['result'].nombres;
     this.cedula=data['result'].cedula;
@@ -117,6 +126,8 @@ export class PacientesComponent implements OnInit {
     this.religion=data['result'].religion;
     this.nivel_instruccion=data['result'].nivel_instruccion;
     this.estado_civil=data['result'].estado_civil;
+    this.gad=data['result'].gad;
+
     this.alcoholT=data['result']['habitos'].alcohol;
     this.tabacoT=data['result']['habitos'].tabaco;
     this.drogasT=data['result']['habitos'].drogas;
@@ -164,14 +175,33 @@ export class PacientesComponent implements OnInit {
   }
 
   actualizarDatosAfiliacion(){
-    
-    this.ServicioSecretaria.updateDatosAfilicaion( this.pacientesActualizar[0], this.cedula ).then(data =>{
-      Swal.fire(
-        'Correcto',
-        'Datos guardados correctamente',
-        'success'
-      )
+    let pacientesActualizar = {
+      'id_patologico':this.idPatologico,
+      'id_e_fisico':this.idEFisico,
+      'id_e_organo_sistema':this.idEOrganoSistema,
+      'id_e_complementario':this.idEComplementario,
+      'id_habito':this.idHabito,
+      'apellidos':this.apellidos,
+      'nombres':this.nombres,
+      'cedula':this.cedula,
+      'edad':this.edad,
+      'ocupacion':this.ocupacion,
+      'sexo':this.sexo,
+      'residencia':this.Lresidencia,
+      'procedencia':this.Lprocedencia,
+      'fecha_nacimiento':this.fechanacimiento,
+      'raza':this.raza,
+      'religion':this.religion,
+      'nivel_instruccion':this.nivel_instruccion,
+      'estado_civil':this.estado_civil,
+      'gad':this.gad,
+      }
+
+    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.idPaciente ).then(data =>{
+      this.DatosPaciente(this.idPaciente);
     });
   }
+  
+
 
 }
