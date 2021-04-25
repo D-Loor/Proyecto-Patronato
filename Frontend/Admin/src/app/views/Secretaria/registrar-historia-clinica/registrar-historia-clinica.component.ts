@@ -24,6 +24,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
+  existente:string;
   orden:number = 1;
   EstadoVida: boolean = true;
   guardado: boolean = false;
@@ -414,11 +415,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
     this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
       this.ActualizarEstadoCitas();
-      Swal.fire(
-        'Correcto',
-        'Datos guardados correctamente',
-        'success'
-      )
     });
   }
 
@@ -427,16 +423,37 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'nombres':this.nombresP + " " + this.apellidos,
     }
     this.ServicioSecretaria.ActualizarCitas( citas, this.cedula ).then(data =>{
+      Swal.fire(
+        'Correcto',
+        'Datos guardados correctamente',
+        'success'
+      )
+    });
+  }
+  
+  IngresarDatosPaciente(){
+      if(this.sexo=="Mujer"){
+        this.IngresarObstetrico();
+      }else{
+       this.IngresarAntecedesPersonales();
+      } 
+    
+  }
+
+  VaidarPaciente(){
+    this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
+      if(data ['code'] == '201'){
+        Swal.fire(
+          'Error!',
+          'El paciente ya cuenta con historial clínico',
+          'error'
+        )
+      }else
+        this.IngresarDatosPaciente();
     });
   }
 
-  IngresarDatosPaciente(){
-    if(this.sexo=="Mujer"){
-      this.IngresarObstetrico()
-    }else{
-     this.IngresarAntecedesPersonales();
-    }   
-  }
+
   
 
 }
