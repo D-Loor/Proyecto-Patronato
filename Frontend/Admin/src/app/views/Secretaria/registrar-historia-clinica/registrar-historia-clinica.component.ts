@@ -26,6 +26,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   isCollapsed7 = false;
   orden:number = 1;
   EstadoVida: boolean = true;
+  guardado: boolean = false;
   number: number = 0;
   DatosFamiliares: any = [];
   edit:number = 0;
@@ -88,6 +89,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           "causas":this.estadoT,
       }];
       this.DatosFamiliares.push(DatosFamiliares2);
+      this.nombres = "";
+      this.union = "";
+      this.union2 = "";
+      this.estado = "";
+      this.estadoT = "";
+
   }
 
   EliminarDatosArray(elimina:string){
@@ -385,11 +392,34 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   AntecedentesFamiliares(){
-    debugger
-    this.ServicioSecretaria.Familiares(this.DatosFamiliares).then(data =>{
-      debugger
-      this.id_familiar = data['id'];
+    let  arrayLocal={};
+    for (let item of this.DatosFamiliares) { 
+      arrayLocal = {
+          "nombres": item[0].nombres,
+          "union": item[0].union,
+          "vida": item[0].vida,
+          "causas":item[0].causas,
+      }
+      this.ServicioSecretaria.Familiares(arrayLocal).then(data =>{
+        this.id_familiar = data['id'];
+        this.AntecedentesPatologicosF();
+      });
+    }
+  }
+
+  AntecedentesPatologicosF(){
+    let AntecedentesPF = {
+      'id_familiar':this.id_familiar,
+      'id_paciente':this.id_paciente,
+    }
+    this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
+      Swal.fire(
+        'Correcto',
+        'Datos guardados correctamente',
+        'success'
+      )
     });
+    return true;
   }
 
   IngresarDatosPaciente(){
@@ -397,8 +427,26 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
-    } */
-    this.AntecedentesFamiliares();
+    }  */
+    const ipAPI = '//api.ipify.org?format=json'
+
+    Swal.queue([{
+      title: 'Desea guardar los datos',
+      confirmButtonText: 'Si',
+      text:'Los datos se estan guardando',
+      showLoaderOnConfirm: this.AntecedentesPatologicosF(),
+      preConfirm: () => {
+        return fetch(ipAPI)
+          .then(response => response.json())
+          .then(data => Swal.insertQueueStep(data.ip))
+          .catch(() => {
+            Swal.insertQueueStep({
+              icon: 'error',
+              title: 'Los datos no se fuardaron correctamente'
+            })
+          })
+      }
+    }])
   }
   
 

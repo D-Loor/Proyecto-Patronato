@@ -39,8 +39,8 @@ class AntecedentePatologicoFamiliarController extends Controller
         $datos->id_familiar=$request->id_familiar;
         $datos->id_paciente=$request->id_paciente;
         $datos->save();
-
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_a_p_familiar;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201',  'id' => $idRecienGuardado]);
     }
 
     /**

@@ -93,14 +93,24 @@ export class SecretariaService {
   }
 
   Familiares(data:any) {
-    debugger
     let  url = 'http://127.0.0.1:8000/api/Familiar';
     return new Promise ((resolve, reject) => {
       this.http.post(url, data ).subscribe(res => {
         resolve(res);{
         }
       }, error => {
-        debugger
+        reject(error);
+      });
+    });
+  }
+  
+  AntecedentesFamiliares(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/AntecedentePatologicoFamiliar';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
         reject(error);
       });
     });
