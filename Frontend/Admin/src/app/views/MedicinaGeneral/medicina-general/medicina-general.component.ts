@@ -101,12 +101,12 @@ export class MedicinaGeneralComponent implements OnInit {
     this.lugar_atencion=arreglo['lugar_atencion'];
     this.condicion_diagnostico=arreglo['condicion_diagnostico'];
     this.plan_terapeutico=arreglo['plan_terapeutico'];
-
+    this.diagnostico=arreglo['diagnostico'];
     if(arreglo['condicion_diagnostico']=="Presuntivo"){
-      this.diagnostico=arreglo['diagnostico_presuntivo'];
+      
       this.diagno="Diagnóstio Presuntivo";
     }else{
-      this.diagnostico=arreglo['diagnostico_diferencial'];
+      
       this.diagno="Diagnóstio Diferencial";
     }
 

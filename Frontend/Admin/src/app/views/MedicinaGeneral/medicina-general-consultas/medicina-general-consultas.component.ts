@@ -21,14 +21,15 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   tipo_atencion;
   motivo;
   antecedentes_enfermedad;
-  diagnostico;
-  plan_terapeutico;
+  diagnostico='';
+  plan_terapeutico='';
   certificado;
   enfermedades: any[];
   data = [];
   nombres:string;
   cedula:string;
   edad:string;
+  idPaciente;
   gad;
   gadv;
   today = new Date();
@@ -79,6 +80,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.medicinag.AtenderPaciente(cedula).then(data => {
       this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
+      this.idPaciente=data['result'].id_paciente;
       this.edad = data['result'].edad;
       this.gad = data['result'].gad;
       if(this.gad==1)
@@ -91,23 +93,15 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     });
   }
 
-  selectEvent(event) {
-    debugger
-    console.log(event)
+  selectEvent(item) {
+    this.valor=item.id; 
   }
 
   IngresarConsulta(){
-    var id;
-    console.log(this.enferme);
-    for (let item of this.enfermedades){
-      debugger
-      if(this.enferme==item['enfermedad']){
-        id=item['id_enfermedad'];
-      }
-    }
-
+    
     let data = {
-      'id_enfermedad':1,
+      'id_enfermedad':this.valor,
+      'id_paciente':this.idPaciente,
       'a_enfermedad':this.antecedentes_enfermedad,
       'fecha': this.fechaActual,
       'motivo_consulta':this.motivo,
@@ -118,6 +112,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       'lugar_atencion': this.lugar_atencion,
       'certificado': true,
     }
+    debugger
     this.medicinag.AgregarConsulta(data).then(data =>{
 
     });

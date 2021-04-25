@@ -90,6 +90,7 @@
                         [data]="data"
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
+                        (selected)='selectEvent($event)'
                         [itemTemplate]="itemTemplate"
                         [notFoundTemplate]="notFoundTemplate"
                         paramName="valor"

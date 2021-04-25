@@ -44,6 +44,7 @@ class HistoriaClinicaMGController extends Controller
     {
         $datos=new Historia_Clinica_MG();
         $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->id_paciente=$request->id_paciente;
         $datos->a_enfermedad=$request->a_enfermedad;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
@@ -99,6 +100,7 @@ class HistoriaClinicaMGController extends Controller
         $datos=Historia_Clinica_MG::find($id_historia_clinica_mg);
 
         $datos->id_enfermedad=$request->id_enfermedad;
+        $datos->id_paciente=$request->id_paciente;
         $datos->a_enfermedad=$request->a_enfermedad;
         $datos->fecha=$request->fecha;
         $datos->motivo_consulta=$request->motivo_consulta;
