@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
+import { SecretariaService } from '../../../servicios/secretaria.service';
 
 @Component({
   selector: 'app-agendar-cita',
@@ -8,13 +9,17 @@ import { navItems } from '../../../_nav';
 })
 export class AgendarCitaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ServicioSecretaria:SecretariaService) { }
 
 
   isCollapsed = false;
   public sidebarMinimized = false;
   public navItems = navItems;
   ClaseCdula:string="form-control form-input select-number"; 
+
+  //Variables para datos pacientes 
+  nombres; fecha_consulta; cedula; especialidad; id_hora;
+
   ngOnInit(): void {
   }
   toggleMinimize(e) {
@@ -116,6 +121,15 @@ export class AgendarCitaComponent implements OnInit {
       return false;
     }
   
+  }
+
+  AgendarCita(){
+    let paciente = {
+
+    }
+    this.ServicioSecretaria.AddCitas(paciente).then(data =>{
+
+    });
   }
 
 }

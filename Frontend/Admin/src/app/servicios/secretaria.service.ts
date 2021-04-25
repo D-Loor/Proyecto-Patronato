@@ -116,8 +116,6 @@ export class SecretariaService {
     });
   }
   
-  
-
 
   ActualizarCitas(data:any,cedula:string) {
     let  url = 'http://127.0.0.1:8000/api/Cita/'+cedula;
@@ -134,6 +132,17 @@ export class SecretariaService {
     let  url = 'http://127.0.0.1:8000/api/atender/'+cedula;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  AddCitas(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/Cita/';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data).subscribe(res => {
         resolve(res);
       }, error => {
         reject(error);
