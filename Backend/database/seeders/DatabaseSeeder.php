@@ -213,7 +213,7 @@ class DatabaseSeeder extends Seeder
             'id_e_organo_sistema' => 1,
             'id_e_complementario' => 1,
             'id_habito' => 1,
-            'cedula' => '13168687076',
+            'cedula' => '1316870706',
             'nombres' => 'Diego Oswaldo',
             'apellidos' => 'Loor Moran',
             'edad' => 21,
@@ -234,6 +234,7 @@ class DatabaseSeeder extends Seeder
         DB::table('historias_clinicas_mg')->insert([
             'id_paciente' => 2,
             'id_enfermedad' => 1,
+            'a_enfermedad'=>'mucho dolor hace semanas',
             'fecha' => Carbon::parse('2021-04-20'),
             'motivo_consulta' => 'Dolor de cabeza',
             'tipo_atencion' => 'Presuntivo',
@@ -248,6 +249,7 @@ class DatabaseSeeder extends Seeder
         DB::table('historias_clinicas_mg')->insert([
             'id_paciente' => 1,
             'id_enfermedad' => 4,
+            'a_enfermedad'=>'fatiga y mucho dolor hace semanas',
             'fecha' => Carbon::parse('2021-03-24'),
             'motivo_consulta' => 'Cansancio y dolor a los musculos',
             'tipo_atencion' => 'Presuntivo',

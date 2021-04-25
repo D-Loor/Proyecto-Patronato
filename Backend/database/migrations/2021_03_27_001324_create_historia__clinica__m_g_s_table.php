@@ -19,6 +19,7 @@ class CreateHistoriaClinicaMGSTable extends Migration
             $table->unsignedBigInteger('id_enfermedad');
             $table->date('fecha');
             $table->string('motivo_consulta');
+            $table->string('a_enfermedad');
             $table->string('tipo_atencion');
             $table->string('condicion_diagnostico');
             $table->string('diagnostico');
