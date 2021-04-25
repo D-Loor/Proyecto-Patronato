@@ -115,12 +115,12 @@ class CitaController extends Controller
         $datos=Cita::where("cedula", '=', $cedula)->first();
         //$rol = role::where("cedula", '=', $id_cita)->first();
         if($datos != null){
-            $datos->id_cita =$datos->id_cita;
-            $datos->nombres=$request->nombres;
-            $datos->cedula=$request->cedula;
-            $datos->especialidad=$request->especialidad;
-            $datos->fecha=$request->fecha;
-            $datos->id_turno=$request->id_turno;
+            $datos->id_cita = $datos->id_cita;
+            $datos->nombres = $request->nombres;
+            $datos->cedula = $datos->cedula;
+            $datos->especialidad = $datos->especialidad;
+            $datos->fecha = $datos->fecha;
+            $datos->id_turno = $datos->id_turno;
             $datosP=Paciente::where('cedula', $cedula)->get()->first();
             if($datosP != null){
                 $datos->estado=1;

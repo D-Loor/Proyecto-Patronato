@@ -413,6 +413,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'id_paciente':this.id_paciente,
     }
     this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
+      this.ActualizarEstadoCitas();
       Swal.fire(
         'Correcto',
         'Datos guardados correctamente',
@@ -421,13 +422,20 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     });
   }
 
+  ActualizarEstadoCitas(){
+    let citas = {
+      'nombres':this.nombresP + " " + this.apellidos,
+    }
+    this.ServicioSecretaria.ActualizarCitas( citas, this.cedula ).then(data =>{
+    });
+  }
+
   IngresarDatosPaciente(){
     if(this.sexo=="Mujer"){
       this.IngresarObstetrico()
     }else{
      this.IngresarAntecedesPersonales();
-    }  
-    
+    }   
   }
   
 
