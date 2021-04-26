@@ -41,7 +41,7 @@ Route::resource('HistorialEnfermedades','HistorialEnfermedadesController');
 Route::get('login/{correo}/{pass}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
 Route::post('agendarCita','CitaController@store');
-Route::get('validarHora/{fecha}', 'CitaController@validarHora');
+Route::get('validarturno/{fecha}', 'CitaController@validarHora');
 Route::get('filtroFecha/{fecha}', 'PacienteController@filtro');
 Route::get('atender/{cedula}','PacienteController@Atender');
 Route::get('validarcita/{cedula}/{fechaActual}', 'CitaController@ValidarCita');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Models\Turno;
 
 class CitaController extends Controller
 {
@@ -85,11 +86,27 @@ class CitaController extends Controller
 
     public function validarHora($fecha)
     {
-        $datos=Cita::all()->where('fecha', $fecha);;
-        if($datos != null){
-            return response()->json(['result'=>$datos, 'code'=>'201']);
+        $datos=Cita::all()->where('fecha', $fecha);
+        $turno=Turno::all();
+
+        foreach ($datos as $cita)
+        {
+            $cont=0;
+            foreach ($turno as $tur)
+            {
+
+                if($tur['id_turno'] == $cita['id_turno'] ){
+                    unset($turno[$cont]);
+
+                }
+                $cont++;
+            }
+        }
+
+        if($turno != null){
+            return response()->json(['result'=>$turno, 'code'=>'201']);
         }else
-        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        return response()->json(['result2'=>$turno,'result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -132,7 +149,7 @@ class CitaController extends Controller
         } else{
             return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
         }
-        
+
     }
 
     /**
@@ -160,5 +177,5 @@ class CitaController extends Controller
         }else
             return response()->json(['result'=>"Proceda con el registro", 'code'=>'202']);
     }
-    
+
 }
