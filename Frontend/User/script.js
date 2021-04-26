@@ -51,7 +51,6 @@ $(document).ready(function() {
 	};
 });
 
-
 //Validar cédula
 
 function validarC() {
@@ -75,6 +74,8 @@ function validarC() {
           } 
          
   }
+
+
   
  //Validar Fecha
     window.onload=function validarf() {

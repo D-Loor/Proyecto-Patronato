@@ -558,7 +558,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     
-                    <form method="POST" name="sentMessage" id="contactForm"  action="AgendarCita.php" >
+                    <form method="POST" name="sentMessage" id="contactForm"  action="#" >
 
                         <div class="row">
                             <div class="col-md-6">
@@ -598,34 +598,62 @@
                                 <div class="form-group">
                         
                                     <label class="label-co"> Seleccione la fecha de consulta *</label>
-                                    <input method="POST" id="fecha" name="fecha" onchange="ver()" type="date" class="form-control fecha"  required
+                                    <input  id="fecha" name="fecha" onchange="cargar()" type="date" class="form-control fecha"  required
                                         data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-03-03" onload="validarf()">
                                     <p class="help-block text-danger"></p>
                             
                                 </div>
                         <script>
-                            function ver(){
-                            debugger
+                            function cargar(){
+                                var fecha = document.getElementById("fecha").value;
+                                const $select = document.getElementById("hora");
+                               
+                                for (let i = $select.options.length; i >= 0; i--) {
+                                    $select.remove(i);
+                                }
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://127.0.0.1:8000/api/validarturno/"+fecha,
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        debugger
+                                        for(var i = 0; i < data.length; i++){
+
+                                            const option = document.createElement('option');
+                                            console.log(data[i].id_turno);
+                                            console.log(data[i].hora);
+                                            
+                                            option.value = 1;
+                                            option.text = "hola";
+                                            option.className="op-select";
+                                        
+                                            $select.appendChild(option);
+                                            debugger
+
+                                            console.log(data[i].com)
+                                        }
+                                   
+
+                                    },
+                                    failure: function (data) {
+                                    alert(data.responseText);
+                                    },
+                                    error: function (data) {
+                                    alert(data.responseText);
+                                    }
+                                });
 
                             }
                         </script>
-                                
-                                
-                                <!-- PARA LLENAR EL OPTION -->
-                                <?php
-                                function llenarSelect($regiones){
-                                foreach ($regiones as $region)
-                                      $html.= "<option value=".$region['id'].">".$region['nombre']."</option>";
-                                 return $html;
-                                }
-                                ?>
+                                                             
 
 
                                 <div class="form-group">
                                     
                                     <label class="label-co"> Seleccione la hora de consulta *</label>
                                     <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" name="hora" id="hora" required>
-                                        
+                                   
                                     </select>
                                 </div>
 
@@ -642,7 +670,7 @@
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="custom-btn btn-11"> Agendar cita</button>
+                                <button type="submit" id="AgendarCita" name="AgendarCita" class="custom-btn btn-11"> Agendar cita</button>
                             </div>
                         </div>
                     </form>

@@ -97,7 +97,7 @@ class CitaController extends Controller
 
                 if($tur['id_turno'] == $cita['id_turno'] ){
                     unset($turno[$cont]);
-
+                    break;
                 }
                 $cont++;
             }
@@ -106,7 +106,7 @@ class CitaController extends Controller
         if($turno != null){
             return response()->json(['result'=>$turno, 'code'=>'201']);
         }else
-        return response()->json(['result2'=>$turno,'result'=>"Registro no encontrado", 'code'=>'202']);
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
