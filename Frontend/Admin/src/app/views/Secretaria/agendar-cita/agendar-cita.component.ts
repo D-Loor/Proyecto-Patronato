@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { SecretariaService } from '../../../servicios/secretaria.service';
 import Swal from 'sweetalert2';
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
+//import DatePicker from "react-datepicker";
+//import "react-datepicker/dist/react-datepicker.css";
 
 @Component({
   selector: 'app-agendar-cita',
