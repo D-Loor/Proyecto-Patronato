@@ -127,7 +127,6 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   AgendarCita(){
-    debugger
     let paciente = {
       'nombres':this.nombres,
       'cedula':this.cedula,
@@ -173,6 +172,7 @@ export class AgendarCitaComponent implements OnInit {
             'No existen citas disponibles en esta fecha',
             'error'
           )
+          this.ArrayTurnos = [];
         }else{
         array = data['result'];
         this.TurnosDisponibles(array);

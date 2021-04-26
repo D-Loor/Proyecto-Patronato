@@ -102,8 +102,8 @@ class CitaController extends Controller
                 $cont++;
             }
         }
-
-        if($turno != null){
+         $num_rows = count($turno);
+        if($num_rows != 0){
             return response()->json(['result'=>$turno, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
