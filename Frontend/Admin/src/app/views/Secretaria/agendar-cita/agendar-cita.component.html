@@ -45,7 +45,7 @@
                                           <div class="form-group col-md-6" >
                                               <label for="date-input"> Seleccione la hora de consulta</label>
                                               <select  class="form-control sel-opcion" size="5" multiple aria-label=" multiple select example" name="idT" [(ngModel)]="idT" id="idT"  required>
-                                                <option *ngFor="let item of Array_Turnos" value="{{item.id_turno}}">{{item.hora}}</option>
+                                                <option *ngFor="let item of ArrayTurnos" value="{{item.id}}">{{item.hora}}</option>
                                               </select>
                                           </div>                                  
                                       </div>

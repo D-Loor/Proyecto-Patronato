@@ -18,9 +18,8 @@ export class AgendarCitaComponent implements OnInit {
   public navItems = navItems;
   ClaseCdula:string="form-control form-input select-number"; 
   //Variables para datos pacientes 
-  nombres; fecha_consulta; cedula; especialidad; idT:number;
-
-  Array_Turnos:any [];
+  nombres; fecha_consulta; cedula; especialidad; idT:string;
+  ArrayTurnos: any = []
 
   ngOnInit() {
     
@@ -128,6 +127,7 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   AgendarCita(){
+    debugger
     let paciente = {
       'nombres':this.nombres,
       'cedula':this.cedula,
@@ -141,6 +141,13 @@ export class AgendarCitaComponent implements OnInit {
         'Cita agendada correctamente',
         'success'
       )
+      this.nombres="";
+      this.cedula ="";
+      this.fecha_consulta="";
+      this.especialidad="";
+      this.idT="";
+      this.ClaseCdula="form-control form-input select-number"; 
+      this.ArrayTurnos = [];
     });
   }
 
@@ -158,12 +165,34 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Turnos(fecha:Date){
-    this.Array_Turnos =null;
+    let array ={};
     this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
-      this.Array_Turnos = data ['result'];
+        if(data['code']=='202'){
+          Swal.fire(
+            'Lo sentimos',
+            'No existen citas disponibles en esta fecha',
+            'error'
+          )
+        }else{
+        array = data['result'];
+        this.TurnosDisponibles(array);
+        }
     });
   }
 
+  TurnosDisponibles(array:any){
+    let turnos = { }
+    this.ArrayTurnos = [];
+    for (let item of Object.keys(array)) { 
+      turnos = {
+          "id": array[item].id_turno,
+          "hora": array[item].hora,
+      }
+      this.ArrayTurnos.push(turnos);
+    }
+  }
+
+  
 
 
 }
