@@ -18,7 +18,9 @@ export class AgendarCitaComponent implements OnInit {
   public navItems = navItems;
   ClaseCdula:string="form-control form-input select-number"; 
   //Variables para datos pacientes 
-  nombres; fecha_consulta; cedula; especialidad; id_turno;
+  nombres; fecha_consulta; cedula; especialidad; idT:number;
+
+  Array_Turnos:any [];
 
   ngOnInit() {
     
@@ -131,7 +133,7 @@ export class AgendarCitaComponent implements OnInit {
       'cedula':this.cedula,
       'fecha':this.fecha_consulta,
       'especialidad':this.especialidad,
-      'id_turno':1,
+      'id_turno':this.idT[0],
     }
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
       Swal.fire(
@@ -152,6 +154,13 @@ export class AgendarCitaComponent implements OnInit {
         )
       }else
         this.AgendarCita();
+    });
+  }
+
+  Turnos(fecha:Date){
+    this.Array_Turnos =null;
+    this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
+      this.Array_Turnos = data ['result'];
     });
   }
 

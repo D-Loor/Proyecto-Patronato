@@ -161,6 +161,17 @@ export class SecretariaService {
     });
   }
 
+  ValidarTurno(fecha:Date) {
+    let  url = 'http://127.0.0.1:8000/api/validarturno/'+fecha;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   updateDatosAfilicaion(data:any,id:string){
     let  url = 'http://127.0.0.1:8000/api/Paciente/'+id;
     return new Promise ((resolve, reject) => {
