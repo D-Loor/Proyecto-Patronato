@@ -29,13 +29,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   EstadoVida: boolean = true;
   guardado: boolean = false;
   number: number = 0;
-  DatosFamiliares: any = [];
+  DatosFamiliares=[];
   edit:number = 0;
-
+  select="hola";
+  actualizar:number;
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
-  id_familiar:number;
+  id_familiar:number; id_PacienteDA:number;
   
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
@@ -61,6 +62,38 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
   
 
+  limpiar(){
+
+    this.DatosFamiliares=[]; this.number=0; this.edit=0; this.actualizar=0;
+
+    this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
+  this.id_sistema=null; this.id_complementario=null; this.id_habito=null; this.id_paciente=null;
+  this.id_familiar=null; this.id_PacienteDA=null;
+  
+  //Variables de  Datos de Afiliación
+  this.apellidos=""; this.nombresP=""; this.cedula=""; this.edad=""; this.ocupacion=""; this.sexo=""; this.Lresidencia=""; this.Lprocedencia=""; this.fechanacimiento="";
+  this.raza=""; this.religion=""; this.nivel_instruccion=""; this.estado_civil=""; this.gad="";
+
+  //Variables de datos de Antecedentes Patológicos Personales
+  this.ninezT=""; this.adolescenciaT=""; this.adultezT=""; this.quirurgicosT=""; this.alergicosT=""; this.traumatologicosT=""; this.fum=""; this.fpp=""; this.edad_gestional="";
+  this.menarquia=""; this.flujo_genital=""; this.Gestas=""; this.Partos=""; this.abortos=""; this.cesareas=""; this.DBT=""; this.HTA=""; this.TBC=""; this.GEMELAR=""; 
+
+  //Variables de Antecedentes Patológicos Familiares
+  this.nombres=""; this.union=""; this.estado=""; this.estadoT=""; this.union2="";
+
+  //Variables de Hábitos Personales
+  this.alcoholT=""; this.tabacoT=""; this.drogasT=""; this.alimentacionT=""; this.diuresisT=""; this.somniaT=""; 
+
+  //Variables de Examenes Físicos Generales
+  this.examen_cabezaT=""; this.examen_cuelloT=""; this.examen_toraxT=""; this.examen_abdomenT=""; this.examen_msuperiorT=""; this.examen_minferioresT=""; this.examen_genitalT=""; this.examen_analT="";
+
+  //Variables de Examenes de Organos y Sistemas
+  this.examen_digestivoT=""; this.examen_respiratorioT=""; this.examen_cardiacoT=""; this.examen_genitourinarioT=""; this.examen_osteomuscularT=""; this.examen_nerviosoT="";
+
+  //Variables de Examenes Complementarios
+  this.examen_laboratorioT=""; this.examen_electrocardiogramaT=""; this.examen_RToraxT=""; this.examen_otrosT="";
+  }
+
   ngOnInit(): void {
   }
   
@@ -84,12 +117,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
     let DatosFamiliares2 = [
       {
+          "id_familiar" : this.id_familiar,
           "nombres": this.nombres,
           "union": this.union,
           "vida": this.estado,
           "causas":this.estadoT,
       }];
-      this.DatosFamiliares.push(DatosFamiliares2);
+      debugger
+      this.DatosFamiliares.push(DatosFamiliares2[0]);
       this.nombres = "";
       this.union = "";
       this.union2 = "";
@@ -209,6 +244,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       )
     }else{
       this.medicinag.AtenderPaciente(this.cedula).then(data => {      
+        
         if(data['code'] === '201'){
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
@@ -217,6 +253,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           },
           buttonsStyling: true
           })
+          
     
           swalWithBootstrapButtons.fire({
             title: 'El paciente cuenta con historial clínico',
@@ -228,11 +265,75 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
             confirmButtonColor: '#4BB543',
             cancelButtonColor: '#d33',
             reverseButtons: true
-          }).then((result) => {
-            if (result.isConfirmed) {
-            //llamar los datos y llenarlos
-            this.edit=1;
             
+          }).then((result) => {
+            
+            if (result.isConfirmed) {
+              this.id_PacienteDA=data['result'].id_paciente;
+              this.apellidos=data['result'].apellidos;
+              this.nombresP=data['result'].nombres;
+              this.edad=data['result'].edad;
+              this.sexo=data['result'].sexo;
+              this.gad=data['result'].gad;
+              this.ocupacion=data['result'].ocupacion;
+              this.Lresidencia=data['result'].residencia;
+              this.Lprocedencia=data['result'].procedencia;
+              this.estado_civil=data['result'].estado_civil;
+              this.raza=data['result'].raza;
+              this.religion=data['result'].religion;
+              this.fechanacimiento=data['result'].fecha_nacimiento;
+              this.nivel_instruccion=data['result'].nivel_instruccion;
+              this.id_patologico=data['result'].id_patologico;
+              this.id_e_fisico=data['result'].id_e_fisico;
+              this.id_sistema=data['result'].id_e_organo_sistema;
+              this.id_complementario=data['result'].id_e_complementario;
+              this.id_habito=data['result'].id_habito;
+
+              this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
+              this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
+              this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
+              this.DBT=data['result']['antecedentes_patologicos_personales'].DBT;
+              this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
+              this.TBC=data['result']['antecedentes_patologicos_personales'].TBC;
+              this.GEMELAR=data['result']['antecedentes_patologicos_personales'].GEMELAR;
+              this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
+              this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
+              this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
+
+              this.alcoholT=data['result']['habitos'].alcohol;
+              this.tabacoT=data['result']['habitos'].tabaco;
+              this.drogasT=data['result']['habitos'].drogas;
+              this.alimentacionT=data['result']['habitos'].alimentacion;
+              this.diuresisT=data['result']['habitos'].diuresis;
+              this.somniaT=data['result']['habitos'].somnia;
+
+              this.DatosFamiliares=data['result']['familiares'];
+              this.id_familiar=data['result']['familiares'][0].id_familiar;
+              this.number=1;
+              this.actualizar=1;
+              this.edit=1;
+              debugger
+              this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
+              this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
+              this.examen_toraxT=data['result']['examen_fisicos'].torax;
+              this.examen_abdomenT=data['result']['examen_fisicos'].abdomen;
+              this.examen_msuperiorT=data['result']['examen_fisicos'].miembros_superiores;
+              this.examen_minferioresT=data['result']['examen_fisicos'].miembros_inferiores;
+              this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
+              this.examen_analT=data['result']['examen_fisicos'].region_anal;
+           
+              this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
+              this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;
+              this.examen_cardiacoT=data['result']['examen_organo_sistemas'].sistema_cardiaco;
+              this.examen_genitourinarioT=data['result']['examen_organo_sistemas'].sistema_genitourinarion;
+              this.examen_osteomuscularT=data['result']['examen_organo_sistemas'].sistema_osteomuscular;
+              this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
+              
+              this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
+              this.examen_electrocardiogramaT=data['result']['examene_complementarios'].laboratorio;
+              this.examen_RToraxT=data['result']['examene_complementarios'].laboratorio;
+              this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
+
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -252,6 +353,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
             'El paciente con la cedula ' + this.cedula + ' no cuenta con historial clínico',
             'error'
           )
+          this.edit=0;
          }
         })
         .catch((error) => {
@@ -454,6 +556,45 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
 
+  actualizarDatos(){
+    debugger
+    let pacientesActualizar = {
+      'id_patologico':this.id_patologico,
+      'id_e_fisico':this.id_e_fisico,
+      'id_e_organo_sistema':this.id_sistema,
+      'id_e_complementario':this.id_complementario,
+      'id_habito':this.id_habito,
+      'apellidos':this.apellidos,
+      'nombres':this.nombresP,
+      'cedula':this.cedula,
+      'edad':this.edad,
+      'ocupacion':this.ocupacion,
+      'sexo':this.sexo,
+      'residencia':this.Lresidencia,
+      'procedencia':this.Lprocedencia,
+      'fecha_nacimiento':this.fechanacimiento,
+      'raza':this.raza,
+      'religion':this.religion,
+      'nivel_instruccion':this.nivel_instruccion,
+      'estado_civil':this.estado_civil,
+      'gad':this.gad,
+      }
+
+    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{
+      Swal.fire(
+        'Correcto',
+        'Datos actualizados correctamente',
+        'success'
+      )
+
+      let antecedentePP = {
+        
+      }
+
+      this.limpiar();
+    });
+  }
+  }
   
 
-}
+

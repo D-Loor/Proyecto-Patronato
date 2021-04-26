@@ -63,11 +63,11 @@
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="select1">Sexo</label>
-                                            <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo" required>
+                                            <select id="sexo" class="form-control" [(ngModel)]="sexo" name="sexo"  required>
                                                 <option value="Hombre">Hombre</option>
                                                 <option value="Mujer">Mujer</option>
                                             </select>
-                                        </div>
+                                        </div> 
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-6">
@@ -396,6 +396,7 @@
                                               </tr>
                                             </thead>
                                             <tbody>
+                                                <ng-container *ngIf="actualizar==0">    
                                               <tr *ngFor="let item of DatosFamiliares">
                                                 <td class="table-titulo">{{item[0].nombres}}</td>
                                                 <td>{{item[0].union}}</td>
@@ -409,6 +410,24 @@
                                                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                                                 </td>
                                               </tr>
+                                            </ng-container>
+
+                                              <ng-container *ngIf="actualizar==1">
+                                                <tr *ngFor="let item of DatosFamiliares">
+                                                    <td class="table-titulo">{{item.nombres}}</td>
+                                                    <td>{{item.union}}</td>
+                                                    <td>
+                                                      <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
+                                                      <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
+                                                    </td>
+                                                    <td>{{item.causas}}</td>
+                                                    <td>
+                                                      <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item[0].nombresF)"><i
+                                                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                                                    </td>
+                                                  </tr>
+                                              </ng-container>
+                                              
                                               
                                 
                                             </tbody>
@@ -790,7 +809,7 @@
 
                             </form>
                             <button *ngIf="edit==0" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Registrar Paciente</button>
-                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto">Editar Datos del Paciente</button>
+                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Editar Datos del Paciente</button>
                         </div>
                     </div>
                    

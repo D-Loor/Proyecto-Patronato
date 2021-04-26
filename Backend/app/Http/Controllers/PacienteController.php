@@ -145,7 +145,7 @@ class PacienteController extends Controller
 
     public function Atender( $cedula)
     {
-        $datos=Paciente::where('cedula', $cedula)->get()->first();
+        $datos=Paciente::with('habitos','antecedentes_patologicos_personales','familiares','examen_fisicos','examen_organo_sistemas','examene_complementarios')->where('cedula', $cedula)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else

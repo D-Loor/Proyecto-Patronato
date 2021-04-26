@@ -172,7 +172,8 @@ export class SecretariaService {
     });
   }
 
-  updateDatosAfilicaion(data:any,id:string){
+  updateDatosAfilicaion(data:any,id:number){
+    debugger
     let  url = 'http://127.0.0.1:8000/api/Paciente/'+id;
     return new Promise ((resolve, reject) => {
       this.http.put(url, data).subscribe(res => {

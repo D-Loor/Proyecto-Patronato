@@ -38,7 +38,7 @@ export class PacientesComponent implements OnInit {
   examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string; 
   examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string; gad:string;
 
-  idPaciente:string; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string; 
+  idPaciente:number; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string; 
 
   isCollapsed = false;
   isCollapsed2 = false;
@@ -102,7 +102,7 @@ export class PacientesComponent implements OnInit {
     this.pacientesMGPaginate = null;
   }
 
-  DatosPaciente(id_paciente:string){
+  DatosPaciente(id_paciente:number){
     this.Principal.show();
     this.edit=1;
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
