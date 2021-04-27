@@ -330,9 +330,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
               
               this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
-              this.examen_electrocardiogramaT=data['result']['examene_complementarios'].laboratorio;
-              this.examen_RToraxT=data['result']['examene_complementarios'].laboratorio;
-              this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
+              this.examen_electrocardiogramaT=data['result']['examene_complementarios'].electrocardiograma;
+              this.examen_RToraxT=data['result']['examene_complementarios'].radiografia_torax;
+              this.examen_otrosT=data['result']['examene_complementarios'].otros;
 
             } else if (
               /* Read more about handling dismissals below */
@@ -581,20 +581,90 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       }
 
     this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{
-      Swal.fire(
-        'Correcto',
-        'Datos actualizados correctamente',
-        'success'
-      )
+      
+    });
 
-      let antecedentePP = {
-        
+    if(this.sexo=="Hombre"){
+      debugger
+      let APPActualizar = {
+        'infancia':this.ninezT,
+        'adolecencia':this.adolescenciaT,
+        'adultez':this.adultezT,
+        'DBT':this.DBT,
+        'HTA':this.HTA,
+        'TBC':this.TBC,
+        'GEMELAR':this.GEMELAR,
+        'quirujircos':this.quirurgicosT,
+        'alergias':this.alergicosT,
+        'traumas':this.traumatologicosT,
+        'id_gineco':1,
       }
 
-      this.limpiar();
+      this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{
+        Swal.fire(
+          'Correcto',
+          'Datos actualizados correctamente',
+          'success'
+        )
+        this.limpiar();
+      });
+    }else{
+
+    }
+
+    let habitosActualizar = {
+      'alcohol':this.alcoholT,
+      'tabaco':this.tabacoT,
+      'drogas':this.drogasT,
+      'alimentacion':this.alimentacionT,
+      'diuresis':this.diuresisT,
+      'somnia':this.somniaT,         
+    }
+
+    this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{
+      
+    });
+
+    let EFGActualizar = {
+      'cabeza':this.examen_cabezaT,
+      'cuello':this.examen_cuelloT,
+      'torax':this.examen_toraxT,
+      'abdomen':this.examen_abdomenT,
+      'miembros_superiores':this.examen_msuperiorT,
+      'miembros_inferiores':this.examen_minferioresT,
+      'region_genital':this.examen_genitalT,
+      'region_anal':this.examen_analT,       
+    }
+
+    this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{
+      
+    });
+
+    let EOSActualizar = {
+      'sistema_digestivo':this.examen_digestivoT,
+      'sistema_respiratorio':this.examen_respiratorioT,
+      'sistema_cardiaco':this.examen_cardiacoT,
+      'sistema_genitourinarion':this.examen_genitourinarioT,
+      'sistema_osteomuscular':this.examen_osteomuscularT,
+      'sistema_nervioso':this.examen_nerviosoT,    
+    }
+
+    this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{
+      
+    });
+
+    let examenesComplementariosActualizar = {
+      'laboratorio':this.examen_laboratorioT,
+      'electrocardiograma':this.examen_electrocardiogramaT,
+      'radiografia_torax':this.examen_RToraxT,
+      'otros':this.examen_otrosT,
+    }
+
+    this.ServicioSecretaria.updateComplementario( examenesComplementariosActualizar, this.id_complementario ).then(data =>{
+      
     });
   }
-  }
+}
   
 
 

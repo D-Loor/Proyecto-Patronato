@@ -85,7 +85,7 @@ class ExamenesComplementarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Examenes_Complementario::find('$id'); 
+        $datos=Examenes_Complementario::find($id); 
         $datos->laboratorio=$request->laboratorio;
         $datos->electrocardiograma=$request->electrocardiograma;
         $datos->radiografia_torax=$request->radiografia_torax;

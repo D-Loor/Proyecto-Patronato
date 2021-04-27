@@ -173,7 +173,7 @@ export class SecretariaService {
   }
 
   updateDatosAfilicaion(data:any,id:number){
-    debugger
+    
     let  url = 'http://127.0.0.1:8000/api/Paciente/'+id;
     return new Promise ((resolve, reject) => {
       this.http.put(url, data).subscribe(res => {
@@ -183,5 +183,67 @@ export class SecretariaService {
       });
     });
   }
+
+  updateHabitos(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/Habitos/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateEFG(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/ExamenesFisicos/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateEOS(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/ExamenesOrganosSistemas/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateComplementario(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/Complementarios/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateAntecedentesPatologicoPersonales(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/APP/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  
 
 }
