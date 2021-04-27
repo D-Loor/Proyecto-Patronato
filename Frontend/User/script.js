@@ -75,7 +75,39 @@ function validarC() {
          
   }
 
+  function cargar(){
+    var fecha = document.getElementById("fecha").value;
+    const $select = document.getElementById("hora");
+   
+    for (let i = $select.options.length; i >= 0; i--) {
+        $select.remove(i);
+    }
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/api/validarturno/"+fecha,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var horas= data['result'];
+            for(var i = 0; i < horas.length; i++){
 
+                const option = document.createElement('option');
+                                                      
+                option.value = horas[i].id_turno;
+                option.text = horas[i].hora;
+                option.className="op-select";
+            
+                $select.appendChild(option);
+                
+
+            }
+       
+
+        }
+    });
+
+    
+}
   
  //Validar Fecha
     window.onload=function validarf() {
@@ -95,8 +127,44 @@ function validarC() {
         }
         document.getElementById("fecha").min = anio+'-'+mes+'-'+_dia; 
         
-        //fecha.min = new Date().toISOString().split("T")[0];
+        fecha.min = new Date().toISOString().split("T")[0];
     }
 
+
+   
+    $("#AgendarCita").click(function () {
+
+        var nombres = document.getElementById("nombres").value;
+        var cedula = document.getElementById("cedula").value;
+        var especialidad = document.getElementById("especialidad").value;
+        var fecha = document.getElementById("fecha").value;
+        var turno = document.getElementById("hora").value;
+        var estado= 1;
+        debugger
+
+        $.ajax({
+            
+            url: "http://127.0.0.1:8000/api/Cita",
+            type: "Post",
+            data: JSON.stringify({
+                'nombres' : nombres,
+                'cedula' : cedula,
+                'especialidad' : especialidad,
+                'fecha' : fecha,
+                'id_turno' : turno,
+                'estado': estado
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger
+            alert('Registro aregado exitosamente !!!');
+            },
+            error: function (data)
+            {
+                debugger
+            alert(data.responseText);
+            }  
+        });
+    });
     
 

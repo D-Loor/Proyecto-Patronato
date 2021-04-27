@@ -141,7 +141,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
+
           this.IngresarConsulta();
+
           swalWithBootstrapButtons.fire(
             '¡Guardado!',
             'La consulta ha sido guardada.',
@@ -271,6 +273,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'certificado': cert,
       }
      }
+
     this.eliminarCita(this.idCitas);
 
 
