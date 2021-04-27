@@ -109,7 +109,7 @@ export class MedicinaGeneralComponent implements OnInit {
 
 
       this.enfermedades=enferme['enfermedad'];
-      debugger
+      
 
 
     this.antecedentes_enfermedad=arreglo['a_enfermedad'];
@@ -119,9 +119,9 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   FiltroFecha(){
-    debugger
+    
       this.medicina_general.FlitroFecha(this.FechaInicio, this.FechaFin).then(data =>{
-        debugger
+        
         if(data['code']=='203'){
           Swal.fire(
             'Error',

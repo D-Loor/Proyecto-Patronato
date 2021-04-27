@@ -15,7 +15,7 @@ class PacienteController extends Controller
     public function index()
     {
         $datos=Paciente::with('historias_clinicas_mg','historias_clinicas_rf','habitos','familiares','examen_organo_sistemas',
-                            'examen_fisicos','examene_complementarios','antecedentes_patologicos_personales',)->get(); 
+                            'examen_fisicos','examene_complementarios','antecedentes_patologicos_personales','antecedentes_ginecos_obstretico')->get(); 
         $num_rows = count($datos);
 
         if($num_rows!=0){

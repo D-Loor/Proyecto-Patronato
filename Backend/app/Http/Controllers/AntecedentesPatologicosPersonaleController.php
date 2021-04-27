@@ -15,7 +15,7 @@ class AntecedentesPatologicosPersonaleController extends Controller
     public function index()
     {
 
-        $datos=Antecedentes_Patologicos_Personale::with('antecedentes_ginecos_obstreticos','pacientes')->get();  
+        $datos=Antecedentes_Patologicos_Personale::with('pacientes','antecedentes_ginecos_obstreticos')->get();  
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]); 

@@ -44,7 +44,13 @@ class Paciente extends Model
    }
 
    public function antecedentes_patologicos_personales(){
-      return $this->belongsTo('App\Models\Antecedentes_Patologicos_Personale','id_paciente','id_patologico');
+      return $this->belongsTo('App\Models\Antecedentes_Patologicos_Personale','id_patologico');
    }
+
+   public function antecedentes_ginecos_obstretico(){
+      return $this->hasManyThrough('App\Models\Antecedentes_Ginecos_Obstretico', 'App\Models\Antecedentes_Patologicos_Personale','id_patologico','id_gineco','id_paciente','id_patologico');
+   }
+
+   
 
 }

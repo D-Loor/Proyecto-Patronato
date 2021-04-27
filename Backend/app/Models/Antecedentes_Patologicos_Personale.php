@@ -16,7 +16,7 @@ class Antecedentes_Patologicos_Personale extends Model
     ];
 
     public function antecedentes_ginecos_obstreticos(){
-        return $this->belongsTo('App\Models\Antecedentes_Ginecos_Obstretico','id_gineco','id_patologico');
+        return $this->belongsTo('App\Models\Antecedentes_Ginecos_Obstretico','id_gineco');
     }
 
     public function pacientes(){

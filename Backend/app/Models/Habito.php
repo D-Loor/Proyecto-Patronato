@@ -14,4 +14,8 @@ class Habito extends Model
      protected $fillable = [
          'alcohol',  'tabaco',  'drogas',  'alimentacion', 'diuresis',  '  somnia',
     ];
+
+    public function pacientes(){
+        return $this->hasMany('App\Models\Paciente','id_habito');
+    }
 }
