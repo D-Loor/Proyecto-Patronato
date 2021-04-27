@@ -130,4 +130,18 @@ class HistoriaClinicaMGController extends Controller
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
+
+
+    public function FiltradoFecha($fechaInicial, $fechaFinal)
+    {
+        if($fechaInicial > $fechaFinal){
+            return response()->json(['result'=>"Error en fechas", 'code'=>'202']);
+        }else if($fechaInicial == $fechaFinal){
+            $datos=Historia_Clinica_MG::where('fecha',$fechaInicial)->get();
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            $datos=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->get();
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        
+    }
 }
