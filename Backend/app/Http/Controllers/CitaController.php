@@ -87,8 +87,8 @@ class CitaController extends Controller
     public function validarHora($fecha)
     {
         $datos=Cita::all()->where('fecha', $fecha);
-        $turno=Turno::all();
-
+        $turno=Turno::all(); 
+        
         foreach ($datos as $cita)
         {
             $cont=0;
