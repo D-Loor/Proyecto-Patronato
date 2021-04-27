@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import {ModalDirective} from 'ngx-bootstrap/modal';
 import { VariableAst, VariableBinding } from '@angular/compiler';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-medicina-general',
   templateUrl: './medicina-general.component.html',
@@ -22,19 +23,10 @@ export class MedicinaGeneralComponent implements OnInit {
   historialMGPaginate:any[];
   historialMGFilter=[];
   historialMGPaginateFilter=[];
-  gad;
-  NPaciente="";
-  Fecha="";
-  motivo;
-  enfermedades;
-  lugar_atencion;
-  condicion_diagnostico;
-  tipo_atencion;
-  antecedentes_enfermedad;
-  diagnostico;
-  diagno;
-  plan_terapeutico;
-  certificado;
+  gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico; 
+  tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;
+  FechaFin; FechaInicio;
+
 
   ngOnInit() {
     this.cargar();
@@ -124,6 +116,32 @@ export class MedicinaGeneralComponent implements OnInit {
 
 
     this.DatosdeConsultas.show();
+  }
+
+  FiltroFecha(){
+    debugger
+      this.medicina_general.FlitroFecha(this.FechaInicio, this.FechaFin).then(data =>{
+        debugger
+        if(data['code']=='203'){
+          Swal.fire(
+            'Error',
+            'La fecha de incio debe ser menor a la fecha final',
+            'error'
+          )
+        }else if(data['code']=='202'){
+          Swal.fire(
+            'Ops!',
+            'Sin registros',
+            'warning'
+          )
+        }else{
+          this.historialMG=data['result'];
+          this.historialMGPaginate = this.historialMG.slice(0, 10);
+        }
+      
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
 

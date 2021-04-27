@@ -135,13 +135,22 @@ class HistoriaClinicaMGController extends Controller
     public function FiltradoFecha($fechaInicial, $fechaFinal)
     {
         if($fechaInicial > $fechaFinal){
-            return response()->json(['result'=>"Error en fechas", 'code'=>'202']);
+            return response()->json(['result'=>"Error en fechas", 'code'=>'203']);
         }else if($fechaInicial == $fechaFinal){
-            $datos=Historia_Clinica_MG::where('fecha',$fechaInicial)->get();
-            return response()->json(['result'=>$datos, 'code'=>'201']);
-        }else
-            $datos=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->get();
-            return response()->json(['result'=>$datos, 'code'=>'201']);
-        
+            $datos=Historia_Clinica_MG::where('fecha',$fechaInicial)->with('paciente','enfermedad')->get();
+            $num_rows = count($datos);
+            if($num_rows != 0){
+                return response()->json(['result'=>$datos, 'code'=>'201']);
+            }else
+                return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
+        }else{
+            $datos=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
+            $num_rows = count($datos);
+            if($num_rows != 0){
+                return response()->json(['result'=>$datos, 'code'=>'201']);
+            }else
+                return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
+        }
+            
     }
 }
