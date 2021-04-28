@@ -36,8 +36,11 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
-  id_familiar:number; id_PacienteDA:number;
+  id_familiar:number; id_PacienteDA:number; id_gineco:number;
   
+  //cheak
+
+  alcoholC:number; tabacoC:number; drogasC:number; alimentacionC:number; diuresisC:number; somniaC:number;
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
   raza; religion; nivel_instruccion; estado_civil; gad;
@@ -63,10 +66,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
 
   limpiar(){
+    //cheak
+    this.alcoholC=0;this.tabacoC=0;this.drogasC=0;this.alimentacionC=0;this.diuresisC=0;this.somniaC=0;
 
     this.DatosFamiliares=[]; this.number=0; this.edit=0; this.actualizar=0;
-
-    this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
+    //variables de los id Para relacionar y actualizar
+  this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
   this.id_sistema=null; this.id_complementario=null; this.id_habito=null; this.id_paciente=null;
   this.id_familiar=null; this.id_PacienteDA=null;
   
@@ -235,7 +240,40 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
   }
 
+  cargarGinecoPersonal(id_gineco:number){
+    this.ServicioSecretaria.datoGinecoObstetricos(id_gineco).then(data => {
+      this.fum=data['result'].FUM;
+      this.fpp=data['result'].FPP;
+      this.edad_gestional=data['result'].edad_gestional;
+      this.menarquia=data['result'].menarquia;
+      this.flujo_genital=data['result'].flujo_genital;
+      this.Gestas=data['result'].gestas;
+      this.Partos=data['result'].partos;
+      this.cesareas=data['result'].cesareas;
+      this.abortos=data['result'].abortos;
+      
+    })
+  }
+
+  actualizarGinecosPersonal(){
+    let ginecoPersonal = {
+      'FUM':this.fum,
+      'FPP':this.fpp,
+      'edad_gestional':this.edad_gestional,
+      'menarquia':this.menarquia,
+      'flujo_genital':this.flujo_genital,
+      'gestas':this.Gestas,
+      'partos':this.Partos,
+      'cesareas':this.cesareas,
+      'abortos':this.abortos
+    }
+
+    this.ServicioSecretaria.updateGinecos( ginecoPersonal, this.id_gineco ).then(data =>{});
+  }
+
   Consultar(){
+    let hola = document.getElementById("gad");
+    debugger
     if(this.cedula== undefined || this.cedula=="undefined"){
       Swal.fire(
         'Campo vacío',
@@ -244,7 +282,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       )
     }else{
       this.medicinag.AtenderPaciente(this.cedula).then(data => {      
-        
+        debugger
         if(data['code'] === '201'){
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
@@ -253,9 +291,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           },
           buttonsStyling: true
           })
-          
-    
-          swalWithBootstrapButtons.fire({
+           swalWithBootstrapButtons.fire({
             title: 'El paciente cuenta con historial clínico',
             text: "Desea observar sus datos para poderlos editar",
             icon: 'success',
@@ -299,7 +335,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
               this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
+              this.id_gineco=data['result']['antecedentes_patologicos_personales'].id_gineco;
 
+              if(this.sexo == "Mujer"){
+                this.cargarGinecoPersonal(this.id_gineco);
+              }
+              
               this.alcoholT=data['result']['habitos'].alcohol;
               this.tabacoT=data['result']['habitos'].tabaco;
               this.drogasT=data['result']['habitos'].drogas;
@@ -307,6 +348,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.diuresisT=data['result']['habitos'].diuresis;
               this.somniaT=data['result']['habitos'].somnia;
 
+              //Condiciones para los check
+              if(this.alcoholT==1){this.alcoholC=1; this.alcoholT='';}
+              if(this.tabacoT==1){this.tabacoC=1;this.tabacoT='';}
+              if(this.drogasT==1){this.drogasC=1;this.drogasT='';}
+              if(this.alimentacionT==1){this.alimentacionC=1;this.alimentacionT='';}
+              if(this.diuresisT==1){this.diuresisC=1;this.diuresisT='';}
+              if(this.somniaT==1){this.somniaC=1;this.somniaT='';}
+         
               this.DatosFamiliares=data['result']['familiares'];
               this.id_familiar=data['result']['familiares'][0].id_familiar;
               this.number=1;
@@ -334,6 +383,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.examen_RToraxT=data['result']['examene_complementarios'].radiografia_torax;
               this.examen_otrosT=data['result']['examene_complementarios'].otros;
 
+              
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -580,9 +630,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'gad':this.gad,
       }
 
-    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{
-      
-    });
+    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{});
 
     if(this.sexo=="Hombre"){
       debugger
@@ -599,18 +647,20 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'traumas':this.traumatologicosT,
         'id_gineco':1,
       }
-
-      this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{
-        Swal.fire(
-          'Correcto',
-          'Datos actualizados correctamente',
-          'success'
-        )
-        this.limpiar();
-      });
+ 
+      this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
     }else{
-
+      debugger
+        this.actualizarGinecosPersonal();
     }
+
+    //Condicionales del checkHabitos
+    if(this.alcoholC==1){this.alcoholT=1;}
+    if(this.tabacoC==1){this.tabacoT=1;}
+    if(this.drogasC==1){this.drogasT=1;}
+    if(this.alimentacionC==1){this.alimentacionT=1;}
+    if(this.diuresisC==1){this.diuresisT=1;}
+    if(this.somniaC==1){this.somniaT=1;}
 
     let habitosActualizar = {
       'alcohol':this.alcoholT,
@@ -621,9 +671,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'somnia':this.somniaT,         
     }
 
-    this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{
-      
-    });
+    this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{});
 
     let EFGActualizar = {
       'cabeza':this.examen_cabezaT,
@@ -636,9 +684,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'region_anal':this.examen_analT,       
     }
 
-    this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{
-      
-    });
+    this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{});
 
     let EOSActualizar = {
       'sistema_digestivo':this.examen_digestivoT,
@@ -649,9 +695,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'sistema_nervioso':this.examen_nerviosoT,    
     }
 
-    this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{
-      
-    });
+    this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{});
 
     let examenesComplementariosActualizar = {
       'laboratorio':this.examen_laboratorioT,
@@ -661,7 +705,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
 
     this.ServicioSecretaria.updateComplementario( examenesComplementariosActualizar, this.id_complementario ).then(data =>{
-      
+      Swal.fire(
+        'Correcto',
+        'Datos actualizados correctamente',
+        'success'
+      )
+      this.limpiar();
     });
   }
 }

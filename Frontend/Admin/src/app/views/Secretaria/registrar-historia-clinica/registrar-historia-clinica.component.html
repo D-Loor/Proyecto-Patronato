@@ -52,11 +52,11 @@
                                             <label for="inline-radios">GAD</label>
                                             <div class="col-md-8 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                                    <input autocomplete="off" required class="form-check-input" type="radio" name="gad"  [(ngModel)]="gad" id="gad" value="1">
+                                                    <input autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1">
                                                     <label class="form-check-label" for="inlineRadio1">Si</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mr-1">
-                                                    <input autocomplete="off" required class="form-check-input" type="radio" name="gad"  [(ngModel)]="gad" id="gad" value="0" >
+                                                    <input autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" >
                                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                                 </div>
                                             </div> 
@@ -458,11 +458,11 @@
                                         <label class="habito" for="inline-radios">Alcohol</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alcohol"  [(ngModel)]="alcohol" id="alcohol" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alcoholC"  [(ngModel)]="alcoholC" id="alcoholC" value="1" >
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!alcohol">
+                                        <div *ngIf="!alcoholC">
                                             <textarea autocomplete="off" required [(ngModel)]="alcoholT" id="alcoholT" name="alcoholT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>
@@ -470,11 +470,11 @@
                                         <label class="habito" for="inline-radios">Tabaco</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="tabaco"  [(ngModel)]="tabaco" id="tabaco" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="tabacoC"  [(ngModel)]="tabacoC" id="tabacoC" value="1">
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!tabaco">
+                                        <div *ngIf="!tabacoC">
                                             <textarea autocomplete="off" required [(ngModel)]="tabacoT" id="tabacoT" name="tabacoT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>
@@ -482,11 +482,11 @@
                                         <label class="habito" for="inline-radios">Drogas</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="drogas"  [(ngModel)]="drogas" id="drogas" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="drogasC"  [(ngModel)]="drogasC" id="drogasC" value="1">
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!drogas">
+                                        <div *ngIf="!drogasC">
                                             <textarea autocomplete="off" required [(ngModel)]="drogasT" id="drogasT" name="drogasT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>
@@ -494,11 +494,11 @@
                                         <label class="habito" for="inline-radios">Alimentación</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alimentacion"  [(ngModel)]="alimentacion" id="alimentacion" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alimentacionC"  [(ngModel)]="alimentacionC" id="alimentacionC" value="1">
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!alimentacion">
+                                        <div *ngIf="!alimentacionC">
                                             <textarea autocomplete="off" required [(ngModel)]="alimentacionT" id="alimentacionT" name="alimentacionT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>
@@ -506,11 +506,11 @@
                                         <label class="habito" for="inline-radios">Diuresis</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="diuresis"  [(ngModel)]="diuresis" id="diuresis" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="diuresisC"  [(ngModel)]="diuresisC" id="diuresisC" value="1">
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!diuresis">
+                                        <div *ngIf="!diuresisC">
                                             <textarea autocomplete="off" required [(ngModel)]="diuresisT" id="diuresisT" name="diuresisT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>
@@ -518,11 +518,11 @@
                                         <label class="habito" for="inline-radios">Somnia</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="somnia"  [(ngModel)]="somnia" id="somnia" value="0">
+                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="somniaC"  [(ngModel)]="somniaC" id="somniaC" value="0">
                                                 <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!somnia">
+                                        <div *ngIf="!somniaC">
                                             <textarea autocomplete="off" required [(ngModel)]="somniaT" id="somniaT" name="somniaT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
                                         </div>
                                     </div>

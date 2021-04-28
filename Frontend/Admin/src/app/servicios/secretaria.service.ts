@@ -172,6 +172,17 @@ export class SecretariaService {
     });
   }
 
+  datoGinecoObstetricos(id:number) {
+    let  url = 'http://127.0.0.1:8000/api/AGO/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   updateDatosAfilicaion(data:any,id:number){
     
     let  url = 'http://127.0.0.1:8000/api/Paciente/'+id;
@@ -235,6 +246,18 @@ export class SecretariaService {
   updateAntecedentesPatologicoPersonales(data:any,id:number){
     
     let  url = 'http://127.0.0.1:8000/api/APP/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateGinecos(data:any,id:number){
+    
+    let  url = 'http://127.0.0.1:8000/api/AGO/'+id;
     return new Promise ((resolve, reject) => {
       this.http.put(url, data).subscribe(res => {
         resolve(res);
