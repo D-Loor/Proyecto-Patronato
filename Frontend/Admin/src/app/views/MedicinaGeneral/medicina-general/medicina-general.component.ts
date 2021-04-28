@@ -26,10 +26,20 @@ export class MedicinaGeneralComponent implements OnInit {
   gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico; 
   tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;
   FechaFin; FechaInicio;
-
+  idPaciente = localStorage.getItem('id_paciente');
 
   ngOnInit() {
-    this.cargar();
+    if(this.idPaciente == 'Undefined' || this.idPaciente == null){
+      this.cargar();
+    }else{
+      this.medicina_general.ConsultasPacientes(this.idPaciente).then(data =>{
+        this.historialMG=data['result'];
+        this.historialMGPaginate = this.historialMG.slice(0, 10);
+        localStorage.removeItem('id_paciente');
+      }).catch(error =>{
+        console.log(error);
+      });
+    }
   }
 
   cargar(){

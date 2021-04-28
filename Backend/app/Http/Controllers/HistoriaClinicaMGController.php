@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Historia_Clinica_MG;
 use Illuminate\Http\Request;
+use App\Models\Paciente;
 
 class HistoriaClinicaMGController extends Controller
 {
@@ -152,5 +153,15 @@ class HistoriaClinicaMGController extends Controller
                 return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         }
             
+    }
+
+    public function ConsultasPacientes($id){
+        $datos = Historia_Clinica_MG::where('id_paciente', $id)->with('paciente','enfermedad')->get();
+        $num_rows = count($datos);
+        if($num_rows != 0){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
+        
     }
 }

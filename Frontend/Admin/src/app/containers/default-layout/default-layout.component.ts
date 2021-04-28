@@ -32,6 +32,7 @@ export class DefaultLayoutComponent implements OnInit {
     localStorage.removeItem('sesionLoginInicio');
     localStorage.removeItem('cedulaMG');
     localStorage.removeItem('cedulaRF');
+    localStorage.removeItem('id_paciente');
     this.rutas.navigate(['/login']);
   }
 

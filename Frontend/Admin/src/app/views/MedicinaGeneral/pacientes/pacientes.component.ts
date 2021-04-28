@@ -106,7 +106,6 @@ export class PacientesComponent implements OnInit {
     this.Principal.show();
     this.edit=1;
     this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
-    debugger
     this.idPaciente=data['result'].id_paciente;
     this.idPatologico=data['result'].id_patologico;
     this.idEFisico=data['result'].id_e_fisico;
@@ -200,6 +199,11 @@ export class PacientesComponent implements OnInit {
     this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.idPaciente ).then(data =>{
       this.DatosPaciente(this.idPaciente);
     });
+  }
+
+  Consultar(id_paciente:string){
+    localStorage.setItem('id_paciente', id_paciente);
+    this.rutas.navigate(['/medicinageneral']);
   }
   
 
