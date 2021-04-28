@@ -129,9 +129,14 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   FiltroFecha(){
-    
+    if(this.FechaInicio === undefined || this.FechaFin === undefined){
+      Swal.fire(
+        'Ops!',
+        'Ingrese las fechas completas',
+        'warning'
+      )
+    }else{
       this.medicina_general.FlitroFecha(this.FechaInicio, this.FechaFin).then(data =>{
-        
         if(data['code']=='203'){
           Swal.fire(
             'Error',
@@ -144,14 +149,21 @@ export class MedicinaGeneralComponent implements OnInit {
             'Sin registros',
             'warning'
           )
+          this.FechaFin = "";
+          this.FechaInicio = "";
         }else{
           this.historialMG=data['result'];
           this.historialMGPaginate = this.historialMG.slice(0, 10);
+          this.FechaFin = "";
+          this.FechaInicio = "";
         }
       
     }).catch(error =>{
       console.log(error);
     });
+    }
+    
+      
   }
 
 
