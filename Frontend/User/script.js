@@ -18,7 +18,7 @@ $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
 
-
+var comprotido=false;
 
 
 //Animacion Footer
@@ -89,8 +89,8 @@ function validarC() {
         dataType: "json",
         success: function (data) {
             var horas= data['result'];
-            for(var i = 0; i < horas.length; i++){
-
+            
+            $.each(horas, function (i, item) {
                 const option = document.createElement('option');
                                                       
                 option.value = horas[i].id_turno;
@@ -98,10 +98,8 @@ function validarC() {
                 option.className="op-select";
             
                 $select.appendChild(option);
+            });
                 
-
-            }
-       
 
         }
     });
@@ -131,7 +129,9 @@ function validarC() {
     }
 
 
-   
+   function compromete(){
+        comprotido= !comprotido
+   }
     $("#AgendarCita").click(function () {
 
         var nombres = document.getElementById("nombres").value;
@@ -140,31 +140,38 @@ function validarC() {
         var fecha = document.getElementById("fecha").value;
         var turno = document.getElementById("hora").value;
         var estado= 1;
-        debugger
+        
 
-        $.ajax({
+        if(nombres==""||nombres==null||cedula==""||cedula==null||especialidad==null||especialidad==""||fecha==null||fecha==""||turno==null||turno==""||estado==null||estado==""||comprotido==false){
             
-            url: "http://127.0.0.1:8000/api/Cita",
-            type: "Post",
-            data: JSON.stringify({
-                'nombres' : nombres,
-                'cedula' : cedula,
-                'especialidad' : especialidad,
-                'fecha' : fecha,
-                'id_turno' : turno,
-                'estado': estado
-            }),
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                debugger
-            alert('Registro aregado exitosamente !!!');
-            },
-            error: function (data)
-            {
-                debugger
-            alert(data.responseText);
-            }  
-        });
+        }else{
+            
+            $.ajax({
+            
+                url: "http://127.0.0.1:8000/api/Cita",
+                type: "Post",
+                data: JSON.stringify({
+                    'nombres' : nombres,
+                    'cedula' : cedula,
+                    'especialidad' : especialidad,
+                    'fecha' : fecha,
+                    'id_turno' : turno,
+                    'estado': estado
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    
+                alert('Registro aregado exitosamente !!!');
+                },
+                error: function (data)
+                {
+                    
+                alert(data.responseText);
+                }  
+            });
+
+        }
+       
     });
     
 
