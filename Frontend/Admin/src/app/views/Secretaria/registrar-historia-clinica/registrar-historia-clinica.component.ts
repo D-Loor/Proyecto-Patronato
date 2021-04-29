@@ -39,8 +39,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   id_familiar:number; id_PacienteDA:number; id_gineco:number;
   
   //cheak
+  gadCSi:number=0; gadCNo:number=1; 
 
-  alcoholC:number; tabacoC:number; drogasC:number; alimentacionC:number; diuresisC:number; somniaC:number;
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
   raza; religion; nivel_instruccion; estado_civil; gad;
@@ -48,32 +48,47 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   //Variables de datos de Antecedentes Patológicos Personales
   ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
   menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBT; HTA; TBC; GEMELAR; 
+  //Check Variables Antecedentes Patológicos Personales
+  ninezC:number; adolescenciaC:number; adultezC:number; quirurgicosC:number; alergicosC:number; traumatologicosC:number; ginecos_obstetricosC:number;
 
   //Variables de Antecedentes Patológicos Familiares
   nombres; union; estado; estadoT; union2;
 
   //Variables de Hábitos Personales
-  alcoholT; tabacoT; drogasT; alimentacionT; diuresisT; somniaT; 
+  alcoholT; tabacoT; drogasT; alimentacionT; diuresisT; somniaT;
+  //Check Variables Habitos Personales
+  alcoholC:number; tabacoC:number; drogasC:number; alimentacionC:number; diuresisC:number; somniaC:number; 
 
   //Variables de Examenes Físicos Generales
   examen_cabezaT; examen_cuelloT; examen_toraxT; examen_abdomenT; examen_msuperiorT; examen_minferioresT; examen_genitalT; examen_analT;
+  //Check Variables Examenes Físicos Generales
+  examen_cabezaC:number; examen_cuelloC:number; examen_toraxC:number; examen_abdomenC:number; examen_msuperiorC:number; examen_minferioresC:number; examen_genitalC:number; examen_analC:number;
+
 
   //Variables de Examenes de Organos y Sistemas
   examen_digestivoT; examen_respiratorioT; examen_cardiacoT; examen_genitourinarioT; examen_osteomuscularT; examen_nerviosoT;
+  //Check Variables Examenes de Organos y Sistemass
+  examen_digestivoC:number; examen_respiratorioC:number; examen_cardiacoC:number; examen_genitourinarioC:number; examen_osteomuscularC:number; examen_nerviosoC:number;
 
   //Variables de Examenes Complementarios
   examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
-  
+  //Check Variables Examenes Complementarioss
+  examen_laboratorioC:number; examen_electrocardiogramaC:number; examen_RToraxC:number; examen_otrosC:number;
 
   limpiar(){
     //cheak
     this.alcoholC=0;this.tabacoC=0;this.drogasC=0;this.alimentacionC=0;this.diuresisC=0;this.somniaC=0;
+    this.ninezC=0; this.adolescenciaC=0; this.adultezC=0; this.quirurgicosC=0; this.alergicosC=0; this.alergicosC=0; this.ginecos_obstetricosC=0; this.traumatologicosC=0;
+    this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
+    this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
+    this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
+    this.gadCSi=0; this.gadCNo=1;
 
     this.DatosFamiliares=[]; this.number=0; this.edit=0; this.actualizar=0;
     //variables de los id Para relacionar y actualizar
-  this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
-  this.id_sistema=null; this.id_complementario=null; this.id_habito=null; this.id_paciente=null;
-  this.id_familiar=null; this.id_PacienteDA=null;
+    this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
+    this.id_sistema=null; this.id_complementario=null; this.id_habito=null; this.id_paciente=null;
+    this.id_familiar=null; this.id_PacienteDA=null;
   
   //Variables de  Datos de Afiliación
   this.apellidos=""; this.nombresP=""; this.cedula=""; this.edad=""; this.ocupacion=""; this.sexo=""; this.Lresidencia=""; this.Lprocedencia=""; this.fechanacimiento="";
@@ -99,8 +114,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   this.examen_laboratorioT=""; this.examen_electrocardiogramaT=""; this.examen_RToraxT=""; this.examen_otrosT="";
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -240,6 +254,15 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
   }
 
+   //Es para actualizar...
+
+   checkRadioSi(radioCheck:string){
+    if(radioCheck=='gad'){this.gad=1}
+   }
+   checkRadioNo(radioCheck:string){
+    if(radioCheck=='gad'){this.gad=0}
+  }
+
   cargarGinecoPersonal(id_gineco:number){
     this.ServicioSecretaria.datoGinecoObstetricos(id_gineco).then(data => {
       this.fum=data['result'].FUM;
@@ -251,9 +274,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.Partos=data['result'].partos;
       this.cesareas=data['result'].cesareas;
       this.abortos=data['result'].abortos;
-      
+      if(id_gineco==1){this.ginecos_obstetricosC=1;this.fum='';this.fpp='';this.edad_gestional='';this.menarquia='';this.Gestas='';this.Partos='';
+      this.cesareas=''; this.abortos=''; this.flujo_genital='';}
     })
   }
+
+ 
 
   actualizarGinecosPersonal(){
     let ginecoPersonal = {
@@ -267,7 +293,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'cesareas':this.cesareas,
       'abortos':this.abortos
     }
-
+ 
     this.ServicioSecretaria.updateGinecos( ginecoPersonal, this.id_gineco ).then(data =>{});
   }
 
@@ -311,6 +337,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.edad=data['result'].edad;
               this.sexo=data['result'].sexo;
               this.gad=data['result'].gad;
+              if(this.gad == 1){this.gadCSi=1;}else{this.gadCNo=0}
               this.ocupacion=data['result'].ocupacion;
               this.Lresidencia=data['result'].residencia;
               this.Lprocedencia=data['result'].procedencia;
@@ -335,8 +362,15 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
               this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
-              this.id_gineco=data['result']['antecedentes_patologicos_personales'].id_gineco;
-
+              this.id_gineco=data['result']['antecedentes_patologicos_personales'].id_gineco;  
+              //Condiciones para los check
+              if(this.ninezT==1){this.ninezC=1; this.ninezT='';}
+              if(this.adolescenciaT==1){this.adolescenciaC=1;this.adolescenciaT='';}
+              if(this.adultezT==1){this.adultezC=1;this.adultezT='';}
+              if(this.quirurgicosT==1){this.quirurgicosC=1;this.quirurgicosT='';}
+              if(this.traumatologicosT==1){this.traumatologicosC=1;this.traumatologicosT='';}
+              if(this.alergicosT==1){this.alergicosC=1;this.alergicosT='';}
+             
               if(this.sexo == "Mujer"){
                 this.cargarGinecoPersonal(this.id_gineco);
               }
@@ -347,7 +381,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.alimentacionT=data['result']['habitos'].alimentacion;
               this.diuresisT=data['result']['habitos'].diuresis;
               this.somniaT=data['result']['habitos'].somnia;
-
               //Condiciones para los check
               if(this.alcoholT==1){this.alcoholC=1; this.alcoholT='';}
               if(this.tabacoT==1){this.tabacoC=1;this.tabacoT='';}
@@ -370,19 +403,40 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.examen_minferioresT=data['result']['examen_fisicos'].miembros_inferiores;
               this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
               this.examen_analT=data['result']['examen_fisicos'].region_anal;
-           
+              //Condiciones para los check
+              if(this.examen_cabezaT==1){this.examen_cabezaC=1; this.examen_cabezaT='';}
+              if(this.examen_cuelloT==1){this.examen_cuelloC=1;this.examen_cuelloT='';}
+              if(this.examen_toraxT==1){this.examen_toraxC=1;this.examen_toraxT='';}
+              if(this.examen_abdomenT==1){this.examen_abdomenC=1;this.examen_abdomenT='';}
+              if(this.examen_msuperiorT==1){this.examen_msuperiorC=1;this.examen_msuperiorT='';}
+              if(this.examen_minferioresT==1){this.examen_minferioresC=1;this.examen_minferioresT='';}
+              if(this.examen_genitalT==1){this.examen_genitalC=1;this.examen_genitalT='';}
+              if(this.examen_analT==1){this.examen_analC=1;this.examen_analT='';}
+              
               this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
               this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;
               this.examen_cardiacoT=data['result']['examen_organo_sistemas'].sistema_cardiaco;
               this.examen_genitourinarioT=data['result']['examen_organo_sistemas'].sistema_genitourinarion;
               this.examen_osteomuscularT=data['result']['examen_organo_sistemas'].sistema_osteomuscular;
               this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
+              //Condiciones para los check
+              if(this.examen_digestivoT==1){this.examen_digestivoC=1; this.examen_digestivoT='';}
+              if(this.examen_respiratorioT==1){this.examen_respiratorioC=1;this.examen_respiratorioT='';}
+              if(this.examen_cardiacoT==1){this.examen_cardiacoC=1;this.examen_cardiacoT='';}
+              if(this.examen_genitourinarioT==1){this.examen_genitourinarioC=1;this.examen_genitourinarioT='';}
+              if(this.examen_osteomuscularT==1){this.examen_osteomuscularC=1;this.examen_osteomuscularT='';}
+              if(this.examen_nerviosoT==1){this.examen_nerviosoC=1;this.examen_nerviosoT='';}
               
               this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
               this.examen_electrocardiogramaT=data['result']['examene_complementarios'].electrocardiograma;
               this.examen_RToraxT=data['result']['examene_complementarios'].radiografia_torax;
               this.examen_otrosT=data['result']['examene_complementarios'].otros;
-
+              //Condiciones para los check
+              if(this.examen_laboratorioT==1){this.examen_laboratorioC=1; this.examen_laboratorioT='';}
+              if(this.examen_electrocardiogramaT==1){this.examen_electrocardiogramaC=1;this.examen_electrocardiogramaT='';}
+              if(this.examen_RToraxT==1){this.examen_RToraxC=1;this.examen_RToraxT='';}
+              if(this.examen_otrosT==1){this.examen_otrosC=1;this.examen_otrosT='';}
+              
               
             } else if (
               /* Read more about handling dismissals below */
@@ -607,7 +661,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 
   actualizarDatos(){
-    debugger
+    
     let pacientesActualizar = {
       'id_patologico':this.id_patologico,
       'id_e_fisico':this.id_e_fisico,
@@ -630,10 +684,16 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'gad':this.gad,
       }
 
+      
     this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{});
 
     if(this.sexo=="Hombre"){
-      debugger
+      if(this.ninezC==1){this.ninezT=1}
+      if(this.adolescenciaC==1){this.adolescenciaT=1;}
+      if(this.adultezC==1){this.adultezT=1;}
+      if(this.quirurgicosC==1){this.quirurgicosT=1;}
+      if(this.traumatologicosC==1){this.traumatologicosT=1;}
+      if(this.alergicosC==1){this.alergicosT=1;}     
       let APPActualizar = {
         'infancia':this.ninezT,
         'adolecencia':this.adolescenciaT,
@@ -673,6 +733,15 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
     this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{});
 
+    if(this.examen_cabezaC==1){this.examen_cabezaT=1;}
+    if(this.examen_cuelloC==1){this.examen_cuelloT=1;}
+    if(this.examen_toraxC==1){this.examen_toraxT=1;}
+    if(this.examen_abdomenC==1){this.examen_abdomenT=1;}
+    if(this.examen_msuperiorC==1){this.examen_msuperiorT=1;}
+    if(this.examen_minferioresC==1){this.examen_minferioresT=1;}
+    if(this.examen_genitalC==1){this.examen_genitalT=1;}
+    if(this.examen_analC==1){this.examen_analT=1;}    
+
     let EFGActualizar = {
       'cabeza':this.examen_cabezaT,
       'cuello':this.examen_cuelloT,
@@ -685,7 +754,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
 
     this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{});
-
+    if(this.examen_digestivoC==1){this.examen_digestivoT=1;}
+    if(this.examen_respiratorioC==1){this.examen_respiratorioT=1;}
+    if(this.examen_cardiacoC==1){this.examen_cardiacoT=1;}
+    if(this.examen_genitourinarioC==1){this.examen_genitourinarioT=1;}
+    if(this.examen_osteomuscularC==1){this.examen_osteomuscularT=1;}
+    if(this.examen_nerviosoC==1){this.examen_nerviosoT=1;}
     let EOSActualizar = {
       'sistema_digestivo':this.examen_digestivoT,
       'sistema_respiratorio':this.examen_respiratorioT,
@@ -697,6 +771,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
     this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{});
 
+    if(this.examen_laboratorioC==1){this.examen_laboratorioT=1; }
+    if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT=1;}
+    if(this.examen_RToraxC==1){this.examen_RToraxT=1;}
+    if(this.examen_otrosC==1){this.examen_otrosT=1;}
     let examenesComplementariosActualizar = {
       'laboratorio':this.examen_laboratorioT,
       'electrocardiograma':this.examen_electrocardiogramaT,
