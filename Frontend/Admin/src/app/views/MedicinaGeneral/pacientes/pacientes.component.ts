@@ -48,6 +48,7 @@ export class PacientesComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
+  
   ngOnInit() {
     if(this.CedulaPaciente == null ){
       this.cargar();
