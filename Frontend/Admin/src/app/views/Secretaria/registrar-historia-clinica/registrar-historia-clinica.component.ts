@@ -32,7 +32,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   DatosFamiliares=[];
   edit:number = 0;
   select="hola";
-  actualizar:number;
+  actualizar:number=0;
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
@@ -42,7 +42,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   gadClass:string;
 
   //cheak
-  gadCSi:number=0; gadCNo:number=1; 
+  gadCSi:string='0'; gadCNo:string='1'; 
 
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
@@ -79,14 +79,16 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   examen_laboratorioC:number; examen_electrocardiogramaC:number; examen_RToraxC:number; examen_otrosC:number;
 
   limpiar(){
-    //cheak
 
+    this.ClaseCdula="form-control form-input select-number"; 
+
+    //cheak
     this.alcoholC=0;this.tabacoC=0;this.drogasC=0;this.alimentacionC=0;this.diuresisC=0;this.somniaC=0;
     this.ninezC=0; this.adolescenciaC=0; this.adultezC=0; this.quirurgicosC=0; this.alergicosC=0; this.alergicosC=0; this.ginecos_obstetricosC=0; this.traumatologicosC=0;
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
     this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
     this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
-    this.gadCSi=0; this.gadCNo=1;
+    this.gadCSi='2'; this.gadCNo='2';
 
     this.DatosFamiliares=[]; this.number=0; this.edit=0; this.actualizar=0;
     //variables de los id Para relacionar y actualizar
@@ -142,14 +144,13 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
     let DatosFamiliares2 = [
       {
-          "id_familiar" : this.id_familiar,
           "nombres": this.nombres,
           "union": this.union,
           "vida": this.estado,
           "causas":this.estadoT,
       }];
-      debugger
       this.DatosFamiliares.push(DatosFamiliares2[0]);
+      debugger
       this.nombres = "";
       this.union = "";
       this.union2 = "";
@@ -159,7 +160,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   EliminarDatosArray(elimina:string){
-    this.DatosFamiliares.splice(this.DatosFamiliares.indexOf(dato => dato.nombresF === elimina), 1);
+    this.DatosFamiliares.splice(this.DatosFamiliares.indexOf(dato => dato.nombres === elimina), 1);
     this.number --;
   }
 
@@ -304,8 +305,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   Consultar(){
-    let hola = document.getElementById("gad");
-    debugger
     if(this.cedula== undefined || this.cedula=="undefined"){
       Swal.fire(
         'Campo vacío',
@@ -313,8 +312,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'warning'
       )
     }else{
-      this.medicinag.AtenderPaciente(this.cedula).then(data => {      
-        debugger
+      this.medicinag.AtenderPaciente(this.cedula).then(data => {  
+           
         if(data['code'] === '201'){
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
@@ -337,13 +336,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           }).then((result) => {
             
             if (result.isConfirmed) {
+              this.gadCSi=''; this.gadCNo='';  
               this.id_PacienteDA=data['result'].id_paciente;
               this.apellidos=data['result'].apellidos;
               this.nombresP=data['result'].nombres;
               this.edad=data['result'].edad;
               this.sexo=data['result'].sexo;
               this.gad=data['result'].gad;
-              if(this.gad == 1){this.gadCSi=1; this.gadCNo=1; }else{this.gadCNo=0; this.gadCSi=0;}
+              if(this.gad == 1){this.gadCSi='1'; this.gadCNo='1'; }else{this.gadCNo='0'; this.gadCSi='0';}
               this.ocupacion=data['result'].ocupacion;
               this.Lresidencia=data['result'].residencia;
               this.Lprocedencia=data['result'].procedencia;
@@ -400,7 +400,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.number=1;
               this.actualizar=1;
               this.edit=1;
-              debugger
+              
               this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
               this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
               this.examen_toraxT=data['result']['examen_fisicos'].torax;
@@ -598,6 +598,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'fecha_nacimiento':this.fechanacimiento,
       'nivel_instruccion':this.nivel_instruccion,
     }
+    debugger
     this.ServicioSecretaria.AgregarPaciente(pacientesA).then(data =>{
       this.id_paciente = data['id'];
       this.AntecedentesFamiliares();

@@ -52,13 +52,15 @@
                                             <label for="inline-radios">GAD</label>
                                             <div class="col-md-8 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                                    <input *ngIf="gadCSi==1" (click)="checkRadioSi('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1" checked>
-                                                    <input *ngIf="gadCSi==0" (click)="checkRadioSi('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1" >
+                                                    <input *ngIf="gadCSi=='1'" (click)="checkRadioSi('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1" checked>
+                                                    <input *ngIf="gadCSi=='0'" (click)="checkRadioSi('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1" >
+                                                    <input *ngIf="gadCSi=='2'" (click)="checkRadioSi('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="1" >
                                                     <label class="form-check-label" for="inlineRadio1">Si</label>
                                                 </div>
                                                 <div  class="form-check form-check-inline mr-1">
-                                                    <input *ngIf="gadCNo==0" (click)="checkRadioNo('gad')"autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" checked>
-                                                    <input *ngIf="gadCNo==1" (click)="checkRadioNo('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" >
+                                                    <input *ngIf="gadCNo=='0'" (click)="checkRadioNo('gad')"autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" checked>
+                                                    <input *ngIf="gadCNo=='1'" (click)="checkRadioNo('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" >
+                                                    <input *ngIf="gadCNo=='2'" (click)="checkRadioNo('gad')" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" >
                                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                                 </div>
                                             </div> 
@@ -398,23 +400,24 @@
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                <ng-container *ngIf="actualizar==0">    
-                                              <tr *ngFor="let item of DatosFamiliares">
-                                                <td class="table-titulo">{{item[0].nombres}}</td>
-                                                <td>{{item[0].union}}</td>
+                                                <!--*ngIf="actualizar==0"-->
+                                                <ng-container *ngIf="actualizar==0; else agg2">    
+                                                <tr *ngFor="let item of DatosFamiliares" >
+                                                <td class="table-titulo">{{item.nombres}}</td>
+                                                <td>{{item.union}}</td>
                                                 <td>
-                                                  <span *ngIf="item[0].vida==1" class="badge badge-success">Active</span>
-                                                  <span *ngIf="item[0].vida==0" class="badge badge-danger">Fallecido</span>
+                                                  <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
+                                                  <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
                                                 </td>
-                                                <td>{{item[0].causas}}</td>
+                                                <td>{{item.causas}}</td>
                                                 <td>
-                                                  <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item[0].nombresF)"><i
+                                                  <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item.nombres)"><i
                                                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                                                 </td>
                                               </tr>
                                             </ng-container>
 
-                                              <ng-container *ngIf="actualizar==1">
+                                              <ng-template #agg2 >
                                                 <tr *ngFor="let item of DatosFamiliares">
                                                     <td class="table-titulo">{{item.nombres}}</td>
                                                     <td>{{item.union}}</td>
@@ -424,11 +427,11 @@
                                                     </td>
                                                     <td>{{item.causas}}</td>
                                                     <td>
-                                                      <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item[0].nombresF)"><i
+                                                      <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item.nombres)"><i
                                                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                                                     </td>
                                                   </tr>
-                                              </ng-container>
+                                                </ng-template>
                                               
                                               
                                 

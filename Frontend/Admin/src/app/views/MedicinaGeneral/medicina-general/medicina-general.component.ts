@@ -149,6 +149,7 @@ export class MedicinaGeneralComponent implements OnInit {
             'Sin registros',
             'warning'
           )
+          this.cargar();
           this.FechaFin = "";
           this.FechaInicio = "";
           this.historialMG=[];
