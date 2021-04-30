@@ -19,10 +19,20 @@
  
             </div>
             <div class="row">
-            <div class="col-md-3 searcht">
-              <input  id="date-input" type="date" name="date-input" placeholder="date" class="form-control">
+                <div class="col-md-3 searcht">
+                  <label for="name">Fecha inicial</label>
+                  <input name="FechaInicio" id="FechaInicio"  name="FechaInicio" [(ngModel)]="FechaInicio" type="date"  placeholder="date" class="form-control">
+                </div>
+                <div class="col-md-3 searcht">
+                  <label for="name">Fecha final</label>
+                  <input name="FechaFin" id="FechaFin"  name="FechaFin" [(ngModel)]="FechaFin" type="date"  placeholder="date" class="form-control">
+                </div>
+                <div class="col-md-3 searcht">
+                  <label for="name"></label>
+                  <button type="button" class="btn btn-primary form-control" (click)="FiltroFecha()">Consultar</button>
+                </div>
             </div>
-          </div>
+          
         </div>
 
 
@@ -54,10 +64,8 @@
                     <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-ghost-info botont"><i
-                        class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                        <button type="button" class="btn btn-ghost-success botont" data-toggle="modal" (click)="DatosPaciente(item.paciente.id_paciente)"><i
-                          class="fa fa-eye"></i>&nbsp;Datos del paciente</button>
+                        <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente()"><i
+                            class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
                     <button type="button" class="btn btn-ghost-danger botont"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td> 
@@ -77,10 +85,8 @@
                       <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont"><i
-                          class="fa fa-stethoscope"></i>&nbsp;Atender</button>
-                          <button type="button" class="btn btn-ghost-success botont" data-toggle="modal" (click)="DatosPaciente(item.paciente.id_paciente)"><i
-                            class="fa fa-eye"></i>&nbsp;Datos del paciente</button>
+                          <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente()"><i
+                            class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
                       <button type="button" class="btn btn-ghost-danger botont"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td> 

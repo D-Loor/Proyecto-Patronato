@@ -65,7 +65,7 @@ export const navItems: INavData[] = [
     icon: 'icon-layers'
   },
   {
-    name: 'Historia Clínica',
+    name: 'Historial de consultas',
     url: '/rehabilitacionfisica',
     icon: 'icon-folder-alt'
   },

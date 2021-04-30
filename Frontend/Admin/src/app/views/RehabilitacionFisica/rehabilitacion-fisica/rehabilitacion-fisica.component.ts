@@ -5,6 +5,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { RehabilitacionFisicaService } from '../../../servicios/rehabilitacion-fisica.service';
 import { ViewChild } from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-rehabilitacion-fisica',
   templateUrl: './rehabilitacion-fisica.component.html',
@@ -23,11 +24,14 @@ export class RehabilitacionFisicaComponent implements OnInit {
   historialRFFilter:any[];
   historialRFPaginateFilter:any[];
   @ViewChild('Principal') public Principal: ModalDirective;
+  FechaFin; FechaInicio;
+
   ngOnInit(): void {
     this.cargar();
   }
 
-  cargar(){this.historial.historialrf().then(data =>{
+  cargar(){
+    this.historial.historialrf().then(data =>{
     this.historialRF=data['result'];
     this.historialRFPaginate = this.historialRF.slice(0, 10);
   }).catch(error =>{
@@ -70,11 +74,11 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-
     this.historialRFPaginate = null;
     this.historialRF = null;
   }
-  DatosPaciente(id_paciente:string){
+
+  DatosPaciente(){
     this.Principal.show();
     /* this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
     this.apellidos=data['result'].apellidos;
@@ -100,6 +104,46 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }).catch(error =>{
     console.log(error);
 }); */
+  }
+
+  FiltroFecha(){
+    if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
+      Swal.fire(
+        'Ops!',
+        'Ingrese las fechas completas',
+        'warning'
+      )
+    }else{
+      this.historial.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
+        if(data['code']=='203'){
+          Swal.fire(
+            'Error',
+            'La fecha de incio debe ser menor a la fecha final',
+            'error'
+          )
+        }else if(data['code']=='202'){
+          Swal.fire(
+            'Ops!',
+            'Sin registros',
+            'warning'
+          )
+          this.cargar();
+          this.FechaFin = "";
+          this.FechaInicio = "";
+          this.historialRF=[];
+          this.historialRFPaginate = this.historialRF.slice(0, 10);
+        }else{
+          this.historialRF=data['result'];
+          this.historialRFPaginate = this.historialRF.slice(0, 10);
+          this.FechaFin = "";
+          this.FechaInicio = "";
+        }
+      
+    }).catch(error =>{
+      console.log(error);
+    });
+    }
+    
   }
 
 }

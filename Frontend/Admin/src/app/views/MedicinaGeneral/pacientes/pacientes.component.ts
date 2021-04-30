@@ -51,7 +51,6 @@ export class PacientesComponent implements OnInit {
   
   ngOnInit() {
     this.CedulaPaciente = localStorage.getItem('cedulaMG');
-    debugger
     if(this.CedulaPaciente == null ){
       this.cargar();
     }else
@@ -63,7 +62,6 @@ export class PacientesComponent implements OnInit {
       this.medicina_general.AtenderPaciente(this.CedulaPaciente).then(data =>{
       this.pacientesMG=data['result'];
       this.pacientesMGPaginate = this.pacientesMG;
-      debugger
       localStorage.removeItem('cedulaMG');
     }).catch(error =>{
       console.log(error);
@@ -94,7 +92,6 @@ export class PacientesComponent implements OnInit {
          this.pacientesMGFilter.push(x);
        };
       };
-      debugger
       this.pacientesMGPaginateFilter = this.pacientesMGFilter.slice(0, 10);
     }
     

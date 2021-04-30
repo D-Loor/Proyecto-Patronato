@@ -45,5 +45,6 @@ Route::get('validarturno/{fecha}', 'CitaController@validarHora');
 Route::get('filtroFecha/{fecha}', 'PacienteController@filtro');
 Route::get('atender/{cedula}','PacienteController@Atender');
 Route::get('validarcita/{cedula}/{fechaActual}', 'CitaController@ValidarCita');
-Route::get('FechasRangos/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@FiltradoFecha');
+Route::get('FechasRangosMG/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@FiltradoFecha');
 Route::get('pacientesConcultas/{id}', 'HistoriaClinicaMGController@ConsultasPacientes');
+Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFController@FiltradoFecha');

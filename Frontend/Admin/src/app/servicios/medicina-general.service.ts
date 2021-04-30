@@ -91,8 +91,8 @@ export class MedicinaGeneralService {
     });
   }
 
-  FlitroFecha(fechaInicio:Date, fechaFin:Date){
-    let  url = 'http://127.0.0.1:8000/api/FechasRangos/'+fechaInicio+"/"+fechaFin;
+  FiltroFecha(fechaInicio:Date, fechaFin:Date){
+    let  url = 'http://127.0.0.1:8000/api/FechasRangosMG/'+fechaInicio+"/"+fechaFin;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);{

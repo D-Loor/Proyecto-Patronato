@@ -47,14 +47,11 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       this.citasRFPaginateFilter=[];
     if(this.search==''){
     }else{
-      debugger
       for (const x of this.citasRF) {
-        debugger
         if(x.cedula.indexOf(this.search)> -1){
          this.citasRFFilter.push(x);
        };
       };
-      debugger
       this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
     }
     
@@ -65,7 +62,6 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasRFPaginate = this.citasRF.slice(startItem, endItem);
-    debugger
   }
 
   pageChangedFiltro(event: PageChangedEvent) :void{ //paginado sin los pipes

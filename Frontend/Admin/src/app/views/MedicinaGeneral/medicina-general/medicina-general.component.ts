@@ -136,7 +136,7 @@ export class MedicinaGeneralComponent implements OnInit {
         'warning'
       )
     }else{
-      this.medicina_general.FlitroFecha(this.FechaInicio, this.FechaFin).then(data =>{
+      this.medicina_general.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
         if(data['code']=='203'){
           Swal.fire(
             'Error',
