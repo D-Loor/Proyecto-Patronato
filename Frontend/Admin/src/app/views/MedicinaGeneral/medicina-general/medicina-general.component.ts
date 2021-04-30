@@ -129,7 +129,7 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   FiltroFecha(){
-    if(this.FechaInicio === undefined || this.FechaFin === undefined){
+    if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
       Swal.fire(
         'Ops!',
         'Ingrese las fechas completas',
@@ -151,6 +151,8 @@ export class MedicinaGeneralComponent implements OnInit {
           )
           this.FechaFin = "";
           this.FechaInicio = "";
+          this.historialMG=[];
+          this.historialMGPaginate = this.historialMG.slice(0, 10);
         }else{
           this.historialMG=data['result'];
           this.historialMGPaginate = this.historialMG.slice(0, 10);

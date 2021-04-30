@@ -146,9 +146,12 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     localStorage.setItem('cedulaMG', cedula);
     localStorage.setItem('idCita', idCita);
   }
-  HistoriaPaciente(){
-    this.rutas.navigate(['/medicinageneral']);
+  
+  HistoriaPaciente(cedula:string){
+    localStorage.setItem('cedulaMG', cedula);
+    this.rutas.navigate(['/pacientes']);
   }
+
   CrearHistoriaClinica(){
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }

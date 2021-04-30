@@ -90,6 +90,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.idPaciente=data['result'].id_paciente;
       this.edad = data['result'].edad;
       this.gad = data['result'].gad;
+      localStorage.removeItem('cedulaMG');
+      localStorage.removeItem('idCita');
       if(this.gad==1)
        this.gadv="Miembro activo";
       else
