@@ -20,7 +20,7 @@
           </div>
 
         </div>
- 
+  
 
         <div class="card-body">
           <table class="table table-bordered table-striped table-sm">
@@ -55,7 +55,7 @@
                 </tr>
               </ng-container>
               
-            <ng-template #filtro2>
+            <ng-container #filtro2 *ngIf="CedulaPaciente == null; else filtro3">
               <tr  *ngFor="let item of pacientesMGPaginateFilter">
                
                 <td>{{item.cedula}}</td>
@@ -73,10 +73,29 @@
                       class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                 </td>
               </tr>
-            </ng-template>
+            </ng-container>
+
+            <ng-template #filtro3>
+                <tr>
+                  <td>{{pacientesMGPaginate.cedula}}</td>
+                  <td>{{pacientesMGPaginate.nombres}}</td>
+                  <td>{{pacientesMGPaginate.apellidos}}</td>
+                  <td>{{pacientesMGPaginate.sexo}}</td>
+                  <td>{{pacientesMGPaginate.edad}}</td>
+                  <td>{{pacientesMGPaginate.residencia}}</td>
+                  <td>
+                    <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(pacientesMGPaginate.id_paciente)" ><i
+                      class="fa fa-male"></i>&nbsp;Datos Paciente</button>
+                    <button type="button" class="btn btn-ghost-success botont" (click)="Consultar(pacientesMGPaginate.id_paciente)"><i
+                        class="fa fa-eye"></i>&nbsp;Consultas</button>
+                    <button type="button" class="btn btn-ghost-danger botont"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                  </td>
+                </tr>
+              </ng-template>
             </tbody>
           </table>
-          <nav>
+          <nav *ngIf="CedulaPaciente==null">
             <pagination *ngIf="search==''" [totalItems]="pacientesMG.length" (pageChanged)="pageChanged($event)"></pagination>
             <pagination *ngIf="search!=''" [totalItems]="pacientesMGFilter.length" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
           </nav>

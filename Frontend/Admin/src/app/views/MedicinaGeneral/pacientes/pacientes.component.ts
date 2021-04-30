@@ -28,8 +28,8 @@ export class PacientesComponent implements OnInit {
   pacientesMGFilter=[];//variable para el paginado sin el pipe
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
   APF:any[];
-  CedulaPaciente = localStorage.getItem('cedulaMG');
-  
+  CedulaPaciente = null;
+
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
@@ -50,6 +50,8 @@ export class PacientesComponent implements OnInit {
   isCollapsed7 = false;
   
   ngOnInit() {
+    this.CedulaPaciente = localStorage.getItem('cedulaMG');
+    debugger
     if(this.CedulaPaciente == null ){
       this.cargar();
     }else
@@ -61,6 +63,7 @@ export class PacientesComponent implements OnInit {
       this.medicina_general.AtenderPaciente(this.CedulaPaciente).then(data =>{
       this.pacientesMG=data['result'];
       this.pacientesMGPaginate = this.pacientesMG;
+      debugger
       localStorage.removeItem('cedulaMG');
     }).catch(error =>{
       console.log(error);
@@ -86,6 +89,7 @@ export class PacientesComponent implements OnInit {
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.pacientesMGFilter=[];
       this.pacientesMGPaginateFilter=[];
+      this.CedulaPaciente=null;
     if(this.search==''){
     }else{
       for (const x of this.pacientesMG) {
@@ -94,6 +98,7 @@ export class PacientesComponent implements OnInit {
          this.pacientesMGFilter.push(x);
        };
       };
+      debugger
       this.pacientesMGPaginateFilter = this.pacientesMGFilter.slice(0, 10);
     }
     

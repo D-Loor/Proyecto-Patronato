@@ -38,6 +38,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
   id_familiar:number; id_PacienteDA:number; id_gineco:number;
   
+  //classCheck
+  gadClass:string;
+
   //cheak
   gadCSi:number=0; gadCNo:number=1; 
 
@@ -77,6 +80,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
   limpiar(){
     //cheak
+
     this.alcoholC=0;this.tabacoC=0;this.drogasC=0;this.alimentacionC=0;this.diuresisC=0;this.somniaC=0;
     this.ninezC=0; this.adolescenciaC=0; this.adultezC=0; this.quirurgicosC=0; this.alergicosC=0; this.alergicosC=0; this.ginecos_obstetricosC=0; this.traumatologicosC=0;
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
@@ -114,7 +118,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   this.examen_laboratorioT=""; this.examen_electrocardiogramaT=""; this.examen_RToraxT=""; this.examen_otrosT="";
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
   
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -257,10 +263,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
    //Es para actualizar...
 
    checkRadioSi(radioCheck:string){
-    if(radioCheck=='gad'){this.gad=1}
+    if(radioCheck=='gad'){this.gad=1;}
    }
    checkRadioNo(radioCheck:string){
-    if(radioCheck=='gad'){this.gad=0}
+    if(radioCheck=='gad'){this.gad=0;}
   }
 
   cargarGinecoPersonal(id_gineco:number){
@@ -337,7 +343,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.edad=data['result'].edad;
               this.sexo=data['result'].sexo;
               this.gad=data['result'].gad;
-              if(this.gad == 1){this.gadCSi=1;}else{this.gadCNo=0}
+              if(this.gad == 1){this.gadCSi=1; this.gadCNo=1; }else{this.gadCNo=0; this.gadCSi=0;}
               this.ocupacion=data['result'].ocupacion;
               this.Lresidencia=data['result'].residencia;
               this.Lprocedencia=data['result'].procedencia;
