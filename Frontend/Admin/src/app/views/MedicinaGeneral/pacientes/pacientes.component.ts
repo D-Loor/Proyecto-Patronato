@@ -76,12 +76,8 @@ export class PacientesComponent implements OnInit {
     this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
   }).catch(error =>{
     console.log(error);
-});
+  });
 
-  }
-
-  inputEdit(){//editar los input (abilitarlos) 
-    this.edit=0;
   }
   
   
