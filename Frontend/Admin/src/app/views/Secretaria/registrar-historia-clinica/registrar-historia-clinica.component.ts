@@ -38,11 +38,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
   id_familiar:number; id_PacienteDA:number; id_gineco:number;
   
-  //classCheck
-  gadClass:string;
-
+  
   //cheak
-  gadCSi:string='0'; gadCNo:string='1'; 
+  gadCSi:string='0';gadCNo:string='1'; dbtCSi:string='0';dbtCNo:string='1'; htaCSi:string='0';htaCNo:string='1'; tbcCSi:string='0';tbcCNo:string='1'; gemelarCSi:string='0';gemelarCNo:string='1';  
 
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
@@ -52,7 +50,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
   menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBT; HTA; TBC; GEMELAR; 
   //Check Variables Antecedentes Patológicos Personales
-  ninezC:number; adolescenciaC:number; adultezC:number; quirurgicosC:number; alergicosC:number; traumatologicosC:number; ginecos_obstetricosC:number;
+  ninezC:number; adolescenciaC:number; adultezC:number; quirurgicosC:number; alergicosC:number; traumatologicosC:number; ginecos_obstetricosC:number; ginecos_obstetricosCaux:number=0;
 
   //Variables de Antecedentes Patológicos Familiares
   nombres; union; estado; estadoT; union2;
@@ -84,11 +82,11 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
     //cheak
     this.alcoholC=0;this.tabacoC=0;this.drogasC=0;this.alimentacionC=0;this.diuresisC=0;this.somniaC=0;
-    this.ninezC=0; this.adolescenciaC=0; this.adultezC=0; this.quirurgicosC=0; this.alergicosC=0; this.alergicosC=0; this.ginecos_obstetricosC=0; this.traumatologicosC=0;
+    this.ninezC=0; this.adolescenciaC=0; this.adultezC=0; this.quirurgicosC=0; this.alergicosC=0; this.alergicosC=0; this.ginecos_obstetricosC=0; this.traumatologicosC=0; this.ginecos_obstetricosCaux=0;
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
     this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
     this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
-    this.gadCSi='2'; this.gadCNo='2';
+    this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
 
     this.DatosFamiliares=[]; this.number=0; this.edit=0; this.actualizar=0;
     //variables de los id Para relacionar y actualizar
@@ -265,9 +263,19 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
    checkRadioSi(radioCheck:string){
     if(radioCheck=='gad'){this.gad=1;}
+    if(radioCheck=='dbt'){this.DBT=1;}
+    if(radioCheck=='hta'){this.HTA=1;}
+    if(radioCheck=='tbc'){this.TBC=1;}
+    if(radioCheck=='gemelar'){this.GEMELAR=1;}
+    debugger
    }
    checkRadioNo(radioCheck:string){
     if(radioCheck=='gad'){this.gad=0;}
+    if(radioCheck=='dbt'){this.DBT=0;}
+    if(radioCheck=='hta'){this.HTA=0;}
+    if(radioCheck=='tbc'){this.TBC=0;}
+    if(radioCheck=='gemelar'){this.GEMELAR=0;}
+    debugger
   }
 
   cargarGinecoPersonal(id_gineco:number){
@@ -281,7 +289,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.Partos=data['result'].partos;
       this.cesareas=data['result'].cesareas;
       this.abortos=data['result'].abortos;
-      if(id_gineco==1){this.ginecos_obstetricosC=1;this.fum='';this.fpp='';this.edad_gestional='';this.menarquia='';this.Gestas='';this.Partos='';
+      if(id_gineco==1){this.ginecos_obstetricosC=1; this.ginecos_obstetricosCaux=this.ginecos_obstetricosC; this.fum='';this.fpp='';this.edad_gestional='';this.menarquia='';this.Gestas='';this.Partos='';
       this.cesareas=''; this.abortos=''; this.flujo_genital='';}
     })
   }
@@ -305,15 +313,18 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   Consultar(){
+    
     if(this.cedula== undefined || this.cedula=="undefined"){
+      this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+      this.limpiar();
       Swal.fire(
         'Campo vacío',
         'Ingrese un número de cédula',
         'warning'
       )
     }else{
-      this.medicinag.AtenderPaciente(this.cedula).then(data => {  
-           
+      this.medicinag.AtenderPaciente(this.cedula).then(data => { 
+        this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2'; 
         if(data['code'] === '201'){
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
@@ -336,7 +347,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           }).then((result) => {
             
             if (result.isConfirmed) {
-              this.gadCSi=''; this.gadCNo='';  
               this.id_PacienteDA=data['result'].id_paciente;
               this.apellidos=data['result'].apellidos;
               this.nombresP=data['result'].nombres;
@@ -365,6 +375,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
               this.TBC=data['result']['antecedentes_patologicos_personales'].TBC;
               this.GEMELAR=data['result']['antecedentes_patologicos_personales'].GEMELAR;
+              if(this.DBT == 1){this.dbtCSi='1'; this.dbtCNo='1'; }else{this.dbtCNo='0'; this.dbtCSi='0';}
+              if(this.HTA == 1){this.htaCSi='1'; this.htaCNo='1'; }else{this.htaCNo='0'; this.htaCSi='0';}
+              if(this.TBC == 1){this.tbcCSi='1'; this.tbcCNo='1'; }else{this.tbcCNo='0'; this.tbcCSi='0';}
+              if(this.GEMELAR == 1){this.gemelarCSi='1'; this.gemelarCNo='1'; }else{this.gemelarCNo='0'; this.gemelarCSi='0';}
               this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
               this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
@@ -444,11 +458,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               if(this.examen_otrosT==1){this.examen_otrosC=1;this.examen_otrosT='';}
               
               
-            } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
+            }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
               this.edit=0;
+              this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+              this.limpiar();
               swalWithBootstrapButtons.fire(
                 'Cancelado',
                 'Se ha cancelado correctamente',
@@ -457,7 +470,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
             }
           })
          }
-         else{
+         else{ 
+          this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+          this.limpiar();
           Swal.fire(
             'Paciente no encontrado',
             'El paciente con la cedula ' + this.cedula + ' no cuenta con historial clínico',
@@ -487,9 +502,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'cesareas': this.cesareas,
       'abortos': this.abortos,
     }
+    debugger
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
+      debugger
       this.id_obstetrico = data['id'];
-      this.IngresarAntecedesPersonales();
+      if(this.ginecos_obstetricosCaux!=1){this.IngresarAntecedesPersonales();}
+      
     });
   }
 
@@ -694,13 +712,35 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       
     this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{});
 
-    if(this.sexo=="Hombre"){
-      if(this.ninezC==1){this.ninezT=1}
+    if(this.ninezC==1){this.ninezT=1}
       if(this.adolescenciaC==1){this.adolescenciaT=1;}
       if(this.adultezC==1){this.adultezT=1;}
       if(this.quirurgicosC==1){this.quirurgicosT=1;}
       if(this.traumatologicosC==1){this.traumatologicosT=1;}
-      if(this.alergicosC==1){this.alergicosT=1;}     
+      if(this.alergicosC==1){this.alergicosT=1;}    
+      if(this.sexo=='Hombre'){
+        this.id_gineco=1;
+      }
+      debugger
+      if(this.ginecos_obstetricosCaux==1 && this.ginecos_obstetricosC!=this.ginecos_obstetricosCaux){
+        let obstetricos = {
+          'FUM':this.fum,
+          'FPP':this.fpp,
+          'edad_gestional': this.edad_gestional,
+          'menarquia':this.menarquia,
+          'flujo_genital':this.flujo_genital,
+          'gestas': this.Gestas,
+          'partos': this.Partos,
+          'cesareas': this.cesareas,
+          'abortos': this.abortos,
+        }
+        debugger
+        this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
+          debugger
+          this.id_gineco = data['id'];
+        });
+      }
+      
       let APPActualizar = {
         'infancia':this.ninezT,
         'adolecencia':this.adolescenciaT,
@@ -712,14 +752,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'quirujircos':this.quirurgicosT,
         'alergias':this.alergicosT,
         'traumas':this.traumatologicosT,
-        'id_gineco':1,
+        'id_gineco':this.id_gineco,
       }
- 
-      this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
-    }else{
-      debugger
+
+    if(this.sexo=="Mujer" && this.ginecos_obstetricosCaux==0){
         this.actualizarGinecosPersonal();
     }
+    
+    this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
 
     //Condicionales del checkHabitos
     if(this.alcoholC==1){this.alcoholT=1;}
