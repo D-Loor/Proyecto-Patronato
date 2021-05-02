@@ -841,3 +841,11 @@
     </div><!--/.row-->
 
 </div>
+
+<div *ngIf="spinnerConfig['fullScreen']">
+    <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+      [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+      [showSpinner]="spinnerConfig['showSpinner']">
+      <p style="color: white">{{loadingText}}</p>
+    </ngx-spinner>
+  </div>

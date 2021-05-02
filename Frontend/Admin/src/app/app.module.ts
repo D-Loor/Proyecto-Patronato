@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -62,6 +62,7 @@ import { CitasModule } from './views/Secretaria/citas/citas.module';
 import { RegistrarHistoriaClinicaModule } from './views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module';
 import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.module';
 import { PrincipalComponent } from './views/principal/principal.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -99,6 +100,7 @@ import { PrincipalComponent } from './views/principal/principal.component';
     CitasModule,
     RegistrarHistoriaClinicaModule,
     AgendarCitaModule,
+    NgxSpinnerModule,
     
   ],
   declarations: [
@@ -118,6 +120,7 @@ import { PrincipalComponent } from './views/principal/principal.component';
     },
     IconSetService,
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

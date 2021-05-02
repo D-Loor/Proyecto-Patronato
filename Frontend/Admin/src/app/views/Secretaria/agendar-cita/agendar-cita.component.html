@@ -50,7 +50,7 @@
                                           </div>                                  
                                       </div>
   
-                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarCita()">Registrar Consulta</button>
+                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarCita('sample')">Registrar Consulta</button>
                                 </form>
                             </div>
 
@@ -63,3 +63,10 @@
   
   </div>
   
+  <div *ngIf="spinnerConfig['fullScreen']">
+    <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+      [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+      [showSpinner]="spinnerConfig['showSpinner']">
+      <p style="color: white">{{loadingText}}</p>
+    </ngx-spinner>
+  </div>

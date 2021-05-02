@@ -3,6 +3,7 @@ import { navItems } from '../../../_nav';
 import Swal from 'sweetalert2';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 import { SecretariaService } from '../../../servicios/secretaria.service';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-registrar-historia-clinica',
   templateUrl: './registrar-historia-clinica.component.html',
@@ -10,7 +11,25 @@ import { SecretariaService } from '../../../servicios/secretaria.service';
 })
 export class RegistrarHistoriaClinicaComponent implements OnInit {
 
-  constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService ) { }
+  constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService ) { }
+
+  loadingText = 'Guardando...';
+
+  /**
+   * Spinner configuration
+   *
+   * @type {object}
+   * @memberof AppComponent
+   */
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
 
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -148,7 +167,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           "causas":this.estadoT,
       }];
       this.DatosFamiliares.push(DatosFamiliares2[0]);
-      debugger
       this.nombres = "";
       this.union = "";
       this.union2 = "";
@@ -267,7 +285,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     if(radioCheck=='hta'){this.HTA=1;}
     if(radioCheck=='tbc'){this.TBC=1;}
     if(radioCheck=='gemelar'){this.GEMELAR=1;}
-    debugger
    }
    checkRadioNo(radioCheck:string){
     if(radioCheck=='gad'){this.gad=0;}
@@ -275,7 +292,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     if(radioCheck=='hta'){this.HTA=0;}
     if(radioCheck=='tbc'){this.TBC=0;}
     if(radioCheck=='gemelar'){this.GEMELAR=0;}
-    debugger
   }
 
   cargarGinecoPersonal(id_gineco:number){
@@ -616,7 +632,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'fecha_nacimiento':this.fechanacimiento,
       'nivel_instruccion':this.nivel_instruccion,
     }
-    debugger
     this.ServicioSecretaria.AgregarPaciente(pacientesA).then(data =>{
       this.id_paciente = data['id'];
       this.AntecedentesFamiliares();
@@ -627,10 +642,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     let  arrayLocal={};
     for (let item of this.DatosFamiliares) { 
       arrayLocal = {
-          "nombres": item[0].nombres,
-          "union": item[0].union,
-          "vida": item[0].vida,
-          "causas":item[0].causas,
+          "nombres": item.nombres,
+          "union": item.union,
+          "vida": item.vida,
+          "causas":item.causas,
       }
       this.ServicioSecretaria.Familiares(arrayLocal).then(data =>{
         this.id_familiar = data['id'];
@@ -654,6 +669,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'nombres':this.nombresP + " " + this.apellidos,
     }
     this.ServicioSecretaria.ActualizarCitas( citas, this.cedula ).then(data =>{
+      this.spinner.hide('sample');
       Swal.fire(
         'Correcto',
         'Datos guardados correctamente',
@@ -679,8 +695,11 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           'El paciente ya cuenta con historial clínico',
           'error'
         )
-      }else
+      }else{
+        this.spinner.show('sample');
         this.IngresarDatosPaciente();
+      }
+        
     });
   }
 

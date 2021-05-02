@@ -1,7 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { SecretariaService } from '../../../servicios/secretaria.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -10,10 +12,29 @@ import Swal from 'sweetalert2';
   templateUrl: './agendar-cita.component.html',
   styleUrls: ['./agendar-cita.component.scss']
 })
+
 export class AgendarCitaComponent implements OnInit {
 
-  constructor(private ServicioSecretaria:SecretariaService) { }
+  constructor(private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
 
+
+  loadingText = 'Guardando...';
+
+  /**
+   * Spinner configuration
+   *
+   * @type {object}
+   * @memberof AppComponent
+   */
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
 
   isCollapsed = false;
   public sidebarMinimized = false;
@@ -128,7 +149,7 @@ export class AgendarCitaComponent implements OnInit {
   
   }
 
-  AgendarCita(){
+  AgendarCita(name:string){
     let paciente = {
       'nombres':this.nombres,
       'cedula':this.cedula,
@@ -137,11 +158,12 @@ export class AgendarCitaComponent implements OnInit {
       'id_turno':this.idT[0],
     }
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
+      this.spinner.hide(name);
       Swal.fire(
         'Correcto',
         'Cita agendada correctamente',
         'success'
-      )
+      );
       this.nombres="";
       this.cedula ="";
       this.fecha_consulta="";
@@ -152,7 +174,7 @@ export class AgendarCitaComponent implements OnInit {
     });
   }
 
-  ValidarCita(){
+  ValidarCita(name:string){
     this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
       if(data ['code'] == '201'){
         Swal.fire(
@@ -160,8 +182,12 @@ export class AgendarCitaComponent implements OnInit {
           'El usuaria ya cuenta con una cita en esta fecha',
           'error'
         )
-      }else
-        this.AgendarCita();
+      }else{
+        
+        this.spinner.show(name);
+        this.AgendarCita(name);
+      }
+        
     });
   }
 
