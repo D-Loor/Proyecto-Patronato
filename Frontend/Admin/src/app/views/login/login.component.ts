@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../servicios/login.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2'
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,15 +15,36 @@ export class LoginComponent implements OnInit {
   arraydat:any = [];
   usuario:string [];
 
-  constructor(public login:LoginService, public rutas:Router) {
+  loadingText = 'Ingresando...';
+  /**
+   * Spinner configuration
+   *
+   * @type {object}
+   * @memberof AppComponent
+   */
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
+  constructor(public login:LoginService, public rutas:Router, private spinner: NgxSpinnerService ) {
   }
+
+
 
   ngOnInit() {
   }
 
   
   IniciarSesion(){ 
+    this.spinner.show('sample');
     if(this.correo==null || this.pass==null || this.correo=="" || this.pass==""){
+      this.spinner.hide('sample');
       Swal.fire({
         title: 'Error!',
         text: 'Existen campos vacios',
@@ -32,6 +54,7 @@ export class LoginComponent implements OnInit {
     }else{
       this.login.ValidarLogin(this.correo, this.pass).then(data =>{
         if(data['code'] == "202"){
+          this.spinner.hide('sample');
           Swal.fire({
             title: 'Error!',
             text: 'El correo o la contraseña estan incorrectos',
@@ -43,6 +66,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('sesionLoginInicio', 'true');
           this.arraydat=data['result'];
           this.rutas.navigate(['/dashboard']);
+          this.spinner.hide('sample');
           Swal.fire({
             title: 'Bienvenido',
             text: 'Sesión Iniciada',
