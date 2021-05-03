@@ -11,7 +11,7 @@
     <link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
-
+    <link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
 </head>
 
 
@@ -563,27 +563,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group ">
-                                    <label class="label-co"> Ingrese sus nombres completos *</label>
+                                    <label class="label-co" id="label-nombres" > Ingrese sus nombres completos *</label>
                                     
-                                    <input type="text" class="form-control  form-input" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
+                                    <input type="text" onblur="cambio('nombres')" class="form-control  form-input" placeholder="Nombres y Apellidos *" id="nombres" name="nombres"
                                         required autocomplete="off" data-validation-required-message="Escriba sus nombres completos.">
                                         
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="label-co"> Ingrese su cédula de identidad *</label>
+                                    <label class="label-co"  id="label-cedula"> Ingrese su cédula de identidad *</label>
                                     <div class="input-group">
-                                        <input type="number"  class="form-control  form-input" onblur="validarC()" placeholder="Cédula de Identidad *" id="cedula" name="cedula"
+                                        <input type="number" onblur="cambio('cedula'); validarC();"  class="form-control  form-input"  placeholder="Cédula de Identidad *" id="cedula" name="cedula"
                                             required autocomplete="off"
                                             data-validation-required-message="Escriba su cédula de identidad." >
                                         <span class="input-group-addon" id="basic-addon1" >
-                                            <i class="fa fa-check fa-2x" id="vcedula"></i>'
+                                            <i class="fa fa-check fa-2x" id="vcedula"></i>
                                         </span>
                                     </div>
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label class="label-co"> Seleccione la especialidad *</label>
+                                    <label class="label-co"  id="label-especialidad"> Seleccione la especialidad *</label>
                                     <select class="form-control form-select "  id="especialidad"  name="especialidad" aria-label=".form-select-lg example"> 
                                         <option selected value="Medicina General" class="op-select">Medicina General</option>
                                         <option value="Rehabilitacion Fisica" class="op-select">Rehabilitación Física</option>
@@ -597,8 +597,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                         
-                                    <label class="label-co"> Seleccione la fecha de consulta *</label>
-                                    <input  id="fecha" name="fecha" onchange="cargar()" type="date" class="form-control fecha"  required
+                                    <label class="label-co"  id="label-fecha"> Seleccione la fecha de consulta *</label>
+                                  
+                                    <input  id="fecha"  onblur="cambio('fecha')" name="fecha" onchange="cargar()" type="date" class="form-control fecha"  required
                                         data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-04-25" onload="validarf()">
                                     <p class="help-block text-danger"></p>
                             
@@ -609,8 +610,8 @@
 
                                 <div class="form-group">
                                     
-                                    <label class="label-co"> Seleccione la hora de consulta *</label>
-                                    <select  class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" name="hora" id="hora" required>
+                                    <label class="label-co"  id="label-hora"> Seleccione la hora de consulta *</label>
+                                    <select  onblur="cambio('hora')" class="form-control sel-opcion" multiple aria-label="size 6 multiple select example" name="hora" id="hora" required>
                                    
                                     </select>
                                 </div>
@@ -620,7 +621,7 @@
                             <div class="col-md-12">
                                 <div class="form-group chec">
                                     
-                                    <input type="checkbox" id="certi" name="certi" onchange="compromete()" required >  <label class="label-co"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
+                                    <input type="checkbox" onblur="cambio('certi')" id="certi" name="certi" onchange="compromete()" required >  <label class="label-co"  id="label-certi"> Me comprometo a llegar 15 minutos antes de la hora agendada.</label>
                                 </div>    
                             </div>
 
@@ -962,6 +963,11 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 </body>
 

@@ -86,27 +86,33 @@ class CitaController extends Controller
 
     public function validarHora($fecha)
     {
-        $datos=Cita::all()->where('fecha', $fecha);
-        $turno=Turno::all(); 
-        
+        $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');;
+        $turno=Turno::all();
+        $NCitas = count($datos);
+
+
         foreach ($datos as $cita)
         {
-            $cont=0;
+
+            $cont=-1;
             foreach ($turno as $tur)
             {
 
+                $cont++;
                 if($tur['id_turno'] == $cita['id_turno'] ){
                     unset($turno[$cont]);
                     break;
                 }
-                $cont++;
+
             }
         }
-         $num_rows = count($turno);
-        if($num_rows != 0){
+
+        $NTurnos = count($turno);
+
+        if($NTurnos != 0){
             return response()->json(['result'=>$turno, 'code'=>'201']);
         }else
-        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        return response()->json(['result'=>"Sin Turnos ", 'code'=>'202']);
     }
 
     /**

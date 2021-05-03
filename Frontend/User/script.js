@@ -1,4 +1,7 @@
+
+
 $(function() {
+    
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
@@ -89,17 +92,22 @@ function validarC() {
         dataType: "json",
         success: function (data) {
             var horas= data['result'];
+
             
-            $.each(horas, function (i, item) {
-                const option = document.createElement('option');
-                                                      
-                option.value = horas[i].id_turno;
-                option.text = horas[i].hora;
-                option.className="op-select";
-            
-                $select.appendChild(option);
-            });
+            if(data['code']=="202"){
+                document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
+                document.getElementById("fecha").reportValidity();
+            }else{
+                $.each(horas, function (i, item) {
+                    const option = document.createElement('option');
+                                                          
+                    option.value = horas[i].id_turno;
+                    option.text = horas[i].hora;
+                    option.className="op-select";
                 
+                    $select.appendChild(option);
+                });
+            }  
 
         }
     });
@@ -108,32 +116,56 @@ function validarC() {
 }
   
  //Validar Fecha
-    window.onload=function validarf() {
-        
-        var fec='2021-02-01';
-        var fecha = new Date();
-        var anio = fecha.getFullYear();
-        var dia = fecha.getDate();
-        var _mes = fecha.getMonth();//viene con valores de 0 al 11
-        _mes = _mes + 1;//ahora lo tienes de 1 al 12
-        if (_mes < 10)//ahora le agregas un 0 para el formato date
-        { var mes = "0" + _mes;}
-        else
-        { var mes = _mes.toString;}
-        if(dia<10){
-          var _dia= "0"+ dia;
-        }
-        document.getElementById("fecha").min = anio+'-'+mes+'-'+_dia; 
-        
-        fecha.min = new Date().toISOString().split("T")[0];
-    }
+   
+    /*Restringo Fecha de anteriores a la de hoy */
+var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("fecha")[0].setAttribute('min', today);
+
+/*Restringo Fecha de selección hasta 180 días después de la fecha actual */
+var maxDate = new Date(new Date().getTime() + 360 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
+
+$("fecha").datepicker({ beforeShowDay: $.datepicker.noWeekends })
 
 
    function compromete(){
         comprotido= !comprotido
    }
-    $("#AgendarCita").click(function () {
 
+   function cambio( id){
+    
+    if(document.getElementById(id).value!=""){
+        document.getElementById(id).className = "form-control  form-input";
+        document.getElementById("label-"+id).className = "label-co";
+        if(id=="cedula"){
+            document.getElementById("basic-addon1").className = "input-group-addon";
+        }else if(id=="fecha"){
+            document.getElementById(id).className = " form-control fecha";
+        }else if(id=="certi"){
+            document.getElementById(id).className = "";
+        }
+
+
+    }else{
+       
+        document.getElementById(id).className = "input-inco form-control  form-input";
+        document.getElementById("label-"+id).className = "label-inco label-co";
+        if(id=="cedula"){
+            document.getElementById("basic-addon1").className = "input-inco input-group-addon";
+        }else if(id=="fecha"){
+            document.getElementById(id).className = "input-inco form-control fecha";
+        }else if(id=="certi"){
+            document.getElementById(id).className = "";
+        }
+        document.getElementById(id).setCustomValidity('Complete este campo!');
+        document.getElementById(id).reportValidity();
+    }
+
+   }
+    $("#AgendarCita").click(function () {
+       
+        event.preventDefault();
+        
         var nombres = document.getElementById("nombres").value;
         var cedula = document.getElementById("cedula").value;
         var especialidad = document.getElementById("especialidad").value;
@@ -144,6 +176,40 @@ function validarC() {
 
         if(nombres==""||nombres==null||cedula==""||cedula==null||especialidad==null||especialidad==""||fecha==null||fecha==""||turno==null||turno==""||estado==null||estado==""||comprotido==false){
             
+            if(nombres==""||nombres==null){
+               
+                document.getElementById("nombres").className = "input-inco form-control  form-input";
+                document.getElementById("nombres").setCustomValidity('Complete este campo!');
+                document.getElementById("nombres").reportValidity();
+                document.getElementById("label-nombres").className = "label-inco label-co";
+            }
+            if(cedula==""||cedula==null){
+                document.getElementById("cedula").className = "input-inco form-control  form-input";
+                document.getElementById("label-cedula").className = "label-inco label-co";
+                document.getElementById("basic-addon1").className = "input-inco input-group-addon";
+                document.getElementById("cedula").setCustomValidity('Complete este campo!');
+                document.getElementById("cedula").reportValidity();
+           
+            }
+            if(fecha==null||fecha==""){
+                document.getElementById("fecha").className = "input-inco form-control fecha";
+                document.getElementById("label-fecha").className = "label-inco label-co";
+                document.getElementById("fecha").setCustomValidity('Complete este campo!');
+                document.getElementById("fecha").reportValidity();
+            }
+            if(turno==null||turno==""){
+                document.getElementById("hora").className = "input-inco form-control  form-input";
+                document.getElementById("label-hora").className = "label-inco label-co";
+                document.getElementById("hora").setCustomValidity('Complete este campo!');
+                document.getElementById("hora").reportValidity();
+            }
+            if(comprotido==false){
+                document.getElementById("certi").className = "input-inco ";
+                document.getElementById("label-certi").className = "label-inco label-co";
+                document.getElementById("certi").setCustomValidity('Complete este campo!');
+                document.getElementById("certi").reportValidity();
+            }
+
         }else{
             
             $.ajax({
@@ -161,6 +227,23 @@ function validarC() {
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     
+                document.getElementById("nombres").value="";
+                document.getElementById("cedula").value="";
+                document.getElementById("fecha").value="";
+                document.getElementById("nombres").value="";
+                document.querySelector("#certi").checked = false;
+                const $select = document.getElementById("hora");
+   
+                for (let i = $select.options.length; i >= 0; i--) {
+                    $select.remove(i);
+                }
+                var valido=document.getElementById("vcedula");
+                valido.className = "fa fa-times fa-2x";
+                valido.style.visibility="hidden";   
+                 cedula="";
+                 fecha="";
+                 turno="";
+                 comprotido=false;
                 alert('Registro aregado exitosamente !!!');
                 },
                 error: function (data)
