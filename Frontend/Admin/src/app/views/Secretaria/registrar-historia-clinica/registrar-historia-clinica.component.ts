@@ -14,7 +14,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService ) { }
 
   loadingText = 'Guardando...';
-
+  loadingTextA = 'Actualizando...';
   /**
    * Spinner configuration
    *
@@ -167,6 +167,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           "causas":this.estadoT,
       }];
       this.DatosFamiliares.push(DatosFamiliares2[0]);
+      debugger
       this.nombres = "";
       this.union = "";
       this.union2 = "";
@@ -176,6 +177,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   EliminarDatosArray(elimina:string){
+    debugger
     this.DatosFamiliares.splice(this.DatosFamiliares.indexOf(dato => dato.nombres === elimina), 1);
     this.number --;
   }
@@ -518,17 +520,15 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'cesareas': this.cesareas,
       'abortos': this.abortos,
     }
-    debugger
+  
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
-      debugger
       this.id_obstetrico = data['id'];
-      if(this.ginecos_obstetricosCaux!=1){this.IngresarAntecedesPersonales();}
-      
+      this.IngresarAntecedesPersonales();
     });
   }
 
   IngresarAntecedesPersonales(){
-    if(this.sexo=="Hombre"){
+    if(this.sexo=="Hombre" || this.ginecos_obstetricosC==1){
       this.id_obstetrico = 1;
     }
     let APerosonales = {
@@ -669,6 +669,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'nombres':this.nombresP + " " + this.apellidos,
     }
     this.ServicioSecretaria.ActualizarCitas( citas, this.cedula ).then(data =>{
+      this.limpiar(); 
       this.spinner.hide('sample');
       Swal.fire(
         'Correcto',
@@ -705,7 +706,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 
   actualizarDatos(){
-    
+    this.spinner.show('sampleA');
     let pacientesActualizar = {
       'id_patologico':this.id_patologico,
       'id_e_fisico':this.id_e_fisico,
@@ -740,26 +741,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       if(this.sexo=='Hombre'){
         this.id_gineco=1;
       }
-      debugger
-      if(this.ginecos_obstetricosCaux==1 && this.ginecos_obstetricosC!=this.ginecos_obstetricosCaux){
-        let obstetricos = {
-          'FUM':this.fum,
-          'FPP':this.fpp,
-          'edad_gestional': this.edad_gestional,
-          'menarquia':this.menarquia,
-          'flujo_genital':this.flujo_genital,
-          'gestas': this.Gestas,
-          'partos': this.Partos,
-          'cesareas': this.cesareas,
-          'abortos': this.abortos,
-        }
-        debugger
-        this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
-          debugger
-          this.id_gineco = data['id'];
-        });
-      }
-      
+
       let APPActualizar = {
         'infancia':this.ninezT,
         'adolecencia':this.adolescenciaT,
@@ -773,13 +755,41 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'traumas':this.traumatologicosT,
         'id_gineco':this.id_gineco,
       }
-
-    if(this.sexo=="Mujer" && this.ginecos_obstetricosCaux==0){
-        this.actualizarGinecosPersonal();
-    }
-    
+      debugger
     this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
-
+      
+      if(this.ginecos_obstetricosCaux==1 && this.ginecos_obstetricosC!=this.ginecos_obstetricosCaux){
+        let obstetricos = {
+          'FUM':this.fum,
+          'FPP':this.fpp,
+          'edad_gestional': this.edad_gestional,
+          'menarquia':this.menarquia,
+          'flujo_genital':this.flujo_genital,
+          'gestas': this.Gestas,
+          'partos': this.Partos,
+          'cesareas': this.cesareas,
+          'abortos': this.abortos,
+        }
+        
+        this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
+          this.id_gineco = data['id'];
+          let APPActualizar = {
+            'infancia':this.ninezT,
+            'adolecencia':this.adolescenciaT,
+            'adultez':this.adultezT,
+            'DBT':this.DBT,
+            'HTA':this.HTA,
+            'TBC':this.TBC,
+            'GEMELAR':this.GEMELAR,
+            'quirujircos':this.quirurgicosT,
+            'alergias':this.alergicosT,
+            'traumas':this.traumatologicosT,
+            'id_gineco':this.id_gineco,
+          }
+          debugger
+        this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
+        });
+      }
     //Condicionales del checkHabitos
     if(this.alcoholC==1){this.alcoholT=1;}
     if(this.tabacoC==1){this.tabacoT=1;}
@@ -849,6 +859,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
 
     this.ServicioSecretaria.updateComplementario( examenesComplementariosActualizar, this.id_complementario ).then(data =>{
+      this.spinner.hide('sampleA');
       Swal.fire(
         'Correcto',
         'Datos actualizados correctamente',

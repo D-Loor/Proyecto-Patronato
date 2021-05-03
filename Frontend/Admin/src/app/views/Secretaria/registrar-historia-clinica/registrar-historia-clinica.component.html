@@ -417,7 +417,7 @@
                                             </thead> 
                                             <tbody>
                                                 <!--*ngIf="actualizar==0"-->
-                                                <ng-container *ngIf="actualizar==0; else agg2">    
+                                                <ng-container >    
                                                 <tr *ngFor="let item of DatosFamiliares" >
                                                 <td class="table-titulo">{{item.nombres}}</td>
                                                 <td>{{item.union}}</td>
@@ -433,24 +433,6 @@
                                               </tr>
                                             </ng-container>
 
-                                              <ng-template #agg2 >
-                                                <tr *ngFor="let item of DatosFamiliares">
-                                                    <td class="table-titulo">{{item.nombres}}</td>
-                                                    <td>{{item.union}}</td>
-                                                    <td>
-                                                      <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
-                                                      <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
-                                                    </td>
-                                                    <td>{{item.causas}}</td>
-                                                    <td>
-                                                      <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item.nombres)"><i
-                                                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-                                                    </td>
-                                                  </tr>
-                                                </ng-template>
-                                              
-                                              
-                                
                                             </tbody>
                                           </table>
                                     </div>
@@ -830,7 +812,7 @@
 
                             </form>
                             <button *ngIf="edit==0" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Registrar Paciente</button>
-                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Editar Datos del Paciente</button>
+                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Editar Datos del Paciente</button>
                         </div>
                     </div>
                    
@@ -847,5 +829,13 @@
       [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
       [showSpinner]="spinnerConfig['showSpinner']">
       <p style="color: white">{{loadingText}}</p>
+    </ngx-spinner>
+  </div>
+
+  <div *ngIf="spinnerConfig['fullScreen']">
+    <ngx-spinner name='sampleA' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+      [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+      [showSpinner]="spinnerConfig['showSpinner']">
+      <p style="color: white">{{loadingTextA}}</p>
     </ngx-spinner>
   </div>
