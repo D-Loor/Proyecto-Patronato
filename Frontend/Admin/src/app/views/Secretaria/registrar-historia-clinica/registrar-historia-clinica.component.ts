@@ -180,16 +180,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
   }
 
-  aggArrayDB(){
-    this.LlenarArrayDB();
-  }
-
-  LlenarArrayDB(){
-    this.medicinag.AtenderPaciente(this.cedula).then(data => {
-      this.DatosFamiliaresbasedatos=data['result']['familiares'];
-      debugger
-    }); 
-  }
 
   EliminarDatosArray(elimina:string){
     debugger
@@ -454,7 +444,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.number=this.DatosFamiliaresbasedatos.length;
               this.actualizar=1;
               this.edit=1;
-              debugger
               
               this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
               this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
@@ -931,6 +920,52 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'success'
       )
       this.limpiar();
+    });
+  }
+
+  aggArrayDB(){
+    let  arrayLocal={};
+      arrayLocal = {
+          "nombres": this.nombres,
+          "union": this.union,
+          "vida": this.estado,
+          "causas":this.estadoT,
+      }
+      this.ServicioSecretaria.Familiares2(arrayLocal).then(data =>{
+        this.id_familiar = data['id'];
+        this.AntecedentesPatologicosDB();
+      });
+  }
+  
+
+  AntecedentesPatologicosDB(){
+    let AntecedentesPF = {
+      'id_familiar':this.id_familiar,
+      'id_paciente':this.id_PacienteDA,
+    }
+    this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
+      this.LlenarArrayDB();
+    });
+  }
+
+  LlenarArrayDB(){
+    this.medicinag.AtenderPaciente(this.cedula).then(data => {
+      this.DatosFamiliaresbasedatos=data['result']['familiares'];
+      debugger
+      if (this.DatosFamiliaresbasedatos.length == 0){
+        this.number=0;
+      }
+      this.nombres = "";
+      this.union = "";
+      this.union2 = "";
+      this.estado = "";
+      this.estadoT = "";
+    }); 
+  }
+
+  eliminarFamiliarBD(id_familiar:number){
+    this.ServicioSecretaria.eliFamiliares(id_familiar,this.id_PacienteDA).then(data =>{
+      this.LlenarArrayDB();
     });
   }
 }

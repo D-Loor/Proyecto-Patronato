@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antecedente_Patologico_Familiar;
+use App\Models\Familia;
 use Illuminate\Http\Request;
 
 class AntecedentePatologicoFamiliarController extends Controller
@@ -87,11 +88,13 @@ class AntecedentePatologicoFamiliarController extends Controller
      * @param  \App\Models\Antecedente_Patologico_Familiar  $antecedente_Patologico_Familiar
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id_a_p_familiar)
+    public function eliminar($id_familiar,$id_paciente)
     {
-        $datos=Antecedente_Patologico_Familiar::where('id_a_p_familiar', $id_a_p_familiar)->get()->first();
-        if($datos != null){
-            $datos->delete();
+        $datosAPF=Antecedente_Patologico_Familiar::where('id_familiar', $id_familiar)->where('id_paciente', $id_paciente)->get()->first();
+        $datosF=Familia::where('id_familiar', $id_familiar)->get()->first();
+        if($datosAPF != null){
+            $datosAPF->delete();
+            $datosF->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);

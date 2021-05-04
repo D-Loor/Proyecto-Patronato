@@ -93,11 +93,35 @@ export class SecretariaService {
   }
 
   Familiares(data:any) {
+    debugger
     let  url = 'http://127.0.0.1:8000/api/Familiar';
     return new Promise ((resolve, reject) => {
       this.http.post(url, data ).subscribe(res => {
         resolve(res);{
         }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  Familiares2(data:any) {
+    debugger
+    let  url = 'http://127.0.0.1:8000/api/Familiar';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  eliFamiliares($id_familiar,$id_paciente) {
+    let  url = 'http://127.0.0.1:8000/api/eliminarATPF/'+$id_familiar+'/'+$id_paciente;
+    return new Promise ((resolve, reject) => {
+      this.http.delete(url).subscribe(res => {
+        resolve(res);
       }, error => {
         reject(error);
       });

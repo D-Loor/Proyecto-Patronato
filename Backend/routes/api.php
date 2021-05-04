@@ -48,3 +48,4 @@ Route::get('validarcita/{cedula}/{fechaActual}', 'CitaController@ValidarCita');
 Route::get('FechasRangosMG/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@FiltradoFecha');
 Route::get('pacientesConcultas/{id}', 'HistoriaClinicaMGController@ConsultasPacientes');
 Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFController@FiltradoFecha');
+Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoFamiliarController@eliminar');
