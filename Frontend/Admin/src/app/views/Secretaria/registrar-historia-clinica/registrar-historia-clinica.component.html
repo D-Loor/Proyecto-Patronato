@@ -383,7 +383,8 @@
                                         <br>
                                         <div>
                                             <span class="input-group-append">
-                                                <button type="button" class="btn btn-primary" (click)="LlenarArray()">Agregar</button>
+                                                <button *ngIf="DatosFamiliaresDB==0" type="button" class="btn btn-primary" (click)="LlenarArray()">Agregar</button>
+                                                <button *ngIf="DatosFamiliaresDB==1" type="button" class="btn btn-primary" (click)="aggArrayDB()">Agregar</button>
                                             </span> 
                                         </div>
                                         
@@ -417,7 +418,7 @@
                                             </thead> 
                                             <tbody>
                                                 <!--*ngIf="actualizar==0"-->
-                                                <ng-container >    
+                                                <ng-container *ngIf="DatosFamiliaresDB==0; else array2">    
                                                 <tr *ngFor="let item of DatosFamiliares" >
                                                 <td class="table-titulo">{{item.nombres}}</td>
                                                 <td>{{item.union}}</td>
@@ -432,6 +433,23 @@
                                                 </td>
                                               </tr>
                                             </ng-container>
+
+                                            <ng-template #array2>
+                                                <tr *ngFor="let item of DatosFamiliaresbasedatos" >
+                                                    <td class="table-titulo">{{item.nombres}}</td>
+                                                    <td>{{item.union}}</td>
+                                                    <td>
+                                                      <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
+                                                      <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
+                                                    </td>
+                                                    <td>{{item.causas}}</td>
+                                                    <td>
+                                                      <button type="button" class="btn btn-ghost-danger botont" (click)="EliminarDatosArray(item.nombres)"><i
+                                                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                                                    </td>
+                                                  </tr>
+                                            </ng-template>
+                                            
 
                                             </tbody>
                                           </table>
@@ -812,7 +830,7 @@
 
                             </form>
                             <button *ngIf="edit==0" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Registrar Paciente</button>
-                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Editar Datos del Paciente</button>
+                            <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Editar Datos del Paciente</button>
                         </div>
                     </div>
                    
