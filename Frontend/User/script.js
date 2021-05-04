@@ -1,5 +1,4 @@
 
-
 $(function() {
     
     $('a.page-scroll').bind('click', function(event) {
@@ -19,6 +18,10 @@ $('body').scrollspy({
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
+});
+
+$(window).load(function() {
+    $(".loader").fadeOut("slow");
 });
 
 var comprotido=false;
@@ -95,6 +98,13 @@ function validarC() {
 
             
             if(data['code']=="202"){
+
+                Swal.fire(
+                    'Lo sentimos',
+                    'No existen citas disponibles en esta fecha',
+                    'error'
+                  )
+
                 document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
                 document.getElementById("fecha").reportValidity();
             }else{
@@ -125,7 +135,7 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);
 var maxDate = new Date(new Date().getTime() + 360 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
 document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
 
-$("fecha").datepicker({ beforeShowDay: $.datepicker.noWeekends })
+
 
 
    function compromete(){
@@ -213,48 +223,75 @@ $("fecha").datepicker({ beforeShowDay: $.datepicker.noWeekends })
         }else{
             
             $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8000/api/validarcita/"+cedula+"/"+fecha,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) { 
+                    
+                    if(data ['code'] == '201'){
+                        Swal.fire(
+                          'Error!',
+                          'El usuaria ya cuenta con una cita en esta fecha',
+                          'error'
+                        )
+                      }else{
+                        $.ajax({
             
-                url: "http://127.0.0.1:8000/api/Cita",
-                type: "Post",
-                data: JSON.stringify({
-                    'nombres' : nombres,
-                    'cedula' : cedula,
-                    'especialidad' : especialidad,
-                    'fecha' : fecha,
-                    'id_turno' : turno,
-                    'estado': estado
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    
-                document.getElementById("nombres").value="";
-                document.getElementById("cedula").value="";
-                document.getElementById("fecha").value="";
-                document.getElementById("nombres").value="";
-                document.querySelector("#certi").checked = false;
-                const $select = document.getElementById("hora");
-   
-                for (let i = $select.options.length; i >= 0; i--) {
-                    $select.remove(i);
+                            url: "http://127.0.0.1:8000/api/Cita",
+                            type: "Post",
+                            data: JSON.stringify({
+                                'nombres' : nombres,
+                                'cedula' : cedula,
+                                'especialidad' : especialidad,
+                                'fecha' : fecha,
+                                'id_turno' : turno,
+                                'estado': estado
+                            }),
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                
+                            document.getElementById("nombres").value="";
+                            document.getElementById("cedula").value="";
+                            document.getElementById("fecha").value="";
+                            document.getElementById("nombres").value="";
+                            document.querySelector("#certi").checked = false;
+                            const $select = document.getElementById("hora");
+               
+                            for (let i = $select.options.length; i >= 0; i--) {
+                                $select.remove(i);
+                            }
+                            var valido=document.getElementById("vcedula");
+                            valido.className = "fa fa-times fa-2x";
+                            valido.style.visibility="hidden";   
+                             cedula="";
+                             fecha="";
+                             turno="";
+                             comprotido=false;
+                            Swal.fire(
+                                'Correcto',
+                                'Cita agendada correctamente',
+                                'success'
+                            );
+                            },
+                            error: function (data)
+                            {
+                                Swal.fire(
+                                    'Opps!',
+                                    'Error de servidor, lo sentimos.',
+                                    'warning'
+                                );
+                            }  
+                        });
+                      }
+        
                 }
-                var valido=document.getElementById("vcedula");
-                valido.className = "fa fa-times fa-2x";
-                valido.style.visibility="hidden";   
-                 cedula="";
-                 fecha="";
-                 turno="";
-                 comprotido=false;
-                alert('Registro aregado exitosamente !!!');
-                },
-                error: function (data)
-                {
-                    
-                alert(data.responseText);
-                }  
             });
+           
 
         }
        
     });
+
     
 
