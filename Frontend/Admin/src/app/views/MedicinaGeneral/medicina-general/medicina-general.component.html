@@ -14,7 +14,7 @@
 
                 <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">
-                  <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                  <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Buscar</button>
                 </span>
 
               </div>
@@ -30,9 +30,9 @@
                 <label for="name">Fecha final</label>
                 <input name="FechaFin" id="FechaFin"  name="FechaFin" [(ngModel)]="FechaFin" type="date"  placeholder="date" class="form-control">
               </div>
-                <div class="col-md-2 searcht">
+                <div class="col-xs-2 searcht">
                 <label for="name"><label for="name"></label></label>
-                <button type="button" class="btn btn-primary form-control" (click)="FiltroFecha()"><i class="fa fa-sliders fa-lg mt-2"></i></button>
+                <button type="button" class="btn btn-primary form-control" (click)="FiltroFecha()"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
               </div>
             </div>
           </div>
@@ -68,9 +68,6 @@
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"  (click)="DatosConsulta(item)"><i
                         class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
-
-                    <button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
                 </tr>
                 </ng-container>
@@ -90,9 +87,6 @@
                   <td>
                     <button type="button" class="btn btn-ghost-info botont"  (click)="DatosConsulta(item)"><i
                         class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
-
-                    <button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
                 </tr>
                 </ng-template>
