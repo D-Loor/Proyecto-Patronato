@@ -32,6 +32,7 @@
                 <th>Sexo</th>
                 <th>Edad</th>
                 <th>Residencia</th>
+                <th>GAD</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -45,12 +46,16 @@
                   <td>{{item.edad}}</td>
                   <td>{{item.residencia}}</td>
                   <td>
+                    <span *ngIf="item.gad != 1" class="badge badge-secondary">NO</span>
+                    <span *ngIf="item.gad != 0" class="badge badge-success">SI</span>
+                  </td>
+                  <td>
                     <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item.id_paciente)"><i
                           class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                     <button type="button" class="btn btn-ghost-success botont" (click)="Consultar(item.id_paciente)"><i
                         class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                    <!--button type="button" class="btn btn-ghost-danger botont"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
                   </td>
                 </tr>
               </ng-container>
@@ -65,12 +70,16 @@
                 <td>{{item.edad}}</td>
                 <td>{{item.residencia}}</td>
                 <td>
+                    <span *ngIf="item.gad != 1" class="badge badge-secondary">NO</span>
+                    <span *ngIf="item.gad != 0" class="badge badge-success">SI</span>
+                  </td>
+                <td>
                   <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item.id_paciente)" ><i
                     class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                   <button type="button" class="btn btn-ghost-success botont" (click)="Consultar(item.id_paciente)"><i
                       class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <button type="button" class="btn btn-ghost-danger botont"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                  <!--button type="button" class="btn btn-ghost-danger botont"><i
+                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
                 </td>
               </tr>
             </ng-container>
@@ -84,12 +93,16 @@
                   <td>{{pacientesMGPaginate.edad}}</td>
                   <td>{{pacientesMGPaginate.residencia}}</td>
                   <td>
+                    <span *ngIf="pacientesMGPaginate.gad != 1" class="badge badge-secondary">NO</span>
+                    <span *ngIf="pacientesMGPaginate.gad != 0" class="badge badge-success">SI</span>
+                  </td>
+                  <td>
                     <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(pacientesMGPaginate.id_paciente)" ><i
                       class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                     <button type="button" class="btn btn-ghost-success botont" (click)="Consultar(pacientesMGPaginate.id_paciente)"><i
                         class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                    <!--button type="button" class="btn btn-ghost-danger botont"><i
+                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
                   </td>
                 </tr>
               </ng-template>
