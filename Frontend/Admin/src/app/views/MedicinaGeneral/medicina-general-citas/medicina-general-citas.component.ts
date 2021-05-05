@@ -31,11 +31,30 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   citasEliminar:any[];
   today = new Date();
   fechaActual:string;
+  date = new Date();
+
+  //Obtener inicio y fin de mes
+  primerDia = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+  ultimoDia = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+  dia = this.primerDia.getDate();
+  mes = this.primerDia.getMonth();
+  yyy = this.primerDia.getFullYear();
+  FechaInicio:string = this.yyy +'-'+this.mes+'-'+this.dia; 
+  diaF = this.ultimoDia.getDate();
+  mesF = this.ultimoDia.getMonth();
+  yyyF = this.ultimoDia.getFullYear();
+  FechaFin:string = this.yyyF +'-'+this.mesF+'-'+this.diaF; 
+  
 
 
   ngOnInit(): void {
+    this.Estadisticas(this.FechaInicio,this.FechaFin);
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
+  }
+
+  Estadisticas(Inicio:string, Fin:string){
+    
   }
 
   cargar(){

@@ -164,4 +164,13 @@ class HistoriaClinicaMGController extends Controller
             return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         
     }
+
+    public function DatosEstadisticos($fechaInicial, $fechaFinal){
+        $pacientes = Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
+        $numerosP = count($paciente);
+
+         return response()->json(['result'=>$numerosP, 'code'=>'201']);
+        
+    }
+
 }
