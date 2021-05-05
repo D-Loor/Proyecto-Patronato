@@ -12,7 +12,7 @@
               <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.."
                 [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
               <span class="input-group-prepend">
-                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
               </span>
 
             </div>
@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="search == ''; else filtro2">
+              <ng-container *ngIf="search == null; else filtro2">
                 <tr *ngFor="let item of pacientesMGPaginate ">
                   <td>{{item.cedula}}</td>
                   <td>{{item.nombres}}</td>
@@ -60,7 +60,7 @@
                 </tr>
               </ng-container>
               
-            <ng-container #filtro2 *ngIf="CedulaPaciente == null; else filtro3">
+            <ng-container #filtro2>
               <tr  *ngFor="let item of pacientesMGPaginateFilter">
                
                 <td>{{item.cedula}}</td>
@@ -83,34 +83,11 @@
                 </td>
               </tr>
             </ng-container>
-
-            <ng-template #filtro3>
-                <tr>
-                  <td>{{pacientesMGPaginate.cedula}}</td>
-                  <td>{{pacientesMGPaginate.nombres}}</td>
-                  <td>{{pacientesMGPaginate.apellidos}}</td>
-                  <td>{{pacientesMGPaginate.sexo}}</td>
-                  <td>{{pacientesMGPaginate.edad}}</td>
-                  <td>{{pacientesMGPaginate.residencia}}</td>
-                  <td>
-                    <span *ngIf="pacientesMGPaginate.gad != 1" class="badge badge-secondary">NO</span>
-                    <span *ngIf="pacientesMGPaginate.gad != 0" class="badge badge-success">SI</span>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(pacientesMGPaginate.id_paciente)" ><i
-                      class="fa fa-male"></i>&nbsp;Datos Paciente</button>
-                    <button type="button" class="btn btn-ghost-success botont" (click)="Consultar(pacientesMGPaginate.id_paciente)"><i
-                        class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <!--button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
-                  </td>
-                </tr>
-              </ng-template>
             </tbody>
           </table>
           <nav *ngIf="CedulaPaciente==null">
-            <pagination *ngIf="search==''" [totalItems]="pacientesMG.length" (pageChanged)="pageChanged($event)"></pagination>
-            <pagination *ngIf="search!=''" [totalItems]="pacientesMGFilter.length" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
+            <pagination *ngIf="search==null" [totalItems]="pacientesMG.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="search!=null" [totalItems]="pacientesMGFilter.length" (pageChanged)="pageChangedFiltro($event,pacientesMG)"></pagination>
           </nav>
         </div>
 
@@ -234,7 +211,7 @@
                                         <input *ngIf="edit==1" autocomplete="off" required type="text" id="estado_civil"  [(ngModel)]="estado_civil"   name="estado_civil" class="form-control" placeholder="Ingrese el estado civil" disabled>
                                     </div>
                                   </div><!--/.row-->
-                                  <button type="button" class="btn btn-secondary" (click)="actualizarDatosAfiliacion()" >Actualizar</button>
+        
                             </form>
                         </div>
                     </div>
