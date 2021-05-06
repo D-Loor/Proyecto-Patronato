@@ -24,7 +24,9 @@ export class RehabilitacionFisicaComponent implements OnInit {
   historialRFFilter:any[];
   historialRFPaginateFilter:any[];
   @ViewChild('Principal') public Principal: ModalDirective;
-  FechaFin; FechaInicio;
+  FechaFin; FechaInicio; 
+  //variables para el modal
+  NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado
 
   ngOnInit(): void {
     this.cargar();
@@ -78,32 +80,24 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.historialRF = null;
   }
 
-  DatosPaciente(){
-    this.Principal.show();
-    /* this.medicina_general.PacientesAntecedentes(id_paciente).then(data =>{
-    this.apellidos=data['result'].apellidos;
-    this.nombres=data['result'].nombres;
-    this.cedula=data['result'].cedula;
-    this.edad=data['result'].edad;
-    this.ocupacion=data['result'].ocupacion;
-    this.sexo=data['result'].sexo;
-    this.Lresidencia=data['result'].residencia;
-    this.Lprocedencia=data['result'].procedencia;
-    this.fechanacimiento=data['result'].fecha_nacimiento;
-    this.raza=data['result'].raza;
-    this.religion=data['result'].religion;
-    this.nivel_instruccion=data['result'].nivel_instruccion;
-    this.estado_civil=data['result'].estado_civil;
-    this.alcoholT=data['result']['habitos']['0'].alcohol;
-    this.tabacoT=data['result']['habitos']['0'].tabaco;
-    this.drogasT=data['result']['habitos']['0'].drogas;
-    this.alimentacionT=data['result']['habitos']['0'].alimentacion;
-    this.diuresisT=data['result']['habitos']['0'].diuresis;
-    this.somniaT=data['result']['habitos']['0'].somnia;
+  DatosPaciente(arreglo:[]){
+    var paciente=arreglo['paciente'];
+    let tratamiento=arreglo['tratamiento'];
+    this.NPaciente=paciente['nombres']+" "+paciente['apellidos'];
+    this.Fecha=arreglo['fecha'];
+    this.lugar_atencion=arreglo['lugar_atencion'];
+    this.ocupacion=paciente['ocupacion'];
+    this.residencia=paciente['residencia'];
+    this.motivo=arreglo['motivo_consulta'];
+    this.diagnostico=arreglo['diagnostico'];
+    this.anamnesis=arreglo['anamnesis'];
 
-  }).catch(error =>{
-    console.log(error);
-}); */
+    if(arreglo['certificado']==1){
+      this.certificado="Se entregó certificado al paciente.";
+    }else
+      this.certificado="No se entregó certificado al paciente.";
+      
+    this.Principal.show();
   }
 
   FiltroFecha(){

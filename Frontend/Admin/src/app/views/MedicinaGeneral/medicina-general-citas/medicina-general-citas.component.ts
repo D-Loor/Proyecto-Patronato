@@ -32,6 +32,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   today = new Date();
   fechaActual:string;
   Porcentaje1:number;
+  EstiloPorcentajeH:string;
+  EstiloPorcentajeM:string;
   TotalPacientes; TotalCitasPendientes; ServidoresPublicos; TotalHombres; TotalMujeres;
 
   //Obtener inicio y fin de mes
@@ -56,15 +58,15 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   Estadisticas(Inicio:string, Fin:string){
-    let porcentaje1, porcentaje2;
 
     this.medicina.Estadisticas(Inicio,Fin).then(data =>{
       this.TotalPacientes = data['totalP'];
       this.TotalCitasPendientes = data['totalC'];
       this.ServidoresPublicos = data['totalG'];
-      this.TotalHombres = data['totalH'];
-      this.TotalMujeres = data['totalM'];
-      
+      this.TotalHombres =Math.round( data['totalH']*100/this.TotalPacientes);
+      this.TotalMujeres = Math.round(data['totalM']*100/this.TotalPacientes);
+      this.EstiloPorcentajeH ="width: "+ this.TotalHombres+"%"
+      this.EstiloPorcentajeM ="width: "+ this.TotalMujeres+"%"
     }).catch(error =>{
       console.log(error);
     });

@@ -19,6 +19,8 @@ class CreateHistoriaClinicaRFSTable extends Migration
             $table->unsignedBigInteger('id_tratamiento');
             $table->string('diagnostico');
             $table->string('lugar_atencion');
+            $table->string('motivo_consulta');
+            $table->string('anamnesis');
             $table->boolean('certificado');
             $table->date('fecha');
 

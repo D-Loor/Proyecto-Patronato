@@ -15,7 +15,7 @@ class HistoriaClinicaRFController extends Controller
     public function index()
     {
         //$datos=Historia_Clinica_RF::all();  
-        $datos=Historia_Clinica_RF::with('paciente')->get();
+        $datos=Historia_Clinica_RF::with('paciente', 'tratamiento')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]); 
@@ -48,6 +48,8 @@ class HistoriaClinicaRFController extends Controller
         $datos->diagnostico=$request->diagnostico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
+        $datos->motivo_consulta=$request->motivo_consulta;
+        $datos->anamnesis=$request->anamnesis;
         $datos->fecha=$request->fecha;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
