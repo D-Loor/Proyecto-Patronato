@@ -22,17 +22,17 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="callout callout-info">
-                      <small class="text-muted">New Clients</small>
+                      <small class="text-muted">Total de pacientes atendidos</small>
                       <br>
-                      <strong class="h4">9,123</strong>
+                      <strong class="h4">{{TotalPacientes}}</strong>
                     </div>
                   </div>
                   <!--/.col-->
                   <div class="col-sm-6">
                     <div class="callout callout-danger">
-                      <small class="text-muted">Recuring Clients</small>
+                      <small class="text-muted">Total citas pendientes</small>
                       <br>
-                      <strong class="h4">22,643</strong>
+                      <strong class="h4">{{TotalCitasPendientes}}</strong>
                     </div>
                   </div>
                   <!--/.col-->
@@ -163,19 +163,20 @@
               <div class="col-sm-6">
                 <div class="row">
                   <div class="col-sm-6">
+                    <div class="callout callout-success">
+                      <small class="text-muted">Servidores publicos</small>
+                      <br>
+                      <strong class="h4">{{ServidoresPublicos}}</strong>
+                    </div>
+                  </div>
+                  <!--/.col-->
+                  <div class="col-sm-6">
                     <div class="callout callout-warning">
                       <small class="text-muted">Pageviews</small>
                       <br>
                       <strong class="h4">78,623</strong>
                     </div>
-                  </div>
-                  <!--/.col-->
-                  <div class="col-sm-6">
-                    <div class="callout callout-success">
-                      <small class="text-muted">Organic</small>
-                      <br>
-                      <strong class="h4">49,123</strong>
-                    </div>
+                    
                   </div>
                   <!--/.col-->
                 </div>
@@ -185,7 +186,7 @@
                   <div class="progress-group-header">
                     <i class="icon-user progress-group-icon"></i>
                     <div>Hombres</div>
-                    <div class="ml-auto font-weight-bold">43%</div>
+                    <div class="ml-auto font-weight-bold">{{TotalHombres}}%</div>
                   </div>
                   <div class="progress-group-bars">
                     <div class="progress progress-xs">
@@ -198,7 +199,7 @@
                   <div class="progress-group-header">
                     <i class="icon-user-female progress-group-icon"></i>
                     <div>Mujeres</div>
-                    <div class="ml-auto font-weight-bold">37%</div>
+                    <div class="ml-auto font-weight-bold">{{TotalMujeres}}%</div>
                   </div>
                   <div class="progress-group-bars">
                     <div class="progress progress-xs">

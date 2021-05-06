@@ -31,11 +31,12 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   citasEliminar:any[];
   today = new Date();
   fechaActual:string;
-  date = new Date();
+  Porcentaje1:number;
+  TotalPacientes; TotalCitasPendientes; ServidoresPublicos; TotalHombres; TotalMujeres;
 
   //Obtener inicio y fin de mes
-  primerDia = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
-  ultimoDia = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+  primerDia = new Date(this.today.getFullYear(), this.today.getMonth()+1, 1);
+  ultimoDia = new Date(this.today.getFullYear(), this.today.getMonth() + 2, 1);
   dia = this.primerDia.getDate();
   mes = this.primerDia.getMonth();
   yyy = this.primerDia.getFullYear();
@@ -44,6 +45,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   mesF = this.ultimoDia.getMonth();
   yyyF = this.ultimoDia.getFullYear();
   FechaFin:string = this.yyyF +'-'+this.mesF+'-'+this.diaF; 
+  
   
 
 
@@ -54,7 +56,18 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   Estadisticas(Inicio:string, Fin:string){
-    
+    let porcentaje1, porcentaje2;
+
+    this.medicina.Estadisticas(Inicio,Fin).then(data =>{
+      this.TotalPacientes = data['totalP'];
+      this.TotalCitasPendientes = data['totalC'];
+      this.ServidoresPublicos = data['totalG'];
+      this.TotalHombres = data['totalH'];
+      this.TotalMujeres = data['totalM'];
+      
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   cargar(){

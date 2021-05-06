@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Historia_Clinica_MG;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Models\Cita;
 
 class HistoriaClinicaMGController extends Controller
 {
@@ -166,10 +167,31 @@ class HistoriaClinicaMGController extends Controller
     }
 
     public function DatosEstadisticos($fechaInicial, $fechaFinal){
-        $pacientes = Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
-        $numerosP = count($paciente);
+        $pacientes=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
+        $citasPendientes = Cita::all();
 
-         return response()->json(['result'=>$numerosP, 'code'=>'201']);
+        $cont = 0;
+        $contH = 0;
+        $contM =0;
+        foreach ($pacientes as $item){
+            if($item->paciente['gad']=='1')
+                $cont++;
+        }
+
+        foreach ($pacientes as $item){
+            if($item->paciente['sexo']=='Hombre')
+                $contH++;
+        }
+
+        foreach ($pacientes as $item){
+            if($item->paciente['sexo']=='Mujer')
+                $contM++;
+        }
+
+        $TotalPacientes = count($pacientes);
+        $TotalcitasPendientes = count($citasPendientes);
+
+        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM]);
         
     }
 
