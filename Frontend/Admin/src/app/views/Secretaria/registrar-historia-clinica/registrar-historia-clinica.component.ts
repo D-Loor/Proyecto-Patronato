@@ -155,7 +155,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
   LlenarArray(){
     this.DatosFamiliaresDB=0;
-    debugger
     this.number ++;
     if(this.union == "Otro"){
       this.union = this.union2;
@@ -171,7 +170,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           "causas":this.estadoT,
       }];
       this.DatosFamiliares.push(DatosFamiliares2[0]);
-      debugger
       this.nombres = "";
       this.union = "";
       this.union2 = "";
@@ -182,7 +180,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 
   EliminarDatosArray(elimina:string){
-    debugger
     for (var i=0;i<this.DatosFamiliares.length;i++){
       if(this.DatosFamiliares[i].nombres == elimina){
         this.DatosFamiliares.splice(i, 1);
