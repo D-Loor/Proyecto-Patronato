@@ -50,12 +50,9 @@ export class PacientesComponent implements OnInit {
   isCollapsed7 = false;
   
   ngOnInit() {
-    this.CedulaPaciente = localStorage.getItem('cedulaMG');
-    if(this.CedulaPaciente == null ){
-      this.cargar();
-    }else
-      this.CargarHistoriaPaciente()
-    
+    debugger
+    this.search = localStorage.getItem('cedulaMG');
+    this.cargar();
   }
 
   CargarHistoriaPaciente(){
@@ -72,6 +69,10 @@ export class PacientesComponent implements OnInit {
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
     this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
+    debugger
+    if(this.search!=null){
+      this.dataPaginate(event);
+    }
   }).catch(error =>{
     console.log(error);
   });
@@ -84,8 +85,9 @@ export class PacientesComponent implements OnInit {
     this.pacientesMGFilter=[];
       this.pacientesMGPaginateFilter=[];
       this.CedulaPaciente=null;
-    if(this.search==''){
+    if(this.search==null){
     }else{
+      debugger
       for (const x of this.pacientesMG) {
 
         if(x.cedula.indexOf(this.search)> -1){
@@ -114,6 +116,7 @@ export class PacientesComponent implements OnInit {
   ngOnDestroy(): void{
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
+    localStorage.removeItem('cedulaMG');
   }
 
   DatosPaciente(id_paciente:number){
@@ -187,33 +190,7 @@ export class PacientesComponent implements OnInit {
 });
   }
 
-  actualizarDatosAfiliacion(){
-    let pacientesActualizar = {
-      'id_patologico':this.idPatologico,
-      'id_e_fisico':this.idEFisico,
-      'id_e_organo_sistema':this.idEOrganoSistema,
-      'id_e_complementario':this.idEComplementario,
-      'id_habito':this.idHabito,
-      'apellidos':this.apellidos,
-      'nombres':this.nombres,
-      'cedula':this.cedula,
-      'edad':this.edad,
-      'ocupacion':this.ocupacion,
-      'sexo':this.sexo,
-      'residencia':this.Lresidencia,
-      'procedencia':this.Lprocedencia,
-      'fecha_nacimiento':this.fechanacimiento,
-      'raza':this.raza,
-      'religion':this.religion,
-      'nivel_instruccion':this.nivel_instruccion,
-      'estado_civil':this.estado_civil,
-      'gad':this.gad,
-      }
-
-    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.idPaciente ).then(data =>{
-      this.DatosPaciente(this.idPaciente);
-    });
-  }
+  
 
   Consultar(id_paciente:string){
     localStorage.setItem('id_paciente', id_paciente);
