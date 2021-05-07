@@ -136,9 +136,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.citasRFPaginate = null;
     this.citasRF = null;
   }
-  ConsultarPaciente(cedula:string){
+  ConsultarPaciente(cedula:string, idCita:string){
     this.rutas.navigate(['/rehabilitacionfisicaconsultas']);
     localStorage.setItem('cedulaRF', cedula);
+    localStorage.setItem('idCita', idCita);
   }
 
   

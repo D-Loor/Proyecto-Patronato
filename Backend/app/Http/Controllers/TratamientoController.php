@@ -51,7 +51,8 @@ class TratamientoController extends Controller
         $datos->laser=$request->laser;
         $datos->otros=$request->otros;
         $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        $idRecienGuardado = $datos->id_tratamiento;
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id'=>$idRecienGuardado]);
     }
 
     /**

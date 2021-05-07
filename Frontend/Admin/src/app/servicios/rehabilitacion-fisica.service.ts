@@ -31,4 +31,28 @@ export class RehabilitacionFisicaService {
       });
     });
   }
+
+  AgregarTratamiento(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/Tratamiento';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  AgregarConsulta(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/HistoriasClinicasRF';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
