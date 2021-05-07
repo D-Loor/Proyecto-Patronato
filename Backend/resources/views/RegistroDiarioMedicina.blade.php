@@ -56,14 +56,14 @@
             margin-top: 70px;
             text-align: center;
             border-top: solid 1px black;
-            width:270px;
+            width:290px;
             height: 5px;
             margin-left:-5px;
         }
         .doc , .doc .cargo {
             font-size:13px;
             font-weight: bold;
-            padding-left: 30px;
+            padding-left:5px;
             margin:0px;
         }
         .cargo{
@@ -81,8 +81,8 @@
             position: absolute;
             margin:0px;
             text-align: center;
-            padding: 80px ;
-            padding-top: 0px;
+            padding:70px ;
+            padding-top: 25px;
         }
         .LogoJunin{
             height:90px;
@@ -149,55 +149,47 @@
    <img src="imagenes/LogoJunin.png" class="LogoJunin">
     <img src="imagenes/LogoPatronato.png" class="LogoPatronato">
 
-    <h4>REGISTRO DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN REHABILITACIÓN FÍSICA SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN</h4>
-    <div class="contenido">
-        <div >
-            <div class="items">
-            <span class="item ">PROVINCIA:</span>
-                MANABÍ
-            <span class="item subt">MES:</span>
-                FEBRERO
-            <span class="item subt">AÑO:</span>
-                2021
-
-            </div>
-
-
-        </div>
+    <h4>UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN REGISTRO DIARIO DE ATENCIÓN Y CONSULTAS MÉDICAS</h4>
 
         <table>
             <thead>
                 <tr>
                     <th rowspan="4"> N°</th>
-                    <th rowspan="4"> CAUSAS</th>
-                    <th class="grupos" colspan="12" class="ulti"> GRUPOS DE EDAD </th>
+                    <th rowspan="4"> APELLIDOS Y NOMBRES   /   H.C.</th>
+                    <th class="grupos" colspan="16" class="ulti"> GRUPOS DE EDAD </th>
                     <th colspan="1" style="border-top: none !important; border-bottom: none !important" ></th>
                 </tr>
                 <tr>
-                    <th class="numero" colspan="2" rowspan="2"> 0 a 3 AÑOS </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 4 a 12 AÑOS </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 13 a 19 AÑOS </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 20 a 49 AÑOS </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 50 años y MÁS </th>
+                    <th class="numero" colspan="4"> Menores de 1 AÑO </th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 1 a 4 AÑOS</th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 5 a 14 AÑOS</th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 15 a 49 AÑOS</th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 50 a 64 AÑOS</th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 65 AÑOS Y MÁS</th>
                     <th class="tmedio" colspan="2" rowspan="2" class="ulti"> TOTAL EDADES</th>
                     <th colspan="1" style="border-top: none !important" rowspan="2"></th>
                 </tr>
                 <tr>
-                    
+                    <th class="" colspan="2"> Menores de 28 días </th>
+                    <th class="" colspan="2" > 29 - 365 días</th>
                 </tr>
                 <tr>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
-                    <th class="g1" > H </th>
-                    <th class="g1" > M</th>
+                    <th class="g1" > 1 </th>
+                    <th class="g1" > 2 </th>
+                    <th class="g1" > 3 </th>
+                    <th class="g1" > 4 </th>
+                    <th class="g1" > 5 </th>
+                    <th class="g1" > 6 </th>
+                    <th class="g1" > 7 </th>
+                    <th class="g1" > 8 </th>
+                    <th class="g1" > 9 </th>
+                    <th class="g1" > 10 </th>
+                    <th class="g1" > 11 </th>
+                    <th class="g1" > 12 </th>
+                    <th class="g1" > 13 </th>
+                    <th class="g1" > 14 </th>
+                    <th class="g1" > 15 </th>
+                    <th class="g1" > 16 </th>
                     <th class="g1" > Total </th>
                     <th class="g1" > %</th>
                 </tr>
@@ -221,6 +213,10 @@
                     <td> 371 </td>
                     <td> 143</td>
                     <td> 228</td>
+                    <td> 371 </td>
+                    <td> 143</td>
+                    <td> 228</td>
+                    <td> 371 </td>
                 </tr>
 
                 <tr>
@@ -240,6 +236,10 @@
                     <td> 371 </td>
                     <td> 143</td>
                     <td> 228</td>
+                    <td> 371 </td>
+                    <td> 143</td>
+                    <td> 228</td>
+                    <td> 371 </td>
                 </tr>
 
             </tbody>
@@ -258,6 +258,10 @@
                     <td> 143</td>
                     <td> 371 </td>
                     <td> 143</td>
+                    <td> 228</td>
+                    <td> 228</td>
+                    <td class="ver"> 371 </td>
+                    <td class="ver"> 143</td>
                     <td class="ver"> 228</td>
                     <td class="resul"> 100% </td>
                 </tr>
@@ -268,8 +272,8 @@
         <div>
             <div class="doc">
                 <div class="firma"></div>
-                LCDO. CARLOS ZAMBRANO M.
-                    <div class="cargo"> ÁREA  DE  REHABILITACIÓN FÍSICA
+                DR. FERNANDO MARTIN DUEÑAS INTRIAGO
+                    <div class="cargo"> DEPARTAMENTO DE ASISTENCIA SOCIAL
                 </div>
 
             </div>

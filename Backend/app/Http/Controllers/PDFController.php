@@ -45,4 +45,9 @@ class PDFController extends Controller
         return \PDF::loadView('MorbilidadTerapia', $datos)->setPaper('a4', 'landscape')->stream('MorbilidadTerapia.pdf');
 
     }
+
+    public function RegistroDiarioMedicina(){
+        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        return \PDF::loadView('RegistroDiarioMedicina')->setPaper('a4', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+    }
 }
