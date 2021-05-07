@@ -189,5 +189,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   CrearHistoriaClinica(){
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }
+  
 
 }

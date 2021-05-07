@@ -12,8 +12,20 @@ tr{
   float: right !important;
   padding-right: 22px;
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
 }
 .collaps{
   float: right !important;
+}
+
+.modal-body{
+  height: 420px;
+  width: 100%;
+  overflow-y: auto;
+}
+.dere{
+  float: right !important;
+}
+.sangria{
+  padding-left: 10px !important;
 }
