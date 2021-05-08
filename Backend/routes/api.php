@@ -56,3 +56,5 @@ Route::get('ReportePacientesMensual','PDFController@ReportePacientesMensual');
 Route::get('MorbilidadMedicinaGeneral','PDFController@MorbilidadMedicinaGeneral');
 Route::get('MorbilidadTerapia','PDFController@MorbilidadTerapia');
 Route::get('RegistroDiarioMedicina','PDFController@RegistroDiarioMedicina');
+Route::get('ConsolidadoMensualMedicinaGeneral','PDFController@ConsolidadoMensualMedicinaGeneral');
+
