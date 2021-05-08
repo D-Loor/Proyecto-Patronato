@@ -56,4 +56,9 @@ class PDFController extends Controller
         $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
         return \PDF::loadView('ConsolidadoMensualMedicinaGeneral')->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
     }
+
+    public function ConsolidadoMensualTerapia(){
+        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        return \PDF::loadView('ConsolidadoMensualTerapia')->setPaper('a4', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
+    }
 }
