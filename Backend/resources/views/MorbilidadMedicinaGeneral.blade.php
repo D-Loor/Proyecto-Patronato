@@ -146,8 +146,8 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/LogoJunin.png" class="LogoJunin">
-    <img src="imagenes/LogoPatronato.png" class="LogoPatronato">
+   <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
+    <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
     <h4>REGISTRO  DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN MEDICINA GENERAL SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL CANTÓN JUNÍN</h4>
     <div class="contenido">

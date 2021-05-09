@@ -105,8 +105,8 @@
 <div class="separador"></div>
     <div class="contenedor">
 
-        <img src="imagenes/LogoJunin.png" class="LogoJunin">
-        <img src="imagenes/LogoPatronato.png" class="LogoPatronato">
+        <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
+    <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
         <h4>TOTAL DE PACIENTES ATENDIDOS EN LA UNIDAD DE ASISTENCIA SOCIAL  DEL GAD MUNICIPAL DEL CANTÓN JUNÍN EN LAS ÁREAS DE MEDICINA GENERAL Y REHABILITACIÓN FÍSICA</h4>
         <div>

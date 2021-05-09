@@ -146,8 +146,8 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/LogoJunin.png" class="LogoJunin">
-    <img src="imagenes/LogoPatronato.png" class="LogoPatronato">
+   <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
+    <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
     <h4>UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN REGISTRO DIARIO DE ATENCIÓN Y CONSULTAS MÉDICAS</h4>
 
