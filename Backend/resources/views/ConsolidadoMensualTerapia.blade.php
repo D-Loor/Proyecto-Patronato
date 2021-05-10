@@ -32,7 +32,6 @@
             text-align: center;
         }
         th,td {
-                width:20px;
                 font-size: 9px;
                 font-weight: bold;
                 text-align: center;
@@ -41,12 +40,6 @@
 
         .segunda-fila{
              height: 90px;
-        }
-        .encabezado{
-            height: -5px !important;
-        }
-        .individual{
-            width: -5px !important;
         }
 
         thead tr th{
@@ -73,10 +66,6 @@
         }
         .cargo{
             margin-left: 5px;
-        }
-        .text-space{
-            padding: 5px;
-            padding-bottom: 5px;
         }
         h4 {
             position: absolute;
@@ -146,6 +135,13 @@
         .nborde{
             border: none;
         }
+        .th, .td {
+            width: 80px !important;
+            height: 6px !important;
+            padding: 1px;
+            text-align: center;
+            border: solid 1px black;
+        }
 
     </style>
 </head>
@@ -165,20 +161,20 @@
         <table>
             <thead>
                 <tr>
+                    <th class="nborde" colspan="5"></th>
+                    <th class="numero encabezado" colspan="5">ATENCIÓN MORBILIDAD</th>
+                    <th class="nborde"></th>
+                </tr>
+                <tr>
                     <th class="numero encabezado" colspan="2">LUGAR DE ATENCIÓN</th>
-                    <th class="segunda-fila" rowspan="2">
-                        <div  class="box-rotate">
-                            <p>TOTAL DE</p>
-                            <p>ATENCIONES</p>
-                        </div>
-                    </th>
+                    <th rowspan="2"><p class="box-rotate">TOTAL DE ATENCIONES</p></th>
                     <th class="numero encabezado" colspan="2">SEXO</th>
                     <th class="numero encabezado" colspan="5">GRUPOS DE EDAD - MORBILIDAD</th>
                     <th class="numero encabezado" colspan="9">TRATAMIENTO</th>
                     <th class="nborde"></th>
                 </tr>
                 <tr>
-                    <th><p class="box-rotate">PATRONATO</p></th>
+                    <th class="segunda-fila"><p class="box-rotate">PATRONATO</p></th>
                     <th><p class="box-rotate">DOMICILIO</p></th>
                     <th><p class="box-rotate">HOMBRE</p></th>
                     <th><p class="box-rotate">MUJER</p></th>
@@ -186,39 +182,17 @@
                     <th><p class="box-rotate">4-12 AÑOS</p></th>
                     <th><p class="box-rotate">13-19 AÑOS</p></th>
                     <th><p class="box-rotate">20-49 AÑOS</p></th>
-                    <th>
-                        <div  class="box-rotate">
-                            <p> >= 50 AÑOS</p>
-                        </div>
-                    </th>
-                    <th>
-                        <div  class="box-rotate">
-                            <p>ESTIMULACIÓN</p>
-                            <p>TEMPRANA</p>
-                        </div>
-                    </th>
+                    <th><p class="box-rotate">>= 50 AÑOS</p></th>
+                    <th><p class="box-rotate">ESTIMULACIÓN TEMPRANA</p></th>
                     <th><p class="box-rotate">MAGNETOTERAPIA</p></th>
-                    <th  class="segunda-fila">
-                        <div  class="box-rotate">
-                            <p>ELECTRO</p>
-                            <p>ESTIMULACIÓN</p>
-                        </div>
-                    </th>
+                    <th><p class="box-rotate">ELECTRO ESTIMULACIÓN</p></th>
                     <th><p class="box-rotate">ULTRASONIDO</p></th>
                     <th><p class="box-rotate">C.Q.C. O H.</p></th>
                     <th><p class="box-rotate">MASAJE</p></th>
-                    <th>
-                        <div  class="box-rotate">
-                            <p>EJERCICIOS</p>
-                            <p>PASIVOS</p>
-                            <p>RESISTIDOS</p>
-                        </div>
-                    </th>
+                    <th><p class="box-rotate">EJERCICIOS PASIVOS RESISTIDOS</p></th>
                     <th><p class="box-rotate">LASER</p></th>
                     <th><p class="box-rotate">OTROS</p></th>
                     <th><p class="box-rotate">HORAS TRABAJADAS</p></th>
-                    
-                     
                 </tr>
                
                 <tr  class="numero">
@@ -293,12 +267,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">ENERO</th>
+                            <th class="th">SEPTIEMBRE</th>
                             <td class="td"> 2018</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+
         </div>
 
 
