@@ -31,10 +31,10 @@
             border-collapse: collapse;
             text-align: center;
         }
+
         th,td {
-                min-width: 100px;
+
                 width: 20px;
-                min-height: 20px;
                 height: 20px;
                 padding: 5px;
                 font-size: 13px;
@@ -72,14 +72,7 @@
         .cargo{
             margin-left: 5px;
         }
-        .th, .td {
-            font-weight:bold;
-            width: 80px !important;
-            height: 6px !important;
-            padding: 1px;
-            text-align: center;
-            border: solid 1px black;
-        }
+
         h4 {
             font-size: 21px;
             position: absolute;
@@ -127,6 +120,16 @@
             font-weight:bold;
             font-size:10px;
         }
+        .subtema2{
+            font-weight: none !important;
+            font-size:10px;
+            min-width: 20px !important;
+            width: 20px;
+            height: 20px;
+        }
+        .ulti th{
+            height:90px;
+        }
 
         .nvertical th , .nhorizontal th{
             font-size:11px;
@@ -149,7 +152,14 @@
         .nborde{
             border: none;
         }
+        .box-rotate {
+            -moz-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            -webkit-transform: rotate(270deg);
+            margin:0px;
+            padding:0px;
 
+        }
 
 
     </style>
@@ -160,8 +170,8 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/LogoJunin.png" class="LogoJunin">
-    <img src="imagenes/LogoPatronato.png" class="LogoPatronato">
+   <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
+    <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
     <h4>UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL CANTÓN JUNÍN CONSOLIDADO MENSUAL DE CONSULTAS MÉDICAS</h4>
     <div class="contenido">
@@ -179,56 +189,60 @@
                 <tr>
                     <th rowspan="3" class="nborde"></th>
                     <th colspan="3" class="subtema"> LUGAR DE ATENCIÓN </th>
-                    <th rowspan="3"> v </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">TOTAL DE ATENCIONES</p> </th>
                     <th colspan="2" class="subtema"> SEXO </th>
                     <th colspan="4" class="subtema"> MUJERES </th>
                     <th colspan="5" class="subtema"> NIÑOS </th>
-                    <th rowspan="3"> v </th>
-                    <th rowspan="3"> v </th>
-                    <th rowspan="3"> v </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">ADOLESC 10-14 AÑOS</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">ADOLESC 15-19 AÑOS</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">20 AÑOS Y MAS</p> </th>
+
                     <th colspan="10" class="subtema"> GRUPOS DE EDAD - MORBILIDAD</th>
                     <th colspan="2" class="tema"> TIPO DE ATENCIÓN </th>
                     <th colspan="2" class="subtema"> CONDICIÓN DIAGNÓSTICO </th>
                     <th colspan="2" class="nborde"> </th>
                 </tr>
                 <tr>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> PATRONATO</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> COMUNIDAD</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> DOMICILIO</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> HOMBRE</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> MUJER</p> </th>
                     <th colspan="2" class="subtema"> PRE NATAL </th>
                     <th colspan="2" class="subtema"> PLANIF. FAMILIAR</th>
                     <th colspan="2" class="subtema"> -1 AÑO </th>
                     <th colspan="2" class="subtema"> 1 - 4 AÑOS </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
-                    <th rowspan="2"> v </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 5-9 AÑOS</p> </th>
+
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> MENOR DE 1 MES</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 1-11 MESES</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 1-4 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 5-9 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 10-14 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 15-19 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 20-35 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 36-49 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 50-64 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 65 AÑOS Y MÁS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> PREVENCIÓN</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> PRESUNTIVO</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> DEFINITIVO</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> CERTIFICADO</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> HORAS TRABAJADAS</p> </th>
+
+
                 </tr>
-                <tr>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
-                    <th> v </th>
+                <tr class="ulti">
+                    <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
+                    <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
 
                 </tr>
                 <tr class="nhorizontal">
