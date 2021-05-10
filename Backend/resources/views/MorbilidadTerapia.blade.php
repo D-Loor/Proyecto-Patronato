@@ -49,28 +49,30 @@
         }
         .doc{
             padding-left: 60px;
-            position:absolute;
-
+            position: absolute;
+        }
+        .antFirma{
+            margin-left: 25px;
+            
         }
         .firma{
             margin-top: 70px;
             text-align: center;
             border-top: solid 1px black;
-            width:270px;
+            width: 270px;
             height: 5px;
-            margin-left:-5px;
+            margin-left: -5px;
         }
-        .doc , .doc .cargo {
-            font-size:13px;
+        .doc , .doc  {
+            font-size: 13px;
             font-weight: bold;
-            padding-left: 30px;
+            padding-left: 5px;
             margin:0px;
         }
         .cargo{
-            margin-left: 5px;
+            margin-left: 12px;
         }
         .th, .td {
-
             width: 80px !important;
             height: 6px !important;
             padding: 1px;
@@ -123,7 +125,7 @@
             padding-left:10px ;
         }
         .subt{
-            padding-left:230px ;
+            padding-left:225px ;
         }
 
         .items{
@@ -159,9 +161,7 @@
                 FEBRERO
             <span class="item subt">AÑO:</span>
                 2021
-
             </div>
-
 
         </div>
 
@@ -178,7 +178,7 @@
                     <th class="tmedio" colspan="2" rowspan="2"> 4 a 12 AÑOS </th>
                     <th class="tmedio" colspan="2" rowspan="2"> 13 a 19 AÑOS </th>
                     <th class="tmedio" colspan="2" rowspan="2"> 20 a 49 AÑOS </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 50 años y MÁS </th>
+                    <th class="tmedio" colspan="2" rowspan="2"> 50 AÑOS y MÁS </th>
                     <th class="tmedio" colspan="2" rowspan="2" class="ulti"> TOTAL EDADES</th>
                     <th colspan="1" style="border-top: none !important" rowspan="2"></th>
                 </tr>
@@ -268,7 +268,7 @@
         <div>
             <div class="doc">
                 <div class="firma"></div>
-                LCDO. CARLOS ZAMBRANO M.
+                <div class="antFirma">LCDO. CARLOS ZAMBRANO M.</div>
                     <div class="cargo"> ÁREA  DE  REHABILITACIÓN FÍSICA
                 </div>
 
