@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morbilidad Medcina Genenral</title>
     <style>
-
         @page {
             margin: 0cm 1cm;
         }
-
         *{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
         }
         img{
             padding-top:75px;
@@ -25,7 +22,6 @@
             padding-top: 0px !important;
             margin-top: 0px !important;
         }
-
         table{
             padding-top:10px;
             border-collapse: collapse;
@@ -37,18 +33,15 @@
                 text-align: center;
                 border: solid 1px black;
         }
-
         .segunda-fila{
              height: 90px;
         }
-
         thead tr th{
             color: rgb(0, 112, 192);
         }
         .doc{
             padding-left: 60px;
             position:absolute;
-
         }
         .firma{
             margin-top: 70px;
@@ -83,17 +76,12 @@
             height:70px;
             weight:120px;
         }
-
-
         .separador{
             height:25px;
         }
-
-
         .numero{
             color: rgb(0, 112, 192);
         }
-
         .total{
             color: rgb(0, 112, 192);
         }
@@ -106,19 +94,8 @@
         .ver{
             color: rgb(0, 176, 80);
         }
-        .item{
-            font-size:13px;
-            font-weight:bold;
-            color: rgb(0, 112, 192);
-            padding-left:10px ;
-        }
-        .subt{
-            padding-left:230px ;
-        }
-
-        .items{
-            font-size:15px;
-            font-weight:bold;
+        .principal{
+        	height: 20px;
         }
         .segt{
             position: relative;
@@ -142,7 +119,6 @@
             text-align: center;
             border: solid 1px black;
         }
-
     </style>
 </head>
 <body>
@@ -161,11 +137,12 @@
         <table>
             <thead>
                 <tr>
-                    <th class="nborde" colspan="5"></th>
-                    <th class="numero encabezado" colspan="5">ATENCIÓN MORBILIDAD</th>
+                    <th class="nborde" colspan="6"></th>
+                    <th class="numero encabezado principal" colspan="5">ATENCIÓN MORBILIDAD</th>
                     <th class="nborde"></th>
                 </tr>
                 <tr>
+                	<th class="nborde"></th>
                     <th class="numero encabezado" colspan="2">LUGAR DE ATENCIÓN</th>
                     <th rowspan="2"><p class="box-rotate">TOTAL DE ATENCIONES</p></th>
                     <th class="numero encabezado" colspan="2">SEXO</th>
@@ -174,6 +151,7 @@
                     <th class="nborde"></th>
                 </tr>
                 <tr>
+                	<th class="nborde"></th>
                     <th class="segunda-fila"><p class="box-rotate">PATRONATO</p></th>
                     <th><p class="box-rotate">DOMICILIO</p></th>
                     <th><p class="box-rotate">HOMBRE</p></th>
@@ -196,6 +174,7 @@
                 </tr>
                
                 <tr  class="numero">
+                	<td>N°</td>
                     <td>1</td>
                     <td>2</td>
                     <td >3</td>
@@ -220,6 +199,7 @@
             </thead>
             <tbody>
                 <tr>
+                	<td class="numero">1</td>
                     <td>V</td>
                     <td>V</td>
                     <td>V</td>
@@ -283,5 +263,3 @@
 
 </body>
 </html>
-
-

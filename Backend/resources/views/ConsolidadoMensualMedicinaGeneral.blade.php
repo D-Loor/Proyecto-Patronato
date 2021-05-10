@@ -203,6 +203,7 @@
                     <th colspan="2" class="nborde"> </th>
                 </tr>
                 <tr>
+                    <th rowspan="3" class="nborde"></th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> PATRONATO</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> COMUNIDAD</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> DOMICILIO</p> </th>
@@ -235,6 +236,7 @@
 
                 </tr>
                 <tr class="ulti">
+                    <th rowspan="3" class="nborde"></th>
                     <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
                     <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
                     <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
