@@ -32,17 +32,22 @@
             text-align: center;
         }
         th,td {
-                min-width: 100px;
-                width: 20px;
-                min-height: 20px;
-                height: 20px;
-                padding: 5px;
-                font-size: 14px;
+                width:20px;
+                font-size: 7px;
                 font-weight: bold;
                 text-align: center;
                 border: solid 1px black;
         }
 
+        .segunda-fila{
+             height: 90px;
+        }
+        .encabezado{
+            height: -5px !important;
+        }
+        .individual{
+            width: -5px !important;
+        }
 
         thead tr th{
             color: rgb(0, 112, 192);
@@ -58,31 +63,27 @@
             border-top: solid 1px black;
             width:290px;
             height: 5px;
-            margin-left:-5px;
+            margin-left:-22px;
         }
         .doc , .doc .cargo {
             font-size:13px;
             font-weight: bold;
-            padding-left:5px;
+            padding-left:10px;
             margin:0px;
         }
         .cargo{
             margin-left: 5px;
         }
-        .th, .td {
-
-            width: 80px !important;
-            height: 6px !important;
-            padding: 1px;
-            text-align: center;
-            border: solid 1px black;
+        .text-space{
+            padding: 5px;
+            padding-bottom: 5px;
         }
         h4 {
             position: absolute;
             margin:0px;
             text-align: center;
-            padding:70px ;
-            padding-top: 25px;
+            padding:100px ;
+            padding-top: 0px;
         }
         .LogoJunin{
             height:90px;
@@ -108,7 +109,7 @@
             color: rgb(0, 112, 192);
         }
         tfoot tr td{
-            font-size: 16px;
+            font-size: 10px;
         }
         .resul{
             color: rgb(255, 0, 0);
@@ -137,6 +138,30 @@
             margin-right:100px;
             padding-right:100px;
         }
+        .box-rotate {
+            -moz-transform: rotate(270deg);  /* FF3.5+ */
+            -o-transform: rotate(270deg);  /* Opera 10.5 */
+            -webkit-transform: rotate(270deg);  /* Saf3.1+, Chrome */
+        }
+        .nborde{
+            border: none;
+        }
+
+        .es{
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    height:20px;
+    width:25px;
+}
+.inline-block{
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline; 
+}
 
     </style>
 </head>
@@ -149,131 +174,108 @@
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-    <h4>UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN REGISTRO DIARIO DE ATENCIÓN Y CONSULTAS MÉDICAS</h4>
+    <h4>UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL CANTÓN JUNÍN <br> CONSOLIDADO MENSUAL DE REHABILITACIÓN FÍSICA</h4>
+    <div class="contenido">
+     
 
         <table>
             <thead>
                 <tr>
-                    <th rowspan="4"> N°</th>
-                    <th rowspan="4"> APELLIDOS Y NOMBRES   /   H.C.</th>
-                    <th class="grupos" colspan="16" class="ulti"> GRUPOS DE EDAD </th>
-                    <th colspan="1" style="border-top: none !important; border-bottom: none !important" ></th>
+                    <th class="nborde" colspan="6"></th>
+                    <th colspan="3" class="item">ATENCIÓN PREVENTIVA </th>
+                    <th class="nborde"></th>
                 </tr>
                 <tr>
-                    <th class="numero" colspan="4"> Menores de 1 AÑO </th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 1 a 4 AÑOS</th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 5 a 14 AÑOS</th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 15 a 49 AÑOS</th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 50 a 64 AÑOS</th>
-                    <th class="tmedio" colspan="2" rowspan="2"> 65 AÑOS Y MÁS</th>
-                    <th class="tmedio" colspan="2" rowspan="2" class="ulti"> TOTAL EDADES</th>
-                    <th colspan="1" style="border-top: none !important" rowspan="2"></th>
+                    <th class="numero encabezado" colspan="3">LUGAR DE ATENCIÓN</th>
+                    <th class="segunda-fila" rowspan="3">
+                        <div  class="box-rotate">
+                            <p>TOTAL DE</p>
+                            <p>ATENCIONES</p>
+                        </div>
+                    </th>
+                    <th class="numero encabezado" colspan="2">SEXO</th>
+                    <th class="numero encabezado" colspan="4">MUJERES</th>
+                    <th class="numero encabezado" colspan="5">NIÑOS</th>
+                    <th class="segunda-fila" rowspan="3"> <div class="box-rotate">ADOLESCENTES 10 - 14 AÑOS</div> </th>
+                    <th class="segunda-fila" rowspan="3"> <div class="box-rotate">ADOLESCENTES 15 - 19 AÑOS</div> </th>
+                    <th class="segunda-fila" rowspan="3"> <div class="box-rotate">20 AÑOS Y MAS</div> </th>
                 </tr>
                 <tr>
-                    <th class="" colspan="2"> Menores de 28 días </th>
-                    <th class="" colspan="2" > 29 - 365 días</th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">PATRONATO</p></th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">COMUNIDAD</p></th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">DOMICILIO</p></th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">HOMBRE</p></th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">MUJER</p></th>
+                    <th class="numero encabezado" colspan="2">PRE NATAL</th>
+                    <th class="numero encabezado" colspan="2">PLANIF. FAMILIAR</th>
+                    <th class="numero encabezado" colspan="2">1 AÑO</th>
+                    <th class="numero encabezado" colspan="2">1 - 4 AÑOS</th>
+                    <th class="segunda-fila" rowspan="2"><p class="box-rotate">5 - 9 AÑOS</p></th>
                 </tr>
                 <tr>
-                    <th class="g1" > 1 </th>
-                    <th class="g1" > 2 </th>
-                    <th class="g1" > 3 </th>
-                    <th class="g1" > 4 </th>
-                    <th class="g1" > 5 </th>
-                    <th class="g1" > 6 </th>
-                    <th class="g1" > 7 </th>
-                    <th class="g1" > 8 </th>
-                    <th class="g1" > 9 </th>
-                    <th class="g1" > 10 </th>
-                    <th class="g1" > 11 </th>
-                    <th class="g1" > 12 </th>
-                    <th class="g1" > 13 </th>
-                    <th class="g1" > 14 </th>
-                    <th class="g1" > 15 </th>
-                    <th class="g1" > 16 </th>
-                    <th class="g1" > Total </th>
-                    <th class="g1" > %</th>
+                <th class="segunda-fila"><p><span class="es inline-block">PRIMERA</span></p></th>
+                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
+                <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
+                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
+                <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
+                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
+                <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
+                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
                 </tr>
-
+               
+                <tr  class="numero">
+                    <td>1</td>
+                    <td>2</td>
+                    <td >3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th class="numero">1</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
+                    <td>V</td>
                 </tr>
 
-                <tr>
-                    <th class="numero">2</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                </tr>
-
+                
             </tbody>
-            <tfoot>
-            <tr>
-                    <th colspan="2" class="total"> TOTAL</th>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 228</td>
-                    <td class="ver"> 371 </td>
-                    <td class="ver"> 143</td>
-                    <td class="ver"> 228</td>
-                    <td class="resul"> 100% </td>
-                </tr>
-            </tfoot>
         </table>
     </div>
 
         <div>
             <div class="doc">
                 <div class="firma"></div>
-                DR. FERNANDO MARTIN DUEÑAS INTRIAGO
-                    <div class="cargo"> DEPARTAMENTO DE ASISTENCIA SOCIAL
+                LCDO.  CARLOS ZAMBRANO MOREIRA
+                    <div class="cargo"> ÁREA DE REHABILITACIÓN FISICA
                 </div>
 
             </div>
