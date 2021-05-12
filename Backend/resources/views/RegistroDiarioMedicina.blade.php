@@ -30,20 +30,20 @@
             padding-top:10px;
             border-collapse: collapse;
             text-align: center;
+            
         }
         th,td {
-                width:20px;
-                font-size: 7px;
+            font-size: 6px;
                 font-weight: bold;
                 text-align: center;
-                border: solid 1px black;
+                border: solid 1px black;     
         }
 
         .segunda-fila{
-             height: 90px;
+             height: 60px;
         }
         .encabezado{
-            height: -5px !important;
+            height: -25px !important;
         }
         .individual{
             width: -5px !important;
@@ -147,21 +147,18 @@
             border: none;
         }
 
-        .es{
-    -webkit-transform: rotate(-90deg); 
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    height:20px;
-    width:25px;
-}
-.inline-block{
-    display:-moz-inline-stack;
-    display:inline-block;
-    zoom:1;
-    *display:inline; 
-}
+        .dario{
+            table-layout: fixed;
+            width: 500px;
+        }
+        .th, .td {
+            width: 80px !important;
+            height: 6px !important;
+            padding: 1px;
+            text-align: center;
+            border: solid 1px black;
+        }
+        
 
     </style>
 </head>
@@ -178,19 +175,18 @@
     <div class="contenido">
      
 
-        <table>
+        <table class="dario">
             <thead>
                 <tr>
                     <th class="nborde" colspan="6"></th>
-                    <th colspan="3" class="item">ATENCIÓN PREVENTIVA </th>
+                    <th colspan="12" class="item">ATENCIÓN PREVENTIVA </th>
                     <th class="nborde"></th>
                 </tr>
                 <tr>
                     <th class="numero encabezado" colspan="3">LUGAR DE ATENCIÓN</th>
                     <th class="segunda-fila" rowspan="3">
                         <div  class="box-rotate">
-                            <p>TOTAL DE</p>
-                            <p>ATENCIONES</p>
+                            <p>TOTAL DE ATENCIONES</p>
                         </div>
                     </th>
                     <th class="numero encabezado" colspan="2">SEXO</th>
@@ -199,6 +195,7 @@
                     <th class="segunda-fila" rowspan="3"> <div class="box-rotate">ADOLESCENTES 10 - 14 AÑOS</div> </th>
                     <th class="segunda-fila" rowspan="3"> <div class="box-rotate">ADOLESCENTES 15 - 19 AÑOS</div> </th>
                     <th class="segunda-fila" rowspan="3"> <div class="box-rotate">20 AÑOS Y MAS</div> </th>
+                    <th class="nborde"></th>
                 </tr>
                 <tr>
                     <th class="segunda-fila" rowspan="2"><p class="box-rotate">PATRONATO</p></th>
@@ -211,16 +208,18 @@
                     <th class="numero encabezado" colspan="2">1 AÑO</th>
                     <th class="numero encabezado" colspan="2">1 - 4 AÑOS</th>
                     <th class="segunda-fila" rowspan="2"><p class="box-rotate">5 - 9 AÑOS</p></th>
+                    <th class="nborde"></th>
                 </tr>
                 <tr>
-                <th class="segunda-fila"><p><span class="es inline-block">PRIMERA</span></p></th>
-                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
                 <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
                 <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
                 <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
                 <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
                 <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
                 <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
+                <th class="segunda-fila"><p class="box-rotate">PRIMERA</p></th>
+                <th class="segunda-fila"><p class="box-rotate">SUBSECUENTE</p></th>
+                <th class="nborde"></th>
                 </tr>
                
                 <tr  class="numero">
@@ -242,6 +241,7 @@
                     <td>16</td>
                     <td>17</td>
                     <td>18</td>
+                    <th class="nborde"></th>
                 </tr>
             </thead>
             <tbody>
@@ -264,6 +264,7 @@
                     <td>V</td>
                     <td>V</td>
                     <td>V</td>
+                    <th class="nborde"></th>
                 </tr>
 
                 
@@ -291,7 +292,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">ENERO</th>
+                            <th class="td">ENERO</th>
                             <td class="td"> 2018</td>
                         </tr>
                     </tbody>
