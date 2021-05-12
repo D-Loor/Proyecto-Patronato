@@ -119,6 +119,11 @@
             text-align: center;
             border: solid 1px black;
         }
+        .espacios{
+        	table-layout: fixed;
+           	width: 910px;
+        }
+
     </style>
 </head>
 <body>
@@ -134,7 +139,7 @@
     <div class="contenido">
      
 
-        <table>
+        <table class="espacios">
             <thead>
                 <tr>
                     <th class="nborde" colspan="6"></th>
