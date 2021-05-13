@@ -40,7 +40,6 @@
             color: rgb(0, 112, 192);
         }
         .doc{
-            padding-left: 60px;
             position:absolute;
         }
         .firma{
@@ -51,10 +50,10 @@
             height: 5px;
             margin-left:-22px;
         }
-        .doc , .doc .cargo {
+        .doc {
             font-size:13px;
             font-weight: bold;
-            padding-left:10px;
+            padding-left:80px;
             margin:0px;
         }
         .cargo{
