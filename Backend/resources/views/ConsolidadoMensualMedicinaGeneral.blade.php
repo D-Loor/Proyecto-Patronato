@@ -34,13 +34,12 @@
 
         th,td {
 
-                width: 20px;
-                height: 20px;
-                padding: 5px;
-                font-size: 13px;
-                font-weight: bold;
-                text-align: center;
-                border: solid 1px black;
+            width: 20px;
+            height: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            border: solid 1px black;
         }
 
 
@@ -110,7 +109,7 @@
             border: solid 1.5px black;
         }
         .prevencion{
-            color: rgb(0, 176, 80);
+            color: rgb(0, 176, 80) !important;
         }
         .tema{
             font-weight:bold;
@@ -160,8 +159,10 @@
             padding:0px;
 
         }
-
-
+        .espacios{
+        	table-layout: fixed;
+           	width: 1410px;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +178,7 @@
     <div class="contenido">
 
 
-        <table>
+        <table class="espacios">
             <thead>
                 <tr>
                     <th  colspan="7" class="nborde"></th>
@@ -189,13 +190,13 @@
                 <tr>
                     <th rowspan="3" class="nborde"></th>
                     <th colspan="3" class="subtema"> LUGAR DE ATENCIÓN </th>
-                    <th rowspan="3" class="subtema2"> <p class="box-rotate">TOTAL DE ATENCIONES</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">TOTAL ATENCIONES</p> </th>
                     <th colspan="2" class="subtema"> SEXO </th>
                     <th colspan="4" class="subtema"> MUJERES </th>
                     <th colspan="5" class="subtema"> NIÑOS </th>
-                    <th rowspan="3" class="subtema2"> <p class="box-rotate">ADOLESC 10-14 AÑOS</p> </th>
-                    <th rowspan="3" class="subtema2"> <p class="box-rotate">ADOLESC 15-19 AÑOS</p> </th>
-                    <th rowspan="3" class="subtema2"> <p class="box-rotate">20 AÑOS Y MAS</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">10-14 AÑOS</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate">15-19 AÑOS</p> </th>
+                    <th rowspan="3" class="subtema2"> <p class="box-rotate"> >= 20 AÑOS </p> </th>
 
                     <th colspan="10" class="subtema"> GRUPOS DE EDAD - MORBILIDAD</th>
                     <th colspan="2" class="tema"> TIPO DE ATENCIÓN </th>
@@ -203,7 +204,6 @@
                     <th colspan="2" class="nborde"> </th>
                 </tr>
                 <tr>
-                    <th rowspan="3" class="nborde"></th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> PATRONATO</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> COMUNIDAD</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> DOMICILIO</p> </th>
@@ -213,9 +213,9 @@
                     <th colspan="2" class="subtema"> PLANIF. FAMILIAR</th>
                     <th colspan="2" class="subtema"> -1 AÑO </th>
                     <th colspan="2" class="subtema"> 1 - 4 AÑOS </th>
-                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 5-9 AÑOS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 5 a 9 AÑOS</p> </th>
 
-                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> MENOR DE 1 MES</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> MENOR 1 MES</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 1-11 MESES</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 1-4 AÑOS</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 5-9 AÑOS</p> </th>
@@ -224,7 +224,7 @@
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 20-35 AÑOS</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 36-49 AÑOS</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> 50-64 AÑOS</p> </th>
-                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> 65 AÑOS Y MÁS</p> </th>
+                    <th rowspan="2" class="subtema2"> <p class="box-rotate"> >= 65 AÑOS </p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> PREVENCIÓN</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
                     <th rowspan="2" class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
@@ -236,7 +236,6 @@
 
                 </tr>
                 <tr class="ulti">
-                    <th rowspan="3" class="nborde"></th>
                     <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
                     <th class="subtema2"> <p class="box-rotate"> SUBSECUENTE</p> </th>
                     <th class="subtema2"> <p class="box-rotate"> PRIMERA</p> </th>
@@ -360,7 +359,7 @@
                     <td>26</td>
                     <td>27</td>
                     <td>28</td>
-                    <th class="prevencion">29</th>
+                    <td class="prevencion">29</td>
                     <td>30</td>
                     <td>31</td>
                     <td>32</td>
