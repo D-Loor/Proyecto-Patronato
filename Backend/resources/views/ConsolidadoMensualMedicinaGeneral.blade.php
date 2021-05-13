@@ -95,7 +95,12 @@
         .separador{
             height:25px;
         }
-
+        .th{
+            font-weight:bold;
+        }
+        .th, .td{
+            padding: 3px 10px;
+        }
 
         .numero{
             color: rgb(0, 112, 192);
@@ -199,7 +204,7 @@
                     <th rowspan="3" class="subtema2"> <p class="box-rotate"> >= 20 AÑOS </p> </th>
 
                     <th colspan="10" class="subtema"> GRUPOS DE EDAD - MORBILIDAD</th>
-                    <th colspan="2" class="tema"> TIPO DE ATENCIÓN </th>
+                    <th colspan="3" class="tema"> TIPO DE ATENCIÓN </th>
                     <th colspan="2" class="subtema"> CONDICIÓN DIAGNÓSTICO </th>
                     <th colspan="2" class="nborde"> </th>
                 </tr>
