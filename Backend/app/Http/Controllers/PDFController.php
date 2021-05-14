@@ -48,12 +48,16 @@ class PDFController extends Controller
 
     public function RegistroDiarioMedicina(){
         //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
-        return \PDF::loadView('RegistroDiarioMedicina')->setPaper('a4', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+        return \PDF::loadView('RegistroDiarioMedicina')->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
     }
 
+    public function RegistroDiarioFisica(){
+        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        return \PDF::loadView('RegistroDiarioFisica')->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+    }
 
     public function ConsolidadoMensualMedicinaGeneral(){
-        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
         return \PDF::loadView('ConsolidadoMensualMedicinaGeneral')->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
     }
 
