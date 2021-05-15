@@ -1,0 +1,2 @@
+npm install sweetalert2
+npm install ngx-spinner --save
