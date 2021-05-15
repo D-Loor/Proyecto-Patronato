@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morbilidad Medcina Genenral</title>
+    <title>Registro Diario de Rehabilitación Física</title>
 
     <style>
 
@@ -61,16 +61,16 @@
             border-top: solid 1px black;
             width:290px;
             height: 5px;
-            margin-left:-5px;
+            margin-left:-22px;
         }
-        .doc , .doc .cargo {
+        .doc{
             font-size:13px;
             font-weight: bold;
-            padding-left:15px;
+            padding-left:100px;
             margin:0px;
         }
         .cargo{
-            margin-left: 5px;
+            margin-left: 12px;
         }
 
         h4 {
@@ -78,7 +78,7 @@
             position: absolute;
             margin-top:10px !important;
             text-align: center;
-            padding-left: 215px ;
+            padding-left: 248px; 
             padding-right: 370px ;
             padding-top: 0px;
         }
@@ -126,6 +126,10 @@
             min-width: 20px !important;
             width: 20px;
             height: 120px;
+        }
+        .subtemaalt{
+            
+            font-size:11px;
         }
         .ulti th{
             height:90px;
@@ -185,7 +189,7 @@
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-    <h4> UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL JUNÍN <br> REGISTRO DIARIO DE ATENCIÓN Y CONSULTAS MÉDICAS</h4>
+    <h4> UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN  <br> REGISTRO DIARIO DE REHABILITACIÓN FÍSICA</h4>
     <div class="contenido">
      
 
@@ -200,10 +204,10 @@
                     <th colspan="1" rowspan="3" class="tema">N°</th>
                     <th colspan="6" rowspan="3" class="tema">APELLIDOS Y NOMBRES / H.C</th>
                     <th class="subtema" colspan="2">LUGAR DE ATENCIÓN</th>
-                    <th rowspan="2" class="subtema"> <p class="box-rotate">TOTAL ATENCIONES</p> </th>
+                    <th rowspan="2" class="subtemaalt"> <p class="box-rotate">TOTAL ATENCIONES</p> </th>
                     <th class="subtema" colspan="2">SEXO</th>
                     <th class="subtema" colspan="5">GRUPOS DE EDAD - MORBILIDAD</th>
-                    <th class="subtema" rowspan="3" colspan="6">DIAGNÓSTICO</th>
+                    <th class="subtemaalt" rowspan="3" colspan="5">DIAGNÓSTICO</th>
                     <th class="subtema" colspan="9">TRATAMIENTO</th>
                     <th class="nborde"></th>
                 </tr>
@@ -223,7 +227,7 @@
                     <th class="subtema2" ><p class="box-rotate">ULTRASONIDO</p></th>
                     <th class="subtema2" ><p class="box-rotate">C.Q.C. O H.</p></th>
                     <th class="subtema2" ><p class="box-rotate">MASAJE</p></th>
-                    <th class="subtema2" ><p class="box-rotate">EJERCICIOS PASIVOS Y RESISTIDOS</p></th>
+                    <th class="subtema2" ><p class="box-rotate">EJERCICIOS PASIVOS/ RESISTIDOS</p></th>
                     <th class="subtema2" ><p class="box-rotate">LASER</p></th>
                     <th class="subtema2" ><p class="box-rotate">OTROS</p></th>
                     <th class="nborde"></th>
