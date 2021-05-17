@@ -16,8 +16,8 @@ export class CitasComponent implements OnInit {
 
   isCollapsedMG = false;
   isCollapsedRF = false;
-  searchMG:string="";
-  searchRF:string="";
+  searchMG:number=null;
+  searchRF:number=null;
 
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -30,37 +30,35 @@ export class CitasComponent implements OnInit {
   citasRFFilter=[];
   citasRFPaginate:any[];
   citasRFPaginateFilter=[];
-  FechaMg:string;
-  FechaRf:string;
-
+  FechaMg:string='';
+  FechaRf:string='';
+  
   today = new Date();
   fechaActual:string;
 
   ngOnInit(): void {
+    
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargarRF("Rehabilitacion Fisica",this.fechaActual);
     this.cargarMG("Medicina General",this.fechaActual);
 
   }
 
-  FiltroFechaMg(){
-
-  }
-
-  FiltroFechaRf(){
-    
-  }
-
   cargarMG(especialidad:string,fechaActual:string){
+    
     this.citasser.citas(especialidad,fechaActual).then(data =>{
     if(data['result']!="Registro no encontrado"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
-    debugger
+    
     }else{
-      this.citasMG=null;
-      this.citasMGPaginate = null;
-      debugger
+    this.citasMG=null;
+    this.citasMGPaginate = null;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas en esta Fecha!'
+      })
     }
     }).catch(error =>{
       console.log(error);
@@ -69,17 +67,19 @@ export class CitasComponent implements OnInit {
 
   dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
     this.citasMGFilter=[];
-      this.citasMGPaginateFilter=[];
-    if(this.searchMG==''){
+    this.citasMGPaginateFilter=[];
+    
+    if(this.searchMG==null){
+      
     }else{
-      debugger
+      
       for (const x of this.citasMG) {
-        debugger
+        
         if(x.cedula.indexOf(this.searchMG)> -1){
          this.citasMGFilter.push(x);
        };
       };
-      debugger
+      
       this.citasMGPaginateFilter = this.citasMGFilter.slice(0, 10);
     }
     
@@ -112,6 +112,11 @@ export class CitasComponent implements OnInit {
     }else{
       this.citasRF=null;
       this.citasRFPaginate = null;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas en esta Fecha!'
+      })
     }
     
     }).catch(error =>{
@@ -119,19 +124,42 @@ export class CitasComponent implements OnInit {
   });
   }
 
+  
+  buscarMG(){
+    if(this.citasMGPaginateFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas con esta Cedula!'
+      })
+    }
+  }
+
+  buscarRF(){
+    if(this.citasRFPaginateFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas con esta Cedula!'
+      })
+    }
+  }
+
+  
+
   dataPaginateRF(event){//Función para el filtrado con paginado sin los pipes
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
-    if(this.searchRF==''){
+    if(this.searchRF==null){
     }else{
-      debugger
+      
       for (const x of this.citasRF) {
-        debugger
+        
         if(x.cedula.indexOf(this.searchRF)> -1){
          this.citasRFFilter.push(x);
        };
       };
-      debugger
+      
       this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
     }
     
@@ -184,7 +212,7 @@ export class CitasComponent implements OnInit {
           this.cargarMG("MedicinaGeneral",this.fechaActual);
         }else{
           this.eliminarRF(id);
-          this.cargarMG("RehabilitaciónFísica",this.fechaActual);
+          this.cargarRF("RehabilitaciónFísica",this.fechaActual);
         }
 
         swalWithBootstrapButtons.fire(

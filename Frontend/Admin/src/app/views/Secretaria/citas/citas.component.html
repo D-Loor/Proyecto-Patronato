@@ -15,24 +15,31 @@
         <div id="collapseBasic" [collapse]="isCollapsedMG" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
+            <label for="name">Buscar por Cédula:</label>
             <div class="input-group"> 
-              <input type="text" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
+              <input type="number" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
               <span class="input-group-prepend">
-                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                <button *ngIf="searchMG==null" disabled type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                <button *ngIf="searchMG!=null" type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i> Buscar</button>
               </span>
             </div>
           </div>
+          <div class="col-md-10">
           <div class="row">
             <div class="col-md-3 searcht">
-              <label for="name">Fecha</label>
+              <label for="name">Filtrar por Fecha:</label>
               <input name="FechaMg" id="FechaMg"  name="FechaMg" [(ngModel)]="FechaMg" type="date"  placeholder="date" class="form-control">
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
+          </div>
         </div>
         </div>
+
+        
 
         <div class="card-body">
           <table class="table table-bordered table-striped table-sm">
@@ -41,16 +48,18 @@
                 <th>Nombres</th>
                 <th>Cédula</th>
                 <th>Hora</th>
+                <th>Fecha</th>
                 <th>Historial</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="searchMG == ''; else filtroMG">
+              <ng-container *ngIf="searchMG == null; else filtroMG">
                 <tr *ngFor="let item of citasMGPaginate" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
                   <td>{{item.turno.hora}}</td>
+                  <td>{{item.fecha}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
@@ -72,6 +81,7 @@
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
                   <td>{{item.turno.hora}}</td>
+                  <td>{{item.fecha}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
@@ -90,8 +100,8 @@
             </tbody>
           </table>
           <nav>
-            <pagination *ngIf="searchMG==''" [totalItems]="citasMG.length" (pageChanged)="pageChangedMG($event)"></pagination>
-            <pagination *ngIf="searchMG!=''" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltroMG($event)"></pagination>
+            <pagination *ngIf="searchMG==null" [totalItems]="citasMG.length" (pageChanged)="pageChangedMG($event)"></pagination>
+            <pagination *ngIf="searchMG!=null" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltroMG($event)"></pagination>
           </nav>
         </div>
        </div>
@@ -117,23 +127,28 @@
         <div id="collapseBasic" [collapse]="isCollapsedRF" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
+            <label for="name">Buscar por Cédula:</label>
             <div class="input-group">
-              <input type="text" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
+              <input type="number" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
               <span class="input-group-prepend">
-                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                <button *ngIf="searchRF==null" type="button" class="btn btn-primary" disabled><i class="fa fa-search"></i> Buscar</button>
+                <button *ngIf="searchRF!=null" type="button" class="btn btn-primary" (click)="buscarRF()"><i class="fa fa-search"></i> Buscar</button>
               </span>
 
             </div>
           </div>
+          <div class="col-md-10">
           <div class="row">
             <div class="col-md-3 searcht">
-              <label for="name">Fecha</label>
+              <label for="name">Filtrar por Fecha:</label>
               <input name="FechaRf" id="FechaRf"  name="FechaRf" [(ngModel)]="FechaRf" type="date"  placeholder="date" class="form-control">
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
+          </div>
         </div>
         </div>
 
@@ -144,23 +159,25 @@
                 <th>Nombres</th>
                 <th>Cédula</th>
                 <th>Hora</th>
+                <th>Fecha</th>
                 <th>Historial</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="searchRF == ''; else filtroRF">
+              <ng-container *ngIf="searchRF == null; else filtroRF">
               <tr *ngFor="let item of citasRFPaginate" >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.turno.hora}}</td>
+                <td>{{item.fecha}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                  <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
                   
-                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                     class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                 <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                       class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
@@ -176,13 +193,14 @@
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
                 <td>{{item.turno.hora}}</td>
+                <td>{{item.fecha}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                  <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                  <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
                   
-                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                     class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                 <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                       class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
@@ -195,8 +213,8 @@
             </tbody>
           </table>
           <nav>
-            <pagination *ngIf="searchRF==''" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)"></pagination>
-            <pagination *ngIf="searchRF!=''" [totalItems]="citasRFFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
+            <pagination *ngIf="searchRF==null" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="searchRF!=null" [totalItems]="citasRFFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
           </nav>
         </div>
        </div>
