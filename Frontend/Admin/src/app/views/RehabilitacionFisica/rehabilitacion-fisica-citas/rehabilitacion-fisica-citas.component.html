@@ -7,7 +7,7 @@
           <div class="card-header">
             <i class="fa fa-bar-chart"></i>
             Estadística mensual
-  
+   
             <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i
               class="fa fa-chevron-down"></i>&nbsp;</button>
@@ -325,7 +325,7 @@
                   <td>
                     <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula, item.id_cita)"><i
                       class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
-                  <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                  <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                       class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                   <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                         class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>

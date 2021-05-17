@@ -30,6 +30,8 @@ export class CitasComponent implements OnInit {
   citasRFFilter=[];
   citasRFPaginate:any[];
   citasRFPaginateFilter=[];
+  FechaMg:string;
+  FechaRf:string;
 
   today = new Date();
   fechaActual:string;
@@ -41,10 +43,25 @@ export class CitasComponent implements OnInit {
 
   }
 
+  FiltroFechaMg(){
+
+  }
+
+  FiltroFechaRf(){
+    
+  }
+
   cargarMG(especialidad:string,fechaActual:string){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
+    if(data['result']!="Registro no encontrado"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
+    debugger
+    }else{
+      this.citasMG=null;
+      this.citasMGPaginate = null;
+      debugger
+    }
     }).catch(error =>{
       console.log(error);
   });
@@ -89,8 +106,14 @@ export class CitasComponent implements OnInit {
 
   cargarRF(especialidad:string,fechaActual:string){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-    this.citasRF=data['result'];
-    this.citasRFPaginate = this.citasRF.slice(0, 10);
+    if(data['result']!="Registro no encontrado"){
+      this.citasRF=data['result'];
+      this.citasRFPaginate = this.citasRF.slice(0, 10);
+    }else{
+      this.citasRF=null;
+      this.citasRFPaginate = null;
+    }
+    
     }).catch(error =>{
       console.log(error);
   });
@@ -202,6 +225,15 @@ export class CitasComponent implements OnInit {
     this.citasMGPaginate = null;
     this.citasRF = null;
     this.citasRFPaginate = null;
+  }
+
+  HistoriaPaciente(cedula:string){
+    localStorage.setItem('cedulaMGandRF', cedula);
+    this.rutas.navigate(['/pacientes']);
+  }
+
+  CrearHistoriaClinica(){
+    this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 
 

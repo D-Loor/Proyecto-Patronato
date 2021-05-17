@@ -131,6 +131,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     })
   }
 
+  HistoriaPaciente(cedula:string){
+    localStorage.setItem('cedulaMGandRF', cedula);
+    this.rutas.navigate(['/pacientes']);
+  }
 
   ngOnDestroy(): void{
     this.citasRFPaginate = null;
@@ -140,6 +144,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.rutas.navigate(['/rehabilitacionfisicaconsultas']);
     localStorage.setItem('cedulaRF', cedula);
     localStorage.setItem('idCita', idCita);
+  }
+
+  CrearHistoriaClinica(){
+    this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 
   

@@ -51,7 +51,7 @@ export class PacientesComponent implements OnInit {
   
   ngOnInit() {
     debugger
-    this.search = localStorage.getItem('cedulaMG');
+    this.search = localStorage.getItem('cedulaMGandRF');
     this.cargar();
   }
 
@@ -59,7 +59,7 @@ export class PacientesComponent implements OnInit {
       this.medicina_general.AtenderPaciente(this.CedulaPaciente).then(data =>{
       this.pacientesMG=data['result'];
       this.pacientesMGPaginate = this.pacientesMG;
-      localStorage.removeItem('cedulaMG');
+      localStorage.removeItem('cedulaMGandRF');
     }).catch(error =>{
       console.log(error);
   });
@@ -116,7 +116,7 @@ export class PacientesComponent implements OnInit {
   ngOnDestroy(): void{
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
-    localStorage.removeItem('cedulaMG');
+    localStorage.removeItem('cedulaMGandRF');
   }
 
   DatosPaciente(id_paciente:number){

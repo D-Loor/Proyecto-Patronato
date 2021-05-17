@@ -20,9 +20,18 @@
               <span class="input-group-prepend">
                 <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
               </span>
-
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-3 searcht">
+              <label for="name">Fecha</label>
+              <input name="FechaMg" id="FechaMg"  name="FechaMg" [(ngModel)]="FechaMg" type="date"  placeholder="date" class="form-control">
+            </div>
+            <div class="col-xs-2 searcht">
+              <label for="name"><label for="name"></label></label>
+              <button type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+            </div>
+        </div>
         </div>
 
         <div class="card-body">
@@ -103,6 +112,8 @@
             class="fa fa-chevron-down"></i>&nbsp;</button>
         </div>
 
+        
+
         <div id="collapseBasic" [collapse]="isCollapsedRF" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
@@ -114,6 +125,16 @@
 
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-3 searcht">
+              <label for="name">Fecha</label>
+              <input name="FechaRf" id="FechaRf"  name="FechaRf" [(ngModel)]="FechaRf" type="date"  placeholder="date" class="form-control">
+            </div>
+            <div class="col-xs-2 searcht">
+              <label for="name"><label for="name"></label></label>
+              <button type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+            </div>
+        </div>
         </div>
 
         <div class="card-body">
