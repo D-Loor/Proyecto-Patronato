@@ -268,11 +268,7 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                              fecha="";
                              turno="";
                              comprotido=false;
-                            Swal.fire(
-                                'Correcto',
-                                'Cita agendada correctamente',
-                                'success'
-                            );
+                             smoke.alert('texto');
                             },
                             error: function (data)
                             {
@@ -293,5 +289,5 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
        
     });
 
-    
 
+    
