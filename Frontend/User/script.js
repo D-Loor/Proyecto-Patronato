@@ -98,12 +98,8 @@ function validarC() {
 
             
             if(data['code']=="202"){
-
-                Swal.fire(
-                    'Lo sentimos',
-                    'No existen citas disponibles en esta fecha',
-                    'error'
-                  )
+                  smoke.alert('No existen citas disponibles en esta fecha');
+                  
 
                 document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
                 document.getElementById("fecha").reportValidity();
@@ -230,11 +226,7 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                 success: function (data) { 
                     
                     if(data ['code'] == '201'){
-                        Swal.fire(
-                          'Error!',
-                          'El usuaria ya cuenta con una cita en esta fecha',
-                          'error'
-                        )
+                        smoke.alert('El usuaria ya cuenta con una cita en esta fecha');
                       }else{
                         $.ajax({
             
@@ -268,15 +260,11 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                              fecha="";
                              turno="";
                              comprotido=false;
-                             smoke.alert('texto');
+                             smoke.alert('Cita agendada correctamente');
                             },
                             error: function (data)
                             {
-                                Swal.fire(
-                                    'Opps!',
-                                    'Error de servidor, lo sentimos.',
-                                    'warning'
-                                );
+                                smoke.alert('Error de servidor, lo sentimos.');
                             }  
                         });
                       }
