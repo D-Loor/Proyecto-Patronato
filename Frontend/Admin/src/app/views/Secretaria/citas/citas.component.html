@@ -19,8 +19,7 @@
             <div class="input-group"> 
               <input type="number" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
               <span class="input-group-prepend">
-                <button *ngIf="searchMG==null" disabled type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                <button *ngIf="searchMG!=null" type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i> Buscar</button>
+                <button  type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i> Buscar</button>
               </span>
             </div>
           </div>
@@ -131,8 +130,7 @@
             <div class="input-group">
               <input type="number" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
               <span class="input-group-prepend">
-                <button *ngIf="searchRF==null" type="button" class="btn btn-primary" disabled><i class="fa fa-search"></i> Buscar</button>
-                <button *ngIf="searchRF!=null" type="button" class="btn btn-primary" (click)="buscarRF()"><i class="fa fa-search"></i> Buscar</button>
+                <button  type="button" class="btn btn-primary" (click)="buscarRF()"><i class="fa fa-search"></i> Buscar</button>
               </span>
 
             </div>

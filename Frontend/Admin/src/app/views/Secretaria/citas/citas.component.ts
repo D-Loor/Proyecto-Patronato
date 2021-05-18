@@ -16,8 +16,8 @@ export class CitasComponent implements OnInit {
 
   isCollapsedMG = false;
   isCollapsedRF = false;
-  searchMG:number=null;
-  searchRF:number=null;
+  searchMG;
+  searchRF;
 
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -121,7 +121,7 @@ export class CitasComponent implements OnInit {
         text: 'No hay Citas Registradas en esta Fecha!'
       })
     }else{
-      this.citasRF=[];
+      this.citasRF = [];
       debugger
       this.citasRFPaginate = [];
     }
@@ -132,11 +132,17 @@ export class CitasComponent implements OnInit {
 
   
   buscarMG(){
-    if(this.citasMGPaginateFilter.length==0){
+    if(this.searchMG== null || this.searchMG.length==0 || this.searchMG.length>10){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.citasMGPaginateFilter.length==0){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'No hay Citas Registradas con esta Cedula!'
+        text: 'No hay Citas Registradas con esta Cédula!'
       })
     }
   }
