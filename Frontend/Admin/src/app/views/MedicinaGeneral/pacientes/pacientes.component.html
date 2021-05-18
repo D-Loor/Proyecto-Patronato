@@ -8,6 +8,7 @@
 
         <div class="form-group">
           <div class="col-md-4 searcht">
+            <label for="name">Buscar por Cédula:</label>
             <div class="input-group">
               <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.."
                 [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
@@ -20,7 +21,7 @@
           </div>
 
         </div>
-  
+
 
         <div class="card-body">
           <table class="table table-bordered table-striped table-sm">
@@ -59,10 +60,10 @@
                   </td>
                 </tr>
               </ng-container>
-              
+
             <ng-container #filtro2>
               <tr  *ngFor="let item of pacientesMGPaginateFilter">
-               
+
                 <td>{{item.cedula}}</td>
                 <td>{{item.nombres}}</td>
                 <td>{{item.apellidos}}</td>
@@ -202,8 +203,8 @@
                                   <div class="row">
                                     <div class="form-group col-sm-8">
                                         <label for="nivel_instruccion">Nivel de instrucción:</label>
-                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" > 
-                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" disabled> 
+                                        <input *ngIf="edit==0" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" >
+                                        <input *ngIf="edit==1" autocomplete="off" required type="text" id="nivel_instruccion"  [(ngModel)]="nivel_instruccion"   name="nivel_instruccion" class="form-control" placeholder="Ingrese el nivel de instruccion" disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="estado_civil">Estado Civil:</label>
@@ -211,7 +212,7 @@
                                         <input *ngIf="edit==1" autocomplete="off" required type="text" id="estado_civil"  [(ngModel)]="estado_civil"   name="estado_civil" class="form-control" placeholder="Ingrese el estado civil" disabled>
                                     </div>
                                   </div><!--/.row-->
-        
+
                             </form>
                         </div>
                     </div>
@@ -384,10 +385,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-3">
-                                        <label for="text-input">DBT: </label>  
-                                       
+                                        <label for="text-input">DBT: </label>
+
                                             <input class="form-control col-sm-8" type="text" name="DBT"  [(ngModel)]="DBT" id="DBT" value="DBT" disabled>
-                                     
+
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <label for="text-input">HTA:</label>
@@ -436,7 +437,7 @@
                                     <span *ngIf="item.vida != 1" class="badge badge-danger">Fallecido.</span>
                                     <span *ngIf="item.vida != 0" class="badge badge-success">Vivito y Coleando.</span></td>
                                 <td>{{item.causas}}</td>
-                              </tr> 
+                              </tr>
                             </tbody>
                           </table>
                         </div>
@@ -465,7 +466,7 @@
                                         <div >
                                             <textarea autocomplete="off" required [(ngModel)]="examen_cabezaT" id="examen_cabezaT" name="examen_cabezaT" rows="2" class="form-control" placeholder="Descripción del examen.." disabled></textarea>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="form-group col-sm-12">
                                         <label class="habito" for="inline-radios">Cuello:</label>
 

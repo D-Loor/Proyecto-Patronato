@@ -176,7 +176,7 @@
                       <br>
                       <strong class="h4">78,623</strong>
                     </div>
-                    
+
                   </div>
                   <!--/.col-->
                 </div>
@@ -292,7 +292,7 @@
         <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
-            <label for="name">Buscar Cita</label>
+            <label for="name">Buscar por Cédula:</label>
             <div class="input-group">
               <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
               <span class="input-group-prepend">
@@ -301,16 +301,16 @@
 
             </div>
           </div>
-          <div class="col-md-10">
-          <div class="row">
-            <div class="col-md-4 searcht">
+          <div class="col-md-8">
+          <div class="row space">
+            <div class="col-xs-2 searcht ">
               <label for="name">Fecha actual</label>
               <div class="sangria">
                 <strong><i class="fa fa-calendar" aria-hidden="true"></i><label class="sangria"  for="name">{{fechaActual}}</label></strong>
               </div>
             </div>
-            <div class="col-sm-3 searcht">
-              <label for="name"><label ></label></label>
+            <div class="col-xs-2 searcht">
+              <label style="height: 0px;"><label ></label></label>
               <button type="button" class="btn btn-primary form-control" (click)="cargar()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
             </div>
           </div>

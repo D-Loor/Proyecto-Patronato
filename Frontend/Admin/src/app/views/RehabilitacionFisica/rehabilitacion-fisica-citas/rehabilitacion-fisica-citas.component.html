@@ -1,306 +1,321 @@
 <div class="animated fadeIn">
 
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <i class="fa fa-bar-chart"></i>
-            Estadística mensual
-   
-            <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed = !isCollapsed"
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i>
+          Estadística mensual
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i
               class="fa fa-chevron-down"></i>&nbsp;</button>
-  
-  
-          </div>
-          <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-            <div class="card-body">
-  
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="callout callout-info">
-                        <small class="text-muted">New Clients</small>
-                        <br>
-                        <strong class="h4">9,123</strong>
-                      </div>
-                    </div>
-                    <!--/.col-->
-                    <div class="col-sm-6">
-                      <div class="callout callout-danger">
-                        <small class="text-muted">Recuring Clients</small>
-                        <br>
-                        <strong class="h4">22,643</strong>
-                      </div>
-                    </div>
-                    <!--/.col-->
-                  </div>
-                  <!--/.row-->
-                  <hr class="mt-0">
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Monday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+
+
+        </div>
+        <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="callout callout-info">
+                      <small class="text-muted">New Clients</small>
+                      <br>
+                      <strong class="h4">9,123</strong>
                     </div>
                   </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Tuesday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+                  <!--/.col-->
+                  <div class="col-sm-6">
+                    <div class="callout callout-danger">
+                      <small class="text-muted">Recuring Clients</small>
+                      <br>
+                      <strong class="h4">22,643</strong>
                     </div>
                   </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Wednesday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
+                  <!--/.col-->
+                </div>
+                <!--/.row-->
+                <hr class="mt-0">
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Monday
+                    </span>
                   </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Thursday
-                      </span>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Friday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Saturday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 53%" aria-valuenow="53"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group mb-4">
-                    <div class="progress-group-prepend">
-                      <span class="progress-group-text">
-                        Sunday
-                      </span>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 9%" aria-valuenow="9"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 69%" aria-valuenow="69"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
-                <!--/.col-->
-                <div class="col-sm-6">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="callout callout-warning">
-                        <small class="text-muted">Pageviews</small>
-                        <br>
-                        <strong class="h4">78,623</strong>
-                      </div>
-                    </div>
-                    <!--/.col-->
-                    <div class="col-sm-6">
-                      <div class="callout callout-success">
-                        <small class="text-muted">Organic</small>
-                        <br>
-                        <strong class="h4">49,123</strong>
-                      </div>
-                    </div>
-                    <!--/.col-->
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Tuesday
+                    </span>
                   </div>
-                  <!--/.row-->
-                  <hr class="mt-0">
-                  <div class="progress-group">
-                    <div class="progress-group-header">
-                      <i class="icon-user progress-group-icon"></i>
-                      <div>Hombres</div>
-                      <div class="ml-auto font-weight-bold">43%</div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group mb-5">
-                    <div class="progress-group-header">
-                      <i class="icon-user-female progress-group-icon"></i>
-                      <div>Mujeres</div>
-                      <div class="ml-auto font-weight-bold">37%</div>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group">
-                    <div class="progress-group-header align-items-end">
-                      <i class="icon-globe progress-group-icon"></i>
-                      <div>Organic Search</div>
-                      <div class="ml-auto font-weight-bold mr-2">191.235</div>
-                      <div class="text-muted small">(56%)</div>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 56%" aria-valuenow="56"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group">
-                    <div class="progress-group-header align-items-end">
-                      <i class="icon-social-facebook progress-group-icon"></i>
-                      <div>Facebook</div>
-                      <div class="ml-auto font-weight-bold mr-2">51.223</div>
-                      <div class="text-muted small">(15%)</div>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group">
-                    <div class="progress-group-header align-items-end">
-                      <i class="icon-social-twitter progress-group-icon"></i>
-                      <div>Twitter</div>
-                      <div class="ml-auto font-weight-bold mr-2">37.564</div>
-                      <div class="text-muted small">(11%)</div>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 11%" aria-valuenow="11"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="progress-group">
-                    <div class="progress-group-header align-items-end">
-                      <i class="icon-social-linkedin progress-group-icon"></i>
-                      <div>LinkedIn</div>
-                      <div class="ml-auto font-weight-bold mr-2">27.319</div>
-                      <div class="text-muted small">(8%)</div>
-                    </div>
-                    <div class="progress-group-bars">
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 8%" aria-valuenow="8"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
-                <!--/.col-->
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Wednesday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Thursday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Friday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Saturday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 53%" aria-valuenow="53"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Sunday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 9%" aria-valuenow="9"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 69%" aria-valuenow="69"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <!--/.row-->
-              <br>
-  
+              <!--/.col-->
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="callout callout-warning">
+                      <small class="text-muted">Pageviews</small>
+                      <br>
+                      <strong class="h4">78,623</strong>
+                    </div>
+                  </div>
+                  <!--/.col-->
+                  <div class="col-sm-6">
+                    <div class="callout callout-success">
+                      <small class="text-muted">Organic</small>
+                      <br>
+                      <strong class="h4">49,123</strong>
+                    </div>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.row-->
+                <hr class="mt-0">
+                <div class="progress-group">
+                  <div class="progress-group-header">
+                    <i class="icon-user progress-group-icon"></i>
+                    <div>Hombres</div>
+                    <div class="ml-auto font-weight-bold">43%</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-5">
+                  <div class="progress-group-header">
+                    <i class="icon-user-female progress-group-icon"></i>
+                    <div>Mujeres</div>
+                    <div class="ml-auto font-weight-bold">37%</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  <div class="progress-group-header align-items-end">
+                    <i class="icon-globe progress-group-icon"></i>
+                    <div>Organic Search</div>
+                    <div class="ml-auto font-weight-bold mr-2">191.235</div>
+                    <div class="text-muted small">(56%)</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 56%" aria-valuenow="56"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  <div class="progress-group-header align-items-end">
+                    <i class="icon-social-facebook progress-group-icon"></i>
+                    <div>Facebook</div>
+                    <div class="ml-auto font-weight-bold mr-2">51.223</div>
+                    <div class="text-muted small">(15%)</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  <div class="progress-group-header align-items-end">
+                    <i class="icon-social-twitter progress-group-icon"></i>
+                    <div>Twitter</div>
+                    <div class="ml-auto font-weight-bold mr-2">37.564</div>
+                    <div class="text-muted small">(11%)</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 11%" aria-valuenow="11"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  <div class="progress-group-header align-items-end">
+                    <i class="icon-social-linkedin progress-group-icon"></i>
+                    <div>LinkedIn</div>
+                    <div class="ml-auto font-weight-bold mr-2">27.319</div>
+                    <div class="text-muted small">(8%)</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 8%" aria-valuenow="8"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
             </div>
+            <!--/.row-->
+            <br>
+
           </div>
         </div>
       </div>
-      <!--/.col-->
     </div>
-  
-  
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <i class="fa fa-spinner fa-spin"></i> Citas en espera
-  
-            <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
+    <!--/.col-->
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-spinner fa-spin"></i> Citas en espera
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
             [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic"><i
               class="fa fa-chevron-down"></i>&nbsp;</button>
-          </div>
-  
-          <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
           <div class="form-group">
             <div class="col-md-4 searcht">
+              <label for="name">Buscar por Cédula:</label>
               <div class="input-group">
                 <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">
                   <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                 </span>
-  
+
               </div>
             </div>
+            <div class="col-md-8">
+            <div class="row space">
+              <div class="col-xs-2 searcht ">
+                <label for="name">Fecha actual</label>
+                <div class="sangria">
+                  <strong><i class="fa fa-calendar" aria-hidden="true"></i><label class="sangria"  for="name">{{fechaActual}}</label></strong>
+                </div>
+              </div>
+              <div class="col-xs-2 searcht">
+                <label style="height: 0px;"><label ></label></label>
+                <button type="button" class="btn btn-primary form-control" (click)="cargar(especialidad,fechaActual)"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+              </div>
+            </div>
+            </div>
           </div>
-  
+
           <div class="card-body">
             <table class="table table-bordered table-striped table-sm">
               <thead>
@@ -311,67 +326,70 @@
                   <th>Antecedente</th>
                   <th>Opciones</th>
                 </tr>
-              </thead> 
+              </thead>
               <tbody>
                 <ng-container *ngIf="search == ''; else filtro2">
-                <tr *ngFor="let item of citasRFPaginate" >
-                  <td class="table-titulo">{{item.nombres}}</td>
-                  <td>{{item.cedula}}</td>
-                  <td>{{item.turno.hora}}</td>
-                  <td>
-                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
-                  </td>
-                  <td>
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula, item.id_cita)"><i
-                      class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
-                  <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                      class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                  <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                        class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                  <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-  
-                  </td>
-                </tr>
-              </ng-container>
-        
-              <ng-template #filtro2>
-                <tr *ngFor="let item of citasRFPaginateFilter" >
-                  <td class="table-titulo">{{item.nombres}}</td>
-                  <td>{{item.cedula}}</td>
-                  <td>{{item.turno.hora}}</td>
-                  <td>
-                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
-                  </td>
-                  <td>
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula, item.id_cita)"><i
-                      class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
-                  <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                      class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                  <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                        class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                  <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-  
-                  </td>
-                </tr>
-              </ng-template>
+                  <tr *ngFor="let item of citasRFPaginate">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+                    <td>
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont"
+                        (click)="ConsultarPaciente(item.cedula, item.id_cita)"><i
+                          class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-template #filtro2>
+                  <tr *ngFor="let item of citasRFPaginateFilter">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+                    <td>
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont"
+                        (click)="ConsultarPaciente(item.cedula, item.id_cita)"><i
+                          class="fa fa-stethoscope"></i>&nbsp;Atender</button>
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+
+                    </td>
+                  </tr>
+                </ng-template>
               </tbody>
             </table>
             <nav>
-              <pagination *ngIf="search==''" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)"></pagination>
-              <pagination *ngIf="search!=''" [totalItems]="citasRFFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
+              <pagination *ngIf="search==''" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)">
+              </pagination>
+              <pagination *ngIf="search!=''" [totalItems]="citasRFFilter.length"
+                (pageChanged)="pageChangedFiltro($event)"></pagination>
             </nav>
           </div>
-         </div>
         </div>
       </div>
-      <!--/.col-->
     </div>
-  
+    <!--/.col-->
   </div>
-  
 
-  
+</div>

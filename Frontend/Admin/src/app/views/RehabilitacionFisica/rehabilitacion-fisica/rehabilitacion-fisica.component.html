@@ -4,12 +4,12 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-archive "></i> Historia Cínica
+          <i class="fa fa-archive "></i> Historial de Consultas
         </div>
 
           <div class="form-group">
             <div class="col-md-4 searcht">
-              <label for="name">Buscar Consulta</label>
+              <label for="name">Buscar por Cédula:</label>
               <div class="input-group">
 
                 <input type="text" id="search" name="search" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
@@ -20,8 +20,8 @@
               </div>
 
             </div>
-            <div class="col-md-10">
-            <div class="row">
+            <div class="col-md-8">
+            <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Fecha inicial</label>
                   <input name="FechaInicio" id="FechaInicio"  name="FechaInicio" [(ngModel)]="FechaInicio" type="date"  placeholder="date" class="form-control">
@@ -36,7 +36,7 @@
                 </div>
             </div>
           </div>
-          
+
         </div>
 
 
@@ -54,7 +54,7 @@
                   <th>CRUD</th>
                 </tr>
               </thead>
-              <tbody> 
+              <tbody>
                   <ng-container *ngIf="search == ''; else filtro2">
                 <tr *ngFor="let item of historialRFPaginate">
                   <td>{{item.paciente.cedula}}</td>
@@ -62,7 +62,7 @@
                   <td>{{item.paciente.apellidos}}</td>
                   <td>{{item.paciente.edad}}</td>
                   <td>{{item.fecha}}</td>
-                  <td>{{item.lugar_atencion}}</td> 
+                  <td>{{item.lugar_atencion}}</td>
                   <td>
                     <span *ngIf="item.paciente.gad != 1" class="badge badge-secondary">NO</span>
                     <span *ngIf="item.paciente.gad != 0" class="badge badge-success">SI</span>
@@ -70,11 +70,11 @@
                   <td>
                         <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item)"><i
                         class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
-                    
-                  </td> 
+
+                  </td>
                 </tr>
             </ng-container>
-                
+
             <ng-template #filtro2>
                 <tr *ngFor="let item of historialRFPaginateFilter">
                     <td>{{item.paciente.cedula}}</td>
@@ -90,8 +90,8 @@
                     <td>
                         <button type="button" class="btn btn-ghost-info botont" data-toggle="modal" (click)="DatosPaciente(item)"><i
                         class="fa fa-list-alt"></i>&nbsp;Datos Consulta</button>
-                      
-                    </td> 
+
+                    </td>
                   </tr>
             </ng-template>
 
@@ -121,43 +121,43 @@
           </button>
         </div>
         <div class="modal-body">
-  
+
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
                 <i class="fa fa-male"></i>
                 <strong>{{NPaciente}}</strong>
-  
+
                 <div class="dere">
                   <i class="fa fa-calendar"></i>
                   <strong>{{Fecha}}</strong>
                 </div>
-  
+
               </div>
-  
+
               <div class="card-body">
-  
+
                 <div class="row">
                   <div class="form-group col-sm-4">
                     <label for="inline-radios">Lugar de atención</label>
                     <input type="text" class="form-control" id="lugar_atencion" disabled name="lugar_atencion" [(ngModel)]="lugar_atencion">
-  
+
                   </div>
-  
+
                   <div class="form-group col-sm-4">
                     <label for="inline-radios">Ocupación</label>
                     <input type="text" class="form-control" id="ocupacion" disabled name="ocupacion" [(ngModel)]="ocupacion">
-  
+
                   </div>
-  
+
                   <div class="form-group col-sm-4">
                     <label for="inline-radios">Lugar de residencia</label>
                     <input type="text" class="form-control" id="residencia" disabled name="residencia" [(ngModel)]="residencia">
-  
+
                   </div>
-  
+
                 </div>
-  
+
                 <div class="row" >
                   <div class="form-group col-sm-12">
                     <div class="form-group">
@@ -171,27 +171,27 @@
                     <div class="form-group">
                       <label for="vat">Anamnesis</label>
                          <textarea id="anamnesis" disabled name="anamnesis" [(ngModel)]="anamnesis" rows="2" class="form-control"  required></textarea>
-  
+
                     </div>
-  
+
                     <div class="form-group ">
-  
+
                       <div class="col-md-9 col-form-label">
                         <div class="form-check form-check-inline mr-1">
-  
+
                           <label class="form-check-label" for="inline-checkbox1"> <i class="fa fa-file-text-o"></i> {{certificado}}</label>
                         </div>
-  
+
                       </div>
                     </div>
                   </div>
                 </div>
-  
+
                 </div>
               </div>
             </div>
-  
-  
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="Principal.hide()">Cerrar</button>
