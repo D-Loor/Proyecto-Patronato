@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
+import { SecretariaService } from '../../../servicios/secretaria.service';
 
 @Component({
   selector: 'app-citas',
@@ -12,7 +13,7 @@ import { CitasService } from '../../../servicios/citas.service';
 })
 export class CitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router) { }
+  constructor(public citasser:CitasService, public rutas:Router, private secretaria:SecretariaService) { }
 
   isCollapsedMG = false;
   isCollapsedRF = false;
@@ -45,7 +46,6 @@ export class CitasComponent implements OnInit {
   cargarMG(especialidad:string,fechaActual:string,fecha:number){
     
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-      debugger
     if(data['code']!="202"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);

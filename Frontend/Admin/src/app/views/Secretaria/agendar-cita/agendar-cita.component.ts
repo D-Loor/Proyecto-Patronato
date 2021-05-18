@@ -52,6 +52,28 @@ export class AgendarCitaComponent implements OnInit {
     this.sidebarMinimized = e;
   }
 
+  
+
+  Consultar(cedula:string){
+    this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
+      if(data ['code'] == '202'){
+        Swal.fire(
+          'Error!',
+          'El paciente no cuenta con un historial clinico',
+          'error'
+        )
+      }else{
+        Swal.fire(
+          'Encontrado!',
+          'El paciente ya cuenta con un historial clinico',
+          'success'
+        )
+        this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
+      }
+      
+    });
+  }
+
   ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
     

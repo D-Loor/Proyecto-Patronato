@@ -28,7 +28,9 @@
                                                       <label for="text-input">Cédula</label>
                                                       <div class="input-group">
                                                           <input required type="number" id="cedula" [class]="ClaseCdula" autocomplete="off" [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula" (focusout)="ValidarCedula(cedula)">
-                                                     
+                                                          <span class="input-group-append">
+                                                            <button type="button" class="btn btn-primary" (click)="Consultar(cedula)">Consultar</button>
+                                                          </span>
                                                       </div>
                                                   </div>
                                               </div>
