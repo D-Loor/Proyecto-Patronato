@@ -24,7 +24,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
   historialRFFilter:any[];
   historialRFPaginateFilter:any[];
   @ViewChild('Principal') public Principal: ModalDirective;
-  FechaFin; FechaInicio; 
+  FechaFin; FechaInicio;
   //variables para el modal
   NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado
 
@@ -32,6 +32,21 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.cargar();
   }
 
+  buscarRH(){
+    if(this.search== null || this.search.length==0 || this.search.length>10){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.historialRFFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Consultas Registradas con esta Cédula!'
+      })
+    }
+  }
   cargar(){
     this.historial.historialrf().then(data =>{
     this.historialRF=data['result'];
@@ -40,7 +55,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
     console.log(error);
 });
 
-  } 
+  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.historialRFFilter=[];
@@ -57,7 +72,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
       debugger
       this.historialRFPaginateFilter = this.historialRFFilter.slice(0, 10);
     }
-    
+
   }
 
 
@@ -96,7 +111,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
       this.certificado="Se entregó certificado al paciente.";
     }else
       this.certificado="No se entregó certificado al paciente.";
-      
+
     this.Principal.show();
   }
 
@@ -132,12 +147,12 @@ export class RehabilitacionFisicaComponent implements OnInit {
           this.FechaFin = "";
           this.FechaInicio = "";
         }
-      
+
     }).catch(error =>{
       console.log(error);
     });
     }
-    
+
   }
 
 }

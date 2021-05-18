@@ -36,10 +36,10 @@ export class PacientesComponent implements OnInit {
   adultezT:string; quirurgicosT:string; alergicosT:string; traumatologicosT:string; fum:string; fpp:string; edad_gestional:string;
   menarquia:string; flujo_genital:string; Gestas:string; Partos:string; abortos:string; cesareas:string; DBT:string; HTA:string; TBC:string;
   GEMELAR:string; examen_cabezaT:string; examen_cuelloT:string; examen_toraxT:string; examen_abdomenT:string; examen_msuperiorT:string; examen_minferioresT:string;
-  examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string; 
+  examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string;
   examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string; gad:string;
 
-  idPaciente:number; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string; 
+  idPaciente:number; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string;
 
   isCollapsed = false;
   isCollapsed2 = false;
@@ -48,7 +48,7 @@ export class PacientesComponent implements OnInit {
   isCollapsed5 = false;
   isCollapsed6 = false;
   isCollapsed7 = false;
-  
+
   ngOnInit() {
     debugger
     this.search = localStorage.getItem('cedulaMGandRF');
@@ -78,8 +78,22 @@ export class PacientesComponent implements OnInit {
   });
 
   }
-  
-  
+
+  buscarMG(){
+    if(this.search== null || this.search.length==0 || this.search.length>10){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.pacientesMGFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Paciente Registrado con esta Cédula!'
+      })
+    }
+  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.pacientesMGFilter=[];
@@ -96,7 +110,7 @@ export class PacientesComponent implements OnInit {
       };
       this.pacientesMGPaginateFilter = this.pacientesMGFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChanged(event: PageChangedEvent): void {
@@ -150,7 +164,7 @@ export class PacientesComponent implements OnInit {
     this.alimentacionT=data['result']['habitos'].alimentacion;
     this.diuresisT=data['result']['habitos'].diuresis;
     this.somniaT=data['result']['habitos'].somnia;
-    
+
 
     this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
     this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
@@ -162,9 +176,9 @@ export class PacientesComponent implements OnInit {
     this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
     this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
     this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
-    
+
     this.APF=data['result']['familiares'];
-    
+
     this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
     this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
     this.examen_toraxT=data['result']['examen_fisicos'].torax;
@@ -190,15 +204,15 @@ export class PacientesComponent implements OnInit {
 });
   }
 
-  
+
 
   Consultar(id_paciente:string){
     localStorage.setItem('id_paciente', id_paciente);
     this.rutas.navigate(['/medicinageneral']);
   }
 
- 
-  
+
+
 
 
 }

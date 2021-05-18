@@ -42,13 +42,13 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   dia = this.primerDia.getDate();
   mes = this.primerDia.getMonth();
   yyy = this.primerDia.getFullYear();
-  FechaInicio:string = this.yyy +'-'+this.mes+'-'+this.dia; 
+  FechaInicio:string = this.yyy +'-'+this.mes+'-'+this.dia;
   diaF = this.ultimoDia.getDate();
   mesF = this.ultimoDia.getMonth();
   yyyF = this.ultimoDia.getFullYear();
-  FechaFin:string = this.yyyF +'-'+this.mesF+'-'+this.diaF; 
-  
-  
+  FechaFin:string = this.yyyF +'-'+this.mesF+'-'+this.diaF;
+
+
 
 
   ngOnInit(): void {
@@ -56,7 +56,21 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
   }
-
+  buscarMG(){
+    if(this.search== null || this.search.length==0||this.search.length>10){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.citasMGPaginateFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas con esta Cédula!'
+      })
+    }
+  }
   Estadisticas(Inicio:string, Fin:string){
 
     this.medicina.Estadisticas(Inicio,Fin).then(data =>{
@@ -180,7 +194,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     localStorage.setItem('cedulaMG', cedula);
     localStorage.setItem('idCita', idCita);
   }
-  
+
   HistoriaPaciente(cedula:string){
     localStorage.setItem('cedulaMGandRF', cedula);
     this.rutas.navigate(['/pacientes']);
@@ -189,6 +203,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   CrearHistoriaClinica(){
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }
-  
+
 
 }

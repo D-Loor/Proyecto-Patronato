@@ -23,7 +23,7 @@ export class MedicinaGeneralComponent implements OnInit {
   historialMGPaginate:any[];
   historialMGFilter=[];
   historialMGPaginateFilter=[];
-  gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico; 
+  gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico;
   tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;
   FechaFin; FechaInicio;
   idPaciente = localStorage.getItem('id_paciente');
@@ -52,6 +52,21 @@ export class MedicinaGeneralComponent implements OnInit {
 
   }
 
+  buscarMG(){
+    if(this.search== null || this.search.length==0 || this.search.length>10){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.historialMGFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Consultas Registradas con esta Cédula!'
+      })
+    }
+  }
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.historialMGFilter=[];
       this.historialMGPaginateFilter=[];
@@ -119,7 +134,7 @@ export class MedicinaGeneralComponent implements OnInit {
 
 
       this.enfermedades=enferme['enfermedad'];
-      
+
 
 
     this.antecedentes_enfermedad=arreglo['a_enfermedad'];
@@ -160,13 +175,13 @@ export class MedicinaGeneralComponent implements OnInit {
           this.FechaFin = "";
           this.FechaInicio = "";
         }
-      
+
     }).catch(error =>{
       console.log(error);
     });
     }
-    
-      
+
+
   }
 
 

@@ -26,9 +26,9 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   citasRFFilter:any[];
   today = new Date();
   fechaActual:string;
-   
+
   ngOnInit(): void {
-    
+
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar(this.especialidad,this.fechaActual);
   }
@@ -42,6 +42,23 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   });
   }
 
+  buscarRH(){
+    if(this.search.length>10 || this.search.length==0){
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Advertencia!',
+        text: 'La Cédula a buscar no es válida!'
+      })
+    }else if(this.citasRFFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No hay Citas Registradas con esta Cédula!'
+      })
+    }
+  }
+
+
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
@@ -54,7 +71,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       };
       this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChanged(event: PageChangedEvent): void {
@@ -96,7 +113,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
-      buttonsStyling: true 
+      buttonsStyling: true
     })
 
     swalWithBootstrapButtons.fire({
@@ -150,6 +167,6 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 
-  
+
 
 }

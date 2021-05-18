@@ -8,7 +8,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   selector: 'app-dashboard',
   templateUrl: 'login.component.html'
 })
-export class LoginComponent implements OnInit { 
+export class LoginComponent implements OnInit {
 
   correo: string;
   pass: string;
@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  
-  IniciarSesion(){ 
+
+  IniciarSesion(){
     this.spinner.show('sample');
     if(this.correo==null || this.pass==null || this.correo=="" || this.pass==""){
       this.spinner.hide('sample');
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('sesionLogin', data['result'][0].id_cuenta);
           localStorage.setItem('sesionLoginInicio', 'true');
           this.arraydat=data['result'];
-          this.rutas.navigate(['/dashboard']);
+          this.rutas.navigate(['/medicinageneralcitas']);
           this.spinner.hide('sample');
           Swal.fire({
             title: 'Bienvenido',
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
             console.log(error);
         });
     }
-    
+
   }
 
 }
