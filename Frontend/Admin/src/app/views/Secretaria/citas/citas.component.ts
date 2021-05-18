@@ -22,36 +22,35 @@ export class CitasComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
 
-  citasMG:any[];
+  citasMG=[];
   citasMGFilter=[];
-  citasMGPaginate:any[];
+  citasMGPaginate=[];
   citasMGPaginateFilter=[];
-  citasRF:any[];
+  citasRF=[];
   citasRFFilter=[];
-  citasRFPaginate:any[];
+  citasRFPaginate=[];
   citasRFPaginateFilter=[];
   FechaMg:string='';
   FechaRf:string='';
-  
+
   today = new Date();
   fechaActual:string;
 
   ngOnInit(): void {
-    
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF("Rehabilitacion Fisica",this.fechaActual);
-    this.cargarMG("Medicina General",this.fechaActual);
-
+    this.cargarRF("Rehabilitacion Fisica",this.fechaActual,0);
+    this.cargarMG("Medicina General",this.fechaActual,0);
   }
 
-  cargarMG(especialidad:string,fechaActual:string){
+  cargarMG(especialidad:string,fechaActual:string,fecha:number){
     
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-    if(data['result']!="Registro no encontrado"){
+      debugger
+    if(data['code']!="202"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
     
-    }else{
+    }else if(fecha==1){
     this.citasMG=null;
     this.citasMGPaginate = null;
       Swal.fire({
@@ -59,6 +58,9 @@ export class CitasComponent implements OnInit {
         title: 'Oops...',
         text: 'No hay Citas Registradas en esta Fecha!'
       })
+    }else{
+      this.citasMG=[];
+    this.citasMGPaginate = [];
     }
     }).catch(error =>{
       console.log(error);
@@ -104,12 +106,13 @@ export class CitasComponent implements OnInit {
 
 
 
-  cargarRF(especialidad:string,fechaActual:string){
+  cargarRF(especialidad:string,fechaActual:string,fecha:number){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
-    if(data['result']!="Registro no encontrado"){
+      debugger
+    if(data['code']!="202"){
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
-    }else{
+    }else if(fecha==1){
       this.citasRF=null;
       this.citasRFPaginate = null;
       Swal.fire({
@@ -117,8 +120,11 @@ export class CitasComponent implements OnInit {
         title: 'Oops...',
         text: 'No hay Citas Registradas en esta Fecha!'
       })
+    }else{
+      this.citasRF=[];
+      debugger
+      this.citasRFPaginate = [];
     }
-    
     }).catch(error =>{
       console.log(error);
   });
@@ -209,10 +215,10 @@ export class CitasComponent implements OnInit {
       if (result.isConfirmed) {
         if(especialidad=="MG"){
           this.eliminarMG(id);
-          this.cargarMG("MedicinaGeneral",this.fechaActual);
+          this.cargarMG("MedicinaGeneral",this.fechaActual,0);
         }else{
           this.eliminarRF(id);
-          this.cargarRF("RehabilitaciónFísica",this.fechaActual);
+          this.cargarRF("RehabilitaciónFísica",this.fechaActual,0);
         }
 
         swalWithBootstrapButtons.fire(
@@ -248,7 +254,6 @@ export class CitasComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-
     this.citasMG = null;
     this.citasMGPaginate = null;
     this.citasRF = null;

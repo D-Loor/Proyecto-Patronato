@@ -32,8 +32,8 @@
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
           </div>
         </div>
@@ -145,8 +145,8 @@
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
           </div>
         </div>
