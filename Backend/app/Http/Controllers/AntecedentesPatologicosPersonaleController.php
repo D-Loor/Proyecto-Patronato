@@ -47,10 +47,10 @@ class AntecedentesPatologicosPersonaleController extends Controller
         $datos->infancia=$request->infancia;
         $datos->adolecencia=$request->adolecencia;
         $datos->adultez=$request->adultez;
-        $datos->DBT=$request->DBT;
+        $datos->DBID=$request->DBID;
         $datos->HTA=$request->HTA;
-        $datos->TBC=$request->TBC;
-        $datos->GEMELAR=$request->GEMELAR;
+        $datos->TbP=$request->TbP;
+        $datos->DBI=$request->DBI;
         $datos->quirujircos=$request->quirujircos;
         $datos->alergias=$request->alergias;
         $datos->traumas=$request->traumas;
@@ -99,10 +99,10 @@ class AntecedentesPatologicosPersonaleController extends Controller
         $datos->infancia=$request->infancia;
         $datos->adolecencia=$request->adolecencia;
         $datos->adultez=$request->adultez;
-        $datos->DBT=$request->DBT;
+        $datos->DBID=$request->DBID;
         $datos->HTA=$request->HTA;
-        $datos->TBC=$request->TBC;
-        $datos->GEMELAR=$request->GEMELAR;
+        $datos->TbP=$request->TbP;
+        $datos->DBI=$request->DBI;
         $datos->quirujircos=$request->quirujircos;
         $datos->alergias=$request->alergias;
         $datos->traumas=$request->traumas;

@@ -19,10 +19,10 @@ class CreateAntecedentesPatologicosPersonalesTable extends Migration
             $table->string('infancia');
             $table->string('adolecencia');
             $table->string('adultez');
-            $table->string('DBT');
+            $table->string('DBID');
             $table->string('HTA');
-            $table->string('TBC');
-            $table->string('GEMELAR');
+            $table->string('TbP');
+            $table->string('DBI');
             $table->string('quirujircos');
             $table->string('alergias');
             $table->string('traumas');

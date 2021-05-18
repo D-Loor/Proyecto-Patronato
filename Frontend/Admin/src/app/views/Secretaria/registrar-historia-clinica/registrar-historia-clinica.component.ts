@@ -61,7 +61,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   
   
   //cheak
-  gadCSi:string='0';gadCNo:string='1'; dbtCSi:string='0';dbtCNo:string='1'; htaCSi:string='0';htaCNo:string='1'; tbcCSi:string='0';tbcCNo:string='1'; gemelarCSi:string='0';gemelarCNo:string='1';  
+  gadCSi:string='0';gadCNo:string='1'; dbidCSi:string='0';dbidCNo:string='1'; htaCSi:string='0';htaCNo:string='1'; tbpCSi:string='0';tbpCNo:string='1'; dbiCSi:string='0';dbiCNo:string='1';  
 
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
@@ -69,7 +69,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
   //Variables de datos de Antecedentes Patológicos Personales
   ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
-  menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBT; HTA; TBC; GEMELAR; 
+  menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBID; HTA; TbP; DBI; 
   //Check Variables Antecedentes Patológicos Personales
   ninezC:number; adolescenciaC:number; adultezC:number; quirurgicosC:number; alergicosC:number; traumatologicosC:number; ginecos_obstetricosC:number; ginecos_obstetricosCaux:number=0;
 
@@ -107,10 +107,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
     this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
     this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
-    this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+    this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
 
     this.DatosFamiliares=[]; this.DatosFamiliaresbasedatos=[]; this.DatosFamiliaresDB=0; this.number=0; this.edit=0; this.actualizar=0;
-    //variables de los id Para relacionar y actualizar
+    //variables de los id Para relacionar y actualiar
     this.id_obstetrico=null; this.id_patologico=null; this.id_e_fisico=null; 
     this.id_sistema=null; this.id_complementario=null; this.id_habito=null; this.id_paciente=null;
     this.id_familiar=null; this.id_PacienteDA=null;
@@ -121,7 +121,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
   //Variables de datos de Antecedentes Patológicos Personales
   this.ninezT=""; this.adolescenciaT=""; this.adultezT=""; this.quirurgicosT=""; this.alergicosT=""; this.traumatologicosT=""; this.fum=""; this.fpp=""; this.edad_gestional="";
-  this.menarquia=""; this.flujo_genital=""; this.Gestas=""; this.Partos=""; this.abortos=""; this.cesareas=""; this.DBT=""; this.HTA=""; this.TBC=""; this.GEMELAR=""; 
+  this.menarquia=""; this.flujo_genital=""; this.Gestas=""; this.Partos=""; this.abortos=""; this.cesareas=""; this.DBI=""; this.HTA=""; this.TbP=""; this.DBID=""; 
 
   //Variables de Antecedentes Patológicos Familiares
   this.nombres=""; this.union=""; this.estado=""; this.estadoT=""; this.union2="";
@@ -290,17 +290,19 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
    checkRadioSi(radioCheck:string){
     if(radioCheck=='gad'){this.gad=1;}
-    if(radioCheck=='dbt'){this.DBT=1;}
+    if(radioCheck=='dbid'){this.DBID=1;}
     if(radioCheck=='hta'){this.HTA=1;}
-    if(radioCheck=='tbc'){this.TBC=1;}
-    if(radioCheck=='gemelar'){this.GEMELAR=1;}
+    if(radioCheck=='tbc'){this.TbP=1;}
+    if(radioCheck=='dbi'){this.DBI=1;}
+    debugger
    }
    checkRadioNo(radioCheck:string){
     if(radioCheck=='gad'){this.gad=0;}
-    if(radioCheck=='dbt'){this.DBT=0;}
+    if(radioCheck=='dbid'){this.DBID=0;}
     if(radioCheck=='hta'){this.HTA=0;}
-    if(radioCheck=='tbc'){this.TBC=0;}
-    if(radioCheck=='gemelar'){this.GEMELAR=0;}
+    if(radioCheck=='tbc'){this.TbP=0;}
+    if(radioCheck=='dbi'){this.DBI=0;}
+    debugger
   }
 
   cargarGinecoPersonal(id_gineco:number){
@@ -340,7 +342,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   Consultar(){
     
     if(this.cedula== undefined || this.cedula=="undefined"){
-      this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+      this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
       this.limpiar();
       Swal.fire(
         'Campo vacío',
@@ -349,7 +351,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       )
     }else{
       this.medicinag.AtenderPaciente(this.cedula).then(data => { 
-        this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2'; 
+        this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2'; 
         if(data['code'] === '201'){
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
@@ -396,14 +398,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
               this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
               this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
-              this.DBT=data['result']['antecedentes_patologicos_personales'].DBT;
+              this.DBID=data['result']['antecedentes_patologicos_personales'].DBID;
               this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
-              this.TBC=data['result']['antecedentes_patologicos_personales'].TBC;
-              this.GEMELAR=data['result']['antecedentes_patologicos_personales'].GEMELAR;
-              if(this.DBT == 1){this.dbtCSi='1'; this.dbtCNo='1'; }else{this.dbtCNo='0'; this.dbtCSi='0';}
+              this.TbP=data['result']['antecedentes_patologicos_personales'].TbP;
+              this.DBI=data['result']['antecedentes_patologicos_personales'].DBI;
+              if(this.DBID == 1){this.dbidCSi='1'; this.dbidCNo='1'; }else{this.dbidCNo='0'; this.dbidCSi='0';}
               if(this.HTA == 1){this.htaCSi='1'; this.htaCNo='1'; }else{this.htaCNo='0'; this.htaCSi='0';}
-              if(this.TBC == 1){this.tbcCSi='1'; this.tbcCNo='1'; }else{this.tbcCNo='0'; this.tbcCSi='0';}
-              if(this.GEMELAR == 1){this.gemelarCSi='1'; this.gemelarCNo='1'; }else{this.gemelarCNo='0'; this.gemelarCSi='0';}
+              if(this.TbP == 1){this.tbpCSi='1'; this.tbpCNo='1'; }else{this.tbpCNo='0'; this.tbpCSi='0';}
+              if(this.DBI == 1){this.dbiCSi='1'; this.dbiCNo='1'; }else{this.dbiCNo='0'; this.dbiCSi='0';}
               this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
               this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
@@ -487,7 +489,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               
             }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
               this.edit=0;
-              this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+              this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
               this.limpiar();
               swalWithBootstrapButtons.fire(
                 'Cancelado',
@@ -498,7 +500,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
           })
          }
          else{ 
-          this.gadCSi='2'; this.gadCNo='2'; this.dbtCSi='2';this.dbtCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbcCSi='2';this.tbcCNo='2'; this.gemelarCSi='2';this.gemelarCNo='2';
+          this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
           this.limpiar();
           Swal.fire(
             'Paciente no encontrado',
@@ -557,10 +559,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       'infancia':this.ninezT,
       'adolecencia': this.adolescenciaT,
       'adultez':this.adultezT,
-      'DBT':this.DBT,
+      'DBID':this.DBID,
       'HTA': this.HTA,
-      'TBC': this.TBC,
-      'GEMELAR': this.GEMELAR,
+      'TBC': this.TbP,
+      'DBI': this.DBI,
       'quirujircos': this.quirurgicosT,
       'alergias': this.alergicosT,
       'traumas': this.traumatologicosT,
@@ -797,10 +799,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         'infancia':this.ninezT,
         'adolecencia':this.adolescenciaT,
         'adultez':this.adultezT,
-        'DBT':this.DBT,
+        'DBID':this.DBID,
         'HTA':this.HTA,
-        'TBC':this.TBC,
-        'GEMELAR':this.GEMELAR,
+        'TbP':this.TbP,
+        'DBI':this.DBI,
         'quirujircos':this.quirurgicosT,
         'alergias':this.alergicosT,
         'traumas':this.traumatologicosT,
@@ -828,10 +830,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
             'infancia':this.ninezT,
             'adolecencia':this.adolescenciaT,
             'adultez':this.adultezT,
-            'DBT':this.DBT,
+            'DBID':this.DBID,
             'HTA':this.HTA,
-            'TBC':this.TBC,
-            'GEMELAR':this.GEMELAR,
+            'TbP':this.TbP,
+            'DBI':this.DBI,
             'quirujircos':this.quirurgicosT,
             'alergias':this.alergicosT,
             'traumas':this.traumatologicosT,

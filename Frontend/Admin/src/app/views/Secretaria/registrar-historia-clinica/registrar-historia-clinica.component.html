@@ -26,7 +26,7 @@
                                             <label for="text-input">Nombres</label>
                                             <input autocomplete="off" required type="text" id="nombresP"  [(ngModel)]="nombresP"   name="nombresP" class="form-control" placeholder="Ingrese los nombres">
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="row">
                                         <div class="form-group col-sm-8">
                                             <label for="text-input">Cédula</label>
@@ -186,6 +186,77 @@
                                             <textarea autocomplete="off" required  [(ngModel)]="adultezT" id="adultezT" name="adultezT" rows="3" class="form-control" placeholder="Descripción de los antecedentes patológicos.."></textarea>
                                         </div>
                                         <br>
+                                        <div class="row">
+                                            <div class="form-group col-sm-3">
+                                                <label for="inline-radios">DBID</label>
+                                                <div class="col-md-8 col-form-label">
+                                                    <div class="form-check form-check-inline mr-1" id="inline-radiosN">
+                                                        <input *ngIf="dbidCSi=='1'" (click)="checkRadioSi('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="1" checked>
+                                                        <input *ngIf="dbidCSi=='0'" (click)="checkRadioSi('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="1">
+                                                        <input *ngIf="dbidCSi=='2'" (click)="checkRadioSi('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="1">
+                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-1">
+                                                        <input *ngIf="dbidCNo=='0'" (click)="checkRadioNo('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="0" checked>
+                                                        <input *ngIf="dbidCNo=='1'" (click)="checkRadioNo('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="0" >
+                                                        <input *ngIf="dbidCNo=='2'" (click)="checkRadioNo('dbid')" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="0" >
+                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="inline-radios">DBI</label>  
+                                                <div class="col-md-8 col-form-label">
+                                                    <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                        <input *ngIf="dbiCSi=='1'" (click)="checkRadioSi('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="1" checked>
+                                                        <input *ngIf="dbiCSi=='0'" (click)="checkRadioSi('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="1">
+                                                        <input *ngIf="dbiCSi=='2'" (click)="checkRadioSi('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="1">
+                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-1">
+                                                        <input *ngIf="dbiCNo=='0'" (click)="checkRadioNo('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="0" checked>
+                                                        <input *ngIf="dbiCNo=='1'" (click)="checkRadioNo('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="0">
+                                                        <input *ngIf="dbiCNo=='2'" (click)="checkRadioNo('dbi')" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="0">
+                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="inline-radios">HTA</label>
+                                                <div class="col-md-8 col-form-label">
+                                                    <div class="form-check form-check-inline mr-1" id="inline-radiosA">
+                                                        <input *ngIf="htaCSi=='1'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1" checked>
+                                                        <input *ngIf="htaCSi=='0'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1">
+                                                        <input *ngIf="htaCSi=='2'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1">
+                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-1">
+                                                        <input *ngIf="htaCNo=='0'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0" checked>
+                                                        <input *ngIf="htaCNo=='1'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0">
+                                                        <input *ngIf="htaCNo=='2'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0">
+                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="inline-radios">TbP</label>  
+                                                <div class="col-md-8 col-form-label">
+                                                    <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                        <input *ngIf="tbpCSi=='1'" (click)="checkRadioSi('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="1" checked>
+                                                        <input *ngIf="tbpCSi=='0'" (click)="checkRadioSi('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="1">
+                                                        <input *ngIf="tbpCSi=='2'" (click)="checkRadioSi('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="1">
+                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mr-1">
+                                                        <input *ngIf="tbpCNo=='0'" (click)="checkRadioNo('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="0" checked>
+                                                        <input *ngIf="tbpCNo=='1'" (click)="checkRadioNo('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="0">
+                                                        <input *ngIf="tbpCNo=='2'" (click)="checkRadioNo('tbp')" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="0">
+                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--/.row-->
+                                        <br>
                                         <label for="inline-radios">Antecedentes quirúrgicos</label>  
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1">
@@ -273,76 +344,7 @@
                                         </div><!--/.row-->
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label for="inline-radios">DBT</label>
-                                        <div class="col-md-8 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                                <input *ngIf="dbtCSi=='1'" (click)="checkRadioSi('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="1" checked>
-                                                <input *ngIf="dbtCSi=='0'" (click)="checkRadioSi('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="1">
-                                                <input *ngIf="dbtCSi=='2'" (click)="checkRadioSi('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">Si</label>
-                                            </div>
-                                            <div class="form-check form-check-inline mr-1">
-                                                <input *ngIf="dbtCNo=='0'" (click)="checkRadioNo('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="0" checked>
-                                                <input *ngIf="dbtCNo=='1'" (click)="checkRadioNo('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="0" >
-                                                <input *ngIf="dbtCNo=='2'" (click)="checkRadioNo('dbt')" autocomplete="off" required class="form-check-input" type="radio" name="DBT" id="DBT" value="0" >
-                                                <label class="form-check-label" for="inlineRadio2">No</label>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label for="inline-radios">HTA</label>
-                                        <div class="col-md-8 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosA">
-                                                <input *ngIf="htaCSi=='1'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1" checked>
-                                                <input *ngIf="htaCSi=='0'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1">
-                                                <input *ngIf="htaCSi=='2'" (click)="checkRadioSi('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">Si</label>
-                                            </div>
-                                            <div class="form-check form-check-inline mr-1">
-                                                <input *ngIf="htaCNo=='0'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0" checked>
-                                                <input *ngIf="htaCNo=='1'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0">
-                                                <input *ngIf="htaCNo=='2'" (click)="checkRadioNo('hta')" autocomplete="off" required class="form-check-input" type="radio" name="HTA" id="HTA" value="0">
-                                                <label class="form-check-label" for="inlineRadio2">No</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label for="inline-radios">TBC</label>  
-                                        <div class="col-md-8 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input *ngIf="tbcCSi=='1'" (click)="checkRadioSi('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="1" checked>
-                                                <input *ngIf="tbcCSi=='0'" (click)="checkRadioSi('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="1">
-                                                <input *ngIf="tbcCSi=='2'" (click)="checkRadioSi('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">Si</label>
-                                            </div>
-                                            <div class="form-check form-check-inline mr-1">
-                                                <input *ngIf="tbcCNo=='0'" (click)="checkRadioNo('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="0" checked>
-                                                <input *ngIf="tbcCNo=='1'" (click)="checkRadioNo('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="0">
-                                                <input *ngIf="tbcCNo=='2'" (click)="checkRadioNo('tbc')" autocomplete="off" required class="form-check-input" type="radio" name="TBC" id="TBC" value="0">
-                                                <label class="form-check-label" for="inlineRadio2">No</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label for="inline-radios">GEMELAR</label>  
-                                        <div class="col-md-8 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input *ngIf="gemelarCSi=='1'" (click)="checkRadioSi('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="1" checked>
-                                                <input *ngIf="gemelarCSi=='0'" (click)="checkRadioSi('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="1">
-                                                <input *ngIf="gemelarCSi=='2'" (click)="checkRadioSi('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">Si</label>
-                                            </div>
-                                            <div class="form-check form-check-inline mr-1">
-                                                <input *ngIf="gemelarCNo=='0'" (click)="checkRadioNo('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="0" checked>
-                                                <input *ngIf="gemelarCNo=='1'" (click)="checkRadioNo('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="0">
-                                                <input *ngIf="gemelarCNo=='2'" (click)="checkRadioNo('gemelar')" autocomplete="off" required class="form-check-input" type="radio" name="GEMELAR" id="GEMELAR" value="0">
-                                                <label class="form-check-label" for="inlineRadio2">No</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!--/.row-->
+                                
                             </form>
                         </div>
                     </div>
