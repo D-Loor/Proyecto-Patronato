@@ -44,7 +44,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   tipo="Dianóstico";
 
   Formulario= new FormGroup({
-    motivo: new FormControl('', Validators.required),
+    motivo: new FormControl('', Validators.requiredTrue),
     enfermedad: new FormControl('', Validators.required),
     antecedente: new FormControl('', Validators.required),
     diagnostico: new FormControl('', Validators.required),
@@ -104,6 +104,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
        this.gadv="Miembro activo";
       else
         this.gadv="No consta como miembro activo";
+      if(this.gad==0){
+        this.condicion_diagnostico='Presuntivo';
+        this.diagnostico='No admite';
+        this.plan_terapeutico='No admite';
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -120,17 +125,39 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.confirma=false;
     this.pase=false;
   }
-
+  NotiCampos(){
+    Swal.fire({
+      icon: 'error',
+      title: '¡Hay campos vacíos..!',
+      text: 'Debe de completar todo el formulario para registrar la consulta.'
+    })
+  }
   notificacion(){
 
-    if(this.pase==false){
-      Swal.fire(
-        'Advertencia!',
-        'La enfermedad no se encuentra registrada.',
-        'warning'
-      )
+    if(this.antecedentes_enfermedad==undefined||this.motivo==undefined||this.diagnostico==undefined||this.plan_terapeutico==undefined||this.pase==false){
+      if(this.pase==false){
+        Swal.fire(
+          'Advertencia!',
+          'La enfermedad no se encuentra registrada.',
+          'warning'
+        )
+      }
+      if(this.antecedentes_enfermedad==undefined){
+        this.validar("antecedentes_enfermedad");
+      }
+      if(this.motivo==undefined){
+        this.validar("motivo");
+      }
+      if(this.diagnostico==undefined){
+        this.validar("diagnostico");
+      }
+      if(this.plan_terapeutico==undefined){
+        this.validar("plan_terapeutico");
+      }
+      this.NotiCampos();
     }
     else{
+
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-info',
@@ -246,6 +273,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     console.log(this.NuevaEnfermedad);
 
   }
+  validar(id){
+    debugger
+    var elemento = document.getElementById(id);
+    elemento.className += " is-invalid";
+  }
 
   IngresarConsulta(){
 
@@ -254,22 +286,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     if(this.certificado==true){
       cert=1;
     }
-     if(this.gad==0){
 
-      data = {
-        'id_enfermedad':this.valor,
-        'id_paciente':this.idPaciente,
-        'a_enfermedad':this.antecedentes_enfermedad,
-        'fecha': this.fechaActual,
-        'motivo_consulta':this.motivo,
-        'tipo_atencion':this.tipo_atencion,
-        'condicion_diagnostico': 'Presuntivo',
-        'diagnostico': 'No admite',
-        'plan_terapeutico': 'No admite',
-        'lugar_atencion': this.lugar_atencion,
-        'certificado': cert,
-      }
-    }else{
        data = {
         'id_enfermedad':this.valor,
         'id_paciente':this.idPaciente,
@@ -283,7 +300,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'lugar_atencion': this.lugar_atencion,
         'certificado': cert,
       }
-    }
+
 
     this.eliminarCita(this.idCitas);
 
