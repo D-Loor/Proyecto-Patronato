@@ -8,23 +8,23 @@
             <strong>Datos de la consulta </strong>
           </div>
           <div class="card-body">
-            <form action="#" id="form" name="form">
+            <form [formGroup]="Formulario">
               <div class="form-group">
                 <label for="company">Nombres</label>
-                <input type="text" class="form-control" disabled id="nombres" name="nombres" [(ngModel)]="nombres">
+                <input type="text" class="form-control" disabled id="nombres" [ngModelOptions]="{standalone: true}" name="nombres" [(ngModel)]="nombres">
               </div>
               <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="city">Cédula</label>
-                  <input type="text" class="form-control" disabled id="cedula" name="cedula" [(ngModel)]="cedula">
+                  <input type="text" class="form-control" disabled id="cedula" [ngModelOptions]="{standalone: true}" name="cedula" [(ngModel)]="cedula">
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="postal-code">Edad</label>
-                  <input type="text" class="form-control" disabled id="edad" name="edad" [(ngModel)]="edad">
+                  <input type="text" class="form-control" disabled id="edad" [ngModelOptions]="{standalone: true}" name="edad" [(ngModel)]="edad">
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="postal-code">GAD</label>
-                  <input type="text" class="form-control" disabled id="gadv" name="gadv" [(ngModel)]="gadv">
+                  <input type="text" class="form-control" disabled id="gadv" [ngModelOptions]="{standalone: true}" name="gadv" [(ngModel)]="gadv">
                 </div>
               </div>
               <div class="row">
@@ -32,15 +32,15 @@
                   <label for="inline-radios">Lugar de atención</label>
                   <div class="col-md-8 col-form-label">
                     <div class="form-check form-check-inline mr-3">
-                      <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
+                      <input class="form-check-input" type="radio" name="lugar_atencion" [ngModelOptions]="{standalone: true}" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
                       <label class="form-check-label" for="inlineRadio1">Patronato</label>
                     </div>
                     <div class="form-check form-check-inline mr-3">
-                      <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Comunidad">
+                      <input class="form-check-input" type="radio" name="lugar_atencion" [ngModelOptions]="{standalone: true}" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Comunidad">
                       <label class="form-check-label" for="inlineRadio2">Comunidad</label>
                     </div>
                     <div class="form-check form-check-inline ">
-                      <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
+                      <input class="form-check-input" type="radio" name="lugar_atencion" [ngModelOptions]="{standalone: true}" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
                       <label class="form-check-label" for="inlineRadio3">Domicilio</label>
                     </div>
                   </div>
@@ -49,15 +49,15 @@
                   <label for="inline-radios">Tipo de atención</label>
                   <div class="col-md-8 col-form-label">
                     <div class="form-check form-check-inline mr-2" id="inline-radios">
-                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Prevención">
+                      <input class="form-check-input" type="radio" name="tipo_atencion" [ngModelOptions]="{standalone: true}"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Prevención">
                       <label class="form-check-label" for="inlineRadio1">Prevención</label>
                     </div>
                     <div class="form-check form-check-inline mr-2">
-                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Primera">
+                      <input class="form-check-input" type="radio" name="tipo_atencion" [ngModelOptions]="{standalone: true}"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Primera">
                       <label class="form-check-label" for="inlineRadio2">Primera</label>
                     </div>
                     <div class="form-check form-check-inline mr-2">
-                      <input class="form-check-input" type="radio" name="tipo_atencion"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Subsecuente">
+                      <input class="form-check-input" type="radio" name="tipo_atencion" [ngModelOptions]="{standalone: true}"  [(ngModel)]="tipo_atencion" id="tipo_atencion" value="Subsecuente">
                       <label class="form-check-label" for="inlineRadio3">Subsecuente</label>
                     </div>
                   </div>
@@ -66,11 +66,11 @@
                   <label for="inline-radios">Condición de diagnóstico</label>
                   <div class="col-md-8 col-form-label">
                     <div class="form-check form-check-inline mr-3" id="inline-radios">
-                      <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [(ngModel)]="condicion_diagnostico" value="Presuntivo" (click)="funcionPreventivo()">
+                      <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [ngModelOptions]="{standalone: true}" [(ngModel)]="condicion_diagnostico" value="Presuntivo" (click)="funcionPreventivo()">
                       <label class="form-check-label" for="inlineRadio1">Presuntivo</label>
                     </div>
                     <div class="form-check form-check-inline mr-3">
-                      <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [(ngModel)]="condicion_diagnostico" value="Definitivo" (click)="funcionDefinitivo()">
+                      <input class="form-check-input" type="radio" name="presuntivo" id="condicion_diagnostico" [ngModelOptions]="{standalone: true}" [(ngModel)]="condicion_diagnostico" value="Definitivo" (click)="funcionDefinitivo()">
                       <label class="form-check-label" for="inlineRadio2">Definitivo</label>
                     </div>
 
@@ -87,6 +87,8 @@
                   <div class="input-group">
                     <div class="form-control auto">
                       <ng-autocomplete
+                        formControlName="enfermedad"
+                        [class.is-invalid]="Formulario.get('enfermedad').touched && Formulario.get('enfermedad').invalid"
                         [data]="data"
                         [searchKeyword]="enferme"
                         placeholder="Escriba la enfermedad"
@@ -119,31 +121,31 @@
 
               <div class="form-group">
                 <label for="vat">Motivo de la consulta</label>
-                   <textarea id="motivo" name="motivo" rows="4" [(ngModel)]="motivo" class="form-control" placeholder="Escriba el motivo de la consulta..." required></textarea>
+                   <textarea formControlName="motivo" [class.is-invalid]="Formulario.get('motivo').touched && Formulario.get('motivo').invalid" id="motivo" name="motivo" rows="4" [(ngModel)]="motivo" class="form-control" placeholder="Escriba el motivo de la consulta..." required></textarea>
 
               </div>
               <div class="form-group">
                 <label for="vat">Antecedentes de la enfermedad</label>
-                   <textarea id="antecedentes_enfermedad" name="antecedentes_enfermedad" [(ngModel)]="antecedentes_enfermedad" rows="4" class="form-control" placeholder="Escriba el antecedente de la enfermedad..." required></textarea>
+                   <textarea formControlName="antecedente" [class.is-invalid]="Formulario.get('antecedente').touched && Formulario.get('antecedente').invalid"  id="antecedentes_enfermedad" name="antecedentes_enfermedad" [(ngModel)]="antecedentes_enfermedad" rows="4" class="form-control" placeholder="Escriba el antecedente de la enfermedad..." required></textarea>
 
               </div>
 
               <div class="form-group " *ngIf="gad==1">
                 <label for="vat">{{tipo}}</label>
-                   <textarea id="diagnostico" name="diagnostico" [(ngModel)]="diagnostico" rows="4" class="form-control" placeholder="Escriba el diagnostico..." required></textarea>
+                   <textarea formControlName="diagnostico" [class.is-invalid]="Formulario.get('diagnostico').touched && Formulario.get('diagnostico').invalid" id="diagnostico" name="diagnostico" [(ngModel)]="diagnostico" rows="4" class="form-control" placeholder="Escriba el diagnostico..." required></textarea>
 
               </div>
 
               <div class="form-group " *ngIf="gad==1">
                 <label for="vat">Plan terapéutico</label>
-                   <textarea id="plan_terapeutico" name="plan_terapeutico" [(ngModel)]="plan_terapeutico" rows="4" class="form-control" placeholder="Escriba el plan terapéutico..." required></textarea>
+                   <textarea formControlName="plan" [class.is-invalid]="Formulario.get('plan').touched && Formulario.get('plan').invalid" id="plan_terapeutico" name="plan_terapeutico" [(ngModel)]="plan_terapeutico" rows="4" class="form-control" placeholder="Escriba el plan terapéutico..." required></textarea>
               </div>
 
               <div class="form-group ">
 
                 <div class="col-md-9 col-form-label">
                   <div class="form-check form-check-inline mr-1">
-                    <input class="form-check-input" [(ngModel)]="certificado" type="checkbox" id="certificado" name="certificado" value="1">
+                    <input class="form-check-input" [ngModelOptions]="{standalone: true}" [(ngModel)]="certificado" type="checkbox" id="certificado" name="certificado" value="1">
                     <label class="form-check-label" for="inline-checkbox1">Se entregó certificado</label>
                   </div>
 

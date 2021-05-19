@@ -49,7 +49,7 @@ import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedicinaGeneralConsultasModule } from './views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module';
 import { PacientesModule } from './views/MedicinaGeneral/pacientes/pacientes.module';
 import { MedicinaGeneralModule } from './views/MedicinaGeneral/medicina-general/medicina-general.module';
@@ -100,6 +100,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     RegistrarHistoriaClinicaModule,
     AgendarCitaModule,
     NgxSpinnerModule,
+    ReactiveFormsModule,
 
   ],
   declarations: [

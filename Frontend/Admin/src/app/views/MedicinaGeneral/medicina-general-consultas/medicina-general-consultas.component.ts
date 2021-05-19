@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-medicina-general-consultas',
@@ -42,6 +43,15 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   pase=false;
   tipo="Dianóstico";
 
+  Formulario= new FormGroup({
+    motivo: new FormControl('', Validators.required),
+    enfermedad: new FormControl('', Validators.required),
+    antecedente: new FormControl('', Validators.required),
+    diagnostico: new FormControl('', Validators.required),
+    plan: new FormControl('', Validators.required),
+
+  });
+
   ngOnInit(): void {
     this.cargar();
     this.CargarDatos();
@@ -57,8 +67,6 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   funcionDefinitivo(){
     this.tipo="Dianósticos Diferenciales";
   }
-
-
 
   cargar(){
       this.medicinag.enfermedad().then(data =>{
@@ -247,6 +255,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       cert=1;
     }
      if(this.gad==0){
+
       data = {
         'id_enfermedad':this.valor,
         'id_paciente':this.idPaciente,
@@ -260,7 +269,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'lugar_atencion': this.lugar_atencion,
         'certificado': cert,
       }
-     }else{
+    }else{
        data = {
         'id_enfermedad':this.valor,
         'id_paciente':this.idPaciente,
@@ -274,7 +283,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'lugar_atencion': this.lugar_atencion,
         'certificado': cert,
       }
-     }
+    }
 
     this.eliminarCita(this.idCitas);
 
