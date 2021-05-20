@@ -78,12 +78,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('habitos')->insert([
-            'alcohol' => 'Alcohol',
-            'tabaco' => 'Tabaco',
-            'drogas' => 'Drogas',
-            'alimentacion' =>'Alimentacion',
-            'diuresis' => 'Diuresis',
-            'somnia' => 'Somnia',
+            'alcohol' => '1',
+            'tabaco' => '0',
+            'drogas' => '0',
+            'alimentacion' =>'1',
+            'diuresis' => '1',
+            'somnia' => '0',
             //'email' => Str::random(10).'@gmail.com',
             //'password' => Hash::make('password'),
         ]);

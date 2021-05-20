@@ -294,7 +294,7 @@
                                 <div *ngIf="sexo=='Mujer'">
                                     <label for="">Antecedentes ginecos obstétricos</label>
                                     <div class="col-md-4 col-form-label">
-                                        <div class="form-check form-check-inline mr-1">
+                                        <div *ngIf="ginecosSi==1" class="form-check form-check-inline mr-1">
                                             <input autocomplete="off" required class="form-check-input" type="checkbox" name="ginecos_obstetricosC"  [(ngModel)]="ginecos_obstetricosC" id="ginecos_obstetricosC" value="1">
                                             <label class="form-check-label" for="inlineRadio2">No existen antecedentes</label>
                                         </div>
@@ -365,8 +365,8 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row">
                                     <div class="form-group col-sm-8">
-                                        <label for="company">Nombres</label>
-                                        <input autocomplete="off" type="text" class="form-control" required [(ngModel)]="nombres" id="nombres" name="nombres" placeholder="Ingrese los nombres completos del familiar">
+                                        <label for="company">Antecedentes patológicos</label>
+                                        <input autocomplete="off" type="text" class="form-control" required [(ngModel)]="nombres" id="nombres" name="nombres" placeholder="Ingrese los antecedentes">
                                         <br>
                                         <label >Estado</label>
                                         <div class="col-md-4 col-form-label">
@@ -411,7 +411,7 @@
                                         <table class="table table-bordered table-striped table-sm">
                                             <thead>
                                               <tr>
-                                                <th>Nombres del familiar</th>
+                                                <th>Antecedentes patológicos</th>
                                                 <th>Unión</th>
                                                 <th>Estado</th>
                                                 <th>Causas</th>
@@ -425,7 +425,7 @@
                                                 <td class="table-titulo">{{item.nombres}}</td>
                                                 <td>{{item.union}}</td>
                                                 <td>
-                                                  <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
+                                                  <span *ngIf="item.vida==1" class="badge badge-success">Vivo</span>
                                                   <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
                                                 </td>
                                                 <td>{{item.causas}}</td>
@@ -441,7 +441,7 @@
                                                     <td class="table-titulo">{{item.nombres}}</td>
                                                     <td>{{item.union}}</td>
                                                     <td>
-                                                      <span *ngIf="item.vida==1" class="badge badge-success">Active</span>
+                                                      <span *ngIf="item.vida==1" class="badge badge-success">Vivo</span>
                                                       <span *ngIf="item.vida==0" class="badge badge-danger">Fallecido</span>
                                                     </td>
                                                     <td>{{item.causas}}</td>
@@ -477,355 +477,106 @@
                         <div class="card-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Alcohol</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alcoholC"  [(ngModel)]="alcoholC" id="alcoholC" value="1" >
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Alcohol</label>
+                                        <div class="col-md-8 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosN">
+                                                <input *ngIf="alcoholCSi=='1'" (click)="checkRadioSi('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="1" checked>
+                                                <input *ngIf="alcoholCSi=='0'" (click)="checkRadioSi('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="1">
+                                                <input *ngIf="alcoholCSi=='2'" (click)="checkRadioSi('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
-                                        </div>
-                                        <div *ngIf="!alcoholC">
-                                            <textarea autocomplete="off" required [(ngModel)]="alcoholT" id="alcoholT" name="alcoholT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="alcoholCNo=='0'" (click)="checkRadioNo('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="0" checked>
+                                                <input *ngIf="alcoholCNo=='1'" (click)="checkRadioNo('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="0" >
+                                                <input *ngIf="alcoholCNo=='2'" (click)="checkRadioNo('alcohol')" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="0" >
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Tabaco</label>  
+                                        <div class="col-md-8 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                <input *ngIf="tabacoCSi=='1'" (click)="checkRadioSi('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="1" checked>
+                                                <input *ngIf="tabacoCSi=='0'" (click)="checkRadioSi('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="1">
+                                                <input *ngIf="tabacoCSi=='2'" (click)="checkRadioSi('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="tabacoCNo=='0'" (click)="checkRadioNo('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="0" checked>
+                                                <input *ngIf="tabacoCNo=='1'" (click)="checkRadioNo('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="0">
+                                                <input *ngIf="tabacoCNo=='2'" (click)="checkRadioNo('tabaco')" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Tabaco</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="tabacoC"  [(ngModel)]="tabacoC" id="tabacoC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Drogas</label>
+                                        <div class="col-md-8 col-form-label">
+                                            <div class="form-check form-check-inline mr-1" id="inline-radiosA">
+                                                <input *ngIf="drogasCSi=='1'" (click)="checkRadioSi('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="1" checked>
+                                                <input *ngIf="drogasCSi=='0'" (click)="checkRadioSi('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="1">
+                                                <input *ngIf="drogasCSi=='2'" (click)="checkRadioSi('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
-                                        </div>
-                                        <div *ngIf="!tabacoC">
-                                            <textarea autocomplete="off" required [(ngModel)]="tabacoT" id="tabacoT" name="tabacoT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="drogasCNo=='0'" (click)="checkRadioNo('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="0" checked>
+                                                <input *ngIf="drogasCNo=='1'" (click)="checkRadioNo('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="0">
+                                                <input *ngIf="drogasCNo=='2'" (click)="checkRadioNo('drogas')" autocomplete="off" required class="form-check-input" type="radio" name="Drogas" id="Drogas" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Drogas</label>  
-                                        <div class="col-md-4 col-form-label">
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Alimentacion</label>  
+                                        <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="drogasC"  [(ngModel)]="drogasC" id="drogasC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                                <input *ngIf="alimentacionCSi=='1'" (click)="checkRadioSi('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="1" checked>
+                                                <input *ngIf="alimentacionCSi=='0'" (click)="checkRadioSi('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="1">
+                                                <input *ngIf="alimentacionCSi=='2'" (click)="checkRadioSi('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
-                                        </div>
-                                        <div *ngIf="!drogasC">
-                                            <textarea autocomplete="off" required [(ngModel)]="drogasT" id="drogasT" name="drogasT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="alimentacionCNo=='0'" (click)="checkRadioNo('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="0" checked>
+                                                <input *ngIf="alimentacionCNo=='1'" (click)="checkRadioNo('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="0">
+                                                <input *ngIf="alimentacionCNo=='2'" (click)="checkRadioNo('alimentacion')" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Alimentación</label>  
-                                        <div class="col-md-4 col-form-label">
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Diuresis</label>  
+                                        <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="alimentacionC"  [(ngModel)]="alimentacionC" id="alimentacionC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                                <input *ngIf="diuresisCSi=='1'" (click)="checkRadioSi('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="1" checked>
+                                                <input *ngIf="diuresisCSi=='0'" (click)="checkRadioSi('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="1">
+                                                <input *ngIf="diuresisCSi=='2'" (click)="checkRadioSi('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="diuresisCNo=='0'" (click)="checkRadioNo('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="0" checked>
+                                                <input *ngIf="diuresisCNo=='1'" (click)="checkRadioNo('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="0">
+                                                <input *ngIf="diuresisCNo=='2'" (click)="checkRadioNo('diuresis')" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
-                                        <div *ngIf="!alimentacionC">
-                                            <textarea autocomplete="off" required [(ngModel)]="alimentacionT" id="alimentacionT" name="alimentacionT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Diuresis</label>  
-                                        <div class="col-md-4 col-form-label">
+                                    </div>  
+                                    <div class="form-group col-sm-4">
+                                        <label for="inline-radios">Somnia</label>  
+                                        <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="diuresisC"  [(ngModel)]="diuresisC" id="diuresisC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                                <input *ngIf="somniaCSi=='1'" (click)="checkRadioSi('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="1" checked>
+                                                <input *ngIf="somniaCSi=='0'" (click)="checkRadioSi('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="1">
+                                                <input *ngIf="somniaCSi=='2'" (click)="checkRadioSi('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
-                                        </div>
-                                        <div *ngIf="!diuresisC">
-                                            <textarea autocomplete="off" required [(ngModel)]="diuresisT" id="diuresisT" name="diuresisT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Somnia</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="somniaC"  [(ngModel)]="somniaC" id="somniaC" value="0">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este hábito</label>
+                                            <div class="form-check form-check-inline mr-1">
+                                                <input *ngIf="somniaCNo=='0'" (click)="checkRadioNo('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="0" checked>
+                                                <input *ngIf="somniaCNo=='1'" (click)="checkRadioNo('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="0">
+                                                <input *ngIf="somniaCNo=='2'" (click)="checkRadioNo('somnia')" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
-                                        </div>
-                                        <div *ngIf="!somniaC">
-                                            <textarea autocomplete="off" required [(ngModel)]="somniaT" id="somniaT" name="somniaT" rows="3" class="form-control" placeholder="Descripción del hábito.."></textarea>
-                                        </div>
-                                    </div>
-                                </div><!--/.row-->
-
-                            </form>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="card">
-                
-                <div class="card-header">
-                    <i class="icon-layers"></i>
-                        <strong>Examenes Físicos Generales</strong>
-                        <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed5 = !isCollapsed5"
-                        [attr.aria-expanded]="!isCollapsed5" aria-controls="collapseBasic"><i
-                        class="fa fa-chevron-down"></i>&nbsp;</button>
-                </div>
-
-                    <div id="collapseBasic" [collapse]="isCollapsed5" [isAnimated]="true">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Cabeza</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cabezaC"  [(ngModel)]="examen_cabezaC" id="examen_cabeza" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_cabezaC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_cabezaT" id="examen_cabezaT" name="examen_cabezaT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Cuello</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cuelloC"  [(ngModel)]="examen_cuelloC" id="examen_cuelloC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_cuelloC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_cuelloT" id="examen_cuelloT" name="examen_cuelloT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Tórax</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_toraxC"  [(ngModel)]="examen_toraxC" id="examen_toraxC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_toraxC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_toraxT" id="examen_toraxT" name="examen_toraxT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Abdomen</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_abdomenC"  [(ngModel)]="examen_abdomenC" id="examen_abdomenC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_abdomenC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_abdomenT" id="examen_abdomenT" name="examen_abdomenT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Miembros Superiores</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_msuperiorC"  [(ngModel)]="examen_msuperiorC" id="examen_msuperiorC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_msuperiorC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_msuperiorT" id="examen_msuperiorT" name="examen_msuperiorT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Miembros Inferiores</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_minferioresC"  [(ngModel)]="examen_minferioresC" id="examen_minferioresC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_minferioresC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_minferioresT" id="examen_minferioresT" name="examen_minferioresT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Región Genital</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitalC"  [(ngModel)]="examen_genitalC" id="examen_genitalC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_genitalC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_genitalT" id="examen_genitalT" name="examen_genitalT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Región Anal</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_analC"  [(ngModel)]="examen_analC" id="examen_analC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_analC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_analT" id="examen_analT" name="examen_analT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                </div><!--/.row-->
-
-                            </form>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="card">
-                
-                <div class="card-header">
-                    <i class="icon-docs"></i>
-                        <strong>Examenes de Organos y Sistemas</strong>
-                        <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed6 = !isCollapsed6"
-                        [attr.aria-expanded]="!isCollapsed6" aria-controls="collapseBasic"><i
-                        class="fa fa-chevron-down"></i>&nbsp;</button>
-                </div>
-
-                    <div id="collapseBasic" [collapse]="isCollapsed6" [isAnimated]="true">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Digestivo</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_digestivoC"  [(ngModel)]="examen_digestivoC" id="examen_digestivoC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_digestivoC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_digestivoT" id="examen_digestivoT" name="examen_digestivoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Respiratorio</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_respiratorioC"  [(ngModel)]="examen_respiratorioC" id="examen_respiratorioC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_respiratorioC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_respiratorioT" id="examen_respiratorioT" name="examen_respiratorioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Cardíaco</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cardiacoC"  [(ngModel)]="examen_cardiacoC" id="examen_cardiacoC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_cardiacoC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_cardiacoT" id="examen_cardiacoT" name="examen_cardiacoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Genitourinario</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitourinarioC"  [(ngModel)]="examen_genitourinarioC" id="examen_genitourinarioC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_genitourinarioC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_genitourinarioT" id="examen_genitourinarioT" name="examen_genitourinarioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Osteomuscular</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_osteomuscularC"  [(ngModel)]="examen_osteomuscularC" id="examen_osteomuscularC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_osteomuscularC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_osteomuscularT" id="examen_osteomuscularT" name="examen_osteomuscularT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Sistema Nervioso</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_nerviosoC"  [(ngModel)]="examen_nerviosoC" id="examen_nerviosoC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_nerviosoC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_nerviosoT" id="examen_nerviosoT" name="examen_nerviosoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                </div><!--/.row-->
-
-                            </form>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="card">
-                
-                <div class="card-header">
-                    <i class="icon-note"></i>
-                        <strong>Examenes Complementarios</strong>
-                        <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed7 = !isCollapsed7"
-                        [attr.aria-expanded]="!isCollapsed7" aria-controls="collapseBasic"><i
-                        class="fa fa-chevron-down"></i>&nbsp;</button>
-                </div>
-
-                    <div id="collapseBasic" [collapse]="isCollapsed7" [isAnimated]="true">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Laboratorio</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_laboratorioC"  [(ngModel)]="examen_laboratorioC" id="examen_laboratorioC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_laboratorioC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_laboratorioT" id="examen_laboratorioT" name="examen_laboratorioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Electrocardiograma</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_electrocardiogramaC"  [(ngModel)]="examen_electrocardiogramaC" id="examen_electrocardiogramaC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_electrocardiogramaC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_electrocardiogramaT" id="examen_electrocardiogramaT" name="examen_electrocardiogramaT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Radiografía de Tórax</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_RToraxC"  [(ngModel)]="examen_RToraxC" id="examen_RToraxC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_RToraxC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_RToraxT" id="examen_RToraxT" name="examen_RToraxT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        <label class="habito" for="inline-radios">Otros Estudios</label>  
-                                        <div class="col-md-4 col-form-label">
-                                            <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
-                                                <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_otrosC"  [(ngModel)]="examen_otrosC" id="examen_otrosC" value="1">
-                                                <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="!examen_otrosC">
-                                            <textarea autocomplete="off" required [(ngModel)]="examen_otrosT" id="examen_otrosT" name="examen_otrosT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
                                         </div>
                                     </div>
                                 </div><!--/.row-->
@@ -835,8 +586,293 @@
                             <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Editar Datos del Paciente</button>
                         </div>
                     </div>
-                   
             </div>
+
+            <ng-container *ngIf="containerSecretaria==1">
+                <div class="card">
+                
+                    <div class="card-header">
+                        <i class="icon-layers"></i>
+                            <strong>Examenes Físicos Generales</strong>
+                            <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed5 = !isCollapsed5"
+                            [attr.aria-expanded]="!isCollapsed5" aria-controls="collapseBasic"><i
+                            class="fa fa-chevron-down"></i>&nbsp;</button>
+                    </div>
+    
+                        <div id="collapseBasic" [collapse]="isCollapsed5" [isAnimated]="true">
+                            <div class="card-body">
+                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Cabeza</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cabezaC"  [(ngModel)]="examen_cabezaC" id="examen_cabeza" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_cabezaC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_cabezaT" id="examen_cabezaT" name="examen_cabezaT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Cuello</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cuelloC"  [(ngModel)]="examen_cuelloC" id="examen_cuelloC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_cuelloC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_cuelloT" id="examen_cuelloT" name="examen_cuelloT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Tórax</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_toraxC"  [(ngModel)]="examen_toraxC" id="examen_toraxC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_toraxC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_toraxT" id="examen_toraxT" name="examen_toraxT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Abdomen</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_abdomenC"  [(ngModel)]="examen_abdomenC" id="examen_abdomenC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_abdomenC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_abdomenT" id="examen_abdomenT" name="examen_abdomenT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Miembros Superiores</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_msuperiorC"  [(ngModel)]="examen_msuperiorC" id="examen_msuperiorC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_msuperiorC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_msuperiorT" id="examen_msuperiorT" name="examen_msuperiorT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Miembros Inferiores</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_minferioresC"  [(ngModel)]="examen_minferioresC" id="examen_minferioresC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_minferioresC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_minferioresT" id="examen_minferioresT" name="examen_minferioresT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Región Genital</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitalC"  [(ngModel)]="examen_genitalC" id="examen_genitalC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_genitalC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_genitalT" id="examen_genitalT" name="examen_genitalT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Región Anal</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_analC"  [(ngModel)]="examen_analC" id="examen_analC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_analC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_analT" id="examen_analT" name="examen_analT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                    </div><!--/.row-->
+    
+                                </form>
+                            </div>
+                        </div>
+                </div>
+    
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <i class="icon-docs"></i>
+                            <strong>Examenes de Organos y Sistemas</strong>
+                            <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed6 = !isCollapsed6"
+                            [attr.aria-expanded]="!isCollapsed6" aria-controls="collapseBasic"><i
+                            class="fa fa-chevron-down"></i>&nbsp;</button>
+                    </div>
+    
+                        <div id="collapseBasic" [collapse]="isCollapsed6" [isAnimated]="true">
+                            <div class="card-body">
+                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Digestivo</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_digestivoC"  [(ngModel)]="examen_digestivoC" id="examen_digestivoC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_digestivoC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_digestivoT" id="examen_digestivoT" name="examen_digestivoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Respiratorio</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_respiratorioC"  [(ngModel)]="examen_respiratorioC" id="examen_respiratorioC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_respiratorioC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_respiratorioT" id="examen_respiratorioT" name="examen_respiratorioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Cardíaco</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cardiacoC"  [(ngModel)]="examen_cardiacoC" id="examen_cardiacoC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_cardiacoC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_cardiacoT" id="examen_cardiacoT" name="examen_cardiacoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Genitourinario</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitourinarioC"  [(ngModel)]="examen_genitourinarioC" id="examen_genitourinarioC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_genitourinarioC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_genitourinarioT" id="examen_genitourinarioT" name="examen_genitourinarioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Osteomuscular</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_osteomuscularC"  [(ngModel)]="examen_osteomuscularC" id="examen_osteomuscularC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_osteomuscularC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_osteomuscularT" id="examen_osteomuscularT" name="examen_osteomuscularT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Sistema Nervioso</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_nerviosoC"  [(ngModel)]="examen_nerviosoC" id="examen_nerviosoC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_nerviosoC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_nerviosoT" id="examen_nerviosoT" name="examen_nerviosoT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                    </div><!--/.row-->
+    
+                                </form>
+                            </div>
+                        </div>
+                </div>
+    
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <i class="icon-note"></i>
+                            <strong>Examenes Complementarios</strong>
+                            <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed7 = !isCollapsed7"
+                            [attr.aria-expanded]="!isCollapsed7" aria-controls="collapseBasic"><i
+                            class="fa fa-chevron-down"></i>&nbsp;</button>
+                    </div>
+    
+                        <div id="collapseBasic" [collapse]="isCollapsed7" [isAnimated]="true">
+                            <div class="card-body">
+                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Laboratorio</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_laboratorioC"  [(ngModel)]="examen_laboratorioC" id="examen_laboratorioC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_laboratorioC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_laboratorioT" id="examen_laboratorioT" name="examen_laboratorioT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Electrocardiograma</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_electrocardiogramaC"  [(ngModel)]="examen_electrocardiogramaC" id="examen_electrocardiogramaC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_electrocardiogramaC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_electrocardiogramaT" id="examen_electrocardiogramaT" name="examen_electrocardiogramaT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Radiografía de Tórax</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_RToraxC"  [(ngModel)]="examen_RToraxC" id="examen_RToraxC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_RToraxC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_RToraxT" id="examen_RToraxT" name="examen_RToraxT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="habito" for="inline-radios">Otros Estudios</label>  
+                                            <div class="col-md-4 col-form-label">
+                                                <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
+                                                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_otrosC"  [(ngModel)]="examen_otrosC" id="examen_otrosC" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">No cuenta con este examen</label>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="!examen_otrosC">
+                                                <textarea autocomplete="off" required [(ngModel)]="examen_otrosT" id="examen_otrosT" name="examen_otrosT" rows="3" class="form-control" placeholder="Descripción del examen.."></textarea>
+                                            </div>
+                                        </div>
+                                    </div><!--/.row-->
+    
+                                </form>
+                                <!--button *ngIf="edit==0" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Registrar Paciente</button>
+                                <button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Editar Datos del Paciente</button-->
+                            </div>
+                        </div>
+                       
+                </div> 
+            </ng-container>
+            
+            
             
         </div>
         
