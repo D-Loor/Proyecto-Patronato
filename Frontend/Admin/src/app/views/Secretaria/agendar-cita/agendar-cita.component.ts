@@ -46,6 +46,7 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCEspecialidad:string="form-control form-input select-number"; 
   ClaseCFecha:string="form-control form-input select-number"; 
   ClaseCHora:string="form-control form-input select-number"; 
+  
   //Variables para datos pacientes 
   nombres; fecha_consulta; cedula; especialidad; idT:string;
   ArrayTurnos: any = []
@@ -61,23 +62,32 @@ export class AgendarCitaComponent implements OnInit {
   
 
   Consultar(cedula:string){
-    this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
-      if(data ['code'] == '202'){
-        Swal.fire(
-          'Ops!',
-          'El paciente no cuenta con un historial clinico',
-          'warning'
-        )
-      }else{
-        Swal.fire(
-          'Encontrado!',
-          'El paciente ya cuenta con un historial clinico',
-          'success'
-        )
-        this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
-      }
-      
-    });
+    if(this.cedula==undefined || this.cedula==""){
+      Swal.fire(
+        'Error!',
+        'Ingrese una cedula',
+        'error'
+      );
+    }else{
+      this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
+        if(data ['code'] == '202'){
+          Swal.fire(
+            'Ops!',
+            'El paciente no cuenta con un historial clinico',
+            'warning'
+          );
+        }else{
+          Swal.fire(
+            'Encontrado!',
+            'El paciente cuenta con un historial clinico',
+            'success'
+          );
+          this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
+        }
+        
+      });
+    }
+    
   }
 
   ValidarCedula(cedulaV: number) {
