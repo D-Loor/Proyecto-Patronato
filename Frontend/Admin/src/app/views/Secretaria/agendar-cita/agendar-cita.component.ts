@@ -39,7 +39,13 @@ export class AgendarCitaComponent implements OnInit {
   isCollapsed = false;
   public sidebarMinimized = false;
   public navItems = navItems;
+
+  //Variables para validar
   ClaseCdula:string="form-control form-input select-number"; 
+  ClaseCNombre:string="form-control form-input select-number"; 
+  ClaseCEspecialidad:string="form-control form-input select-number"; 
+  ClaseCFecha:string="form-control form-input select-number"; 
+  ClaseCHora:string="form-control form-input select-number"; 
   //Variables para datos pacientes 
   nombres; fecha_consulta; cedula; especialidad; idT:string;
   ArrayTurnos: any = []
@@ -58,9 +64,9 @@ export class AgendarCitaComponent implements OnInit {
     this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
       if(data ['code'] == '202'){
         Swal.fire(
-          'Error!',
+          'Ops!',
           'El paciente no cuenta con un historial clinico',
-          'error'
+          'warning'
         )
       }else{
         Swal.fire(
@@ -197,20 +203,47 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   ValidarCita(name:string){
-    this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
-      if(data ['code'] == '201'){
-        Swal.fire(
-          'Error!',
-          'El usuaria ya cuenta con una cita en esta fecha',
-          'error'
-        )
-      }else{
-        
-        this.spinner.show(name);
-        this.AgendarCita(name);
+    
+    if( this.nombres==undefined || this.nombres=="" || this.cedula==undefined || this.cedula=="" || this.especialidad==undefined || this.especialidad=="" || this.fecha_consulta==undefined || this.fecha_consulta=="" ||this.idT==undefined || this.idT==""){
+      Swal.fire(
+        'Ops!',
+        'Existen campos vacios',
+        'warning'
+      );
+      if(this.nombres==undefined || this.nombres==""){
+        this.ClaseCNombre = "form-control is-invalid select-number";
       }
-        
-    });
+      if(this.cedula==undefined || this.cedula==""){
+        this.ClaseCdula = "form-control is-invalid select-number";
+      }
+      if(this.especialidad==undefined || this.especialidad==""){
+        this.ClaseCEspecialidad = "form-control is-invalid select-number";
+      }
+      if(this.fecha_consulta==undefined || this.fecha_consulta==""){
+        this.ClaseCFecha = "form-control is-invalid select-number";
+      }
+      if(this.idT==undefined || this.idT==""){
+        this.ClaseCHora = "form-control is-invalid select-number";
+      }
+    }else{
+      this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
+        if(data ['code'] == '201'){
+          Swal.fire(
+            'Error!',
+            'El usuaria ya cuenta con una cita en esta fecha',
+            'error'
+          )
+        }else{
+          
+          this.spinner.show(name);
+          this.AgendarCita(name);
+        }
+          
+      });
+    }
+   
+
+    
   }
 
   Turnos(fecha:Date){
