@@ -94,6 +94,14 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       console.log(error);
   });
   }
+  actualizar(){
+    this.cargar();
+    Swal.fire(
+      'Citas Actualizadas!',
+      'La lista de Citas ha sido actualizada.',
+      'success'
+    )
+  }
   // for (var item in this.Citas){
   //   this.ValidarAntecedentes(this.Citas[item].cedula);
   //  }
@@ -101,7 +109,10 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
-    if(this.search==''){
+    debugger
+    if(this.search==null){
+
+      this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
       for (const x of this.citasMG) {
 

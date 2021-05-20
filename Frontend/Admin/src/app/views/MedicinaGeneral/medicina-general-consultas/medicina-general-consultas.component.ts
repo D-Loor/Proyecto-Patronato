@@ -43,14 +43,12 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   pase=false;
   tipo="Dianóstico";
 
-  Formulario= new FormGroup({
-    motivo: new FormControl('', Validators.requiredTrue),
-    enfermedad: new FormControl('', Validators.required),
-    antecedente: new FormControl('', Validators.required),
-    diagnostico: new FormControl('', Validators.required),
-    plan: new FormControl('', Validators.required),
+  ClaseMotivo:string="form-control form-input";
+  ClaseAntecedentes:string="form-control form-input";
+  ClaseDiagnostico:string="form-control form-input";
+  ClasePlan:string="form-control form-input";
 
-  });
+
 
   ngOnInit(): void {
     this.cargar();
@@ -134,7 +132,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
   notificacion(){
 
-    if(this.antecedentes_enfermedad==undefined||this.motivo==undefined||this.diagnostico==undefined||this.plan_terapeutico==undefined||this.pase==false){
+    if(this.antecedentes_enfermedad==undefined||this.antecedentes_enfermedad==""||this.motivo==undefined||this.motivo==""||this.diagnostico==undefined||this.diagnostico==""||this.plan_terapeutico==undefined||this.plan_terapeutico==""||this.pase==false){
       if(this.pase==false){
         Swal.fire(
           'Advertencia!',
@@ -142,18 +140,20 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
           'warning'
         )
       }
-      if(this.antecedentes_enfermedad==undefined){
-        this.validar("antecedentes_enfermedad");
+      if(this.antecedentes_enfermedad==undefined||this.antecedentes_enfermedad==""){
+        this.ClaseAntecedentes = "form-control is-invalid";
       }
-      if(this.motivo==undefined){
-        this.validar("motivo");
+      if(this.motivo==undefined||this.motivo==""){
+        this.ClaseMotivo = "form-control is-invalid";
       }
-      if(this.diagnostico==undefined){
-        this.validar("diagnostico");
+      debugger
+      if(this.diagnostico==undefined||this.diagnostico==""){
+        this.ClaseDiagnostico = "form-control is-invalid";
       }
-      if(this.plan_terapeutico==undefined){
-        this.validar("plan_terapeutico");
+      if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
+        this.ClasePlan = "form-control is-invalid";
       }
+
       this.NotiCampos();
     }
     else{
@@ -273,11 +273,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     console.log(this.NuevaEnfermedad);
 
   }
-  validar(id){
-    debugger
-    var elemento = document.getElementById(id);
-    elemento.className += " is-invalid";
-  }
+
 
   IngresarConsulta(){
 
