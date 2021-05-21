@@ -19,6 +19,7 @@ export class AgendarCitaComponent implements OnInit {
 
 
   loadingText = 'Guardando...';
+  CargaText = 'Cargando...';
 
   /**
    * Spinner configuration
@@ -41,25 +42,25 @@ export class AgendarCitaComponent implements OnInit {
   public navItems = navItems;
 
   //Variables para validar
-  ClaseCdula:string="form-control form-input select-number"; 
-  ClaseCNombre:string="form-control form-input select-number"; 
-  ClaseCEspecialidad:string="form-control form-input select-number"; 
-  ClaseCFecha:string="form-control form-input select-number"; 
-  ClaseCHora:string="form-control form-input select-number"; 
-  
-  //Variables para datos pacientes 
+  ClaseCdula:string="form-control form-input select-number";
+  ClaseCNombre:string="form-control form-input select-number";
+  ClaseCEspecialidad:string="form-control form-input select-number";
+  ClaseCFecha:string="form-control form-input select-number";
+  ClaseCHora:string="form-control form-input select-number";
+
+  //Variables para datos pacientes
   nombres; fecha_consulta; cedula; especialidad; idT:string;
   ArrayTurnos: any = []
 
   ngOnInit() {
-    
+
   }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
-  
+
 
   Consultar(cedula:string){
     if(this.cedula==undefined || this.cedula==""){
@@ -72,95 +73,95 @@ export class AgendarCitaComponent implements OnInit {
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         if(data ['code'] == '202'){
           Swal.fire(
-            'Ops!',
-            'El paciente no cuenta con un historial clinico',
+            '¡Sin registros..!',
+            'El paciente no cuenta con un historial clínico.',
             'warning'
           );
         }else{
           Swal.fire(
-            'Encontrado!',
-            'El paciente cuenta con un historial clinico',
+            '¡Encontrado!',
+            'El paciente cuenta con un historial clínico.',
             'success'
           );
           this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
         }
-        
+
       });
     }
-    
+
   }
 
   ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
-    
+
     if(cedula.length === 9 || cedula === "undefined" ||  cedula === "null"){
-      this.ClaseCdula="form-control form-input select-number"; 
+      this.ClaseCdula="form-control form-input select-number";
     }
 
     else if (cedula.length === 10) {
-  
+
       // Obtenemos el digito de la region que sonlos dos primeros digitos
       const digitoRegion = cedula.substring(0, 2);
-  
+
       // Pregunto si la region existe ecuador se divide en 24 regiones
       if (digitoRegion >= String(1) && digitoRegion <= String(24)) {
-  
+
         // Extraigo el ultimo digito
         const ultimoDigito = Number(cedula.substring(9, 10));
-  
+
         // Agrupo todos los pares y los sumo
         const pares = Number(cedula.substring(1, 2)) + Number(cedula.substring(3, 4)) + Number(cedula.substring(5, 6)) + Number(cedula.substring(7, 8));
-  
+
         // Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
         let numeroUno: any = cedula.substring(0, 1);
         numeroUno = (numeroUno * 2);
         if (numeroUno > 9) {
           numeroUno = (numeroUno - 9);
         }
-  
+
         let numeroTres: any = cedula.substring(2, 3);
         numeroTres = (numeroTres * 2);
         if (numeroTres > 9) {
           numeroTres = (numeroTres - 9);
         }
-  
+
         let numeroCinco: any = cedula.substring(4, 5);
         numeroCinco = (numeroCinco * 2);
         if (numeroCinco > 9) {
           numeroCinco = (numeroCinco - 9);
         }
-  
+
         let numeroSiete: any = cedula.substring(6, 7);
         numeroSiete = (numeroSiete * 2);
         if (numeroSiete > 9) {
           numeroSiete = (numeroSiete - 9);
         }
-  
+
         let numeroNueve: any = cedula.substring(8, 9);
         numeroNueve = (numeroNueve * 2);
         if (numeroNueve > 9) {
           numeroNueve = (numeroNueve - 9);
         }
-  
+
         const impares = numeroUno + numeroTres + numeroCinco + numeroSiete + numeroNueve;
-  
+
         // Suma total
         const sumaTotal = (pares + impares);
-  
+
         // extraemos el primero digito
         const primerDigitoSuma = String(sumaTotal).substring(0, 1);
-  
+
         // Obtenemos la decena inmediata
         const decena = (Number(primerDigitoSuma) + 1) * 10;
-  
+
         // Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
         let digitoValidador = decena - sumaTotal;
-  
+
         // Si el digito validador es = a 10 toma el valor de 0
         if (digitoValidador === 10) {
           digitoValidador = 0;
         }
-  
+
         // Validamos que el digito validador sea igual al de la cedula
         if (digitoValidador === ultimoDigito) {
           this.ClaseCdula = "form-control is-valid select-number";
@@ -171,7 +172,7 @@ export class AgendarCitaComponent implements OnInit {
           console.log("Incorrecto");
           return false;
         }
-  
+
       } else {
         // imprimimos en consola si la region no pertenece
         this.ClaseCdula = "form-control is-invalid select-number";
@@ -184,10 +185,9 @@ export class AgendarCitaComponent implements OnInit {
       console.log("Cedula incompleta")
       return false;
     }
-  
-  }
 
-  AgendarCita(name:string){
+  }
+  GuardarCita(name:string){
     let paciente = {
       'nombres':this.nombres,
       'cedula':this.cedula,
@@ -198,8 +198,8 @@ export class AgendarCitaComponent implements OnInit {
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
       this.spinner.hide(name);
       Swal.fire(
-        'Correcto',
-        'Cita agendada correctamente',
+        '¡Cita Agendada..!',
+        'La Cita Médica fue agendada correctamente.',
         'success'
       );
       this.nombres="";
@@ -207,19 +207,58 @@ export class AgendarCitaComponent implements OnInit {
       this.fecha_consulta="";
       this.especialidad="";
       this.idT="";
-      this.ClaseCdula="form-control form-input select-number"; 
+      this.ClaseCdula="form-control form-input select-number";
       this.ArrayTurnos = [];
     });
   }
 
+  AgendarCita(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-info',
+        cancelButton: 'btn btn-danger'
+
+      },
+      buttonsStyling: true
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea Agendar la Cita?',
+      text: "Una vez agendada no se podrá modificar.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Agendar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.spinner.show('sample');
+        this.GuardarCita('sample');
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          '¡Cancelado!',
+          'No se ha agendado la cita médica.',
+          'error'
+        )
+      }
+    })
+
+  }
+
   ValidarCita(name:string){
-    
+
     if( this.nombres==undefined || this.nombres=="" || this.cedula==undefined || this.cedula=="" || this.especialidad==undefined || this.especialidad=="" || this.fecha_consulta==undefined || this.fecha_consulta=="" ||this.idT==undefined || this.idT==""){
-      Swal.fire(
-        'Ops!',
-        'Existen campos vacios',
-        'warning'
-      );
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para agendar la cita médica.'
+      })
       if(this.nombres==undefined || this.nombres==""){
         this.ClaseCNombre = "form-control is-invalid select-number";
       }
@@ -235,34 +274,34 @@ export class AgendarCitaComponent implements OnInit {
       if(this.idT==undefined || this.idT==""){
         this.ClaseCHora = "form-control is-invalid select-number";
       }
+
     }else{
       this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
         if(data ['code'] == '201'){
           Swal.fire(
-            'Error!',
-            'El usuaria ya cuenta con una cita en esta fecha',
+            '¡Error!',
+            'El usuario ya cuenta con una cita en esta fecha.',
             'error'
           )
         }else{
-          
-          this.spinner.show(name);
-          this.AgendarCita(name);
+          this.AgendarCita();
         }
-          
+
       });
     }
-   
 
-    
+
+
   }
 
   Turnos(fecha:Date){
+    this.spinner.show('carga');
     let array ={};
     this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
         if(data['code']=='202'){
           Swal.fire(
-            'Lo sentimos',
-            'No existen citas disponibles en esta fecha',
+            '¡Lo sentimos..!',
+            'No existen citas disponibles en esta fecha.',
             'error'
           )
           this.ArrayTurnos = [];
@@ -271,12 +310,13 @@ export class AgendarCitaComponent implements OnInit {
         this.TurnosDisponibles(array);
         }
     });
+    this.spinner.hide('carga');
   }
 
   TurnosDisponibles(array:any){
     let turnos = { }
     this.ArrayTurnos = [];
-    for (let item of Object.keys(array)) { 
+    for (let item of Object.keys(array)) {
       turnos = {
           "id": array[item].id_turno,
           "hora": array[item].hora,
@@ -285,7 +325,7 @@ export class AgendarCitaComponent implements OnInit {
     }
   }
 
-  
+
 
 
 }

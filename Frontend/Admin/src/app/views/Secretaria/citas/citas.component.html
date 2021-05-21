@@ -15,7 +15,7 @@
         <div id="collapseBasic" [collapse]="isCollapsedMG" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
-            <label for="name">Buscar por Cédula:</label>
+            <label for="name">Buscar por Cédula</label>
             <div class="input-group">
               <input type="number" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
               <span class="input-group-prepend">
@@ -26,13 +26,13 @@
           <div class="col-md-8">
           <div class="row space">
             <div class="col-md-3 searcht">
-              <label for="name">Filtrar por Fecha:</label>
+              <label for="name">Filtrar por Fecha</label>
               <input name="FechaMg" id="FechaMg"  name="FechaMg" [(ngModel)]="FechaMg" type="date"  placeholder="date" class="form-control">
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1,true)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG('Medicina General',FechaMg,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
           </div>
         </div>
@@ -46,8 +46,8 @@
               <tr>
                 <th>Nombres</th>
                 <th>Cédula</th>
-                <th>Hora</th>
                 <th>Fecha</th>
+                <th>Hora</th>
                 <th>Historial</th>
                 <th>Opciones</th>
               </tr>
@@ -57,8 +57,8 @@
                 <tr *ngFor="let item of citasMGPaginate" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
-                  <td>{{item.turno.hora}}</td>
                   <td>{{item.fecha}}</td>
+                  <td>{{item.turno.hora}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
@@ -126,7 +126,7 @@
         <div id="collapseBasic" [collapse]="isCollapsedRF" [isAnimated]="true">
         <div class="form-group">
           <div class="col-md-4 searcht">
-            <label for="name">Buscar por Cédula:</label>
+            <label for="name">Buscar por Cédula</label>
             <div class="input-group">
               <input type="number" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
               <span class="input-group-prepend">
@@ -138,13 +138,13 @@
           <div class="col-md-8">
           <div class="row space">
             <div class="col-md-3 searcht">
-              <label for="name">Filtrar por Fecha:</label>
+              <label for="name">Filtrar por Fecha</label>
               <input name="FechaRf" id="FechaRf"  name="FechaRf" [(ngModel)]="FechaRf" type="date"  placeholder="date" class="form-control">
             </div>
             <div class="col-xs-2 searcht">
               <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1,1)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF('Rehabilitacion Fisica',FechaRf,1,1)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
             </div>
           </div>
         </div>
@@ -156,8 +156,8 @@
               <tr>
                 <th>Nombres</th>
                 <th>Cédula</th>
-                <th>Hora</th>
                 <th>Fecha</th>
+                <th>Hora</th>
                 <th>Historial</th>
                 <th>Opciones</th>
               </tr>
@@ -167,8 +167,8 @@
               <tr *ngFor="let item of citasRFPaginate" >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
-                <td>{{item.turno.hora}}</td>
                 <td>{{item.fecha}}</td>
+                <td>{{item.turno.hora}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                   <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>

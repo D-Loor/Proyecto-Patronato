@@ -67,13 +67,7 @@ export class LoginComponent implements OnInit {
           this.arraydat=data['result'];
           this.rutas.navigate(['/medicinageneralcitas']);
           this.spinner.hide('sample');
-          Swal.fire({
-            title: 'Bienvenido',
-            text: 'Sesión Iniciada',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            timer:1900
-          })
+
         }
         }).catch(error =>{
             console.log(error);

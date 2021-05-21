@@ -19,7 +19,6 @@ export class CitasComponent implements OnInit {
   isCollapsedRF = false;
   searchMG;
   searchRF;
-
   public sidebarMinimized = false;
   public navItems = navItems;
 
@@ -39,24 +38,32 @@ export class CitasComponent implements OnInit {
 
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF("Rehabilitacion Fisica",this.fechaActual,0);
-    this.cargarMG("Medicina General",this.fechaActual,0);
+    this.cargarRF("Rehabilitacion Fisica",this.fechaActual,0,false);
+    this.cargarMG("Medicina General",this.fechaActual,0,false);
   }
 
-  cargarMG(especialidad:string,fechaActual:string,fecha:number){
-    
+  cargarMG(especialidad:string,fechaActual:string,fecha:number, cambio:boolean){
+
     this.citasser.citas(especialidad,fechaActual).then(data =>{
     if(data['code']!="202"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
-    
+
+    if(cambio==true){
+      Swal.fire({
+        icon: 'success',
+        title: '¡Citas Filtradas..!',
+        text: 'Se filtró las citas con la fecha seleccionada.'
+      })
+    }
+
     }else if(fecha==1){
     this.citasMG=null;
     this.citasMGPaginate = null;
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas en esta Fecha!'
+        title: '¡Sin Registros..!',
+        text: 'No hay citas registradas en esta fecha.'
       })
     }else{
       this.citasMG=[];
@@ -70,21 +77,21 @@ export class CitasComponent implements OnInit {
   dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
     this.citasMGFilter=[];
     this.citasMGPaginateFilter=[];
-    
+
     if(this.searchMG==null){
-      
+
     }else{
-      
+
       for (const x of this.citasMG) {
-        
+
         if(x.cedula.indexOf(this.searchMG)> -1){
          this.citasMGFilter.push(x);
        };
       };
-      
+
       this.citasMGPaginateFilter = this.citasMGFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChangedFiltroMG(event: PageChangedEvent) :void{ //paginado sin los pipes
@@ -106,23 +113,29 @@ export class CitasComponent implements OnInit {
 
 
 
-  cargarRF(especialidad:string,fechaActual:string,fecha:number){
+  cargarRF(especialidad:string,fechaActual:string,fecha:number, cambio:boolean){
     this.citasser.citas(especialidad,fechaActual).then(data =>{
       debugger
     if(data['code']!="202"){
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
+      if(cambio==true){
+        Swal.fire({
+          icon: 'success',
+          title: '¡Citas Filtradas..!',
+          text: 'Se filtró las citas con la fecha seleccionada.'
+        })
+      }
     }else if(fecha==1){
       this.citasRF=null;
       this.citasRFPaginate = null;
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas en esta Fecha!'
+        title: '¡Sin Registros..!',
+        text: 'No hay citas registradas en esta fecha.'
       })
     }else{
       this.citasRF = [];
-      debugger
       this.citasRFPaginate = [];
     }
     }).catch(error =>{
@@ -130,51 +143,57 @@ export class CitasComponent implements OnInit {
   });
   }
 
-  
+
   buscarMG(){
     if(this.searchMG== null || this.searchMG.length==0 || this.searchMG.length>10){
       Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
+        icon: 'error',
+        title: '¡Cédula inválida..!',
+        text: 'La Cédula a buscar no es válida.'
       })
     }else if(this.citasMGPaginateFilter.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas con esta Cédula!'
+        title: '¡Sin Registros..!',
+        text: 'No hay Citas Registradas con esta Cédula.'
       })
     }
   }
 
   buscarRF(){
-    if(this.citasRFPaginateFilter.length==0){
+    if(this.searchRF== null || this.searchRF.length==0 || this.searchRF.length>10){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas con esta Cedula!'
+        title: '¡Cédula inválida..!',
+        text: 'La Cédula a buscar no es válida.'
+      })
+    } else if(this.citasRFPaginateFilter.length==0){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Sin Registros..!',
+        text: 'No hay Citas Registradas con esta Cedula.'
       })
     }
   }
 
-  
+
 
   dataPaginateRF(event){//Función para el filtrado con paginado sin los pipes
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
     if(this.searchRF==null){
     }else{
-      
+
       for (const x of this.citasRF) {
-        
+
         if(x.cedula.indexOf(this.searchRF)> -1){
          this.citasRFFilter.push(x);
        };
       };
-      
+
       this.citasRFPaginateFilter = this.citasRFFilter.slice(0, 10);
     }
-    
+
   }
 
   pageChangedFiltroRF(event: PageChangedEvent) :void{ //paginado sin los pipes
@@ -210,26 +229,26 @@ export class CitasComponent implements OnInit {
     swalWithBootstrapButtons.fire({
       title: '¿Está seguro de eliminar?',
       text: "Una vez eliminado no se podrá recuperar el mismo!",
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar registro!',
+      confirmButtonText: 'Si, eliminar cita!',
       cancelButtonText: 'No, cancelar!',
-      confirmButtonColor: '#4BB543',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
         if(especialidad=="MG"){
           this.eliminarMG(id);
-          this.cargarMG("MedicinaGeneral",this.fechaActual,0);
+          this.cargarMG("MedicinaGeneral",this.fechaActual,0,false);
         }else{
           this.eliminarRF(id);
-          this.cargarRF("RehabilitaciónFísica",this.fechaActual,0);
+          this.cargarRF("RehabilitaciónFísica",this.fechaActual,0,false);
         }
 
         swalWithBootstrapButtons.fire(
-          'Eliminado!',
-          'El dato se ha eliminado.',
+          '¡Eliminado!',
+          'La cita ha sido eliminada.',
           'success'
         )
       } else if (
@@ -237,8 +256,8 @@ export class CitasComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          'Cancelado',
-          'Se ha cancelado',
+          '¡Cancelado!',
+          'La cita no ha sido eliminada.',
           'error'
         )
       }
@@ -250,7 +269,7 @@ export class CitasComponent implements OnInit {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.citasMGPaginate = this.citasMG.slice(startItem, endItem);
-    
+
   }
   pageChangedRF(event: PageChangedEvent): void {
     event.itemsPerPage = 10; //opcional
