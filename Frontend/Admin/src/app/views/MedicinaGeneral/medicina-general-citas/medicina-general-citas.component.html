@@ -329,7 +329,7 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="search == ''; else filtroMG">
+              <ng-container *ngIf="search == null; else filtroMG">
                 <tr *ngFor="let item of citasMGPaginate" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>

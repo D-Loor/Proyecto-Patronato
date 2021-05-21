@@ -17,18 +17,19 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   isCollapsed2 = false;
   isCollapsed = true;
-  search:string="";
+  search;
   especialidad:string="Medicina General";
   Estado:number=1;
   validacion:string;
   public sidebarMinimized = false;
   public navItems = navItems;
-  citasMG:any[];
-  citasMGPaginate:any[];
+  validarVacio;
+  citasMG=[];
+  citasMGPaginate=[];
   citasMGFilter=[];
   citasMGPaginateFilter=[];
   Valida=[];
-  citasEliminar:any[];
+  citasEliminar=[];
   today = new Date();
   fechaActual:string;
   Porcentaje1:number;
@@ -87,13 +88,28 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(){
+    debugger
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
-    this.citasMGPaginate = this.citasMG.slice(0, 10);
+    this.validarVacio=data['code'];
+    if(this.validarVacio == '202'){
+      this.citasMG=null;
+      this.citasMGPaginate = null;
+      debugger
+    }else{
+      this.citasMGPaginate = this.citasMG.slice(0, 10);
+    }
+    if(this.search!=null){
+      debugger
+      this.dataPaginate(event);
+    }
+    
+    debugger
     }).catch(error =>{
       console.log(error);
   });
   }
+
   actualizar(){
     this.cargar();
     Swal.fire(
@@ -107,12 +123,12 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   //  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    debugger
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
-    debugger
     if(this.search==null){
 
-      this.citasMGPaginate = this.citasMG.slice(0, 10);
+      //this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
       for (const x of this.citasMG) {
 
@@ -133,8 +149,11 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   eliminar(id:string) {
+    debugger
     this.citasser.elicitas(id).then(data => {
+      debugger
         this.citasEliminar=data['result'];
+        this.cargar();
       })
       .catch((error) => {
         console.log(error);
@@ -167,8 +186,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        debugger
         this.eliminar(id);
-        this.cargar();
+        debugger
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
