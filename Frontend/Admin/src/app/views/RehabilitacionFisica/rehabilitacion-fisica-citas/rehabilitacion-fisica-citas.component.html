@@ -234,7 +234,7 @@
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
-                </div>
+                </div> 
                 <div class="progress-group">
                   <div class="progress-group-header align-items-end">
                     <i class="icon-social-twitter progress-group-icon"></i>
@@ -328,7 +328,7 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngIf="search == ''; else filtro2">
+                <ng-container *ngIf="search == null; else filtro2">
                   <tr *ngFor="let item of citasRFPaginate">
                     <td class="table-titulo">{{item.nombres}}</td>
                     <td>{{item.cedula}}</td>

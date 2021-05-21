@@ -16,14 +16,14 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   constructor(public citasser:CitasService, public rutas:Router) { }
   isCollapsed2 = false;
   isCollapsed = true;
-  search:string="";
+  search;
   especialidad:string="Rehabilitacion Fisica";
   public sidebarMinimized = false;
   public navItems = navItems;
-  citasRF:any[];
-  citasRFPaginate:any[];
-  citasRFPaginateFilter:any[];
-  citasRFFilter:any[];
+  citasRF=[];
+  citasRFPaginate=[];
+  citasRFPaginateFilter=[];
+  citasRFFilter=[];
   today = new Date();
   fechaActual:string;
 
@@ -60,9 +60,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
 
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
+    debugger
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
-    if(this.search==''){
+    if(this.search==null){
     }else{
       for (const x of this.citasRF) {
         if(x.cedula.indexOf(this.search)> -1){
@@ -143,7 +144,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
           'Cancelado',
           'Se ha cancelado',
           'error'
-        )
+        ) 
       }
     })
   }
