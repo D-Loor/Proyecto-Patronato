@@ -24,8 +24,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   tipo_atencion;
   motivo;
   antecedentes_enfermedad;
-  diagnostico='';
-  plan_terapeutico='';
+  diagnostico;
+  plan_terapeutico;
   certificado;
   enfermedades: any[];
   data = [];
@@ -48,7 +48,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   ClaseDiagnostico:string="form-control form-input";
   ClasePlan:string="form-control form-input";
 
-
+  ClaseLugar:string="";
+  ClaseTipo:string="";
+  ClaseCondicion:string="";
+  ClaseEnfermedad:string="";
 
   ngOnInit(): void {
     this.cargar();
@@ -61,9 +64,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   funcionPreventivo(){
     this.tipo="Dianóstico Presuntivo";
+    this.ClaseCondicion='';
   }
   funcionDefinitivo(){
     this.tipo="Dianósticos Diferenciales";
+    this.ClaseCondicion='';
   }
 
   cargar(){
@@ -114,12 +119,14 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
 
   selectEvent(item) {
+    this.ClaseEnfermedad='';
     this.valor=item.id;
     this.confirma=true;
     this.pase=true;
   }
 
   onChangeSearch(){
+    this.ClaseEnfermedad='';
     this.confirma=false;
     this.pase=false;
   }
@@ -132,21 +139,27 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
   notificacion(){
 
-    if(this.antecedentes_enfermedad==undefined||this.antecedentes_enfermedad==""||this.motivo==undefined||this.motivo==""||this.diagnostico==undefined||this.diagnostico==""||this.plan_terapeutico==undefined||this.plan_terapeutico==""||this.pase==false){
-      if(this.pase==false){
-        Swal.fire(
-          'Advertencia!',
-          'La enfermedad no se encuentra registrada.',
-          'warning'
-        )
+    if(this.antecedentes_enfermedad==undefined||this.condicion_diagnostico==undefined||this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""||this.NuevaEnfermedad==null||this.condicion_diagnostico==""||this.lugar_atencion==undefined||this.lugar_atencion==""||this.tipo_atencion==undefined||this.tipo_atencion==""||this.antecedentes_enfermedad==""||this.motivo==undefined||this.motivo==""||this.diagnostico==undefined||this.diagnostico==""||this.plan_terapeutico==undefined||this.plan_terapeutico==""){
+
+      if(this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""||this.NuevaEnfermedad==null){
+        this.ClaseEnfermedad = "invalido";
       }
       if(this.antecedentes_enfermedad==undefined||this.antecedentes_enfermedad==""){
         this.ClaseAntecedentes = "form-control is-invalid";
       }
+
+      if(this.condicion_diagnostico==undefined||this.condicion_diagnostico==""){
+        this.ClaseCondicion = "invalido";
+      }
+      if(this.lugar_atencion==undefined||this.lugar_atencion==""){
+        this.ClaseLugar = "invalido";
+      }
+      if(this.tipo_atencion==undefined||this.tipo_atencion==""){
+        this.ClaseTipo = "invalido";
+      }
       if(this.motivo==undefined||this.motivo==""){
         this.ClaseMotivo = "form-control is-invalid";
       }
-      debugger
       if(this.diagnostico==undefined||this.diagnostico==""){
         this.ClaseDiagnostico = "form-control is-invalid";
       }
@@ -155,6 +168,14 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       }
 
       this.NotiCampos();
+    }
+    else if(this.pase==false){
+      this.ClaseEnfermedad = "invalido";
+      Swal.fire(
+        'Error!',
+        'La enfermedad no se encuentra registrada.',
+        'error'
+      )
     }
     else{
 
