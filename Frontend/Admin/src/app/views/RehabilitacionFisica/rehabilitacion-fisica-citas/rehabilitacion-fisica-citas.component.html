@@ -310,7 +310,7 @@
               </div>
               <div class="col-xs-2 searcht">
                 <label style="height: 0px;"><label ></label></label>
-                <button type="button" class="btn btn-primary form-control" (click)="cargar(especialidad,fechaActual)"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+                <button type="button" class="btn btn-primary form-control" (click)="cargar()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
               </div>
             </div>
             </div>
@@ -326,7 +326,7 @@
                   <th>Antecedente</th>
                   <th>Opciones</th>
                 </tr>
-              </thead>
+              </thead> 
               <tbody>
                 <ng-container *ngIf="search == null; else filtro2">
                   <tr *ngFor="let item of citasRFPaginate">

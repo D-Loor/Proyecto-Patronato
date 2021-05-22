@@ -26,17 +26,30 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   citasRFFilter=[];
   today = new Date();
   fechaActual:string;
+  validarVacio;
 
   ngOnInit(): void {
 
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargar(this.especialidad,this.fechaActual);
+    this.cargar();
   }
 
-  cargar(especialidad:string,fechaActual:string){
-    this.citasser.citas(especialidad,fechaActual).then(data =>{
+  cargar(){
+    this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
       this.citasRF=data['result'];
-    this.citasRFPaginate = this.citasRF.slice(0, 10);
+      this.citasRFPaginate = this.citasRF.slice(0, 10);
+      this.validarVacio=data['code'];
+      if(this.validarVacio == '202'){
+        this.citasRF=null;
+        this.citasRFPaginate = null;
+        debugger
+      }else{
+        this.citasRFPaginate = this.citasRF.slice(0, 10);
+      }
+      if(this.search!=null){
+        debugger
+        this.dataPaginate(event);
+      }
     }).catch(error =>{
       console.log(error);
   });
@@ -57,7 +70,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       })
     }
   }
-
+ 
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     debugger
@@ -91,13 +104,11 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
 
 
 
-
-
-
   citasEliminar:any[];
   eliminar(id:string) {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
+        this.cargar();
       })
       .catch((error) => {
         console.log(error);
@@ -130,7 +141,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.eliminar(id);
-        this.cargar(this.especialidad,this.fechaActual);
+        //this.cargar(this.especialidad,this.fechaActual);
         swalWithBootstrapButtons.fire(
           'Eliminado!',
           'El dato se ha eliminado.',
