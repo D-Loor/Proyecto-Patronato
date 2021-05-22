@@ -60,15 +60,15 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   buscarMG(){
     if(this.search== null || this.search.length==0||this.search.length>10){
       Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
+        icon: 'error',
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
       })
     }else if(this.citasMGPaginateFilter.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas con esta Cédula!'
+        title: '¡No hay Registros..!',
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }
@@ -103,7 +103,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       debugger
       this.dataPaginate(event);
     }
-    
+
     debugger
     }).catch(error =>{
       console.log(error);
@@ -114,7 +114,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.cargar();
     Swal.fire(
       'Citas Actualizadas!',
-      'La lista de Citas ha sido actualizada.',
+      'La lista de citas ha sido actualizada.',
       'success'
     )
   }
