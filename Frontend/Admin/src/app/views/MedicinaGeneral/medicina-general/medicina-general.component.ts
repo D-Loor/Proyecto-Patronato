@@ -4,6 +4,7 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from "ngx-spinner";
 import { VariableAst, VariableBinding } from '@angular/compiler';
 import Swal from 'sweetalert2';
 @Component({
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class MedicinaGeneralComponent implements OnInit {
 
-  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router) { }
+  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router, private spinner: NgxSpinnerService) { }
 
   @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
   public sidebarMinimized = false;
@@ -27,6 +28,18 @@ export class MedicinaGeneralComponent implements OnInit {
   tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;
   FechaFin; FechaInicio;
   idPaciente = localStorage.getItem('id_paciente');
+
+  loadingText = 'Guardando...';
+
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
 
   ngOnInit() {
     if(this.idPaciente == 'Undefined' || this.idPaciente == null){
@@ -55,15 +68,15 @@ export class MedicinaGeneralComponent implements OnInit {
   buscarMG(){
     if(this.search== null || this.search.length==0 || this.search.length>10){
       Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
+        icon: 'error',
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
       })
     }else if(this.historialMGFilter.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Consultas Registradas con esta Cédula!'
+        title: '¡No hay Registros..!',
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }
@@ -144,25 +157,32 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   FiltroFecha(){
+
     if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
       Swal.fire(
-        'Ops!',
-        'Ingrese las fechas completas',
-        'warning'
+        '¡Campos Incorrectos..!',
+        'Ingrese las fechas a filtrar completas.',
+        'error'
       )
     }else{
+      this.loadingText = 'Cargando...';
+      this.spinner.show('sample');
+
       this.medicina_general.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
+
+
+
         if(data['code']=='203'){
           Swal.fire(
-            'Error',
-            'La fecha de incio debe ser menor a la fecha final',
+            '¡Fecha Incorrecta..!',
+            'La fecha de incio debe ser menor a la fecha final.',
             'error'
           )
         }else if(data['code']=='202'){
           Swal.fire(
-            'Ops!',
-            'Sin registros',
-            'warning'
+            '¡Sin Registros..!',
+            'No hay consultas resgistradas en esta fecha.',
+            'error'
           )
           this.cargar();
           this.FechaFin = "";
@@ -170,12 +190,18 @@ export class MedicinaGeneralComponent implements OnInit {
           this.historialMG=[];
           this.historialMGPaginate = this.historialMG.slice(0, 10);
         }else{
+          Swal.fire(
+            'Consultas Filtradas!',
+            'La lista de consultas ha sido filtrada.',
+            'success'
+          )
           this.historialMG=data['result'];
           this.historialMGPaginate = this.historialMG.slice(0, 10);
           this.FechaFin = "";
           this.FechaInicio = "";
         }
 
+      this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
     });

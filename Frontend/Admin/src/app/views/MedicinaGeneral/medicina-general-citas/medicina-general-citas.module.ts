@@ -6,6 +6,7 @@ import { FiltroModule } from '../../../pipes/filtro.module';
 import { MedicinaGeneralCitasRoutingModule } from './medicina-general-citas-routing.module';
 import { MedicinaGeneralCitasComponent } from './medicina-general-citas.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -16,13 +17,14 @@ import { PaginationModule } from 'ngx-bootstrap/pagination'
     CommonModule,
     FiltroModule,
     FormsModule,
-    PaginationModule
-  
-    
+    PaginationModule,
+    NgxSpinnerModule,
+
+
   ],
   declarations: [
     MedicinaGeneralCitasComponent,
-    
+
   ]
 })
 export class MedicinaGeneralCitasModule { }

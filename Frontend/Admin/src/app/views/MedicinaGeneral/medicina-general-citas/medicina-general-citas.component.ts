@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-medicina-general-citas',
   templateUrl: './medicina-general-citas.component.html',
@@ -13,7 +14,7 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 export class MedicinaGeneralCitasComponent implements OnInit {
 
 
-  constructor(public citasser:CitasService, public rutas:Router, private medicina:MedicinaGeneralService) { }
+  constructor(public citasser:CitasService, public rutas:Router, private medicina:MedicinaGeneralService, private spinner: NgxSpinnerService) { }
 
   isCollapsed2 = false;
   isCollapsed = true;
@@ -36,6 +37,18 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   EstiloPorcentajeH:string;
   EstiloPorcentajeM:string;
   TotalPacientes; TotalCitasPendientes; ServidoresPublicos; TotalHombres; TotalMujeres;
+  loadingText = 'Guardando...';
+
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
 
   //Obtener inicio y fin de mes
   primerDia = new Date(this.today.getFullYear(), this.today.getMonth()+1, 1);
@@ -58,19 +71,26 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.cargar();
   }
   buscarMG(){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     if(this.search== null || this.search.length==0||this.search.length>10){
+
       Swal.fire({
         icon: 'error',
         title: '¡Cédula Inválida..!',
         text: 'La cédula a buscar no es válida.'
       })
+
     }else if(this.citasMGPaginateFilter.length==0){
+
       Swal.fire({
         icon: 'error',
         title: '¡No hay Registros..!',
         text: 'No hay citas registradas con esta cédula.'
       })
+
     }
+    this.spinner.hide('sample');
   }
   Estadisticas(Inicio:string, Fin:string){
 
@@ -88,30 +108,34 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(){
-    debugger
+
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
     this.validarVacio=data['code'];
+
     if(this.validarVacio == '202'){
+      this.spinner.hide('sample');
       this.citasMG=null;
       this.citasMGPaginate = null;
-      debugger
     }else{
+      this.spinner.hide('sample');
       this.citasMGPaginate = this.citasMG.slice(0, 10);
     }
     if(this.search!=null){
-      debugger
+      this.spinner.hide('sample');
       this.dataPaginate(event);
     }
-
-    debugger
     }).catch(error =>{
+      this.spinner.hide('sample');
       console.log(error);
   });
   }
 
   actualizar(){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     this.cargar();
+
     Swal.fire(
       'Citas Actualizadas!',
       'La lista de citas ha sido actualizada.',
@@ -123,7 +147,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   //  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
-    debugger
+
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
     if(this.search==null){
@@ -149,14 +173,17 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   eliminar(id:string) {
-    debugger
+
     this.citasser.elicitas(id).then(data => {
-      debugger
+
         this.citasEliminar=data['result'];
+        this.spinner.hide('sample');
         this.cargar();
+
       })
       .catch((error) => {
         console.log(error);
+        this.spinner.hide('sample');
       });
   }
 
@@ -165,11 +192,11 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   notificacion(id:string){
+
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
-
       },
       buttonsStyling: true
     })
@@ -177,30 +204,33 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     swalWithBootstrapButtons.fire({
       title: '¿Está seguro de eliminar?',
       text: "Una vez eliminado no se podrá recuperar el mismo!",
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar registro!',
+      confirmButtonText: 'Si, eliminar cita!',
       cancelButtonText: 'No, cancelar!',
       confirmButtonColor: '#20a8d8',
       cancelButtonColor: '#f86c6b',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        debugger
+        this.loadingText = 'Cargando...';
+        this.spinner.show('sample');
         this.eliminar(id);
-        debugger
+
+
         swalWithBootstrapButtons.fire(
           'Eliminado!',
-          'El dato se ha eliminado.',
+          'La cita ha sido eliminada.',
           'success'
         )
+
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          'Cancelado',
-          'Se ha cancelado',
+          '¡Cancelado!',
+          'La cita no ha sido eliminada.',
           'error'
         )
       }

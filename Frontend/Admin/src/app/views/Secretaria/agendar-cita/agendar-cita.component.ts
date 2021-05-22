@@ -19,7 +19,7 @@ export class AgendarCitaComponent implements OnInit {
 
 
   loadingText = 'Guardando...';
-  CargaText = 'Cargando...';
+
 
   /**
    * Spinner configuration
@@ -63,20 +63,26 @@ export class AgendarCitaComponent implements OnInit {
 
 
   Consultar(cedula:string){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
+
     if(this.cedula==undefined || this.cedula==""){
-      Swal.fire(
-        'Error!',
-        'Ingrese una cedula',
-        'error'
-      );
+      this.spinner.hide('sample');
+      Swal.fire({
+        icon: 'error',
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
+      })
     }else{
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         if(data ['code'] == '202'){
+          this.spinner.hide('sample');
           Swal.fire(
             '¡Sin registros..!',
             'El paciente no cuenta con un historial clínico.',
-            'warning'
+            'error'
           );
+
         }else{
           Swal.fire(
             '¡Encontrado!',
@@ -84,6 +90,7 @@ export class AgendarCitaComponent implements OnInit {
             'success'
           );
           this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
+          this.spinner.hide('sample');
         }
 
       });
@@ -199,7 +206,7 @@ export class AgendarCitaComponent implements OnInit {
       this.spinner.hide(name);
       Swal.fire(
         '¡Cita Agendada..!',
-        'La Cita Médica fue agendada correctamente.',
+        'La cita médica fue agendada correctamente.',
         'success'
       );
       this.nombres="";
@@ -213,7 +220,7 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   AgendarCita(){
-
+    this.loadingText = 'Guardando...';
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-info',
@@ -295,7 +302,8 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Turnos(fecha:Date){
-    this.spinner.show('carga');
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     let array ={};
     this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
         if(data['code']=='202'){
@@ -304,13 +312,16 @@ export class AgendarCitaComponent implements OnInit {
             'No existen citas disponibles en esta fecha.',
             'error'
           )
+          this.spinner.hide('sample');
           this.ArrayTurnos = [];
         }else{
         array = data['result'];
         this.TurnosDisponibles(array);
+        this.spinner.hide('sample');
         }
     });
-    this.spinner.hide('carga');
+
+
   }
 
   TurnosDisponibles(array:any){

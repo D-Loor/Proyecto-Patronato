@@ -82,15 +82,15 @@ export class PacientesComponent implements OnInit {
   buscarMG(){
     if(this.search== null || this.search.length==0 || this.search.length>10){
       Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
+        icon: 'error',
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
       })
     }else if(this.pacientesMGFilter.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Paciente Registrado con esta Cédula!'
+        title: '¡No hay Registros..!',
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }

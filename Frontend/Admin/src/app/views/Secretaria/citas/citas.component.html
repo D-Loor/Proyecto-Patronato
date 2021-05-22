@@ -68,7 +68,7 @@
                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"  [(ngModel)]="cancelomg" id="cancelomg" value="0">
 
                   </td>
-                  <td> 
+                  <td>
 
                     <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
                         class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
@@ -90,6 +90,9 @@
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
+                  </td>
+                  <td>
+                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
                   </td>
                   <td>
 
@@ -183,7 +186,6 @@
 
                 <td>
                   <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
-
                 </td>
                 <td>
 
@@ -207,6 +209,9 @@
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                   <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
+                </td>
+                <td>
+                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
                 </td>
                 <td>
 
