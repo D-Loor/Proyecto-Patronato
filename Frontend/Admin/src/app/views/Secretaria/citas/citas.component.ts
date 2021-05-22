@@ -21,7 +21,7 @@ export class CitasComponent implements OnInit {
   searchRF;
   public sidebarMinimized = false;
   public navItems = navItems;
-
+ 
   citasMG=[];
   citasMGFilter=[];
   citasMGPaginate=[];
@@ -32,22 +32,25 @@ export class CitasComponent implements OnInit {
   citasRFPaginateFilter=[];
   FechaMg:string='';
   FechaRf:string='';
+  validarVacio;
 
   today = new Date();
   fechaActual:string;
 
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF("Rehabilitacion Fisica",this.fechaActual,0,false);
-    this.cargarMG("Medicina General",this.fechaActual,0,false);
+    this.cargarRF(this.fechaActual,0,false);
+    this.cargarMG(this.fechaActual,0,false);
   }
 
-  cargarMG(especialidad:string,fechaActual:string,fecha:number, cambio:boolean){
-
-    this.citasser.citas(especialidad,fechaActual).then(data =>{
+  cargarMG(fechaActual:string,fecha:number,cambio:boolean){
+    debugger
+    this.citasser.citas("Medicina General",fechaActual).then(data =>{
+    debugger
     if(data['code']!="202"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
+    
 
     if(cambio==true){
       Swal.fire({
@@ -58,7 +61,7 @@ export class CitasComponent implements OnInit {
     }
 
     }else if(fecha==1){
-    this.citasMG=null;
+    this.citasMG = null;
     this.citasMGPaginate = null;
       Swal.fire({
         icon: 'error',
@@ -66,7 +69,7 @@ export class CitasComponent implements OnInit {
         text: 'No hay citas registradas en esta fecha.'
       })
     }else{
-      this.citasMG=[];
+      this.citasMG = [];
     this.citasMGPaginate = [];
     }
     }).catch(error =>{
@@ -75,8 +78,8 @@ export class CitasComponent implements OnInit {
   }
 
   dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
-    this.citasMGFilter=[];
-    this.citasMGPaginateFilter=[];
+    this.citasMGFilter = [];
+    this.citasMGPaginateFilter = [];
 
     if(this.searchMG==null){
 
@@ -103,8 +106,18 @@ export class CitasComponent implements OnInit {
 
   citasEliminarMG:any[];
   eliminarMG(id:string) {
+    debugger
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarMG=data['result'];
+        debugger
+        if(this.FechaMg==''){
+          this.cargarMG(this.fechaActual,0,false);
+          debugger
+        }else{
+          this.cargarMG(this.FechaMg,0,false);
+        }
+        
+        debugger
       })
       .catch((error) => {
         console.log(error);
@@ -113,12 +126,12 @@ export class CitasComponent implements OnInit {
 
 
 
-  cargarRF(especialidad:string,fechaActual:string,fecha:number, cambio:boolean){
-    this.citasser.citas(especialidad,fechaActual).then(data =>{
+  cargarRF(fechaActual:string,fecha:number,cambio:boolean){
+    this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
       debugger
-    if(data['code']!="202"){
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
+    if(data['code']!="202"){
       if(cambio==true){
         Swal.fire({
           icon: 'success',
@@ -134,9 +147,15 @@ export class CitasComponent implements OnInit {
         title: '¡Sin Registros..!',
         text: 'No hay citas registradas en esta fecha.'
       })
+    }else if(fecha!=1 && this.searchRF==null){
+      this.citasRF = null;
+      this.citasRFPaginate = null;
     }else{
-      this.citasRF = [];
-      this.citasRFPaginate = [];
+      debugger
+      if(this.searchRF!=null){
+        debugger
+        this.dataPaginateRF(event);
+      }
     }
     }).catch(error =>{
       console.log(error);
@@ -207,6 +226,13 @@ export class CitasComponent implements OnInit {
   eliminarRF(id:string) {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarRF=data['result'];
+        if(this.FechaRf==''){
+          this.cargarRF(this.fechaActual,0,false);
+          debugger
+        }else{
+          this.cargarRF(this.FechaRf,0,false);
+        }
+        
       })
       .catch((error) => {
         console.log(error);
@@ -238,12 +264,15 @@ export class CitasComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        debugger
         if(especialidad=="MG"){
+          debugger
           this.eliminarMG(id);
-          this.cargarMG("MedicinaGeneral",this.fechaActual,0,false);
+          debugger
         }else{
+          debugger
           this.eliminarRF(id);
-          this.cargarRF("RehabilitaciónFísica",this.fechaActual,0,false);
+          debugger
         }
 
         swalWithBootstrapButtons.fire(

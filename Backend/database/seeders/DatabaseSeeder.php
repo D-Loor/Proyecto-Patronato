@@ -128,8 +128,8 @@ class DatabaseSeeder extends Seeder
         DB::table('citas')->insert([
             'nombres' => 'Alex Dario Zambrano Falconez',
             'cedula' => '1314567908',
-            'especialidad' => 'Medicina General',
-            'fecha' => Carbon::parse('2021-05-22'),
+            'especialidad' => 'Rehabilitacion Fisica',
+            'fecha' => Carbon::parse('2021-05-21'),
             'estado' => true,
             'id_turno' => 1,
             //'email' => Str::random(10).'@gmail.com',
@@ -137,8 +137,8 @@ class DatabaseSeeder extends Seeder
         ]); DB::table('citas')->insert([
             'nombres' => 'Bryan Aldair Mendoza Loor',
             'cedula' => '1314567903',
-            'especialidad' => 'Medicina General',
-            'fecha' => Carbon::parse('2021-05-22'),
+            'especialidad' => 'Rehabilitacion Fisica',
+            'fecha' => Carbon::parse('2021-05-21'),
             'estado' => false,
             'id_turno' => 2,
             //'email' => Str::random(10).'@gmail.com',
@@ -146,7 +146,7 @@ class DatabaseSeeder extends Seeder
         ]); DB::table('citas')->insert([
             'nombres' => 'Diego Oswaldo Loor Moran',
             'cedula' => '1316870706',
-            'especialidad' => 'Medicina General',
+            'especialidad' => 'Rehabilitacion Fisica',
             'fecha' => Carbon::parse('2021-05-22'),
             'estado' => true,
             'id_turno' => 3,
