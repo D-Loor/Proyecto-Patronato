@@ -14,13 +14,13 @@ class HistoriaClinicaRFController extends Controller
      */
     public function index()
     {
-        //$datos=Historia_Clinica_RF::all();  
+        //$datos=Historia_Clinica_RF::all();
         $datos=Historia_Clinica_RF::with('paciente', 'tratamiento')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
-           return response()->json(['result'=>$datos]); 
+           return response()->json(['result'=>$datos]);
        }else
-           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
 
     }
 
@@ -50,6 +50,7 @@ class HistoriaClinicaRFController extends Controller
         $datos->certificado=$request->certificado;
         $datos->motivo_consulta=$request->motivo_consulta;
         $datos->anamnesis=$request->anamnesis;
+        $datos->receta=$request->receta;
         $datos->fecha=$request->fecha;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
@@ -63,7 +64,7 @@ class HistoriaClinicaRFController extends Controller
      */
     public function show($id)
     {
-        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first(); 
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
@@ -90,15 +91,16 @@ class HistoriaClinicaRFController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first(); 
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();
         $datos->id_paciente=$request->id_paciente;
         $datos->id_tratamiento=$request->id_tratamiento;
         $datos->diagnostico=$request->diagnostico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
         $datos->fecha=$request->fecha;
+        $datos->receta=$request->receta;
         $datos->update();
-        
+
         return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
     }
 
@@ -110,7 +112,7 @@ class HistoriaClinicaRFController extends Controller
      */
     public function destroy($id)
     {
-        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();  
+        $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();
         if($datos != null){
             $datos->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
@@ -137,6 +139,6 @@ class HistoriaClinicaRFController extends Controller
             }else
                 return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         }
-            
+
     }
 }

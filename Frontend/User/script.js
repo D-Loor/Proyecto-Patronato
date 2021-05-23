@@ -178,7 +178,7 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
         var fecha = document.getElementById("fecha").value;
         var turno = document.getElementById("hora").value;
         var estado= 1;
-        
+        var abono="ADZF-BAML-DOLM";
 
         if(nombres==""||nombres==null||cedula==""||cedula==null||especialidad==null||especialidad==""||fecha==null||fecha==""||turno==null||turno==""||estado==null||estado==""||comprotido==false){
             
@@ -238,7 +238,8 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                                 'especialidad' : especialidad,
                                 'fecha' : fecha,
                                 'id_turno' : turno,
-                                'estado': estado
+                                'estado': estado,
+                                'abono': abono
                             }),
                             contentType: 'application/json; charset=utf-8',
                             success: function (data) {

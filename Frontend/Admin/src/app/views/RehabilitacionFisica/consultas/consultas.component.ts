@@ -27,8 +27,8 @@ export class ConsultasComponent implements OnInit {
   idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado
 
   //variables para el tratamiento
-  idTratamiento; estimulacion_temprana; magnetoterapia; electroestimulacion; ultrasonido; CQC_OH; 
-  masaje; ejercicios_PR; laser; otros; otrosT
+  idTratamiento; estimulacion_temprana; magnetoterapia; electroestimulacion; ultrasonido; CQC_OH;
+  masaje; ejercicios_PR; laser; otros; otrosT; receta;
 
   loadingText = 'Guardando...';
 
@@ -69,7 +69,7 @@ export class ConsultasComponent implements OnInit {
   CargarDatos(){
     let cedula = localStorage.getItem('cedulaRF');
     this.idcita = localStorage.getItem('idCita');
-    this.rehabilifacionF.AtenderPaciente(cedula).then(data => {      
+    this.rehabilifacionF.AtenderPaciente(cedula).then(data => {
       this.nombres = data['result'].nombres + '' +data['result'].apellidos;
       this.ocupacion = data['result'].ocupacion;
       this.edad = data['result'].edad;
@@ -165,7 +165,7 @@ export class ConsultasComponent implements OnInit {
     }else{
       OT="No aplica";
     }
-    
+
     let dataT ={
       'estimulacion_temprana': ET,
       'magnetoterapia': MG,
@@ -198,6 +198,7 @@ export class ConsultasComponent implements OnInit {
       'motivo_consulta':this.motivo_consultaT,
       'anamnesis':this.anamnesisT,
       'fecha':this.fechaActual,
+      'receta':this.receta
     }
 
     this.RFService.AgregarConsulta(dataC).then(data=>{

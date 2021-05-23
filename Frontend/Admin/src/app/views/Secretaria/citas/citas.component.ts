@@ -21,7 +21,7 @@ export class CitasComponent implements OnInit {
   searchRF;
   public sidebarMinimized = false;
   public navItems = navItems;
- 
+
   citasMG=[];
   citasMGFilter=[];
   citasMGPaginate=[];
@@ -44,13 +44,13 @@ export class CitasComponent implements OnInit {
   }
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean){
-    debugger
+
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
-    debugger
+
     if(data['code']!="202"){
     this.citasMG=data['result'];
     this.citasMGPaginate = this.citasMG.slice(0, 10);
-    
+
 
     if(cambio==true){
       Swal.fire({
@@ -106,29 +106,34 @@ export class CitasComponent implements OnInit {
 
   citasEliminarMG:any[];
   eliminarMG(id:string) {
-    debugger
+
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarMG=data['result'];
-        debugger
+
         if(this.FechaMg==''){
           this.cargarMG(this.fechaActual,0,false);
-          debugger
+
         }else{
           this.cargarMG(this.FechaMg,0,false);
         }
-        
-        debugger
+
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  abonar(id, valor){
+    if(valor ==true || valor==1){
+      return false;
+    }
 
+  }
 
   cargarRF(fechaActual:string,fecha:number,cambio:boolean){
     this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
-      debugger
+
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
     if(data['code']!="202"){
@@ -151,9 +156,9 @@ export class CitasComponent implements OnInit {
       this.citasRF = null;
       this.citasRFPaginate = null;
     }else{
-      debugger
+
       if(this.searchRF!=null){
-        debugger
+
         this.dataPaginateRF(event);
       }
     }
@@ -228,11 +233,11 @@ export class CitasComponent implements OnInit {
         this.citasEliminarRF=data['result'];
         if(this.FechaRf==''){
           this.cargarRF(this.fechaActual,0,false);
-          debugger
+
         }else{
           this.cargarRF(this.FechaRf,0,false);
         }
-        
+
       })
       .catch((error) => {
         console.log(error);

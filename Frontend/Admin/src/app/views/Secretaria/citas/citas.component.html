@@ -65,7 +65,7 @@
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"  [(ngModel)]="cancelomg" id="cancelomg" value="0">
+                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" id="cancelomg"  [checked]='item.abono' >
 
                   </td>
                   <td>
@@ -84,15 +84,14 @@
                 <tr *ngFor="let item of citasMGPaginateFilter" >
                   <td class="table-titulo">{{item.nombres}}</td>
                   <td>{{item.cedula}}</td>
-                  <td>{{item.turno.hora}}</td>
                   <td>{{item.fecha}}</td>
-                  <td></td>
+                  <td>{{item.turno.hora}}</td>
                   <td>
                     <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
+                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf" id="cancelorf" [checked]='item.abono'>
                   </td>
                   <td>
 
@@ -167,8 +166,8 @@
                 <th>Cédula</th>
                 <th>Fecha</th>
                 <th>Hora</th>
-                <th>Abonó</th>
                 <th>Historial</th>
+                <th>Abonó</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -185,7 +184,7 @@
                 </td>
 
                 <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
+                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  (click)="abonar(item.id,item.abono)" id="cancelorf" [checked]='item.abono'>
                 </td>
                 <td>
 
@@ -204,14 +203,14 @@
               <tr *ngFor="let item of citasRFPaginateFilter" >
                 <td class="table-titulo">{{item.nombres}}</td>
                 <td>{{item.cedula}}</td>
-                <td>{{item.turno.hora}}</td>
                 <td>{{item.fecha}}</td>
+                <td>{{item.turno.hora}}</td>
                 <td>
                   <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
                   <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  [(ngModel)]="cancelorf" id="cancelorf" value="0">
+                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf" (click)="abonar(item.id,item.abono)"  id="cancelorf" [checked]='item.abono'>
                 </td>
                 <td>
 

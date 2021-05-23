@@ -21,6 +21,7 @@ class CreateCitasTable extends Migration
             $table->string('especialidad');
             $table->date('fecha');
             $table->string('estado');
+            $table->boolean('abono');
             $table->foreign('id_turno')->references('id_turno')->on('turnos')->onDelete('cascade');
         });
     }

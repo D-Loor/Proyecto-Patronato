@@ -53,12 +53,18 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
+
         $datos=new Cita();
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
         $datos->especialidad=$request->especialidad;
         $datos->fecha=$request->fecha;
         $datos->id_turno=$request->id_turno;
+        if($request->abono=="DOADBA"){
+            $datos->abono=true;
+        }else{
+            $datos->abono=false;
+        }
         $datosP=Paciente::where('cedula', $request->cedula)->get()->first();
         if($datosP != null){
             $datos->estado=1;
@@ -143,6 +149,7 @@ class CitaController extends Controller
             $datos->cedula = $datos->cedula;
             $datos->especialidad = $datos->especialidad;
             $datos->fecha = $datos->fecha;
+            $datos->abono = $request->abono;
             $datos->id_turno = $datos->id_turno;
             $datosP=Paciente::where('cedula', $cedula)->get()->first();
             if($datosP != null){

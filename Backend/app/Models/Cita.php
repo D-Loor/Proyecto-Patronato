@@ -12,7 +12,7 @@ class Cita extends Model
     protected $table = 'citas';
     protected $primaryKey = 'id_cita';
     protected $fillable = [
-         'nombres', 'id_turno', 'cedula',  'especialidad',  'fecha', 'estado',
+         'nombres', 'id_turno', 'cedula',  'especialidad',  'fecha', 'estado','abono',
     ];
     public function turno(){
         return $this->belongsTo('App\Models\Turno','id_turno');

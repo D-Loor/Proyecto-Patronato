@@ -49,7 +49,7 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCHora:string="form-control form-input select-number";
 
   //Variables para datos pacientes
-  nombres; fecha_consulta; cedula; especialidad; idT:string;
+  nombres; fecha_consulta; cedula; especialidad; idT:string;abono=false;
   ArrayTurnos: any = []
 
   ngOnInit() {
@@ -195,13 +195,21 @@ export class AgendarCitaComponent implements OnInit {
 
   }
   GuardarCita(name:string){
+    let compro="";
+    if(this.abono==true){
+      compro="DOADBA";
+    }else{
+      compro="FALSO";
+    }
     let paciente = {
       'nombres':this.nombres,
       'cedula':this.cedula,
       'fecha':this.fecha_consulta,
       'especialidad':this.especialidad,
+      'abono':compro,
       'id_turno':this.idT[0],
     }
+
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
       this.spinner.hide(name);
       Swal.fire(
@@ -214,6 +222,7 @@ export class AgendarCitaComponent implements OnInit {
       this.fecha_consulta="";
       this.especialidad="";
       this.idT="";
+      this.abono=false;
       this.ClaseCdula="form-control form-input select-number";
       this.ArrayTurnos = [];
     });

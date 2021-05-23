@@ -56,11 +56,9 @@ class HistoriaClinicaMGController extends Controller
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
-
-
+        $datos->receta=$request->receta;
 
         $datos->save();
-
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
 
@@ -112,6 +110,7 @@ class HistoriaClinicaMGController extends Controller
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
+        $datos->receta=$request->receta;
 
         $datos->update();
         return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
@@ -153,7 +152,7 @@ class HistoriaClinicaMGController extends Controller
             }else
                 return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         }
-            
+
     }
 
     public function ConsultasPacientes($id){
@@ -163,7 +162,7 @@ class HistoriaClinicaMGController extends Controller
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
             return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
-        
+
     }
 
     public function DatosEstadisticos($fechaInicial, $fechaFinal){
@@ -192,7 +191,7 @@ class HistoriaClinicaMGController extends Controller
         $TotalcitasPendientes = count($citasPendientes);
 
         return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM]);
-        
+
     }
 
 }
