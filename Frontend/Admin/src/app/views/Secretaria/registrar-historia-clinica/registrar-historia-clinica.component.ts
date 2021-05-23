@@ -61,7 +61,12 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   ClaseEdad = "form-control";  ClaseOcupacion = "form-control"; ClaseGad = ""; ClaseSexo="form-control";
   ClaseLR = "form-control"; ClaseLP ="form-control"; ClaseFecha ="form-control"; ClaseRaza ="form-control";
   ClaseReligion="form-control"; ClaseNivel="form-control"; ClaseEstado="form-control"; 
-  ClaseTninez="form-control"; ClaseTadolecencia="form-control"; ClaseTadultez="form-control"; ClaseDbid=""
+  ClaseTninez="form-control"; ClaseTadolecencia="form-control"; ClaseTadultez="form-control"; ClaseDbid="";
+  ClaseDbi="";ClaseHta=""; ClaseTbp=""; ClaseTquirurjicos="form-control"; ClaseTalergicos="form-control"; ClaseTtraumatologicos="form-control"; 
+  ClaseFum='form-control form-input'; ClaseFpp='form-control form-input'; ClaseEdadG='form-control form-input';
+  ClaseMenarquia='form-control form-input';ClaseFlujoG='form-control form-input'; ClaseGestas='form-control form-input';
+  ClasePartos='form-control form-input'; ClaseAbortos='form-control form-input'; ClaseCesareas='form-control form-input';
+  ClaseAlcohol=""; ClaseTabaco=""; ClaseDrogas=""; ClaseAliemtacion=""; ClaseDiurisis=""; ClaseSomnia="";
 
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
@@ -77,10 +82,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   raza; religion; nivel_instruccion; estado_civil; gad;
 
   //Variables de datos de Antecedentes Patológicos Personales
-  ninezT=""; adolescenciaT=""; adultezT=""; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
+  ninezT=""; adolescenciaT=""; adultezT=""; quirurgicosT=""; alergicosT=""; traumatologicosT=""; fum; fpp; edad_gestional;
   menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBID; HTA; TbP; DBI; 
   //Check Variables Antecedentes Patológicos Personales
-  ninezC=0; adolescenciaC=0; adultezC=0; quirurgicosC=0; alergicosC=0; traumatologicosC=0; ginecos_obstetricosC=0; ginecos_obstetricosCaux:number=0;
+  ninezC=0; adolescenciaC=0; adultezC=0; quirurgicosC=0; alergicosC=0; traumatologicosC=0; ginecos_obstetricosC=0; ginecos_obstetricosCaux=0;
 
   //Variables de Antecedentes Patológicos Familiares
   nombres; union; estado; estadoT; union2;
@@ -300,8 +305,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
    //Es para actualizar...
 
    checkRadioSi(radioCheck:string){
-     this.ClaseGad="";
-     this.ClaseDbid="";
     if(radioCheck=='gad'){this.gad=1;}
     if(radioCheck=='dbid'){this.DBID=1;}
     if(radioCheck=='hta'){this.HTA=1;}
@@ -316,7 +319,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     
    }
    checkRadioNo(radioCheck:string){
-    this.ClaseGad="";
     if(radioCheck=='gad'){this.gad=0;}
     if(radioCheck=='dbid'){this.DBID=0;}
     if(radioCheck=='hta'){this.HTA=0;}
@@ -442,9 +444,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               if(this.ninezT=="1"){this.ninezC=1; this.ninezT='';}
               if(this.adolescenciaT=="1"){this.adolescenciaC=1;this.adolescenciaT='';}
               if(this.adultezT=="1"){this.adultezC=1;this.adultezT='';}
-              if(this.quirurgicosT==1){this.quirurgicosC=1;this.quirurgicosT='';}
-              if(this.traumatologicosT==1){this.traumatologicosC=1;this.traumatologicosT='';}
-              if(this.alergicosT==1){this.alergicosC=1;this.alergicosT='';}
+              if(this.quirurgicosT=="1"){this.quirurgicosC=1;this.quirurgicosT='';}
+              if(this.traumatologicosT=="1"){this.traumatologicosC=1;this.traumatologicosT='';}
+              if(this.alergicosT=="1"){this.alergicosC=1;this.alergicosT='';}
              
               if(this.sexo == "Mujer"){
                 this.cargarGinecoPersonal(this.id_gineco);
@@ -579,9 +581,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       if(this.ninezC==1){this.ninezT="1";}
       if(this.adolescenciaC==1){this.adolescenciaT="1";}
       if(this.adultezC==1){this.adultezT="1";}
-      if(this.quirurgicosC==1){this.quirurgicosT=1;}
-      if(this.traumatologicosC==1){this.traumatologicosT=1;}
-      if(this.alergicosC==1){this.alergicosT=1;}  
+      if(this.quirurgicosC==1){this.quirurgicosT="1";}
+      if(this.traumatologicosC==1){this.traumatologicosT="1";}
+      if(this.alergicosC==1){this.alergicosT="1";}  
     
     let APerosonales = {
       'id_gineco':this.id_obstetrico,
@@ -792,10 +794,52 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
        this.IngresarAntecedesPersonales();
       } 
   }
+  
+  Restaurar(){
+    this.ClaseTadultez='form-control';
+    this.DBID=undefined; this.DBI=undefined;this.HTA=undefined;this.TbP==undefined;
+    this.ClaseDbid="";this.ClaseDbi="";this.ClaseHta="";this.ClaseTbp="";
+  }
+  RestaurarMujer(){
+    this.ClaseFum='form-control form-input'; this.ClaseFpp='form-control form-input'; this.ClaseEdadG='form-control form-input';
+    this.ClaseMenarquia='form-control form-input';this.ClaseFlujoG='form-control form-input'; this.ClaseGestas='form-control form-input';
+    this.ClasePartos='form-control form-input'; this.ClaseAbortos='form-control form-input'; this.ClaseCesareas='form-control form-input'
+  }
 
   ValidarMujer(){
-    if(this.sexo=="Mujer"){
-      if(this.sexo=="Mujer"){
+    if(this.sexo=="Mujer" && this.ginecos_obstetricosC==0){
+      if(this.fum==undefined|| this.fum==""|| this.fpp==undefined||this.fpp==""||this.edad_gestional==undefined||
+         this.edad_gestional==""|| this.menarquia==undefined||this.menarquia==""||this.flujo_genital==undefined||
+         this.flujo_genital==""||this.Gestas==undefined||this.Gestas==""||this.Partos==undefined||this.Partos==""||
+         this.abortos==undefined||this.abortos==""||this.cesareas==undefined||this.cesareas==""
+      ){
+        if(this.fum==undefined|| this.fum==""){
+          this.ClaseFum="form-control is-invalid";
+        }
+        if(this.fpp==undefined||this.fpp==""){
+          this.ClaseFpp="form-control is-invalid";
+        }
+        if(this.edad_gestional==undefined||this.edad_gestional==""){
+          this.ClaseEdadG="form-control is-invalid";
+        }
+        if(this.menarquia==undefined||this.menarquia==""){
+          this.ClaseMenarquia="form-control is-invalid";
+        }
+        if(this.flujo_genital==undefined||this.flujo_genital==""){
+          this.ClaseFlujoG="form-control is-invalid";
+        }
+        if(this.Gestas==undefined||this.Gestas==""){
+          this.ClaseGestas="form-control is-invalid";
+        }
+        if(this.Partos==undefined||this.Partos==""){
+          this.ClasePartos="form-control is-invalid";
+        }
+        if(this.abortos==undefined||this.abortos==""){
+          this.ClaseAbortos="form-control is-invalid";
+        }
+        if(this.cesareas==undefined||this.cesareas==""){
+          this.ClaseCesareas="form-control is-invalid";
+        }
         
         return true;
       }else{
@@ -807,14 +851,16 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   VaidarPaciente(){
-    debugger
     let mujer = this.ValidarMujer();
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
        this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
        this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
        this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
        this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
-       this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""
+       this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
+       this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 && 
+       this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
+       this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined
     ){
       Swal.fire({
         icon: 'error',
@@ -822,12 +868,54 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         text: 'Debe de completar todo el formulario para registrar el historial clínico.'
       })
 
+      if(this.alcohol==undefined){
+        this.ClaseAlcohol="invalido";
+      }
+      if(this.tabaco==undefined){
+        this.ClaseTabaco="invalido";
+      }
+      if(this.drogas==undefined){
+        this.ClaseDrogas="invalido";
+      }
+      if(this.alimentacion==undefined){
+        this.ClaseAliemtacion="invalido";
+      }
+      if(this.diuresis==undefined){
+        this.ClaseDiurisis="invalido";
+      }
+      if(this.somnia==undefined){
+        this.ClaseSomnia="invalido";
+      }
+      if(this.traumatologicosC==0){
+        if(this.traumatologicosT==""){
+          this.ClaseTtraumatologicos="form-control is-invalid";
+        }
+      }
+      if(this.alergicosC==0){
+        if(this.alergicosT==""){
+          this.ClaseTalergicos="form-control is-invalid";
+        }
+      }
+      if(this.quirurgicosC==0){
+        if(this.quirurgicosT==""){
+          this.ClaseTquirurjicos="form-control is-invalid";
+        }
+      }
       if(this.adultezC==0){
         if(this.adultezT==""){
           this.ClaseTadultez="form-control is-invalid";
         }
         if(this.DBID==undefined){
           this.ClaseDbid="invalido";
+        }
+        if(this.DBI==undefined){
+          this.ClaseDbi="invalido";
+        }
+        if(this.HTA==undefined){
+          this.ClaseHta="invalido";
+        }
+        if(this.TbP==undefined){
+          this.ClaseTbp="invalido";
         }
       }
       if(this.adolescenciaC==0){
@@ -934,9 +1022,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     if(this.ninezC==1){this.ninezT="1"}
       if(this.adolescenciaC==1){this.adolescenciaT="1";}
       if(this.adultezC==1){this.adultezT="1";}
-      if(this.quirurgicosC==1){this.quirurgicosT=1;}
-      if(this.traumatologicosC==1){this.traumatologicosT=1;}
-      if(this.alergicosC==1){this.alergicosT=1;}    
+      if(this.quirurgicosC==1){this.quirurgicosT="1";}
+      if(this.traumatologicosC==1){this.traumatologicosT="1";}
+      if(this.alergicosC==1){this.alergicosT="1";}    
       if(this.sexo=='Hombre'){
         this.id_gineco=1;
       }
