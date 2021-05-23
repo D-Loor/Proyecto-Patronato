@@ -35,7 +35,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   public navItems = navItems;
   inputCedula: boolean = false;
   inputCedula2: boolean = false;
-  ClaseCdula:string="form-control form-input select-number"; 
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = false;
@@ -56,6 +55,14 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   actualizar:number=0;
   containerSecretaria=0;
   ginecosSi:number=1;
+
+  //Validación de campos vacios
+  Classapellidos = "form-control"; Classnombres ="form-control"; ClaseCdula:string="form-control form-input select-number"; 
+  ClaseEdad = "form-control";  ClaseOcupacion = "form-control"; ClaseGad = ""; ClaseSexo="form-control";
+  ClaseLR = "form-control"; ClaseLP ="form-control"; ClaseFecha ="form-control"; ClaseRaza ="form-control";
+  ClaseReligion="form-control"; ClaseNivel="form-control"; ClaseEstado="form-control"; 
+  ClaseTninez="form-control"; ClaseTadolecencia="form-control"; ClaseTadultez="form-control"; ClaseDbid=""
+
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
   id_sistema:number; id_complementario:number; id_habito:number; id_paciente:number;
@@ -70,10 +77,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   raza; religion; nivel_instruccion; estado_civil; gad;
 
   //Variables de datos de Antecedentes Patológicos Personales
-  ninezT; adolescenciaT; adultezT; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
+  ninezT=""; adolescenciaT=""; adultezT=""; quirurgicosT; alergicosT; traumatologicosT; fum; fpp; edad_gestional;
   menarquia; flujo_genital; Gestas; Partos; abortos; cesareas; DBID; HTA; TbP; DBI; 
   //Check Variables Antecedentes Patológicos Personales
-  ninezC:number; adolescenciaC:number; adultezC:number; quirurgicosC:number; alergicosC:number; traumatologicosC:number; ginecos_obstetricosC:number; ginecos_obstetricosCaux:number=0;
+  ninezC=0; adolescenciaC=0; adultezC=0; quirurgicosC=0; alergicosC=0; traumatologicosC=0; ginecos_obstetricosC=0; ginecos_obstetricosCaux:number=0;
 
   //Variables de Antecedentes Patológicos Familiares
   nombres; union; estado; estadoT; union2;
@@ -293,6 +300,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
    //Es para actualizar...
 
    checkRadioSi(radioCheck:string){
+     this.ClaseGad="";
+     this.ClaseDbid="";
     if(radioCheck=='gad'){this.gad=1;}
     if(radioCheck=='dbid'){this.DBID=1;}
     if(radioCheck=='hta'){this.HTA=1;}
@@ -307,6 +316,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     
    }
    checkRadioNo(radioCheck:string){
+    this.ClaseGad="";
     if(radioCheck=='gad'){this.gad=0;}
     if(radioCheck=='dbid'){this.DBID=0;}
     if(radioCheck=='hta'){this.HTA=0;}
@@ -429,9 +439,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
               this.id_gineco=data['result']['antecedentes_patologicos_personales'].id_gineco;  
               //Condiciones para los check
-              if(this.ninezT==1){this.ninezC=1; this.ninezT='';}
-              if(this.adolescenciaT==1){this.adolescenciaC=1;this.adolescenciaT='';}
-              if(this.adultezT==1){this.adultezC=1;this.adultezT='';}
+              if(this.ninezT=="1"){this.ninezC=1; this.ninezT='';}
+              if(this.adolescenciaT=="1"){this.adolescenciaC=1;this.adolescenciaT='';}
+              if(this.adultezT=="1"){this.adultezC=1;this.adultezT='';}
               if(this.quirurgicosT==1){this.quirurgicosC=1;this.quirurgicosT='';}
               if(this.traumatologicosT==1){this.traumatologicosC=1;this.traumatologicosT='';}
               if(this.alergicosT==1){this.alergicosC=1;this.alergicosT='';}
@@ -566,9 +576,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     if(this.sexo=="Hombre" || this.ginecos_obstetricosC==1){
       this.id_obstetrico = 1;
     }
-      if(this.ninezC==1){this.ninezT=1;}
-      if(this.adolescenciaC==1){this.adolescenciaT=1;}
-      if(this.adultezC==1){this.adultezT=1;}
+      if(this.ninezC==1){this.ninezT="1";}
+      if(this.adolescenciaC==1){this.adolescenciaT="1";}
+      if(this.adultezC==1){this.adultezT="1";}
       if(this.quirurgicosC==1){this.quirurgicosT=1;}
       if(this.traumatologicosC==1){this.traumatologicosT=1;}
       if(this.alergicosC==1){this.alergicosT=1;}  
@@ -776,30 +786,121 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
   
   IngresarDatosPaciente(){
-    
       if(this.sexo=="Mujer"){
         this.IngresarObstetrico();
       }else{
        this.IngresarAntecedesPersonales();
       } 
-    
+  }
+
+  ValidarMujer(){
+    if(this.sexo=="Mujer"){
+      if(this.sexo=="Mujer"){
+        
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
   }
 
   VaidarPaciente(){
-    
-    this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
-      if(data ['code'] == '201'){
-        Swal.fire(
-          'Error!',
-          'El paciente ya cuenta con historial clínico',
-          'error'
-        )
-      }else{
-        this.spinner.show('sample');
-        this.IngresarDatosPaciente();
+    debugger
+    let mujer = this.ValidarMujer();
+    if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
+       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
+       this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
+       this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
+       this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
+       this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""
+    ){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para registrar el historial clínico.'
+      })
+
+      if(this.adultezC==0){
+        if(this.adultezT==""){
+          this.ClaseTadultez="form-control is-invalid";
+        }
+        if(this.DBID==undefined){
+          this.ClaseDbid="invalido";
+        }
       }
-        
-    });
+      if(this.adolescenciaC==0){
+        if(this.adolescenciaT==""){
+          this.ClaseTadolecencia="form-control is-invalid";
+        }
+      }
+      if(this.ninezC==0){
+        if(this.ninezT==""){
+          this.ClaseTninez="form-control is-invalid";
+        }
+      }
+      if(this.apellidos==undefined||this.apellidos==""){
+        this.Classapellidos="form-control is-invalid";
+      }
+      if(this.nombresP==undefined||this.nombresP==""){
+        this.Classnombres="form-control is-invalid";
+      }
+      if(this.cedula==undefined||this.cedula==""){
+        this.ClaseCdula="form-control is-invalid";
+      }
+      if(this.edad==undefined||this.edad==""){
+        this.ClaseEdad="form-control is-invalid";
+      }
+      if(this.gad==undefined){
+        this.ClaseGad="invalido";
+      }
+      if(this.ocupacion==undefined||this.ocupacion==""){
+        this.ClaseOcupacion="form-control is-invalid";
+      }
+      if(this.sexo==undefined||this.sexo==""){
+        this.ClaseSexo="form-control is-invalid";
+      }
+      if(this.Lresidencia==undefined||this.Lresidencia==""){
+        this.ClaseLR="form-control is-invalid";
+      }
+      if(this.Lprocedencia==undefined||this.Lprocedencia==""){
+        this.ClaseLP="form-control is-invalid";
+      }
+      if(this.religion==undefined||this.religion==""){
+        this.ClaseReligion="form-control is-invalid";
+      }
+      if(this.raza==undefined||this.raza==""){
+        this.ClaseRaza="form-control is-invalid";
+      }
+      if(this.fechanacimiento==undefined||this.fechanacimiento==""){
+        this.ClaseFecha="form-control is-invalid";
+      }
+      if(this.nivel_instruccion==undefined||this.nivel_instruccion==""){
+        this.ClaseNivel="form-control is-invalid";
+      }
+      if(this.estado_civil==undefined||this.estado_civil==""){
+        this.ClaseEstado="form-control is-invalid";
+      }
+      
+      
+    }else{
+      this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
+        if(data ['code'] == '201'){
+          Swal.fire(
+            'Error!',
+            'El paciente ya cuenta con historial clínico',
+            'error'
+          )
+        }else{
+          this.spinner.show('sample');
+          this.IngresarDatosPaciente();
+        }
+          
+      });
+    }
+    
+    
   }
 
 
@@ -830,9 +931,9 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       
     this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{});
 
-    if(this.ninezC==1){this.ninezT=1}
-      if(this.adolescenciaC==1){this.adolescenciaT=1;}
-      if(this.adultezC==1){this.adultezT=1;}
+    if(this.ninezC==1){this.ninezT="1"}
+      if(this.adolescenciaC==1){this.adolescenciaT="1";}
+      if(this.adultezC==1){this.adultezT="1";}
       if(this.quirurgicosC==1){this.quirurgicosT=1;}
       if(this.traumatologicosC==1){this.traumatologicosT=1;}
       if(this.alergicosC==1){this.alergicosT=1;}    
