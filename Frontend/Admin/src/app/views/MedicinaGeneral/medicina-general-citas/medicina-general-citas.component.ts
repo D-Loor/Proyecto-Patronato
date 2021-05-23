@@ -137,7 +137,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.cargar();
 
     Swal.fire(
-      'Citas Actualizadas!',
+      '¡Citas Actualizadas..!',
       'La lista de citas ha sido actualizada.',
       'success'
     )
