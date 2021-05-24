@@ -27,14 +27,14 @@
                                             <input required type="number" id="edad"  autocomplete="off" disabled [(ngModel)]="edad" name="edad" class="form-control" placeholder="Ingrese la edad">
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="inline-radios">Lugar de atención</label>
+                                            <label for="inline-radios" [class]="ClaseLugar">Lugar de atención</label>
                                                 <div class="col-md-8 col-form-label">
                                                     <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
+                                                    <input class="form-check-input" type="radio" name="lugar_atencion" (click)="ClaseLugar=''" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Patronato">
                                                     <label class="form-check-label" for="inlineRadio1">Patronato</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" type="radio" name="lugar_atencion" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
+                                                    <input class="form-check-input" type="radio" name="lugar_atencion" (click)="ClaseLugar=''" [(ngModel)]="lugar_atencion" id="lugar_atencion" value="Domicilio">
                                                     <label class="form-check-label" for="inlineRadio3">Domicilio</label>
                                                     </div>
                                                 </div>
@@ -43,70 +43,70 @@
                                       <div class="row">
                                         <div class="form-group col-sm-12">
                                             <label for="text-input">Motivo de la consulta</label>
-                                            <textarea autocomplete="off" required  [(ngModel)]="motivo_consultaT" id="motivo_consultaT" name="motivo_consultaT" rows="3" class="form-control" placeholder="Descripción del motivo de la consulta.."></textarea>
+                                            <textarea autocomplete="off" required  [(ngModel)]="motivo_consultaT" id="motivo_consultaT" name="motivo_consultaT" rows="3" [class]="ClaseMotivoC" (click)="ClaseMotivoC='form-control'" placeholder="Descripción del motivo de la consulta.."></textarea>
                                         </div>
                                         </div><!--/.row-->
                                         <div class="row">
                                             <div class="form-group col-sm-12">
                                                 <label for="text-input">Diagnóstico</label>
-                                                <textarea autocomplete="off" required  [(ngModel)]="diagnosticoT" id="diagnosticoT" name="diagnosticoT" rows="3" class="form-control" placeholder="Descripción del diagnóstico.."></textarea>
+                                                <textarea autocomplete="off" required  [(ngModel)]="diagnosticoT" id="diagnosticoT" name="diagnosticoT" rows="3" [class]="ClaseDiagnostico" (click)="ClaseDiagnostico='form-control'" placeholder="Descripción del diagnóstico.."></textarea>
                                             </div>
                                         </div><!--/.row-->
                                         <div class="row">
                                             <div class="form-group col-sm-12">
                                                 <label for="text-input">Anamnesis</label>
-                                                <textarea autocomplete="off" required  [(ngModel)]="anamnesisT" id="anamnesisT" name="anamnesisT" rows="3" class="form-control" placeholder="Descripción de la anamnesis.."></textarea>
+                                                <textarea autocomplete="off" required  [(ngModel)]="anamnesisT" id="anamnesisT" name="anamnesisT" rows="3" [class]="ClaseAnammesi" (click)="ClaseAnammesi='form-control'" placeholder="Descripción de la anamnesis.."></textarea>
                                             </div>
                                         </div><!--/.row-->
                                         <div class="form-group">
                                           <label for="vat">Receta</label>
-                                             <textarea  id="receta" name="receta" rows="3" [(ngModel)]="receta" class="form-control" placeholder="Escriba la receta para el paciente..." required></textarea>
+                                             <textarea  id="receta" name="receta" rows="3" [(ngModel)]="receta" [class]="ClaseReceta" (click)="ClaseReceta='form-control'" placeholder="Escriba la receta para el paciente..." required></textarea>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-12">
-                                                <label for="inline-radios">Tratamiento</label>
+                                                <label for="inline-radios" [class]="ClaseTratamiento">Tratamiento</label>
                                                 <div class="col-md-12 col-form-label">
                                                     <div class="form-check form-check-inline mr-5">
-                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="estimulacion_temprana" id="estimulacion_temprana" name="estimulacion_temprana" value="1">
+                                                        <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="estimulacion_temprana" id="estimulacion_temprana" name="estimulacion_temprana" value="1">
                                                         <label class="form-check-label" for="inline-checkbox1">Estimulación temprana</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-5">
-                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="magnetoterapia" id="magnetoterapia" name="magnetoterapia" value="1">
+                                                        <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="magnetoterapia" id="magnetoterapia" name="magnetoterapia" value="1">
                                                         <label class="form-check-label" for="inline-checkbox2">Magnetoterapia</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-5">
-                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="electroestimulacion" id="electroestimulacion" name="electroestimulacion" value="1">
+                                                        <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="electroestimulacion" id="electroestimulacion" name="electroestimulacion" value="1">
                                                         <label class="form-check-label" for="inline-checkbox3">Electroestimulación</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-5">
-                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="ultrasonido" id="ultrasonido" name="ultrasonido" value="1">
+                                                        <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="ultrasonido" id="ultrasonido" name="ultrasonido" value="1">
                                                         <label class="form-check-label" for="inline-checkbox3">Ultrasonido</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-5">
-                                                        <input class="form-check-input" type="checkbox" [(ngModel)]="CQC_OH" id="CQC_OH" name="CQC_OH" value="1">
+                                                        <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="CQC_OH" id="CQC_OH" name="CQC_OH" value="1">
                                                         <label class="form-check-label" for="inline-checkbox3">C.Q.C. O H.</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mr-5">
-                                                          <input class="form-check-input" type="checkbox" [(ngModel)]="masaje" id="masaje" name="masaje" value="1">
+                                                          <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="masaje" id="masaje" name="masaje" value="1">
                                                           <label class="form-check-label" for="inline-checkbox3">Masaje</label>
                                                       </div>
                                                       <div class="form-check form-check-inline mr-5">
-                                                          <input class="form-check-input" type="checkbox" [(ngModel)]="ejercicios_PR" id="ejercicios_PR" name="ejercicios_PR" value="1">
+                                                          <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="ejercicios_PR" id="ejercicios_PR" name="ejercicios_PR" value="1">
                                                           <label class="form-check-label" for="inline-checkbox3">Ejercicios pasivos y resistidos</label>
                                                       </div>
                                                       <div class="form-check form-check-inline mr-5">
-                                                          <input class="form-check-input" type="checkbox" [(ngModel)]="laser" id="laser" name="laser" value="1">
+                                                          <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="laser" id="laser" name="laser" value="1">
                                                           <label class="form-check-label" for="inline-checkbox3">Láser</label>
                                                       </div>
                                                       <div class="form-check form-check-inline mr-5">
-                                                          <input class="form-check-input" type="checkbox" [(ngModel)]="otros" id="otros" name="otros" value="1">
+                                                          <input class="form-check-input" type="checkbox" (click)="ClaseTratamiento=''" [(ngModel)]="otros" id="otros" name="otros" value="1">
                                                           <label class="form-check-label" for="inline-checkbox3">Otros</label>
                                                       </div>
                                                 </div>
 
                                             </div>
                                             <div  *ngIf="otros==true" class="form-group col-sm-12">
-                                                <textarea autocomplete="off" required  [(ngModel)]="otrosT" id="otrosT" name="otrosT" rows="3" class="form-control" placeholder="Descripción del tratamiento.."></textarea>
+                                                <textarea autocomplete="off" required  [(ngModel)]="otrosT" id="otrosT" (click)="ClaseTratamiento=''" name="otrosT" rows="3" [class]="ClaseOtrosT" (click)="ClaseOtrosT='form-control'" placeholder="Descripción del tratamiento.."></textarea>
                                             </div>
                                         </div><!--/.row-->
                                         <div class="form-group ">
@@ -118,7 +118,7 @@
                                             </div>
                                           </div>
 
-                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="Alert()">Registrar Consulta</button>
+                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarVacios()">Registrar Consulta</button>
                                 </form>
                             </div>
 

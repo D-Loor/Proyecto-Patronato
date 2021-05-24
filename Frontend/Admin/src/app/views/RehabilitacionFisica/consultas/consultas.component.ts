@@ -24,11 +24,15 @@ export class ConsultasComponent implements OnInit {
   nombres:string; ocupacion:string; edad:string; idcita;
 
   //variables para agregar la consulta
-  idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado
+  idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado; receta;
 
   //variables para el tratamiento
-  idTratamiento; estimulacion_temprana; magnetoterapia; electroestimulacion; ultrasonido; CQC_OH;
-  masaje; ejercicios_PR; laser; otros; otrosT; receta;
+  idTratamiento; estimulacion_temprana=false; magnetoterapia=false; electroestimulacion=false; ultrasonido=false; CQC_OH=false;
+  masaje=false; ejercicios_PR=false; laser=false; otros=false; otrosT=""; 
+
+  //Variables de Validacion
+  ClaseLugar='';ClaseMotivoC="form-control"; ClaseDiagnostico='form-control';ClaseAnammesi='form-control';
+  ClaseReceta='form-control';ClaseOtrosT='form-control'; ClaseTratamiento='';
 
   loadingText = 'Guardando...';
 
@@ -105,7 +109,7 @@ export class ConsultasComponent implements OnInit {
       if (result.isConfirmed) {
         this.spinner.show('sample');
         this.Tratamiento();
-        this.spinner.hide('sample');
+        
         swalWithBootstrapButtons.fire(
           '¡Guardado!',
           'La consulta ha sido guardada.',
@@ -202,9 +206,61 @@ export class ConsultasComponent implements OnInit {
     }
 
     this.RFService.AgregarConsulta(dataC).then(data=>{
+      this.spinner.hide('sample');
       this.EliminarCita(this.idcita);
     });
 
+  }
+
+  ValidarTratamiento(){
+    if(this.estimulacion_temprana==false&&this.magnetoterapia==false&&this.electroestimulacion==false&&
+       this.ultrasonido==false&&this.CQC_OH==false&&this.masaje==false&&this.ejercicios_PR==false&&this.laser==false&&
+       this.otros==false
+      ){
+        return true;
+    }else
+      return false
+  }
+  
+
+  ValidarVacios(){
+    let tratamient=this.ValidarTratamiento();
+    if(this.lugar_atencion==undefined||this.motivo_consultaT==undefined||this.motivo_consultaT==""||
+       this.diagnosticoT==undefined||this.diagnosticoT==""||this.anamnesisT==undefined||this.anamnesisT==""||
+       this.receta==undefined||this.receta==undefined||this.receta==""||tratamient==true||this.otros==true&&this.otrosT==""
+    ){
+
+      if(this.otros==true&&this.otrosT==""){
+        this.ClaseOtrosT="form-control is-invalid";
+      }
+      if(tratamient==true){
+        this.ClaseTratamiento="invalido";
+      }
+      if(this.lugar_atencion==undefined){
+        this.ClaseLugar="invalido";
+      }
+      if(this.motivo_consultaT==undefined||this.motivo_consultaT==""){
+        this.ClaseMotivoC="form-control is-invalid";
+      }
+      if(this.diagnosticoT==undefined||this.diagnosticoT==""){
+        this.ClaseDiagnostico="form-control is-invalid";
+      }
+      if(this.anamnesisT==undefined||this.anamnesisT==""){
+        this.ClaseAnammesi="form-control is-invalid";
+      }
+      if(this.receta==undefined||this.receta==""){
+        this.ClaseReceta="form-control is-invalid";
+      }
+            
+
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para registrar la consulta.'
+      });
+    }else{
+      this.Alert();
+    }
   }
 
 }
