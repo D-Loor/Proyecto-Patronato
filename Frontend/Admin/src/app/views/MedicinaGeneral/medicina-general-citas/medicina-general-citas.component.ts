@@ -71,8 +71,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.cargar();
   }
   buscarMG(){
-    this.loadingText = 'Cargando...';
-    this.spinner.show('sample');
+
     if(this.search== null || this.search.length==0||this.search.length>10){
 
       Swal.fire({
@@ -90,7 +89,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       })
 
     }
-    this.spinner.hide('sample');
   }
   Estadisticas(Inicio:string, Fin:string){
 

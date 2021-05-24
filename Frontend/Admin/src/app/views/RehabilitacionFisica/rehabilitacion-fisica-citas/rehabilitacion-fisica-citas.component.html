@@ -234,7 +234,7 @@
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div class="progress-group">
                   <div class="progress-group-header align-items-end">
                     <i class="icon-social-twitter progress-group-icon"></i>
@@ -310,7 +310,7 @@
               </div>
               <div class="col-xs-2 searcht">
                 <label style="height: 0px;"><label ></label></label>
-                <button type="button" class="btn btn-primary form-control" (click)="cargar()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+                <button type="button" class="btn btn-primary form-control" (click)="actualizar()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
               </div>
             </div>
             </div>
@@ -326,7 +326,7 @@
                   <th>Antecedente</th>
                   <th>Opciones</th>
                 </tr>
-              </thead> 
+              </thead>
               <tbody>
                 <ng-container *ngIf="search == null; else filtro2">
                   <tr *ngFor="let item of citasRFPaginate">
@@ -391,5 +391,14 @@
     </div>
     <!--/.col-->
   </div>
+
+</div>
+
+<div *ngIf="spinnerConfig['fullScreen']">
+  <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+    [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+    [showSpinner]="spinnerConfig['showSpinner']">
+    <p style="color: white">{{loadingText}}</p>
+  </ngx-spinner>
 
 </div>

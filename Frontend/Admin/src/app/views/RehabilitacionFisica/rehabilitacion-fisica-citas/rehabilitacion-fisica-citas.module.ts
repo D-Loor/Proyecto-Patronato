@@ -6,6 +6,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { RehabilitacionFisicaCitasComponent } from './rehabilitacion-fisica-citas.component';
 import { RehabilitacionFisicaCitasRoutingModule } from './rehabilitacion-fisica-citas-routing.module';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { RehabilitacionFisicaCitasRoutingModule } from './rehabilitacion-fisica-
     CommonModule,
     PaginationModule,
     FiltroModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     RehabilitacionFisicaCitasComponent

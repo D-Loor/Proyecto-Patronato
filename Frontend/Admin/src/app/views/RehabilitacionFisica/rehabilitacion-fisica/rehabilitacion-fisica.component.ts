@@ -28,7 +28,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
   @ViewChild('Principal') public Principal: ModalDirective;
   FechaFin; FechaInicio;
   //variables para el modal
-  NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado
+  NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado;receta;
 
   loadingText = 'Guardando...';
 
@@ -121,7 +121,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.motivo=arreglo['motivo_consulta'];
     this.diagnostico=arreglo['diagnostico'];
     this.anamnesis=arreglo['anamnesis'];
-
+    this.receta=arreglo['receta'];
     if(arreglo['certificado']==1){
       this.certificado="Se entregó certificado al paciente.";
     }else

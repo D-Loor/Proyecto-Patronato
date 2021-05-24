@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { ViewChild } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-rehabilitacion-fisica-citas',
@@ -13,7 +14,7 @@ import { ViewChild } from '@angular/core';
 })
 export class RehabilitacionFisicaCitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router) { }
+  constructor(public citasser:CitasService, public rutas:Router, private spinner: NgxSpinnerService) { }
   isCollapsed2 = false;
   isCollapsed = true;
   search;
@@ -28,10 +29,31 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   fechaActual:string;
   validarVacio;
 
+  loadingText = 'Cargando...';
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
   ngOnInit(): void {
 
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
+  }
+  actualizar(){
+    this.spinner.show('sample');
+    this.cargar();
+
+    Swal.fire(
+      'Citas Actualizadas..!',
+      'La lista de citas ha sido actualizada.',
+      'success'
+    )
   }
 
   cargar(){
@@ -42,38 +64,46 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       if(this.validarVacio == '202'){
         this.citasRF=null;
         this.citasRFPaginate = null;
-        debugger
+
       }else{
         this.citasRFPaginate = this.citasRF.slice(0, 10);
       }
       if(this.search!=null){
-        debugger
+
         this.dataPaginate(event);
       }
+      this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
   });
   }
 
   buscarRH(){
-    if(this.search.length>10 || this.search.length==0){
-      Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
-      })
-    }else if(this.citasRFFilter.length==0){
+
+    if(this.search== null || this.search.length==0||this.search.length>10){
+
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Citas Registradas con esta Cédula!'
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
       })
+
+    }else if(this.citasRFFilter.length==0){
+
+      Swal.fire({
+        icon: 'error',
+        title: '¡No hay Registros..!',
+        text: 'No hay citas registradas con esta cédula.'
+      })
+
     }
+
   }
- 
+
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
-    debugger
+
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
     if(this.search==null){
@@ -155,7 +185,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
           'Cancelado',
           'Se ha cancelado',
           'error'
-        ) 
+        )
       }
     })
   }
