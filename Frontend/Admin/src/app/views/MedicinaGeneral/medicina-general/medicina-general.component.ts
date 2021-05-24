@@ -204,6 +204,8 @@ export class MedicinaGeneralComponent implements OnInit {
       this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+
     });
     }
 

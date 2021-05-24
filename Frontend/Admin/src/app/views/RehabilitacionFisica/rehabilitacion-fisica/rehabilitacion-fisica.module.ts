@@ -9,6 +9,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalsComponent } from '../../notifications/modals.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -23,6 +24,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     TabsModule.forRoot(),
     CollapseModule.forRoot(),
     CollapseModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     RehabilitacionFisicaComponent,

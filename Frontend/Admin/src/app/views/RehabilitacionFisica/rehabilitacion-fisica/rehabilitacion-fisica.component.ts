@@ -6,6 +6,8 @@ import { RehabilitacionFisicaService } from '../../../servicios/rehabilitacion-f
 import { ViewChild } from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-rehabilitacion-fisica',
   templateUrl: './rehabilitacion-fisica.component.html',
@@ -13,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class RehabilitacionFisicaComponent implements OnInit {
 
-  constructor(public historial:RehabilitacionFisicaService, public rutas:Router) { }
+  constructor(public historial:RehabilitacionFisicaService, public rutas:Router, private spinner: NgxSpinnerService) { }
 
 
   public sidebarMinimized = false;
@@ -28,6 +30,19 @@ export class RehabilitacionFisicaComponent implements OnInit {
   //variables para el modal
   NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado
 
+  loadingText = 'Guardando...';
+
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
+
   ngOnInit(): void {
     this.cargar();
   }
@@ -35,15 +50,15 @@ export class RehabilitacionFisicaComponent implements OnInit {
   buscarRH(){
     if(this.search== null || this.search.length==0 || this.search.length>10){
       Swal.fire({
-        icon: 'warning',
-        title: '¡Advertencia!',
-        text: 'La Cédula a buscar no es válida!'
+        icon: 'error',
+        title: '¡Cédula Inválida..!',
+        text: 'La cédula a buscar no es válida.'
       })
     }else if(this.historialRFFilter.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No hay Consultas Registradas con esta Cédula!'
+        title: '¡No hay Registros..!',
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }
@@ -118,23 +133,26 @@ export class RehabilitacionFisicaComponent implements OnInit {
   FiltroFecha(){
     if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
       Swal.fire(
-        'Ops!',
-        'Ingrese las fechas completas',
-        'warning'
+        '¡Campos Incorrectos..!',
+        'Ingrese las fechas a filtrar completas.',
+        'error'
       )
     }else{
+      this.loadingText = 'Cargando...';
+      this.spinner.show('sample');
+
       this.historial.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
         if(data['code']=='203'){
-          Swal.fire(
-            'Error',
-            'La fecha de incio debe ser menor a la fecha final',
+         Swal.fire(
+            '¡Fecha Incorrecta..!',
+            'La fecha de incio debe ser menor a la fecha final.',
             'error'
           )
         }else if(data['code']=='202'){
           Swal.fire(
-            'Ops!',
-            'Sin registros',
-            'warning'
+            '¡Sin Registros..!',
+            'No hay consultas resgistradas en esta fecha.',
+            'error'
           )
           this.cargar();
           this.FechaFin = "";
@@ -142,14 +160,21 @@ export class RehabilitacionFisicaComponent implements OnInit {
           this.historialRF=[];
           this.historialRFPaginate = this.historialRF.slice(0, 10);
         }else{
+          Swal.fire(
+            'Consultas Filtradas!',
+            'La lista de consultas ha sido filtrada.',
+            'success'
+          )
           this.historialRF=data['result'];
           this.historialRFPaginate = this.historialRF.slice(0, 10);
           this.FechaFin = "";
           this.FechaInicio = "";
         }
+        this.spinner.hide('sample');
 
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
     });
     }
 
