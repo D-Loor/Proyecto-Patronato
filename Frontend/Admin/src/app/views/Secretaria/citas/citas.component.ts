@@ -46,18 +46,21 @@ export class CitasComponent implements OnInit {
   cargarMG(fechaActual:string,fecha:number,cambio:boolean){
 
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
-
+      this.citasMG=data['result'];
+      this.citasMGPaginate = this.citasMG.slice(0, 10);
     if(data['code']!="202"){
-    this.citasMG=data['result'];
-    this.citasMGPaginate = this.citasMG.slice(0, 10);
-
-
+  
     if(cambio==true){
       Swal.fire({
         icon: 'success',
         title: '¡Citas Filtradas..!',
         text: 'Se filtró las citas con la fecha seleccionada.'
       })
+    }
+
+    if(this.searchMG!=null){
+
+      this.dataPaginateMG(event);
     }
 
     }else if(fecha==1){
@@ -68,9 +71,14 @@ export class CitasComponent implements OnInit {
         title: '¡Sin Registros..!',
         text: 'No hay citas registradas en esta fecha.'
       })
+    }else if(fecha!=1 && this.searchMG==null){
+      this.citasMG= null;
+    this.citasMGPaginate = null;
     }else{
-      this.citasMG = [];
-    this.citasMGPaginate = [];
+      if(this.searchMG!=null){
+
+        this.dataPaginateMG(event);
+      }
     }
     }).catch(error =>{
       console.log(error);
@@ -82,7 +90,10 @@ export class CitasComponent implements OnInit {
     this.citasMGPaginateFilter = [];
 
     if(this.searchMG==null){
-
+      if(this.citasMG==null || this.citasMG[0]=="R"){
+        this.citasMG=[];
+      this.citasMGPaginate=[];
+        }
     }else{
 
       for (const x of this.citasMG) {
@@ -133,7 +144,7 @@ export class CitasComponent implements OnInit {
 
   cargarRF(fechaActual:string,fecha:number,cambio:boolean){
     this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
-
+      debugger
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
     if(data['code']!="202"){
@@ -143,6 +154,11 @@ export class CitasComponent implements OnInit {
           title: '¡Citas Filtradas..!',
           text: 'Se filtró las citas con la fecha seleccionada.'
         })
+      }
+      debugger
+      if(this.searchRF!=null){
+
+        this.dataPaginateRF(event);
       }
     }else if(fecha==1){
       this.citasRF=null;
@@ -156,7 +172,7 @@ export class CitasComponent implements OnInit {
       this.citasRF = null;
       this.citasRFPaginate = null;
     }else{
-
+      debugger
       if(this.searchRF!=null){
 
         this.dataPaginateRF(event);
@@ -203,9 +219,15 @@ export class CitasComponent implements OnInit {
 
 
   dataPaginateRF(event){//Función para el filtrado con paginado sin los pipes
+    debugger
+    
     this.citasRFFilter=[];
-      this.citasRFPaginateFilter=[];
+    this.citasRFPaginateFilter=[];
     if(this.searchRF==null){
+      if(this.citasRF==null || this.citasRF[0]=="R"){
+      this.citasRF=[];
+    this.citasRFPaginate=[];
+      }
     }else{
 
       for (const x of this.citasRF) {
@@ -232,10 +254,14 @@ export class CitasComponent implements OnInit {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarRF=data['result'];
         if(this.FechaRf==''){
+          debugger
           this.cargarRF(this.fechaActual,0,false);
+          debugger
 
         }else{
+          debugger
           this.cargarRF(this.FechaRf,0,false);
+          debugger
         }
 
       })
