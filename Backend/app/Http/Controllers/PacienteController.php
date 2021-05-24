@@ -15,16 +15,16 @@ class PacienteController extends Controller
     public function index()
     {
         $datos=Paciente::with('historias_clinicas_mg','historias_clinicas_rf','habitos','familiares','examen_organo_sistemas',
-                            'examen_fisicos','examene_complementarios','antecedentes_patologicos_personales','antecedentes_ginecos_obstretico')->get(); 
+                            'examen_fisicos','examene_complementarios','antecedentes_patologicos_personales','antecedentes_ginecos_obstretico')->get();
         $num_rows = count($datos);
 
         if($num_rows!=0){
-            return response()->json(['result'=>$datos]);
+            return response()->json(['result'=>$datos, 'code'=>'201','total'=>$num_rows]);
         }else
             return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -77,8 +77,11 @@ class PacienteController extends Controller
     public function show($id_paciente)
     {
         $datos=Paciente::with('habitos','antecedentes_patologicos_personales','familiares','examen_fisicos','examen_organo_sistemas','examene_complementarios')->where('id_paciente', $id_paciente)->get()->first();
+
+
+
         if($datos != null){
-            return response()->json(['result'=>$datos, 'code'=>'201']);
+            return response()->json(['result'=>$datos,'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }

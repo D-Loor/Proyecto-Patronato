@@ -22,6 +22,12 @@ tr{
   width: 100%;
   overflow-y: auto;
 }
+.space{
+  padding-left: 30px;
+}
+.sangria{
+  padding-left: 10px !important;
+}
 input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;

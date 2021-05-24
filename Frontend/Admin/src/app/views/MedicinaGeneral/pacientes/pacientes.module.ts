@@ -9,7 +9,7 @@ import { FiltroModule } from '../../../pipes/filtro.module';
 import { ModalsComponent } from '../../notifications/modals.component';
 import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesComponent } from './pacientes.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { PacientesComponent } from './pacientes.component';
     ModalModule.forRoot(),
     TabsModule.forRoot(),
     CollapseModule.forRoot(),
+    NgxSpinnerModule,
   ],
   declarations: [
     PacientesComponent,

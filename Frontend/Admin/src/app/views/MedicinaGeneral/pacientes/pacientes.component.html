@@ -19,6 +19,20 @@
             </div>
 
           </div>
+          <div class="col-md-8">
+            <div class="row space">
+              <div class="col-xs-2 searcht ">
+                <label for="name">Total de Pacientes</label>
+                <div class="sangria">
+                  <strong><i class="fa fa-group" aria-hidden="true"></i><label class="sangria"  for="name">{{TotalPacientes}}</label></strong>
+                </div>
+              </div>
+              <div class="col-xs-2 searcht">
+                <label style="height: 0px;"><label ></label></label>
+                <button type="button" class="btn btn-primary form-control" (click)="actualizar()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+              </div>
+            </div>
+            </div>
 
         </div>
 
@@ -647,6 +661,14 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div *ngIf="spinnerConfig['fullScreen']">
+  <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+    [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+    [showSpinner]="spinnerConfig['showSpinner']">
+    <p style="color: white">{{loadingText}}</p>
+  </ngx-spinner>
+
+</div>
 
 
 

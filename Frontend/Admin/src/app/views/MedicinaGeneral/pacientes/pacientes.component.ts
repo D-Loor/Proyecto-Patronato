@@ -7,6 +7,7 @@ import { ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { SecretariaService } from '../../../servicios/secretaria.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class PacientesComponent implements OnInit {
 
-  constructor(public medicina_general:MedicinaGeneralService, public rutas:Router, private ServicioSecretaria:SecretariaService) { }
+  constructor(public medicina_general:MedicinaGeneralService, private spinner: NgxSpinnerService, public rutas:Router, private ServicioSecretaria:SecretariaService) { }
 
   @ViewChild('Principal') public Principal: ModalDirective;
   public sidebarMinimized = false;
@@ -29,7 +30,7 @@ export class PacientesComponent implements OnInit {
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
   APF:any[];
   CedulaPaciente = null;
-
+  TotalPacientes;
   apellidos:string; nombres:string; cedula:string; edad:string; ocupacion:string; nivel_instruccion:string; estado_civil:string;
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
@@ -49,12 +50,32 @@ export class PacientesComponent implements OnInit {
   isCollapsed6 = false;
   isCollapsed7 = false;
 
+  loadingText = 'Cargando...';
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
   ngOnInit() {
-    debugger
+
     this.search = localStorage.getItem('cedulaMGandRF');
     this.cargar();
   }
+  actualizar(){
+    this.spinner.show('sample');
+    this.cargar();
 
+    Swal.fire(
+      '¡Pacientes Actualizados..!',
+      'La lista de pacientes ha sido actualizada.',
+      'success'
+    )
+  }
   CargarHistoriaPaciente(){
       this.medicina_general.AtenderPaciente(this.CedulaPaciente).then(data =>{
       this.pacientesMG=data['result'];
@@ -68,12 +89,15 @@ export class PacientesComponent implements OnInit {
   cargar(){
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
+    this.TotalPacientes=data['total'];
+
     this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
-    debugger
+    this.spinner.hide('sample');
     if(this.search!=null){
       this.dataPaginate(event);
     }
   }).catch(error =>{
+    this.spinner.hide('sample');
     console.log(error);
   });
 
@@ -101,7 +125,6 @@ export class PacientesComponent implements OnInit {
       this.CedulaPaciente=null;
     if(this.search==null){
     }else{
-      debugger
       for (const x of this.pacientesMG) {
 
         if(x.cedula.indexOf(this.search)> -1){
