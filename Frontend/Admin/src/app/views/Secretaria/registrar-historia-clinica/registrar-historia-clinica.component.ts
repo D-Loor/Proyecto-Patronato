@@ -379,42 +379,8 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     this.ServicioSecretaria.updateGinecos( ginecoPersonal, this.id_gineco ).then(data =>{});
   }
 
-  Consultar(){
-    if(this.cedula== undefined || this.cedula=="undefined"){
-      this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
-      this.limpiar();
-      Swal.fire(
-        'Campo vacío',
-        'Ingrese un número de cédula',
-        'warning'
-      )
-    }else{
-      this.medicinag.AtenderPaciente(this.cedula).then(data => { 
-        this.alcoholCSi='2';this.alcoholCNo='2'; this.tabacoCSi='2';this.tabacoCNo='2'; this.drogasCSi='2'; this.drogasCNo='2'; this.alimentacionCSi='2';this.alimentacionCNo='2'; this.diuresisCSi='2';this.diuresisCNo='2'; this.somniaCSi='2';this.somniaCNo='2';
-        this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2'; 
-        if(data['code'] === '201'){
-          const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: true
-          })
-           swalWithBootstrapButtons.fire({
-            title: 'El paciente cuenta con historial clínico',
-            text: "Desea observar sus datos para poderlos editar",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Si, editar registros!',
-            cancelButtonText: 'No, cancelar!',
-            confirmButtonColor: '#4BB543',
-            cancelButtonColor: '#d33',
-            reverseButtons: true
-            
-          }).then((result) => {
-            
-            if (result.isConfirmed) {
-              this.id_PacienteDA=data['result'].id_paciente;
+  CargarDatosPaciente(data:any){
+    this.id_PacienteDA=data['result'].id_paciente;
               this.apellidos=data['result'].apellidos;
               this.nombresP=data['result'].nombres;
               this.edad=data['result'].edad;
@@ -525,19 +491,64 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
               if(this.examen_electrocardiogramaT==1){this.examen_electrocardiogramaC=1;this.examen_electrocardiogramaT='';}
               if(this.examen_RToraxT==1){this.examen_RToraxC=1;this.examen_RToraxT='';}
               if(this.examen_otrosT==1){this.examen_otrosC=1;this.examen_otrosT='';}
-              
-              
-            }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
-              this.edit=0;
-              this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
-              this.limpiar();
-              swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'Se ha cancelado correctamente',
-                'error'
-              )
-            }
-          })
+  }
+
+  Consultar(){
+    let ce="";
+    ce=  localStorage.getItem('CedulaExamenes');
+    if(this.cedula== undefined || this.cedula=="undefined"){
+      this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
+      this.limpiar();
+      Swal.fire(
+        'Campo vacío',
+        'Ingrese un número de cédula',
+        'warning'
+      )
+    }else{
+      this.medicinag.AtenderPaciente(this.cedula).then(data => { 
+        this.alcoholCSi='2';this.alcoholCNo='2'; this.tabacoCSi='2';this.tabacoCNo='2'; this.drogasCSi='2'; this.drogasCNo='2'; this.alimentacionCSi='2';this.alimentacionCNo='2'; this.diuresisCSi='2';this.diuresisCNo='2'; this.somniaCSi='2';this.somniaCNo='2';
+        this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2'; 
+        if(data['code'] === '201'){
+          if(ce!=""&&ce!=null){
+            this.CargarDatosPaciente(data);
+            localStorage.removeItem('CedulaExamenes');
+          }else{
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+              },
+              buttonsStyling: true
+              })
+               swalWithBootstrapButtons.fire({
+                title: 'El paciente cuenta con historial clínico',
+                text: "Desea observar sus datos para poderlos editar",
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Si, editar registros!',
+                cancelButtonText: 'No, cancelar!',
+                confirmButtonColor: '#4BB543',
+                cancelButtonColor: '#d33',
+                reverseButtons: true
+                
+              }).then((result) => {
+                
+                if (result.isConfirmed) {
+                  this.CargarDatosPaciente(data);
+    
+                }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
+                  this.edit=0;
+                  this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
+                  this.limpiar();
+                  swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'Se ha cancelado correctamente',
+                    'error'
+                  )
+                }
+              })
+          }
+          
          }
          else{ 
           this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
