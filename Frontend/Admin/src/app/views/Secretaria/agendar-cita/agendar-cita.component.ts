@@ -49,7 +49,7 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCHora:string="form-control form-input select-number";
 
   //Variables para datos pacientes
-  nombres; fecha_consulta; cedula; especialidad; idT:string;abono=false;
+  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false;
   ArrayTurnos: any = []
 
   ngOnInit() {
@@ -311,10 +311,16 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Turnos(fecha:Date){
+    let tipo;
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
     let array ={};
-    this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
+    if(this.especialidad=="Medicina General"){
+      tipo="MG"
+    }else{
+      tipo="RF"
+    }
+    this.ServicioSecretaria.ValidarTurno(fecha,tipo).then(data =>{
         if(data['code']=='202'){
           Swal.fire(
             '¡Lo sentimos..!',

@@ -115,15 +115,36 @@ class DatabaseSeeder extends Seeder
             'enfermedad' => 'Migraña',
         ]);
 
-        DB::table('turnos')->insert(
-            ['hora' => "08:00 AM",],
-         );
-         DB::table('turnos')->insert(
-            ['hora' => "08:20 AM",],
-         );
-         DB::table('turnos')->insert(
-            ['hora' => "08:40 AM",],
-         );
+        DB::table('turnos')->insert([
+            'hora' => "08:00 AM",
+            'tipo' => "MG",
+        ]);
+
+         DB::table('turnos')->insert([
+            'hora' => "08:20 AM",
+            'tipo' => "MG",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "08:40 AM",
+            'tipo' => "MG",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "09:00 AM",
+            'tipo' => "MG",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "08:00 AM",
+            'tipo' => "RF",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "08:30 AM",
+            'tipo' => "RF",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "09:00 AM",
+            'tipo' => "RF",
+        ]);
+
 
         DB::table('citas')->insert([
             'nombres' => 'Alex Dario Zambrano Falconez',

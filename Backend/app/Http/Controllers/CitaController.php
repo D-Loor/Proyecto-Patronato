@@ -90,10 +90,10 @@ class CitaController extends Controller
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
-    public function validarHora($fecha)
+    public function validarHora($fecha, $tipo)
     {
-        $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');;
-        $turno=Turno::all();
+        $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');
+        $turno=Turno::all()->where('tipo', $tipo);
         $NCitas = count($datos);
 
 
@@ -105,7 +105,7 @@ class CitaController extends Controller
             {
 
                 $cont++;
-                if($tur['id_turno'] == $cita['id_turno'] ){
+                if($tur['id_turno'] == $cita['id_turno']){
                     unset($turno[$cont]);
                     break;
                 }
