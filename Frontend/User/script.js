@@ -82,15 +82,21 @@ function validarC() {
   }
 
   function cargar(){
+    var tipo="";
     var fecha = document.getElementById("fecha").value;
+    var combo = document.getElementById("especialidad").value;
     const $select = document.getElementById("hora");
-   
+    if(combo=="Medicina General"){
+        tipo="MG";
+    }else{
+        tipo="RF";
+    }
     for (let i = $select.options.length; i >= 0; i--) {
         $select.remove(i);
     }
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/api/validarturno/"+fecha,
+        url: "http://127.0.0.1:8000/api/validarturno/"+fecha+"/"+tipo,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {

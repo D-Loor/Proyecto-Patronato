@@ -49,7 +49,7 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCHora:string="form-control form-input select-number";
 
   //Variables para datos pacientes
-  nombres; fecha_consulta; cedula; especialidad; idT:string;abono=false;
+  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false;
   ArrayTurnos: any = []
 
   ngOnInit() {

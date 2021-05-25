@@ -119,12 +119,17 @@ class DatabaseSeeder extends Seeder
             'hora' => "08:00 AM",
             'tipo' => "MG",
         ]);
+
          DB::table('turnos')->insert([
             'hora' => "08:20 AM",
             'tipo' => "MG",
         ]);
          DB::table('turnos')->insert([
             'hora' => "08:40 AM",
+            'tipo' => "MG",
+        ]);
+         DB::table('turnos')->insert([
+            'hora' => "09:00 AM",
             'tipo' => "MG",
         ]);
          DB::table('turnos')->insert([
