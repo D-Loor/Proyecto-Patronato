@@ -55,7 +55,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   actualizar:number=0;
   containerSecretaria=0;
   ginecosSi:number=1;
-
+ 
   //Validación de campos vacios
   Classapellidos = "form-control"; Classnombres ="form-control"; ClaseCdula:string="form-control form-input select-number"; 
   ClaseEdad = "form-control";  ClaseOcupacion = "form-control"; ClaseGad = ""; ClaseSexo="form-control";
@@ -67,6 +67,10 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   ClaseMenarquia='form-control form-input';ClaseFlujoG='form-control form-input'; ClaseGestas='form-control form-input';
   ClasePartos='form-control form-input'; ClaseAbortos='form-control form-input'; ClaseCesareas='form-control form-input';
   ClaseAlcohol=""; ClaseTabaco=""; ClaseDrogas=""; ClaseAliemtacion=""; ClaseDiurisis=""; ClaseSomnia="";
+  ClaseTexamen_cabeza='form-control'; ClaseTexamen_cuello='form-control'; ClaseTexamen_torax='form-control'; ClaseTexamen_abdomen='form-control'; ClaseTexamen_msuperior='form-control'; ClaseTexamen_minferiores='form-control'; ClaseTexamen_genital='form-control'; ClaseTexamen_anal='form-control';
+  ClaseTexamen_digestivo='form-control'; ClaseTexamen_respiratorio='form-control'; ClaseTexamen_cardiaco='form-control'; ClaseTexamen_genitourinario="form-control"; ClaseTexamen_osteomuscular="form-control"; ClaseTexamen_nervioso="form-control"; 
+  ClaseTexamen_laboratorio='form-control'; ClaseTexamen_electrocardiograma='form-control'; ClaseTexamen_RTorax='form-control'; ClaseTexamen_otros='form-control';
+
 
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number; 
@@ -98,18 +102,18 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   //Variables de Examenes Físicos Generales
   examen_cabezaT; examen_cuelloT; examen_toraxT; examen_abdomenT; examen_msuperiorT; examen_minferioresT; examen_genitalT; examen_analT;
   //Check Variables Examenes Físicos Generales
-  examen_cabezaC:number; examen_cuelloC:number; examen_toraxC:number; examen_abdomenC:number; examen_msuperiorC:number; examen_minferioresC:number; examen_genitalC:number; examen_analC:number;
+examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_msuperiorC=0; examen_minferioresC=0; examen_genitalC=0; examen_analC=0;
 
 
   //Variables de Examenes de Organos y Sistemas
   examen_digestivoT; examen_respiratorioT; examen_cardiacoT; examen_genitourinarioT; examen_osteomuscularT; examen_nerviosoT;
   //Check Variables Examenes de Organos y Sistemass
-  examen_digestivoC:number; examen_respiratorioC:number; examen_cardiacoC:number; examen_genitourinarioC:number; examen_osteomuscularC:number; examen_nerviosoC:number;
+  examen_digestivoC=0; examen_respiratorioC=0; examen_cardiacoC=0; examen_genitourinarioC=0; examen_osteomuscularC=0; examen_nerviosoC=0;
 
   //Variables de Examenes Complementarios
   examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
   //Check Variables Examenes Complementarioss
-  examen_laboratorioC:number; examen_electrocardiogramaC:number; examen_RToraxC:number; examen_otrosC:number;
+  examen_laboratorioC=0; examen_electrocardiogramaC=0; examen_RToraxC=0; examen_otrosC=0;
 
   contador
   ngOnInit() {
@@ -871,6 +875,112 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
     }
   }
 
+  validacionTotal(){
+    if(this.alcohol==undefined){
+      this.ClaseAlcohol="invalido";
+    }
+    if(this.tabaco==undefined){
+      this.ClaseTabaco="invalido";
+    }
+    if(this.drogas==undefined){
+      this.ClaseDrogas="invalido";
+    }
+    if(this.alimentacion==undefined){
+      this.ClaseAliemtacion="invalido";
+    }
+    if(this.diuresis==undefined){
+      this.ClaseDiurisis="invalido";
+    }
+    if(this.somnia==undefined){
+      this.ClaseSomnia="invalido";
+    }
+    if(this.traumatologicosC==0){
+      if(this.traumatologicosT==""){
+        this.ClaseTtraumatologicos="form-control is-invalid";
+      }
+    }
+    if(this.alergicosC==0){
+      if(this.alergicosT==""){
+        this.ClaseTalergicos="form-control is-invalid";
+      }
+    }
+    if(this.quirurgicosC==0){
+      if(this.quirurgicosT==""){
+        this.ClaseTquirurjicos="form-control is-invalid";
+      }
+    }
+    if(this.adultezC==0){
+      if(this.adultezT==""){
+        this.ClaseTadultez="form-control is-invalid";
+      }
+      if(this.DBID==undefined){
+        this.ClaseDbid="invalido";
+      }
+      if(this.DBI==undefined){
+        this.ClaseDbi="invalido";
+      }
+      if(this.HTA==undefined){
+        this.ClaseHta="invalido";
+      }
+      if(this.TbP==undefined){
+        this.ClaseTbp="invalido";
+      }
+    }
+    if(this.adolescenciaC==0){
+      if(this.adolescenciaT==""){
+        this.ClaseTadolecencia="form-control is-invalid";
+      }
+    }
+    if(this.ninezC==0){
+      if(this.ninezT==""){
+        this.ClaseTninez="form-control is-invalid";
+      }
+    }
+    if(this.apellidos==undefined||this.apellidos==""){
+      this.Classapellidos="form-control is-invalid";
+    }
+    if(this.nombresP==undefined||this.nombresP==""){
+      this.Classnombres="form-control is-invalid";
+    }
+    if(this.cedula==undefined||this.cedula==""){
+      this.ClaseCdula="form-control is-invalid";
+    }
+    if(this.edad==undefined||this.edad==""){
+      this.ClaseEdad="form-control is-invalid";
+    }
+    if(this.gad==undefined){
+      this.ClaseGad="invalido";
+    }
+    if(this.ocupacion==undefined||this.ocupacion==""){
+      this.ClaseOcupacion="form-control is-invalid";
+    }
+    if(this.sexo==undefined||this.sexo==""){
+      this.ClaseSexo="form-control is-invalid";
+    }
+    if(this.Lresidencia==undefined||this.Lresidencia==""){
+      this.ClaseLR="form-control is-invalid";
+    }
+    if(this.Lprocedencia==undefined||this.Lprocedencia==""){
+      this.ClaseLP="form-control is-invalid";
+    }
+    if(this.religion==undefined||this.religion==""){
+      this.ClaseReligion="form-control is-invalid";
+    }
+    if(this.raza==undefined||this.raza==""){
+      this.ClaseRaza="form-control is-invalid";
+    }
+    if(this.fechanacimiento==undefined||this.fechanacimiento==""){
+      this.ClaseFecha="form-control is-invalid";
+    }
+    if(this.nivel_instruccion==undefined||this.nivel_instruccion==""){
+      this.ClaseNivel="form-control is-invalid";
+    }
+    if(this.estado_civil==undefined||this.estado_civil==""){
+      this.ClaseEstado="form-control is-invalid";
+    }
+  }
+
+
   VaidarPaciente(){
     let mujer = this.ValidarMujer();
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
@@ -888,109 +998,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para registrar el historial clínico.'
       })
-
-      if(this.alcohol==undefined){
-        this.ClaseAlcohol="invalido";
-      }
-      if(this.tabaco==undefined){
-        this.ClaseTabaco="invalido";
-      }
-      if(this.drogas==undefined){
-        this.ClaseDrogas="invalido";
-      }
-      if(this.alimentacion==undefined){
-        this.ClaseAliemtacion="invalido";
-      }
-      if(this.diuresis==undefined){
-        this.ClaseDiurisis="invalido";
-      }
-      if(this.somnia==undefined){
-        this.ClaseSomnia="invalido";
-      }
-      if(this.traumatologicosC==0){
-        if(this.traumatologicosT==""){
-          this.ClaseTtraumatologicos="form-control is-invalid";
-        }
-      }
-      if(this.alergicosC==0){
-        if(this.alergicosT==""){
-          this.ClaseTalergicos="form-control is-invalid";
-        }
-      }
-      if(this.quirurgicosC==0){
-        if(this.quirurgicosT==""){
-          this.ClaseTquirurjicos="form-control is-invalid";
-        }
-      }
-      if(this.adultezC==0){
-        if(this.adultezT==""){
-          this.ClaseTadultez="form-control is-invalid";
-        }
-        if(this.DBID==undefined){
-          this.ClaseDbid="invalido";
-        }
-        if(this.DBI==undefined){
-          this.ClaseDbi="invalido";
-        }
-        if(this.HTA==undefined){
-          this.ClaseHta="invalido";
-        }
-        if(this.TbP==undefined){
-          this.ClaseTbp="invalido";
-        }
-      }
-      if(this.adolescenciaC==0){
-        if(this.adolescenciaT==""){
-          this.ClaseTadolecencia="form-control is-invalid";
-        }
-      }
-      if(this.ninezC==0){
-        if(this.ninezT==""){
-          this.ClaseTninez="form-control is-invalid";
-        }
-      }
-      if(this.apellidos==undefined||this.apellidos==""){
-        this.Classapellidos="form-control is-invalid";
-      }
-      if(this.nombresP==undefined||this.nombresP==""){
-        this.Classnombres="form-control is-invalid";
-      }
-      if(this.cedula==undefined||this.cedula==""){
-        this.ClaseCdula="form-control is-invalid";
-      }
-      if(this.edad==undefined||this.edad==""){
-        this.ClaseEdad="form-control is-invalid";
-      }
-      if(this.gad==undefined){
-        this.ClaseGad="invalido";
-      }
-      if(this.ocupacion==undefined||this.ocupacion==""){
-        this.ClaseOcupacion="form-control is-invalid";
-      }
-      if(this.sexo==undefined||this.sexo==""){
-        this.ClaseSexo="form-control is-invalid";
-      }
-      if(this.Lresidencia==undefined||this.Lresidencia==""){
-        this.ClaseLR="form-control is-invalid";
-      }
-      if(this.Lprocedencia==undefined||this.Lprocedencia==""){
-        this.ClaseLP="form-control is-invalid";
-      }
-      if(this.religion==undefined||this.religion==""){
-        this.ClaseReligion="form-control is-invalid";
-      }
-      if(this.raza==undefined||this.raza==""){
-        this.ClaseRaza="form-control is-invalid";
-      }
-      if(this.fechanacimiento==undefined||this.fechanacimiento==""){
-        this.ClaseFecha="form-control is-invalid";
-      }
-      if(this.nivel_instruccion==undefined||this.nivel_instruccion==""){
-        this.ClaseNivel="form-control is-invalid";
-      }
-      if(this.estado_civil==undefined||this.estado_civil==""){
-        this.ClaseEstado="form-control is-invalid";
-      }
+      this.validacionTotal();
       
       
     }else{
@@ -1014,6 +1022,126 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 
   actualizarDatos(){
+    let mujer = this.ValidarMujer();
+    debugger
+    if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
+       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
+       this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
+       this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
+       this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
+       this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
+       this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 && 
+       this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
+       this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
+       this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
+       this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
+       this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
+       this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_toraxC==0 && this.examen_toraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
+    ){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para actualizar el historial clínico.'
+      })
+      if(this.examen_cabezaC==0){
+        if(this.examen_cabezaT==""){
+          this.ClaseTexamen_cabeza="form-control is-invalid";
+        }
+      }
+      if(this.examen_cuelloC==0){
+        if(this.examen_cuelloT==""){
+          this.ClaseTexamen_cuello="form-control is-invalid";
+        }
+      }
+      if(this.examen_toraxC==0){
+        if(this.examen_toraxT==""){
+          this.ClaseTexamen_torax="form-control is-invalid";
+        }
+      }
+      if(this.examen_abdomenC==0){
+        if(this.examen_abdomenT==""){
+          this.ClaseTexamen_abdomen="form-control is-invalid";
+        }
+      }
+      if(this.examen_msuperiorC==0){
+        if(this.examen_msuperiorT==""){
+          this.ClaseTexamen_msuperior="form-control is-invalid";
+        }
+      }
+      if(this.examen_minferioresC==0){
+        if(this.examen_minferioresT==""){
+          this.ClaseTexamen_minferiores="form-control is-invalid";
+        }
+      }
+      if(this.examen_genitalC==0){
+        if(this.examen_genitalT==""){
+          this.ClaseTexamen_genital="form-control is-invalid";
+        }
+      }
+      if(this.examen_analC==0){
+        if(this.examen_analT==""){
+          this.ClaseTexamen_anal="form-control is-invalid";
+        }
+      }
+      if(this.examen_otrosC==0){
+        if(this.examen_otrosT==""){
+          this.ClaseTexamen_otros="form-control is-invalid";
+        }
+      }
+      if(this.examen_digestivoC==0){
+        if(this.examen_digestivoT==""){
+          this.ClaseTexamen_digestivo="form-control is-invalid";
+        }
+      }
+      if(this.examen_respiratorioC==0){
+        if(this.examen_respiratorioT==""){
+          this.ClaseTexamen_respiratorio="form-control is-invalid";
+        }
+      }
+      if(this.examen_cardiacoC==0){
+        if(this.examen_cardiacoT==""){
+          this.ClaseTexamen_cardiaco="form-control is-invalid";
+        }
+      }
+      if(this.examen_genitourinarioC==0){
+        if(this.examen_genitourinarioT==""){
+          this.ClaseTexamen_genitourinario="form-control is-invalid";
+        }
+      }
+      if(this.examen_osteomuscularC==0){
+        if(this.examen_osteomuscularT==""){
+          this.ClaseTexamen_osteomuscular="form-control is-invalid";
+        }
+      }
+      if(this.examen_nerviosoC==0){
+        if(this.examen_nerviosoT==""){
+          this.ClaseTexamen_nervioso="form-control is-invalid";
+        }
+      }
+      if(this.examen_laboratorioC==0){
+        if(this.examen_laboratorioT==""){
+          this.ClaseTexamen_laboratorio="form-control is-invalid";
+        }
+      }
+      if(this.examen_electrocardiogramaC==0){
+        if(this.examen_electrocardiogramaT==""){
+          this.ClaseTexamen_electrocardiograma="form-control is-invalid";
+        }
+      }
+      if(this.examen_toraxC==0){
+        if(this.examen_toraxT==""){
+          this.ClaseTexamen_torax="form-control is-invalid";
+        }
+      }
+      if(this.examen_toraxC==0){
+        if(this.examen_toraxT==""){
+          this.ClaseTexamen_torax="form-control is-invalid";
+        }
+      }
+      
+      this.validacionTotal();
+
+    }else{  
     this.spinner.show('sampleA');
     let pacientesActualizar = {
       'id_patologico':this.id_patologico,
@@ -1170,6 +1298,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
       this.limpiar();
     });
   }
+}
 
   aggArrayDB(){
     let  arrayLocal:any;
