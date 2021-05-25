@@ -261,6 +261,7 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                              fecha="";
                              turno="";
                              comprotido=false;
+                             debugger
                              smoke.alert('Cita agendada correctamente');
                             },
                             error: function (data)
