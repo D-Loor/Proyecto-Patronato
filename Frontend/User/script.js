@@ -98,8 +98,11 @@ function validarC() {
 
             
             if(data['code']=="202"){
-                  smoke.alert('No existen citas disponibles en esta fecha');
-                  
+                  swal(
+                    '¡Lo sentimos..!',
+                    'No existen citas disponibles en esta fecha.',
+                    'error'
+                  )
 
                 document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
                 document.getElementById("fecha").reportValidity();
@@ -226,7 +229,11 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                 success: function (data) { 
                     
                     if(data ['code'] == '201'){
-                        smoke.alert('El usuaria ya cuenta con una cita en esta fecha');
+                        swal(
+                            '¡Error!',
+                            'El usuario ya cuenta con una cita en esta fecha.',
+                            'error'
+                          )
                       }else{
                         $.ajax({
             
@@ -261,12 +268,19 @@ document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
                              fecha="";
                              turno="";
                              comprotido=false;
-                             debugger
-                             smoke.alert('Cita agendada correctamente');
+                             swal(
+                                '¡Cita Agendada..!',
+                                'La cita médica fue agendada correctamente.',
+                                'success'
+                              );
                             },
                             error: function (data)
                             {
-                                smoke.alert('Error de servidor, lo sentimos.');
+                                swal(
+                                    '¡Error!',
+                                    'Error de servidor, lo sentimos.',
+                                    'error'
+                                  )
                             }  
                         });
                       }
