@@ -185,8 +185,8 @@ export class SecretariaService {
     });
   }
 
-  ValidarTurno(fecha:Date) {
-    let  url = 'http://127.0.0.1:8000/api/validarturno/'+fecha;
+  ValidarTurno(fecha:Date, tipo:string) {
+    let  url = 'http://127.0.0.1:8000/api/validarturno/'+fecha+"/"+tipo;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);

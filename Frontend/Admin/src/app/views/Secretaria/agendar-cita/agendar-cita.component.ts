@@ -311,10 +311,16 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Turnos(fecha:Date){
+    let tipo;
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
     let array ={};
-    this.ServicioSecretaria.ValidarTurno(fecha).then(data =>{
+    if(this.especialidad=="Medicina General"){
+      tipo="MG"
+    }else{
+      tipo="RF"
+    }
+    this.ServicioSecretaria.ValidarTurno(fecha,tipo).then(data =>{
         if(data['code']=='202'){
           Swal.fire(
             '¡Lo sentimos..!',
