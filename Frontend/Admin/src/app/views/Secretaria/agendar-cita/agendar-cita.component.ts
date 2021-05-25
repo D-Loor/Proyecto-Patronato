@@ -295,7 +295,7 @@ export class AgendarCitaComponent implements OnInit {
       this.ServicioSecretaria.ValidarCitas(this.cedula, this.fecha_consulta).then(data =>{
         if(data ['code'] == '201'){
           Swal.fire(
-            '¡Error!',
+            '¡No se pudo Agendar..!',
             'El usuario ya cuenta con una cita en esta fecha.',
             'error'
           )

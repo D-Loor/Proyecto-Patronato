@@ -167,11 +167,21 @@ class HistoriaClinicaMGController extends Controller
 
     public function DatosEstadisticos($fechaInicial, $fechaFinal){
         $pacientes=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
+
+        $presunt=0;
+        $defini=0;
         $citasPendientes = Cita::all();
 
         $cont = 0;
         $contH = 0;
         $contM =0;
+        foreach ($pacientes as $item){
+            if($item['condicion_diagnostico']=='Presuntivo')
+                $presunt++;
+            else
+                $defini++;
+        }
+
         foreach ($pacientes as $item){
             if($item->paciente['gad']=='1')
                 $cont++;
@@ -190,7 +200,7 @@ class HistoriaClinicaMGController extends Controller
         $TotalPacientes = count($pacientes);
         $TotalcitasPendientes = count($citasPendientes);
 
-        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM]);
+        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'presuntivo'=>$presunt,'definitivo'=> $defini]);
 
     }
 

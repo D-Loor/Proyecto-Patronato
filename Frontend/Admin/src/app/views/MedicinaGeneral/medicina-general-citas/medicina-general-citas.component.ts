@@ -34,6 +34,10 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   today = new Date();
   fechaActual:string;
   Porcentaje1:number;
+  horas;
+  minutos;
+  presun;
+  defini;
   EstiloPorcentajeH:string;
   EstiloPorcentajeM:string;
   TotalPacientes; TotalCitasPendientes; ServidoresPublicos; TotalHombres; TotalMujeres;
@@ -96,10 +100,14 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       this.TotalPacientes = data['totalP'];
       this.TotalCitasPendientes = data['totalC'];
       this.ServidoresPublicos = data['totalG'];
-      this.TotalHombres =Math.round( data['totalH']*100/this.TotalPacientes);
-      this.TotalMujeres = Math.round(data['totalM']*100/this.TotalPacientes);
-      this.EstiloPorcentajeH ="width: "+ this.TotalHombres+"%"
-      this.EstiloPorcentajeM ="width: "+ this.TotalMujeres+"%"
+      this.TotalHombres = data['totalH'];
+      this.TotalMujeres = data['totalM'];
+      this.presun= data['presuntivo'];
+      this.defini= data['definitivo'];
+      let tiempocita=this.TotalPacientes*20;
+      this.horas=tiempocita/60;
+      this.horas=parseInt(this.horas);
+      this.minutos = tiempocita%60;
     }).catch(error =>{
       console.log(error);
     });
