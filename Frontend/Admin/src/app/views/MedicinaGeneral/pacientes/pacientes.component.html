@@ -162,8 +162,8 @@
                                     <div class="form-group col-sm-8">
                                         <label for="text-input">Cédula:</label>
                                         <div class="input-group">
-                                          <input *ngIf="edit==0" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" >
-                                          <input *ngIf="edit==1" autocomplete="off" required type="text" id="apellidos"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" disabled>
+                                          <input *ngIf="edit==0" autocomplete="off" required type="text" id="cedula"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" >
+                                          <input *ngIf="edit==1" autocomplete="off" required type="text" id="cedula"  [(ngModel)]="cedula"   name="cedula" class="form-control" placeholder="Ingrese la cedula" disabled>
                                         </div>
 
                                     </div>
@@ -655,6 +655,7 @@
 
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="IrHistorial(cedula)">Editar</button>
         <button type="button" class="btn btn-secondary" (click)="Principal.hide()">Cerrar</button>
       </div>
     </div><!-- /.modal-content -->

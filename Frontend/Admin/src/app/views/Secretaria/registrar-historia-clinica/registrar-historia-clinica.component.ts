@@ -111,6 +111,19 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   //Check Variables Examenes Complementarioss
   examen_laboratorioC:number; examen_electrocardiogramaC:number; examen_RToraxC:number; examen_otrosC:number;
 
+  contador
+  ngOnInit() {
+    let cedula="";
+    this.containerSecretaria=0;
+    cedula=  localStorage.getItem('CedulaExamenes');
+    if(cedula!=""&&cedula!=null){
+      this.containerSecretaria=1
+      this.cedula=cedula;
+      this.Consultar();
+      localStorage.removeItem('CedulaExamenes');
+    }
+  }
+
   limpiar(){
 
     this.ClaseCdula="form-control form-input select-number"; 
@@ -154,9 +167,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   this.examen_laboratorioT=""; this.examen_electrocardiogramaT=""; this.examen_RToraxT=""; this.examen_otrosT="";
   }
 
-  ngOnInit(): void {
-
-  }
+  
   
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -369,7 +380,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   }
 
   Consultar(){
-    
     if(this.cedula== undefined || this.cedula=="undefined"){
       this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
       this.limpiar();

@@ -234,6 +234,11 @@ export class PacientesComponent implements OnInit {
     this.rutas.navigate(['/medicinageneral']);
   }
 
+  IrHistorial(cedul:string){
+    localStorage.setItem('CedulaExamenes', cedul);
+    this.rutas.navigate(['/registrarhistoriaclinica']);
+  }
+
 
 
 
