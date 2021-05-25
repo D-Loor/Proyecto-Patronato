@@ -16,6 +16,7 @@ class CreateTurnosTable extends Migration
         Schema::create('turnos', function (Blueprint $table) {
             $table->bigIncrements('id_turno');
             $table->string('hora');
+            $table->string('tipo');
         });
     }
 
