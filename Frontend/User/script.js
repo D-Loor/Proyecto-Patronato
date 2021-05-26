@@ -129,6 +129,14 @@ function validarC() {
 
     
 }
+function LimpiarTurnos(){
+    document.getElementById("fecha").value="";
+    const $select = document.getElementById("hora");
+               
+    for (let i = $select.options.length; i >= 0; i--) {
+        $select.remove(i);
+    }
+}
   
  //Validar Fecha
    

@@ -37,7 +37,7 @@
                                               <div class="row">
                                                   <div class="form-group col-md-12">
                                                       <label for="text-input">Especialidad</label>
-                                                      <select id="especialidad" (click)="ClaseCEspecialidad='form-control form-input select-number'" [class]="ClaseCEspecialidad" [(ngModel)]="especialidad" name="especialidad" required>
+                                                      <select id="especialidad" (change)="LimpiarTurno()" (click)="ClaseCEspecialidad='form-control form-input select-number'" [class]="ClaseCEspecialidad" [(ngModel)]="especialidad" name="especialidad" required>
                                                           <option value="Medicina General">Medicina General</option>
                                                           <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
                                                       </select>
@@ -49,7 +49,7 @@
                                           <div class="form-group col-md-6" >
                                               <label for="date-input"> Hora de la cita </label>
                                               <select  [class]="ClaseCHora" (click)="ClaseCHora='form-control form-input select-number'" size="5" multiple aria-label=" multiple select example" name="idT" [(ngModel)]="idT" id="idT"  required>
-                                                <option *ngFor="let item of ArrayTurnos" value="{{item.id}}">{{item.hora}}</option>
+                                                <option *ngFor="let item of ArrayTurnos" value="{{item.id}}">{{item.hora}} </option>
                                               </select>
                                           </div>
                                           <div class="form-group col-md-6" >

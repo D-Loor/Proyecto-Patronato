@@ -49,7 +49,7 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCHora:string="form-control form-input select-number";
 
   //Variables para datos pacientes
-  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false;
+  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos
   ArrayTurnos: any = []
 
   ngOnInit() {
@@ -220,7 +220,6 @@ export class AgendarCitaComponent implements OnInit {
       this.nombres="";
       this.cedula ="";
       this.fecha_consulta="";
-      this.especialidad="";
       this.idT="";
       this.abono=false;
       this.ClaseCdula="form-control form-input select-number";
@@ -349,6 +348,10 @@ export class AgendarCitaComponent implements OnInit {
       }
       this.ArrayTurnos.push(turnos);
     }
+  }
+  LimpiarTurno(){
+    this.fecha_consulta="";
+    this.ArrayTurnos=undefined;
   }
 
 
