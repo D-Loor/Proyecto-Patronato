@@ -95,23 +95,44 @@ class CitaController extends Controller
         $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');
         $turno=Turno::all()->where('tipo', $tipo);
         $NCitas = count($datos);
-
-
-        foreach ($datos as $cita)
-        {
-
-            $cont=-1;
-            foreach ($turno as $tur)
+        $pase=0;
+        if($tipo=="MG"){
+            foreach ($datos as $cita)
             {
 
-                $cont++;
-                if($tur['id_turno'] == $cita['id_turno']){
-                    unset($turno[$cont]);
-                    break;
-                }
+                $cont=-1;
+                foreach ($turno as $tur)
+                {
 
+                    $cont++;
+                    if($tur['id_turno'] == $cita['id_turno']){
+                        unset($turno[$cont]);
+                        break;
+                    }
+
+                }
+            }
+        }else{
+            foreach ($datos as $cita)
+            {
+
+                $cont=-1;
+                foreach ($turno as $tur)
+                {
+
+                    $cont++;
+                    if($tur['id_turno'] == $cita['id_turno']){
+                       $pase++;
+                    }
+                    if($pase == 2){
+                        unset($turno[$cont]);
+                        break;
+                    }
+
+                }
             }
         }
+
 
         $NTurnos = count($turno);
 
@@ -144,12 +165,16 @@ class CitaController extends Controller
         $datos=Cita::where("cedula", '=', $cedula)->first();
         //$rol = role::where("cedula", '=', $id_cita)->first();
         if($datos != null){
+            if($request->abono=="DOADBA"){
+                $datos->abono=true;
+            }else{
+                $datos->abono=false;
+            }
             $datos->id_cita = $datos->id_cita;
             $datos->nombres = $request->nombres;
             $datos->cedula = $datos->cedula;
             $datos->especialidad = $datos->especialidad;
             $datos->fecha = $datos->fecha;
-            $datos->abono = $request->abono;
             $datos->id_turno = $datos->id_turno;
             $datosP=Paciente::where('cedula', $cedula)->get()->first();
             if($datosP != null){
