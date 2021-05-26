@@ -768,7 +768,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   AntecedentesFamiliares(){
-    
+    debugger
+    if(this.DatosFamiliares.length==0){
+      this.ActualizarEstadoCitas();
+    }else{
     let  arrayLocal={};
     for (let item of this.DatosFamiliares) { 
       arrayLocal = {
@@ -782,6 +785,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         this.AntecedentesPatologicosF();
       });
     }
+  }
   }
 
   AntecedentesPatologicosF(){
