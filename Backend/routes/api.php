@@ -50,6 +50,7 @@ Route::get('pacientesConcultas/{id}', 'HistoriaClinicaMGController@ConsultasPaci
 Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFController@FiltradoFecha');
 Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoFamiliarController@eliminar');
 Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@DatosEstadisticos');
+Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
 
 Route::get('ReportePacientesAnual','PDFController@ReportePacientesAnual');
 Route::get('ReportePacientesMensual','PDFController@ReportePacientesMensual');

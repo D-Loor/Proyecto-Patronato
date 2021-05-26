@@ -170,11 +170,13 @@ class HistoriaClinicaMGController extends Controller
 
         $presunt=0;
         $defini=0;
-        $citasPendientes = Cita::all();
-
+        $TotalcitasPendientes=0;
         $cont = 0;
         $contH = 0;
         $contM =0;
+
+        $citasPendientes = Cita::all();
+
         foreach ($pacientes as $item){
             if($item['condicion_diagnostico']=='Presuntivo')
                 $presunt++;
@@ -196,9 +198,12 @@ class HistoriaClinicaMGController extends Controller
             if($item->paciente['sexo']=='Mujer')
                 $contM++;
         }
+        foreach ($citasPendientes as $item){
+            if($item['especialidad']=='Medicina General')
+                $TotalcitasPendientes++;
+        }
 
         $TotalPacientes = count($pacientes);
-        $TotalcitasPendientes = count($citasPendientes);
 
         return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'presuntivo'=>$presunt,'definitivo'=> $defini]);
 

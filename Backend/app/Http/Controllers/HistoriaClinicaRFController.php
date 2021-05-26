@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Historia_Clinica_RF;
 use Illuminate\Http\Request;
+use App\Models\Cita;
 
 class HistoriaClinicaRFController extends Controller
 {
@@ -139,6 +140,49 @@ class HistoriaClinicaRFController extends Controller
             }else
                 return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         }
+
+    }
+    public function DatosEstadisticos($fechaInicial, $fechaFinal){
+        $pacientes=Historia_Clinica_RF::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente')->get();
+
+        $patro=0;
+        $domi=0;
+        $TotalcitasPendientes=0;
+        $cont = 0;
+        $contH = 0;
+        $contM =0;
+
+        $citasPendientes = Cita::all();
+
+        foreach ($pacientes as $item){
+            if($item['lugar_atencion']=='Patronato')
+                $patro++;
+            else
+                $domi++;
+        }
+
+        foreach ($pacientes as $item){
+            if($item->paciente['gad']=='1')
+                $cont++;
+        }
+
+        foreach ($pacientes as $item){
+            if($item->paciente['sexo']=='Hombre')
+                $contH++;
+        }
+
+        foreach ($pacientes as $item){
+            if($item->paciente['sexo']=='Mujer')
+                $contM++;
+        }
+        foreach ($citasPendientes as $item){
+            if($item['especialidad']=='Rehabilitacion Fisica')
+                $TotalcitasPendientes++;
+        }
+
+        $TotalPacientes = count($pacientes);
+
+        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'patronato'=>$patro,'domicilio'=> $domi]);
 
     }
 }

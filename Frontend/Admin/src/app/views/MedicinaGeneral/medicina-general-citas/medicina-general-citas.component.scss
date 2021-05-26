@@ -23,12 +23,7 @@ tr{
 .space{
   padding-left: 30px;
 }
-.widget{
-  color: #fff;
-  padding-left: 10px;
-  font-size: 18px;
-  font-weight: 400;
-}
+
 .principal{
   margin-top: 10px;
 }
@@ -43,4 +38,23 @@ input[type="number"]::-webkit-outer-spin-button,
   }
   input[type="number"] {
       -moz-appearance: textfield;
+  }
+  .widget{
+    color: #fff;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .brand-card{
+    height: 100px;
+  }
+  .text-value{
+    font-size: 15px;
+  }
+  .brand-card-body{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .iconosf{
+    font-size: 1.4rem;
   }

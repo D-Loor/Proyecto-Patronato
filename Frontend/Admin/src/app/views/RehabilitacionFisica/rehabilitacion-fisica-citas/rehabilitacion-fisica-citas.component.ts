@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { ViewChild } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
+import { RehabilitacionFisicaService } from '../../../servicios/rehabilitacion-fisica.service';
 
 @Component({
   selector: 'app-rehabilitacion-fisica-citas',
@@ -14,7 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class RehabilitacionFisicaCitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router, private spinner: NgxSpinnerService) { }
+  constructor(public citasser:CitasService,public rehabilita:RehabilitacionFisicaService, public rutas:Router, private spinner: NgxSpinnerService) { }
   isCollapsed2 = false;
   isCollapsed = true;
   search;
@@ -28,6 +29,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   today = new Date();
   fechaActual:string;
   validarVacio;
+  TotalHombres; TotalMujeres; TotalPacientes; TotalCitasPendientes; horas; minutos; patronato; domicilio;
 
   loadingText = 'Cargando...';
   spinnerConfig: object = {
@@ -40,8 +42,21 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     showSpinner: false
   };
 
-  ngOnInit(): void {
+    //Obtener inicio y fin de mes
+    primerDia = new Date(this.today.getFullYear(), this.today.getMonth()+1, 1);
+    ultimoDia = new Date(this.today.getFullYear(), this.today.getMonth() + 2, 1);
+    dia = this.primerDia.getDate();
+    mes = this.primerDia.getMonth();
+    yyy = this.primerDia.getFullYear();
+    FechaInicio:string = this.yyy +'-'+this.mes+'-'+this.dia;
+    diaF = this.ultimoDia.getDate();
+    mesF = this.ultimoDia.getMonth();
+    yyyF = this.ultimoDia.getFullYear();
+    FechaFin:string = this.yyyF +'-'+this.mesF+'-'+this.diaF;
 
+
+  ngOnInit(): void {
+    this.Estadisticas(this.FechaInicio,this.FechaFin);
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
   }
@@ -54,6 +69,23 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       'La lista de citas ha sido actualizada.',
       'success'
     )
+  }
+  Estadisticas(Inicio:string,Fin:string){
+
+    this.rehabilita.Estadisticas(Inicio,Fin).then(data =>{
+      this.TotalPacientes = data['totalP'];
+      this.TotalCitasPendientes = data['totalC'];
+      this.TotalHombres = data['totalH'];
+      this.TotalMujeres = data['totalM'];
+      this.patronato= data['patronato'];
+      this.domicilio= data['domicilio'];
+      let tiempocita=this.TotalPacientes*20;
+      this.horas=tiempocita/60;
+      this.horas=parseInt(this.horas);
+      this.minutos = tiempocita%60;
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   cargar(){

@@ -55,4 +55,15 @@ export class RehabilitacionFisicaService {
       });
     });
   }
+  Estadisticas(fechaInicio:string, fechaFin:string){
+    let  url = 'http://127.0.0.1:8000/api/estadisticasRF/'+fechaInicio+"/"+fechaFin;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
