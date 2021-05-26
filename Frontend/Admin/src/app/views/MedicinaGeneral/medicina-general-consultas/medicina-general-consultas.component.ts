@@ -4,6 +4,7 @@ import { MedicinaGeneralService } from '../../../servicios/medicina-general.serv
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-medicina-general-consultas',
@@ -12,7 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class MedicinaGeneralConsultasComponent implements OnInit {
 
-  constructor(public medicinag:MedicinaGeneralService, public rutas:Router,public citasser:CitasService) { }
+  constructor(public medicinag:MedicinaGeneralService, public rutas:Router,public citasser:CitasService, private spinner: NgxSpinnerService) { }
   isCollapsed = false;
   presun=false;
   defini=false;
@@ -54,6 +55,19 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   ClaseTipo:string="";
   ClaseCondicion:string="";
   ClaseEnfermedad:string="";
+
+  loadingText = 'Guardando...';
+
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
 
   ngOnInit(): void {
     this.cargar();
@@ -229,9 +243,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   eliminarCita(id:string) {
     this.citasser.elicitas(id).then(data => {
       this.rutas.navigate(['/medicinageneralcitas']);
+      this.spinner.hide('sample');
       })
       .catch((error) => {
         console.log(error);
+        this.spinner.hide('sample');
       });
   }
 
@@ -260,6 +276,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
+            this.loadingText = 'Cargando...';
+            this.spinner.show('sample');
             let datos;
             datos = {
               'enfermedad':this.NuevaEnfermedad,
@@ -270,7 +288,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
               this.data.push({ "id": this.valor, "name":this.NuevaEnfermedad});
               this.confirma=true;
               this.pase=true;
-              Swal.fire('¡Enfermedad agregada!', '', 'success')
+              this.spinner.hide('sample');
+              Swal.fire('¡Enfermedad Agregada..!', '', 'success')
 
             });
 
@@ -302,6 +321,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
 
   IngresarConsulta(){
+    this.loadingText = 'Guardando...';
+    this.spinner.show('sample');
 
     let data;
     let cert=0;

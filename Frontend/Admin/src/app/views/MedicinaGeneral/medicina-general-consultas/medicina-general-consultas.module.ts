@@ -7,6 +7,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FiltroModule } from '../../../pipes/filtro.module';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -18,6 +19,7 @@ import { FiltroModule } from '../../../pipes/filtro.module';
     FiltroModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
 
   ],
   declarations: [
