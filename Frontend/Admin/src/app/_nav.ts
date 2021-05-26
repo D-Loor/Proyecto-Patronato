@@ -22,12 +22,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Generar Reporte',
-    url: '/medicinageneral/reporte',
+    url: '/reportesMG',
     icon: 'icon-chart',
     children: [
       {
         name: 'Reporte Diario',
-        url: '/medicinageneral/reporte/diario',
+        url: '/ReporteMGDiario',
         icon: 'icon-graph'
       },
       {
@@ -69,12 +69,12 @@ export const navItems: INavData[] = [
 
   {
     name: 'Generar Reporte',
-    url: '/rehabilitacionfisica/reporte',
+    url: '/reportesRF',
     icon: 'icon-chart',
     children: [
       {
         name: 'Reporte Diario',
-        url: '/rehabilitacionfisica/reporte/diario',
+        url: '/ReporteRFDiario',
         icon: 'icon-graph'
       },
       {

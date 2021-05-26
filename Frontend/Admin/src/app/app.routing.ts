@@ -69,6 +69,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
       },
       {
+        path: 'ReporteMGDiario',
+        loadChildren: () => import('./views/MedicinaGeneral/reportes-mg/diario/diario.module').then(m => m.DiarioMGModule)
+      },
+      {
         path: 'pacientes',
         loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PacientesModule)
       },
@@ -84,6 +88,10 @@ export const routes: Routes = [
       {
         path: 'rehabilitacionfisicacitas',
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module').then(m => m.RehabilitacionFisicaCitasModule)
+      },
+      {
+        path: 'ReporteRFDiario',
+        loadChildren: () => import('./views/RehabilitacionFisica/reportes-rf/diario/diario.module').then(m => m.DiarioRFModule)
       },
       //Secretaría
       {
