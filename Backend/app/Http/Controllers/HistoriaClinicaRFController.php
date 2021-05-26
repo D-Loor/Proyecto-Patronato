@@ -126,14 +126,14 @@ class HistoriaClinicaRFController extends Controller
         if($fechaInicial > $fechaFinal){
             return response()->json(['result'=>"Error en fechas", 'code'=>'203']);
         }else if($fechaInicial == $fechaFinal){
-            $datos=Historia_Clinica_RF::where('fecha',$fechaInicial)->with('paciente','enfermedad')->get();
+            $datos=Historia_Clinica_RF::where('fecha',$fechaInicial)->with('paciente','tratamiento')->get();
             $num_rows = count($datos);
             if($num_rows != 0){
                 return response()->json(['result'=>$datos, 'code'=>'201']);
             }else
                 return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
         }else{
-            $datos=Historia_Clinica_RF::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
+            $datos=Historia_Clinica_RF::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','tratamiento')->get();
             $num_rows = count($datos);
             if($num_rows != 0){
                 return response()->json(['result'=>$datos, 'code'=>'201']);

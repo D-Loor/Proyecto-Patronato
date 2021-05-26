@@ -77,14 +77,11 @@ export class RehabilitacionFisicaComponent implements OnInit {
       this.historialRFPaginateFilter=[];
     if(this.search==''){
     }else{
-      debugger
       for (const x of this.historialRF) {
-        debugger
         if(x['paciente'].cedula.indexOf(this.search)> -1){
          this.historialRFFilter.push(x);
        };
       };
-      debugger
       this.historialRFPaginateFilter = this.historialRFFilter.slice(0, 10);
     }
 
@@ -130,54 +127,57 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.Principal.show();
   }
 
-  FiltroFecha(){
-    if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
-      Swal.fire(
-        '¡Campos Incorrectos..!',
-        'Ingrese las fechas a filtrar completas.',
-        'error'
-      )
-    }else{
-      this.loadingText = 'Cargando...';
-      this.spinner.show('sample');
+FiltroFecha(){
+  if(this.FechaInicio === undefined || this.FechaFin === undefined || this.FechaInicio === "" || this.FechaFin === ""){
+    Swal.fire(
+      '¡Campos Incorrectos..!',
+      'Ingrese las fechas a filtrar completas.',
+      'error'
+    )
+  }else{
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
 
-      this.historial.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
-        if(data['code']=='203'){
-         Swal.fire(
-            '¡Fecha Incorrecta..!',
-            'La fecha de incio debe ser menor a la fecha final.',
-            'error'
-          )
-        }else if(data['code']=='202'){
-          Swal.fire(
-            '¡Sin Registros..!',
-            'No hay consultas resgistradas en esta fecha.',
-            'error'
-          )
-          this.cargar();
-          this.FechaFin = "";
-          this.FechaInicio = "";
-          this.historialRF=[];
-          this.historialRFPaginate = this.historialRF.slice(0, 10);
-        }else{
-          Swal.fire(
-            'Consultas Filtradas!',
-            'La lista de consultas ha sido filtrada.',
-            'success'
-          )
-          this.historialRF=data['result'];
-          this.historialRFPaginate = this.historialRF.slice(0, 10);
-          this.FechaFin = "";
-          this.FechaInicio = "";
-        }
-        this.spinner.hide('sample');
+    this.historial.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
+  
+      if(data['code']=='203'){
+        Swal.fire(
+          '¡Fecha Incorrecta..!',
+          'La fecha de incio debe ser menor a la fecha final.',
+          'error'
+        )
+      }else if(data['code']=='202'){
+        Swal.fire(
+          '¡Sin Registros..!',
+          'No hay consultas resgistradas en esta fecha.',
+          'error'
+        )
+        this.cargar();
+        this.FechaFin = "";
+        this.FechaInicio = "";
+        this.historialRF=[];
+        this.historialRFPaginate = this.historialRF.slice(0, 10);
+      }else{
+        Swal.fire(
+          'Consultas Filtradas!',
+          'La lista de consultas ha sido filtrada.',
+          'success'
+        )
+        this.historialRF=data['result'];
+        this.historialRFPaginate = this.historialRF.slice(0, 10);
+        this.FechaFin = "";
+        this.FechaInicio = "";
+      }
 
-    }).catch(error =>{
-      console.log(error);
-      this.spinner.hide('sample');
-    });
-    }
+    this.spinner.hide('sample');
+  }).catch(error =>{
+    console.log(error);
+    this.spinner.hide('sample');
 
+  });
   }
+
+
+}
 
 }
