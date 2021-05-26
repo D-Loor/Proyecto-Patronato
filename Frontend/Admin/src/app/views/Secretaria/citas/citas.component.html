@@ -65,8 +65,7 @@
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" id="cancelomg"  [checked]='item.abono' >
-
+                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >
                   </td>
                   <td>
 
@@ -91,8 +90,7 @@
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf" id="cancelorf" [checked]='item.abono'>
-                  </td>
+                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                  </td>
                   <td>
 
                     <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
@@ -184,8 +182,7 @@
                 </td>
 
                 <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf"  (click)="abonar(item.id,item.abono)" id="cancelorf" [checked]='item.abono'>
-                </td>
+                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                </td>
                 <td>
 
                 <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
@@ -210,8 +207,7 @@
                   <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
                 </td>
                 <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelorf" (click)="abonar(item.id,item.abono)"  id="cancelorf" [checked]='item.abono'>
-                </td>
+                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                </td>
                 <td>
 
                 <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i

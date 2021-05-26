@@ -39,15 +39,16 @@ export class CitasComponent implements OnInit {
 
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF(this.fechaActual,0,false);
-    this.cargarMG(this.fechaActual,0,false);
+    this.cargarRF(this.fechaActual,0,false,false);
+    this.cargarMG(this.fechaActual,0,false,false);
   }
 
-  cargarMG(fechaActual:string,fecha:number,cambio:boolean){
-
+  cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
+    debugger
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.citasMG=data['result'];
       this.citasMGPaginate = this.citasMG.slice(0, 10);
+      if(check==true){}else{
     if(data['code']!="202"){
   
     if(cambio==true){
@@ -80,6 +81,7 @@ export class CitasComponent implements OnInit {
         this.dataPaginateMG(event);
       }
     }
+  }
     }).catch(error =>{
       console.log(error);
   });
@@ -122,10 +124,10 @@ export class CitasComponent implements OnInit {
         this.citasEliminarMG=data['result'];
 
         if(this.FechaMg==''){
-          this.cargarMG(this.fechaActual,0,false);
+          this.cargarMG(this.fechaActual,0,false,false);
 
         }else{
-          this.cargarMG(this.FechaMg,0,false);
+          this.cargarMG(this.FechaMg,0,false,false);
         }
 
 
@@ -135,18 +137,74 @@ export class CitasComponent implements OnInit {
       });
   }
 
-  abonar(id, valor){
-    if(valor ==true || valor==1){
+  abonar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
+    debugger
+    if(abono == true || abono == 1){
       return false;
+    }else{
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea marcar como abonado?',
+        text: "Una vez marcado no se podrá cambiar el mismo.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, marcar abonado!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let arrayLocal = {
+            "id_cita": id_cita,
+            "nombres": nombres,
+            "cedula": cedula,
+            "especialidad": especialidad,
+            "fecha": fecha,
+            "abono": 'DOADBA',
+            "id_turno": id_turno,
+        }
+        
+          this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
+            debugger
+            if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
+            else{this.cargarMG(this.fechaActual,0,false,true);}
+            
+          });
+          swalWithBootstrapButtons.fire(
+            'Modificado..!',
+            'La cita ha sido modificada.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'La cita no ha sido modificada.',
+            'error'
+          )
+          if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
+            else{this.cargarMG(this.fechaActual,0,false,true);}
+        }
+      })      
     }
-
   }
 
-  cargarRF(fechaActual:string,fecha:number,cambio:boolean){
+  cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
       debugger
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
+      if(check==true){}else{
     if(data['code']!="202"){
       if(cambio==true){
         Swal.fire({
@@ -178,6 +236,7 @@ export class CitasComponent implements OnInit {
         this.dataPaginateRF(event);
       }
     }
+  }
     }).catch(error =>{
       console.log(error);
   });
@@ -255,12 +314,12 @@ export class CitasComponent implements OnInit {
         this.citasEliminarRF=data['result'];
         if(this.FechaRf==''){
           debugger
-          this.cargarRF(this.fechaActual,0,false);
+          this.cargarRF(this.fechaActual,0,false,false);
           debugger
 
         }else{
           debugger
-          this.cargarRF(this.FechaRf,0,false);
+          this.cargarRF(this.FechaRf,0,false,false);
           debugger
         }
 
@@ -285,7 +344,7 @@ export class CitasComponent implements OnInit {
 
     swalWithBootstrapButtons.fire({
       title: '¿Está seguro de eliminar?',
-      text: "Una vez eliminado no se podrá recuperar el mismo!",
+      text: "Una vez eliminado no se podrá recuperar el mismo.",
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar cita!',
@@ -307,7 +366,7 @@ export class CitasComponent implements OnInit {
         }
 
         swalWithBootstrapButtons.fire(
-          '¡Eliminado!',
+          '¡Eliminado..!',
           'La cita ha sido eliminada.',
           'success'
         )
@@ -316,7 +375,7 @@ export class CitasComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
+          '¡Cancelado..!',
           'La cita no ha sido eliminada.',
           'error'
         )
