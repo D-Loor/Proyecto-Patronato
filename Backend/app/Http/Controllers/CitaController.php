@@ -93,45 +93,44 @@ class CitaController extends Controller
     public function validarHora($fecha, $tipo)
     {
         $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');
-        $turno=Turno::all()->where('tipo', $tipo);
-        $NCitas = count($datos);
-        $pase=0;
-        if($tipo=="MG"){
-            foreach ($datos as $cita)
+        $turno=Turno::all();
+        $posicion=0;
+
+            foreach ($turno as $tur)
             {
-
-                $cont=-1;
-                foreach ($turno as $tur)
-                {
-
-                    $cont++;
-                    if($tur['id_turno'] == $cita['id_turno']){
-                        unset($turno[$cont]);
-                        break;
+                $pase = 0;
+                if($tipo=="RF"){
+                    if($tur['tipo'] != $tipo){
+                        unset($turno[$posicion]);
+                    }else{
+                        foreach ($datos as $cita)
+                        {
+                            if($tur['id_turno'] == $cita['id_turno']){
+                                $pase++;
+                            }
+                            if($pase == 2){
+                                unset($turno[$posicion]);
+                                break;
+                            }
+                        }
                     }
 
+                }else{
+                    if($tur['tipo'] != $tipo){
+                        unset($turno[$posicion]);
+                    }else{
+                        foreach ($datos as $cita)
+                        {
+                            if($tur['id_turno'] == $cita['id_turno']){
+                                unset($turno[$posicion]);
+                                break;
+                            }
+                        }
+                    }
                 }
+
+                $posicion++;
             }
-        }else{
-            foreach ($datos as $cita)
-            {
-
-                $cont=-1;
-                foreach ($turno as $tur)
-                {
-
-                    $cont++;
-                    if($tur['id_turno'] == $cita['id_turno']){
-                       $pase++;
-                    }
-                    if($pase == 2){
-                        unset($turno[$cont]);
-                        break;
-                    }
-
-                }
-            }
-        }
 
 
         $NTurnos = count($turno);
