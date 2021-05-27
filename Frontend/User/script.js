@@ -141,13 +141,10 @@ function LimpiarTurnos(){
  //Validar Fecha
    
     /*Restringo Fecha de anteriores a la de hoy */
-var today = new Date().toISOString().split('T')[0];
-document.getElementsByName("fecha")[0].setAttribute('min', today);
+/*var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("fecha")[0].setAttribute('min', today);*/
 
 /*Restringo Fecha de selección hasta 180 días después de la fecha actual */
-var maxDate = new Date(new Date().getTime() + 360 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-document.getElementsByName("fecha")[0].setAttribute('max', maxDate)
-
 
 
 

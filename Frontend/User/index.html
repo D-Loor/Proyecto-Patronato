@@ -12,7 +12,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="flatpickr.min.css">
+    <script src="flatpickr.min.js"></script>
+    <script src="es.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">-->
+    <!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/confetti.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/light.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css"> -->
 </head>
 
 
@@ -605,13 +613,32 @@
                         
                                     <label class="label-co"  id="label-fecha"> Seleccione la fecha de consulta *</label>
                                   
-                                    <input  id="fecha"  onblur="cambio('fecha')" name="fecha" onchange="cargar()" type="date" class="form-control fecha"  required
-                                        data-validation-required-message="Seleccione o ingrese la fecha de la cita." min="2021-04-25" onload="validarf()">
+                                    <input  id="fecha"  onblur="cambio('fecha')" name="fecha" onchange="cargar()" class="form-control fecha"  required
+                                        data-validation-required-message="Seleccione o ingrese la fecha de la cita." placeholder="" onload="validarf()">
                                     <p class="help-block text-danger"></p>
                             
                                 </div>
                      
-                                                             
+                                  <script>
+                                      var today = new Date().toISOString().split('T')[0];
+                                      var maxDate = new Date(new Date().getTime() + 360 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                                      $(".fecha").flatpickr({
+                                        minDate: today,
+                                        maxDate: maxDate,
+                                        enableTime: false,
+                                        dateFormat: "Y-m-d",
+                                        "disable": [
+                                        function(date) {
+                                        return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
+                                        }
+                                        ],
+                                        
+                                        "locale": {
+                                        "firstDayOfWeek": 1 // set start day of week to Monday
+                                        },
+                                        locale:"es",
+                                        });
+                                  </script>                           
 
 
                                 <div class="form-group">
