@@ -125,6 +125,9 @@
         .Der{
             float:right;
         }
+        .espaciado{
+            padding-left:25px;
+        }
 
     </style>
 </head>
@@ -136,12 +139,12 @@
          <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-        <h4>TOTAL DE PACIENTES ATENDIDOS EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL DEL CANTÓN JUNÍN EN LAS ÁREAS DE MEDICINA GENERAL Y REHABILITACIÓN FÍSICA EN EL AÑO 2020.</h4>
+        <h4>TOTAL DE PACIENTES ATENDIDOS EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL DEL CANTÓN JUNÍN EN LAS ÁREAS DE MEDICINA GENERAL Y REHABILITACIÓN FÍSICA EN EL AÑO {{$year}}.</h4>
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th class="hinicio"> 2020 </th>
+                        <th class="hinicio"> {{$year}} </th>
                         <th class="hmedio"  colspan="2"> MEDICINA GENERAL</th>
                         <th class="hmedio"  colspan="2"> REHABILITACION FISICA</th>
                         <th class="hmedio"  colspan="2"> SUBTOTAL</th>
@@ -160,139 +163,136 @@
                 <tbody>
                     <tr>
                         <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <td> {{$MGH[0]}}</td>
+                        <td> {{$MGM[0]}}</td>
+                        <td> {{$RFH[0]}}</td>
+                        <td> {{$RFM[0]}}</td>
+                        <td> {{$STH[0]}}</td>
+                        <td> {{$STM[0]}} </td>
+                        <td > {{$Total[0]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> FEBRERO </th>
+                        <td> {{$MGH[1]}}</td>
+                        <td> {{$MGM[1]}}</td>
+                        <td> {{$RFH[1]}}</td>
+                        <td> {{$RFM[1]}}</td>
+                        <td> {{$STH[1]}}</td>
+                        <td> {{$STM[1]}} </td>
+                        <td > {{$Total[1]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> MARZO </th>
+                        <td> {{$MGH[2]}}</td>
+                        <td> {{$MGM[2]}}</td>
+                        <td> {{$RFH[2]}}</td>
+                        <td> {{$RFM[2]}}</td>
+                        <td> {{$STH[2]}}</td>
+                        <td> {{$STM[2]}} </td>
+                        <td> {{$Total[2]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> ABRIL </th>
+                        <td> {{$MGH[3]}}</td>
+                        <td> {{$MGM[3]}}</td>
+                        <td> {{$RFH[3]}}</td>
+                        <td> {{$RFM[3]}}</td>
+                        <td> {{$STH[3]}}</td>
+                        <td> {{$STM[3]}} </td>
+                        <td > {{$Total[3]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> MAYO </th>
+                        <td> {{$MGH[4]}}</td>
+                        <td> {{$MGM[4]}}</td>
+                        <td> {{$RFH[4]}}</td>
+                        <td> {{$RFM[4]}}</td>
+                        <td> {{$STH[4]}}</td>
+                        <td> {{$STM[4]}} </td>
+                        <td> {{$Total[4]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> JUNIO </th>
+                        <td> {{$MGH[5]}}</td>
+                        <td> {{$MGM[5]}}</td>
+                        <td> {{$RFH[5]}}</td>
+                        <td> {{$RFM[5]}}</td>
+                        <td> {{$STH[5]}}</td>
+                        <td> {{$STM[5]}} </td>
+                        <td > {{$Total[5]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> JULIO </th>
+                        <td> {{$MGH[6]}}</td>
+                        <td> {{$MGM[6]}}</td>
+                        <td> {{$RFH[6]}}</td>
+                        <td> {{$RFM[6]}}</td>
+                        <td> {{$STH[6]}}</td>
+                        <td> {{$STM[6]}} </td>
+                        <td > {{$Total[6]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> AGOSTO </th>
+                        <td> {{$MGH[7]}}</td>
+                        <td> {{$MGM[7]}}</td>
+                        <td> {{$RFH[7]}}</td>
+                        <td> {{$RFM[7]}}</td>
+                        <td> {{$STH[7]}}</td>
+                        <td> {{$STM[7]}} </td>
+                        <td > {{$Total[7]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> SEPTIEMBRE </th>
+                        <td> {{$MGH[8]}}</td>
+                        <td> {{$MGM[8]}}</td>
+                        <td> {{$RFH[8]}}</td>
+                        <td> {{$RFM[8]}}</td>
+                        <td> {{$STH[8]}}</td>
+                        <td> {{$STM[8]}} </td>
+                        <td > {{$Total[8]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> OCTUBRE </th>
+                        <td> {{$MGH[9]}}</td>
+                        <td> {{$MGM[9]}}</td>
+                        <td> {{$RFH[9]}}</td>
+                        <td> {{$RFM[9]}}</td>
+                        <td> {{$STH[9]}}</td>
+                        <td> {{$STM[9]}} </td>
+                        <td > {{$Total[9]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                        <th> NOVIEMBRE </th>
+                        <td> {{$MGH[10]}}</td>
+                        <td> {{$MGM[10]}}</td>
+                        <td> {{$RFH[10]}}</td>
+                        <td> {{$RFM[10]}}</td>
+                        <td> {{$STH[10]}}</td>
+                        <td> {{$STM[10]}} </td>
+                        <td > {{$Total[10]}} </td>
                     </tr>
                     <tr>
-                        <th> ENERO </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="suma"> 371 </td>
+                    <th> DICIEMBRE </th>
+                        <td> {{$MGH[11]}}</td>
+                        <td> {{$MGM[11]}}</td>
+                        <td> {{$RFH[11]}}</td>
+                        <td> {{$RFM[11]}}</td>
+                        <td> {{$STH[11]}}</td>
+                        <td> {{$STM[11]}} </td>
+                        <td> {{$Total[11]}} </td>
                     </tr>
-
-
-
 
                 </tbody>
                 <tfoot>
                 <tr>
                         <th> TOTAL DE PACIENTES ATENDIDOS </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
-                        <td class="resul"> 371 </td>
+                        <td class="suma"> {{$MGH[12]}}</td>
+                        <td class="suma"> {{$MGM[12]}}</td>
+                        <td class="suma"> {{$RFH[12]}}</td>
+                        <td class="suma"> {{$RFM[12]}}</td>
+                        <td class="suma"> {{$STH[12]}}</td>
+                        <td class="suma"> {{$STM[12]}} </td>
+                        <td class="resul"> {{$Total[12]}} </td>
                     </tr>
                 </tfoot>
             </table>
@@ -301,12 +301,12 @@
         <div class="firmas">
             <div class="Izq">
                 <p class="Doc">Dr. Martín Dueñas Intriago.</p>
-                <p>Área de Medicina General</p>
+                <p class="espaciado"> Medicina General.</p>
             </div>
 
             <div class="Der">
                 <p class="Doc">Lic. Carlos Zambrano Moreira.</p>
-                <p>Área de Rehabilitación Física.</p>
+                <p class="espaciado"> Rehabilitación Física.</p>
             </div>
         </div>
 
