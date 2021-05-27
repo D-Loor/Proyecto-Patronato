@@ -52,7 +52,7 @@ Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGControl
 Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
 
 Route::get('ReportePacientesAnual','PDFController@ReportePacientesAnual');
-Route::get('ReportePacientesMensual','PDFController@ReportePacientesMensual');
+Route::get('ReportePacientesMensual/{mes}/{year}','PDFController@ReportePacientesMensual');
 Route::get('MorbilidadMedicinaGeneral','PDFController@MorbilidadMedicinaGeneral');
 Route::get('MorbilidadTerapia','PDFController@MorbilidadTerapia');
 Route::get('RegistroDiarioMedicina','PDFController@RegistroDiarioMedicina');

@@ -7,6 +7,7 @@ use PDF;
 use App\Models\Historia_Clinica_MG;
 use App\Models\Historia_Clinica_RF;
 use App\Models\Paciente;
+use DateTime;
 
 class PDFController extends Controller
 {
@@ -80,13 +81,86 @@ class PDFController extends Controller
         return \PDF::loadView('ReportePacientesAnual',compact('MGH','MGM','RFH','RFM','STH','STM','Total','year'))->setPaper('a4', 'landscape')->stream('ReportePacientesAnual.pdf');
     }
 
-    public function ReportePacientesMensual(){
+    public function ReportePacientesMensual($Mes, $Year){
 
-        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+            $mes;
+            switch ($Mes) {
+                case 1:
+                    $mes="Enero";
+                    break;
+                case 2:
+                    $mes="Febrero";
+                    break;
+                case 3:
+                    $mes="Marzo";
+                    break;
+                case 4:
+                    $mes="Abril";
+                    break;
+                case 5:
+                    $mes="Mayo";
+                    break;
+                case 6:
+                    $mes="Junio";
+                    break;
+                case 7:
+                    $mes="Julio";
+                    break;
+                case 8:
+                    $mes="Agosto";
+                    break;
+                case 9:
+                    $mes="Septiembre";
+                    break;
+                case 10:
+                    $mes="Octubre";
+                    break;
+                case 11:
+                    $mes="Noviembre";
+                    break;
+                case 12:
+                    $mes="Diciembre";
+                    break;
+            }
 
-        return \PDF::loadView('ReportePacientesMensual', $datos)->setPaper('a4', 'landscape')->stream('ReportePacientesMensual.pdf');
+
+        //Medicina General
+        $MGcontH=0;$MGcontM=0;
+        $MG=Historia_Clinica_MG::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+        $datosMG = count($MG);
+            foreach ($MG as $item){
+                if($item->paciente['sexo']=='Hombre'){
+                    $MGcontH++;
+                }else{
+                    $MGcontM++;
+                }
+            }
+
+        //Rehabilitacion Fisica
+        $RFcontH=0;$RFcontM=0;
+        $RF=Historia_Clinica_RF::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+        $datosRF = count($RF);
+            foreach ($RF as $item){
+                if($item->paciente['sexo']=='Hombre'){
+                    $RFcontH++;
+                }else{
+                    $RFcontM++;
+                }
+            }
+        
+        $TotalH=$MGcontH+$RFcontH;
+        $TotalM=$MGcontM+$RFcontM;
+        $Total=$datosMG+$datosRF;
+
+        
+
+        
+        //return response()->json(['HombresMG'=>$MGcontH, 'MujeresMG'=>$MGcontM, 'TotalMG'=>$datosMG, 'HombresRF'=>$RFcontH, 'MujeresRF'=>$RFcontM, 'TotalRF'=>$datosRF, 'TotalH'=>$TotalH, 'TotalM'=>$TotalM, 'Total'=>$Total]);
+        
+        return \PDF::loadView('ReportePacientesMensual', compact('MGcontH','MGcontM','datosMG','RFcontH','RFcontM','datosRF','TotalH','TotalM','Total', 'mes','Year'))->setPaper('a4', 'landscape')->stream('ReportePacientesMensual.pdf');
 
     }
+
 
 
     public function MorbilidadMedicinaGeneral(){

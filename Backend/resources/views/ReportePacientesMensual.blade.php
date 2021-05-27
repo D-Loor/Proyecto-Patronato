@@ -122,21 +122,21 @@
                 <tbody>
                     <tr class="azul">
                         <th> MEDICINA GENERAL </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
+                        <td>{{$MGcontH}}</td>
+                        <td>{{$MGcontM}}</td>
+                        <td>{{$datosMG}}</td>
                     </tr>
                     <tr class="azul">
                         <th> REHABILITACION FISICA </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
+                        <td>{{$RFcontH}}</td>
+                        <td>{{$RFcontM}}</td>
+                        <td>{{$datosRF}}</td>
                     </tr>
                     <tr class="rojo">
                         <th> TOTAL </th>
-                        <td> 143</td>
-                        <td> 228</td>
-                        <td> 371 </td>
+                        <td>{{$TotalH}}</td>
+                        <td>{{$TotalM}}</td>
+                        <td>{{$Total}}</td>
                     </tr>
 
                 </tbody>
@@ -161,8 +161,8 @@
                 <tbody>
 
                     <tr>
-                        <th class="th">ENERO</th>
-                        <td class="td"> 2018</td>
+                        <th class="th">{{$mes}}</th>
+                        <td class="td">{{$Year}}</td>
                     </tr>
 
 
