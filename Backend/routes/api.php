@@ -51,11 +51,11 @@ Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoF
 Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@DatosEstadisticos');
 Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
 
-Route::get('ReportePacientesAnual','PDFController@ReportePacientesAnual');
+Route::get('ReportePacientesAnual/{year}','PDFController@ReportePacientesAnual');
 Route::get('ReportePacientesMensual/{mes}/{year}','PDFController@ReportePacientesMensual');
 Route::get('MorbilidadMedicinaGeneral','PDFController@MorbilidadMedicinaGeneral');
 Route::get('MorbilidadTerapia','PDFController@MorbilidadTerapia');
-Route::get('RegistroDiarioMedicina','PDFController@RegistroDiarioMedicina');
+Route::get('RegistroDiarioMedicina/{fecha}','PDFController@RegistroDiarioMedicina');
 Route::get('RegistroDiarioFisica','PDFController@RegistroDiarioFisica');
 Route::get('ConsolidadoMensualMedicinaGeneral','PDFController@ConsolidadoMensualMedicinaGeneral');
 

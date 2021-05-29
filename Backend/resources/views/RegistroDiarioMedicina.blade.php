@@ -41,7 +41,9 @@
             text-align: center;
             border: solid 1px black;
         }
-
+        .bori{
+            border-right: solid 1px black !important;
+        }
 
         thead tr th{
             color: rgb(0, 112, 192);
@@ -77,9 +79,15 @@
             position: absolute;
             margin-top:10px !important;
             text-align: center;
-            padding-left: 248px; 
+            padding-left: 248px;
             padding-right: 370px ;
             padding-top: 0px;
+        }
+        .fecha th {
+            font-size: 12px;
+        }
+        .fecha td{
+            font-size: 12px;
         }
         .LogoJunin{
             height:90px;
@@ -98,7 +106,7 @@
 
 
         .numero{
-            
+
             color: rgb(0, 112, 192);
         }
 
@@ -110,7 +118,7 @@
             border: solid 1.5px black;
         }
         .prevencion{
-            color: rgb(0, 176, 80) !important;
+            color: rgb(0, 112, 192) !important;
         }
         .tema{
             font-weight:bold;
@@ -144,7 +152,7 @@
 
         .segt{
             position: relative;
-            margin-left:1220px;
+            margin-left:1130px;
             margin-top: 60px;
             margin-right:100px;
             padding-right:100px;
@@ -185,7 +193,7 @@
 
     <h4> UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL JUNÍN <br> REGISTRO DIARIO DE ATENCIÓN Y CONSULTAS MÉDICAS</h4>
     <div class="contenido">
-     
+
 
         <table class="espacios">
             <thead>
@@ -207,7 +215,7 @@
                     <th class="subtema2" rowspan="3"><p class="box-rotate"> 15-19 AÑOS</p></th>
                     <th class="subtema2" rowspan="3"> <p class="box-rotate"> >=20 AÑOS</p></th>
                     <th class="subtema" colspan="10">GUPOS DE EDAD - MORBILIDAD</th>
-                    <th class="subtema" rowspan="4" colspan="5">DIAGNÓSTICO</th>
+                    <th class="subtema" rowspan="3" colspan="5">DIAGNÓSTICO</th>
                     <th class="tema" colspan="3">TIPOS DE ATENCIÓN</th>
                     <th class="subtema" colspan="2">CONDICIÓN DE DIAGNOSTICO</th>
                     <th class="nborde"></th>
@@ -252,7 +260,7 @@
                 <th class="subtema2"><p class="box-rotate">SUBSECUENTE</p></th>
                 <th class="nborde"></th>
                 </tr>
-               
+
                 <tr  class="numero">
                     <td>1</td>
                     <td>2</td>
@@ -282,58 +290,43 @@
                     <td>26</td>
                     <td>27</td>
                     <td>28</td>
+                    <td colspan="5"> </td>
                     <td>29</td>
                     <td>30</td>
                     <td>31</td>
                     <td>32</td>
                     <td>33</td>
                     <td>34</td>
-                    <th class="nborde"></th> 
+                    <th class="nborde"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td colspan="5">Mendoza Loor Bryan Aldair</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td colspan="5">V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <th class="nborde"></th>
-                </tr>
+                @foreach ($Result as $item)
+                    <tr >
 
-                
+                        @for($i = 0; $i <= 36; $i++)
+
+                            @if ($i === 0)
+                                <td class="prevencion">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i === 30)
+                                <td colspan="5">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i === 1)
+                                <td colspan="5">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i != 1 && $i != 30 && $i != 0 && $i != 36)
+                                <td>{{$item[$i]}}</td>
+                            @endif
+                            @if ($i == 36)
+                                <td class="bori">{{$item[$i]}}</td>
+                                <th class="nborde"></th>
+                            @endif
+
+                        @endfor
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>
@@ -351,15 +344,17 @@
             <div >
                 <table class="segt" >
                     <thead>
-                        <tr>
+                        <tr class="fecha">
+                            <th class="th"> DÍA</th>
                             <th class="th"> MES</th>
                             <th class="th"> AÑO</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="td">ENERO</th>
-                            <td class="td"> 2018</td>
+                        <tr class="fecha">
+                            <th class="td">{{$dia}}</th>
+                            <th class="td">{{$mes}}</th>
+                            <td class="td"> {{$anio}}</td>
                         </tr>
                     </tbody>
                 </table>

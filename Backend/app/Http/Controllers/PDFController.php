@@ -11,9 +11,8 @@ use DateTime;
 
 class PDFController extends Controller
 {
-    public function ReportePacientesAnual(){
+    public function ReportePacientesAnual( $year){
 
-        $year="2021";
         $datosMG=Historia_Clinica_MG::whereYear('fecha',$year)->with('paciente')->get();
         $datosRF=Historia_Clinica_RF::whereYear('fecha',$year)->with('paciente')->get();
 
@@ -147,16 +146,16 @@ class PDFController extends Controller
                     $RFcontM++;
                 }
             }
-        
+
         $TotalH=$MGcontH+$RFcontH;
         $TotalM=$MGcontM+$RFcontM;
         $Total=$datosMG+$datosRF;
 
-        
 
-        
+
+
         //return response()->json(['HombresMG'=>$MGcontH, 'MujeresMG'=>$MGcontM, 'TotalMG'=>$datosMG, 'HombresRF'=>$RFcontH, 'MujeresRF'=>$RFcontM, 'TotalRF'=>$datosRF, 'TotalH'=>$TotalH, 'TotalM'=>$TotalM, 'Total'=>$Total]);
-        
+
         return \PDF::loadView('ReportePacientesMensual', compact('MGcontH','MGcontM','datosMG','RFcontH','RFcontM','datosRF','TotalH','TotalM','Total', 'mes','Year'))->setPaper('a4', 'landscape')->stream('ReportePacientesMensual.pdf');
 
     }
@@ -178,9 +177,158 @@ class PDFController extends Controller
 
     }
 
-    public function RegistroDiarioMedicina(){
-        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
-        return \PDF::loadView('RegistroDiarioMedicina')->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+    public function RegistroDiarioMedicina($fecha){
+
+        $datosMG=Historia_Clinica_MG::where('fecha',$fecha)->with('paciente')->get();
+
+        $Result=[];
+        $num=1;
+        $valores = explode('-', $fecha);
+        $dia = $valores[0];
+        $mes = $valores[1];
+        $anio = $valores[2];
+        foreach ($datosMG as $item){
+
+            $nombres=$item->paciente['apellidos']." ".$item->paciente['nombres'];
+            $lugar[0]=" ";
+            $lugar[1]=" ";
+            $lugar[2]=" ";
+
+            if($item['lugar_atencion']=='Patronato'){
+                $lugar[0]="X";
+            }
+            else if($item['lugar_atencion']=='Comunidad'){
+                $lugar[1]="X";
+            }
+            else{
+                $lugar[2]="X";
+            }
+
+            $sexo[0]=" ";
+            $sexo[1]=" ";
+
+            if($item->paciente['sexo']=='Hombre'){
+                $sexo[0]="X";
+            }else{
+                $sexo[1]="X";
+            }
+
+            $mujer[0]=" ";
+            $mujer[1]=" ";
+            $mujer[2]=" ";
+            $mujer[3]=" ";
+
+            if($item->paciente['sexo']=='Hombre'){
+                $mujer[0]=" ";
+                $mujer[1]=" ";
+                $mujer[2]=" ";
+                $mujer[3]=" ";
+            }else{
+                $mujer[0]=" ";
+                $mujer[1]=" ";
+                $mujer[2]=" ";
+                $mujer[3]=" ";
+            }
+
+            $ninos[0]=" ";
+            $ninos[1]=" ";
+            $ninos[2]=" ";
+            $ninos[3]=" ";
+            $ninos[4]=" ";
+
+            if($item->paciente['edad'] < 1){
+                $ninos[0]="X";
+                $ninos[1]=" ";
+            }else if($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4){
+                $ninos[2]=" ";
+                $ninos[3]="X";
+            }else if($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9){
+                $ninos[4]="X";
+            }
+
+            $edadesm[0]=" ";
+            $edadesm[1]=" ";
+            $edadesm[2]=" ";
+
+            if($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14){
+                $edadesm[0]="X";
+            }else if($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19){
+                $edadesm[1]="X";
+            }else{
+                $edadesm[2]="X";
+            }
+
+            $morbilidad[0]="";
+            $morbilidad[1]="";
+            $morbilidad[2]="";
+            $morbilidad[3]="";
+            $morbilidad[4]="";
+            $morbilidad[5]="";
+            $morbilidad[6]="";
+            $morbilidad[7]="";
+            $morbilidad[8]="";
+            $morbilidad[9]="";
+
+            if($item->paciente['edad'] < 0.1){
+                $morbilidad[0]="X";
+            }else if($item->paciente['edad'] >= 0.1 && $item->paciente['edad'] <= 0.11){
+                $morbilidad[1]="X";
+            }else if($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4){
+                $morbilidad[2]="X";
+            }else if($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9){
+                $morbilidad[3]="X";
+            }else if($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14){
+                $morbilidad[4]="X";
+            }else if($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19){
+                $morbilidad[5]="X";
+            }else if($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 35){
+                $morbilidad[6]="X";
+            }else if($item->paciente['edad'] >= 36 && $item->paciente['edad'] <= 49){
+                $morbilidad[7]="X";
+            }else if($item->paciente['edad'] >= 50 && $item->paciente['edad'] <= 64){
+                $morbilidad[8]="X";
+            }else{
+                $morbilidad[9]="X";
+            }
+
+            $diagnostico=$item['diagnostico'];
+
+            $tipo[0]=" ";
+            $tipo[1]=" ";
+            $tipo[2]=" ";
+
+            if($item['tipo_atencion'] == "Prevención"){
+                $tipo[0]="X";
+            }else if($item['tipo_atencion'] == "Primera"){
+                $tipo[1]="X";
+            }else{
+                $tipo[2]="X";
+            }
+
+            $diagno[0]=" ";
+            $diagno[1]=" ";
+
+            if($item['condicion_diagnostico'] == "Presuntivo"){
+                $diagno[0]="X";
+            }else{
+                $diagno[1]="X";
+            }
+
+            $certificado=" ";
+
+            if($item['certificado'] == 1){
+                $certificado="X";
+            }
+
+            $Result[]=[$num,$nombres,$lugar[0],$lugar[1],$lugar[2],'1',$sexo[0],$sexo[1],$mujer[0],$mujer[1],$mujer[2],$mujer[3],$ninos[0],$ninos[1],$ninos[2],$ninos[3],$ninos[4],
+            $edadesm[0],$edadesm[1],$edadesm[2],$morbilidad[0],$morbilidad[1],$morbilidad[2],$morbilidad[3],$morbilidad[4],$morbilidad[5],$morbilidad[6],$morbilidad[7],
+            $morbilidad[8],$morbilidad[9],$diagnostico,$tipo[0],$tipo[1],$tipo[2],$diagno[0],$diagno[1],$certificado];
+
+            $num++;
+        }
+
+        // return response()->json(['result'=>$Result]);
+        return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
     }
 
     public function RegistroDiarioFisica(){
