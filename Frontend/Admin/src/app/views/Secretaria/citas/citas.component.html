@@ -69,10 +69,12 @@
                   </td>
                   <td>
 
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                         class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                     <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                          class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                        class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                    <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
+                        class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
                     <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
@@ -93,10 +95,12 @@
                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                  </td>
                   <td>
 
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente()"><i
+                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                         class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                     <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                           class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                    <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
+                      class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
                     <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
                         class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                   </td>
@@ -189,6 +193,8 @@
                     class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                 <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                       class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
+                  class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
                 <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                     class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 
@@ -214,6 +220,8 @@
                     class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
                 <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
                       class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
+                <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
+                  class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
                 <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
                     class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
 

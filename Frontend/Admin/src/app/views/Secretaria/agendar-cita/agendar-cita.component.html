@@ -64,7 +64,8 @@
 
 
 
-                                        <button type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarCita('sample')" >Agendar Cita</button>
+                                        <button *ngIf="estado==0" type="submit" class="btn btn-lg btn-primary boto" (click)="ValidarCita('sample')" >Agendar Cita</button>
+                                        <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto" (click)="ActualizarCita()" >Reagendar Cita</button>
                                 </form>
                             </div>
 

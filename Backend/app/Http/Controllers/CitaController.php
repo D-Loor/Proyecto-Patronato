@@ -161,7 +161,8 @@ class CitaController extends Controller
      */
     public function update(Request $request, $cedula)
     {
-        $datos=Cita::where("cedula", '=', $cedula)->first();
+        $datos=Cita::find($request->id_cita);
+
         //$rol = role::where("cedula", '=', $id_cita)->first();
         if($datos != null){
             if($request->abono=="DOADBA"){
@@ -171,10 +172,10 @@ class CitaController extends Controller
             }
             $datos->id_cita = $datos->id_cita;
             $datos->nombres = $request->nombres;
-            $datos->cedula = $datos->cedula;
-            $datos->especialidad = $datos->especialidad;
-            $datos->fecha = $datos->fecha;
-            $datos->id_turno = $datos->id_turno;
+            $datos->cedula = $request->cedula;
+            $datos->especialidad = $request->especialidad;
+            $datos->fecha = $request->fecha;
+            $datos->id_turno = $request->id_turno;
             $datosP=Paciente::where('cedula', $cedula)->get()->first();
             if($datosP != null){
                 $datos->estado=1;

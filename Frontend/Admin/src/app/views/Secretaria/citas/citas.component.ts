@@ -44,13 +44,14 @@ export class CitasComponent implements OnInit {
   }
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
-    debugger
+
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.citasMG=data['result'];
       this.citasMGPaginate = this.citasMG.slice(0, 10);
       if(check==true){}else{
     if(data['code']!="202"){
-  
+
+
     if(cambio==true){
       Swal.fire({
         icon: 'success',
@@ -138,7 +139,7 @@ export class CitasComponent implements OnInit {
   }
 
   abonar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
-    debugger
+
     if(abono == true || abono == 1){
       return false;
     }else{
@@ -149,7 +150,7 @@ export class CitasComponent implements OnInit {
         },
         buttonsStyling: true
       })
-  
+
       swalWithBootstrapButtons.fire({
         title: '¿Desea marcar como abonado?',
         text: "Una vez marcado no se podrá cambiar el mismo.",
@@ -171,12 +172,12 @@ export class CitasComponent implements OnInit {
             "abono": 'DOADBA',
             "id_turno": id_turno,
         }
-        
+
           this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
-            debugger
+
             if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
             else{this.cargarMG(this.fechaActual,0,false,true);}
-            
+
           });
           swalWithBootstrapButtons.fire(
             'Modificado..!',
@@ -195,13 +196,13 @@ export class CitasComponent implements OnInit {
           if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
             else{this.cargarMG(this.fechaActual,0,false,true);}
         }
-      })      
+      })
     }
   }
 
   cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
-      debugger
+
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);
       if(check==true){}else{
@@ -213,7 +214,7 @@ export class CitasComponent implements OnInit {
           text: 'Se filtró las citas con la fecha seleccionada.'
         })
       }
-      debugger
+
       if(this.searchRF!=null){
 
         this.dataPaginateRF(event);
@@ -230,7 +231,7 @@ export class CitasComponent implements OnInit {
       this.citasRF = null;
       this.citasRFPaginate = null;
     }else{
-      debugger
+
       if(this.searchRF!=null){
 
         this.dataPaginateRF(event);
@@ -278,8 +279,8 @@ export class CitasComponent implements OnInit {
 
 
   dataPaginateRF(event){//Función para el filtrado con paginado sin los pipes
-    debugger
-    
+
+
     this.citasRFFilter=[];
     this.citasRFPaginateFilter=[];
     if(this.searchRF==null){
@@ -313,14 +314,14 @@ export class CitasComponent implements OnInit {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminarRF=data['result'];
         if(this.FechaRf==''){
-          debugger
+
           this.cargarRF(this.fechaActual,0,false,false);
-          debugger
+
 
         }else{
-          debugger
+
           this.cargarRF(this.FechaRf,0,false,false);
-          debugger
+
         }
 
       })
@@ -354,15 +355,15 @@ export class CitasComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        debugger
+
         if(especialidad=="MG"){
-          debugger
+
           this.eliminarMG(id);
-          debugger
+
         }else{
-          debugger
+
           this.eliminarRF(id);
-          debugger
+
         }
 
         swalWithBootstrapButtons.fire(
@@ -407,6 +408,13 @@ export class CitasComponent implements OnInit {
   HistoriaPaciente(cedula:string){
     localStorage.setItem('cedulaMGandRF', cedula);
     this.rutas.navigate(['/pacientes']);
+  }
+
+  ReagendarCita(cedula:string,id:string,abono:string){
+    localStorage.setItem('cedulaCita', cedula);
+    localStorage.setItem('idCita', id);
+    localStorage.setItem('abonoCita', abono);
+    this.rutas.navigate(['/agendarcita']);
   }
 
   CrearHistoriaClinica(){

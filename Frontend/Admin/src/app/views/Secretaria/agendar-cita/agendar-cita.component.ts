@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { SecretariaService } from '../../../servicios/secretaria.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { CitasService } from '../../../servicios/citas.service';
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,7 +17,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 export class AgendarCitaComponent implements OnInit {
 
-  constructor(private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
+  constructor(public rutas:Router, public citasser:CitasService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
 
 
   loadingText = 'Guardando...';
@@ -40,7 +42,9 @@ export class AgendarCitaComponent implements OnInit {
   isCollapsed = false;
   public sidebarMinimized = false;
   public navItems = navItems;
-
+  idCita="";
+  abonoCita="";
+  cedulaCita="";
   //Variables para validar
   ClaseCdula:string="form-control form-input select-number";
   ClaseCNombre:string="form-control form-input select-number";
@@ -49,11 +53,22 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCHora:string="form-control form-input select-number";
 
   //Variables para datos pacientes
-  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos
+  nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos;
+  estado=0;
   ArrayTurnos: any = []
 
   ngOnInit() {
 
+    this.idCita = localStorage.getItem('idCita');
+    this.cedulaCita= localStorage.getItem('cedulaCita');
+    if(localStorage.getItem('abonoCita')=="1"){
+      this.abono=true;
+    }
+
+    if(this.cedulaCita != "" && this.cedulaCita != undefined){
+      this.Consultar(this.cedulaCita);
+      this.estado=1;
+    }
   }
 
   toggleMinimize(e) {
@@ -61,12 +76,27 @@ export class AgendarCitaComponent implements OnInit {
   }
 
 
+  ngOnDestroy(){
+    localStorage.removeItem('cedulaCita');
+    localStorage.removeItem('idCita');
+    localStorage.removeItem('abonoCita');
+  }
 
   Consultar(cedula:string){
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
 
-    if(this.cedula==undefined || this.cedula==""){
+    if(this.cedulaCita != "" && this.cedulaCita != undefined){
+
+      this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
+
+          this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
+          this.cedula= this.cedulaCita;
+          this.spinner.hide('sample');
+
+      });
+    }else{
+       if(this.cedula==undefined || this.cedula==""){
       this.spinner.hide('sample');
       Swal.fire({
         icon: 'error',
@@ -95,6 +125,8 @@ export class AgendarCitaComponent implements OnInit {
 
       });
     }
+    }
+
 
   }
 
@@ -259,6 +291,106 @@ export class AgendarCitaComponent implements OnInit {
         swalWithBootstrapButtons.fire(
           '¡Cancelado!',
           'No se ha agendado la cita médica.',
+          'error'
+        )
+      }
+    })
+
+  }
+
+  ActualizarCita(){
+
+    if( this.nombres==undefined || this.nombres=="" || this.cedula==undefined || this.cedula=="" || this.especialidad==undefined || this.especialidad=="" || this.fecha_consulta==undefined || this.fecha_consulta=="" ||this.idT==undefined || this.idT==""){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para reagendar la cita médica.'
+      })
+      if(this.nombres==undefined || this.nombres==""){
+        this.ClaseCNombre = "form-control is-invalid select-number";
+      }
+      if(this.cedula==undefined || this.cedula==""){
+        this.ClaseCdula = "form-control is-invalid select-number";
+      }
+      if(this.especialidad==undefined || this.especialidad==""){
+        this.ClaseCEspecialidad = "form-control is-invalid select-number";
+      }
+      if(this.fecha_consulta==undefined || this.fecha_consulta==""){
+        this.ClaseCFecha = "form-control is-invalid select-number";
+      }
+      if(this.idT==undefined || this.idT==""){
+        this.ClaseCHora = "form-control is-invalid select-number";
+      }
+
+    }else{
+      this.ReagendarCita();
+    }
+
+
+
+  }
+  Actualizar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
+
+    let abo="NoExiste"
+    if(abono==1){
+      abo='DOADBA';
+    }
+    debugger
+    let arrayLocal = {
+      "id_cita": id_cita,
+      "nombres": nombres,
+      "cedula": cedula,
+      "especialidad": especialidad,
+      "fecha": fecha,
+      "abono": abo,
+      "id_turno": id_turno,
+    }
+
+    this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
+      Swal.fire(
+        '¡Cita Reagendada..!',
+        'Se ha reagendado la cita médica.',
+        'success'
+      )
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/citas']);
+    });
+
+
+  }
+
+  ReagendarCita(){
+    this.loadingText = 'Guardando...';
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-info',
+        cancelButton: 'btn btn-danger'
+
+      },
+      buttonsStyling: true
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea Reagendar la Cita?',
+      text: "Una vez reagendada no se podrá modificar.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Reagendar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.spinner.show('sample');
+        this.Actualizar(this.idCita,this.nombres,this.cedulaCita,this.especialidad,this.fecha_consulta,this.abono,this.idT[0]);
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          '¡Cancelado!',
+          'No se ha reagendado la cita médica.',
           'error'
         )
       }
