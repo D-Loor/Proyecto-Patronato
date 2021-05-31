@@ -389,9 +389,229 @@ class PDFController extends Controller
         return \PDF::loadView('RegistroDiarioFisica')->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
     }
 
-    public function ConsolidadoMensualMedicinaGeneral(){
-        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
-        return \PDF::loadView('ConsolidadoMensualMedicinaGeneral')->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
+    public function ConsolidadoMensualMedicinaGeneral($fecha)
+    {
+
+
+        $Result = [];
+        
+        $num = 1;
+        $valores = explode('-', $fecha);
+        $dia = 1;
+        $mes = $valores[1];
+        $anio = $valores[0];
+        $mesL="";
+        $Total[0] = [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0
+        ];
+        switch ($mes) {
+            case 1:
+                $mesL = "Enero";
+                break;
+            case 2:
+                $mesL = "Febrero";
+                break;
+            case 3:
+                $mesL = "Marzo";
+                break;
+            case 4:
+                $mesL = "Abril";
+                break;
+            case 5:
+                $mesL = "Mayo";
+                break;
+            case 6:
+                $mesL = "Junio";
+                break;
+            case 7:
+                $mesL = "Julio";
+                break;
+            case 8:
+                $mesL = "Agosto";
+                break;
+            case 9:
+                $mesL = "Septiembre";
+                break;
+            case 10:
+                $mesL = "Octubre";
+                break;
+            case 11:
+                $mesL = "Noviembre";
+                break;
+            case 12:
+                $mesL = "Diciembre";
+                break;
+        }
+        $mesL = strtoupper($mesL);
+
+
+        $datosMG = Historia_Clinica_MG::whereMonth('fecha', $mes)->whereYear('fecha', $anio)->with('paciente')->get();
+        
+
+        for ($i = 1; $i < 32; $i++) {
+            $Result[$i] = [
+                $i, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0
+            ];
+        }
+
+        $atenciones = 0;
+        $horas=0;
+        foreach ($datosMG as $item) {
+            
+            $separar = explode('-', $item['fecha']);
+
+                $lugar[0] = 0;
+                $lugar[1] = 0;
+                $lugar[2] = 0;
+
+                if ($item['lugar_atencion'] == 'Patronato') {
+                    $lugar[0] = 1;
+                } else if ($item['lugar_atencion'] == 'Comunidad') {
+                    $lugar[1] = 1;
+                } else {
+                    $lugar[2] = 1;
+                }
+
+                $sexo[0] = 0;
+                $sexo[1] = 0;
+
+                if ($item->paciente['sexo'] == 'Hombre') {
+                    $sexo[0] = 1;
+                } else {
+                    $sexo[1] = 1;
+                }
+
+                $mujer[0] = 0;
+                $mujer[1] = 0;
+                $mujer[2] = 0;
+                $mujer[3] = 0;
+
+                if ($item->paciente['sexo'] == 'Hombre') {
+                    $mujer[0] = 0;
+                    $mujer[1] = 0;
+                    $mujer[2] = 0;
+                    $mujer[3] = 0;
+                } else {
+                    $mujer[0] = 0;
+                    $mujer[1] = 0;
+                    $mujer[2] = 0;
+                    $mujer[3] = 0;
+                }
+
+                $ninos[0] = 0;
+                $ninos[1] = 0;
+                $ninos[2] = 0;
+                $ninos[3] = 0;
+                $ninos[4] = 0;
+
+                if ($item->paciente['edad'] < 1) {
+                    $ninos[0] = 1;
+                    $ninos[1] = 0;
+                } else if ($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4) {
+                    $ninos[2] = 0;
+                    $ninos[3] = 1;
+                } else if ($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9) {
+                    $ninos[4] = 1;
+                }
+
+                $edadesm[0] = 0;
+                $edadesm[1] = 0;
+                $edadesm[2] = 0;
+
+                if ($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14) {
+                    $edadesm[0] = 1;
+                } else if ($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19) {
+                    $edadesm[1] = 1;
+                } else {
+                    $edadesm[2] = 1;
+                }
+
+                $morbilidad[0] = 0;
+                $morbilidad[1] = 0;
+                $morbilidad[2] = 0;
+                $morbilidad[3] = 0;
+                $morbilidad[4] = 0;
+                $morbilidad[5] = 0;
+                $morbilidad[6] = 0;
+                $morbilidad[7] = 0;
+                $morbilidad[8] = 0;
+                $morbilidad[9] = 0;
+
+                if ($item->paciente['edad'] < 0.1) {
+                    $morbilidad[0] = 1;
+                } else if ($item->paciente['edad'] >= 0.1 && $item->paciente['edad'] <= 0.11) {
+                    $morbilidad[1] = 1;
+                } else if ($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4) {
+                    $morbilidad[2] = 1;
+                } else if ($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9) {
+                    $morbilidad[3] = 1;
+                } else if ($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14) {
+                    $morbilidad[4] = 1;
+                } else if ($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19) {
+                    $morbilidad[5] = 1;
+                } else if ($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 35) {
+                    $morbilidad[6] = 1;
+                } else if ($item->paciente['edad'] >= 36 && $item->paciente['edad'] <= 49) {
+                    $morbilidad[7] = 1;
+                } else if ($item->paciente['edad'] >= 50 && $item->paciente['edad'] <= 64) {
+                    $morbilidad[8] = 1;
+                } else {
+                    $morbilidad[9] = 1;
+                }
+
+
+                $tipo[0] = 0;
+                $tipo[1] = 0;
+                $tipo[2] = 0;
+
+                if ($item['tipo_atencion'] == "Prevención") {
+                    $tipo[0] = 1;
+                } else if ($item['tipo_atencion'] == "Primera") {
+                    $tipo[1] = 1;
+                } else {
+                    $tipo[2] = 1;
+                }
+
+                $diagno[0] = 0;
+                $diagno[1] = 0;
+
+                if ($item['condicion_diagnostico'] == "Presuntivo") {
+                    $diagno[0] = 1;
+                } else {
+                    $diagno[1] = 1;
+                }
+
+                $certificado = 0;
+
+                if ($item['certificado'] == 1) {
+                    $certificado = 1;
+                }
+                $Result[$separar[2]] = [
+                    $Result[$separar[2]][0], $lugar[0]+$Result[$separar[2]][1], $lugar[1]+$Result[$separar[2]][2], $lugar[2]+$Result[$separar[2]][3], 1+$Result[$separar[2]][4], $sexo[0]+$Result[$separar[2]][5], $sexo[1]+$Result[$separar[2]][6], $mujer[0]+$Result[$separar[2]][7], $mujer[1]+$Result[$separar[2]][8], $mujer[2]+$Result[$separar[2]][9], $mujer[3]+$Result[$separar[2]][10], $ninos[0]+$Result[$separar[2]][11], $ninos[1]+$Result[$separar[2]][12], $ninos[2]+$Result[$separar[2]][13], $ninos[3]+$Result[$separar[2]][14], $ninos[4]+$Result[$separar[2]][15],
+                    $edadesm[0]+$Result[$separar[2]][16], $edadesm[1]+$Result[$separar[2]][17], $edadesm[2]+$Result[$separar[2]][18], $morbilidad[0]+$Result[$separar[2]][19], $morbilidad[1]+$Result[$separar[2]][20], $morbilidad[2]+$Result[$separar[2]][21], $morbilidad[3]+$Result[$separar[2]][22], $morbilidad[4]+$Result[$separar[2]][23], $morbilidad[5]+$Result[$separar[2]][24], $morbilidad[6]+$Result[$separar[2]][25], $morbilidad[7]+$Result[$separar[2]][26],
+                    $morbilidad[8]+$Result[$separar[2]][27], $morbilidad[9]+$Result[$separar[2]][28], $tipo[0]+$Result[$separar[2]][29], $tipo[1]+$Result[$separar[2]][30], $tipo[2]+$Result[$separar[2]][31], $diagno[0]+$Result[$separar[2]][32], $diagno[1]+$Result[$separar[2]][33], $certificado+$Result[$separar[2]][34], $horas+$Result[$separar[2]][35],
+
+                ];
+                
+
+                $num++;
+                
+            
+        }
+
+        for ($i = 1; $i < 32; $i++) {
+            $Total[0] = [
+                0, $Total[0][1]+$Result[$i][1], $Total[0][2]+$Result[$i][2], $Total[0][3]+$Result[$i][3], $Total[0][4]+$Result[$i][4], $Total[0][5]+$Result[$i][5], $Total[0][6]+$Result[$i][6], $Total[0][7]+$Result[$i][7], $Total[0][8]+$Result[$i][8], $Total[0][9]+$Result[$i][9], 
+                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19], $Total[0][20]+$Result[$i][20], $Total[0][21]+$Result[$i][21], 
+                $Total[0][22]+$Result[$i][22], $Total[0][23]+$Result[$i][23], $Total[0][24]+$Result[$i][24], $Total[0][25]+$Result[$i][25], $Total[0][26]+$Result[$i][26], $Total[0][27]+$Result[$i][27], $Total[0][28]+$Result[$i][28], $Total[0][29]+$Result[$i][29],
+                $Total[0][30]+$Result[$i][30], $Total[0][31]+$Result[$i][31], $Total[0][32]+$Result[$i][32], $Total[0][33]+$Result[$i][33], $Total[0][34]+$Result[$i][34], $Total[0][35]+$Result[$i][35], $Total[0][35]+$Result[$i][35]
+            ];
+        }
+
+
+        return \PDF::loadView('ConsolidadoMensualMedicinaGeneral', compact('Result','mesL','anio', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
     }
 
     public function ConsolidadoMensualTerapia(){
