@@ -384,9 +384,113 @@ class PDFController extends Controller
         return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
     }
 
-    public function RegistroDiarioFisica(){
-        //$datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
-        return \PDF::loadView('RegistroDiarioFisica')->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+    public function RegistroDiarioFisica($fecha){
+        $datosRF=Historia_Clinica_RF::where('fecha',$fecha)->with('paciente','tratamiento')->get();
+        $num=1;
+        $valores = explode('-', $fecha);
+        $anio = $valores[0];
+        $mes = $valores[1];
+        $dia = $valores[2];
+        $Result=[];
+        foreach ($datosRF as $item){
+            $nombres=$item->paciente['apellidos']." ".$item->paciente['nombres'];
+            $lugar[0]="";
+            $lugar[1]="";
+            if($item['lugar_atencion']=='Patronato'){
+                $lugar[0]="X";
+            }
+            else{
+                $lugar[1]="X";
+            }
+
+            $sexo[0]="";
+            $sexo[1]="";
+            if($item->paciente['sexo']=='Hombre'){
+                $sexo[0]="X";
+            }else{
+                $sexo[1]="X";
+            }
+
+            $morbilidad[0]="";
+            $morbilidad[1]="";
+            $morbilidad[2]="";
+            $morbilidad[3]="";
+            $morbilidad[4]="";
+            if($item->paciente['edad'] >= 0 && $item->paciente['edad'] <= 3){
+                $morbilidad[0]="X";
+            }else if($item->paciente['edad'] >= 4 && $item->paciente['edad'] <= 12){
+                $morbilidad[1]="X";
+            }else if($item->paciente['edad'] >= 13 && $item->paciente['edad'] <= 19){
+                $morbilidad[2]="X";
+            }else if($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 49){
+                $morbilidad[3]="X";
+            }else if($item->paciente['edad'] >= 50){
+                $morbilidad[4]="X";
+            }
+
+            $diagnostico=$item['diagnostico'];
+
+            //Tratamiento
+            $tratamiento[0]="";
+            $tratamiento[1]="";
+            $tratamiento[2]="";
+            $tratamiento[3]="";
+            $tratamiento[4]="";
+            $tratamiento[5]="";
+            $tratamiento[6]="";
+            $tratamiento[7]="";
+            $tratamiento[8]="";
+            if($item->tratamiento['estimulacion_temprana'] === "Estimulación temprana"){
+                $tratamiento[0]="X";
+            }else{
+                $tratamiento[0]="";
+            }
+            if($item->tratamiento['magnetoterapia'] === "Magnetoterapia"){
+                $tratamiento[1]="X";
+            }else{
+                $tratamiento[1]="";
+            }
+            if($item->tratamiento['electroestimulacion'] === "Electroestimulación"){
+                $tratamiento[2]="X";
+            }else{
+                $tratamiento[2]="";
+            }
+            if($item->tratamiento['ultrasonido'] === "Ultrasonido"){
+                $tratamiento[3]="X";
+            }else{
+                $tratamiento[3]="";
+            }
+            if($item->tratamiento['C_Q_C_O_H'] === "C.Q.C. O H."){
+                $tratamiento[4]="X";
+            }else{
+                $tratamiento[4]="";
+            }
+            if($item->tratamiento['masaje'] === "Masaje"){
+                $tratamiento[5]="X";
+            }else{
+                $tratamiento[5]="";
+            }
+            if($item->tratamiento['ejercicios_pasivos_resistidos'] === "Ejercicios pasivos y resistidos"){
+                $tratamiento[6]="X";
+            }else{
+                $tratamiento[6]="";
+            }
+            if($item->tratamiento['laser'] === "Láser"){
+                $tratamiento[7]="X";
+            }else{
+                $tratamiento[7]="";
+            }
+            if($item->tratamiento['otros'] === "No aplica"){
+                $tratamiento[8]="";
+            }else{
+                $tratamiento[8]="X";
+            }
+
+            $Result[]=[$num,$nombres,$lugar[0],$lugar[1],'1',$sexo[0],$sexo[1],$morbilidad[0],$morbilidad[1],$morbilidad[2],$morbilidad[3],$morbilidad[4],$diagnostico,$tratamiento[0],$tratamiento[1],$tratamiento[2],$tratamiento[3],$tratamiento[4],$tratamiento[5],$tratamiento[6]
+                    ,$tratamiento[7],$tratamiento[8]];
+            $num++;
+        }
+        return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
     }
 
     public function ConsolidadoMensualMedicinaGeneral($fecha)

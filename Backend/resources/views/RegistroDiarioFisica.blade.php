@@ -19,7 +19,7 @@
         img{
             padding-top:75px;
             padding:0px;
-            margin:0px;
+            margin:0px; 
         }
         .contenedor{
             padding:30px;
@@ -146,9 +146,13 @@
             padding-left:230px ;
         }
 
+        .bori{
+            border-right: solid 1px black !important;
+        }
+
         .segt{
             position: relative;
-            margin-left:1220px;
+            margin-left:1130px;
             margin-top: 60px;
             margin-right:100px;
             padding-right:100px;
@@ -197,7 +201,7 @@
             <thead>
                 <tr>
                     <th class="nborde" colspan="12"></th>
-                    <th colspan="11" class="tema">ATENCIÓN MORBILIDAD</th>
+                    <th colspan="10" class="tema">ATENCIÓN MORBILIDAD</th>
                     <th class="nborde"></th>
                 </tr>
                 <tr>
@@ -256,32 +260,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td colspan="6"></td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td colspan="6"></td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    
-                    <th class="nborde"></th>
-                </tr>
+            @foreach ($Result as $item)
+                    <tr >
+
+                        @for($i = 0; $i <= 21; $i++)
+
+                            @if ($i === 0)
+                                <td class="prevencion">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i === 1)
+                                <td colspan="6">{{$item[$i]}}</td>
+                            @endif
+                            @if ( $i === 12)
+                                <td colspan="5">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i != 1 && $i != 12 && $i != 0 && $i != 21)
+                                <td>{{$item[$i]}}</td>
+                            @endif
+                            @if ($i == 21)
+                                <td class="bori">{{$item[$i]}}</td>
+                                <th class="nborde"></th>
+                            @endif
+
+                        @endfor
+                    </tr>
+                @endforeach
 
                 
             </tbody>
@@ -302,14 +305,16 @@
                 <table class="segt" >
                     <thead>
                         <tr>
+                            <th class="th"> DIA</th>
                             <th class="th"> MES</th>
                             <th class="th"> AÑO</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="td">ENERO</th>
-                            <td class="td"> 2018</td>
+                        <th class="td">{{$dia}}</th>
+                            <th class="td">{{$mes}}</th>
+                            <td class="td">{{$anio}}</td>
                         </tr>
                     </tbody>
                 </table>

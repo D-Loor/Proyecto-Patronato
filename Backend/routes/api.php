@@ -56,7 +56,7 @@ Route::get('ReportePacientesMensual/{mes}/{year}','PDFController@ReportePaciente
 Route::get('MorbilidadMedicinaGeneral','PDFController@MorbilidadMedicinaGeneral');
 Route::get('MorbilidadTerapia','PDFController@MorbilidadTerapia');
 Route::get('RegistroDiarioMedicina/{fecha}','PDFController@RegistroDiarioMedicina');
-Route::get('RegistroDiarioFisica','PDFController@RegistroDiarioFisica');
+Route::get('RegistroDiarioFisica/{fecha}','PDFController@RegistroDiarioFisica');
 Route::get('ConsolidadoMensualMedicinaGeneral/{fecha}','PDFController@ConsolidadoMensualMedicinaGeneral');
 
 Route::get('ConsolidadoMensualTerapia','PDFController@ConsolidadoMensualTerapia');
