@@ -482,7 +482,7 @@ class PDFController extends Controller
 
 
         //return response()->json(['result'=>$TotalF]);
-        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a4', 'landscape')->stream('MorbilidadTerapia.pdf');
+        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia.pdf');
     }
 
     public function RegistroDiarioMedicina($fecha){

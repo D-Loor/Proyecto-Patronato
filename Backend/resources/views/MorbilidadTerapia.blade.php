@@ -48,7 +48,7 @@
             color: rgb(0, 112, 192);
         }
         .doc{
-            padding-left: 60px;
+            padding-left: 0px;
             position: absolute;
         }
         .antFirma{
@@ -66,7 +66,7 @@
         .doc , .doc  {
             font-size: 13px;
             font-weight: bold;
-            padding-left: 5px;
+            padding-left: 115px;
             margin:0px;
         }
         .cargo{
@@ -134,10 +134,16 @@
         }
         .segt{
             position: relative;
-            margin-left:720px;
+            margin-left:1100px;
             margin-top: 60px;
             margin-right:100px;
             padding-right:100px;
+        }
+        .tamnio{
+            width: 500px !important;
+        }
+        .grande{
+            width: 51px !important;
         }
 
     </style>
@@ -169,8 +175,8 @@
             <thead>
                 <tr>
                     <th rowspan="4"> N°</th>
-                    <th rowspan="4"> CAUSAS</th>
-                    <th class="grupos" colspan="12" class="ulti"> GRUPOS DE EDAD </th>
+                    <th rowspan="4" class="tamnio"> CAUSAS</th>
+                    <th class="grupos" colspan="12"> GRUPOS DE EDAD </th>
                     <th colspan="1" style="border-top: none !important; border-bottom: none !important" ></th>
                 </tr>
                 <tr>
@@ -179,7 +185,7 @@
                     <th class="tmedio" colspan="2" rowspan="2"> 13 a 19 AÑOS </th>
                     <th class="tmedio" colspan="2" rowspan="2"> 20 a 49 AÑOS </th>
                     <th class="tmedio" colspan="2" rowspan="2"> 50 AÑOS y MÁS </th>
-                    <th class="tmedio" colspan="2" rowspan="2" class="ulti"> TOTAL EDADES</th>
+                    <th class="tmedio" colspan="2" rowspan="2"> TOTAL EDADES</th>
                     <th colspan="1" style="border-top: none !important" rowspan="2"></th>
                 </tr>
                 <tr>
@@ -204,32 +210,32 @@
 
             </thead>
             <tbody>
-            @foreach ($Resultados as $item)
+                @foreach ($Resultados as $item)
                     <tr>
                         @for($i = 0; $i < 16; $i++) 
                             @if ($i===0) 
                                 <th class="numero">{{$item[$i]}}</th>
                             @endif
                             @if ($i >=1) 
-                                <td>{{$item[$i]}}</td>
+                                <td class="grande" >{{$item[$i]}}</td>
                             @endif
 
                         @endfor
                     </tr>
-                    @endforeach
+                @endforeach
+                    
 
             </tbody>
             <tfoot>
-            <tr>
-
+                <tr>
                     <th colspan="2" class="total"> TOTAL</th>
                     @for($i=0;$i <= 12;$i++)
-                    @if($i !=12)
-                    <td>{{$TotalF[$i]}}</td>
-                    @endif
-                    @if($i==12)
-                    <td class="ver">{{$TotalF[$i]}}</td>
-                    @endif
+                        @if($i !=12)
+                        <td>{{$TotalF[$i]}}</td>
+                        @endif
+                        @if($i==12)
+                        <td class="ver">{{$TotalF[$i]}}</td>
+                        @endif
                     @endfor
                     <td class="resul"> 100% </td>
                 </tr>
