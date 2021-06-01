@@ -138,6 +138,10 @@
             padding-right:100px;
         }
 
+        .result{
+            color: rgb(255, 0, 0);
+        }
+
     </style>
 </head>
 <body>
@@ -156,9 +160,9 @@
             <span class="item ">PROVINCIA:</span>
                 MANABÍ
             <span class="item subt">MES:</span>
-                FEBRERO
+                {{$mes}}
             <span class="item subt">AÑO:</span>
-                2021
+                {{$Year}}
 
             </div>
 
@@ -210,74 +214,42 @@
 
             </thead>
             <tbody>
+            @foreach ($Result as $item)
                 <tr>
-                    <th class="numero">1</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
+                @for($i = 0 ; $i <= 2; $i++)
+                    @if($i===0)
+                    <th class="numero">{{$item[$i]}}</th>
+                    @endif
+                    @if($i===1)
+                    <td>{{$item[$i]}}</td>
+                    @endif
+                    @if($i>1)
+                    @for($j=0;$j<=16;$j++)
+                    <td>{{$item[$i][$j]}}</td>
+                    @endfor
+                    @endif
+                    @if($i===2)
+                    <td>25%</td>
+                    @endif
+                 @endfor
                 </tr>
-
-                <tr>
-                    <th class="numero">2</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                </tr>
-
+             @endforeach
             </tbody>
             <tfoot>
-            <tr>
-                    <th colspan="2" class="total"> TOTAL</th>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 228</td>
-                    <td class="ver"> 371 </td>
-                    <td class="ver"> 143</td>
-                    <td class="ver"> 228</td>
-                    <td class="resul"> 100% </td>
+                <tr>
+                <th colspan="2" class="total"> TOTAL</th>
+                @for($i = 0 ; $i <= 16; $i++)
+                    @if($i<=13)
+                        <td>{{$total[$i]}}</td>
+                    @endif
+                    @if($i>13)
+                    <td class="ver"> {{$total[$i]}} </td>
+                    @endif
+                    @if($i==16)
+                    <td class="result">100%</td>
+                    @endif
+                    
+                 @endfor
                 </tr>
             </tfoot>
         </table>
@@ -303,8 +275,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">ENERO</th>
-                            <td class="td"> 2018</td>
+                            <th class="th">{{$mes}}</th>
+                            <td class="td"> {{$Year}}</td>
                         </tr>
                     </tbody>
                 </table>

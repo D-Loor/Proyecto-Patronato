@@ -162,11 +162,163 @@ class PDFController extends Controller
 
 
 
-    public function MorbilidadMedicinaGeneral(){
+    public function MorbilidadMedicinaGeneral($Mes,$Year){
 
-        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        $mes;
+            switch ($Mes) {
+                case 1:
+                    $mes="Enero";
+                    break;
+                case 2:
+                    $mes="Febrero";
+                    break;
+                case 3:
+                    $mes="Marzo";
+                    break;
+                case 4:
+                    $mes="Abril";
+                    break;
+                case 5:
+                    $mes="Mayo";
+                    break;
+                case 6:
+                    $mes="Junio";
+                    break;
+                case 7:
+                    $mes="Julio";
+                    break;
+                case 8:
+                    $mes="Agosto";
+                    break;
+                case 9:
+                    $mes="Septiembre";
+                    break;
+                case 10:
+                    $mes="Octubre";
+                    break;
+                case 11:
+                    $mes="Noviembre";
+                    break;
+                case 12:
+                    $mes="Diciembre";
+                    break;
+            };
+            
+            $mes = strtoupper($mes);
+            $MMG=Historia_Clinica_MG::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('enfermedad','paciente')->select('id_enfermedad')
+            ->groupBy('id_enfermedad')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(20)
+            ->get();
+            
+            $Result=[];
+            $n=1;
+                $total[0]=0;
+                $total[1]=0;
+                $total[2]=0;
+                $total[3]=0;
+                $total[4]=0;
+                $total[5]=0;
+                $total[6]=0;
+                $total[7]=0;
+                $total[8]=0;
+                $total[9]=0;
+                $total[10]=0;
+                $total[11]=0;
+                $total[12]=0;
+                $total[13]=0;
+                $total[14]=0;
+                $total[15]=0;
+                $total[16]=0;
+            foreach ($MMG as $item){
+                $Paciente=Historia_Clinica_MG::where('id_enfermedad',$item->id_enfermedad)->with('paciente')->select('id_paciente')->get();
+                $top20=$item->enfermedad['enfermedad'];
+                $ContgruposEdad[0]=0;
+                $ContgruposEdad[1]=0;
+                $ContgruposEdad[2]=0;
+                $ContgruposEdad[3]=0;
+                $ContgruposEdad[4]=0;
+                $ContgruposEdad[5]=0;
+                $ContgruposEdad[6]=0;
+                $ContgruposEdad[7]=0;
+                $ContgruposEdad[8]=0;
+                $ContgruposEdad[9]=0;
+                $ContgruposEdad[10]=0;
+                $ContgruposEdad[11]=0;
+                $ContgruposEdad[12]=0;
+                $ContgruposEdad[13]=0;
+                $ContgruposEdad[14]=0;
+                $ContgruposEdad[15]=0;
+                $ContgruposEdad[16]=0;
+                
 
-        return \PDF::loadView('MorbilidadMedicinaGeneral', $datos)->setPaper('a4', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
+                foreach($Paciente as $item2){
+                    if($item2->paciente['edad']<0.028){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[0]++;
+                        }else{
+                            $ContgruposEdad[1]++;
+                        }
+                    }else if($item2->paciente['edad']>=0.0028 && $item2->paciente['edad'] < 0.0365){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[2]++;
+                        }else{
+                            $ContgruposEdad[3]++;
+                        }
+                    }else if($item2->paciente['edad']>=1 && $item2->paciente['edad'] <= 4){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[4]++;
+                        }else{
+                            $ContgruposEdad[5]++;
+                        }
+                    }else if($item2->paciente['edad']>=5 && $item2->paciente['edad'] <= 14){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[6]++;
+                        }else{
+                            $ContgruposEdad[7]++;
+                        }
+                    }else if($item2->paciente['edad']>=15 && $item2->paciente['edad'] <= 49){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[8]++;
+                        }else{
+                            $ContgruposEdad[9]++;
+                        }
+                    }else if($item2->paciente['edad']>=50 && $item2->paciente['edad'] <= 64){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[10]++;
+                        }else{
+                            $ContgruposEdad[11]++;
+                        }
+                    }else if($item2->paciente['edad']>=65){
+                        if ($item2->paciente['sexo']=='Hombre'){
+                            $ContgruposEdad[12]++;
+                        }else{
+                            $ContgruposEdad[13]++;
+                        }
+                    }
+                    $ContgruposEdad[14]=$ContgruposEdad[0]+$ContgruposEdad[2]+$ContgruposEdad[4]+$ContgruposEdad[6]+$ContgruposEdad[8]+$ContgruposEdad[10]+$ContgruposEdad[12];
+                    $ContgruposEdad[15]=$ContgruposEdad[1]+$ContgruposEdad[3]+$ContgruposEdad[5]+$ContgruposEdad[7]+$ContgruposEdad[9]+$ContgruposEdad[11]+$ContgruposEdad[13];
+                    $ContgruposEdad[16]=$ContgruposEdad[14]+$ContgruposEdad[15];
+                }
+
+                for($i=0;$i<=16;$i++){
+                    $total[$i]=$total[$i]+$ContgruposEdad[$i];
+                }
+
+                    
+                
+                for($i=0; $i<=13; $i++){
+                    if($ContgruposEdad[$i]==0){
+                        $ContgruposEdad[$i]="";
+                    }
+                }
+                
+                $Result[]=[$n,$top20,$ContgruposEdad];
+                $n++;
+            }
+
+            //return response()->json(['result'=>$Result]);
+        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a4', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
     
