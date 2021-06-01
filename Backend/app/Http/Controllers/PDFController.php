@@ -203,14 +203,14 @@ class PDFController extends Controller
                     $mes="Diciembre";
                     break;
             };
-            
+
             $mes = strtoupper($mes);
             $MMG=Historia_Clinica_MG::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('enfermedad','paciente')->select('id_enfermedad')
             ->groupBy('id_enfermedad')
             ->orderByRaw('COUNT(*) DESC')
             ->take(20)
             ->get();
-            
+
             $Result=[];
             $n=1;
                 $total[0]=0;
@@ -250,7 +250,7 @@ class PDFController extends Controller
                 $ContgruposEdad[14]=0;
                 $ContgruposEdad[15]=0;
                 $ContgruposEdad[16]=0;
-                
+
 
                 foreach($Paciente as $item2){
                     if($item2->paciente['edad']<0.028){
@@ -305,14 +305,14 @@ class PDFController extends Controller
                     $total[$i]=$total[$i]+$ContgruposEdad[$i];
                 }
 
-                    
-                
+
+
                 for($i=0; $i<=13; $i++){
                     if($ContgruposEdad[$i]==0){
                         $ContgruposEdad[$i]="";
                     }
                 }
-                
+
                 $Result[]=[$n,$top20,$ContgruposEdad];
                 $n++;
             }
@@ -321,13 +321,13 @@ class PDFController extends Controller
         return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a4', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
-    
+
     public function MorbilidadTerapia($Mes, $Year)
     {
         $Resultados=[];
         $mes;
         $cont=1;
-        
+
         switch ($Mes) {
             case 1:
                 $mes = "Enero";
@@ -375,7 +375,7 @@ class PDFController extends Controller
 
         $datos = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->with('paciente')->get();
 
-        
+
         $TotalF[0]=0;
         $TotalF[1]=0;
         $TotalF[2]=0;
@@ -467,20 +467,20 @@ class PDFController extends Controller
 
 
                 }
-                
+
             }
-        
+
         for($i=0;$i<=12;$i++){
             $TotalF[$i]=$TotalF[$i]+$Edad[$i];
         }
                 $Porcentaje = $Edad[12]*100;
                 $Resultados [] = [$cont, $itemC['motivo_consulta'], $Edad[0], $Edad[1], $Edad[2], $Edad[3],$Edad[4], $Edad[5], $Edad[6],
-                                  $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12], $Porcentaje                          
+                                  $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12], $Porcentaje
                              ];
-            $cont ++;                 
+            $cont ++;
         }
-        
-        
+
+
         //return response()->json(['result'=>$TotalF]);
         return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a4', 'landscape')->stream('MorbilidadTerapia.pdf');
     }
@@ -1154,7 +1154,7 @@ class PDFController extends Controller
 
                 $Result[$separar[2]] = [
                     $Result[$separar[2]][0], $lugar[0]+$Result[$separar[2]][1], $lugar[1]+$Result[$separar[2]][2], 1+$Result[$separar[2]][3], $sexo[0]+$Result[$separar[2]][4], $sexo[1]+$Result[$separar[2]][5], $edades[0]+$Result[$separar[2]][6], $edades[1]+$Result[$separar[2]][7], $edades[2]+$Result[$separar[2]][8], $edades[3]+$Result[$separar[2]][9], $edades[4]+$Result[$separar[2]][10],
-                    $tratamiento[0]+$Result[$separar[2]][11], $tratamiento[1]+$Result[$separar[2]][12], $tratamiento[2]+$Result[$separar[2]][13], $tratamiento[3]+$Result[$separar[2]][14], $tratamiento[4]+$Result[$separar[2]][15], $tratamiento[5]+$Result[$separar[2]][16], $tratamiento[6]+$Result[$separar[2]][17], $tratamiento[7]+$Result[$separar[2]][18],8
+                    $tratamiento[0]+$Result[$separar[2]][11], $tratamiento[1]+$Result[$separar[2]][12], $tratamiento[2]+$Result[$separar[2]][13], $tratamiento[3]+$Result[$separar[2]][14], $tratamiento[4]+$Result[$separar[2]][15], $tratamiento[5]+$Result[$separar[2]][16], $tratamiento[6]+$Result[$separar[2]][17], $tratamiento[7]+$Result[$separar[2]][18],$tratamiento[8]+$Result[$separar[2]][19],8
                 ];
 
         }
@@ -1162,7 +1162,7 @@ class PDFController extends Controller
         for ($i = 1; $i < 32; $i++) {
             $Total[0] = [
                 0, $Total[0][1]+$Result[$i][1], $Total[0][2]+$Result[$i][2], $Total[0][3]+$Result[$i][3], $Total[0][4]+$Result[$i][4], $Total[0][5]+$Result[$i][5], $Total[0][6]+$Result[$i][6], $Total[0][7]+$Result[$i][7], $Total[0][8]+$Result[$i][8], $Total[0][9]+$Result[$i][9],
-                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19]
+                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19],$Total[0][20]+$Result[$i][20]
             ];
         }
 

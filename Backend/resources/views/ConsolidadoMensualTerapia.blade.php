@@ -28,7 +28,7 @@
             text-align: center;
         }
         th,td {
-                font-size: 9px;
+                font-size: 14px;
                 font-weight: bold;
                 text-align: center;
                 border: solid 1px black;
@@ -48,12 +48,12 @@
             border-top: solid 1px black;
             width:290px;
             height: 5px;
-            margin-left:-22px;
+            margin-left:-6px;
         }
         .doc {
             font-size:15px;
             font-weight: bold;
-            padding-left:80px;
+            padding-left:180px;
             margin:0px;
         }
         .cargo{
@@ -87,14 +87,14 @@
         .separador{
             height:25px;
         }
+        tfoot tr td{
+            font-size: 16px;
+        }
         .numero{
             color: rgb(0, 112, 192);
         }
         .total{
             color: rgb(0, 112, 192);
-        }
-        tfoot tr td{
-            font-size: 10px;
         }
         .resul{
             color: rgb(255, 0, 0);
@@ -107,13 +107,13 @@
         }
         .segt{
             position: relative;
-            margin-left:720px;
-            margin-top: 60px;
+            margin-left:1020px;
+            margin-top: 42px;
             margin-right:100px;
             padding-right:100px;
         }
         .box-rotate {
-            font-size:7.5px;
+            font-size:10px;
             -moz-transform: rotate(270deg);  /* FF3.5+ */
             -o-transform: rotate(270deg);  /* Opera 10.5 */
             -webkit-transform: rotate(270deg);  /* Saf3.1+, Chrome */
@@ -128,9 +128,18 @@
             text-align: center;
             border: solid 1px black;
         }
+        .tama{
+            height:115px;
+        }
         .espacios{
         	table-layout: fixed;
-           	width: 910px;
+           	width: 1300px;
+        }
+        .contenido{
+            padding-left:50px !important;
+        }
+        .result{
+            color: rgb(255, 0, 0);
         }
 
     </style>
@@ -168,24 +177,24 @@
                 <tr>
                 	<th class="nborde"></th>
                     <th class="segunda-fila"><p class="box-rotate">PATRONATO</p></th>
-                    <th><p class="box-rotate">DOMICILIO</p></th>
-                    <th><p class="box-rotate">HOMBRE</p></th>
-                    <th><p class="box-rotate">MUJER</p></th>
-                    <th><p class="box-rotate">0-3 AÑOS</p></th>
-                    <th><p class="box-rotate">4-12 AÑOS</p></th>
-                    <th><p class="box-rotate">13-19 AÑOS</p></th>
-                    <th><p class="box-rotate">20-49 AÑOS</p></th>
-                    <th><p class="box-rotate">>= 50 AÑOS</p></th>
-                    <th><p class="box-rotate">ESTIMULACIÓN TEMPRANA</p></th>
-                    <th><p class="box-rotate">MAGNETOTERAPIA</p></th>
-                    <th><p class="box-rotate">ELECTRO ESTIMULACIÓN</p></th>
-                    <th><p class="box-rotate">ULTRASONIDO</p></th>
-                    <th><p class="box-rotate">C.Q.C. O H.</p></th>
-                    <th><p class="box-rotate">MASAJE</p></th>
-                    <th><p class="box-rotate">EJERCICIOS PASIVOS RESISTIDOS</p></th>
-                    <th><p class="box-rotate">LASER</p></th>
-                    <th><p class="box-rotate">OTROS</p></th>
-                    <th><p class="box-rotate">HORAS TRABAJADAS</p></th>
+                    <th class="tama"><p class="box-rotate">DOMICILIO</p></th>
+                    <th class="tama"><p class="box-rotate">HOMBRE</p></th>
+                    <th class="tama"><p class="box-rotate">MUJER</p></th>
+                    <th class="tama"><p class="box-rotate">0-3 AÑOS</p></th>
+                    <th class="tama"><p class="box-rotate">4-12 AÑOS</p></th>
+                    <th class="tama"><p class="box-rotate">13-19 AÑOS</p></th>
+                    <th class="tama"><p class="box-rotate">20-49 AÑOS</p></th>
+                    <th class="tama"><p class="box-rotate">>= 50 AÑOS</p></th>
+                    <th class="tama"><p class="box-rotate">ESTIMULACIÓN TEMPRANA</p></th>
+                    <th  class="tama"><p class="box-rotate">MAGNETOTERAPIA</p></th>
+                    <th  class="tama"><p class="box-rotate">ELECTRO ESTIMULACIÓN</p></th>
+                    <th  class="tama"><p class="box-rotate">ULTRASONIDO</p></th>
+                    <th  class="tama"><p class="box-rotate">C.Q.C. O H.</p></th>
+                    <th  class="tama"><p class="box-rotate">MASAJE</p></th>
+                    <th  class="tama"><p class="box-rotate">EJERCICIOS PASIVOS RESISTIDOS</p></th>
+                    <th  class="tama"><p class="box-rotate">LASER</p></th>
+                    <th  class="tama"><p class="box-rotate">OTROS</p></th>
+                    <th class="tama"><p class="box-rotate">HORAS TRABAJADAS</p></th>
                 </tr>
 
                 <tr  class="numero">
@@ -215,7 +224,7 @@
             <tbody>
                 @foreach ($Result as $item)
                     <tr>
-                        @for($i = 0; $i < 20; $i++)
+                        @for($i = 0; $i < 21; $i++)
                             @if ($i===0)
                                 <td class="numero">{{$item[$i]}}</td>
                             @endif
@@ -228,6 +237,20 @@
                 @endforeach
 
             </tbody>
+            <tfoot>
+                <tr>
+                <th class="total"> TOTAL</th>
+                @for($i = 1 ; $i < 21; $i++)
+                   @if($i!=20)
+                    <td> {{$Total[0][$i]}} </td>
+                    @endif
+                    @if($i===20)
+                    <td class="result">{{$Total[0][$i]}}</td>
+                    @endif
+
+                 @endfor
+                </tr>
+            </tfoot>
         </table>
     </div>
 

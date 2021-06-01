@@ -248,7 +248,7 @@
                     @if($i==16)
                     <td class="result">100%</td>
                     @endif
-                    
+
                  @endfor
                 </tr>
             </tfoot>
