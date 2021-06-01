@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morbilidad Medcina Genenral</title>
+    <title>Morbilidad Rehabilitación Física</title>
     <style>
 
         @page {
@@ -158,9 +158,9 @@
             <span class="item ">PROVINCIA:</span>
                 MANABÍ
             <span class="item subt">MES:</span>
-                FEBRERO
+                {{$mes}}
             <span class="item subt">AÑO:</span>
-                2021
+                {{$Year}}
             </div>
 
         </div>
@@ -204,61 +204,33 @@
 
             </thead>
             <tbody>
-                <tr>
-                    <th class="numero">1</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                </tr>
+            @foreach ($Resultados as $item)
+                    <tr>
+                        @for($i = 0; $i < 16; $i++) 
+                            @if ($i===0) 
+                                <th class="numero">{{$item[$i]}}</th>
+                            @endif
+                            @if ($i >=1) 
+                                <td>{{$item[$i]}}</td>
+                            @endif
 
-                <tr>
-                    <th class="numero">2</th>
-                    <td> Enfermedad</td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                </tr>
+                        @endfor
+                    </tr>
+                    @endforeach
 
             </tbody>
             <tfoot>
             <tr>
+
                     <th colspan="2" class="total"> TOTAL</th>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 228</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td> 371 </td>
-                    <td> 143</td>
-                    <td class="ver"> 228</td>
+                    @for($i=0;$i <= 12;$i++)
+                    @if($i !=12)
+                    <td>{{$TotalF[$i]}}</td>
+                    @endif
+                    @if($i==12)
+                    <td class="ver">{{$TotalF[$i]}}</td>
+                    @endif
+                    @endfor
                     <td class="resul"> 100% </td>
                 </tr>
             </tfoot>
@@ -285,8 +257,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">ENERO</th>
-                            <td class="td"> 2018</td>
+                            <th class="th">{{$mes}}</th>
+                            <td class="td">{{$Year}}</td>
                         </tr>
                     </tbody>
                 </table>

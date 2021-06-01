@@ -198,7 +198,7 @@
         .espacios {
             table-layout: fixed;
             width: 1410px;
-
+            
         }
     </style>
 </head>
@@ -398,17 +398,17 @@
                 <tbody>
                     @foreach ($Result as $item)
                     <tr class="nvertical">
-                        @for($i = 0; $i <= 35; $i++)
-                            @if ($i===0)
+                        @for($i = 0; $i <= 35; $i++) 
+                            @if ($i===0) 
                                 <th>{{$item[$i]}}</th>
                             @endif
-                            @if ($i >= 7 && $i <= 18)
+                            @if ($i >= 7 && $i <= 18) 
                                 <td class="prevencion">{{$item[$i]}}</td>
                             @endif
-                            @if ($i === 30)
+                            @if ($i === 29)
                                 <td class="prevencion">{{$item[$i]}}</td>
                             @endif
-                            @if ($i >= 0 && $i <= 6 || $i>= 20 && $i <= 29 || $i>= 31 && $i <= 35)
+                            @if ($i >= 1 && $i <= 6 || $i>= 19 && $i <= 28 || $i>= 30 && $i <= 35) 
                                 <td>{{$item[$i]}}</td>
                             @endif
 
@@ -466,7 +466,7 @@
                 <div class="cargo"> DEPARTAMENTO DE ASISTENCIA SOCIAL
                 </div>
 
-
+                
             </div>
             <table class="segt">
                     <thead>

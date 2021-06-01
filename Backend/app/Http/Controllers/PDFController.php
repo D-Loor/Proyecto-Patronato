@@ -169,12 +169,168 @@ class PDFController extends Controller
         return \PDF::loadView('MorbilidadMedicinaGeneral', $datos)->setPaper('a4', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
-    public function MorbilidadTerapia(){
+    
+    public function MorbilidadTerapia($Mes, $Year)
+    {
+        $Resultados=[];
+        $mes;
+        $cont=1;
+        
+        switch ($Mes) {
+            case 1:
+                $mes = "Enero";
+                break;
+            case 2:
+                $mes = "Febrero";
+                break;
+            case 3:
+                $mes = "Marzo";
+                break;
+            case 4:
+                $mes = "Abril";
+                break;
+            case 5:
+                $mes = "Mayo";
+                break;
+            case 6:
+                $mes = "Junio";
+                break;
+            case 7:
+                $mes = "Julio";
+                break;
+            case 8:
+                $mes = "Agosto";
+                break;
+            case 9:
+                $mes = "Septiembre";
+                break;
+            case 10:
+                $mes = "Octubre";
+                break;
+            case 11:
+                $mes = "Noviembre";
+                break;
+            case 12:
+                $mes = "Diciembre";
+                break;
+        }
+        $mes = strtoupper($mes);
+        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->select('motivo_consulta')
+            ->groupBy('motivo_consulta')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(20)
+            ->get();
 
-        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
+        $datos = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->with('paciente')->get();
 
-        return \PDF::loadView('MorbilidadTerapia', $datos)->setPaper('a4', 'landscape')->stream('MorbilidadTerapia.pdf');
+        
+        $TotalF[0]=0;
+        $TotalF[1]=0;
+        $TotalF[2]=0;
+        $TotalF[3]=0;
+        $TotalF[4]=0;
+        $TotalF[5]=0;
+        $TotalF[6]=0;
+        $TotalF[7]=0;
+        $TotalF[8]=0;
+        $TotalF[9]=0;
+        $TotalF[10]=0;
+        $TotalF[11]=0;
+        $TotalF[12]=0;
+        foreach($datosCausas as $itemC)
+        {
+            $Edad[0] = 0;
+            $Edad[1] = 0;
+            $Edad[2] = 0;
+            $Edad[3] = 0;
+            $Edad[4] = 0;
+            $Edad[5] = 0;
+            $Edad[6] = 0;
+            $Edad[7] = 0;
+            $Edad[8] = 0;
+            $Edad[9] = 0;
+            $Edad[10] = 0;
+            $Edad[11] = 0;
+            $Edad[12] = 0;
+            $Porcentaje = 0;
+            foreach($datos as $item)
+            {
+                if($item['motivo_consulta'] === $itemC['motivo_consulta'])
+                {
+                    $Edad[12] +=1;
+                    if($item->paciente['edad']>0 && $item->paciente['edad']<=3)
+                    {
+                        if($item->paciente['sexo']=='Hombre')
+                        {
+                            $Edad[0] += 1;
+                        }else{
+                            $Edad[1] += 1;
+                        }
+                    }
+                    if($item->paciente['edad']>=4 && $item->paciente['edad']<=12)
+                    {
+                        if($item->paciente['sexo']=='Hombre')
+                        {
+                            $Edad[2] += 1;
+                        }else{
+                            $Edad[3] += 1;
+                        }
+                    }
+                    if($item->paciente['edad']>=13 && $item->paciente['edad']<=19)
+                    {
+                        if($item->paciente['sexo']=='Hombre')
+                        {
+                            $Edad[4] += 1;
+                        }else{
+                            $Edad[5] += 1;
+                        }
+                    }
+                    if($item->paciente['edad']>=20 && $item->paciente['edad']<=49)
+                    {
+                        if($item->paciente['sexo']=='Hombre')
+                        {
+                            $Edad[6] += 1;
+                        }else{
+                            $Edad[7] += 1;
+                        }
+                    }
+                    if($item->paciente['edad']>=50)
+                    {
+                        if($item->paciente['sexo']=='Hombre')
+                        {
+                            $Edad[8] += 1;
+                        }else{
+                            $Edad[9] += 1;
+                        }
+                    }
 
+                    if($item->paciente['sexo']=='Hombre')
+                    {
+                        $Edad[10] += 1;
+                    }
+                    if($item->paciente['sexo']=='Mujer')
+                    {
+                        $Edad[11] += 1;
+                    }
+
+
+                }
+                
+            }
+        
+        for($i=0;$i<=12;$i++){
+            $TotalF[$i]=$TotalF[$i]+$Edad[$i];
+        }
+                $Porcentaje = $Edad[12]*100;
+                $Resultados [] = [$cont, $itemC['motivo_consulta'], $Edad[0], $Edad[1], $Edad[2], $Edad[3],$Edad[4], $Edad[5], $Edad[6],
+                                  $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12], $Porcentaje                          
+                             ];
+            $cont ++;                 
+        }
+        
+        
+        //return response()->json(['result'=>$TotalF]);
+        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a4', 'landscape')->stream('MorbilidadTerapia.pdf');
     }
 
     public function RegistroDiarioMedicina($fecha){
