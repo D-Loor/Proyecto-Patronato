@@ -80,6 +80,7 @@
             border: solid 1px black;
         }
         h4 {
+            font-size: 21px;
             position: absolute;
             margin:0px;
             text-align: center;
@@ -125,7 +126,7 @@
             padding-left:10px ;
         }
         .subt{
-            padding-left:225px ;
+            padding-left:275px ;
         }
 
         .items{
@@ -145,6 +146,14 @@
         .grande{
             width: 51px !important;
         }
+        .titu{
+            font-size:21px;
+            margin-left:70px;
+        }
+        .subti{
+            margin-left:70px;
+            font-size:21px;
+        }
 
     </style>
 </head>
@@ -156,8 +165,8 @@
 
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
-
-    <h4>REGISTRO DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN REHABILITACIÓN FÍSICA SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN</h4>
+    <h4 class="titu">REGISTRO DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN REHABILITACIÓN FÍSICA</h4>
+    <h4 class="subti"><br>SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL JUNÍN</h4>
     <div class="contenido">
         <div >
             <div class="items">
