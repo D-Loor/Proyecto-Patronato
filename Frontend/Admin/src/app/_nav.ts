@@ -113,4 +113,23 @@ export const navItems: INavData[] = [
     url: '/registrarhistoriaclinica',
     icon: 'icon-user'
   },
+  {
+    title: true,
+    name: 'Administrador'
+  },
+  {
+    name: 'Cuentas',
+    url: '/cuentas',
+    icon: 'icon-people'
+  },
+  {
+    name: 'Roles',
+    url: '/roles',
+    icon: 'icon-vector'
+  },
+  {
+    name: 'Horarios de Atención',
+    url: '/horarios',
+    icon: 'icon-clock'
+  },
 ];
