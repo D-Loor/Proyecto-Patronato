@@ -498,7 +498,7 @@ class PDFController extends Controller
 
 
         $Result = [];
-        
+
         $num = 1;
         $valores = explode('-', $fecha);
         $dia = 1;
@@ -551,7 +551,7 @@ class PDFController extends Controller
 
 
         $datosMG = Historia_Clinica_MG::whereMonth('fecha', $mes)->whereYear('fecha', $anio)->with('paciente')->get();
-        
+
 
         for ($i = 1; $i < 32; $i++) {
             $Result[$i] = [
@@ -563,7 +563,7 @@ class PDFController extends Controller
         $atenciones = 0;
         $horas=0;
         foreach ($datosMG as $item) {
-            
+
             $separar = explode('-', $item['fecha']);
 
                 $lugar[0] = 0;
@@ -698,17 +698,17 @@ class PDFController extends Controller
                     $morbilidad[8]+$Result[$separar[2]][27], $morbilidad[9]+$Result[$separar[2]][28], $tipo[0]+$Result[$separar[2]][29], $tipo[1]+$Result[$separar[2]][30], $tipo[2]+$Result[$separar[2]][31], $diagno[0]+$Result[$separar[2]][32], $diagno[1]+$Result[$separar[2]][33], $certificado+$Result[$separar[2]][34], $horas+$Result[$separar[2]][35],
 
                 ];
-                
+
 
                 $num++;
-                
-            
+
+
         }
 
         for ($i = 1; $i < 32; $i++) {
             $Total[0] = [
-                0, $Total[0][1]+$Result[$i][1], $Total[0][2]+$Result[$i][2], $Total[0][3]+$Result[$i][3], $Total[0][4]+$Result[$i][4], $Total[0][5]+$Result[$i][5], $Total[0][6]+$Result[$i][6], $Total[0][7]+$Result[$i][7], $Total[0][8]+$Result[$i][8], $Total[0][9]+$Result[$i][9], 
-                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19], $Total[0][20]+$Result[$i][20], $Total[0][21]+$Result[$i][21], 
+                0, $Total[0][1]+$Result[$i][1], $Total[0][2]+$Result[$i][2], $Total[0][3]+$Result[$i][3], $Total[0][4]+$Result[$i][4], $Total[0][5]+$Result[$i][5], $Total[0][6]+$Result[$i][6], $Total[0][7]+$Result[$i][7], $Total[0][8]+$Result[$i][8], $Total[0][9]+$Result[$i][9],
+                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19], $Total[0][20]+$Result[$i][20], $Total[0][21]+$Result[$i][21],
                 $Total[0][22]+$Result[$i][22], $Total[0][23]+$Result[$i][23], $Total[0][24]+$Result[$i][24], $Total[0][25]+$Result[$i][25], $Total[0][26]+$Result[$i][26], $Total[0][27]+$Result[$i][27], $Total[0][28]+$Result[$i][28], $Total[0][29]+$Result[$i][29],
                 $Total[0][30]+$Result[$i][30], $Total[0][31]+$Result[$i][31], $Total[0][32]+$Result[$i][32], $Total[0][33]+$Result[$i][33], $Total[0][34]+$Result[$i][34], $Total[0][35]+$Result[$i][35], $Total[0][35]+$Result[$i][35]
             ];
@@ -718,8 +718,148 @@ class PDFController extends Controller
         return \PDF::loadView('ConsolidadoMensualMedicinaGeneral', compact('Result','mesL','anio', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
     }
 
-    public function ConsolidadoMensualTerapia(){
-        $datos=Historia_Clinica_MG::with('paciente','enfermedad')->get();
-        return \PDF::loadView('ConsolidadoMensualTerapia')->setPaper('a4', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
+    public function ConsolidadoMensualTerapia($Mes, $Year){
+
+        $mes;
+            switch ($Mes) {
+                case 1:
+                    $mes="Enero";
+                    break;
+                case 2:
+                    $mes="Febrero";
+                    break;
+                case 3:
+                    $mes="Marzo";
+                    break;
+                case 4:
+                    $mes="Abril";
+                    break;
+                case 5:
+                    $mes="Mayo";
+                    break;
+                case 6:
+                    $mes="Junio";
+                    break;
+                case 7:
+                    $mes="Julio";
+                    break;
+                case 8:
+                    $mes="Agosto";
+                    break;
+                case 9:
+                    $mes="Septiembre";
+                    break;
+                case 10:
+                    $mes="Octubre";
+                    break;
+                case 11:
+                    $mes="Noviembre";
+                    break;
+                case 12:
+                    $mes="Diciembre";
+                    break;
+            }
+            $mes = strtoupper($mes);
+
+            $Result= [];
+            for ($i = 1; $i < 32; $i++) {
+                $Result[$i] = [
+                    $i, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                ];
+            }
+            $Total[0] = [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            ];
+
+        $RF=Historia_Clinica_RF::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+
+        foreach ($RF as $item) {
+
+            $separar = explode('-', $item['fecha']);
+
+                $lugar[0] = 0;
+                $lugar[1] = 0;
+
+                if ($item['lugar_atencion'] == 'Patronato') {
+                    $lugar[0] = 1;
+                }  else {
+                    $lugar[1] = 1;
+                }
+
+                $sexo[0] = 0;
+                $sexo[1] = 0;
+
+                if ($item->paciente['sexo'] == 'Hombre') {
+                    $sexo[0] = 1;
+                } else {
+                    $sexo[1] = 1;
+                }
+
+
+                $edades[0] = 0;
+                $edades[1] = 0;
+                $edades[2] = 0;
+                $edades[3] = 0;
+                $edades[4] = 0;
+
+                if ($item->paciente['edad'] >0 && $item->paciente['edad'] <=3) {
+                    $edades[0] = 1;
+                } else if ($item->paciente['edad'] >= 4 && $item->paciente['edad'] <= 12) {
+                    $edades[1] = 1;
+                } else if ($item->paciente['edad'] >= 13 && $item->paciente['edad'] <= 19) {
+                    $edades[2] = 1;
+                } else if ($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 49) {
+                    $edades[3] = 1;
+                } else{
+                    $edades[4] = 1;
+                }
+
+                $tratamiento[0] = 0;
+                $tratamiento[1] = 0;
+                $tratamiento[2] = 0;
+                $tratamiento[3] = 0;
+                $tratamiento[4] = 0;
+                $tratamiento[5] = 0;
+                $tratamiento[6] = 0;
+                $tratamiento[7] = 0;
+                $tratamiento[8] = 0;
+
+                if ($item->tratamiento['estimulacion_temprana'] == 1) {
+                    $tratamiento[0] = 1;
+                }else if ($item->tratamiento['magnetoterapia'] == 1) {
+                    $tratamiento[1] = 1;
+                } else if ($item->tratamiento['electroestimulacion'] == 1) {
+                    $tratamiento[2] = 1;
+                } else if ($item->tratamiento['ultrasonido'] == 1) {
+                    $tratamiento[3] = 1;
+                } else if ($item->tratamiento['C_Q_C_O_H'] == 1) {
+                    $tratamiento[4] = 1;
+                } else if ($item->tratamiento['masaje'] == 1) {
+                    $tratamiento[5] = 1;
+                } else if ($item->tratamiento['ejercicios_pasivos_resistidos'] == 1) {
+                    $tratamiento[6] = 1;
+                } else if ($item->tratamiento['laser'] == 1) {
+                    $tratamiento[7] = 1;
+                } else if ($item->tratamiento['otros'] == 1) {
+                    $tratamiento[8] = 1;
+                }
+
+                $Result[$separar[2]] = [
+                    $Result[$separar[2]][0], $lugar[0]+$Result[$separar[2]][1], $lugar[1]+$Result[$separar[2]][2], 1+$Result[$separar[2]][3], $sexo[0]+$Result[$separar[2]][4], $sexo[1]+$Result[$separar[2]][5], $edades[0]+$Result[$separar[2]][6], $edades[1]+$Result[$separar[2]][7], $edades[2]+$Result[$separar[2]][8], $edades[3]+$Result[$separar[2]][9], $edades[4]+$Result[$separar[2]][10],
+                    $tratamiento[0]+$Result[$separar[2]][11], $tratamiento[1]+$Result[$separar[2]][12], $tratamiento[2]+$Result[$separar[2]][13], $tratamiento[3]+$Result[$separar[2]][14], $tratamiento[4]+$Result[$separar[2]][15], $tratamiento[5]+$Result[$separar[2]][16], $tratamiento[6]+$Result[$separar[2]][17], $tratamiento[7]+$Result[$separar[2]][18],8
+                ];
+
+        }
+
+        for ($i = 1; $i < 32; $i++) {
+            $Total[0] = [
+                0, $Total[0][1]+$Result[$i][1], $Total[0][2]+$Result[$i][2], $Total[0][3]+$Result[$i][3], $Total[0][4]+$Result[$i][4], $Total[0][5]+$Result[$i][5], $Total[0][6]+$Result[$i][6], $Total[0][7]+$Result[$i][7], $Total[0][8]+$Result[$i][8], $Total[0][9]+$Result[$i][9],
+                $Total[0][10]+$Result[$i][10], $Total[0][11]+$Result[$i][11], $Total[0][12]+$Result[$i][12], $Total[0][13]+$Result[$i][13], $Total[0][14]+$Result[$i][14], $Total[0][15]+$Result[$i][15], $Total[0][16]+$Result[$i][16], $Total[0][17]+$Result[$i][17], $Total[0][18]+$Result[$i][18], $Total[0][19]+$Result[$i][19]
+            ];
+        }
+
+          //  return response()->json(['result'=>$Result, 'code'=>$Total]);
+
+       return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
     }
 }

@@ -59,4 +59,4 @@ Route::get('RegistroDiarioMedicina/{fecha}','PDFController@RegistroDiarioMedicin
 Route::get('RegistroDiarioFisica/{fecha}','PDFController@RegistroDiarioFisica');
 Route::get('ConsolidadoMensualMedicinaGeneral/{fecha}','PDFController@ConsolidadoMensualMedicinaGeneral');
 
-Route::get('ConsolidadoMensualTerapia','PDFController@ConsolidadoMensualTerapia');
+Route::get('ConsolidadoMensualTerapia/{mes}/{year}','PDFController@ConsolidadoMensualTerapia');

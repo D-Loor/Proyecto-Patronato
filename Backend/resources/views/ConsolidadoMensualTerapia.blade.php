@@ -23,7 +23,7 @@
             margin-top: 0px !important;
         }
         table{
-            padding-top:10px;
+            padding-top:0px;
             border-collapse: collapse;
             text-align: center;
         }
@@ -34,7 +34,7 @@
                 border: solid 1px black;
         }
         .segunda-fila{
-             height: 90px;
+             height: 80px;
         }
         thead tr th{
             color: rgb(0, 112, 192);
@@ -51,7 +51,7 @@
             margin-left:-22px;
         }
         .doc {
-            font-size:13px;
+            font-size:15px;
             font-weight: bold;
             padding-left:80px;
             margin:0px;
@@ -59,20 +59,29 @@
         .cargo{
             margin-left: 5px;
         }
+        .titu{
+            font-size:22px;
+
+        }
+        .subti{
+            margin-left:90px;
+            font-size:20px;
+        }
         h4 {
             position: absolute;
             margin:0px;
             text-align: center;
-            padding:100px ;
+            padding: 200px ;
             padding-top: 0px;
+            padding-bottom: 0px !important;
         }
         .LogoJunin{
-            height:90px;
+            height:100px;
             weight:150px;
         }
         .LogoPatronato{
             float:right;
-            height:70px;
+            height:80px;
             weight:120px;
         }
         .separador{
@@ -104,6 +113,7 @@
             padding-right:100px;
         }
         .box-rotate {
+            font-size:7.5px;
             -moz-transform: rotate(270deg);  /* FF3.5+ */
             -o-transform: rotate(270deg);  /* Opera 10.5 */
             -webkit-transform: rotate(270deg);  /* Saf3.1+, Chrome */
@@ -134,9 +144,10 @@
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-    <h4>UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL CANTÓN JUNÍN <br> CONSOLIDADO MENSUAL DE REHABILITACIÓN FÍSICA</h4>
+    <h4 class="titu">UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D MUNICIPAL CANTÓN JUNÍN </h4>
+    <h4 class="subti"><br> CONSOLIDADO MENSUAL DE REHABILITACIÓN FÍSICA</h4>
     <div class="contenido">
-     
+
 
         <table class="espacios">
             <thead>
@@ -176,7 +187,7 @@
                     <th><p class="box-rotate">OTROS</p></th>
                     <th><p class="box-rotate">HORAS TRABAJADAS</p></th>
                 </tr>
-               
+
                 <tr  class="numero">
                 	<td>N°</td>
                     <td>1</td>
@@ -202,31 +213,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                	<td class="numero">1</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                    <td>V</td>
-                </tr>
+                @foreach ($Result as $item)
+                    <tr>
+                        @for($i = 0; $i < 20; $i++)
+                            @if ($i===0)
+                                <td class="numero">{{$item[$i]}}</td>
+                            @endif
+                            @if ($i != 0)
+                                <td>{{$item[$i]}}</td>
+                            @endif
 
-                
+                        @endfor
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>
@@ -251,8 +251,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">SEPTIEMBRE</th>
-                            <td class="td"> 2018</td>
+                            <th class="th">{{$mes}}</th>
+                            <td class="td"> {{$Year}}</td>
                         </tr>
                     </tbody>
                 </table>
