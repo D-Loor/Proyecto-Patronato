@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Turno;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class TurnoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $datos=Role::all();  
+        $datos=Turno::all();  
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]); 
        }else
-           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
     }
 
     /**
@@ -40,22 +40,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $datos=new Role();
-        $datos->rol=$request->rol;
+        $datos=new Turno();
+        $datos->hora=$request->hora;
+        $datos->tipo=$request->tipo;
         $datos->save();
-        $idRecienGuardado = $datos->id_rol;
+        $idRecienGuardado = $datos->id_turno;
         return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id'=>$idRecienGuardado]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $datos=Role::where('id_rol', $id)->get()->first(); 
+        $datos=Turno::where('id_turno', $id)->get()->first(); 
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
@@ -65,10 +66,10 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Turno $turno)
     {
         //
     }
@@ -77,30 +78,30 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $datos=Role::find($id);
+        $datos=Turno::find($id);
         if($datos != null){
-            $datos->rol=$request->rol;
+            $datos->hora=$request->hora;
+            $datos->tipo=$request->tipo;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else
             return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
-        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Turno  $turno
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $datos=Role::find($id); 
+        $datos=Turno::find($id); 
         if($datos != null){
             $datos->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);

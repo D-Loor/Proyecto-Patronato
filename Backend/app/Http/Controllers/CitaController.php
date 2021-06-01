@@ -162,8 +162,6 @@ class CitaController extends Controller
     public function update(Request $request, $cedula)
     {
         $datos=Cita::find($request->id_cita);
-
-        //$rol = role::where("cedula", '=', $id_cita)->first();
         if($datos != null){
             if($request->abono=="DOADBA"){
                 $datos->abono=true;
