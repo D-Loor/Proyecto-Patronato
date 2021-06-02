@@ -106,6 +106,22 @@ export const routes: Routes = [
         path: 'registrarhistoriaclinica',
         loadChildren: () => import('./views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module').then(m => m.RegistrarHistoriaClinicaModule)
       },
+      {
+        path: 'cuentas',
+        loadChildren: () => import('./views/Administrador/cuentas/cuentas.module').then(m => m.CuentasModule)
+      },
+      {
+        path: 'roles',
+        loadChildren: () => import('./views/Administrador/roles/roles.module').then(m => m.RolesModule)
+      },
+      {
+        path: 'horarios',
+        loadChildren: () => import('./views/Administrador/horarios/horarios.module').then(m => m.HorariosModule)
+      },
+
+
+
+
       //Otros
       {
         path: 'base',

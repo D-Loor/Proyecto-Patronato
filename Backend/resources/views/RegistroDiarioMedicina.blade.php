@@ -62,7 +62,7 @@
             border-top: solid 1px black;
             width:290px;
             height: 5px;
-            margin-left:-22px;
+            margin-left:-5px;
         }
         .doc {
             font-size:13px;
@@ -334,8 +334,8 @@
         <div>
             <div class="doc">
                 <div class="firma"></div>
-                LCDO.  CARLOS ZAMBRANO MOREIRA
-                    <div class="cargo"> ÁREA DE REHABILITACIÓN FISICA
+                DR. FERNANDO MARTIN DUEÑAS INTRIAGO
+                    <div class="cargo"> DEPARTAMENTO DE ASISTENCIA SOCIAL
                 </div>
 
             </div>

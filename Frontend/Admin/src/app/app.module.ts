@@ -62,9 +62,11 @@ import { CitasModule } from './views/Secretaria/citas/citas.module';
 import { RegistrarHistoriaClinicaModule } from './views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module';
 import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.module';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DiarioComponent } from './views/RehabilitacionFisica/reportes-rf/diario/diario.component';
 import { DiarioMGModule } from './views/MedicinaGeneral/reportes-mg/diario/diario.module';
 import { DiarioRFModule } from './views/RehabilitacionFisica/reportes-rf/diario/diario.module';
+import { CuentasModule } from './views/Administrador/cuentas/cuentas.module';
+import { RolesModule } from './views/Administrador/roles/roles.module';
+import { HorariosModule } from './views/Administrador/horarios/horarios.module';
 
 
 
@@ -105,7 +107,10 @@ import { DiarioRFModule } from './views/RehabilitacionFisica/reportes-rf/diario/
     NgxSpinnerModule,
     ReactiveFormsModule,
     DiarioMGModule,
-    DiarioRFModule
+    DiarioRFModule,
+    HorariosModule,
+    RolesModule,
+    CuentasModule
 
   ],
   declarations: [
