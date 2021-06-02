@@ -41,9 +41,9 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
-        $file=$request->file('Aqui va el ID');
-        $nombre=$file->getClientMimeType();
-        $tipoImagen=str_replace('image/', '.',$nombre);
+        $file=$request->$imagen;
+        $nombreImagen=$file->getClientMimeType();
+        $tipoImagen=str_replace('image/', '.',$nombreImagen);
         $fileName=uniqid() . $tipoImagen;
         $path=public_path().'/imagenes';
         $file->move($path,$fileName);
