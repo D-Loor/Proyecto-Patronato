@@ -39,21 +39,22 @@ class CuentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        $file=$request->$imagen;
-        $nombreImagen=$file->getClientMimeType();
-        $tipoImagen=str_replace('image/', '.',$nombreImagen);
-        $fileName=uniqid() . $tipoImagen;
-        $path=public_path().'/imagenes';
-        $file->move($path,$fileName);
+        $file = $request->file('imagen');
+        $filename = $file->getClientOriginalName();
+        $filename = pathinfo($filename, PATHINFO_FILENAME);
+        $name_File = str_replace(" ", "_", $filename);
+        $extension = $file->getClientOriginalExtension();
+        $picture = date('His').'-'.$name_File.'.'.$extension;
+        $file->move(public_path('/imagenes'),$picture); 
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$fileName;
+        $datos->imagen=$picture;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
