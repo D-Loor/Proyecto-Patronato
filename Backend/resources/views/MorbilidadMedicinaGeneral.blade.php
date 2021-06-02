@@ -33,11 +33,25 @@
         }
         th,td {
                 min-width: 100px;
-                width: 20px;
+                width: 46px;
+                min-height: 20px;
+                height: 20px;
+                padding: 4px;
+                font-size: 10px;
+                font-weight: bold;
+                text-align: center;
+                border: solid 1px black;
+        }
+        .tdCeldas{
+            font-size: 12px;
+        }
+        .causas{
+                min-width: 100px;
+                width: 352px;
                 min-height: 20px;
                 height: 20px;
                 padding: 5px;
-                font-size: 14px;
+                font-size: 10px;
                 font-weight: bold;
                 text-align: center;
                 border: solid 1px black;
@@ -56,12 +70,12 @@
             margin-top: 70px;
             text-align: center;
             border-top: solid 1px black;
-            width:290px;
+            width:250px;
             height: 5px;
             margin-left:-5px;
         }
         .doc , .doc .cargo {
-            font-size:13px;
+            font-size:11px;
             font-weight: bold;
             padding-left:5px;
             margin:0px;
@@ -81,8 +95,10 @@
             position: absolute;
             margin:0px;
             text-align: center;
-            padding:70px ;
+            padding:110px;
             padding-top: 0px;
+            
+            font-size:21px;
         }
         .LogoJunin{
             height:90px;
@@ -108,39 +124,49 @@
             color: rgb(0, 112, 192);
         }
         tfoot tr td{
-            font-size: 16px;
+            font-size: 14px;
         }
         .resul{
             color: rgb(255, 0, 0);
         }
         .ver{
+            font-size: 14px;
             color: rgb(0, 176, 80);
         }
         .item{
-            font-size:13px;
+            font-size:15px;
             font-weight:bold;
             color: rgb(0, 112, 192);
             padding-left:10px ;
         }
         .subt{
-            padding-left:230px ;
+            padding-left:400px ;
         }
 
         .items{
             font-size:15px;
             font-weight:bold;
+            padding-left:0px;
+            margin-top: 10px;
         }
         .segt{
-            position: relative;
-            margin-left:720px;
-            margin-top: 60px;
+            position: absolute;
+            margin-left:1150px;
+            margin-top: 53px;
             margin-right:100px;
             padding-right:100px;
         }
 
         .result{
+            font-size: 14px;
             color: rgb(255, 0, 0);
         }
+        .espacios{
+        	table-layout: fixed;
+           	width: 1380px;
+        }
+
+        
 
     </style>
 </head>
@@ -153,7 +179,8 @@
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-    <h4>REGISTRO  DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN MEDICINA GENERAL SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL CANTÓN JUNÍN</h4>
+    <h4>REGISTRO  DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN MEDICINA GENERAL 
+    <br> SEGÚN EDAD Y SEXO EN LA UNIDAD DE ASISTENCIA SOCIAL DEL GAD MUNICIPAL CANTÓN JUNÍN</h4>
     <div class="contenido">
         <div >
             <div class="items">
@@ -168,12 +195,12 @@
 
 
         </div>
-
-        <table>
+<div class="">
+        <table >
             <thead>
                 <tr>
                     <th rowspan="4"> N°</th>
-                    <th rowspan="4"> CAUSAS</th>
+                    <th rowspan="4" class="causas"> CAUSAS</th>
                     <th class="grupos" colspan="16" class="ulti"> GRUPOS DE EDAD </th>
                     <th colspan="1" style="border-top: none !important; border-bottom: none !important" ></th>
                 </tr>
@@ -221,15 +248,15 @@
                     <th class="numero">{{$item[$i]}}</th>
                     @endif
                     @if($i===1)
-                    <td>{{$item[$i]}}</td>
+                    <td class="tdCeldas">{{$item[$i]}}</td>
                     @endif
                     @if($i>1)
                     @for($j=0;$j<=16;$j++)
-                    <td>{{$item[$i][$j]}}</td>
+                    <td class="tdCeldas">{{$item[$i][$j]}}</td>
                     @endfor
                     @endif
                     @if($i===2)
-                    <td>25%</td>
+                    <td class="tdCeldas">25</td>
                     @endif
                  @endfor
                 </tr>
@@ -240,7 +267,7 @@
                 <th colspan="2" class="total"> TOTAL</th>
                 @for($i = 0 ; $i <= 16; $i++)
                     @if($i<=13)
-                        <td>{{$total[$i]}}</td>
+                        <td class="tdCeldas">{{$total[$i]}}</td>
                     @endif
                     @if($i>13)
                     <td class="ver"> {{$total[$i]}} </td>
@@ -248,11 +275,12 @@
                     @if($i==16)
                     <td class="result">100%</td>
                     @endif
-
+                    
                  @endfor
                 </tr>
             </tfoot>
         </table>
+        </div>
     </div>
 
         <div>
@@ -265,8 +293,8 @@
             </div>
 
 
-            <div >
-                <table class="segt" >
+            <div>
+                <table  class="segt">
                     <thead>
                         <tr>
                             <th class="th"> MES</th>
@@ -275,7 +303,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="th">{{$mes}}</th>
+                            <th class="td">{{$mes}}</th>
                             <td class="td"> {{$Year}}</td>
                         </tr>
                     </tbody>

@@ -318,7 +318,7 @@ class PDFController extends Controller
             }
 
             //return response()->json(['result'=>$Result]);
-        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a4', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
+        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
 
