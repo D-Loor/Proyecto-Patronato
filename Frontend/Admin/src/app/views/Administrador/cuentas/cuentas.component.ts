@@ -15,6 +15,17 @@ export class CuentasComponent implements OnInit {
   cuentasFilter=[];
   cuewntasPaginateFilter=[];
   search="";
+  estado=0;
+  nombres="";
+  correo="";
+  rol;
+  password="";
+
+  ClaseCorreo:string="form-control form-input select-number";
+  ClaseNombre:string="form-control form-input select-number";
+  ClaseRol:string="form-control form-input select-number";
+  ClasePassword:string="form-control form-input select-number";
+  ClaseCHora:string="form-control form-input select-number";
 
   loadingText = 'Cargando...';
 
@@ -30,6 +41,15 @@ export class CuentasComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+  }
+
+  CrearCuenta(){
+
+  }
+
+  ActualizarCuenta(){
+
   }
 
   buscar(){

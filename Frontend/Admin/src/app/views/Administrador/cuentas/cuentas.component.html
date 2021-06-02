@@ -5,89 +5,77 @@
       <div class="card">
         <div class="card-header">
           <i class="icon-user-follow"></i>
-          <strong>Crear Cuenta </strong>
+          Crear Cuenta
 
-          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
-            [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic"><i
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed1 = !isCollapsed1"
+            [attr.aria-expanded]="!isCollapsed1" aria-controls="collapseBasic"><i
               class="fa fa-chevron-down"></i>&nbsp;</button>
         </div>
 
-        <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+        <div id="collapseBasic" [collapse]="isCollapsed1" [isAnimated]="true">
 
+          <div class="card-body">
             <div class="form-group">
               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <div class="row">
                   <div class=" form-group col-md-6">
                     <label for="text-input">Nombres</label>
                     <input autocomplete="off" required type="text" id="nombres" [(ngModel)]="nombres" name="nombres"
-                      [class]="ClaseCNombre" placeholder="Ingrese los nombres completos"
-                      (click)="ClaseCNombre='form-control form-input select-number'">
+                      [class]="ClaseNombre" placeholder="Ingrese los nombres completos"
+                      (click)="ClaseNombre='form-control form-input select-number'">
                   </div>
-                  <div class=" form-group col-md-6">
-                    <label for="date-input">Fecha de la cita</label>
-                    <input required [class]="ClaseCFecha" (click)="ClaseCFecha='form-control form-input select-number'"
-                      id="fecha_consulta" type="date" autocomplete="off" [(ngModel)]="fecha_consulta"
-                      name="fecha_consulta" (change)="Turnos(fecha_consulta)">
+                  <div class="form-group col-md-6">
+                    <label for="text-input">Correo </label>
+                    <div class="input-group">
+                      <input required type="text" id="correo" [class]="ClaseCorreo"
+                        (click)="ClaseCorreo='form-control form-input select-number'" autocomplete="off"
+                        [(ngModel)]="correo" name="correo" placeholder="Ingrese el correo"
+                        >
+                      <span class="input-group-append">
+                        <button type="button" class="btn btn-primary" >Consultar</button>
+                      </span>
+                    </div>
                   </div>
+
                 </div>
                 <div class="row">
-                  <div class="form-group col-md-6">
-                    <div class="row">
-                      <div class="form-group col-md-12">
-                        <label for="text-input">Cédula</label>
-                        <div class="input-group">
-                          <input required type="number" id="cedula" [class]="ClaseCdula"
-                            (click)="ClaseCdula='form-control form-input select-number'" autocomplete="off"
-                            [(ngModel)]="cedula" name="cedula" placeholder="Ingrese la cédula"
-                            (focusout)="ValidarCedula(cedula)">
-                          <span class="input-group-append">
-                            <button type="button" class="btn btn-primary" (click)="Consultar(cedula)">Consultar</button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-md-12">
-                        <label for="text-input">Especialidad</label>
-                        <select id="especialidad" (change)="LimpiarTurno()"
-                          (click)="ClaseCEspecialidad='form-control form-input select-number'"
-                          [class]="ClaseCEspecialidad" [(ngModel)]="especialidad" name="especialidad" required>
-                          <option value="Medicina General">Medicina General</option>
-                          <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
+
+                      <div class="form-group col-md-6">
+                        <label for="text-input">Rol</label>
+                        <select id="rol"
+                          (click)="ClaseRol='form-control form-input select-number'"
+                          [class]="ClaseRol" [(ngModel)]="rol" name="rol" required>
+                          <option value="Medicina General">Rol1</option>
+                          <option value="Rehabilitacion Fisica">Rol2</option>
                         </select>
                       </div>
-                    </div>
-
-
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="date-input"> Hora de la cita </label>
-                    <select [class]="ClaseCHora" (click)="ClaseCHora='form-control form-input select-number'" size="5"
-                      multiple aria-label=" multiple select example" name="idT" [(ngModel)]="idT" id="idT" required>
-                      <option *ngFor="let item of ArrayTurnos" value="{{item.id}}">{{item.hora}} </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <div _ngcontent-nko-c102="" class="col-md-12 col-form-label">
-                      <div _ngcontent-nko-c102="" class="form-check form-check-inline mr-1">
-                        <input _ngcontent-nko-c102="" autocomplete="off" type="checkbox" name="abono" id="abono"
-                          value="false" [(ngModel)]="abono" class="form-check-input ng-untouched ng-pristine ng-valid"
-                          ng-reflect-name="abono">
-                        <label _ngcontent-nko-c102="" for="inlineRadio2" class="form-check-label">Canceló el valor de la
-                          Cita Médica</label>
+                      <div class=" form-group col-md-6">
+                        <label for="date-input"> Contraseña</label>
+                        <input autocomplete="off" required type="text" id="password" [(ngModel)]="password" name="password"
+                        [class]="ClasePassword" placeholder="Ingrese la contraseña"
+                        (click)="ClasePassword='form-control form-input select-number'">
                       </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="form-group col-md-6">
+                    <label for="text-input"> Foto</label>
+                    <div class="col-md-9">
+                      <input type="file" id="file-input" name="file-input">
                     </div>
                   </div>
                 </div>
 
-
-
                 <button *ngIf="estado==0" type="submit" class="btn btn-lg btn-primary boto"
-                  (click)="ValidarCita('sample')">Agendar Cita</button>
+                  (click)="CrearCuenta('sample')">Crear Cuenta</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
-                  (click)="ActualizarCita()">Reagendar Cita</button>
+                  (click)="ActualizarCuenta()">Editar Cuenta</button>
               </form>
             </div>
+          </div>
+
 
 
         </div>
@@ -108,14 +96,14 @@
         </div>
 
         <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+
           <div class="form-group">
             <div class="col-md-4 searcht">
               <label for="name">Buscar por Cédula:</label>
               <div class="input-group">
                 <input type="number" id="search" name="search" class="form-control" placeholder="Escriba la cédula.."
                   [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
-                <span class="input-group-prepend">
-                  <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fa fa-search"></i>
+                <span class="input-group-prepend">   <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fa fa-search"></i>
                     Buscar</button>
                 </span>
 
@@ -123,6 +111,8 @@
             </div>
 
           </div>
+
+
           <div class="card-body">
             <table class="table table-bordered table-striped table-sm">
               <thead>
