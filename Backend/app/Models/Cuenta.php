@@ -15,7 +15,7 @@ class Cuenta extends Model
         'id_rol', 'nombres', 'correo', 'password', 'imagen',
      ];
 
-    //public function role(){
-    //	return $this->hasOne('App\Models\Role','id_rol','id_cuenta');
-    //}
+    public function role(){
+    	return $this->belongsTo('App\Models\Role','id_rol');
+    }
 }
