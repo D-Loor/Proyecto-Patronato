@@ -8,6 +8,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DiairioMGRoutingModule } from './diario-routing.module';
 import { DiarioComponent } from './diario.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { DiarioComponent } from './diario.component';
       TabsModule.forRoot(),
       CollapseModule.forRoot(),
       NgxSpinnerModule,
+      PdfViewerModule,
     ],
     declarations: [
       DiarioComponent,
