@@ -579,7 +579,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   IngresarObstetrico(){
-    
     if(this.ginecos_obstetricosC==1){
       this.IngresarAntecedesPersonales();
     }else{
@@ -603,7 +602,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   IngresarAntecedesPersonales(){
-    
     if(this.sexo=="Hombre" || this.ginecos_obstetricosC==1){
       this.id_obstetrico = 1;
     }
@@ -829,21 +827,22 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   
   Restaurar(){
     this.ClaseTadultez='form-control';
-    this.DBID=undefined; this.DBI=undefined;this.HTA=undefined;this.TbP==undefined;
+    this.DBID=0; this.DBI=0;this.HTA=0;this.TbP=0;
     this.ClaseDbid="";this.ClaseDbi="";this.ClaseHta="";this.ClaseTbp="";
   }
   RestaurarMujer(){
     this.ClaseFum='form-control form-input'; this.ClaseFpp='form-control form-input'; this.ClaseEdadG='form-control form-input';
     this.ClaseMenarquia='form-control form-input';this.ClaseFlujoG='form-control form-input'; this.ClaseGestas='form-control form-input';
-    this.ClasePartos='form-control form-input'; this.ClaseAbortos='form-control form-input'; this.ClaseCesareas='form-control form-input'
+    this.ClasePartos='form-control form-input'; this.ClaseAbortos='form-control form-input'; this.ClaseCesareas='form-control form-input';
+    this.fum=0; this.fpp=0; this.edad_gestional=0; this.menarquia=0; this.flujo_genital=0; this.Gestas=0; this.Partos=0; this.cesareas=0;this.abortos=0;
   }
 
   ValidarMujer(){
     if(this.sexo=="Mujer" && this.ginecos_obstetricosC==0){
       if(this.fum==undefined|| this.fum==""|| this.fpp==undefined||this.fpp==""||this.edad_gestional==undefined||
-         this.edad_gestional==""|| this.menarquia==undefined||this.menarquia==""||this.flujo_genital==undefined||
-         this.flujo_genital==""||this.Gestas==undefined||this.Gestas==""||this.Partos==undefined||this.Partos==""||
-         this.abortos==undefined||this.abortos==""||this.cesareas==undefined||this.cesareas==""
+         this.edad_gestional==null|| this.menarquia==undefined||this.menarquia==""||this.flujo_genital==undefined||
+         this.flujo_genital==""||this.Gestas==undefined||this.Gestas==null||this.Partos==undefined||this.Partos==null||
+         this.abortos==undefined||this.abortos==null||this.cesareas==undefined||this.cesareas==null
       ){
         if(this.fum==undefined|| this.fum==""){
           this.ClaseFum="form-control is-invalid";
@@ -851,7 +850,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         if(this.fpp==undefined||this.fpp==""){
           this.ClaseFpp="form-control is-invalid";
         }
-        if(this.edad_gestional==undefined||this.edad_gestional==""){
+        if(this.edad_gestional==undefined||this.edad_gestional==null){
           this.ClaseEdadG="form-control is-invalid";
         }
         if(this.menarquia==undefined||this.menarquia==""){
@@ -860,16 +859,16 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         if(this.flujo_genital==undefined||this.flujo_genital==""){
           this.ClaseFlujoG="form-control is-invalid";
         }
-        if(this.Gestas==undefined||this.Gestas==""){
+        if(this.Gestas==undefined||this.Gestas==null){
           this.ClaseGestas="form-control is-invalid";
         }
-        if(this.Partos==undefined||this.Partos==""){
+        if(this.Partos==undefined||this.Partos==null){
           this.ClasePartos="form-control is-invalid";
         }
-        if(this.abortos==undefined||this.abortos==""){
+        if(this.abortos==undefined||this.abortos==null){
           this.ClaseAbortos="form-control is-invalid";
         }
-        if(this.cesareas==undefined||this.cesareas==""){
+        if(this.cesareas==undefined||this.cesareas==null){
           this.ClaseCesareas="form-control is-invalid";
         }
         
@@ -952,7 +951,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     if(this.cedula==undefined||this.cedula==""){
       this.ClaseCdula="form-control is-invalid";
     }
-    if(this.edad==undefined||this.edad==""){
+    if(this.edad==undefined||this.edad==null){
       this.ClaseEdad="form-control is-invalid";
     }
     if(this.gad==undefined){
@@ -991,7 +990,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   VaidarPaciente(){
     let mujer = this.ValidarMujer();
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
-       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
+       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
        this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
        this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
        this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
@@ -1031,7 +1030,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   actualizarDatos(){
     let mujer = this.ValidarMujer();
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
-       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
+       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
        this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
        this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
        this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
