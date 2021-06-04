@@ -183,6 +183,11 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.EstadoVida = false;
   }
 
+  ActualizarCitaHistorial(cedula:string){
+    this.ServicioSecretaria.ActualizarCitaConHistorial(cedula).then(data => {
+    })
+  }
+
   LlenarArray(){
     
     this.DatosFamiliaresDB=0;
@@ -359,7 +364,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.Partos=data['result'].partos;
       this.cesareas=data['result'].cesareas;
       this.abortos=data['result'].abortos;
-      debugger
       if(id_gineco==1){this.ginecos_obstetricosC=1; this.ginecos_obstetricosCaux=this.ginecos_obstetricosC; this.fum='';this.fpp='';this.edad_gestional='';this.menarquia='';this.Gestas='';this.Partos='';
       this.cesareas=''; this.abortos=''; this.flujo_genital='';}else{this.ginecosSi=0;}
     })
@@ -768,7 +772,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   AntecedentesFamiliares(){
-    debugger
     if(this.DatosFamiliares.length==0){
       this.ActualizarEstadoCitas();
     }else{
@@ -805,7 +808,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'nombres':this.nombresP + " " + this.apellidos,
     }
     this.ServicioSecretaria.ActualizarCitas( citas, this.cedula ).then(data =>{
-      
+      this.ActualizarCitaHistorial(this.cedula);
       this.limpiar(); 
       this.spinner.hide('sample');
       Swal.fire(
@@ -1027,7 +1030,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   actualizarDatos(){
     let mujer = this.ValidarMujer();
-    debugger
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
        this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==""||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
        this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||

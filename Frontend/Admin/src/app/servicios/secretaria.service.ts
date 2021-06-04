@@ -93,7 +93,6 @@ export class SecretariaService {
   }
 
   Familiares(data:any) {
-    debugger
     let  url = 'http://127.0.0.1:8000/api/Familiar';
     return new Promise ((resolve, reject) => {
       this.http.post(url, data ).subscribe(res => {
@@ -106,7 +105,6 @@ export class SecretariaService {
   }
 
   Familiares2(data:any) {
-    debugger
     let  url = 'http://127.0.0.1:8000/api/Familiar';
     return new Promise ((resolve, reject) => {
       this.http.post(url, data ).subscribe(res => {
@@ -280,7 +278,6 @@ export class SecretariaService {
   }
 
   updateGinecos(data:any,id:number){
-    
     let  url = 'http://127.0.0.1:8000/api/AGO/'+id;
     return new Promise ((resolve, reject) => {
       this.http.put(url, data).subscribe(res => {
@@ -291,6 +288,16 @@ export class SecretariaService {
     });
   }
 
+  ActualizarCitaConHistorial(cedula:string){
+    let  url = 'http://127.0.0.1:8000/api/actualizarCita/'+cedula;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, cedula).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
   
 
 }

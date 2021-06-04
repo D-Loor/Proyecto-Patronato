@@ -228,7 +228,7 @@ class CitaController extends Controller
                 $item->estado=1;
                 $item->update();
             }
-            return response()->json(['code'=>'201']);
+            return response()->json(['result'=>"Cita Actualizada",'code'=>'201']);
         }else
             return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
