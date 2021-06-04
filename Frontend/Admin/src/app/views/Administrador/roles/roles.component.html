@@ -20,7 +20,7 @@
                 <div class="row">
                   <div class=" form-group col-md-8">
                     <label for="text-input">Rol</label>
-                    <input autocomplete="off" required type="text" id="rol" [(ngModel)]="rol" name="rol"
+                    <input autocomplete="off" required type="text" id="Rol" [(ngModel)]="Rol" name="Rol"
                       [class]="ClaseRol" placeholder="Ingrese rol"
                       (click)="ClaseRol='form-control form-input select-number'">
                   </div>
@@ -30,7 +30,7 @@
 
 
 
-
+ 
                 <button *ngIf="estado==0" type="submit" class="btn btn-lg btn-primary boto"
                   (click)="CrearRol('sample')">Crear Rol</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
@@ -62,9 +62,9 @@
 
           <div class="form-group">
             <div class="col-md-4 searcht">
-              <label for="name">Buscar por Cédula:</label>
+              <label for="name">Buscar por Rol:</label>
               <div class="input-group">
-                <input type="number" id="search" name="search" class="form-control" placeholder="Escriba la cédula.."
+                <input type="text" id="search" name="search" class="form-control" placeholder="Escriba el rol.."
                   [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">   <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fa fa-search"></i>
                     Buscar</button>
@@ -89,9 +89,9 @@
                   <tr *ngFor="let item of rolPaginate">
                     <td>{{item.rol}}</td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont"><i
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont"><i
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="eliminar(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
@@ -101,9 +101,9 @@
                   <tr *ngFor="let item of rolPaginateFilter">
                     <td>{{item.rol}}</td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont"><i
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)" ><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont"><i
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="eliminar(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
@@ -111,9 +111,9 @@
               </tbody>
             </table>
             <nav>
-              <pagination *ngIf="search==''" [totalItems]="citasMG.length" (pageChanged)="pageChanged($event)">
+              <pagination *ngIf="search==null" [totalItems]="rol.length" (pageChanged)="pageChanged($event)">
               </pagination>
-              <pagination *ngIf="search!=''" [totalItems]="citasMGFilter.length"
+              <pagination *ngIf="search!=null" [totalItems]="rolFilter.length"
                 (pageChanged)="pageChangedFiltro($event)"></pagination>
             </nav>
           </div>

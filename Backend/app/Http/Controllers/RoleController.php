@@ -82,7 +82,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datos=Role::find($id);
+        $datos=Role::where('id_rol', $id)->get()->first();
         if($datos != null){
             $datos->rol=$request->rol;
             $datos->update();
@@ -100,7 +100,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $datos=Role::find($id); 
+        $datos=Role::where('id_rol', $id)->get()->first();  
         if($datos != null){
             $datos->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);

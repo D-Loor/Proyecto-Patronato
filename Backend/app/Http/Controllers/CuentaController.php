@@ -67,7 +67,7 @@ class CuentaController extends Controller
      */
     public function show($id)
     {
-        $datos=Cuenta::where('id_cuenta', $id)->get()->first(); 
+        $datos=Cuenta::with('role')->where('id_cuenta', $id)->get()->first(); 
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
@@ -92,26 +92,11 @@ class CuentaController extends Controller
      * @param  \App\Models\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $datos=Cuenta::where('id_cuenta', $id)->get()->first();
-
-        $file = $request->file('imagen');
-        $filename = $file->getClientOriginalName();
-        $filename = pathinfo($filename, PATHINFO_FILENAME);
-        $name_File = str_replace(" ", "_", $filename);
-        $extension = $file->getClientOriginalExtension();
-        $picture = date('His').'-'.$name_File.'.'.$extension;
-        $file->move(public_path('/imagenes'),$picture); 
-
-        $datos->id_rol=$request->id_rol;
-        $datos->nombres=$request->nombres;
-        $datos->correo=$request->correo;
-        $datos->password=$request->password;
-        $datos->imagen=$picture;
-        $datos->update();
         
-        return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
+        
+        return response()->json(['mensaje'=>$request->imagen, 'code'=>'201']);
     }
 
     /**

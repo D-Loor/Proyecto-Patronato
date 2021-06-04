@@ -191,6 +191,27 @@ class DatabaseSeeder extends Seeder
             "password" => "q",
             "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
         ]);
+        DB::table('cuentas')->insert([
+            "id_rol" => 1,
+            "nombres" => "Dario Aldair Zambrano Mendoza",
+            "correo" => "qs",
+            "password" => "qs",
+            "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
+        ]);
+        DB::table('cuentas')->insert([
+            "id_rol" => 1,
+            "nombres" => "Dario Aldair Zambrano Mendoza",
+            "correo" => "qsd",
+            "password" => "qsd",
+            "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
+        ]);
+        DB::table('cuentas')->insert([
+            "id_rol" => 1,
+            "nombres" => "Dario Aldair Zambrano Mendoza",
+            "correo" => "qsdf",
+            "password" => "qsdf",
+            "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
+        ]);
 
         DB::table('antecedentes_patologicos_personales')->insert([
             'id_gineco' => 1,
