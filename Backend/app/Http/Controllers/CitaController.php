@@ -214,4 +214,23 @@ class CitaController extends Controller
             return response()->json(['result'=>"Proceda con el registro", 'code'=>'202']);
     }
 
+    public function ActualizarEstado($cedula){
+        $datos=Cita::where('cedula', $cedula)->get();
+        if($datos != null){
+            foreach($datos as $item){
+                $item->id_cita = $item->id_cita;
+                $item->nombres = $item->nombres;
+                $item->cedula = $item->cedula;
+                $item->especialidad = $item->especialidad;
+                $item->fecha = $item->fecha;
+                $item->id_turno = $item->id_turno;
+                $item->abono=$item->abono;
+                $item->estado=1;
+                $item->update();
+            }
+            return response()->json(['code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+    }
+
 }
