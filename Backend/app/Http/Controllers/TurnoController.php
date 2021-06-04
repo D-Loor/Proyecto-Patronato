@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Turno;
+use App\Models\Cita;
 use Illuminate\Http\Request;
 
 class TurnoController extends Controller
@@ -102,10 +103,17 @@ class TurnoController extends Controller
     public function destroy($id)
     {
         $datos=Turno::find($id); 
-        if($datos != null){
-            $datos->delete();
-            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
-        }else
-            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        $datosCuenta=Cita::where('id_turno', $id)->get()->first();
+        if($datosCuenta != null ){
+            return response()->json(['result'=>"Turno Relacionado", 'code'=>'203']);
+        }else{
+            if($datos != null){
+                $datos->delete();
+                return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+            }else{
+                return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+            }
+        }
+        
     }
 }

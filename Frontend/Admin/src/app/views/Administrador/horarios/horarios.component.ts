@@ -27,6 +27,7 @@ export class HorariosComponent implements OnInit {
   especialidad="";
   validarVacio="";
   id_turnos="";
+  result="";
 
   ClaseHora:string="form-control form-input select-number";
   ClaseCEspecialidad:string="form-control form-input select-number";
@@ -44,7 +45,7 @@ export class HorariosComponent implements OnInit {
   };
 
   limpiar(){
-    this.hora = ""; this.tipo="";this.especialidad=""; this.id_turnos=""
+    this.hora = ""; this.tipo="";this.especialidad=""; this.id_turnos=""; this.result="";
   }
 
   cargarTablas(){
@@ -71,6 +72,35 @@ export class HorariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarTablas();
+  }
+
+  alertEliminado(result:string){
+    if(result=="203"){
+      Swal.fire(
+        'Eliminado!',
+        'Rol relacionado.',
+        'success'
+      )
+    }else{
+      Swal.fire(
+        'Eliminado!',
+        'El rol ha sido eliminada.',
+        'success'
+      )
+    }
+  }
+
+  eliminar(id:string){
+    this.administradorService.eliminarTurno(id).then(data => {
+      this.result=data['code'];
+      this.spinner.hide('sample');
+      this.alertEliminado(this.result);
+      this.cargarTablas();
+    })
+    .catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+    });
   }
 
   CrearTurno(){
@@ -136,11 +166,7 @@ export class HorariosComponent implements OnInit {
       })
       this.limpiar();
     }else{
-      if(this.especialidad=="Medicina General"){
-        this.especialidad="MG";
-      }else{
-        this.especialidad="RF";
-      }
+      
       let arrayUpdate={
         "hora":this.hora,
         "tipo":this.especialidad
@@ -187,8 +213,8 @@ export class HorariosComponent implements OnInit {
     this.turnosFilter=[];
       this.turnosPaginateFilter=[];
     if(this.search==null){
-
-      //this.citasMGPaginate = this.citasMG.slice(0, 10);
+      debugger
+      this.turnosPaginate = this.turnos.slice(0, 10);
     }else{
       
       for (const x of this.turnos) {
