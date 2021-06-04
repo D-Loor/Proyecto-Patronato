@@ -92,11 +92,22 @@ class CuentaController extends Controller
      * @param  \App\Models\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update($id_cuenta)
     {
+        $datos=Cuenta::find($id_cuenta);
         
+        if($datos != null){
+            $datos->id_rol= request('id_rol');
+            $datos->nombres= request('nombres');
+            $datos->correo= request('correo');
+            $datos->password= request('password');
+            $datos->imagen=1;
+            $datos->update();
+            return response()->json(['mensaje'=>'Datos Actualizados', 'code'=>'201']);
+        }else{
+            return response()->json(['mensaje'=>'Dato no encontrado', 'code'=>'202']);
+        }
         
-        return response()->json(['mensaje'=>$request->imagen, 'code'=>'201']);
     }
 
     /**
