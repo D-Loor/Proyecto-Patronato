@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { MedicinaGeneralService } from '../../../servicios/medicina-general.service';
 import { SecretariaService } from '../../../servicios/secretaria.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registrar-historia-clinica',
   templateUrl: './registrar-historia-clinica.component.html',
@@ -11,7 +12,9 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class RegistrarHistoriaClinicaComponent implements OnInit {
 
-  constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService ) { }
+  constructor(private medicinag:MedicinaGeneralService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService,
+              private rutas:Router
+             ) { }
 
   loadingText = 'Guardando...';
   loadingTextA = 'Actualizando...';
@@ -1301,6 +1304,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         'success'
       )
       this.limpiar();
+      this.rutas.navigate(['/pacientes']);
     });
   }
 }
