@@ -14,7 +14,8 @@ class Turno extends Model
     protected $fillable = [
          'hora','tipo',
     ];
-    public function rcita(){
+    
+     public function rcita(){
         return $this->hasMany('App\Models\Cita','id_turno');
      }
 }

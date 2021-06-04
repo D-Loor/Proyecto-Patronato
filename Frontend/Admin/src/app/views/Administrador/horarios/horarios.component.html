@@ -90,11 +90,12 @@
               </thead>
               <tbody>
                 <ng-container *ngIf="search == null; else filtroMG">
-                  <tr *ngFor="let item of rolPaginate">
+                  <tr *ngFor="let item of turnosPaginate">
                     <td>{{item.hora}}</td>
-                    <td>{{item.tipo}}</td>
+                    <td *ngIf="item.tipo=='MG'">Medicina General</td>
+                    <td *ngIf="item.tipo=='RF'">Rehabilitación Física</td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont"><i
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" class="btn btn-ghost-danger botont"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
@@ -103,12 +104,13 @@
                 </ng-container>
 
                 <ng-template #filtroMG>
-                  <tr *ngFor="let item of rolPaginateFilter">
+                  <tr *ngFor="let item of turnosPaginateFilter">
                     <td>{{item.hora}}</td>
-                    <td>{{item.tipo}}</td>
+                    <td *ngIf="item.tipo=='MG'">Medicina General</td>
+                    <td *ngIf="item.tipo=='RF'">Rehabilitación Física</td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont"><i
-                          class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
+                          class="fa fa-pencil-square-o" ></i>&nbsp;Editar</button>
                       <button type="button" class="btn btn-ghost-danger botont"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
@@ -117,9 +119,9 @@
               </tbody>
             </table>
             <nav>
-              <pagination *ngIf="search==''" [totalItems]="citasMG.length" (pageChanged)="pageChanged($event)">
+              <pagination *ngIf="search==null" [totalItems]="turnos.length" (pageChanged)="pageChanged($event)">
               </pagination>
-              <pagination *ngIf="search!=''" [totalItems]="citasMGFilter.length"
+              <pagination *ngIf="search!=null" [totalItems]="turnosFilter.length"
                 (pageChanged)="pageChangedFiltro($event)"></pagination>
             </nav>
           </div>

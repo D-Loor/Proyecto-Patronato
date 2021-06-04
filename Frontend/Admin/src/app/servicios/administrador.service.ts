@@ -149,4 +149,62 @@ export class AdministradorService {
     });
   }
 
+  cargarTurnos(){
+    let  url = 'http://127.0.0.1:8000/api/Turnos';
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  cargarTurnosId($id){
+    let  url = 'http://127.0.0.1:8000/api/Turnos/'+$id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  agregarTurno(data:any){
+    let  url = 'http://127.0.0.1:8000/api/Turnos';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url,data).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateTurno(data:any,$id){
+    let  url = 'http://127.0.0.1:8000/api/Turnos/'+$id;
+    return new Promise ((resolve, reject) => {
+      this.http.put(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  eliminarTurno($id){
+    let  url = 'http://127.0.0.1:8000/api/Turnos/'+$id;
+    return new Promise ((resolve, reject) => {
+      this.http.delete(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 }

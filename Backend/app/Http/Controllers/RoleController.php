@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Cuenta;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -96,15 +97,23 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Role  $role
+     * @param  \App\Models\Cuenta  $role
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $datos=Role::where('id_rol', $id)->get()->first();  
-        if($datos != null){
-            $datos->delete();
-            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
-        }else
-            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        $datosCuenta=Cuenta::where('id_rol', $id)->get()->first();
+        if($datosCuenta != null ){
+            return response()->json(['result'=>"Rol Relacionado", 'code'=>'203']);
+        }else{
+            if($datos != null){
+                $datos->delete();
+                return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+            }else{
+                return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+            }   
+        }
+        
     }
 }
