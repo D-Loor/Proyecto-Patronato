@@ -70,7 +70,7 @@ export const routes: Routes = [
       },
       {
         path: 'reportesmedicinageneral',
-        loadChildren: () => import('./views/MeicinaGeneral/reportes/reportes.module').then(m => m.ReportesModule)
+        loadChildren: () => import('./views/MedicinaGeneral/reportes/reportes.module').then(m => m.ReportesModule)
       },
       {
         path: 'ReporteMGDiario',
@@ -92,6 +92,10 @@ export const routes: Routes = [
       {
         path: 'rehabilitacionfisicacitas',
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module').then(m => m.RehabilitacionFisicaCitasModule)
+      },
+      {
+        path: 'reportesrehabilitacionfisica',
+        loadChildren: () => import('./views/RehabilitacionFisica/reportes/reportes.module').then(m => m.ReportesModuleRF)
       },
       {
         path: 'ReporteRFDiario',

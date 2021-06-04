@@ -1,0 +1,306 @@
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i>
+          Registro Diario
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed1 = !isCollapsed1"
+            [attr.aria-expanded]="!isCollapsed1" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed1" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+                      <div class="col-md-5 ">
+                        <label for="name">Fecha</label>
+                        <input name="FechaDia" id="FechaDia" name="FechaDia" [(ngModel)]="FechaDia" type="date"
+                          placeholder="date" class="form-control">
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button *ngIf="FechaDia!=''" (click)="Reporte('Diario')" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="FechaDia==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i> Consolidado Mensual
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
+            [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+
+                      <div class=" col-md-4">
+                        <label for="text-input">Mes</label>
+                        <select id="CMes" (click)="ClaseCMes='form-control form-input select-number'" [class]="ClaseCMes" [(ngModel)]="CMes" name="CMes" required>
+                            <option value="01" selected>Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                      </div>
+                      <div class=" col-md-4">
+                        <label for="text-input">Año</label>
+                        <select  id="CYear" (click)="ClaseCYear='form-control form-input select-number'" [class]="ClaseCYear" [(ngModel)]="CYear" name="CYear" required>
+                            <option *ngFor="let item of YearD" value="{{item}}" selected>{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button *ngIf="CMes !='' && CYear !=''" (click)="Reporte('Consolidado')" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="CMes=='' || CYear ==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i> Morbilidad Mensual
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed3 = !isCollapsed3"
+            [attr.aria-expanded]="!isCollapsed3" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed3" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+
+                      <div class=" col-md-4">
+                        <label for="text-input">Mes</label>
+                        <select id="MMes" (click)="ClaseCMes='form-control form-input select-number'" [class]="ClaseCMes" [(ngModel)]="MMes" name="MMes" required>
+                            <option value="01" selected>Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                      </div>
+                      <div class=" col-md-4">
+                        <label for="text-input">Año</label>
+                        <select  id="MYear" (click)="ClaseMYear='form-control form-input select-number'" [class]="ClaseMYear" [(ngModel)]="MYear" name="MYear" required>
+                            <option *ngFor="let item of YearD" value="{{item}}" selected>{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button (click)="Reporte('Morbilidad')" *ngIf="MYear!='' && MMes!=''" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="MYear=='' || MMes==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i> Total Pacientes Mensual
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed4 = !isCollapsed4"
+            [attr.aria-expanded]="!isCollapsed4" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed4" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+
+                      <div class=" col-md-4">
+                        <label for="text-input">Mes</label>
+                        <select id="PMes" (click)="ClasePMes='form-control form-input select-number'" [class]="ClasePMes" [(ngModel)]="PMes" name="PMes" required>
+                            <option value="01" selected>Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                      </div>
+                      <div class=" col-md-4">
+                        <label for="text-input">Año</label>
+                        <select  id="PYear" (click)="ClasePYear='form-control form-input select-number'" [class]="ClasePYear" [(ngModel)]="PYear" name="PYear" required>
+                            <option *ngFor="let item of YearD" value="{{item}}" selected>{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button (click)="Reporte('Pacientes Mensual')" *ngIf="PYear !='' && PMes !=''" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="PYear=='' || PMes==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i> Total Pacientes Anual
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed5 = !isCollapsed5"
+            [attr.aria-expanded]="!isCollapsed5" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed5" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+
+                      <div class=" col-md-4">
+                        <label for="text-input">Año</label>
+                        <select  id="PAYear" (click)="ClaseCYear='form-control form-input select-number'" [class]="ClaseCYear" [(ngModel)]="PAYear" name="PAYear" required>
+                            <option *ngFor="let item of YearD" value="{{item}}" selected>{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button (click)="Reporte('Pacientes Anual')" *ngIf="PAYear!=''" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="PAYear==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>
+
+<div *ngIf="spinnerConfig['fullScreen']">
+  <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+    [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+    [showSpinner]="spinnerConfig['showSpinner']">
+    <p style="color: white">{{loadingText}}</p>
+  </ngx-spinner>
+
+</div>

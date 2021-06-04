@@ -67,7 +67,8 @@ import { DiarioRFModule } from './views/RehabilitacionFisica/reportes-rf/diario/
 import { CuentasModule } from './views/Administrador/cuentas/cuentas.module';
 import { RolesModule } from './views/Administrador/roles/roles.module';
 import { HorariosModule } from './views/Administrador/horarios/horarios.module';
-import { ReportesModule } from './views/MeicinaGeneral/reportes/reportes.module';
+import { ReportesModule } from './views/MedicinaGeneral/reportes/reportes.module';
+import { ReportesModuleRF } from './views/RehabilitacionFisica/reportes/reportes.module';
 
 
 
@@ -112,7 +113,9 @@ import { ReportesModule } from './views/MeicinaGeneral/reportes/reportes.module'
     HorariosModule,
     RolesModule,
     CuentasModule,
-    ReportesModule
+    ReportesModule,
+    ReportesModuleRF
+
 
   ],
   declarations: [

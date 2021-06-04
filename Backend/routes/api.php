@@ -51,7 +51,9 @@ Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFContr
 Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoFamiliarController@eliminar');
 Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@DatosEstadisticos');
 Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
+Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
 
+//reportes
 Route::get('ReportePacientesAnual/{year}','PDFController@ReportePacientesAnual');
 Route::get('ReportePacientesMensual/{mes}/{year}','PDFController@ReportePacientesMensual');
 Route::get('MorbilidadMedicinaGeneral/{mes}/{year}','PDFController@MorbilidadMedicinaGeneral');
@@ -59,6 +61,15 @@ Route::get('MorbilidadTerapia/{mes}/{year}','PDFController@MorbilidadTerapia');
 Route::get('RegistroDiarioMedicina/{fecha}','PDFController@RegistroDiarioMedicina');
 Route::get('RegistroDiarioFisica/{fecha}','PDFController@RegistroDiarioFisica');
 Route::get('ConsolidadoMensualMedicinaGeneral/{mes}/{year}','PDFController@ConsolidadoMensualMedicinaGeneral');
-
 Route::get('ConsolidadoMensualTerapia/{mes}/{year}','PDFController@ConsolidadoMensualTerapia');
-Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
+
+
+//validar reportes
+Route::get('ValidarReportePacientesAnual/{year}','PDFController@ValidarReportePacientesAnual');
+Route::get('ValidarReportePacientesMensual/{mes}/{year}','PDFController@ValidarReportePacientesMensual');
+Route::get('ValidarMorbilidadMedicinaGeneral/{mes}/{year}','PDFController@ValidarMorbilidadMedicinaGeneral');
+Route::get('ValidarMorbilidadTerapia/{mes}/{year}','PDFController@ValidarMorbilidadTerapia');
+Route::get('ValidarRegistroDiarioMedicina/{fecha}','PDFController@ValidarRegistroDiarioMedicina');
+Route::get('ValidarRegistroDiarioFisica/{fecha}','PDFController@ValidarRegistroDiarioFisica');
+Route::get('ValidarConsolidadoMensualMedicinaGeneral/{mes}/{year}','PDFController@ValidarConsolidadoMensualMedicinaGeneral');
+Route::get('ValidarConsolidadoMensualTerapia/{mes}/{year}','PDFController@ValidarConsolidadoMensualTerapia');
