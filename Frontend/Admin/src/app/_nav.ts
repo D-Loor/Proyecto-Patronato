@@ -22,6 +22,11 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Generar Reporte',
+    url: '/reportesmedicinageneral',
+    icon: 'icon-chart'
+  },
+  {
+    name: 'Generar Reporte',
     url: '/reportesMG',
     icon: 'icon-chart',
     children: [
@@ -66,7 +71,6 @@ export const navItems: INavData[] = [
     url: '/pacientes',
     icon: 'icon-people'
   },
-
   {
     name: 'Generar Reporte',
     url: '/reportesRF',

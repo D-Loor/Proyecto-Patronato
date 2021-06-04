@@ -8,112 +8,128 @@
           <i class="fa fa-stethoscope "></i> Citas de Medicina General
 
           <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsedMG = !isCollapsedMG"
-          [attr.aria-expanded]="!isCollapsedMG" aria-controls="collapseBasic"><i
-            class="fa fa-chevron-down"></i>&nbsp;</button>
+            [attr.aria-expanded]="!isCollapsedMG" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
         </div>
 
         <div id="collapseBasic" [collapse]="isCollapsedMG" [isAnimated]="true">
-        <div class="form-group">
-          <div class="col-md-4 searcht">
-            <label for="name">Buscar por Cédula</label>
-            <div class="input-group">
-              <input type="number" id="searchMG" name="searchMG" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
-              <span class="input-group-prepend">
-                <button  type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i> Buscar</button>
-              </span>
+          <div class="form-group">
+            <div class="col-md-4 searcht">
+              <label for="name">Buscar por Cédula</label>
+              <div class="input-group">
+                <input type="number" id="searchMG" name="searchMG" class="form-control"
+                  placeholder="Escriba la cédula.." [(ngModel)]="searchMG" (ngModelChange)="dataPaginateMG($event)">
+                <span class="input-group-prepend">
+                  <button type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i>
+                    Buscar</button>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row space">
+                <div class="col-md-3 searcht">
+                  <label for="name">Filtrar por Fecha</label>
+                  <input name="FechaMg" id="FechaMg" name="FechaMg" [(ngModel)]="FechaMg" type="date" placeholder="date"
+                    class="form-control">
+                </div>
+                <div class="col-xs-2 searcht">
+                  <label for="name"><label for="name"></label></label>
+                  <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control"
+                    (click)="cargarMG(FechaMg,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                  <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control"
+                    (click)="cargarMG(FechaMg,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-8">
-          <div class="row space">
-            <div class="col-md-3 searcht">
-              <label for="name">Filtrar por Fecha</label>
-              <input name="FechaMg" id="FechaMg"  name="FechaMg" [(ngModel)]="FechaMg" type="date"  placeholder="date" class="form-control">
-            </div>
-            <div class="col-xs-2 searcht">
-              <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control" (click)="cargarMG(FechaMg,1,true)" ><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control" (click)="cargarMG(FechaMg,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-            </div>
+
+
+
+          <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Cédula</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Historial</th>
+                  <th>Abonó</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="searchMG == null; else filtroMG">
+                  <tr *ngFor="let item of citasMGPaginate">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+                    <td>
+                      <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        id="cancelomg" [checked]='item.abono'>
+                    </td>
+                    <td>
+
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-info botont"
+                        (click)="ReagendarCita(item.cedula, item.id_cita,item.abono,item.nombres)"><i
+                          class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
+                      <button type="button" class="btn btn-ghost-danger botont"
+                        (click)="notificacion(item.id_cita,'MG')"><i class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-template #filtroMG>
+                  <tr *ngFor="let item of citasMGPaginateFilter">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+                    <td>
+                      <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        id="cancelomg" [checked]='item.abono'>
+                    </td>
+                    <td>
+
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-info botont"
+                        (click)="ReagendarCita(item.cedula, item.id_cita,item.abono,item.nombres)"><i
+                          class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
+                      <button type="button" class="btn btn-ghost-danger botont"
+                        (click)="notificacion(item.id_cita,'MG')"><i class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </tbody>
+            </table>
+            <nav>
+              <pagination *ngIf="searchMG==null" [totalItems]="citasMG.length" (pageChanged)="pageChangedMG($event)">
+              </pagination>
+              <pagination *ngIf="searchMG!=null" [totalItems]="citasMGFilter.length"
+                (pageChanged)="pageChangedFiltroMG($event)"></pagination>
+            </nav>
           </div>
         </div>
-        </div>
-
-
-
-        <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Nombres</th>
-                <th>Cédula</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Historial</th>
-                <th>Abonó</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngIf="searchMG == null; else filtroMG">
-                <tr *ngFor="let item of citasMGPaginate" >
-                  <td class="table-titulo">{{item.nombres}}</td>
-                  <td>{{item.cedula}}</td>
-                  <td>{{item.fecha}}</td>
-                  <td>{{item.turno.hora}}</td>
-                  <td>
-                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
-                  </td>
-                  <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >
-                  </td>
-                  <td>
-
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                        class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                    <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                        class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                    <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
-                        class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
-                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-                  </td>
-                </tr>
-              </ng-container>
-
-              <ng-template #filtroMG>
-                <tr *ngFor="let item of citasMGPaginateFilter" >
-                  <td class="table-titulo">{{item.nombres}}</td>
-                  <td>{{item.cedula}}</td>
-                  <td>{{item.fecha}}</td>
-                  <td>{{item.turno.hora}}</td>
-                  <td>
-                    <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                    <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
-                  </td>
-                  <td>
-                    <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                  </td>
-                  <td>
-
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                        class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                    <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                          class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                    <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
-                      class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
-                    <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita,'MG')"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-                  </td>
-                </tr>
-              </ng-template>
-            </tbody>
-          </table>
-          <nav>
-            <pagination *ngIf="searchMG==null" [totalItems]="citasMG.length" (pageChanged)="pageChangedMG($event)"></pagination>
-            <pagination *ngIf="searchMG!=null" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltroMG($event)"></pagination>
-          </nav>
-        </div>
-       </div>
       </div>
     </div>
     <!--/.col-->
@@ -127,115 +143,132 @@
           <i class="fa fa-wheelchair"></i> Citas de Rehabilitación física
 
           <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsedRF = !isCollapsedRF"
-          [attr.aria-expanded]="!isCollapsedRF" aria-controls="collapseBasic"><i
-            class="fa fa-chevron-down"></i>&nbsp;</button>
+            [attr.aria-expanded]="!isCollapsedRF" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
         </div>
 
 
 
         <div id="collapseBasic" [collapse]="isCollapsedRF" [isAnimated]="true">
-        <div class="form-group">
-          <div class="col-md-4 searcht">
-            <label for="name">Buscar por Cédula</label>
-            <div class="input-group">
-              <input type="number" id="searchRF" name="searchRF" class="form-control" placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
-              <span class="input-group-prepend">
-                <button  type="button" class="btn btn-primary" (click)="buscarRF()"><i class="fa fa-search"></i> Buscar</button>
-              </span>
+          <div class="form-group">
+            <div class="col-md-4 searcht">
+              <label for="name">Buscar por Cédula</label>
+              <div class="input-group">
+                <input type="number" id="searchRF" name="searchRF" class="form-control"
+                  placeholder="Escriba la cédula.." [(ngModel)]="searchRF" (ngModelChange)="dataPaginateRF($event)">
+                <span class="input-group-prepend">
+                  <button type="button" class="btn btn-primary" (click)="buscarRF()"><i class="fa fa-search"></i>
+                    Buscar</button>
+                </span>
 
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row space">
+                <div class="col-md-3 searcht">
+                  <label for="name">Filtrar por Fecha</label>
+                  <input name="FechaRf" id="FechaRf" name="FechaRf" [(ngModel)]="FechaRf" type="date" placeholder="date"
+                    class="form-control">
+                </div>
+                <div class="col-xs-2 searcht">
+                  <label for="name"><label for="name"></label></label>
+                  <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control"
+                    (click)="cargarRF(FechaRf,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                  <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control"
+                    (click)="cargarRF(FechaRf,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-8">
-          <div class="row space">
-            <div class="col-md-3 searcht">
-              <label for="name">Filtrar por Fecha</label>
-              <input name="FechaRf" id="FechaRf"  name="FechaRf" [(ngModel)]="FechaRf" type="date"  placeholder="date" class="form-control">
-            </div>
-            <div class="col-xs-2 searcht">
-              <label for="name"><label for="name"></label></label>
-              <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control" (click)="cargarRF(FechaRf,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-              <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" (click)="cargarRF(FechaRf,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-            </div>
+
+          <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Cédula</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Historial</th>
+                  <th>Abonó</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="searchRF == null; else filtroRF">
+                  <tr *ngFor="let item of citasRFPaginate">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+
+                    <td>
+                      <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        id="cancelomg" [checked]='item.abono'>
+                    </td>
+                    <td>
+
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-info botont"
+                        (click)="ReagendarCita(item.cedula, item.id_cita,item.abono,item.nombres)"><i
+                          class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-template #filtroRF>
+                  <tr *ngFor="let item of citasRFPaginateFilter">
+                    <td class="table-titulo">{{item.nombres}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.turno.hora}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Registrado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
+                    </td>
+                    <td>
+                      <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        id="cancelomg" [checked]='item.abono'>
+                    </td>
+                    <td>
+
+                      <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"
+                        (click)="HistoriaPaciente(item.cedula)"><i class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
+                      <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"
+                        (click)="CrearHistoriaClinica()"><i class="fa fa-plus-square"></i>&nbsp;Crear Historia
+                        Clinica</button>
+                      <button type="button" class="btn btn-ghost-info botont"
+                        (click)="ReagendarCita(item.cedula, item.id_cita,item.abono,item.nombres)"><i
+                          class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
+                          class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
+
+                    </td>
+                  </tr>
+                </ng-template>
+              </tbody>
+            </table>
+            <nav>
+              <pagination *ngIf="searchRF==null" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)">
+              </pagination>
+              <pagination *ngIf="searchRF!=null" [totalItems]="citasRFFilter.length"
+                (pageChanged)="pageChangedFiltro($event)"></pagination>
+            </nav>
           </div>
         </div>
-        </div>
-
-        <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Nombres</th>
-                <th>Cédula</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Historial</th>
-                <th>Abonó</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngIf="searchRF == null; else filtroRF">
-              <tr *ngFor="let item of citasRFPaginate" >
-                <td class="table-titulo">{{item.nombres}}</td>
-                <td>{{item.cedula}}</td>
-                <td>{{item.fecha}}</td>
-                <td>{{item.turno.hora}}</td>
-                <td>
-                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                  <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
-                </td>
-
-                <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                </td>
-                <td>
-
-                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                    class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                      class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
-                  class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
-                <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
-                    class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
-            </ng-container>
-
-            <ng-template #filtroRF>
-              <tr *ngFor="let item of citasRFPaginateFilter" >
-                <td class="table-titulo">{{item.nombres}}</td>
-                <td>{{item.cedula}}</td>
-                <td>{{item.fecha}}</td>
-                <td>{{item.turno.hora}}</td>
-                <td>
-                  <span *ngIf="item.estado==1"  class="badge badge-success">Registrado</span>
-                  <span *ngIf="item.estado==0"  class="badge badge-secondary">Sin registro</span>
-                </td>
-                <td>
-                  <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg" (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)" id="cancelomg"  [checked]='item.abono' >                </td>
-                <td>
-
-                <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
-                    class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
-                <button *ngIf="item.estado==0" type="button" class="btn btn-ghost-primary  botont"  (click)="CrearHistoriaClinica()"><i
-                      class="fa fa-plus-square" ></i>&nbsp;Crear Historia Clinica</button>
-                <button type="button" class="btn btn-ghost-info botont" (click)="ReagendarCita(item.cedula, item.id_cita,item.abono)"><i
-                  class="fa fa-pencil-square-o"></i>&nbsp;Reagendar</button>
-                <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cita)"><i
-                    class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
-
-                </td>
-              </tr>
-            </ng-template>
-            </tbody>
-          </table>
-          <nav>
-            <pagination *ngIf="searchRF==null" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)"></pagination>
-            <pagination *ngIf="searchRF!=null" [totalItems]="citasRFFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
-          </nav>
-        </div>
-       </div>
       </div>
     </div>
     <!--/.col-->

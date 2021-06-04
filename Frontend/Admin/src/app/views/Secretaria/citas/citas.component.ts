@@ -410,10 +410,11 @@ export class CitasComponent implements OnInit {
     this.rutas.navigate(['/pacientes']);
   }
 
-  ReagendarCita(cedula:string,id:string,abono:string){
+  ReagendarCita(cedula:string,id:string,abono:string,nombres:string){
     localStorage.setItem('cedulaCita', cedula);
     localStorage.setItem('idCita', id);
     localStorage.setItem('abonoCita', abono);
+    localStorage.setItem('nombres', nombres);
     this.rutas.navigate(['/agendarcita']);
   }
 

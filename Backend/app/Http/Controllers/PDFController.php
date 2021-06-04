@@ -801,17 +801,16 @@ class PDFController extends Controller
         return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
     }
 
-    public function ConsolidadoMensualMedicinaGeneral($fecha)
+    public function ConsolidadoMensualMedicinaGeneral($Mes, $Year)
     {
 
 
         $Result = [];
 
         $num = 1;
-        $valores = explode('-', $fecha);
         $dia = 1;
-        $mes = $valores[1];
-        $anio = $valores[0];
+        $mes =$Mes;
+        $anio = $Year;
         $mesL="";
         $Total[0] = [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

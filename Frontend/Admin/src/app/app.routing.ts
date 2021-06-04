@@ -69,6 +69,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
       },
       {
+        path: 'reportesmedicinageneral',
+        loadChildren: () => import('./views/MeicinaGeneral/reportes/reportes.module').then(m => m.ReportesModule)
+      },
+      {
         path: 'ReporteMGDiario',
         loadChildren: () => import('./views/MedicinaGeneral/reportes-mg/diario/diario.module').then(m => m.DiarioMGModule)
       },

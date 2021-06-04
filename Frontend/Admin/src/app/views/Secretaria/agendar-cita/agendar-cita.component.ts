@@ -66,7 +66,8 @@ export class AgendarCitaComponent implements OnInit {
     }
 
     if(this.cedulaCita != "" && this.cedulaCita != undefined){
-      this.Consultar(this.cedulaCita);
+      this.nombres=localStorage.getItem('nombres');
+      this.cedula=localStorage.getItem('cedulaCita');
       this.estado=1;
     }
   }
@@ -80,22 +81,13 @@ export class AgendarCitaComponent implements OnInit {
     localStorage.removeItem('cedulaCita');
     localStorage.removeItem('idCita');
     localStorage.removeItem('abonoCita');
+    localStorage.removeItem('nombres');
   }
 
   Consultar(cedula:string){
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
 
-    if(this.cedulaCita != "" && this.cedulaCita != undefined){
-
-      this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
-
-          this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
-          this.cedula= this.cedulaCita;
-          this.spinner.hide('sample');
-
-      });
-    }else{
        if(this.cedula==undefined || this.cedula==""){
       this.spinner.hide('sample');
       Swal.fire({
@@ -125,7 +117,7 @@ export class AgendarCitaComponent implements OnInit {
 
       });
     }
-    }
+
 
 
   }
