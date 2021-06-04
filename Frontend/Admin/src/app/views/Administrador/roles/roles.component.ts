@@ -48,19 +48,40 @@ export class RolesComponent implements OnInit {
   }
 
   CrearRol(){
-    let array={
-      "rol": this.Rol
+    debugger
+    let validator=0;
+    for (let item of Object.keys(this.rol)) {
+      if(this.rol[item]['rol'] == this.Rol){
+        validator=1;
+      }
     }
-    this.administradorService.agregarRol(array).then(data=>{
-      this.limpiar(); 
-      this.spinner.hide('sample');
-      Swal.fire(
-        'Correcto',
-        'Datos guardados correctamente',
-        'success'
-      )
-      this.cargarTablas();
-    })
+
+    this.estado=0;
+
+    if(validator==1){
+      Swal.fire({
+        icon: 'error',
+        title: 'Rol Inválida..!',
+        text: 'La cédula a buscar no es válida.'
+      })
+      this.limpiar();
+    }else{
+      
+      let array={
+        "rol": this.Rol
+      }
+      this.administradorService.agregarRol(array).then(data=>{
+        this.limpiar(); 
+        this.spinner.hide('sample');
+        Swal.fire(
+          'Correcto',
+          'Datos guardados correctamente',
+          'success'
+        )
+        this.cargarTablas();
+      })
+    }
+    
   }
 
   cargarTablas(){
@@ -86,23 +107,41 @@ export class RolesComponent implements OnInit {
   }
 
   ActualizarRol(){
-
-    let arrayUpdate={
-      "rol":this.Rol,
+    debugger
+    let validator=0;
+    for (let item of Object.keys(this.rol)) {
+      if(this.rol[item]['rol'] == this.Rol){
+        validator=1;
+      }
     }
-    
-    this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
-      
-      data['result'];
-      this.spinner.hide('sample');
-      Swal.fire(
-        'Correcto',
-        'Datos actualizados correctamente',
-        'success'
-      )
-      this.cargarTablas();
+    if(validator==1){
+      Swal.fire({
+        icon: 'error',
+        title: 'Rol Inválida..!',
+        text: 'La cédula a buscar no es válida.'
+      })
       this.limpiar();
-    })
+    }else{
+      
+      let arrayUpdate={
+        "rol":this.Rol,
+      }
+      
+      this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
+        
+        data['result'];
+        this.spinner.hide('sample');
+        Swal.fire(
+          'Correcto',
+          'Datos actualizados correctamente',
+          'success'
+        )
+        this.cargarTablas();
+        this.limpiar();
+      })
+    }
+
+    
   }
 
   cargarEditar(id:string){

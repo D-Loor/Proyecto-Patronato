@@ -11,73 +11,99 @@ use DateTime;
 
 class PDFController extends Controller
 {
+    public function ValidarReportePacientesAnual( $year){
+        $datosMG=Historia_Clinica_MG::whereYear('fecha',$year)->with('paciente')->get();
+        $datosRF=Historia_Clinica_RF::whereYear('fecha',$year)->with('paciente')->get();
+
+        $ndatos=count($datosMG)+count($datosRF);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+    }
     public function ReportePacientesAnual( $year){
 
         $datosMG=Historia_Clinica_MG::whereYear('fecha',$year)->with('paciente')->get();
         $datosRF=Historia_Clinica_RF::whereYear('fecha',$year)->with('paciente')->get();
 
-        $MGM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $MGH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $RFM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $RFH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $STH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $STM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $Total=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-        $valores;
+            $MGM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $MGH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $RFM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $RFH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $STH=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $STM=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $Total=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+            $valores;
 
-        foreach ($datosMG as $item) {
-            $valores = explode('-', $item['fecha']);
-            if(count($valores) == 3){
-                for($i=0; $i<12; $i++){
+            foreach ($datosMG as $item) {
+                $valores = explode('-', $item['fecha']);
+                if(count($valores) == 3){
+                    for($i=0; $i<12; $i++){
 
-                    if($valores[1]== ($i+1)){
-                        if($item->paciente['sexo']="Hombre"){
-                            $MGH[$i]++;
-                        }else{
-                            $MGM[$i]++;
+                        if($valores[1]== ($i+1)){
+                            if($item->paciente['sexo']="Hombre"){
+                                $MGH[$i]++;
+                            }else{
+                                $MGM[$i]++;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
-        }
-        foreach ($datosRF as $item) {
-            $valores = explode('-', $item['fecha']);
-            if(count($valores) == 3){
-                for($i=0; $i<12; $i++){
+            foreach ($datosRF as $item) {
+                $valores = explode('-', $item['fecha']);
+                if(count($valores) == 3){
+                    for($i=0; $i<12; $i++){
 
-                    if($valores[1]== ($i+1)){
-                        if($item->paciente['sexo']="Hombre"){
-                            $RFH[$i]++;
-                        }else{
-                            $RFM[$i]++;
+                        if($valores[1]== ($i+1)){
+                            if($item->paciente['sexo']="Hombre"){
+                                $RFH[$i]++;
+                            }else{
+                                $RFM[$i]++;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
+
+            for($i=0; $i<12; $i++){
+                $STH[$i]+=$MGH[$i]+$RFH[$i];
+                $STM[$i]+=$MGM[$i]+$RFM[$i];
+                $Total[$i]+=$STH[$i]+$STM[$i];
+
+                $MGH[12]+=$MGH[$i];
+                $RFH[12]+=$RFH[$i];
+                $MGM[12]+=$MGM[$i];
+                $RFM[12]+=$RFM[$i];
+
+                $STH[12]+=$STH[$i];
+                $STM[12]+=$STM[$i];
+                $Total[12]+=$Total[$i];
+
+
+            }
+
+            //return response()->json(['MGH'=>$MGH, 'RFH'=>$RFH,'MGM'=>$MGM, 'RFM'=>$RFM,'STH'=>$STH,'STM'=>$STM,'Total'=>$Total]);
+
+            return \PDF::loadView('ReportePacientesAnual',compact('MGH','MGM','RFH','RFM','STH','STM','Total','year'))->setPaper('a4', 'landscape')->stream('ReportePacientesAnual.pdf');
+
+
+    }
+
+    public function ValidarReportePacientesMensual($Mes, $Year){
+
+        $datosMG=Historia_Clinica_MG::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+        $datosRF=Historia_Clinica_RF::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+
+        $ndatos=count( $datosMG)+count( $datosRF);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
         }
-
-        for($i=0; $i<12; $i++){
-            $STH[$i]+=$MGH[$i]+$RFH[$i];
-            $STM[$i]+=$MGM[$i]+$RFM[$i];
-            $Total[$i]+=$STH[$i]+$STM[$i];
-
-            $MGH[12]+=$MGH[$i];
-            $RFH[12]+=$RFH[$i];
-            $MGM[12]+=$MGM[$i];
-            $RFM[12]+=$RFM[$i];
-
-            $STH[12]+=$STH[$i];
-            $STM[12]+=$STM[$i];
-            $Total[12]+=$Total[$i];
-
-
-        }
-
-        //return response()->json(['MGH'=>$MGH, 'RFH'=>$RFH,'MGM'=>$MGM, 'RFM'=>$RFM,'STH'=>$STH,'STM'=>$STM,'Total'=>$Total]);
-
-        return \PDF::loadView('ReportePacientesAnual',compact('MGH','MGM','RFH','RFM','STH','STM','Total','year'))->setPaper('a4', 'landscape')->stream('ReportePacientesAnual.pdf');
     }
 
     public function ReportePacientesMensual($Mes, $Year){
@@ -160,7 +186,21 @@ class PDFController extends Controller
 
     }
 
+    public function ValidarMorbilidadMedicinaGeneral($Mes, $Year){
 
+        $MMG=Historia_Clinica_MG::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('enfermedad','paciente')->select('id_enfermedad')
+            ->groupBy('id_enfermedad')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(20)
+            ->get();
+
+        $ndatos=count($MMG);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+    }
 
     public function MorbilidadMedicinaGeneral($Mes,$Year){
 
@@ -320,6 +360,23 @@ class PDFController extends Controller
             //return response()->json(['result'=>$Result]);
         return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
+    }
+
+
+    public function ValidarMorbilidadTerapia($Mes, $Year){
+
+        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->select('motivo_consulta')
+            ->groupBy('motivo_consulta')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(20)
+            ->get();
+
+        $ndatos=count( $datosCausas);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
 
     public function MorbilidadTerapia($Mes, $Year)
@@ -483,6 +540,19 @@ class PDFController extends Controller
 
         //return response()->json(['result'=>$TotalF]);
         return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia.pdf');
+    }
+
+    public function ValidarRegistroDiarioMedicina($fecha){
+
+        $datosMG=Historia_Clinica_MG::where('fecha',$fecha)->with('paciente')->get();
+
+
+        $ndatos=count( $datosMG);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
 
     public function RegistroDiarioMedicina($fecha){
@@ -690,6 +760,20 @@ class PDFController extends Controller
 
         // return response()->json(['result'=>$Result]);
         return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+
+
+    }
+
+    public function ValidarRegistroDiarioFisica($fecha){
+
+        $datosRF=Historia_Clinica_RF::where('fecha',$fecha)->with('paciente','tratamiento')->get();
+
+        $ndatos=count( $datosRF);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
 
     public function RegistroDiarioFisica($fecha){
@@ -799,6 +883,18 @@ class PDFController extends Controller
             $num++;
         }
         return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
+    }
+
+    public function ValidarConsolidadoMensualMedicinaGeneral($Mes, $Year){
+
+        $datosMG = Historia_Clinica_MG::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->with('paciente')->get();
+
+        $ndatos=count( $datosMG);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
 
     public function ConsolidadoMensualMedicinaGeneral($Mes, $Year)
@@ -1023,6 +1119,18 @@ class PDFController extends Controller
 
 
         return \PDF::loadView('ConsolidadoMensualMedicinaGeneral', compact('Result','mesL','anio', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
+    }
+
+    public function ValidarConsolidadoMensualTerapia($Mes, $Year){
+
+        $RF=Historia_Clinica_RF::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente')->get();
+
+        $ndatos=count( $RF);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
 
     public function ConsolidadoMensualTerapia($Mes, $Year){
