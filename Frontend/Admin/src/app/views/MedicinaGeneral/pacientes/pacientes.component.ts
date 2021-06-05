@@ -135,6 +135,7 @@ export class PacientesComponent implements OnInit {
       this.pacientesMGPaginateFilter=[];
       this.CedulaPaciente=null;
     if(this.search==null){
+      this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
     }else{
       for (const x of this.pacientesMG) {
 

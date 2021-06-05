@@ -157,8 +157,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
     if(this.search==null){
-      debugger
-      this.citasMG=null;
+      
+      this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
       for (const x of this.citasMG) {
 

@@ -77,7 +77,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.historialRFFilter=[];
       this.historialRFPaginateFilter=[];
-    if(this.search==''){
+    if(this.search==null){
+      this.historialRFPaginate = this.historialRF.slice(0, 10);
     }else{
       for (const x of this.historialRF) {
         if(x['paciente'].cedula.indexOf(this.search)> -1){

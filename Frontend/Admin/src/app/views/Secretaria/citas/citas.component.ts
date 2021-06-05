@@ -44,8 +44,9 @@ export class CitasComponent implements OnInit {
   }
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
-
+    debugger
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
+      debugger
       this.citasMG=data['result'];
       this.citasMGPaginate = this.citasMG.slice(0, 10);
       if(check==true){}else{
@@ -66,8 +67,8 @@ export class CitasComponent implements OnInit {
     }
 
     }else if(fecha==1){
-    this.citasMG = null;
-    this.citasMGPaginate = null;
+    this.citasMG = [];
+    this.citasMGPaginate = [];
       Swal.fire({
         icon: 'error',
         title: '¡Sin Registros..!',
@@ -75,7 +76,7 @@ export class CitasComponent implements OnInit {
       })
     }else if(fecha!=1 && this.searchMG==null){
       this.citasMG= null;
-    this.citasMGPaginate = null;
+      this.citasMGPaginate = null;
     }else{
       if(this.searchMG!=null){
 
@@ -96,6 +97,8 @@ export class CitasComponent implements OnInit {
       if(this.citasMG==null || this.citasMG[0]=="R"){
         this.citasMG=[];
       this.citasMGPaginate=[];
+        }else{
+        this.citasMGPaginate = this.citasMG.slice(0, 10);
         }
     }else{
 
@@ -220,8 +223,8 @@ export class CitasComponent implements OnInit {
         this.dataPaginateRF(event);
       }
     }else if(fecha==1){
-      this.citasRF=null;
-      this.citasRFPaginate = null;
+      this.citasRF=[];
+      this.citasRFPaginate = [];
       Swal.fire({
         icon: 'error',
         title: '¡Sin Registros..!',
@@ -287,6 +290,8 @@ export class CitasComponent implements OnInit {
       if(this.citasRF==null || this.citasRF[0]=="R"){
       this.citasRF=[];
     this.citasRFPaginate=[];
+      }else{
+      this.citasRFPaginate = this.citasRF.slice(0, 10);
       }
     }else{
 

@@ -84,6 +84,7 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGFilter=[];
       this.historialMGPaginateFilter=[];
     if(this.search==null){
+      this.historialMGPaginate = this.historialMG.slice(0, 10);
     }else{
       for (const x of this.historialMG) {
 

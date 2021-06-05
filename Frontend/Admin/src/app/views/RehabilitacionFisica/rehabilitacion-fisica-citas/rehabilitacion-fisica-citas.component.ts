@@ -139,6 +139,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.citasRFFilter=[];
       this.citasRFPaginateFilter=[];
     if(this.search==null){
+      this.citasRFPaginate = this.citasRF.slice(0, 10);
     }else{
       for (const x of this.citasRF) {
         if(x.cedula.indexOf(this.search)> -1){

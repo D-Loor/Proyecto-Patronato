@@ -98,8 +98,8 @@
               </tbody>
             </table>
             <nav>
-                <pagination *ngIf="search==''" [totalItems]="historialRF.length" (pageChanged)="pageChanged($event)"></pagination>
-                <pagination *ngIf="search!=''" [totalItems]="historialRFFilter.length" (pageChanged)="pageChangedFiltro($event,historialRF)"></pagination>
+                <pagination *ngIf="search==null" [totalItems]="historialRF.length" (pageChanged)="pageChanged($event)"></pagination>
+                <pagination *ngIf="search!=null" [totalItems]="historialRFFilter.length" (pageChanged)="pageChangedFiltro($event,historialRF)"></pagination>
             </nav>
           </div>
 

@@ -262,10 +262,10 @@
               </tbody>
             </table>
             <nav>
-              <pagination *ngIf="searchRF==null" [totalItems]="citasRF.length" (pageChanged)="pageChanged($event)">
+              <pagination *ngIf="searchRF==null" [totalItems]="citasRF.length" (pageChanged)="pageChangedRF($event)">
               </pagination>
               <pagination *ngIf="searchRF!=null" [totalItems]="citasRFFilter.length"
-                (pageChanged)="pageChangedFiltro($event)"></pagination>
+              (pageChanged)="pageChangedFiltroRF($event)"></pagination>
             </nav>
           </div>
         </div>
