@@ -18,7 +18,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
   isCollapsed2 = false;
   isCollapsed = true;
-  search;
+  search=null;
   especialidad:string="Medicina General";
   Estado:number=1;
   validacion:string;
@@ -114,11 +114,11 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(){
-
+    debugger
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
     this.validarVacio=data['code'];
-
+    debugger
     if(this.validarVacio == '202'){
       this.spinner.hide('sample');
       this.citasMG=null;
@@ -157,8 +157,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
     if(this.search==null){
-
-      //this.citasMGPaginate = this.citasMG.slice(0, 10);
+      debugger
+      this.citasMG=null;
     }else{
       for (const x of this.citasMG) {
 

@@ -20,12 +20,12 @@ export class PacientesComponent implements OnInit {
   @ViewChild('Principal') public Principal: ModalDirective;
   public sidebarMinimized = false;
   public navItems = navItems;
-  search="";
+  search;
   pacien="";
   edit=1;
   dataFechaFiltro;
-  pacientesMG:any[];//variable para el paginado
-  pacientesMGPaginate:any[];//variable para el paginado
+  pacientesMG=[];//variable para el paginado
+  pacientesMGPaginate=[];//variable para el paginado
   pacientesMGFilter=[];//variable para el paginado sin el pipe
   pacientesMGPaginateFilter=[];//variable para el paginado sin el pipe
   APF:any[];
@@ -64,6 +64,7 @@ export class PacientesComponent implements OnInit {
   ngOnInit() {
 
     this.search = localStorage.getItem('cedulaMGandRF');
+    debugger
     this.cargar();
   }
   actualizar(){
@@ -87,13 +88,23 @@ export class PacientesComponent implements OnInit {
   }
 
   cargar(){
+    debugger
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
     this.TotalPacientes=data['total'];
-
-    this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
-    this.spinner.hide('sample');
+    if(this.TotalPacientes == null){
+      this.TotalPacientes=0;
+    }
+    debugger
+    if(data['code']=="202"){
+      this.pacientesMG=null;
+      this.pacientesMGPaginate=null;
+    }else{
+      this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
+      this.spinner.hide('sample');
+    }
     if(this.search!=null){
+      debugger
       this.dataPaginate(event);
     }
   }).catch(error =>{

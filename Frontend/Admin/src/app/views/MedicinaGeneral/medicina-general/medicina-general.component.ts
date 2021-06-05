@@ -19,9 +19,9 @@ export class MedicinaGeneralComponent implements OnInit {
   @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
   public sidebarMinimized = false;
   public navItems = navItems;
-  search="";
-  historialMG:any[];
-  historialMGPaginate:any[];
+  search;
+  historialMG=[];
+  historialMGPaginate=[];
   historialMGFilter=[];
   historialMGPaginateFilter=[];
   gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico;
@@ -83,7 +83,7 @@ export class MedicinaGeneralComponent implements OnInit {
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.historialMGFilter=[];
       this.historialMGPaginateFilter=[];
-    if(this.search==''){
+    if(this.search==null){
     }else{
       for (const x of this.historialMG) {
 

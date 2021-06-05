@@ -20,11 +20,11 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
   public sidebarMinimized = false;
   public navItems = navItems;
-  search="";
-  historialRF:any[];
-  historialRFPaginate:any[];
-  historialRFFilter:any[];
-  historialRFPaginateFilter:any[];
+  search;
+  historialRF=[];
+  historialRFPaginate=[];
+  historialRFFilter=[];
+  historialRFPaginateFilter=[];
   @ViewChild('Principal') public Principal: ModalDirective;
   FechaFin; FechaInicio;
   //variables para el modal
@@ -64,8 +64,10 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }
   cargar(){
     this.historial.historialrf().then(data =>{
+    
     this.historialRF=data['result'];
     this.historialRFPaginate = this.historialRF.slice(0, 10);
+    debugger
   }).catch(error =>{
     console.log(error);
 });

@@ -55,7 +55,7 @@
                 </tr>
               </thead>
               <tbody>
-                  <ng-container *ngIf="search == ''; else filtro2">
+                  <ng-container *ngIf="search == null; else filtro2">
                 <tr *ngFor="let item of historialRFPaginate">
                   <td>{{item.paciente.cedula}}</td>
                   <td>{{item.paciente.nombres}}</td>

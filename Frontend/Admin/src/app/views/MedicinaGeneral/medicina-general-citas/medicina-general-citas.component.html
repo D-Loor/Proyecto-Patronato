@@ -169,8 +169,8 @@
             </tbody>
           </table>
           <nav>
-            <pagination *ngIf="search==''" [totalItems]="citasMG.length" (pageChanged)="pageChanged($event)"></pagination>
-            <pagination *ngIf="search!=''" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
+            <pagination *ngIf="search==null" [totalItems]="citasMG.length" (pageChanged)="pageChanged($event)"></pagination>
+            <pagination *ngIf="search!=null" [totalItems]="citasMGFilter.length" (pageChanged)="pageChangedFiltro($event)"></pagination>
           </nav>
         </div>
        </div>
