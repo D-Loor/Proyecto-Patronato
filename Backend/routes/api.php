@@ -38,6 +38,7 @@ Route::resource('Roles','RoleController');
 Route::resource('Cuentas','CuentaController');
 Route::resource('HistorialEnfermedades','HistorialEnfermedadesController');
 Route::resource('Turnos','TurnoController');
+Route::resource('Especialidades','EspecialidadController');
 Route::get('login/{correo}/{pass}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
 Route::post('agendarCita','CitaController@store');
