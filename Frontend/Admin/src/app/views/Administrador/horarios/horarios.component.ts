@@ -75,16 +75,17 @@ export class HorariosComponent implements OnInit {
   }
 
   alertEliminado(result:string){
+    this.spinner.hide('sample');
     if(result=="203"){
       Swal.fire(
-        'Eliminado!',
-        'Rol relacionado.',
-        'success'
+        '¡Turno en Uso!',
+        'El turno no se puede eliminar, está en uso.',
+        'error'
       )
     }else{
       Swal.fire(
-        'Eliminado!',
-        'El rol ha sido eliminada.',
+        '!Turno Eliminado..!',
+        'El turno ha sido eliminado.',
         'success'
       )
     }
@@ -103,9 +104,104 @@ export class HorariosComponent implements OnInit {
     });
   }
 
+  notificacion(id:string){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: true
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Está seguro de eliminar?',
+      text: "Una vez eliminado no se podrá recuperar el mismo!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar turno!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.loadingText = 'Cargando...';
+        this.spinner.show('sample');
+        this.eliminar(id);
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          '¡Cancelado..!',
+          'El turno no ha sido eliminado.',
+          'error'
+        )
+      }
+    })
+  }
+
   CrearTurno(){
-    debugger
-    let validator=0;
+
+    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para agregar el turno.'
+      })
+
+      if(this.hora==undefined || this.hora==""){
+        this.ClaseHora = "form-control is-invalid select-number";
+      }
+      if(this.especialidad==undefined || this.especialidad==""){
+        this.ClaseCEspecialidad = "form-control is-invalid select-number";
+      }
+
+    }
+    else{
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea crear este turno?',
+        text: "Una vez agregado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, crear turno!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.guardar();
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'El turno no se ha creado.',
+            'error'
+          )
+        }
+      })
+    }
+
+  }
+
+  guardar(){
+        let validator=0;
     for (let item of Object.keys(this.turnos)) {
       if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['tipo'] == this.especialidad){
         validator=1;
@@ -116,27 +212,30 @@ export class HorariosComponent implements OnInit {
     if(validator==1){
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Turno antes Registrado..!',
+        text: 'Este turno ya se encuentra registrado.'
       })
       this.limpiar();
     }else{
+      this.spinner.show('sample');
       let array={
         "hora": this.hora,
         "tipo": this.especialidad
       }
       this.administradorService.agregarTurno(array).then(data=>{
-        this.limpiar(); 
+        this.limpiar();
         this.spinner.hide('sample');
         Swal.fire(
-          'Correcto',
-          'Datos guardados correctamente',
+          '¡TTurno Creado..!',
+          'El turno se ha crado correctamente',
           'success'
         )
         this.cargarTablas();
       })
     }
-    
+
+
+
   }
 
   cargarEditar(id:string){
@@ -149,43 +248,95 @@ export class HorariosComponent implements OnInit {
     })
   }
 
-  
+
   ActualizarTurno(){
-    debugger
-    let validator=0;
-    for (let item of Object.keys(this.turnos)) {
-      if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['tipo'] == this.especialidad){
-        validator=1;
-      }
-    }
-    if(validator==1){
+    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""){
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para actualizar el turno.'
       })
-      this.limpiar();
-    }else{
-      
-      let arrayUpdate={
-        "hora":this.hora,
-        "tipo":this.especialidad
+
+      if(this.hora==undefined || this.hora==""){
+        this.ClaseHora = "form-control is-invalid select-number";
       }
-      
-      this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
-        
-        data['result'];
-        this.spinner.hide('sample');
-        Swal.fire(
-          'Correcto',
-          'Datos actualizados correctamente',
-          'success'
-        )
-        this.cargarTablas();
-        this.limpiar();
-      })
+      if(this.especialidad==undefined || this.especialidad==""){
+        this.ClaseCEspecialidad = "form-control is-invalid select-number";
+      }
+
     }
-    
+    else{
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea Actualizar este Turno?',
+        text: "Una vez actualizado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, actualizar turno!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let validator=0;
+          for (let item of Object.keys(this.turnos)) {
+            if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['tipo'] == this.especialidad){
+              validator=1;
+            }
+          }
+          if(validator==1){
+            Swal.fire({
+              icon: 'error',
+              title: '¡Turno ya Existe..!',
+              text: 'Ya existe un turno con estos datos.'
+            })
+          }else{
+            this.loadingText = 'Cargando...';
+            this.spinner.show('sample');
+
+            let arrayUpdate={
+              "hora":this.hora,
+              "tipo":this.especialidad
+            }
+
+            this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
+
+              data['result'];
+              this.spinner.hide('sample');
+              Swal.fire(
+                '¡Datos Actualizados..!',
+                'Datos actualizados correctamente.',
+                'success'
+              )
+              this.cargarTablas();
+              this.limpiar();
+            })
+          }
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'El turno no se ha actualizado.',
+            'error'
+          )
+        }
+      })
+
+    }
+
   }
 
   buscar(){
@@ -193,8 +344,8 @@ export class HorariosComponent implements OnInit {
 
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: 'Turno Inválido..!',
+        text: 'El turno a buscar no es válido.'
       })
 
     }else if(this.turnosPaginateFilter.length==0){
@@ -202,7 +353,7 @@ export class HorariosComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: '¡No hay Registros..!',
-        text: 'No hay rol registradas con este nombre.'
+        text: 'No hay un turno registrado con este nombre.'
       })
 
     }
@@ -216,7 +367,7 @@ export class HorariosComponent implements OnInit {
       debugger
       this.turnosPaginate = this.turnos.slice(0, 10);
     }else{
-      
+
       for (const x of this.turnos) {
 
         if(x.hora.indexOf(this.search)> -1){
@@ -224,7 +375,7 @@ export class HorariosComponent implements OnInit {
        };
       };
       this.turnosPaginateFilter = this.turnosFilter.slice(0, 10);
-      
+
     }
 
   }

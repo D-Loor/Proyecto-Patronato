@@ -4,7 +4,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="icon-user-follow"></i>
+          <i class="fa fa-clock-o"></i>
          Crear Turno
 
           <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed1 = !isCollapsed1"
@@ -54,7 +54,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-group"></i> Turnos Registrados
+          <i class="fa fa-clone"></i> Turnos Registrados
 
           <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed2 = !isCollapsed2"
             [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic"><i
@@ -97,7 +97,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="eliminar(item.id_turno)"><i
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_turno)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
@@ -111,7 +111,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
                           class="fa fa-pencil-square-o" ></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="eliminar(item.id_turno)"><i
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_turno)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>

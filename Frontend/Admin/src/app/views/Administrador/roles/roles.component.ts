@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit {
   rolPaginateFilter=[];
   search=null;
   estado=0;
-  Rol=""; 
+  Rol="";
   validarVacio;
   id_rol="";
   result="";
@@ -47,8 +47,7 @@ export class RolesComponent implements OnInit {
     this.cargarTablas();
   }
 
-  CrearRol(){
-    debugger
+  guardar(){
     let validator=0;
     for (let item of Object.keys(this.rol)) {
       if(this.rol[item]['rol'] == this.Rol){
@@ -61,36 +60,86 @@ export class RolesComponent implements OnInit {
     if(validator==1){
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Rol antes Registrado..!',
+        text: 'Este rol ya se encuentra registrado.'
       })
-      this.limpiar();
     }else{
-      
+      this.spinner.show('sample');
+
       let array={
         "rol": this.Rol
       }
       this.administradorService.agregarRol(array).then(data=>{
-        this.limpiar(); 
+        this.limpiar();
         this.spinner.hide('sample');
         Swal.fire(
-          'Correcto',
-          'Datos guardados correctamente',
+          '¡Rol Creado..!',
+          'El rol se ha crado correctamente',
           'success'
         )
         this.cargarTablas();
       })
     }
-    
+
+  }
+  CrearRol(){
+    if(this.Rol==undefined || this.Rol==""){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para agregar el rol.'
+      })
+        this.ClaseRol = "form-control is-invalid select-number";
+
+
+    }
+    else{
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea crear este rol?',
+        text: "Una vez agregado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, crear rol!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.guardar();
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'El rol no se ha creado.',
+            'error'
+          )
+        }
+      })
+    }
+
   }
 
   cargarTablas(){
     this.administradorService.cargarRol().then(data =>{
-      
+
       this.rol=data['result'];
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
-        
+
       this.rol=[];
       this.rolPaginate = [];
       }else{
@@ -107,59 +156,102 @@ export class RolesComponent implements OnInit {
   }
 
   ActualizarRol(){
-    debugger
-    let validator=0;
-    for (let item of Object.keys(this.rol)) {
-      if(this.rol[item]['rol'] == this.Rol){
-        validator=1;
-      }
-    }
-    if(validator==1){
+
+    if(this.Rol==undefined || this.Rol==""){
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para actualizar el rol.'
       })
-      this.limpiar();
+        this.ClaseRol = "form-control is-invalid select-number";
+
+
     }else{
-      
-      let arrayUpdate={
-        "rol":this.Rol,
-      }
-      
-      this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
-        
-        data['result'];
-        this.spinner.hide('sample');
-        Swal.fire(
-          'Correcto',
-          'Datos actualizados correctamente',
-          'success'
-        )
-        this.cargarTablas();
-        this.limpiar();
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea Actualizar este Turno?',
+        text: "Una vez actualizado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, actualizar turno!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let validator=0;
+          for (let item of Object.keys(this.rol)) {
+            if(this.rol[item]['rol'] == this.Rol){
+              validator=1;
+            }
+          }
+          if(validator==1){
+            Swal.fire({
+              icon: 'error',
+              title: '¡Rol antes Registrado..!',
+              text: 'Este rol ya se encuentra registrado.'
+            })
+          }else{
+            this.loadingText = 'Cargando...';
+            this.spinner.show('sample');
+            let arrayUpdate={
+              "rol":this.Rol,
+            }
+
+            this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
+
+              data['result'];
+              this.spinner.hide('sample');
+              Swal.fire(
+                '¡Datos Actualizados..!',
+                'Datos actualizados correctamente.',
+                'success'
+              )
+              this.cargarTablas();
+              this.limpiar();
+            })
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'El turno no se ha actualizado.',
+            'error'
+          )
+        }
       })
     }
 
-    
+
   }
 
   cargarEditar(id:string){
     this.estado=1;
     this.administradorService.cargarRolId(id).then(data =>{
-      
+
       this.Rol=data['result'].rol;
       this.id_rol=data['result'].id_rol;
     })
   }
 
   buscar(){
-    if(this.search== null || this.search.length==0||this.search.length>10){
+    if(this.search== null || this.search.length==0){
 
       Swal.fire({
         icon: 'error',
-        title: 'Rol Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Rol Inválido..!',
+        text: 'El rol a buscar no es válido.'
       })
 
     }else if(this.rolPaginateFilter.length==0){
@@ -167,7 +259,7 @@ export class RolesComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: '¡No hay Registros..!',
-        text: 'No hay rol registradas con este nombre.'
+        text: 'No hay un rol registrado con este nombre.'
       })
 
     }
@@ -176,14 +268,14 @@ export class RolesComponent implements OnInit {
   alertEliminado(result:string){
     if(result=="203"){
       Swal.fire(
-        'Eliminado!',
-        'Rol relacionado.',
-        'success'
+        '¡Rol en Uso!',
+        'El rol no se puede eliminar, está en uso.',
+        'error'
       )
     }else{
       Swal.fire(
-        'Eliminado!',
-        'El rol ha sido eliminada.',
+        '!Rol Eliminado..!',
+        'El rol ha sido eliminado.',
         'success'
       )
     }
@@ -203,7 +295,7 @@ export class RolesComponent implements OnInit {
   }
 
   notificacion(id:string){
-    
+
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -217,7 +309,7 @@ export class RolesComponent implements OnInit {
       text: "Una vez eliminado no se podrá recuperar el mismo!",
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar cita!',
+      confirmButtonText: 'Si, eliminar rol!',
       cancelButtonText: 'No, cancelar!',
       confirmButtonColor: '#20a8d8',
       cancelButtonColor: '#f86c6b',
@@ -233,8 +325,8 @@ export class RolesComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
-          'La cita no ha sido eliminada.',
+          '¡Cancelado..!',
+          'El rol no ha sido eliminado.',
           'error'
         )
       }
@@ -249,7 +341,7 @@ export class RolesComponent implements OnInit {
 
       //this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
-      
+
       for (const x of this.rol) {
 
         if(x.rol.indexOf(this.search)> -1){
@@ -257,7 +349,7 @@ export class RolesComponent implements OnInit {
        };
       };
       this.rolPaginateFilter = this.rolFilter.slice(0, 10);
-      
+
     }
 
   }

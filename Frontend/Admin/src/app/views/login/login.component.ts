@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit {
     if(this.correo==null || this.pass==null || this.correo=="" || this.pass==""){
       this.spinner.hide('sample');
       Swal.fire({
-        title: 'Error!',
-        text: 'Existen campos vacios',
-        icon: 'warning',
+        title: '¡Campos Vacíos..!',
+        text: 'Se deben completar todos los campos.',
+        icon: 'error',
         confirmButtonText: 'OK'
       })
     }else{
@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
         if(data['code'] == "202"){
           this.spinner.hide('sample');
           Swal.fire({
-            title: 'Error!',
-            text: 'El correo o la contraseña estan incorrectos',
+            title: '¡Datos Incorrectos..!',
+            text: 'El correo o la contraseña está incorrecto.',
             icon: 'error',
             confirmButtonText: 'OK'
           })

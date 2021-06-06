@@ -25,16 +25,18 @@ export class CuentasComponent implements OnInit {
   nombres="";
   correo="";
   id_cuenta="";
-  rol;
+  rol="";
   password="";
-  foto;
+  foto=null;
   listaRoles:any=[];
-  
+
   ClaseCorreo:string="form-control form-input select-number";
   ClaseNombre:string="form-control form-input select-number";
   ClaseRol:string="form-control form-input select-number";
   ClasePassword:string="form-control form-input select-number";
   ClaseCHora:string="form-control form-input select-number";
+
+  ClaseFoto:string="";
 
   loadingText = 'Cargando...';
 
@@ -82,7 +84,7 @@ export class CuentasComponent implements OnInit {
         this.spinner.hide('sample');
         this.dataPaginate(event);
       }
-      
+
     }).catch(error =>{
       console.log(error);
     });
@@ -90,34 +92,118 @@ export class CuentasComponent implements OnInit {
 
   public cargandoImagen(files: Event){
     this.foto = (<HTMLInputElement>files.target).files[0];
-    debugger
+    this.ClaseFoto="";
+  }
+  buscar(){
+
   }
 
-  CrearCuenta(){
-    let array={
-      "id_rol":this.rol,
-      "nombres":this.nombres,
-      "correo":this.correo,
-      "password":this.password,
-      "imagen": this.foto
+  guardar(){
+
+    let validator=0;
+    for (let item of Object.keys(this.cuentas)) {
+      if(this.cuentas[item]['correo'] == this.correo || this.cuentas[item]['nombres'] == this.nombres){
+        validator=1;
+      }
     }
-    debugger
-    this.administradorService.AgregarCuenta(array).then(data =>{
-      this.limpiar(); 
-      this.spinner.hide('sample');
-      Swal.fire(
-        'Correcto',
-        'Datos guardados correctamente',
-        'success'
-      )
-      this.cargarTablas();
-    }).catch(error =>{
-      console.log(error);
-    });
+    if(validator==1){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Cuenta ya Existe..!',
+        text: 'Ya existe una cuenta con estos datos.'
+      })
+    }else{
+      this.spinner.show('sample');
+      let array={
+        "id_rol":this.rol,
+        "nombres":this.nombres,
+        "correo":this.correo,
+        "password":this.password,
+        "imagen": this.foto
+      }
+
+      this.administradorService.AgregarCuenta(array).then(data =>{
+        this.limpiar();
+        this.spinner.hide('sample');
+        this.ClaseFoto="";
+        this.foto=null;
+        Swal.fire(
+          '¡Cuenta Creada..!',
+          'La cuenta se ha creado correctamente',
+          'success'
+        )
+        this.cargarTablas();
+      }).catch(error =>{
+        console.log(error);
+      });
+    }
+  }
+  CrearCuenta(){
+    if(this.foto==undefined || this.foto==null || this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para agregar la cuenta.'
+      })
+
+      if(this.foto==undefined || this.foto== null){
+        this.ClaseFoto =  "invalido";
+      }
+      if(this.nombres==undefined || this.nombres==""){
+        this.ClaseNombre = "form-control is-invalid select-number";
+      }
+      if(this.correo==undefined || this.correo==""){
+        this.ClaseCorreo = "form-control is-invalid select-number";
+      }
+      if(this.rol==undefined || this.rol==""){
+        this.ClaseRol = "form-control is-invalid select-number";
+      }
+      if(this.password==undefined || this.password==""){
+        this.ClasePassword = "form-control is-invalid select-number";
+      }
+
+    }
+    else{
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea crear esta Cuenta?',
+        text: "Una vez agregado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, crear cuenta!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.guardar();
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'La cuenta no se ha creado.',
+            'error'
+          )
+        }
+      })
+    }
   }
 
   notificacion(id:string){
-    debugger
+
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -131,7 +217,7 @@ export class CuentasComponent implements OnInit {
       text: "Una vez eliminado no se podrá recuperar el mismo!",
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar cita!',
+      confirmButtonText: 'Si, eliminar cuenta!',
       cancelButtonText: 'No, cancelar!',
       confirmButtonColor: '#20a8d8',
       cancelButtonColor: '#f86c6b',
@@ -144,8 +230,8 @@ export class CuentasComponent implements OnInit {
 
 
         swalWithBootstrapButtons.fire(
-          'Eliminado!',
-          'La cita ha sido eliminada.',
+          '!Cuenta Eliminada..!',
+          'La cuenta ha sido eliminado.',
           'success'
         )
 
@@ -154,8 +240,8 @@ export class CuentasComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
-          'La cita no ha sido eliminada.',
+          '¡Cancelado..!',
+          'La cuenta no ha sido eliminada.',
           'error'
         )
       }
@@ -190,49 +276,127 @@ export class CuentasComponent implements OnInit {
   }
 
   ActualizarCuenta(){
-    let arrayUpdate={
-      "id_rol":this.rol,
-      "id_cuenta":this.id_cuenta,
-      "nombres":this.nombres,
-      "correo":this.correo,
-      "password":this.password,
-      "imagen": this.foto
+
+    if(this.foto==undefined || this.foto==null || this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para actualizar la cuenta.'
+      })
+
+      if(this.foto==undefined || this.foto== null){
+        this.ClaseFoto =  "invalido";
+      }
+      if(this.nombres==undefined || this.nombres==""){
+        this.ClaseNombre = "form-control is-invalid select-number";
+      }
+      if(this.correo==undefined || this.correo==""){
+        this.ClaseCorreo = "form-control is-invalid select-number";
+      }
+      if(this.rol==undefined || this.rol==""){
+        this.ClaseRol = "form-control is-invalid select-number";
+      }
+      if(this.password==undefined || this.password==""){
+        this.ClasePassword = "form-control is-invalid select-number";
+      }
+
     }
-    debugger
-    this.administradorService.updateCuenta(arrayUpdate).then(data =>{
-      data['result'];
-      this.spinner.hide('sample');
-      Swal.fire(
-        'Correcto',
-        'Datos actualizados correctamente',
-        'success'
-      )
-      this.limpiar();
-    })
+    else{
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Desea Actualizar esta Cuenta?',
+        text: "Una vez actualizado podrá verlo en registros.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, actualizar cuenta!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let validator=0;
+          for (let item of Object.keys(this.cuentas)) {
+            if(this.cuentas[item]['correo'] == this.correo || this.cuentas[item]['nombres'] == this.nombres){
+              validator=1;
+            }
+          }
+          if(validator==1){
+            Swal.fire({
+              icon: 'error',
+              title: '¡Cuenta ya Existe..!',
+              text: 'Ya existe una cuenta con estos datos.'
+            })
+          }else{
+            this.loadingText = 'Cargando...';
+            this.spinner.show('sample');
+
+            let arrayUpdate={
+              "id_rol":this.rol,
+              "id_cuenta":this.id_cuenta,
+              "nombres":this.nombres,
+              "correo":this.correo,
+              "password":this.password,
+              "imagen": this.foto
+            }
+            debugger
+            this.administradorService.updateCuenta(arrayUpdate).then(data =>{
+              data['result'];
+              this.spinner.hide('sample');
+              Swal.fire(
+                '¡Datos Actualizados..!',
+                'Datos actualizados correctamente.',
+                'success'
+              )
+              this.limpiar();
+            })
+          }
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado..!',
+            'La cuenta no se ha actualizado.',
+            'error'
+          )
+        }
+      })
+
+    }
+
+
   }
 
-  buscar(){
-
-  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
- debugger
+
     this.cuentasFilter=[];
       this.cuentasPaginateFilter=[];
     if(this.search==null){
 
       //this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
-      
+
       for (const x of this.cuentas) {
 
         if(x.nombres.indexOf(this.search)> -1){
-          debugger
+
          this.cuentasFilter.push(x);
        };
       };
       this.cuentasPaginateFilter = this.cuentasFilter.slice(0, 10);
-      
+
     }
 
   }
