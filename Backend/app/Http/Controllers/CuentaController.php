@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cuenta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CuentaController extends Controller
 {
@@ -110,18 +111,46 @@ class CuentaController extends Controller
         
     }
 
+    public function actualizar(Request $request)
+    {
+        $datos=Cuenta::where('id_rol', $request->id_cuenta)->get()->first();
+        
+        if($datos != null){
+        $file = $request->file('imagen');
+        $filename = $file->getClientOriginalName();
+        $filename = pathinfo($filename, PATHINFO_FILENAME);
+        $name_File = str_replace(" ", "_", $filename);
+        $extension = $file->getClientOriginalExtension();
+        $picture = date('His').'-'.$name_File.'.'.$extension;
+        $file->move(public_path('/imagenes'),$picture); 
+
+        $datos->id_rol=$request->id_rol;
+        $datos->nombres=$request->nombres;
+        $datos->correo=$request->correo;
+        $datos->password=$request->password;
+        $datos->imagen=$picture;
+            $datos->update();
+            return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
+        }else
+            return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function eliminar($id)
     {
         $datos=Cuenta::where('id_cuenta', $id)->get()->first();  
         if($datos != null){
-            $datos->delete();
-            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+            //$archivo=CONCAT('public', '/', 'imagenes', '/',  $datos->imagen);
+            
+            Storage::delete('022424-hola.jpeg');
+            //$datos->delete();
+            return response()->json(['result'=>'public/imagenes/'.$datos->imagen, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }

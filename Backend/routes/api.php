@@ -53,6 +53,8 @@ Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoF
 Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@DatosEstadisticos');
 Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
 Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
+Route::post('actualizarCuenta','CuentaController@actualizar');
+Route::delete('eliminarCuenta/{id}','CuentaController@eliminar');
 
 //reportes
 Route::get('ReportePacientesAnual/{year}','PDFController@ReportePacientesAnual');
