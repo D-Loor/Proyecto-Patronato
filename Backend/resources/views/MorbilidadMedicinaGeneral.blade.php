@@ -241,38 +241,67 @@
 
             </thead>
             <tbody>
-            @foreach ($Result as $item)
+        @php ($aux = 0)
+        @foreach ($Result as $item)
                 <tr>
                 @for($i = 0 ; $i <= 2; $i++)
                     @if($i===0)
-                    <th class="numero">{{$item[$i]}}</th>
+                        <th class="numero">{{$item[$i]}}</th>
                     @endif
                     @if($i===1)
-                    <td class="tdCeldas">{{$item[$i]}}</td>
+                        <td class="tdCeldas">{{$item[$i]}}</td>
                     @endif
                     @if($i>1)
-                    @for($j=0;$j<=16;$j++)
-                    <td class="tdCeldas">{{$item[$i][$j]}}</td>
-                    @endfor
+                        @for($j=0;$j<=16;$j++)
+                            <td class="tdCeldas">{{$item[$i][$j]}}</td>
+                        @endfor
                     @endif
                     @if($i===2)
-                    <td class="tdCeldas">25</td>
+                    <td class="tdCeldas">{{$porcentajes[$aux]}}</td>
                     @endif
                  @endfor
                 </tr>
-             @endforeach
+           @php ($aux++)
+        @endforeach
+                
+        @if(count($Result)!=20)
+             @for($x = count($Result)+1; $x <= 20; $x++)
+                <tr>
+                    <th class="numero">{{$x}}</th>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                    <td class="tdCeldas"></td>
+                </tr>
+             @endfor
+        @endif
             </tbody>
             <tfoot>
                 <tr>
                 <th colspan="2" class="total"> TOTAL</th>
                 @for($i = 0 ; $i <= 16; $i++)
-                    @if($i<=13)
+                    @if($i <= 13)
                         <td class="tdCeldas">{{$total[$i]}}</td>
                     @endif
-                    @if($i>13)
+                    @if($i > 13)
                     <td class="ver"> {{$total[$i]}} </td>
                     @endif
-                    @if($i==16)
+                    @if($i == 16)
                     <td class="result">100%</td>
                     @endif
                     
