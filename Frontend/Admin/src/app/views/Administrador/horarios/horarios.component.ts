@@ -17,13 +17,13 @@ export class HorariosComponent implements OnInit {
   isCollapsed2=false;
 
   turnos=[];
+  Comboespecialidad=[];
   turnosPaginate=[];
   turnosFilter=[];
   turnosPaginateFilter=[];
   search=null;
   estado=0;
   hora="";
-  tipo="";
   especialidad="";
   validarVacio="";
   id_turnos="";
@@ -44,17 +44,31 @@ export class HorariosComponent implements OnInit {
     showSpinner: false
   };
 
+  ngOnInit(): void {
+    this.cargarTablas();
+    this.CargarEspecialidad();
+  }
+
+  CargarEspecialidad(){
+    this.administradorService.cargarRol().then(data =>{
+      let temporal = data['result'];
+      for (let i of temporal) {
+        if(i.rol != "Administrador" && i.rol != "Secretaria"){
+          this.Comboespecialidad.push(i);
+        }
+      }
+    });
+  }
+
   limpiar(){
-    this.hora = ""; this.tipo="";this.especialidad=""; this.id_turnos=""; this.result="";
+    this.hora = "";this.especialidad=""; this.id_turnos=""; this.result="";
   }
 
   cargarTablas(){
     this.administradorService.cargarTurnos().then(data =>{
-      debugger
       this.turnos=data['result'];
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
-        debugger
       this.turnos=[];
       this.turnosPaginate = [];
       }else{
@@ -70,9 +84,7 @@ export class HorariosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.cargarTablas();
-  }
+ 
 
   alertEliminado(result:string){
     this.spinner.hide('sample');
@@ -203,7 +215,7 @@ export class HorariosComponent implements OnInit {
   guardar(){
         let validator=0;
     for (let item of Object.keys(this.turnos)) {
-      if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['tipo'] == this.especialidad){
+      if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['id_rol'] == this.especialidad){
         validator=1;
       }
     }
@@ -220,13 +232,13 @@ export class HorariosComponent implements OnInit {
       this.spinner.show('sample');
       let array={
         "hora": this.hora,
-        "tipo": this.especialidad
+        "id_rol": this.especialidad
       }
       this.administradorService.agregarTurno(array).then(data=>{
         this.limpiar();
         this.spinner.hide('sample');
         Swal.fire(
-          '¡TTurno Creado..!',
+          '¡Turno Creado..!',
           'El turno se ha crado correctamente',
           'success'
         )
@@ -242,10 +254,10 @@ export class HorariosComponent implements OnInit {
     this.estado=1;
     this.administradorService.cargarTurnosId(id).then(data =>{
       this.hora=data['result'].hora;
-      this.especialidad=data['result'].tipo;
+      this.especialidad=data['result'].id_rol;
       this.id_turnos=data['result'].id_turno;
 
-    })
+    });
   }
 
 
@@ -290,7 +302,7 @@ export class HorariosComponent implements OnInit {
 
           let validator=0;
           for (let item of Object.keys(this.turnos)) {
-            if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['tipo'] == this.especialidad){
+            if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['id_rol'] == this.especialidad){
               validator=1;
             }
           }
@@ -306,7 +318,7 @@ export class HorariosComponent implements OnInit {
 
             let arrayUpdate={
               "hora":this.hora,
-              "tipo":this.especialidad
+              "id_rol":this.especialidad
             }
 
             this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
@@ -364,7 +376,6 @@ export class HorariosComponent implements OnInit {
     this.turnosFilter=[];
       this.turnosPaginateFilter=[];
     if(this.search==null){
-      debugger
       this.turnosPaginate = this.turnos.slice(0, 10);
     }else{
 
@@ -393,5 +404,7 @@ export class HorariosComponent implements OnInit {
     const endItem = event.page * event.itemsPerPage;
     this.turnosPaginate = this.turnos.slice(startItem, endItem);
   }
+
+
 
 }
