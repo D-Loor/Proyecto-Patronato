@@ -15,7 +15,7 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        $datos=Turno::with('role')->get();
+        $datos=Turno::with('rroles')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]);
@@ -57,7 +57,7 @@ class TurnoController extends Controller
      */
     public function show($id)
     {
-        $datos=Turno::where('id_turno', $id)->with('role')->get()->first();
+        $datos=Turno::where('id_turno', $id)->with('rroles')->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
