@@ -15,8 +15,12 @@ class CreateTurnosTable extends Migration
     {
         Schema::create('turnos', function (Blueprint $table) {
             $table->bigIncrements('id_turno');
+            $table->unsignedBigInteger('id_rol');
             $table->string('hora');
             $table->string('tipo');
+
+            $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
+
         });
     }
 

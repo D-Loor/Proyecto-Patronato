@@ -16,20 +16,32 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id_rol');
             $table->string('rol');
+            $table->boolean('estado');
 
         });
 
         DB::table("roles")
         ->insert([
-            "rol" => "Médico General"
+            "rol" => "Administrador",
+            "estado" => 1
+
+
         ]);
         DB::table("roles")
         ->insert([
-            "rol" => "Fisioterapista"
+            "rol" => "Médico General",
+            "estado" => 1
+
         ]);
         DB::table("roles")
         ->insert([
-            "rol" => "Secretaria"
+            "rol" => "Fisioterapista",
+            "estado" => 1
+        ]);
+        DB::table("roles")
+        ->insert([
+            "rol" => "Secretaria",
+            "estado" => 0
         ]);
     }
 

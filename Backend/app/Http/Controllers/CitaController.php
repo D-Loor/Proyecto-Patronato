@@ -28,7 +28,7 @@ class CitaController extends Controller
     }
 
     public function validarMGandRF($especialidad,$fechaActual){
-        $datos=Cita::where('especialidad', $especialidad)->where('fecha',$fechaActual)->with('turno')->get()->all();
+        $datos=Cita::where('especialidad', $especialidad)->where('fecha',$fechaActual)->with('turno','rol')->get()->all();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
@@ -57,7 +57,6 @@ class CitaController extends Controller
         $datos=new Cita();
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
-        $datos->especialidad=$request->especialidad;
         $datos->fecha=$request->fecha;
         $datos->id_turno=$request->id_turno;
         if($request->abono=="DOADBA"){
@@ -171,7 +170,6 @@ class CitaController extends Controller
             $datos->id_cita = $datos->id_cita;
             $datos->nombres = $request->nombres;
             $datos->cedula = $request->cedula;
-            $datos->especialidad = $request->especialidad;
             $datos->fecha = $request->fecha;
             $datos->id_turno = $request->id_turno;
             $datosP=Paciente::where('cedula', $cedula)->get()->first();
@@ -221,7 +219,6 @@ class CitaController extends Controller
                 $item->id_cita = $item->id_cita;
                 $item->nombres = $item->nombres;
                 $item->cedula = $item->cedula;
-                $item->especialidad = $item->especialidad;
                 $item->fecha = $item->fecha;
                 $item->id_turno = $item->id_turno;
                 $item->abono=$item->abono;

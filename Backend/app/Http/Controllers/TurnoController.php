@@ -15,10 +15,10 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        $datos=Turno::all();  
+        $datos=Turno::with('role')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
-           return response()->json(['result'=>$datos]); 
+           return response()->json(['result'=>$datos]);
        }else
            return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
     }
@@ -43,7 +43,7 @@ class TurnoController extends Controller
     {
         $datos=new Turno();
         $datos->hora=$request->hora;
-        $datos->tipo=$request->tipo;
+        $datos->id_rol=$request->id_rol;
         $datos->save();
         $idRecienGuardado = $datos->id_turno;
         return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id'=>$idRecienGuardado]);
@@ -57,7 +57,7 @@ class TurnoController extends Controller
      */
     public function show($id)
     {
-        $datos=Turno::where('id_turno', $id)->get()->first(); 
+        $datos=Turno::where('id_turno', $id)->with('role')->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
@@ -87,7 +87,7 @@ class TurnoController extends Controller
         $datos=Turno::find($id);
         if($datos != null){
             $datos->hora=$request->hora;
-            $datos->tipo=$request->tipo;
+            $datos->id_rol=$request->id_rol;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else
@@ -102,7 +102,7 @@ class TurnoController extends Controller
      */
     public function destroy($id)
     {
-        $datos=Turno::find($id); 
+        $datos=Turno::find($id);
         $datosCuenta=Cita::where('id_turno', $id)->get()->first();
         if($datosCuenta != null ){
             return response()->json(['result'=>"Turno Relacionado", 'code'=>'203']);
@@ -114,6 +114,6 @@ class TurnoController extends Controller
                 return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
             }
         }
-        
+
     }
 }

@@ -18,7 +18,6 @@ class CreateCitasTable extends Migration
             $table->unsignedBigInteger('id_turno');
             $table->string('nombres');
             $table->string('cedula');
-            $table->string('especialidad');
             $table->date('fecha');
             $table->string('estado');
             $table->boolean('abono');

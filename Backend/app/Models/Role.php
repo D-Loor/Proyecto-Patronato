@@ -12,7 +12,13 @@ class Role extends Model
     protected $table = 'roles';
     protected $primaryKey = 'id_rol';
      protected $fillable = [
-       'rol',
+       'rol','estado',
      ];
-    
+
+     public function rcuenta(){
+        return $this->hasMany('App\Models\Cuenta','id_rol');
+     }
+     public function rturnos(){
+        return $this->hasMany('App\Models\Turno','id_rol');
+     }
 }

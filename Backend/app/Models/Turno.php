@@ -12,10 +12,14 @@ class Turno extends Model
     protected $table = 'turnos';
     protected $primaryKey = 'id_turno';
     protected $fillable = [
-         'hora','tipo',
+         'id_rol','hora','tipo',
     ];
-    
+
      public function rcita(){
         return $this->hasMany('App\Models\Cita','id_turno');
      }
+     public function rroles(){
+    	return $this->belongsTo('App\Models\Role','id_rol');
+    }
+
 }
