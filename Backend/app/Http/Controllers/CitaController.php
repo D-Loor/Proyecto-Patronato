@@ -6,6 +6,7 @@ use App\Models\Cita;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Turno;
+use App\Models\Role;
 
 class CitaController extends Controller
 {
@@ -28,8 +29,25 @@ class CitaController extends Controller
     }
 
     public function validarMGandRF($especialidad,$fechaActual){
-        $datos=Cita::where('especialidad', $especialidad)->where('fecha',$fechaActual)->with('turno','rol')->get()->all();
-        if($datos != null){
+
+        $datos=Cita::where('fecha',$fechaActual)->with('turno')->get();
+        $roles=Role::where('rol', $especialidad)->first();
+        $idrol=$roles['id_rol'];
+        $posicion=0;
+
+        foreach ($datos as $tur)
+        {
+            if($tur['turno']['id_rol']!=$idrol){
+
+                    unset($datos[$posicion]);
+
+            }
+
+            $posicion++;
+        }
+
+        $cont=count($datos);
+        if( $cont > 0){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
@@ -82,7 +100,7 @@ class CitaController extends Controller
      */
     public function show( $id_cita)
     {
-        $datos=Cita::where('id_cita', $id_cita)->get()->first();
+        $datos=Cita::where('id_cita', $id_cita)->with('turno','rroles')->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos, 'code'=>'201']);
         }else
@@ -91,45 +109,50 @@ class CitaController extends Controller
 
     public function validarHora($fecha, $tipo)
     {
-        $datos=Cita::all()->where('fecha', $fecha)->sortByDesc('id_turno');
-        $turno=Turno::all();
+
+        $datos=Cita::with('turno')->where('fecha', $fecha)->get();
+        $turno=Turno::with('rroles')->get();
+        $roles=Role::where('rol', $tipo)->first();
         $posicion=0;
+        $idrol=$roles['id_rol'];
 
-            foreach ($turno as $tur)
-            {
-                $pase = 0;
-                if($tipo=="RF"){
-                    if($tur['tipo'] != $tipo){
-                        unset($turno[$posicion]);
-                    }else{
-                        foreach ($datos as $cita)
-                        {
-                            if($tur['id_turno'] == $cita['id_turno']){
-                                $pase++;
-                            }
-                            if($pase == 2){
-                                unset($turno[$posicion]);
-                                break;
-                            }
-                        }
-                    }
+        foreach ($turno as $tur)
+        {
 
+            $pase = 0;
+            if($tipo=="Rehabilitación Física"){
+
+                if($tur['id_rol'] != $idrol){
+                    unset($turno[$posicion]);
                 }else{
-                    if($tur['tipo'] != $tipo){
-                        unset($turno[$posicion]);
-                    }else{
-                        foreach ($datos as $cita)
-                        {
-                            if($tur['id_turno'] == $cita['id_turno']){
-                                unset($turno[$posicion]);
-                                break;
-                            }
+                    foreach ($datos as $cita)
+                    {
+                        if($tur['id_turno'] == $cita['id_turno']){
+                            $pase++;
+                        }
+                        if($pase == 3){
+                            unset($turno[$posicion]);
+                            break;
                         }
                     }
                 }
 
-                $posicion++;
+            }else{
+                if($tur['id_rol'] != $idrol){
+                    unset($turno[$posicion]);
+                }else{
+                    foreach ($datos as $cita)
+                    {
+                        if($tur['id_turno'] == $cita['id_turno']){
+                            unset($turno[$posicion]);
+                            break;
+                        }
+                    }
+                }
             }
+
+            $posicion++;
+        }
 
 
         $NTurnos = count($turno);
@@ -138,6 +161,8 @@ class CitaController extends Controller
             return response()->json(['result'=>$turno, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Sin Turnos ", 'code'=>'202']);
+
+
     }
 
     /**
