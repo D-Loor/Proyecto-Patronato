@@ -157,7 +157,7 @@ class CuentaController extends Controller
 
     public function validar ($correo, $pass){
 
-        $datos=Cuenta::where('correo', $correo)->where('password', $pass)->get();
+        $datos=Cuenta::where('correo', $correo)->where('password', $pass)->with('role')->get();
         $num_rows = count($datos);
         if($num_rows != 0){
            return response()->json(['result'=>$datos]); 

@@ -29,7 +29,7 @@ class CreateRolesTable extends Migration
         ]);
         DB::table("roles")
         ->insert([
-            "rol" => "Médico General",
+            "rol" => "Medicina General",
             "estado" => 1
 
         ]);

@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
           })
         }else{
           localStorage.setItem('sesionLogin', data['result'][0].id_cuenta);
+          localStorage.setItem('rol', data['result'][0].role.rol);
           localStorage.setItem('sesionLoginInicio', 'true');
           this.arraydat=data['result'];
           this.rutas.navigate(['/medicinageneralcitas']);
