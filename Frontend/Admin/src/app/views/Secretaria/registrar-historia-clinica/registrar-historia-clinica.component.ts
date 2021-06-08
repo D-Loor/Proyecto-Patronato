@@ -131,6 +131,77 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
   }
 
+  CalcularEdad(){
+    
+      if (this.fechanacimiento != undefined) { 
+
+        //Fecha Actual
+        var fecha_hoy = new Date();
+        var ahora_ano = fecha_hoy.getFullYear();
+        var ahora_mes = fecha_hoy.getMonth()+1;
+        var ahora_dia = fecha_hoy.getDate();
+        //Fecha de nacimiento
+        var fecha = new Date(this.fechanacimiento);
+        var ano = fecha.getFullYear();
+        var mes = fecha.getMonth()+1;
+        var dia = fecha.getDate();
+        
+         // realizamos el calculo
+         var edad = (ahora_ano + 1900) - ano;
+         if ( ahora_mes < mes )
+         {
+             edad--;
+         }
+         if ((mes == ahora_mes) && (ahora_dia < dia))
+         {
+             edad--;
+         }
+         if (edad > 1900)
+         {
+             edad -= 1900;
+         }
+         if(edad ==1900){
+           edad = 0;
+         }
+  
+         // calculamos los meses
+         var meses = 0;
+
+         if (ahora_mes > mes && dia > ahora_dia)
+             meses = ahora_mes - mes - 1;
+         else if (ahora_mes > mes)
+             meses = ahora_mes - mes
+         if (ahora_mes < mes && dia < ahora_dia)
+             meses = 12 - (mes - ahora_mes);
+         else if (ahora_mes < mes)
+             meses = 12 - (mes - ahora_mes + 1);
+         if (ahora_mes == mes && dia > ahora_dia)
+             meses = 11;
+  
+         // calculamos los dias
+         var dias=0;
+         if(ahora_dia>dia)
+             dias=ahora_dia-dia;
+         if(ahora_dia<dia)
+         {
+             var ultimoDiaMes=new Date(ahora_ano, ahora_mes, 0);
+             dias=ultimoDiaMes.getDate()-(dia-ahora_dia);
+         }
+         
+         if(edad == 0 && meses == 0){
+           this.edad = "0.0"+dias;
+          }
+         if(edad !=0 ){
+          this.edad = edad;
+          }
+          if(edad == 0 && meses != 0){
+            this.edad = "0."+meses;
+          }
+        //alert("Edad en años:" + edad + ',' + 'Meses:' + meses + ',' + 'dias:' + dias);
+      
+      }
+  }
+
   limpiar(){
 
     this.ClaseCdula="form-control form-input select-number"; 

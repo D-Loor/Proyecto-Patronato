@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="text-input">Edad</label>
-                                            <input required type="number" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" [class]="ClaseEdad" (click)="ClaseEdad='form-control'" placeholder="Ingrese la edad">
+                                            <input required type="text" id="edad"  autocomplete="off"  [(ngModel)]="edad" name="edad" [class]="ClaseEdad" (click)="ClaseEdad='form-control'" placeholder="Ingrese la edad">
                                         </div>
                                       </div><!--/.row-->
                                       <div class="row">
@@ -86,7 +86,7 @@
                                       <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label for="date-input">Fecha de nacimiento</label>
-                                            <input required id="date-input" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" [class]="ClaseFecha" (click)="ClaseFecha='form-control'" placeholder="Seleccione la fecha de nacimiento">    
+                                            <input required id="fechanacimiento" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" [class]="ClaseFecha" (click)="ClaseFecha='form-control'" (change)="CalcularEdad()" placeholder="Seleccione la fecha de nacimiento">    
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="raza">Raza</label>
