@@ -19,7 +19,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   search=null;
-  especialidad=localStorage.getItem('rol');;
+  especialidad=localStorage.getItem('rol');
   Estado:number=1;
   validacion:string;
   public sidebarMinimized = false;
@@ -114,7 +114,6 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(){
-    debugger
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
     this.validarVacio=data['code'];

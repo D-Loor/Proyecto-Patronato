@@ -19,7 +19,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   isCollapsed2 = false;
   isCollapsed = true;
   search;
-  especialidad:string="Rehabilitacion Fisica";
+  especialidad=localStorage.getItem('rol');
   public sidebarMinimized = false;
   public navItems = navItems;
   citasRF=[];
