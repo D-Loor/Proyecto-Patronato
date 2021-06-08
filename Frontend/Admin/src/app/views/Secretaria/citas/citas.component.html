@@ -60,7 +60,7 @@
               </thead>
               <tbody>
                 <ng-container *ngIf="searchMG == null; else filtroMG">
-                  <tr *ngFor="let item of citasMGPaginate">
+                  <tr *ngFor="let item of citasMG">
                     <td class="table-titulo">{{item.nombres}}</td>
                     <td>{{item.cedula}}</td>
                     <td>{{item.fecha}}</td>

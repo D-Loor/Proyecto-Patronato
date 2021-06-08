@@ -44,11 +44,18 @@ export class CitasComponent implements OnInit {
   }
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
-    debugger
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
-      debugger
       this.citasMG=data['result'];
-      this.citasMGPaginate = this.citasMG.slice(0, 10);
+      this.validarVacio=data['code'];
+      if(this.validarVacio == '202'){
+        this.citasMG=null;
+        this.citasMGPaginate = null;
+      }else{
+        this.citasMGPaginate = this.citasMG.slice(0, 10);
+      }
+      if(this.searchMG!=null){
+        this.dataPaginateMG(event);
+      }
       if(check==true){}else{
     if(data['code']!="202"){
 
@@ -59,11 +66,6 @@ export class CitasComponent implements OnInit {
         title: '¡Citas Filtradas..!',
         text: 'Se filtró las citas con la fecha seleccionada.'
       })
-    }
-
-    if(this.searchMG!=null){
-
-      this.dataPaginateMG(event);
     }
 
     }else if(fecha==1){
