@@ -18,19 +18,21 @@
             <div class="form-group">
               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <div class="row">
-                  <div class=" form-group col-md-8">
+                  <div class=" form-group col-md-6">
                     <label for="text-input">Rol</label>
                     <input autocomplete="off" required type="text" id="Rol" [(ngModel)]="Rol" name="Rol"
                       [class]="ClaseRol" placeholder="Ingrese rol"
                       (click)="ClaseRol='form-control form-input select-number'">
                   </div>
-
-
+                  <div class=" form-group col-md-3">
+                    <label for="text-input">Estado</label>
+                    <select id="EstadoRol" (click)="ClaseEstado='form-control form-input select-number'"
+                          [class]="ClaseEstado" [(ngModel)]="EstadoRol" name="EstadoRol">
+                          <option value="1">Habilitado</option>
+                          <option value="0">Deshabilitado</option>
+                    </select>
+                  </div>
                 </div>
-
-
-
-
                 <button *ngIf="estado==0" type="submit" class="btn btn-lg btn-primary boto"
                   (click)="CrearRol('sample')">Crear Rol</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
@@ -81,6 +83,7 @@
               <thead>
                 <tr>
                   <th>Rol</th>
+                  <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -88,6 +91,10 @@
                 <ng-container *ngIf="search == null; else filtroMG">
                   <tr *ngFor="let item of rolPaginate">
                     <td>{{item.rol}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Habilitado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
+                    </td>
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
@@ -100,6 +107,10 @@
                 <ng-template #filtroMG>
                   <tr *ngFor="let item of rolPaginateFilter">
                     <td>{{item.rol}}</td>
+                    <td>
+                      <span *ngIf="item.estado==1" class="badge badge-success">Habilitado</span>
+                      <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
+                    </td>
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)" ><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
