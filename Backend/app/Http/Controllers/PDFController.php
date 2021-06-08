@@ -372,7 +372,7 @@ class PDFController extends Controller
             
 
             //return response()->json(['result'=>$Result]);
-        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
+        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','total','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
 
@@ -445,8 +445,10 @@ class PDFController extends Controller
             ->get();
 
         $datos = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->with('paciente')->get();
-
-
+        $aggTotales=[];
+        $porcentajes=[];
+        $ContgruposEdadCont=[];
+        $n=0;
         $TotalF[0]=0;
         $TotalF[1]=0;
         $TotalF[2]=0;
@@ -475,7 +477,6 @@ class PDFController extends Controller
             $Edad[10] = 0;
             $Edad[11] = 0;
             $Edad[12] = 0;
-            $Porcentaje = 0;
             foreach($datos as $item)
             {
                 if($item['motivo_consulta'] === $itemC['motivo_consulta'])
@@ -544,16 +545,24 @@ class PDFController extends Controller
         for($i=0;$i<=12;$i++){
             $TotalF[$i]=$TotalF[$i]+$Edad[$i];
         }
-                $Porcentaje = $Edad[12]*100;
+
+        $ContgruposEdadCont[$n]=$Edad[12];
+
                 $Resultados [] = [$cont, $itemC['motivo_consulta'], $Edad[0], $Edad[1], $Edad[2], $Edad[3],$Edad[4], $Edad[5], $Edad[6],
-                                  $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12], $Porcentaje
+                                  $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12]
                              ];
+            $n++;
             $cont ++;
         }
 
+        for($i=0; $i<=$n-1; $i++){
+            $porcentajes[$i]=$ContgruposEdadCont[$i]/$TotalF[12];
+            $redondear= round($porcentajes[$i]*100, 2); 
+            $porcentajes[$i]=$redondear;
+        }
 
         //return response()->json(['result'=>$TotalF]);
-        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia.pdf');
+        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia.pdf');
     }
 
     public function ValidarRegistroDiarioMedicina($fecha){
@@ -1109,6 +1118,8 @@ class PDFController extends Controller
                 if ($item['certificado'] == 1) {
                     $certificado = 1;
                 }
+
+                
                 $Result[$separar[2]] = [
                     $Result[$separar[2]][0], $lugar[0]+$Result[$separar[2]][1], $lugar[1]+$Result[$separar[2]][2], $lugar[2]+$Result[$separar[2]][3], 1+$Result[$separar[2]][4], $sexo[0]+$Result[$separar[2]][5], $sexo[1]+$Result[$separar[2]][6], $mujer[0]+$Result[$separar[2]][7], $mujer[1]+$Result[$separar[2]][8], $mujer[2]+$Result[$separar[2]][9], $mujer[3]+$Result[$separar[2]][10], $ninos[0]+$Result[$separar[2]][11], $ninos[1]+$Result[$separar[2]][12], $ninos[2]+$Result[$separar[2]][13], $ninos[3]+$Result[$separar[2]][14], $ninos[4]+$Result[$separar[2]][15],
                     $edadesm[0]+$Result[$separar[2]][16], $edadesm[1]+$Result[$separar[2]][17], $edadesm[2]+$Result[$separar[2]][18], $morbilidad[0]+$Result[$separar[2]][19], $morbilidad[1]+$Result[$separar[2]][20], $morbilidad[2]+$Result[$separar[2]][21], $morbilidad[3]+$Result[$separar[2]][22], $morbilidad[4]+$Result[$separar[2]][23], $morbilidad[5]+$Result[$separar[2]][24], $morbilidad[6]+$Result[$separar[2]][25], $morbilidad[7]+$Result[$separar[2]][26],

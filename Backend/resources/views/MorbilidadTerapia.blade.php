@@ -219,20 +219,45 @@
 
             </thead>
             <tbody>
+            @php ($aux = 0)
                 @foreach ($Resultados as $item)
                     <tr>
-                        @for($i = 0; $i < 16; $i++) 
+                        @for($i = 0; $i <= 15; $i++) 
                             @if ($i===0) 
                                 <th class="numero">{{$item[$i]}}</th>
                             @endif
-                            @if ($i >=1) 
+                            @if ($i >=1 && $i < 15) 
                                 <td class="grande" >{{$item[$i]}}</td>
                             @endif
-
+                            @if($i===15)
+                            <td class="grande" >{{$porcentajes[$aux]}}</td>
+                            @endif
                         @endfor
                     </tr>
+                    @php ($aux++)
                 @endforeach
-                    
+                @if(count($Resultados)!=20)
+                    @for($x = count($Resultados)+1; $x <= 20; $x++)
+                        <tr>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                        <td class="grande" ></td>
+                    </tr>
+                    @endfor
+                @endif    
 
             </tbody>
             <tfoot>
