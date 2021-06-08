@@ -43,9 +43,8 @@
                       <div class="form-group col-md-6">
                         <label for="text-input">Rol</label>
                         <select id="rol" (click)="ClaseRol='form-control form-input select-number'"
-                          [class]="ClaseRol" [(ngModel)]="rol" name="rol" required>
+                          [class]="ClaseRol" [(ngModel)]="rol" [disabled]="editarA == 'Administrador'" name="rol" required>
                           <option *ngFor="let item of listaRoles" value="{{item.id_rol}}" >{{item.rol}}</option>
-                          <!--option value="Médico General">Médico General</option!-->
                         </select>
                       </div>
                       <div class=" form-group col-md-6">
@@ -131,7 +130,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
+                      <button type="button" [hidden]="item.role.rol =='Administrador'" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
@@ -145,7 +144,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
+                      <button [hidden]="item.role.rol =='Administrador'" type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>

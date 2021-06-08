@@ -22,7 +22,10 @@ export class CuentasComponent implements OnInit {
   search=null;
   validarVacio;
   estado=0;
+  nombresEditar="";
+  correoEditar="";
   nombres="";
+  editarA="";
   correo="";
   id_cuenta="";
   rol="";
@@ -265,9 +268,12 @@ export class CuentasComponent implements OnInit {
     this.administradorService.cargarCuentaId(id).then(data => {
       this.id_cuenta=data['result'].id_cuenta;
       this.nombres=data['result'].nombres;
+      this.nombresEditar=data['result'].nombres;
       this.correo=data['result'].correo;
       this.password=data['result'].password;
-      this.rol=data['result']['role'].rol;
+      this.correoEditar=data['result'].correo;
+      this.rol=data['result']['role'].id_rol;
+      this.editarA=data['result']['role'].rol;
       this.foto=data['result'].imagen;
       debugger
     }).catch((error) => {
@@ -325,11 +331,26 @@ export class CuentasComponent implements OnInit {
         if (result.isConfirmed) {
 
           let validator=0;
-          for (let item of Object.keys(this.cuentas)) {
-            if(this.cuentas[item]['correo'] == this.correo || this.cuentas[item]['nombres'] == this.nombres){
-              validator=1;
+          if(this.correo!= this.correoEditar || this.nombres != this.nombresEditar){
+
+            for (let item of Object.keys(this.cuentas)) {
+              if(this.correo == this.correoEditar && this.nombres == this.nombresEditar){
+                if(this.cuentas[item]['correo'] == this.correo || this.cuentas[item]['nombres'] == this.nombres){
+                  validator=1;
+                }
+              }else if(this.correo == this.correoEditar){
+                if( this.cuentas[item]['nombres'] == this.nombres){
+                  validator=1;
+                }
+              }else{
+                if( this.cuentas[item]['nombres'] == this.nombres){
+                  validator=1;
+                }
+              }
+
             }
           }
+
           if(validator==1){
             Swal.fire({
               icon: 'error',
@@ -340,6 +361,7 @@ export class CuentasComponent implements OnInit {
             this.loadingText = 'Cargando...';
             this.spinner.show('sample');
 
+            this.editarA="";
             let arrayUpdate={
               "id_rol":this.rol,
               "id_cuenta":this.id_cuenta,
@@ -347,6 +369,7 @@ export class CuentasComponent implements OnInit {
               "correo":this.correo,
               "password":this.password,
               "imagen": this.foto
+
             }
             debugger
             this.administradorService.updateCuenta(arrayUpdate).then(data =>{

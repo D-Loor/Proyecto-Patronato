@@ -96,25 +96,25 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)"><i
+                      <button type="button"  [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
+                      <button type="button" [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
                 </ng-container>
 
                 <ng-template #filtroMG>
-                  <tr *ngFor="let item of rolPaginateFilter">
+                  <tr *ngFor="let item of rolPaginateFilter" >
                     <td>{{item.rol}}</td>
                     <td>
                       <span *ngIf="item.estado==1" class="badge badge-success">Habilitado</span>
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)" ><i
+                      <button type="button" [hidden]="item.rol == 'Administrador'" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)" ><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
+                      <button type="button" [hidden]="item.rol =='Administrador'" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
