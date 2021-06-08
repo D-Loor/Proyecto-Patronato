@@ -34,21 +34,35 @@ class CitaController extends Controller
         $roles=Role::where('rol', $especialidad)->first();
         $idrol=$roles['id_rol'];
         $posicion=0;
-
+        $data=[];
         foreach ($datos as $tur)
         {
-            if($tur['turno']['id_rol']!=$idrol){
+            if($tur['turno']['id_rol']==$idrol){
 
-                    unset($datos[$posicion]);
+                  //  unset($datos[$posicion]);
+                    $data = [
+                        'id_cita'=>$datos[$posicion]['id_cita'],
+                        'id_turno' =>$datos[$posicion]['id_turno'],
+                        'nombres'=>$datos[$posicion]['nombres'],
+                        'cedula' =>$datos[$posicion]['cedula'],
+                        'fecha'=>$datos[$posicion]['fecha'],
+                        'estado' =>$datos[$posicion]['estado'],
+                        'abono'=>$datos[$posicion]['abono'],
+                        'turno' =>
+                            array('id_turno'=>$datos[$posicion]['id_turno'],
+                                'id_rol'=>$datos[$posicion]['turno']['id_rol'],
+                                'hora'=>$datos[$posicion]['turno']['hora'])
+
+                    ];
 
             }
 
             $posicion++;
         }
 
-        $cont=count($datos);
+        $cont=count($data);
         if( $cont > 0){
-            return response()->json(['result'=>$datos, 'code'=>'201']);
+            return response()->json(['result'=>$data, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
