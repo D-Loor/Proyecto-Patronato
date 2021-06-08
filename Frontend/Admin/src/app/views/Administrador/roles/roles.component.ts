@@ -24,8 +24,10 @@ export class RolesComponent implements OnInit {
   validarVacio;
   id_rol="";
   result="";
+  EstadoRol;
 
   ClaseRol:string="form-control form-input select-number";
+  ClaseEstado:string="form-control form-input select-number";
 
   loadingText = 'Cargando...';
 
@@ -41,6 +43,7 @@ export class RolesComponent implements OnInit {
 
   limpiar(){
     this.Rol="";
+    this.EstadoRol="";
   }
 
   ngOnInit(): void {
@@ -65,9 +68,9 @@ export class RolesComponent implements OnInit {
       })
     }else{
       this.spinner.show('sample');
-
       let array={
-        "rol": this.Rol
+        "rol": this.Rol,
+        "estado": this.EstadoRol,
       }
       this.administradorService.agregarRol(array).then(data=>{
         this.limpiar();
@@ -83,13 +86,19 @@ export class RolesComponent implements OnInit {
 
   }
   CrearRol(){
-    if(this.Rol==undefined || this.Rol==""){
+    if(this.Rol==undefined || this.Rol=="" || this.EstadoRol==undefined || this.EstadoRol==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para agregar el rol.'
       })
+      if(this.Rol==undefined || this.Rol==""){
         this.ClaseRol = "form-control is-invalid select-number";
+      }
+      if(this.EstadoRol==undefined || this.EstadoRol==""){
+        this.ClaseEstado ="form-control is-invalid select-number";
+      }
+        
 
 
     }
@@ -205,6 +214,7 @@ export class RolesComponent implements OnInit {
             this.spinner.show('sample');
             let arrayUpdate={
               "rol":this.Rol,
+              "estado": this.EstadoRol,
             }
 
             this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
@@ -242,6 +252,7 @@ export class RolesComponent implements OnInit {
 
       this.Rol=data['result'].rol;
       this.id_rol=data['result'].id_rol;
+      this.EstadoRol =data['result'].estado;
     })
   }
 
