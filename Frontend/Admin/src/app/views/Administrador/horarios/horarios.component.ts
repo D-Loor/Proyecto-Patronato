@@ -61,7 +61,7 @@ export class HorariosComponent implements OnInit {
   }
 
   limpiar(){
-    this.hora = "";this.especialidad=""; this.id_turnos=""; this.result="";
+    this.hora = ""; this.id_turnos=""; this.result="";
   }
 
   cargarTablas(){
@@ -84,7 +84,7 @@ export class HorariosComponent implements OnInit {
     });
   }
 
- 
+
 
   alertEliminado(result:string){
     this.spinner.hide('sample');

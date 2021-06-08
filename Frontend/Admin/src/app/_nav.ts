@@ -93,7 +93,7 @@ export const navItems: INavData[] = [
     icon: 'icon-vector'
   },
   {
-    name: 'Horarios de Atención',
+    name: 'Turnos',
     url: '/horarios',
     icon: 'icon-clock'
   },
