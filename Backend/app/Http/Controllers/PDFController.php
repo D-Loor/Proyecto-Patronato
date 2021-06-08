@@ -252,7 +252,11 @@ class PDFController extends Controller
             ->get();
 
             $Result=[];
+            $aggTotales=[];
+            $porcentajes=[];
+            $ContgruposEdadCont=[];
             $n=1;
+            $cont=0;
                 $total[0]=0;
                 $total[1]=0;
                 $total[2]=0;
@@ -290,7 +294,7 @@ class PDFController extends Controller
                 $ContgruposEdad[14]=0;
                 $ContgruposEdad[15]=0;
                 $ContgruposEdad[16]=0;
-
+                $ContgruposEdad[17]=0;
 
                 foreach($Paciente as $item2){
                     if($item2->paciente['edad']<0.028){
@@ -345,20 +349,30 @@ class PDFController extends Controller
                     $total[$i]=$total[$i]+$ContgruposEdad[$i];
                 }
 
+                $ContgruposEdadCont[$cont]=$ContgruposEdad[16];
+                
 
-
-                for($i=0; $i<=13; $i++){
-                    if($ContgruposEdad[$i]==0){
+                for($i=0; $i<=15; $i++){
+                    if($ContgruposEdad[$i]==0){ 
                         $ContgruposEdad[$i]="";
                     }
                 }
 
                 $Result[]=[$n,$top20,$ContgruposEdad];
+                $cont++;
                 $n++;
             }
 
+            for($i=0; $i<=$cont-1; $i++){
+                $porcentajes[$i]=$ContgruposEdadCont[$i]/$total[16];
+                $redondear= round($porcentajes[$i]*100, 2); 
+                $porcentajes[$i]=$redondear;
+            }
+
+            
+
             //return response()->json(['result'=>$Result]);
-        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
+        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','top20','total','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
 
     }
 
