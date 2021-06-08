@@ -201,7 +201,7 @@
                 	<td>N°</td>
                     <td>1</td>
                     <td>2</td>
-                    <td >3</td>
+                    <td>3</td>
                     <td>4</td>
                     <td>5</td>
                     <td>6</td>
@@ -229,7 +229,12 @@
                                 <td class="numero">{{$item[$i]}}</td>
                             @endif
                             @if ($i != 0)
-                                <td>{{$item[$i]}}</td>
+                                @if($item[$i] != 0){
+                                    <td>{{$item[$i]}}</td>
+                                }@else{
+                                    <td></td>
+                                }@endif
+                                
                             @endif
 
                         @endfor

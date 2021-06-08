@@ -122,21 +122,48 @@
                 <tbody>
                     <tr class="azul">
                         <th> MEDICINA GENERAL </th>
-                        <td>{{$MGcontH}}</td>
-                        <td>{{$MGcontM}}</td>
-                        <td>{{$datosMG}}</td>
+                        
+                        @if($MGcontH != 0){
+                            <td>{{$MGcontH}}</td>
+                        }@else{
+                            <td> </td>
+                        }@endif
+
+                        @if($MGcontM != 0){
+                            <td>{{$MGcontM}}</td>
+                        }@else{
+                            <td> </td>
+                        }@endif
+
+                            <td>{{$datosMG}}</td>
+  
                     </tr>
                     <tr class="azul">
                         <th> REHABILITACION FISICA </th>
-                        <td>{{$RFcontH}}</td>
-                        <td>{{$RFcontM}}</td>
-                        <td>{{$datosRF}}</td>
+
+                        @if($RFcontH != 0){
+                            <td>{{$RFcontH}}</td>
+                        }@else{
+                            <td> </td>
+                        }@endif
+
+                        @if($RFcontM != 0){
+                            <td>{{$RFcontM}}</td>
+                        }@else{
+                            <td> </td>
+                        }@endif
+
+                            <td>{{$datosRF}}</td>
+
                     </tr>
                     <tr class="rojo">
+
                         <th> TOTAL </th>
+
                         <td>{{$TotalH}}</td>
                         <td>{{$TotalM}}</td>
                         <td>{{$Total}}</td>
+ 
                     </tr>
 
                 </tbody>

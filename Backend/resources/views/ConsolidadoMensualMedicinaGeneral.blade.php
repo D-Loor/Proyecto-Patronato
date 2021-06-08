@@ -169,16 +169,13 @@
         }
 
         .segt {
-            position: relative;
+            position: absolute;
             margin-left: 920px;
-            margin-top: 25px;
+            margin-top: 55px;
             margin-right: 100px;
             padding-right: 100px;
         }
-        .segt td, .segt th{
-            height: 2px;
-            padding: 3px;
-        }
+        
 
         .nborde {
             border: none;
@@ -403,15 +400,26 @@
                                 <th>{{$item[$i]}}</th>
                             @endif
                             @if ($i >= 7 && $i <= 18) 
-                                <td class="prevencion">{{$item[$i]}}</td>
+                                @if($item[$i] != 0){
+                                    <td class="prevencion">{{$item[$i]}}</td>
+                                }@else{
+                                    <td class="prevencion"> </td>
+                                }@endif
                             @endif
                             @if ($i === 29)
-                                <td class="prevencion">{{$item[$i]}}</td>
+                                @if($item[$i] != 0){
+                                    <td class="prevencion">{{$item[$i]}}</td>
+                                }@else{
+                                    <td class="prevencion"> </td>
+                                }@endif
                             @endif
                             @if ($i >= 1 && $i <= 6 || $i>= 19 && $i <= 28 || $i>= 30 && $i <= 35) 
-                                <td>{{$item[$i]}}</td>
+                                @if($item[$i] != 0){
+                                    <td>{{$item[$i]}}</td>
+                                }@else{
+                                    <td></td>
+                                }@endif
                             @endif
-
                         @endfor
                     </tr>
                     @endforeach
