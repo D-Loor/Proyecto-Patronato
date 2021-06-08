@@ -21,6 +21,7 @@ export class RolesComponent implements OnInit {
   search=null;
   estado=0;
   Rol="";
+  RolActualizar="";
   validarVacio;
   id_rol="";
   result="";
@@ -198,11 +199,16 @@ export class RolesComponent implements OnInit {
         if (result.isConfirmed) {
 
           let validator=0;
-          for (let item of Object.keys(this.rol)) {
-            if(this.rol[item]['rol'] == this.Rol){
-              validator=1;
+
+          if(this.RolActualizar!=this.Rol){
+
+            for (let item of Object.keys(this.rol)) {
+              if(this.rol[item]['rol'] == this.Rol){
+                validator=1;
+              }
             }
           }
+
           if(validator==1){
             Swal.fire({
               icon: 'error',
@@ -248,12 +254,15 @@ export class RolesComponent implements OnInit {
 
   cargarEditar(id:string){
     this.estado=1;
+
     this.administradorService.cargarRolId(id).then(data =>{
 
       this.Rol=data['result'].rol;
       this.id_rol=data['result'].id_rol;
+      this.RolActualizar=data['result'].rol;
       this.EstadoRol =data['result'].estado;
     })
+
   }
 
   buscar(){
