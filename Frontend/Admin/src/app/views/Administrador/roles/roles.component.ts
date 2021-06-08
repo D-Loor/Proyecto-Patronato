@@ -98,7 +98,7 @@ export class RolesComponent implements OnInit {
       if(this.EstadoRol==undefined || this.EstadoRol==""){
         this.ClaseEstado ="form-control is-invalid select-number";
       }
-        
+
 
 
     }
@@ -185,11 +185,11 @@ export class RolesComponent implements OnInit {
       })
 
       swalWithBootstrapButtons.fire({
-        title: '¿Desea Actualizar este Turno?',
+        title: '¿Desea Actualizar este Rol?',
         text: "Una vez actualizado podrá verlo en registros.",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Si, actualizar turno!',
+        confirmButtonText: 'Si, actualizar rol!',
         cancelButtonText: 'No, cancelar!',
         confirmButtonColor: '#20a8d8',
         cancelButtonColor: '#f86c6b',
@@ -236,7 +236,7 @@ export class RolesComponent implements OnInit {
         ) {
           swalWithBootstrapButtons.fire(
             '¡Cancelado..!',
-            'El turno no se ha actualizado.',
+            'El rol no se ha actualizado.',
             'error'
           )
         }
