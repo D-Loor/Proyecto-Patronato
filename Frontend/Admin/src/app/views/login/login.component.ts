@@ -61,7 +61,17 @@ export class LoginComponent implements OnInit {
             icon: 'error',
             confirmButtonText: 'OK'
           })
-        }else{
+        }
+        else if(data['code'] == "203"){
+          this.spinner.hide('sample');
+          Swal.fire({
+            title: '¡Cuenta Inhabilitada..!',
+            text: 'La cuenta se encuentra en estado inhabilitada.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          })
+        }
+        else{
           localStorage.setItem('sesionLogin', data['result'][0].id_cuenta);
           localStorage.setItem('rol', data['result'][0].role.rol);
           localStorage.setItem('sesionLoginInicio', 'true');

@@ -16,12 +16,12 @@ class CuentaController extends Controller
     public function index()
     {
         //$datos=Cuenta::with('role')->paginate(5);
-        $datos=Cuenta::with('role')->get();  
+        $datos=Cuenta::with('role')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
-           return response()->json(['result'=>$datos]); 
+           return response()->json(['result'=>$datos]);
        }else
-           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']); 
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
     }
 
     /**
@@ -48,7 +48,7 @@ class CuentaController extends Controller
         $name_File = str_replace(" ", "_", $filename);
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
-        $file->move(public_path('/imagenes'),$picture); 
+        $file->move(public_path('/imagenes'),$picture);
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
@@ -68,7 +68,7 @@ class CuentaController extends Controller
      */
     public function show($id)
     {
-        $datos=Cuenta::with('role')->where('id_cuenta', $id)->get()->first(); 
+        $datos=Cuenta::with('role')->where('id_cuenta', $id)->get()->first();
         if($datos != null){
             return response()->json(['result'=>$datos]);
         }else
@@ -96,7 +96,7 @@ class CuentaController extends Controller
     public function update($id_cuenta)
     {
         $datos=Cuenta::find($id_cuenta);
-        
+
         if($datos != null){
             $datos->id_rol= request('id_rol');
             $datos->nombres= request('nombres');
@@ -108,13 +108,13 @@ class CuentaController extends Controller
         }else{
             return response()->json(['mensaje'=>'Dato no encontrado', 'code'=>'202']);
         }
-        
+
     }
 
     public function actualizar(Request $request)
     {
         $datos=Cuenta::where('id_rol', $request->id_cuenta)->get()->first();
-        
+
         if($datos != null){
         $file = $request->file('imagen');
         $filename = $file->getClientOriginalName();
@@ -122,7 +122,7 @@ class CuentaController extends Controller
         $name_File = str_replace(" ", "_", $filename);
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
-        $file->move(public_path('/imagenes'),$picture); 
+        $file->move(public_path('/imagenes'),$picture);
 
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
@@ -133,7 +133,7 @@ class CuentaController extends Controller
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else
             return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
-        
+
     }
 
     /**
@@ -144,10 +144,10 @@ class CuentaController extends Controller
      */
     public function eliminar($id)
     {
-        $datos=Cuenta::where('id_cuenta', $id)->get()->first();  
+        $datos=Cuenta::where('id_cuenta', $id)->get()->first();
         if($datos != null){
             //$archivo=CONCAT('public', '/', 'imagenes', '/',  $datos->imagen);
-            
+
             Storage::delete('022424-hola.jpeg');
             //$datos->delete();
             return response()->json(['result'=>'public/imagenes/'.$datos->imagen, 'code'=>'201']);
@@ -158,11 +158,18 @@ class CuentaController extends Controller
     public function validar ($correo, $pass){
 
         $datos=Cuenta::where('correo', $correo)->where('password', $pass)->with('role')->get();
+
         $num_rows = count($datos);
         if($num_rows != 0){
-           return response()->json(['result'=>$datos]); 
+
+            if($datos[0]['role']['estado'] == 1){
+                return response()->json(['result'=>$datos]);
+            }else{
+                return response()->json(['mensaje'=>"Usuario desabilitado", 'code'=>'203']);
+            }
+
         }else
-           return response()->json(['mensaje'=>"Usuario no encontrado", 'code'=>'202']); 
+           return response()->json(['mensaje'=>"Usuario no encontrado", 'code'=>'202']);
     }
 
 }
