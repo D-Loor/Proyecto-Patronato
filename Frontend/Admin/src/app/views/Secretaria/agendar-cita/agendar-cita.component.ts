@@ -76,7 +76,7 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   cargarRoles(){
-    this.administradorService.cargarRoles().then(data=>{
+    this.administradorService.RolesCitas().then(data=>{
       this.listaRoles=data['result'];
     }).catch(error =>{
       console.log(error);
@@ -445,16 +445,11 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Turnos(fecha:Date){
-    let tipo;
+
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
     let array ={};
-    if(this.especialidad=="Medicina General"){
-      tipo="MG"
-    }else{
-      tipo="RF"
-    }
-    this.ServicioSecretaria.ValidarTurno(fecha,tipo).then(data =>{
+    this.ServicioSecretaria.ValidarTurno(fecha,this.especialidad).then(data =>{
         if(data['code']=='202'){
           Swal.fire(
             '¡Lo sentimos..!',
