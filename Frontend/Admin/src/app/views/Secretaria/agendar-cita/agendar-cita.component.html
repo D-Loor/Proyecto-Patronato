@@ -38,8 +38,8 @@
                                                   <div class="form-group col-md-12">
                                                       <label for="text-input">Especialidad</label>
                                                       <select id="especialidad" (change)="LimpiarTurno()" (click)="ClaseCEspecialidad='form-control form-input select-number'" [class]="ClaseCEspecialidad" [(ngModel)]="especialidad" name="especialidad" required>
-                                                          <option value="Medicina General">Medicina General</option>
-                                                          <option value="Rehabilitacion Fisica">Rehabilitación Física</option>
+                                                        <option *ngFor="let item of listaRoles" value="{{item.rol}}" >{{item.rol}}</option>
+
                                                       </select>
                                                   </div>
                                               </div>

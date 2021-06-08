@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import { CitasService } from '../../../servicios/citas.service';
+import { AdministradorService } from '../../../servicios/administrador.service';
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -17,7 +18,7 @@ import { CitasService } from '../../../servicios/citas.service';
 
 export class AgendarCitaComponent implements OnInit {
 
-  constructor(public rutas:Router, public citasser:CitasService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
+  constructor(public rutas:Router,private administradorService:AdministradorService, public citasser:CitasService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
 
 
   loadingText = 'Guardando...';
@@ -56,9 +57,11 @@ export class AgendarCitaComponent implements OnInit {
   nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos;
   estado=0;
   ArrayTurnos: any = []
+  listaRoles:any=[];
 
   ngOnInit() {
 
+    this.cargarRoles();
     this.idCita = localStorage.getItem('idCita');
     this.cedulaCita= localStorage.getItem('cedulaCita');
     if(localStorage.getItem('abonoCita')=="1"){
@@ -70,6 +73,14 @@ export class AgendarCitaComponent implements OnInit {
       this.cedula=localStorage.getItem('cedulaCita');
       this.estado=1;
     }
+  }
+
+  cargarRoles(){
+    this.administradorService.cargarRoles().then(data=>{
+      this.listaRoles=data['result'];
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   toggleMinimize(e) {

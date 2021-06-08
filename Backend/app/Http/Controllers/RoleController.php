@@ -23,6 +23,16 @@ class RoleController extends Controller
            return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
     }
 
+    public function mostrar(){
+        $datos=Role::where('rol','!=','Administrador')->where('estado',true);
+        $num_rows = count($datos);
+        if($num_rows!=0){
+           return response()->json(['result'=>$datos]);
+        }else
+           return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
