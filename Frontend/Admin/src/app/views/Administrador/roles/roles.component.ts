@@ -261,6 +261,7 @@ export class RolesComponent implements OnInit {
       this.id_rol=data['result'].id_rol;
       this.RolActualizar=data['result'].rol;
       this.EstadoRol =data['result'].estado;
+      window.scrollTo(0, 0);
     })
 
   }

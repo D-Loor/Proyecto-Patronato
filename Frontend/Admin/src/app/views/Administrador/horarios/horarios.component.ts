@@ -256,7 +256,7 @@ export class HorariosComponent implements OnInit {
       this.hora=data['result'].hora;
       this.especialidad=data['result'].id_rol;
       this.id_turnos=data['result'].id_turno;
-
+      window.scrollTo(0, 0);
     });
   }
 

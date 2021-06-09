@@ -25,11 +25,7 @@ export const navItems: INavData[] = [
     url: '/reportesmedicinageneral',
     icon: 'icon-chart'
   },
-  {
-    name: 'Certificados',
-    url: '/#',
-    icon: 'icon-star'
-  },
+
   {
     title: true,
     name: 'Rehabilitación Física'
@@ -54,11 +50,7 @@ export const navItems: INavData[] = [
     url: '/reportesrehabilitacionfisica',
     icon: 'icon-chart'
   },
-  {
-    name: 'Certificados',
-    url: '/#',
-    icon: 'icon-star'
-  },
+
   {
     title: true,
     name: 'Secretaría'
