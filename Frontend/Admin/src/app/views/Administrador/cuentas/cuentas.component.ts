@@ -264,6 +264,8 @@ export class CuentasComponent implements OnInit {
   }
   cargarEditar(id:any){
     this.estado=1;
+    this.isCollapsed1=false;
+
 
     this.administradorService.cargarCuentaId(id).then(data => {
       this.id_cuenta=data['result'].id_cuenta;

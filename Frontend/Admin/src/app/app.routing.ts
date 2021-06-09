@@ -8,6 +8,7 @@ import { TloginGuard } from './guards/tlogin.guard';
 import { AloginGuard } from './guards/alogin.guard';
 import { SloginGuard } from './guards/slogin.guard';
 import { PloginGuard } from './guards/plogin.guard';
+import { HcloginGuard } from './guards/hclogin.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -110,9 +111,11 @@ export const routes: Routes = [
       },
       {
         path: 'registrarhistoriaclinica',
-        canActivate:[SloginGuard],
+        canActivate:[HcloginGuard],
         loadChildren: () => import('./views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module').then(m => m.RegistrarHistoriaClinicaModule)
       },
+
+      //Administrador
       {
         path: 'cuentas',
         canActivate:[AloginGuard],

@@ -252,6 +252,8 @@ export class HorariosComponent implements OnInit {
 
   cargarEditar(id:string){
     this.estado=1;
+    this.isCollapsed1=false;
+
     this.administradorService.cargarTurnosId(id).then(data =>{
       this.hora=data['result'].hora;
       this.especialidad=data['result'].id_rol;

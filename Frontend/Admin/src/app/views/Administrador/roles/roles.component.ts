@@ -254,6 +254,7 @@ export class RolesComponent implements OnInit {
 
   cargarEditar(id:string){
     this.estado=1;
+    this.isCollapsed1=false;
 
     this.administradorService.cargarRolId(id).then(data =>{
 
