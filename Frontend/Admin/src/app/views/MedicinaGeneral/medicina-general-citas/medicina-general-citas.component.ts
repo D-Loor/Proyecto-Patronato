@@ -70,7 +70,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.Estadisticas(this.FechaInicio,this.FechaFin);
+    this.Estadisticas(this.FechaInicio,this.FechaFin, this.especialidad);
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
   }
@@ -94,9 +94,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
     }
   }
-  Estadisticas(Inicio:string, Fin:string){
+  Estadisticas(Inicio:string, Fin:string, especialidad:string){
 
-    this.medicina.Estadisticas(Inicio,Fin).then(data =>{
+    this.medicina.Estadisticas(Inicio,Fin, especialidad).then(data =>{
       this.TotalPacientes = data['totalP'];
       this.TotalCitasPendientes = data['totalC'];
       this.ServidoresPublicos = data['totalG'];

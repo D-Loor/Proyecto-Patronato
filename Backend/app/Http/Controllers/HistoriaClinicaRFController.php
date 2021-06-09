@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Historia_Clinica_RF;
 use Illuminate\Http\Request;
 use App\Models\Cita;
+use App\Models\Role;
 
 class HistoriaClinicaRFController extends Controller
 {
@@ -142,7 +143,7 @@ class HistoriaClinicaRFController extends Controller
         }
 
     }
-    public function DatosEstadisticos($fechaInicial, $fechaFinal){
+    public function DatosEstadisticos($fechaInicial, $fechaFinal, $especialidad){
         $pacientes=Historia_Clinica_RF::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente')->get();
 
         $patro=0;
@@ -152,7 +153,8 @@ class HistoriaClinicaRFController extends Controller
         $contH = 0;
         $contM =0;
 
-        $citasPendientes = Cita::all();
+        $citasPendientes = Cita::with('turno')->get();
+        $rol = Role::all();
 
         foreach ($pacientes as $item){
             if($item['lugar_atencion']=='Patronato')
@@ -176,8 +178,15 @@ class HistoriaClinicaRFController extends Controller
                 $contM++;
         }
         foreach ($citasPendientes as $item){
-            if($item['especialidad']=='Rehabilitacion Fisica')
-                $TotalcitasPendientes++;
+            foreach($rol as $itemRol){
+                if($item['turno']['id_rol'] == $itemRol['id_rol']){
+                    $especialidadT= $itemRol['rol'];
+                    if($especialidadT == $especialidad){
+                        $TotalcitasPendientes++;
+                    }
+                }
+                
+            }
         }
 
         $TotalPacientes = count($pacientes);

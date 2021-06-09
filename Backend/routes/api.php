@@ -51,8 +51,8 @@ Route::get('FechasRangosMG/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGContr
 Route::get('pacientesConcultas/{id}', 'HistoriaClinicaMGController@ConsultasPacientes');
 Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFController@FiltradoFecha');
 Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoFamiliarController@eliminar');
-Route::get('estadisticas/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@DatosEstadisticos');
-Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}',  'HistoriaClinicaRFController@DatosEstadisticos');
+Route::get('estadisticas/{fechaInicial}/{fechaFinal}/{especialidad}', 'HistoriaClinicaMGController@DatosEstadisticos');
+Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}/{especialidad}',  'HistoriaClinicaRFController@DatosEstadisticos');
 Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
 Route::post('actualizarCuenta','CuentaController@actualizar');
 Route::delete('eliminarCuenta/{id}','CuentaController@eliminar');

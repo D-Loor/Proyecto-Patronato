@@ -6,6 +6,7 @@ use App\Models\Historia_Clinica_MG;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Cita;
+use App\Models\Role;
 
 class HistoriaClinicaMGController extends Controller
 {
@@ -165,7 +166,7 @@ class HistoriaClinicaMGController extends Controller
 
     }
 
-    public function DatosEstadisticos($fechaInicial, $fechaFinal){
+    public function DatosEstadisticos($fechaInicial, $fechaFinal, $especialidad){
         $pacientes=Historia_Clinica_MG::whereBetween('fecha', [$fechaInicial, $fechaFinal])->with('paciente','enfermedad')->get();
 
         $presunt=0;
@@ -175,7 +176,8 @@ class HistoriaClinicaMGController extends Controller
         $contH = 0;
         $contM =0;
 
-        $citasPendientes = Cita::all();
+        $citasPendientes = Cita::with('turno')->get();
+        $rol = Role::all();
 
         foreach ($pacientes as $item){
             if($item['condicion_diagnostico']=='Presuntivo')
@@ -198,14 +200,24 @@ class HistoriaClinicaMGController extends Controller
             if($item->paciente['sexo']=='Mujer')
                 $contM++;
         }
+
         foreach ($citasPendientes as $item){
-            if($item['especialidad']=='Medicina General')
-                $TotalcitasPendientes++;
+            foreach($rol as $itemRol){
+                if($item['turno']['id_rol'] == $itemRol['id_rol']){
+                    $especialidadT= $itemRol['rol'];
+                    if($especialidadT == $especialidad){
+                        $TotalcitasPendientes++;
+                    }
+                }
+                
+            }
+
         }
 
         $TotalPacientes = count($pacientes);
 
         return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'presuntivo'=>$presunt,'definitivo'=> $defini]);
+        //return response()->json(['result'=>$TotalcitasPendientes, 'code'=>'202']);
 
     }
 
