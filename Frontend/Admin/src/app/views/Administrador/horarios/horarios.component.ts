@@ -156,7 +156,6 @@ export class HorariosComponent implements OnInit {
   }
 
   CrearTurno(){
-
     if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""){
       Swal.fire({
         icon: 'error',
@@ -181,7 +180,6 @@ export class HorariosComponent implements OnInit {
         },
         buttonsStyling: true
       })
-
       swalWithBootstrapButtons.fire({
         title: '¿Desea crear este turno?',
         text: "Una vez agregado podrá verlo en registros.",
@@ -194,7 +192,6 @@ export class HorariosComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
-
           this.guardar();
 
         } else if (
@@ -207,7 +204,7 @@ export class HorariosComponent implements OnInit {
             'error'
           )
         }
-      })
+      });
     }
 
   }

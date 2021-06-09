@@ -15,7 +15,7 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        $datos=Turno::with('rroles')->get();
+        $datos=Turno::orderBy('hora')->with('rroles')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]);
