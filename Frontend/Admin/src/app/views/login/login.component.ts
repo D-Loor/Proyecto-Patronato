@@ -74,9 +74,21 @@ export class LoginComponent implements OnInit {
         else{
           localStorage.setItem('sesionLogin', data['result'][0].id_cuenta);
           localStorage.setItem('rol', data['result'][0].role.rol);
-          localStorage.setItem('sesionLoginInicio', 'true');
+          localStorage.setItem('sesionLoginInicio', data['result'][0].role.rol);
           this.arraydat=data['result'];
-          this.rutas.navigate(['/medicinageneralcitas']);
+          if(data['result'][0].role.rol == "Administrador"){
+            this.rutas.navigate(['/cuentas']);
+          }else if(data['result'][0].role.rol == "Medicina General"){
+            this.rutas.navigate(['/medicinageneralcitas']);
+          }else if(data['result'][0].role.rol == "Rehabilitación Física"){
+            this.rutas.navigate(['/rehabilitacionfisicacitas']);
+          }else if(data['result'][0].role.rol == "Secretaría"){
+            this.rutas.navigate(['/citas']);
+          }else{
+            this.rutas.navigate(['/404']);
+          }
+
+
           this.spinner.hide('sample');
 
         }

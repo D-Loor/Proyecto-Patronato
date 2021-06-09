@@ -4,6 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { GloginGuard } from './guards/glogin.guard';
+import { TloginGuard } from './guards/tlogin.guard';
+import { AloginGuard } from './guards/alogin.guard';
+import { SloginGuard } from './guards/slogin.guard';
+import { PloginGuard } from './guards/plogin.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -27,7 +31,6 @@ export const routes: Routes = [
   {
     path: '500',
     component: P500Component,
-    canActivate:[GloginGuard],
     data: {
       title: 'Page 500'
     }
@@ -40,90 +43,89 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate:[GloginGuard],
-    data: {
-      title: 'Register Page'
-    }
-  },
-  {
     path: '',
     component: DefaultLayoutComponent,
-    canActivate:[GloginGuard],
     data: {
-      title: 'Home'
+      title: 'Historia Clínica'
     },
     children: [
       //Medicina General
       {
         path: 'medicinageneral',
+        canActivate:[GloginGuard],
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general/medicina-general.module').then(m => m.MedicinaGeneralModule)
       },
       {
         path: 'medicinageneralcitas',
+        canActivate:[GloginGuard],
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-citas/medicina-general-citas.module').then(m => m.MedicinaGeneralCitasModule)
       },
       {
         path: 'medicinageneralconsultas',
+        canActivate:[GloginGuard],
         loadChildren: () => import('./views/MedicinaGeneral/medicina-general-consultas/medicina-general-consultas.module').then(m => m.MedicinaGeneralConsultasModule)
       },
       {
         path: 'reportesmedicinageneral',
+        canActivate:[GloginGuard],
         loadChildren: () => import('./views/MedicinaGeneral/reportes/reportes.module').then(m => m.ReportesModule)
       },
       {
-        path: 'ReporteMGDiario',
-        loadChildren: () => import('./views/MedicinaGeneral/reportes-mg/diario/diario.module').then(m => m.DiarioMGModule)
-      },
-      {
         path: 'pacientes',
+        canActivate:[PloginGuard],
         loadChildren: () => import('./views/MedicinaGeneral/pacientes/pacientes.module').then(m => m.PacientesModule)
       },
       //Rehabilitación Física
       {
         path: 'rehabilitacionfisica',
+        canActivate:[TloginGuard],
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica/rehabilitacion-fisica.module').then(m => m.RehabilitacionFisicaModule)
       },
       {
         path: 'rehabilitacionfisicaconsultas',
+        canActivate:[TloginGuard],
         loadChildren: () => import('./views/RehabilitacionFisica/consultas/consultas.module').then(m => m.RehabilitacionFisicaConsultaModule)
       },
       {
         path: 'rehabilitacionfisicacitas',
+        canActivate:[TloginGuard],
         loadChildren: () => import('./views/RehabilitacionFisica/rehabilitacion-fisica-citas/rehabilitacion-fisica-citas.module').then(m => m.RehabilitacionFisicaCitasModule)
       },
       {
         path: 'reportesrehabilitacionfisica',
+        canActivate:[TloginGuard],
         loadChildren: () => import('./views/RehabilitacionFisica/reportes/reportes.module').then(m => m.ReportesModuleRF)
       },
-      {
-        path: 'ReporteRFDiario',
-        loadChildren: () => import('./views/RehabilitacionFisica/reportes-rf/diario/diario.module').then(m => m.DiarioRFModule)
-      },
+
       //Secretaría
       {
         path: 'agendarcita',
+        canActivate:[SloginGuard],
         loadChildren: () => import('./views/Secretaria/agendar-cita/agendar-cita.module').then(m => m.AgendarCitaModule)
       },
       {
         path: 'citas',
+        canActivate:[SloginGuard],
         loadChildren: () => import('./views/Secretaria/citas/citas.module').then(m => m.CitasModule)
       },
       {
         path: 'registrarhistoriaclinica',
+        canActivate:[SloginGuard],
         loadChildren: () => import('./views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module').then(m => m.RegistrarHistoriaClinicaModule)
       },
       {
         path: 'cuentas',
+        canActivate:[AloginGuard],
         loadChildren: () => import('./views/Administrador/cuentas/cuentas.module').then(m => m.CuentasModule)
       },
       {
         path: 'roles',
+        canActivate:[AloginGuard],
         loadChildren: () => import('./views/Administrador/roles/roles.module').then(m => m.RolesModule)
       },
       {
         path: 'horarios',
+        canActivate:[AloginGuard],
         loadChildren: () => import('./views/Administrador/horarios/horarios.module').then(m => m.HorariosModule)
       },
 

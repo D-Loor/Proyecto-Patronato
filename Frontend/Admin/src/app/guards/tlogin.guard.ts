@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GloginGuard implements CanActivate {
+export class TloginGuard implements CanActivate {
+
 
   constructor(private rutas:Router){}
 
@@ -15,7 +16,7 @@ export class GloginGuard implements CanActivate {
     if(!inicio){
       this.rutas.navigate(["login"]);
       return false;
-    }else if(rol != "Medicina General"){
+    }else if(rol != "Rehabilitación Física"){
       return false;
     }
     return true;

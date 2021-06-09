@@ -35,11 +35,11 @@ export class DefaultLayoutComponent implements OnInit {
     else if(this.Rol=='Rehabilitación Física'){
       this.navItems = navItemsRF;
     }
-    else if(this.Rol=='Secretaria'){
+    else if(this.Rol=='Secretaría'){
       this.navItems = navItemsST;
     }
-    else{
-      this.navItems = navItems;
+    else if(this.Rol=='Administrador'){
+      this.navItems = navItemsAdmin;
     }
     this.user();
   }
