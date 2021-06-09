@@ -38,23 +38,7 @@ class CitaController extends Controller
         foreach ($datos as $tur)
         {
             if($tur['turno']['id_rol']==$idrol){
-
-                  //  unset($datos[$posicion]);
-                    $data = [
-                        'id_cita'=>$datos[$posicion]['id_cita'],
-                        'id_turno' =>$datos[$posicion]['id_turno'],
-                        'nombres'=>$datos[$posicion]['nombres'],
-                        'cedula' =>$datos[$posicion]['cedula'],
-                        'fecha'=>$datos[$posicion]['fecha'],
-                        'estado' =>$datos[$posicion]['estado'],
-                        'abono'=>$datos[$posicion]['abono'],
-                        'turno' =>
-                            array('id_turno'=>$datos[$posicion]['id_turno'],
-                                'id_rol'=>$datos[$posicion]['turno']['id_rol'],
-                                'hora'=>$datos[$posicion]['turno']['hora'])
-
-                    ];
-
+                  array_push ( $data , $tur );
             }
 
             $posicion++;
