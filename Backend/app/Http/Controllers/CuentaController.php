@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CuentaController extends Controller
 {
@@ -49,6 +50,7 @@ class CuentaController extends Controller
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
         $file->move(public_path('/imagenes'),$picture);
+        $picture = '/imagenes/'.$picture;
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
@@ -113,9 +115,12 @@ class CuentaController extends Controller
 
     public function actualizar(Request $request)
     {
-        $datos=Cuenta::where('id_rol', $request->id_cuenta)->get()->first();
+        $datos=Cuenta::where('id_cuenta', $request->id_cuenta)->get()->first();
 
         if($datos != null){
+        $archivo=substr($datos->imagen,1);
+        File::delete($archivo);
+        
         $file = $request->file('imagen');
         $filename = $file->getClientOriginalName();
         $filename = pathinfo($filename, PATHINFO_FILENAME);
@@ -123,6 +128,8 @@ class CuentaController extends Controller
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
         $file->move(public_path('/imagenes'),$picture);
+        $picture = '/imagenes/'.$picture;
+        
 
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
@@ -131,8 +138,10 @@ class CuentaController extends Controller
         $datos->imagen=$picture;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
-        }else
+        }else{
             return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
+        }
+            
 
     }
 
@@ -146,13 +155,14 @@ class CuentaController extends Controller
     {
         $datos=Cuenta::where('id_cuenta', $id)->get()->first();
         if($datos != null){
-            //$archivo=CONCAT('public', '/', 'imagenes', '/',  $datos->imagen);
-
-            Storage::delete('022424-hola.jpeg');
-            //$datos->delete();
-            return response()->json(['result'=>'public/imagenes/'.$datos->imagen, 'code'=>'201']);
-        }else
-        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+            $archivo=substr($datos->imagen,1);
+            File::delete($archivo);
+            $datos->delete();
+            return response()->json(['result'=>'Registro Eliminado', 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+        
     }
 
     public function validar ($correo, $pass){
