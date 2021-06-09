@@ -26,16 +26,17 @@ export class AdministradorService {
   }
 
   updateCuenta(data:any){
-    let  url = 'http://127.0.0.1:8000/api/Cuentas/';
+    let  url = 'http://127.0.0.1:8000/api/actualizarCuenta';
     var formData = new FormData();
     formData.append('id_rol', data.id_rol);
-    formData.append('id_cuenta', data.cuenta);
+    formData.append('id_cuenta', data.id_cuenta);
     formData.append('nombres', data.nombres);
     formData.append('correo', data.correo);
     formData.append('password', data.password);
     formData.append('imagen', data.imagen);
+    debugger
     return new Promise ((resolve, reject) => {
-      this.http.put(url, formData).subscribe(res => {
+      this.http.post(url, formData).subscribe(res => {
         resolve(res);
       }, error => {
         reject(error);
@@ -80,7 +81,7 @@ export class AdministradorService {
   }
 
   eliminarCuenta($id){
-    let  url = 'http://127.0.0.1:8000/api/Cuentas/'+$id;
+    let  url = 'http://127.0.0.1:8000/api/eliminarCuenta/'+$id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);

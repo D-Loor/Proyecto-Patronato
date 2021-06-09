@@ -58,13 +58,14 @@ class CuentaController extends Controller
         $fileName=uniqid() . $tipoImagen;
         $path=public_path().'/imagenes';
         $file->move($path,$fileName);
+        $picture = '/imagenes/'.$fileName;
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$fileName;
+        $datos->imagen=$picture;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
@@ -143,12 +144,13 @@ class CuentaController extends Controller
         $fileName=uniqid() . $tipoImagen;
         $path=public_path().'/imagenes';
         $file->move($path,$fileName);
+        $picture = '/imagenes/'.$fileName;
 
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$fileName;
+        $datos->imagen=$picture;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else{
