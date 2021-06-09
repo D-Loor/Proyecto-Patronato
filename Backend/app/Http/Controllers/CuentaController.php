@@ -43,21 +43,28 @@ class CuentaController extends Controller
      */
         public function store(Request $request)
     {
-        $file = $request->file('imagen');
+        /*$file = $request->file('imagen');
         $filename = $file->getClientOriginalName();
         $filename = pathinfo($filename, PATHINFO_FILENAME);
         $name_File = str_replace(" ", "_", $filename);
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
         $file->move(public_path('/imagenes'),$picture);
-        $picture = '/imagenes/'.$picture;
+        $picture = '/imagenes/'.$picture;*/
+
+        $file=$request->file('imagen');
+        $nombre=$file->getClientMimeType();
+        $tipoImagen=str_replace('image/', '.',$nombre);
+        $fileName=uniqid() . $tipoImagen;
+        $path=public_path().'/imagenes';
+        $file->move($path,$fileName);
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$picture;
+        $datos->imagen=$fileName;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
@@ -121,21 +128,27 @@ class CuentaController extends Controller
         $archivo=substr($datos->imagen,1);
         File::delete($archivo);
         
-        $file = $request->file('imagen');
+        /*$file = $request->file('imagen');
         $filename = $file->getClientOriginalName();
         $filename = pathinfo($filename, PATHINFO_FILENAME);
         $name_File = str_replace(" ", "_", $filename);
         $extension = $file->getClientOriginalExtension();
         $picture = date('His').'-'.$name_File.'.'.$extension;
         $file->move(public_path('/imagenes'),$picture);
-        $picture = '/imagenes/'.$picture;
+        $picture = '/imagenes/'.$picture;*/
         
+        $file=$request->file('imagen');
+        $nombre=$file->getClientMimeType();
+        $tipoImagen=str_replace('image/', '.',$nombre);
+        $fileName=uniqid() . $tipoImagen;
+        $path=public_path().'/imagenes';
+        $file->move($path,$fileName);
 
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
-        $datos->imagen=$picture;
+        $datos->imagen=$fileName;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else{
