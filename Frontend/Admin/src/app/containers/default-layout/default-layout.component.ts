@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
+import { navItemsMG } from '../../_nav';
+import { navItemsRF } from '../../_nav';
+import { navItemsST } from '../../_nav';
+import { navItemsAdmin } from '../../_nav';
 import {LoginService} from '../../servicios/login.service';
 import { Router} from '@angular/router';
 
@@ -12,18 +16,31 @@ export class DefaultLayoutComponent implements OnInit {
   constructor(public login:LoginService, public rutas:Router) { }
 
   public sidebarMinimized = false;
-  public navItems = navItems;
- 
+  public navItems = null;
+
   id:string=localStorage.getItem('sesionLogin');
   usuario:any [];
   Nombre:string;
   Imagen:string;
+  Rol:string=localStorage.getItem('rol');
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
   ngOnInit() {
+    if(this.Rol=='Medicina General'){
+      this.navItems = navItemsMG;
+    }
+    else if(this.Rol=='Rehabilitación Física'){
+      this.navItems = navItemsRF;
+    }
+    else if(this.Rol=='Secretaria'){
+      this.navItems = navItemsST;
+    }
+    else{
+      this.navItems = navItems;
+    }
     this.user();
   }
 
