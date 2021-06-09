@@ -17,8 +17,24 @@ class TurnoController extends Controller
     {
         $datos=Turno::orderBy('hora')->with('rroles')->get();
         $num_rows = count($datos);
+        $data=[];
         if($num_rows!=0){
-           return response()->json(['result'=>$datos]);
+            foreach ($datos as $tur)
+            {
+                if($tur['rroles']['rol']=='Medicina General'){
+                      array_push ( $data , $tur );
+                }
+
+            }
+            foreach ($datos as $tur)
+            {
+                if($tur['rroles']['rol']=='Rehabilitación Física'){
+                      array_push ( $data , $tur );
+                }
+
+            }
+
+           return response()->json(['result'=>$data]);
        }else
            return response()->json(['mensaje'=>"No existen datos registrados", 'code'=>'202']);
     }
