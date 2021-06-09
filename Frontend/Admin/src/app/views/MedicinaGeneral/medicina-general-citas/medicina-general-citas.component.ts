@@ -265,7 +265,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.rutas.navigate(['/pacientes']);
   }
 
-  CrearHistoriaClinica(){
+  CrearHistoriaClinica(algo:string){
+    localStorage.setItem('RolV', algo);
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 

@@ -29,11 +29,11 @@ class CitaController extends Controller
     }
 
     public function validarMGandRF($especialidad,$fechaActual){
-
+        
         $datos=Cita::where('fecha',$fechaActual)->with('turno')->get();
         $roles=Role::where('rol', $especialidad)->first();
         $idrol=$roles['id_rol'];
-        $posicion=0;
+        //$posicion=0;
         $data=[];
         foreach ($datos as $tur)
         {
@@ -41,9 +41,15 @@ class CitaController extends Controller
                   array_push ( $data , $tur );
             }
 
-            $posicion++;
+            //$posicion++;
         }
 
+        foreach ($data as $key => $row) {
+            $aux[$key] = $row['turno']['hora'];
+        }
+
+        array_multisort($aux, SORT_ASC, $data);
+        
         $cont=count($data);
         if( $cont > 0){
             return response()->json(['result'=>$data, 'code'=>'201']);

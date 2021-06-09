@@ -238,7 +238,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     localStorage.setItem('idCita', idCita);
   }
 
-  CrearHistoriaClinica(){
+  CrearHistoriaClinica(algo:string){
+    localStorage.setItem('RolV', algo);
     this.rutas.navigate(['/registrarhistoriaclinica']);
   }
 
