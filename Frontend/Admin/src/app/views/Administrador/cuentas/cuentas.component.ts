@@ -264,7 +264,7 @@ export class CuentasComponent implements OnInit {
   }
   cargarEditar(id:any){
     this.estado=1;
-    debugger
+
     this.administradorService.cargarCuentaId(id).then(data => {
       this.id_cuenta=data['result'].id_cuenta;
       this.nombres=data['result'].nombres;
@@ -275,7 +275,7 @@ export class CuentasComponent implements OnInit {
       this.rol=data['result']['role'].id_rol;
       this.editarA=data['result']['role'].rol;
       this.foto=data['result'].imagen;
-      debugger
+      window.scrollTo(0, 0);
     }).catch((error) => {
       console.log(error);
     });
@@ -371,7 +371,7 @@ export class CuentasComponent implements OnInit {
               "imagen": this.foto
 
             }
-            debugger
+
             this.administradorService.updateCuenta(arrayUpdate).then(data =>{
               data['result'];
               this.spinner.hide('sample');
