@@ -54,6 +54,7 @@ export class CuentasComponent implements OnInit {
     showSpinner: false
   };
 
+  
   limpiar(){
     this.nombres="";this.password="";this.correo="";this.rol=""; this.foto="";
   }
