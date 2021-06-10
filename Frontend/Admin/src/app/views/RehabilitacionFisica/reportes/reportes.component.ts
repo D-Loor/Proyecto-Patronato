@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ReportesService } from '../../../servicios/reportes.service';
 
@@ -10,7 +11,7 @@ import { ReportesService } from '../../../servicios/reportes.service';
 })
 export class ReportesComponent implements OnInit {
 
-  constructor(public Report:ReportesService) { }
+  constructor(public Report:ReportesService, public rutas:Router) { }
 
   isCollapsed1=true;
   isCollapsed2=true;
@@ -104,8 +105,9 @@ export class ReportesComponent implements OnInit {
             }else{
               window.open('http://127.0.0.1:8000/api/RegistroDiarioFisica/'+this.FechaDia, '_blank');
             }
-          }).catch(error =>{
+          }).catch((error) => {
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Consolidado"){
           this.Report.ConsolidadoRF(this.CMes,this.CYear).then(data =>{
@@ -118,8 +120,9 @@ export class ReportesComponent implements OnInit {
             }else{
               window.open('http://127.0.0.1:8000/api/ConsolidadoMensualTerapia/'+this.CMes+'/'+this.CYear, '_blank');
             }
-          }).catch(error =>{
+          }).catch((error) => {
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Morbilidad"){
           this.Report.MorbilidadRF(this.MMes,this.MYear).then(data =>{
@@ -132,8 +135,9 @@ export class ReportesComponent implements OnInit {
             }else{
               window.open('http://127.0.0.1:8000/api/MorbilidadTerapia/'+this.MMes+'/'+this.MYear, '_blank');
             }
-          }).catch(error =>{
+          }).catch((error) => {
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Pacientes Mensual"){
           this.Report.PacientesMensual(this.PMes,this.PYear).then(data =>{
@@ -146,8 +150,9 @@ export class ReportesComponent implements OnInit {
             }else{
               window.open('http://127.0.0.1:8000/api/ReportePacientesMensual/'+this.PMes+'/'+this.PYear, '_blank');
             }
-          }).catch(error =>{
+          }).catch((error) => {
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Pacientes Anual"){
           this.Report.PacientesAnual(this.PAYear).then(data =>{
@@ -160,8 +165,9 @@ export class ReportesComponent implements OnInit {
             }else{
               window.open('http://127.0.0.1:8000/api/ReportePacientesAnual/'+this.PAYear, '_blank');
             }
-          }).catch(error =>{
+          }).catch((error) => {
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }
 

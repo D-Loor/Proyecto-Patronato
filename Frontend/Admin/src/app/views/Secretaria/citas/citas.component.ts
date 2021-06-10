@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
-import { SecretariaService } from '../../../servicios/secretaria.service';
 
 @Component({
   selector: 'app-citas',
@@ -13,7 +12,7 @@ import { SecretariaService } from '../../../servicios/secretaria.service';
 })
 export class CitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router, private secretaria:SecretariaService) { }
+  constructor(public citasser:CitasService, public rutas:Router) { }
 
   isCollapsedMG = false;
   isCollapsedRF = false;
@@ -86,9 +85,10 @@ export class CitasComponent implements OnInit {
       }
     }
   }
-    }).catch(error =>{
+    }).catch((error) => {
       console.log(error);
-  });
+      this.rutas.navigate(['/500']);
+    });
   }
 
   dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
@@ -137,9 +137,9 @@ export class CitasComponent implements OnInit {
         }
 
 
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
+        this.rutas.navigate(['/500']);
       });
   }
 
@@ -183,6 +183,9 @@ export class CitasComponent implements OnInit {
             if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
             else{this.cargarMG(this.fechaActual,0,false,true);}
 
+          }).catch((error) => {
+            console.log(error);
+            this.rutas.navigate(['/500']);
           });
           swalWithBootstrapButtons.fire(
             'Modificado..!',
@@ -243,9 +246,10 @@ export class CitasComponent implements OnInit {
       }
     }
   }
-    }).catch(error =>{
+    }).catch((error) => {
       console.log(error);
-  });
+      this.rutas.navigate(['/500']);
+    });
   }
 
 
@@ -331,9 +335,9 @@ export class CitasComponent implements OnInit {
 
         }
 
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
+        this.rutas.navigate(['/500']);
       });
   }
 

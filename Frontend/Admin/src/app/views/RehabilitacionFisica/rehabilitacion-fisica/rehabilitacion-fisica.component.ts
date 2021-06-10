@@ -67,10 +67,11 @@ export class RehabilitacionFisicaComponent implements OnInit {
     
     this.historialRF=data['result'];
     this.historialRFPaginate = this.historialRF.slice(0, 10);
-    debugger
-  }).catch(error =>{
+  }).catch((error) => {
     console.log(error);
-});
+    this.spinner.hide('sample');
+    this.rutas.navigate(['/500']);
+  });
 
   }
 
@@ -173,10 +174,10 @@ FiltroFecha(){
       }
 
     this.spinner.hide('sample');
-  }).catch(error =>{
+  }).catch((error) => {
     console.log(error);
     this.spinner.hide('sample');
-
+    this.rutas.navigate(['/500']);
   });
   }
 

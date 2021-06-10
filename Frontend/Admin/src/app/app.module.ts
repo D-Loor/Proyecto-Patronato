@@ -62,7 +62,6 @@ import { CitasModule } from './views/Secretaria/citas/citas.module';
 import { RegistrarHistoriaClinicaModule } from './views/Secretaria/registrar-historia-clinica/registrar-historia-clinica.module';
 import { AgendarCitaModule } from './views/Secretaria/agendar-cita/agendar-cita.module';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DiarioRFModule } from './views/RehabilitacionFisica/reportes-rf/diario/diario.module';
 import { CuentasModule } from './views/Administrador/cuentas/cuentas.module';
 import { RolesModule } from './views/Administrador/roles/roles.module';
 import { HorariosModule } from './views/Administrador/horarios/horarios.module';
@@ -107,7 +106,6 @@ import { ReportesModuleRF } from './views/RehabilitacionFisica/reportes/reportes
     AgendarCitaModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    DiarioRFModule,
     HorariosModule,
     RolesModule,
     CuentasModule,

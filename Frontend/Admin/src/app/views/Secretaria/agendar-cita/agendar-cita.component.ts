@@ -78,8 +78,10 @@ export class AgendarCitaComponent implements OnInit {
   cargarRoles(){
     this.administradorService.RolesCitas().then(data=>{
       this.listaRoles=data['result'];
-    }).catch(error =>{
+    }).catch((error) => {
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -125,7 +127,10 @@ export class AgendarCitaComponent implements OnInit {
           this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
           this.spinner.hide('sample');
         }
-
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
     }
 
@@ -259,6 +264,10 @@ export class AgendarCitaComponent implements OnInit {
       this.abono=false;
       this.ClaseCdula="form-control form-input select-number";
       this.ArrayTurnos = [];
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -338,7 +347,6 @@ export class AgendarCitaComponent implements OnInit {
     if(abono==1){
       abo='DOADBA';
     }
-    debugger
     let arrayLocal = {
       "id_cita": id_cita,
       "nombres": nombres,
@@ -357,6 +365,10 @@ export class AgendarCitaComponent implements OnInit {
       )
       this.spinner.hide('sample');
       this.rutas.navigate(['/citas']);
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
 
 
@@ -437,6 +449,10 @@ export class AgendarCitaComponent implements OnInit {
           this.AgendarCita();
         }
 
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
     }
 
@@ -463,6 +479,10 @@ export class AgendarCitaComponent implements OnInit {
         this.TurnosDisponibles(array);
         this.spinner.hide('sample');
         }
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
 
 

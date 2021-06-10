@@ -15,7 +15,7 @@ import { RehabilitacionFisicaService } from '../../../servicios/rehabilitacion-f
 })
 export class RehabilitacionFisicaCitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService,public rehabilita:RehabilitacionFisicaService, public rutas:Router, private spinner: NgxSpinnerService) { }
+  constructor(public citasser:CitasService, public rehabilita:RehabilitacionFisicaService, public rutas:Router, private spinner: NgxSpinnerService) { }
   isCollapsed2 = false;
   isCollapsed = true;
   search;
@@ -83,8 +83,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       this.horas=tiempocita/60;
       this.horas=parseInt(this.horas);
       this.minutos = tiempocita%60;
-    }).catch(error =>{
+    }).catch((error) => {
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -105,10 +107,11 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
         this.dataPaginate(event);
       }
       this.spinner.hide('sample');
-    }).catch(error =>{
+    }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');
-  });
+      this.rutas.navigate(['/500']);
+    });
   }
 
   buscarRH(){
@@ -172,9 +175,10 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.citasser.elicitas(id).then(data => {
         this.citasEliminar=data['result'];
         this.cargar();
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
   }
 
