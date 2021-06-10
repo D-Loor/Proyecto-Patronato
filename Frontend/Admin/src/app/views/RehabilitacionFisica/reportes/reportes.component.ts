@@ -62,7 +62,6 @@ export class ReportesComponent implements OnInit {
   }
 
   cargarYears(){
-    debugger
       for(let i=this.YearInicio; i<=this.YearActual ;i++){
         this.YearD.push(i);
 

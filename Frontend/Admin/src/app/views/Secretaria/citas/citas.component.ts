@@ -32,12 +32,12 @@ export class CitasComponent implements OnInit {
   FechaMg:string='';
   FechaRf:string='';
   validarVacio;
+  validarVacioRF;
 
   today = new Date();
   fechaActual:string;
 
   ngOnInit(): void {
-    debugger
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargarRF(this.fechaActual,0,false,false);
     this.cargarMG(this.fechaActual,0,false,false);
@@ -83,6 +83,55 @@ export class CitasComponent implements OnInit {
       if(this.searchMG!=null){
 
         this.dataPaginateMG(event);
+      }
+    }
+  }
+    }).catch((error) => {
+      console.log(error);
+      this.rutas.navigate(['/500']);
+    });
+  }
+
+  cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
+    this.citasser.citas("Rehabilitación Física",fechaActual).then(data =>{
+      this.citasRF=data['result'];
+      this.validarVacioRF=data['code'];
+      if(this.validarVacioRF == '202'){
+        this.citasRF=null;
+        this.citasRFPaginate = null;
+      }else{
+        this.citasRFPaginate = this.citasRF.slice(0, 10);
+      }
+      
+      if(check==true){}else{
+    if(data['code']!="202"){
+      if(cambio==true){
+        Swal.fire({
+          icon: 'success',
+          title: '¡Citas Filtradas..!',
+          text: 'Se filtró las citas con la fecha seleccionada.'
+        })
+      }
+
+      if(this.searchRF!=null){
+        this.dataPaginateRF(event);
+      }
+    }else if(fecha==1){
+      this.citasRF=[];
+      this.citasRFPaginate = [];
+      Swal.fire({
+        icon: 'error',
+        title: '¡Sin Registros..!',
+        text: 'No hay citas registradas en esta fecha.'
+      })
+    }else if(fecha!=1 && this.searchRF==null){
+      this.citasRF = null;
+      this.citasRFPaginate = null;
+    }else{
+
+      if(this.searchRF!=null){
+
+        this.dataPaginateRF(event);
       }
     }
   }
@@ -209,49 +258,7 @@ export class CitasComponent implements OnInit {
     }
   }
 
-  cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
-    this.citasser.citas("Rehabilitacion Fisica",fechaActual).then(data =>{
 
-      this.citasRF=data['result'];
-      this.citasRFPaginate = this.citasRF.slice(0, 10);
-      if(check==true){}else{
-    if(data['code']!="202"){
-      if(cambio==true){
-        Swal.fire({
-          icon: 'success',
-          title: '¡Citas Filtradas..!',
-          text: 'Se filtró las citas con la fecha seleccionada.'
-        })
-      }
-
-      if(this.searchRF!=null){
-
-        this.dataPaginateRF(event);
-      }
-    }else if(fecha==1){
-      this.citasRF=[];
-      this.citasRFPaginate = [];
-      Swal.fire({
-        icon: 'error',
-        title: '¡Sin Registros..!',
-        text: 'No hay citas registradas en esta fecha.'
-      })
-    }else if(fecha!=1 && this.searchRF==null){
-      this.citasRF = null;
-      this.citasRFPaginate = null;
-    }else{
-
-      if(this.searchRF!=null){
-
-        this.dataPaginateRF(event);
-      }
-    }
-  }
-    }).catch((error) => {
-      console.log(error);
-      this.rutas.navigate(['/500']);
-    });
-  }
 
 
   buscarMG(){

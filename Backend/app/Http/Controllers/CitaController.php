@@ -33,10 +33,11 @@ class CitaController extends Controller
         $datos=Cita::where('fecha',$fechaActual)->with('turno')->get();
         $roles=Role::where('rol', $especialidad)->first();
         $idrol=$roles['id_rol'];
+        //$posicion=0;
         $data=[];
         
 
-        $cont=count($data);
+        $cont=count($datos);
         if( $cont > 0){
             foreach ($datos as $tur)
             {
@@ -44,12 +45,15 @@ class CitaController extends Controller
                       array_push ( $data , $tur );
                 }
             }
-
-            foreach ($data as $key => $row) {
+            $contD=count($data);
+            if($contD > 0){
+                foreach ($data as $key => $row) {
                 $aux[$key] = $row['turno']['hora'];
-            }
+                }
 
-            array_multisort($aux, SORT_ASC, $data);
+                array_multisort($aux, SORT_ASC, $data);
+            }
+            
             return response()->json(['result'=>$data, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);

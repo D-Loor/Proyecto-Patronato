@@ -64,9 +64,15 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }
   cargar(){
     this.historial.historialrf().then(data =>{
-    
     this.historialRF=data['result'];
-    this.historialRFPaginate = this.historialRF.slice(0, 10);
+    let validarVacio=data['code'];
+      if(validarVacio == '202'){
+        this.historialRF=null;
+        this.historialRFPaginate = null;
+      }else{
+        this.historialRFPaginate = this.historialRF.slice(0, 10);
+      }
+    
   }).catch((error) => {
     console.log(error);
     this.spinner.hide('sample');
