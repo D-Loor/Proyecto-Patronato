@@ -378,7 +378,7 @@ header {
   color: #fff;
   background-attachment: scroll;
   /* background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);  */
-  background-image: url(https://unsplash.imgix.net/uploads%2F14115408840644deb16b0%2F2dc933e3?q=75&fm=jpg&auto=format&s=7f43646e4d26049c6c39890afb2e5ced);
+  background-image: url(Images/Princi.jpg);
   background-position: center center;
   background-repeat: none;
   -webkit-background-size: cover;
@@ -456,7 +456,7 @@ section h3.section-subheading {
   text-transform: none;
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1px;
   line-height: 1.55;
 }
@@ -823,7 +823,7 @@ section#contact {
   padding-bottom: 90px;
   position: relative;
   z-index: 1;
-  background-image: url(Images/citas.jpg);
+  background-image: url(Images/cita.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1778,13 +1778,15 @@ input[type=number] { -moz-appearance:textfield; }
 
 #noticia{  
   position: relative;
-    background-image: url('./Images/covid.jpg');
+    background-image: url('./Images/covid2.jpg');
     background-image: fixed;
     background-image: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .log{
   top: 0 !important;

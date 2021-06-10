@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
       })
     }else{
       this.login.ValidarLogin(this.correo, this.pass).then(data =>{
+
         if(data['code'] == "202"){
           this.spinner.hide('sample');
           Swal.fire({
@@ -93,7 +94,10 @@ export class LoginComponent implements OnInit {
 
         }
         }).catch(error =>{
+
             console.log(error);
+            this.spinner.hide('sample');
+            this.rutas.navigate(['/500']);
         });
     }
 

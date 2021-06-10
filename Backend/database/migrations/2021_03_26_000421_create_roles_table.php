@@ -40,8 +40,8 @@ class CreateRolesTable extends Migration
         ]);
         DB::table("roles")
         ->insert([
-            "rol" => "Secretaria",
-            "estado" => 0
+            "rol" => "Secretaría",
+            "estado" => 1
         ]);
     }
 
