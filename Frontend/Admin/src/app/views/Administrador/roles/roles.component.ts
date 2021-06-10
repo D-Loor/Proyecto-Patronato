@@ -83,7 +83,11 @@ export class RolesComponent implements OnInit {
           'success'
         )
         this.cargarTablas();
-      })
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
+      });
     }
 
   }
@@ -237,7 +241,11 @@ export class RolesComponent implements OnInit {
               )
               this.cargarTablas();
               this.limpiar();
-            })
+            }).catch((error) => {
+              console.log(error);
+              this.spinner.hide('sample');
+              this.rutas.navigate(['/500']);
+            });
           }
         } else if (
           /* Read more about handling dismissals below */
@@ -266,7 +274,11 @@ export class RolesComponent implements OnInit {
       this.RolActualizar=data['result'].rol;
       this.EstadoRol =data['result'].estado;
       window.scrollTo(0, 0);
-    })
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
 
   }
 

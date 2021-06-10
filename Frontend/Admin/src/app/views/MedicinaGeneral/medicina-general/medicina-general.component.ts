@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 export class MedicinaGeneralComponent implements OnInit {
 
   constructor(public medicina_general:MedicinaGeneralService, public rutas:Router, private spinner: NgxSpinnerService) { }
-
   @ViewChild('DatosdeConsultas') public DatosdeConsultas: ModalDirective;
   public sidebarMinimized = false;
   public navItems = navItems;
@@ -51,6 +50,8 @@ export class MedicinaGeneralComponent implements OnInit {
         localStorage.removeItem('id_paciente');
       }).catch(error =>{
         console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
     }
   }
@@ -61,6 +62,8 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMGPaginate = this.historialMG.slice(0, 10);
   }).catch(error =>{
     console.log(error);
+    this.spinner.hide('sample');
+    this.rutas.navigate(['/500']);
   });
 
   }
@@ -206,6 +209,7 @@ export class MedicinaGeneralComponent implements OnInit {
     }).catch(error =>{
       console.log(error);
       this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
 
     });
     }

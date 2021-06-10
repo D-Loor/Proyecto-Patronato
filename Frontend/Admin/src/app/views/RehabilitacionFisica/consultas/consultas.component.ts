@@ -67,6 +67,8 @@ export class ConsultasComponent implements OnInit {
       })
       .catch((error) => {
         console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
   }
 
@@ -83,6 +85,8 @@ export class ConsultasComponent implements OnInit {
     })
     .catch((error) => {
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -185,6 +189,10 @@ export class ConsultasComponent implements OnInit {
     this.RFService.AgregarTratamiento(dataT).then(data=>{
       this.idTratamiento = data['id'];
       this.AddConsultas();
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -208,6 +216,10 @@ export class ConsultasComponent implements OnInit {
     this.RFService.AgregarConsulta(dataC).then(data=>{
       this.spinner.hide('sample');
       this.EliminarCita(this.idcita);
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
 
   }

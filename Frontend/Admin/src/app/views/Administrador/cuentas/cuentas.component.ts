@@ -391,7 +391,11 @@ export class CuentasComponent implements OnInit {
                 'success'
               )
               this.limpiar();
-            })
+            }).catch((error) => {
+              console.log(error);
+              this.spinner.hide('sample');
+              this.rutas.navigate(['/500']);
+            });
           }
 
         } else if (

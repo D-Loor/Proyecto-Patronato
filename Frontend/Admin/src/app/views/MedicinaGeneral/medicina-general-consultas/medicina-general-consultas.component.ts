@@ -94,6 +94,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.completar();
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
   });
 
 
@@ -131,6 +133,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     })
     .catch((error) => {
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -248,6 +252,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
   }
 
@@ -291,6 +296,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
               this.spinner.hide('sample');
               Swal.fire('¡Enfermedad Agregada..!', '', 'success')
 
+            }).catch((error) => {
+              console.log(error);
+              this.spinner.hide('sample');
+              this.rutas.navigate(['/500']);
             });
 
 
@@ -351,6 +360,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
     this.medicinag.AgregarConsulta(data).then(data =>{
 
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 

@@ -58,6 +58,10 @@ export class HorariosComponent implements OnInit {
           this.Comboespecialidad.push(i);
         }
       }
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -244,7 +248,11 @@ export class HorariosComponent implements OnInit {
           'success'
         )
         this.cargarTablas();
-      })
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
+      });
     }
 
 
@@ -260,6 +268,10 @@ export class HorariosComponent implements OnInit {
       this.especialidad=data['result'].id_rol;
       this.id_turnos=data['result'].id_turno;
       window.scrollTo(0, 0);
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -335,7 +347,11 @@ export class HorariosComponent implements OnInit {
               )
               this.cargarTablas();
               this.limpiar();
-            })
+            }).catch((error) => {
+              console.log(error);
+              this.spinner.hide('sample');
+              this.rutas.navigate(['/500']);
+            });
           }
 
         } else if (

@@ -15,7 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class PacientesComponent implements OnInit {
 
-  constructor(public medicina_general:MedicinaGeneralService, private spinner: NgxSpinnerService, public rutas:Router, private ServicioSecretaria:SecretariaService) { }
+  constructor(public medicina_general:MedicinaGeneralService, private spinner: NgxSpinnerService, public rutas:Router) { }
 
   @ViewChild('Principal') public Principal: ModalDirective;
   public sidebarMinimized = false;
@@ -64,7 +64,6 @@ export class PacientesComponent implements OnInit {
   ngOnInit() {
 
     this.search = localStorage.getItem('cedulaMGandRF');
-    debugger
     this.cargar();
   }
   actualizar(){
@@ -84,18 +83,18 @@ export class PacientesComponent implements OnInit {
       localStorage.removeItem('cedulaMGandRF');
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
   });
   }
 
   cargar(){
-    debugger
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
     this.TotalPacientes=data['total'];
     if(this.TotalPacientes == null){
       this.TotalPacientes=0;
     }
-    debugger
     if(data['code']=="202"){
       this.pacientesMG=null;
       this.pacientesMGPaginate=null;
@@ -104,12 +103,12 @@ export class PacientesComponent implements OnInit {
       this.spinner.hide('sample');
     }
     if(this.search!=null){
-      debugger
       this.dataPaginate(event);
     }
   }).catch(error =>{
-    this.spinner.hide('sample');
     console.log(error);
+    this.spinner.hide('sample');
+    this.rutas.navigate(['/500']);
   });
 
   }
@@ -236,6 +235,8 @@ export class PacientesComponent implements OnInit {
     this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
   }).catch(error =>{
     console.log(error);
+    this.spinner.hide('sample');
+    this.rutas.navigate(['/500']);
 });
   }
 

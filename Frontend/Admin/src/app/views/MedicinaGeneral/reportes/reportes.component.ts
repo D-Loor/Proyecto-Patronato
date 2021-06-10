@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ReportesService } from '../../../servicios/reportes.service';
 
@@ -10,7 +11,7 @@ import { ReportesService } from '../../../servicios/reportes.service';
 })
 export class ReportesComponent implements OnInit {
 
-  constructor(public Report:ReportesService) { }
+  constructor(public Report:ReportesService, public rutas:Router) { }
 
   isCollapsed1=true;
   isCollapsed2=true;
@@ -61,7 +62,6 @@ export class ReportesComponent implements OnInit {
   }
 
   cargarYears(){
-    debugger
       for(let i=this.YearInicio; i<=this.YearActual ;i++){
         this.YearD.push(i);
 
@@ -106,6 +106,7 @@ export class ReportesComponent implements OnInit {
             }
           }).catch(error =>{
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Consolidado"){
           this.Report.ConsolidadoMG(this.CMes,this.CYear).then(data =>{
@@ -120,6 +121,7 @@ export class ReportesComponent implements OnInit {
             }
           }).catch(error =>{
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Morbilidad"){
           this.Report.MorbilidadMG(this.MMes,this.MYear).then(data =>{
@@ -134,6 +136,7 @@ export class ReportesComponent implements OnInit {
             }
           }).catch(error =>{
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Pacientes Mensual"){
           this.Report.PacientesMensual(this.PMes,this.PYear).then(data =>{
@@ -148,6 +151,7 @@ export class ReportesComponent implements OnInit {
             }
           }).catch(error =>{
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }else if(tipo=="Pacientes Anual"){
           this.Report.PacientesAnual(this.PAYear).then(data =>{
@@ -162,6 +166,7 @@ export class ReportesComponent implements OnInit {
             }
           }).catch(error =>{
             console.log(error);
+            this.rutas.navigate(['/500']);
           });
         }
 

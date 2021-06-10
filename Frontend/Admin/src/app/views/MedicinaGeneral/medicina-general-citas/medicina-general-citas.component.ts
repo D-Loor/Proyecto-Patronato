@@ -110,6 +110,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       this.minutos = tiempocita%60;
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -130,8 +132,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       this.dataPaginate(event);
     }
     }).catch(error =>{
-      this.spinner.hide('sample');
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
   });
   }
 
@@ -188,6 +191,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
   }
 
