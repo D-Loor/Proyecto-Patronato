@@ -3,6 +3,7 @@ import { AdministradorService } from '../../../servicios/administrador.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cuentas',
@@ -11,7 +12,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class CuentasComponent implements OnInit {
 
-  constructor(private administradorService:AdministradorService,private spinner: NgxSpinnerService) { }
+  constructor(private administradorService:AdministradorService,public rutas:Router,private spinner: NgxSpinnerService) { }
 
   isCollapsed1=false;
   isCollapsed2=false;
@@ -67,16 +68,16 @@ export class CuentasComponent implements OnInit {
       this.listaRoles=data['result'];
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
   cargarTablas(){
     this.administradorService.cargarCuenta().then(data =>{
-      debugger
       this.cuentas=data['result'];
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
-        debugger
       this.cuentas=[];
       this.cuentasPaginate = [];
       }else{
@@ -90,6 +91,8 @@ export class CuentasComponent implements OnInit {
 
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -138,6 +141,8 @@ export class CuentasComponent implements OnInit {
         this.cargarTablas();
       }).catch(error =>{
         console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
     }
   }
@@ -260,6 +265,7 @@ export class CuentasComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
       });
   }
   cargarEditar(id:any){
@@ -280,6 +286,8 @@ export class CuentasComponent implements OnInit {
       window.scrollTo(0, 0);
     }).catch((error) => {
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 

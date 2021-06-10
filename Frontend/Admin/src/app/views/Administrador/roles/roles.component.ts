@@ -3,6 +3,7 @@ import { AdministradorService } from '../../../servicios/administrador.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
@@ -10,7 +11,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class RolesComponent implements OnInit {
 
-  constructor(private administradorService:AdministradorService,private spinner: NgxSpinnerService) { }
+  constructor(private administradorService:AdministradorService,public rutas:Router,private spinner: NgxSpinnerService) { }
 
   isCollapsed1=false;
   isCollapsed2=false;
@@ -162,6 +163,8 @@ export class RolesComponent implements OnInit {
       this.estado=0;
     }).catch(error =>{
       console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
@@ -313,6 +316,7 @@ export class RolesComponent implements OnInit {
     .catch((error) => {
       console.log(error);
       this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
     });
   }
 
