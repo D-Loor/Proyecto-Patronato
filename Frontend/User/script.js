@@ -82,15 +82,10 @@ function validarC() {
   }
 
   function cargar(){
-    var tipo="";
     var fecha = document.getElementById("fecha").value;
-    var combo = document.getElementById("especialidad").value;
+    var tipo = document.getElementById("especialidad").value;
     const $select = document.getElementById("hora");
-    if(combo=="Medicina General"){
-        tipo="MG";
-    }else{
-        tipo="RF";
-    }
+    
     for (let i = $select.options.length; i >= 0; i--) {
         $select.remove(i);
     }

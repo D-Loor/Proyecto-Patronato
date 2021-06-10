@@ -24,7 +24,7 @@ class RoleController extends Controller
     }
 
     public function mostrar(){
-        $datos=Role::where('rol','!=','Administrador')->where('rol','!=','Secretaria')->where('estado',1)->get();
+        $datos=Role::where('rol','!=','Administrador')->where('rol','!=','Secretaría')->where('estado',1)->get();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]);

@@ -29,7 +29,7 @@ class CitaController extends Controller
     }
 
     public function validarMGandRF($especialidad,$fechaActual){
-        
+
         $datos=Cita::where('fecha',$fechaActual)->with('turno')->get();
         $roles=Role::where('rol', $especialidad)->first();
         $idrol=$roles['id_rol'];
@@ -49,7 +49,7 @@ class CitaController extends Controller
         }
 
         array_multisort($aux, SORT_ASC, $data);
-        
+
         $cont=count($data);
         if( $cont > 0){
             return response()->json(['result'=>$data, 'code'=>'201']);

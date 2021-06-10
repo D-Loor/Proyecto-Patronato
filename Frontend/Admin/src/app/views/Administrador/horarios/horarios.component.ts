@@ -54,7 +54,7 @@ export class HorariosComponent implements OnInit {
     this.administradorService.cargarRol().then(data =>{
       let temporal = data['result'];
       for (let i of temporal) {
-        if(i.rol != "Administrador" && i.rol != "Secretaria"){
+        if(i.rol != "Administrador" && i.rol != "Secretaría"){
           this.Comboespecialidad.push(i);
         }
       }
