@@ -37,6 +37,7 @@ export class CitasComponent implements OnInit {
   fechaActual:string;
 
   ngOnInit(): void {
+    debugger
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargarRF(this.fechaActual,0,false,false);
     this.cargarMG(this.fechaActual,0,false,false);
