@@ -16,7 +16,7 @@ export class HcloginGuard implements CanActivate {
     if(!inicio){
       this.rutas.navigate(["login"]);
       return false;
-    }else if(rol == "Medicina General"|| rol == "Rehabilitación Física" || rol == "Administrador"){
+    }else if(rol == "Medicina General"|| rol == "Rehabilitación Física" || rol == "Secretaría"){
       return true;
     }
     return false;

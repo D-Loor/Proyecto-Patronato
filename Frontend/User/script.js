@@ -22,6 +22,7 @@ $('.navbar-collapse ul li a').click(function() {
 
 $(window).load(function() {
     $(".loader").fadeOut("slow");
+    cargarEspecialidades();
 });
 
 var comprotido=false;
@@ -147,6 +148,47 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
         comprotido= !comprotido
    }
 
+   function cargarEspecialidades(){
+  
+    const $select = document.getElementById("especialidad");
+    
+    for (let i = $select.options.length; i >= 0; i--) {
+        $select.remove(i);
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/api/CargarRoles",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var espe= data['result'];
+
+            
+            if(data['code']=="202"){
+                  swal(
+                    '¡Lo sentimos..!',
+                    'No hay especialidades disponibles por ahora.',
+                    'warning'
+                  )
+
+                document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
+                document.getElementById("fecha").reportValidity();
+            }else{
+                $.each(espe, function (i, item) {
+                    const option = document.createElement('option');
+                                                          
+                    option.value = espe[i].rol;
+                    option.text = espe[i].rol;
+                    option.className="op-select";
+                
+                    $select.appendChild(option);
+                });
+            }  
+
+        }
+    });
+   }
    function cambio( id){
     
     if(document.getElementById(id).value!=""){
@@ -248,7 +290,6 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
                             data: JSON.stringify({
                                 'nombres' : nombres,
                                 'cedula' : cedula,
-                                'especialidad' : especialidad,
                                 'fecha' : fecha,
                                 'id_turno' : turno,
                                 'estado': estado,
