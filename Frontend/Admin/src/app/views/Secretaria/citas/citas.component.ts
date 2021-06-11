@@ -196,7 +196,7 @@ export class CitasComponent implements OnInit {
   }
 
   abonar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
-
+    debugger
     if(abono == true || abono == 1){
       return false;
     }else{
@@ -229,11 +229,15 @@ export class CitasComponent implements OnInit {
             "abono": 'DOADBA',
             "id_turno": id_turno,
         }
-
+          debugger
           this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
-
-            if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
-            else{this.cargarMG(this.fechaActual,0,false,true);}
+            debugger
+            if(especialidad=="Rehabilitacion Fisica"){
+              this.cargarRF(this.fechaActual,0,false,true);
+              debugger
+            }else{
+              this.cargarMG(this.fechaActual,0,false,true);
+            }
 
           }).catch((error) => {
             console.log(error);
@@ -253,8 +257,13 @@ export class CitasComponent implements OnInit {
             'La cita no ha sido modificada.',
             'error'
           )
-          if(especialidad=="Rehabilitacion Fisica"){this.cargarRF(this.fechaActual,0,false,false);}
-            else{this.cargarMG(this.fechaActual,0,false,true);}
+          debugger
+          if(especialidad=="Rehabilitacion Fisica"){
+            this.cargarRF(this.fechaActual,0,false,true);
+            debugger
+          }else{
+            this.cargarMG(this.fechaActual,0,false,true);
+          }
         }
       })
     }
