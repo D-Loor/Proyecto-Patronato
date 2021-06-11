@@ -64,6 +64,7 @@ export class DefaultLayoutComponent implements OnInit {
       this.Imagen="http://127.0.0.1:8000"+this.usuario['imagen'];
     }).catch(error =>{
       console.log(error);
+      this.rutas.navigate(['/500']);
   });
   }
 
