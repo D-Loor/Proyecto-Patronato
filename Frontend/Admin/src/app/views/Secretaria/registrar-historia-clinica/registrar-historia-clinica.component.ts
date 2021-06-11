@@ -121,9 +121,22 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   contador
   ngOnInit() {
     let cedula="";
+    let cedulaSecretaria = "";
     this.containerSecretaria=0;
-    cedula=  localStorage.getItem('CedulaExamenes');
+    cedula = localStorage.getItem('CedulaExamenes');
+    cedulaSecretaria = localStorage.getItem('historiaClinica');
+    debugger
+    if(cedulaSecretaria!=null && cedulaSecretaria!=""){
+      debugger
+      this.containerSecretaria=0;
+      this.containerMGandRF=1;
+      this.cedula=cedulaSecretaria;
+      this.Consultar();
+      localStorage.removeItem('historiaClinica');
+    }
+
     if(cedula!=""&&cedula!=null){
+      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=1;
       this.cedula=cedula;
@@ -132,6 +145,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
     let rol=  localStorage.getItem('RolV');
     if(rol == "MG" || rol == "RF"){
+      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=0;
       this.edit=1;
@@ -588,8 +602,9 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   Consultar(){
-    let ce="";
+    let ce=""; let ce2="";
     ce=  localStorage.getItem('CedulaExamenes');
+    ce2 = localStorage.getItem('historiaClinica');
     if(this.cedula== undefined || this.cedula=="undefined"){
       this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
       this.limpiar();
@@ -603,7 +618,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         this.alcoholCSi='2';this.alcoholCNo='2'; this.tabacoCSi='2';this.tabacoCNo='2'; this.drogasCSi='2'; this.drogasCNo='2'; this.alimentacionCSi='2';this.alimentacionCNo='2'; this.diuresisCSi='2';this.diuresisCNo='2'; this.somniaCSi='2';this.somniaCNo='2';
         this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2'; 
         if(data['code'] === '201'){
-          if(ce!=""&&ce!=null){
+          if((ce!=""&&ce!=null) || (ce2!=""&&ce2!=null) ){
             this.CargarDatosPaciente(data);
             localStorage.removeItem('CedulaExamenes');
           }else{
@@ -1446,6 +1461,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.eliFamiliares(id_familiar,this.id_PacienteDA).then(data =>{
       this.LlenarArrayDB();
     });
+  }
+
+  ngOnDestroy(): void{
+    
   }
 }
   

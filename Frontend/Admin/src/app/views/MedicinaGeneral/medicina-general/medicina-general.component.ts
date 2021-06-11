@@ -41,6 +41,7 @@ export class MedicinaGeneralComponent implements OnInit {
   };
 
   ngOnInit() {
+    localStorage.removeItem('cedulaMGandRF');
     if(this.idPaciente == 'Undefined' || this.idPaciente == null){
       this.cargar();
     }else{

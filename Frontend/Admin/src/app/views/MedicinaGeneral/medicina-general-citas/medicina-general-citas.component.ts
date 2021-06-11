@@ -70,6 +70,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaMGandRF');
     this.Estadisticas(this.FechaInicio,this.FechaFin, this.especialidad);
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();

@@ -437,6 +437,7 @@ export class CitasComponent implements OnInit {
 
   HistoriaPaciente(cedula:string){
     localStorage.setItem('cedulaMGandRF', cedula);
+    localStorage.setItem('secretariaEdit', 'SE');
     this.rutas.navigate(['/pacientes']);
   }
 

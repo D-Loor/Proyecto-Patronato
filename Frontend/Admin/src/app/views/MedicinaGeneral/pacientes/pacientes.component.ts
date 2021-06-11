@@ -61,10 +61,15 @@ export class PacientesComponent implements OnInit {
     showSpinner: false
   };
 
-  ngOnInit() {
-
-    this.search = localStorage.getItem('cedulaMGandRF');
-    this.cargar();
+  ngOnInit(){
+    debugger
+      if(localStorage.getItem('cedulaMGandRF') == null){
+        this.search="";
+      }else{
+        this.search = localStorage.getItem('cedulaMGandRF');
+      }
+      
+      this.cargar();
   }
   actualizar(){
     this.spinner.show('sample');
@@ -76,17 +81,7 @@ export class PacientesComponent implements OnInit {
       'success'
     )
   }
-  CargarHistoriaPaciente(){
-      this.medicina_general.AtenderPaciente(this.CedulaPaciente).then(data =>{
-      this.pacientesMG=data['result'];
-      this.pacientesMGPaginate = this.pacientesMG;
-      localStorage.removeItem('cedulaMGandRF');
-    }).catch(error =>{
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-  });
-  }
+  
 
   cargar(){
     this.medicina_general.pacientes().then(data =>{
@@ -164,7 +159,7 @@ export class PacientesComponent implements OnInit {
   ngOnDestroy(): void{
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
-    localStorage.removeItem('cedulaMGandRF');
+    
   }
 
   DatosPaciente(id_paciente:number){
@@ -248,8 +243,15 @@ export class PacientesComponent implements OnInit {
   }
 
   IrHistorial(cedul:string){
-    localStorage.setItem('CedulaExamenes', cedul);
-    this.rutas.navigate(['/registrarhistoriaclinica']);
+    let secretariaEdit = localStorage.getItem('secretariaEdit');
+    if(secretariaEdit == 'SE'){
+      localStorage.setItem('historiaClinica', cedul);
+      this.rutas.navigate(['/registrarhistoriaclinica']);
+    }else{
+      localStorage.setItem('CedulaExamenes', cedul);
+      this.rutas.navigate(['/registrarhistoriaclinica']);
+    }
+    
   }
 
 
