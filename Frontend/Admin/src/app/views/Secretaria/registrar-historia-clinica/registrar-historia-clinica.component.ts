@@ -58,7 +58,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   actualizar:number=0;
   containerSecretaria=0;
   ginecosSi:number=1;
- 
+  containerMGandRF=0;
   //Validación de campos vacios
   Classapellidos = "form-control"; Classnombres ="form-control"; ClaseCdula:string="form-control form-input select-number"; 
   ClaseEdad = "form-control";  ClaseOcupacion = "form-control"; ClaseGad = ""; ClaseSexo="form-control";
@@ -124,7 +124,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.containerSecretaria=0;
     cedula=  localStorage.getItem('CedulaExamenes');
     if(cedula!=""&&cedula!=null){
-      this.containerSecretaria=1
+      this.containerSecretaria=1;
+      this.containerMGandRF=1;
       this.cedula=cedula;
       this.Consultar();
       localStorage.removeItem('CedulaExamenes');
@@ -132,6 +133,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     let rol=  localStorage.getItem('RolV');
     if(rol == "MG" || rol == "RF"){
       this.containerSecretaria=1;
+      this.containerMGandRF=0;
+      this.edit=1;
       this.cedula=cedula;
       localStorage.removeItem('RolV');
     }
@@ -265,11 +268,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   ActualizarCitaHistorial(cedula:string){
     this.ServicioSecretaria.ActualizarCitaConHistorial(cedula).then(data => {
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    })
   }
 
   LlenarArray(){
@@ -450,11 +449,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.abortos=data['result'].abortos;
       if(id_gineco==1){this.ginecos_obstetricosC=1; this.ginecos_obstetricosCaux=this.ginecos_obstetricosC; this.fum='';this.fpp='';this.edad_gestional='';this.menarquia='';this.Gestas='';this.Partos='';
       this.cesareas=''; this.abortos=''; this.flujo_genital='';}else{this.ginecosSi=0;}
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    })
   }
 
  
@@ -472,13 +467,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'abortos':this.abortos
     }
  
-    this.ServicioSecretaria.updateGinecos( ginecoPersonal, this.id_gineco ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateGinecos( ginecoPersonal, this.id_gineco ).then(data =>{});
   }
 
   CargarDatosPaciente(data:any){
@@ -662,10 +651,9 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
           )
           this.edit=0;
          }
-        }).catch((error) => {
+        })
+        .catch((error) => {
           console.log(error);
-          this.spinner.hide('sample');
-          this.rutas.navigate(['/500']);
         });
 
     }
@@ -692,10 +680,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.GinecosObtestricos(obstetricos).then(data =>{
       this.id_obstetrico = data['id'];
       this.IngresarAntecedesPersonales();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
   }
@@ -727,10 +711,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.AtecedentesPersonales(APerosonales).then(data =>{
       this.id_patologico = data['id'];
       this.ExamenesFisicos();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -767,10 +747,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.ExamenesFisicos(EFisicos).then(data =>{
      this.id_e_fisico = data['id'];
      this.ExamenesOrganos();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -802,10 +778,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.ExamenesOrganosSistema(ESitemas).then(data =>{
      this.id_sistema = data['id'];
      this.ExamenesComplemenrarios();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -832,10 +804,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.ExamenesComple(EComplementarios).then(data =>{
       this.id_complementario = data['id'];
       this.Habitos();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -852,10 +820,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.HabitosPaciente(habitosA).then(data =>{
       this.id_habito = data['id'];
       this.Pacientes();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -885,10 +849,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.AgregarPaciente(pacientesA).then(data =>{
       this.id_paciente = data['id'];
       this.AntecedentesFamiliares();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -907,10 +867,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.ServicioSecretaria.Familiares(arrayLocal).then(data =>{
         this.id_familiar = data['id'];
         this.AntecedentesPatologicosF();
-      }).catch((error) => {
-        console.log(error);
-        this.spinner.hide('sample');
-        this.rutas.navigate(['/500']);
       });
     }
   }
@@ -924,10 +880,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
     this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
       this.ActualizarEstadoCitas();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -945,10 +897,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         'Datos guardados correctamente',
         'success'
       )
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
   
@@ -1155,10 +1103,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
           this.IngresarDatosPaciente();
         }
           
-      }).catch((error) => {
-        console.log(error);
-        this.spinner.hide('sample');
-        this.rutas.navigate(['/500']);
       });
     }
     
@@ -1310,13 +1254,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       }
 
       
-    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateDatosAfilicaion( pacientesActualizar, this.id_PacienteDA ).then(data =>{});
 
     if(this.ninezC==1){this.ninezT="1"}
       if(this.adolescenciaC==1){this.adolescenciaT="1";}
@@ -1342,13 +1280,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         'id_gineco':this.id_gineco,
       }
       
-    this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
       
       if(this.ginecos_obstetricosCaux==1 && this.ginecos_obstetricosC!=this.ginecos_obstetricosCaux){
         let obstetricos = {
@@ -1380,10 +1312,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
           }
           
         this.ServicioSecretaria.updateAntecedentesPatologicoPersonales( APPActualizar, this.id_patologico ).then(data =>{});
-        }).catch((error) => {
-          console.log(error);
-          this.spinner.hide('sample');
-          this.rutas.navigate(['/500']);
         });
       }
     //Condicionales del checkHabitos
@@ -1397,13 +1325,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'somnia':this.somnia,         
     }
 
-    this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{});
 
     if(this.examen_cabezaC==1){this.examen_cabezaT=1;}
     if(this.examen_cuelloC==1){this.examen_cuelloT=1;}
@@ -1425,13 +1347,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'region_anal':this.examen_analT,       
     }
 
-    this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{});
     if(this.examen_digestivoC==1){this.examen_digestivoT=1;}
     if(this.examen_respiratorioC==1){this.examen_respiratorioT=1;}
     if(this.examen_cardiacoC==1){this.examen_cardiacoT=1;}
@@ -1447,13 +1363,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'sistema_nervioso':this.examen_nerviosoT,    
     }
 
-    this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{
-
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{});
 
     if(this.examen_laboratorioC==1){this.examen_laboratorioT=1; }
     if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT=1;}
@@ -1475,10 +1385,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       )
       this.limpiar();
       this.rutas.navigate(['/pacientes']);
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 }
@@ -1501,10 +1407,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.ServicioSecretaria.Familiares2(arrayLocal).then(data =>{
         this.id_familiar = data['id'];
         this.AntecedentesPatologicosDB();
-      }).catch((error) => {
-        console.log(error);
-        this.spinner.hide('sample');
-        this.rutas.navigate(['/500']);
       });
   }
   
@@ -1516,10 +1418,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
     this.ServicioSecretaria.AntecedentesFamiliares(AntecedentesPF).then(data =>{
       this.LlenarArrayDB();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 
@@ -1538,20 +1436,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.union2 = "";
       this.estado = "";
       this.estadoT = "";
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    }); 
   }
 
   eliminarFamiliarBD(id_familiar:number){
     this.ServicioSecretaria.eliFamiliares(id_familiar,this.id_PacienteDA).then(data =>{
       this.LlenarArrayDB();
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
     });
   }
 }
