@@ -33,7 +33,7 @@ export class CuentasComponent implements OnInit {
   password="";
   foto=null;
   listaRoles:any=[];
-
+  url; //editado
   ClaseCorreo:string="form-control form-input select-number";
   ClaseNombre:string="form-control form-input select-number";
   ClaseRol:string="form-control form-input select-number";
@@ -56,7 +56,7 @@ export class CuentasComponent implements OnInit {
 
   
   limpiar(){
-    this.nombres="";this.password="";this.correo="";this.rol=""; this.foto="";
+    this.nombres="";this.password="";this.correo="";this.rol=""; this.foto=""; this.url="";
   }
 
   ngOnInit(): void {
@@ -101,9 +101,34 @@ export class CuentasComponent implements OnInit {
     this.foto = (<HTMLInputElement>files.target).files[0];
     this.ClaseFoto="";
   }
-  buscar(){
 
-  }
+  //Editado
+  public onSelectFile(event,files:Event) { // called each time file input changes
+      let tipoImagen = (<HTMLInputElement>files.target).files[0].type;
+      if( tipoImagen == "image/jpeg"  || tipoImagen == "image/png" || tipoImagen == "image/svg"){
+      this.foto = (<HTMLInputElement>files.target).files[0];
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.readAsDataURL(event.target.files[0]); // read file as data url
+  
+        reader.onload = (event) => { // called once readAsDataURL is completed
+          debugger
+          this.url = event.target.result;
+        }
+      }
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: '¡No es una Imagen..!',
+          text: 'Elija una imagen.'
+        })
+      this.foto="";
+      }
+      this.ClaseFoto="";
+    }
+
+  buscar(){}
 
   guardar(){
 
@@ -283,7 +308,8 @@ export class CuentasComponent implements OnInit {
       this.correoEditar=data['result'].correo;
       this.rol=data['result']['role'].id_rol;
       this.editarA=data['result']['role'].rol;
-      this.foto=data['result'].imagen;
+      //this.foto=data['result'].imagen;
+      this.url="http://127.0.0.1:8000"+data['result'].imagen;
       window.scrollTo(0, 0);
     }).catch((error) => {
       console.log(error);
