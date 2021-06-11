@@ -86,7 +86,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   alcoholCSi:string='0';alcoholCNo:string='1'; tabacoCSi:string='0';tabacoCNo:string='1'; drogasCSi:string='0'; drogasCNo:string='1'; alimentacionCSi:string='0';alimentacionCNo:string='1'; diuresisCSi:string='0';diuresisCNo:string='1'; somniaCSi:string='0';somniaCNo:string='1';
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
-  raza; religion; nivel_instruccion; estado_civil; gad;
+  raza; religion; nivel_instruccion; estado_civil; gad; edadM;
 
   //Variables de datos de Antecedentes Patológicos Personales
   ninezT=""; adolescenciaT=""; adultezT=""; quirurgicosT=""; alergicosT=""; traumatologicosT=""; fum; fpp; edad_gestional;
@@ -199,12 +199,15 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
          
          if(edad == 0 && meses == 0){
            this.edad = "0.0"+dias;
+           this.edadM= dias +" dias";
           }
          if(edad !=0 ){
           this.edad = edad;
+          this.edadM= edad +" años";
           }
           if(edad == 0 && meses != 0){
             this.edad = "0."+meses;
+            this.edadM= meses +" meses";
           }
         //alert("Edad en años:" + edad + ',' + 'Meses:' + meses + ',' + 'dias:' + dias);
       
@@ -232,7 +235,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   
   //Variables de  Datos de Afiliación
   this.apellidos=""; this.nombresP=""; this.cedula=""; this.edad=""; this.ocupacion=""; this.sexo=""; this.Lresidencia=""; this.Lprocedencia=""; this.fechanacimiento="";
-  this.raza=""; this.religion=""; this.nivel_instruccion=""; this.estado_civil=""; this.gad="";
+  this.raza=""; this.religion=""; this.nivel_instruccion=""; this.estado_civil=""; this.gad=""; this.edadM="";
 
   //Variables de datos de Antecedentes Patológicos Personales
   this.ninezT=""; this.adolescenciaT=""; this.adultezT=""; this.quirurgicosT=""; this.alergicosT=""; this.traumatologicosT=""; this.fum=""; this.fpp=""; this.edad_gestional="";

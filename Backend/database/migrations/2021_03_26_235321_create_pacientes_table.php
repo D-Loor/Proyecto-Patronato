@@ -23,7 +23,7 @@ class CreatePacientesTable extends Migration
             $table->string('cedula');
             $table->string('nombres');
             $table->string('apellidos');
-            $table->integer('edad');
+            $table->float('edad', 4, 3);
             $table->string('sexo');
             $table->boolean('gad');
             $table->string('ocupacion');
