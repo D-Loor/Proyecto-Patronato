@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { navItems } from '../../../_nav';
 import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
@@ -39,53 +39,54 @@ export class CitasComponent implements OnInit {
 
   ngOnInit(): void {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
-    this.cargarRF(this.fechaActual,0,false,false);
     this.cargarMG(this.fechaActual,0,false,false);
+    this.cargarRF(this.fechaActual,0,false,false);
   }
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
+      debugger
       if(this.validarVacio == '202'){
         this.citasMG=null;
         this.citasMGPaginate = null;
       }else{
         this.citasMGPaginate = this.citasMG.slice(0, 10);
       }
-      if(this.searchMG!=null){
-        this.dataPaginateMG(event);
-      }
+
       if(check==true){}else{
-    if(data['code']!="202"){
+        if(data['code']!="202"){
+          if(cambio==true){
+            Swal.fire({
+              icon: 'success',
+              title: '¡Citas Filtradas..!',
+              text: 'Se filtró las citas con la fecha seleccionada.'
+            })
+          }
 
-
-    if(cambio==true){
-      Swal.fire({
-        icon: 'success',
-        title: '¡Citas Filtradas..!',
-        text: 'Se filtró las citas con la fecha seleccionada.'
-      })
-    }
-
-    }else if(fecha==1){
-    this.citasMG = [];
-    this.citasMGPaginate = [];
-      Swal.fire({
-        icon: 'error',
-        title: '¡Sin Registros..!',
-        text: 'No hay citas registradas en esta fecha.'
-      })
-    }else if(fecha!=1 && this.searchMG==null){
-      this.citasMG= null;
-      this.citasMGPaginate = null;
-    }else{
-      if(this.searchMG!=null){
-
-        this.dataPaginateMG(event);
+          if(this.searchMG!=null){
+            this.dataPaginateMG(event);
+          }
+        }else if(fecha==1){
+          this.citasMG = [];
+          this.citasMGPaginate = [];
+          this.citasMGFilter = [];
+          this.citasMGPaginateFilter = [];
+            Swal.fire({
+              icon: 'error',
+              title: '¡Sin Registros..!',
+              text: 'No hay citas registradas en esta fecha.'
+            })
+        }else if(fecha!=1 && this.searchMG==null){
+          this.citasMG= null;
+          this.citasMGPaginate = null;
+        }else{
+          if(this.searchMG!=null){
+            this.dataPaginateMG(event);
+          }
+        }
       }
-    }
-  }
     }).catch((error) => {
       console.log(error);
       this.rutas.navigate(['/500']);
@@ -96,6 +97,7 @@ export class CitasComponent implements OnInit {
     this.citasser.citas("Rehabilitación Física",fechaActual).then(data =>{
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
+      debugger
       if(this.validarVacioRF == '202'){
         this.citasRF=null;
         this.citasRFPaginate = null;
@@ -104,37 +106,37 @@ export class CitasComponent implements OnInit {
       }
       
       if(check==true){}else{
-    if(data['code']!="202"){
-      if(cambio==true){
+        if(data['code']!="202"){
+          if(cambio==true){
+            Swal.fire({
+              icon: 'success',
+              title: '¡Citas Filtradas..!',
+              text: 'Se filtró las citas con la fecha seleccionada.'
+            })
+          }
+
+        if(this.searchRF!=null){
+          this.dataPaginateRF(event);
+        }
+      }else if(fecha==1){
+        this.citasRF=[];
+        this.citasRFPaginate = [];
+        this.citasRFFilter = [];
+        this.citasRFPaginateFilter  = [];
         Swal.fire({
-          icon: 'success',
-          title: '¡Citas Filtradas..!',
-          text: 'Se filtró las citas con la fecha seleccionada.'
+          icon: 'error',
+          title: '¡Sin Registros..!',
+          text: 'No hay citas registradas en esta fecha.'
         })
-      }
-
-      if(this.searchRF!=null){
-        this.dataPaginateRF(event);
-      }
-    }else if(fecha==1){
-      this.citasRF=[];
-      this.citasRFPaginate = [];
-      Swal.fire({
-        icon: 'error',
-        title: '¡Sin Registros..!',
-        text: 'No hay citas registradas en esta fecha.'
-      })
-    }else if(fecha!=1 && this.searchRF==null){
-      this.citasRF = null;
-      this.citasRFPaginate = null;
-    }else{
-
-      if(this.searchRF!=null){
-
-        this.dataPaginateRF(event);
+      }else if(fecha!=1 && this.searchRF==null){
+        this.citasRF = null;
+        this.citasRFPaginate = null;
+      }else{
+        if(this.searchRF!=null){
+          this.dataPaginateRF(event);
+        }
       }
     }
-  }
     }).catch((error) => {
       console.log(error);
       this.rutas.navigate(['/500']);
