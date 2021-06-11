@@ -411,6 +411,10 @@ header .intro-text .intro-heading {
   line-height: 50px;
 }
 
+
+
+
+
 @media (min-width: 768px) {
   header .intro-text {
     padding-top: 300px;
@@ -1060,7 +1064,7 @@ p {
 }
 
 .alogo {
-  padding: 2px 15px !important;
+  padding-top: 5px !important;
 }
 
 .logo {
