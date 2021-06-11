@@ -52,6 +52,8 @@ export class DefaultLayoutComponent implements OnInit {
     localStorage.removeItem('id_paciente');
     localStorage.removeItem('CedulaExamenes');
     localStorage.removeItem('rol');
+    localStorage.removeItem('idCita');
+    localStorage.removeItem('nombres');
     this.rutas.navigate(['/login']);
   }
 
@@ -59,7 +61,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.login.Usuario(this.id).then(data =>{
       this.usuario=data['result'];
       this.Nombre=this.usuario['nombres'];
-      this.Imagen=this.usuario['imagen'];
+      this.Imagen="http://127.0.0.1:8000"+this.usuario['imagen'];
     }).catch(error =>{
       console.log(error);
   });
