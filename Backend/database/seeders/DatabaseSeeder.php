@@ -31,10 +31,10 @@ class DatabaseSeeder extends Seeder
 
         DB::table('cuentas')->insert([
             "id_rol" => 1,
-            "nombres" => "Dario Aldair Zambrano Mendoza",
+            "nombres" => "Administrador",
             "correo" => "q",
             "password" => "q",
-            "imagen" => "https://cdn.icon-icons.com/icons2/39/PNG/128/user_person_people_6100.png",
+            "imagen" => "administrador.png",
         ]);
 
     }

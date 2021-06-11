@@ -174,8 +174,7 @@
                   <label for="name"><label for="name"></label></label>
                   <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control"
                     (click)="cargarRF(FechaRf,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-                  <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control"
-                    (click)="cargarRF(FechaRf,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                  <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
                 </div>
               </div>
             </div>
@@ -208,7 +207,7 @@
 
                     <td>
                       <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
-                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,'Rehabilitacion Fisica',item.fecha,item.abono,item.turno.id_turno)"
                         id="cancelomg" [checked]='item.abono'>
                     </td>
                     <td>
@@ -240,7 +239,7 @@
                     </td>
                     <td>
                       <input autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
-                        (click)="abonar(item.id_cita,item.nombres,item.cedula,item.especialidad,item.fecha,item.abono,item.turno.id_turno)"
+                        (click)="abonar(item.id_cita,item.nombres,item.cedula,'Rehabilitacion Fisica',item.fecha,item.abono,item.turno.id_turno)"
                         id="cancelomg" [checked]='item.abono'>
                     </td>
                     <td>
