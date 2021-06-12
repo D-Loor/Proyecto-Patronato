@@ -502,6 +502,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.raza=data['result'].raza;
               this.religion=data['result'].religion;
               this.fechanacimiento=data['result'].fecha_nacimiento;
+              this.CalcularEdad();
               this.nivel_instruccion=data['result'].nivel_instruccion;
               this.id_patologico=data['result'].id_patologico;
               this.id_e_fisico=data['result'].id_e_fisico;

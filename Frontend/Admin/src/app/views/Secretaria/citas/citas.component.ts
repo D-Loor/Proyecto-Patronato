@@ -47,7 +47,6 @@ export class CitasComponent implements OnInit {
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
-      debugger
       if(this.validarVacio == '202'){
         this.citasMG=null;
         this.citasMGPaginate = null;

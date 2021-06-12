@@ -297,43 +297,43 @@ class PDFController extends Controller
                 $ContgruposEdad[17]=0;
 
                 foreach($Paciente as $item2){
-                    if($item2->paciente['edad']<0.028){
+                    if($item2->paciente['edad']<'0.028'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[0]++;
                         }else{
                             $ContgruposEdad[1]++;
                         }
-                    }else if($item2->paciente['edad']>=0.0028 && $item2->paciente['edad'] < 0.0365){
+                    }else if($item2->paciente['edad']>='0.028' && $item2->paciente['edad'] < '1'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[2]++;
                         }else{
                             $ContgruposEdad[3]++;
                         }
-                    }else if($item2->paciente['edad']>=1 && $item2->paciente['edad'] <= 4){
+                    }else if($item2->paciente['edad']>='1' && $item2->paciente['edad'] <= '4'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[4]++;
                         }else{
                             $ContgruposEdad[5]++;
                         }
-                    }else if($item2->paciente['edad']>=5 && $item2->paciente['edad'] <= 14){
+                    }else if($item2->paciente['edad']>='5' && $item2->paciente['edad'] <= '14'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[6]++;
                         }else{
                             $ContgruposEdad[7]++;
                         }
-                    }else if($item2->paciente['edad']>=15 && $item2->paciente['edad'] <= 49){
+                    }else if($item2->paciente['edad']>='15' && $item2->paciente['edad'] <= '49'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[8]++;
                         }else{
                             $ContgruposEdad[9]++;
                         }
-                    }else if($item2->paciente['edad']>=50 && $item2->paciente['edad'] <= 64){
+                    }else if($item2->paciente['edad']>='50' && $item2->paciente['edad'] <= '64'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[10]++;
                         }else{
                             $ContgruposEdad[11]++;
                         }
-                    }else if($item2->paciente['edad']>=65){
+                    }else if($item2->paciente['edad']>='65'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[12]++;
                         }else{
@@ -482,7 +482,7 @@ class PDFController extends Controller
                 if($item['motivo_consulta'] === $itemC['motivo_consulta'])
                 {
                     $Edad[12] +=1;
-                    if($item->paciente['edad']>0 && $item->paciente['edad']<=3)
+                    if($item->paciente['edad']>'0' && $item->paciente['edad']<='3')
                     {
                         if($item->paciente['sexo']=='Hombre')
                         {
@@ -491,7 +491,7 @@ class PDFController extends Controller
                             $Edad[1] += 1;
                         }
                     }
-                    if($item->paciente['edad']>=4 && $item->paciente['edad']<=12)
+                    if($item->paciente['edad']>='4' && $item->paciente['edad']<='12')
                     {
                         if($item->paciente['sexo']=='Hombre')
                         {
@@ -500,7 +500,7 @@ class PDFController extends Controller
                             $Edad[3] += 1;
                         }
                     }
-                    if($item->paciente['edad']>=13 && $item->paciente['edad']<=19)
+                    if($item->paciente['edad']>='13' && $item->paciente['edad']<='19')
                     {
                         if($item->paciente['sexo']=='Hombre')
                         {
@@ -509,7 +509,7 @@ class PDFController extends Controller
                             $Edad[5] += 1;
                         }
                     }
-                    if($item->paciente['edad']>=20 && $item->paciente['edad']<=49)
+                    if($item->paciente['edad']>='20' && $item->paciente['edad']<='49')
                     {
                         if($item->paciente['sexo']=='Hombre')
                         {
@@ -518,7 +518,7 @@ class PDFController extends Controller
                             $Edad[7] += 1;
                         }
                     }
-                    if($item->paciente['edad']>=50)
+                    if($item->paciente['edad']>='50')
                     {
                         if($item->paciente['sexo']=='Hombre')
                         {
@@ -684,19 +684,19 @@ class PDFController extends Controller
             $ninos[3]=" ";
             $ninos[4]=" ";
 
-            if($item->paciente['edad'] < 1){
+            if($item->paciente['edad'] < '1'){
                 if($item['tipo_atencion'] == "Primera"){
                     $ninos[0]="X";
                 }else{
                     $ninos[1]="X";
                 }
-            }else if($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4){
+            }else if($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4'){
                 if($item['tipo_atencion'] == "Primera"){
                     $ninos[2]="X";
                 }else{
                     $ninos[3]="X";
                 }
-            }else if($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9){
+            }else if($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9'){
                 $ninos[4]="X";
             }
 
@@ -704,9 +704,9 @@ class PDFController extends Controller
             $edadesm[1]=" ";
             $edadesm[2]=" ";
 
-            if($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14){
+            if($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14'){
                 $edadesm[0]="X";
-            }else if($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19){
+            }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
                 $edadesm[1]="X";
             }else{
                 $edadesm[2]="X";
@@ -723,23 +723,23 @@ class PDFController extends Controller
             $morbilidad[8]="";
             $morbilidad[9]="";
 
-            if($item->paciente['edad'] < 0.1){
+            if($item->paciente['edad'] < '0.1'){
                 $morbilidad[0]="X";
-            }else if($item->paciente['edad'] >= 0.1 && $item->paciente['edad'] <= 0.11){
+            }else if($item->paciente['edad'] >= '0.1' && $item->paciente['edad'] <= '0.11'){
                 $morbilidad[1]="X";
-            }else if($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4){
+            }else if($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4'){
                 $morbilidad[2]="X";
-            }else if($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9){
+            }else if($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9'){
                 $morbilidad[3]="X";
-            }else if($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14){
+            }else if($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14'){
                 $morbilidad[4]="X";
-            }else if($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19){
+            }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
                 $morbilidad[5]="X";
-            }else if($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 35){
+            }else if($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '35'){
                 $morbilidad[6]="X";
-            }else if($item->paciente['edad'] >= 36 && $item->paciente['edad'] <= 49){
+            }else if($item->paciente['edad'] >= '36' && $item->paciente['edad'] <= '49'){
                 $morbilidad[7]="X";
-            }else if($item->paciente['edad'] >= 50 && $item->paciente['edad'] <= 64){
+            }else if($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64'){
                 $morbilidad[8]="X";
             }else{
                 $morbilidad[9]="X";
@@ -831,15 +831,15 @@ class PDFController extends Controller
             $morbilidad[2]="";
             $morbilidad[3]="";
             $morbilidad[4]="";
-            if($item->paciente['edad'] >= 0 && $item->paciente['edad'] <= 3){
+            if($item->paciente['edad'] >= '0' && $item->paciente['edad'] <= '3'){
                 $morbilidad[0]="X";
-            }else if($item->paciente['edad'] >= 4 && $item->paciente['edad'] <= 12){
+            }else if($item->paciente['edad'] >= '4' && $item->paciente['edad'] <= '12'){
                 $morbilidad[1]="X";
-            }else if($item->paciente['edad'] >= 13 && $item->paciente['edad'] <= 19){
+            }else if($item->paciente['edad'] >= '13' && $item->paciente['edad'] <= '19'){
                 $morbilidad[2]="X";
-            }else if($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 49){
+            }else if($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '49'){
                 $morbilidad[3]="X";
-            }else if($item->paciente['edad'] >= 50){
+            }else if($item->paciente['edad'] >= '50'){
                 $morbilidad[4]="X";
             }
 
@@ -1036,13 +1036,13 @@ class PDFController extends Controller
                 $ninos[3] = 0;
                 $ninos[4] = 0;
 
-                if ($item->paciente['edad'] < 1) {
+                if ($item->paciente['edad'] < '1') {
                     $ninos[0] = 1;
                     $ninos[1] = 0;
-                } else if ($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4) {
+                } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
                     $ninos[2] = 0;
                     $ninos[3] = 1;
-                } else if ($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9) {
+                } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
                     $ninos[4] = 1;
                 }
 
@@ -1050,9 +1050,9 @@ class PDFController extends Controller
                 $edadesm[1] = 0;
                 $edadesm[2] = 0;
 
-                if ($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14) {
+                if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
                     $edadesm[0] = 1;
-                } else if ($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19) {
+                } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
                     $edadesm[1] = 1;
                 } else {
                     $edadesm[2] = 1;
@@ -1069,23 +1069,23 @@ class PDFController extends Controller
                 $morbilidad[8] = 0;
                 $morbilidad[9] = 0;
 
-                if ($item->paciente['edad'] < 0.1) {
+                if ($item->paciente['edad'] < '0.1') {
                     $morbilidad[0] = 1;
-                } else if ($item->paciente['edad'] >= 0.1 && $item->paciente['edad'] <= 0.11) {
+                } else if ($item->paciente['edad'] >= '0.1' && $item->paciente['edad'] <= '0.11') {
                     $morbilidad[1] = 1;
-                } else if ($item->paciente['edad'] >= 1 && $item->paciente['edad'] <= 4) {
+                } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
                     $morbilidad[2] = 1;
-                } else if ($item->paciente['edad'] >= 5 && $item->paciente['edad'] <= 9) {
+                } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
                     $morbilidad[3] = 1;
-                } else if ($item->paciente['edad'] >= 10 && $item->paciente['edad'] <= 14) {
+                } else if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
                     $morbilidad[4] = 1;
-                } else if ($item->paciente['edad'] >= 15 && $item->paciente['edad'] <= 19) {
+                } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
                     $morbilidad[5] = 1;
-                } else if ($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 35) {
+                } else if ($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '35') {
                     $morbilidad[6] = 1;
-                } else if ($item->paciente['edad'] >= 36 && $item->paciente['edad'] <= 49) {
+                } else if ($item->paciente['edad'] >= '36' && $item->paciente['edad'] <= '49') {
                     $morbilidad[7] = 1;
-                } else if ($item->paciente['edad'] >= 50 && $item->paciente['edad'] <= 64) {
+                } else if ($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64') {
                     $morbilidad[8] = 1;
                 } else {
                     $morbilidad[9] = 1;
@@ -1242,13 +1242,13 @@ class PDFController extends Controller
                 $edades[3] = 0;
                 $edades[4] = 0;
 
-                if ($item->paciente['edad'] >0 && $item->paciente['edad'] <=3) {
+                if ($item->paciente['edad'] >'0' && $item->paciente['edad'] <='3') {
                     $edades[0] = 1;
-                } else if ($item->paciente['edad'] >= 4 && $item->paciente['edad'] <= 12) {
+                } else if ($item->paciente['edad'] >= '4' && $item->paciente['edad'] <= '12') {
                     $edades[1] = 1;
-                } else if ($item->paciente['edad'] >= 13 && $item->paciente['edad'] <= 19) {
+                } else if ($item->paciente['edad'] >= '13' && $item->paciente['edad'] <= '19') {
                     $edades[2] = 1;
-                } else if ($item->paciente['edad'] >= 20 && $item->paciente['edad'] <= 49) {
+                } else if ($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '49') {
                     $edades[3] = 1;
                 } else{
                     $edades[4] = 1;

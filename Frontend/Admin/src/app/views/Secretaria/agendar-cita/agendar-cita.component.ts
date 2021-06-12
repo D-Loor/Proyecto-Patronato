@@ -59,8 +59,11 @@ export class AgendarCitaComponent implements OnInit {
   ArrayTurnos: any = []
   listaRoles:any=[];
 
-  ngOnInit() {
+  today = new Date();
+  fechaActual:string;
 
+  ngOnInit() {
+    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargarRoles();
     this.idCita = localStorage.getItem('idCita');
     this.cedulaCita= localStorage.getItem('cedulaCita');
@@ -248,6 +251,7 @@ export class AgendarCitaComponent implements OnInit {
       'especialidad':this.especialidad,
       'abono':compro,
       'id_turno':this.idT[0],
+      'fecha_actual':this.fechaActual,
     }
 
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
@@ -355,6 +359,7 @@ export class AgendarCitaComponent implements OnInit {
       "fecha": fecha,
       "abono": abo,
       "id_turno": id_turno,
+      'fecha_actual':this.fechaActual,
     }
 
     this.citasser.updatecitas(arrayLocal,cedula).then(data =>{

@@ -77,7 +77,7 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
-
+        $edad = 0;
         $datos=new Cita();
         $datos->nombres=$request->nombres;
         $datos->cedula=$request->cedula;
@@ -91,11 +91,87 @@ class CitaController extends Controller
         $datosP=Paciente::where('cedula', $request->cedula)->get()->first();
         if($datosP != null){
             $datos->estado=1;
+
+            //Fecha Actual
+            $hoy = $request->fecha_actual;
+            $valoresH = explode('-', $hoy);
+            $ahora_dia = $valoresH[2];
+            $ahora_mes = $valoresH[1];
+            $ahora_ano = $valoresH[0];
+
+            //Fecha de nacimiento
+            $cumpleanos = $datosP->fecha_nacimiento;
+            $valoresC = explode('-', $cumpleanos);
+            $ano = $valoresC[0];
+            $mes = $valoresC[1];
+            $dia = $valoresC[2];
+
+            //Calcular edad en años
+            $edad = ($ahora_ano + 1900) - $ano;
+                 if ( $ahora_mes < $mes )
+                 {
+                     $edad--;
+                 }
+                 if (($mes == $ahora_mes) && ($ahora_dia < $dia))
+                 {
+                     $edad--;
+                 }
+                 if ($edad > 1900)
+                 {
+                     $edad -= 1900;
+                 }
+                 if($edad ==1899 || $edad ==1898 || $edad ==1900 ){
+                   $edad = 0;
+                 }
+
+            //Calculamos la edad en meses
+            $meses = 0;
+                 if ($ahora_mes > $mes && $dia > $ahora_dia)
+                     $meses = $ahora_mes - $mes - 1;
+                 else if ($ahora_mes > $mes)
+                     $meses = $ahora_mes - $mes;
+                 if ($ahora_mes < $mes && $dia < $ahora_dia)
+                     $meses = 12 - ($mes - $ahora_mes);
+                 else if ($ahora_mes < $mes)
+                     $meses = 12 - ($mes - $ahora_mes + 1);
+                 if ($ahora_mes == $mes && $dia > $ahora_dia)
+                     $meses = 11;
+
+            // calculamos los dias
+            $dias=0;
+                 if($ahora_dia>$dia)
+                     $dias=$ahora_dia-$dia;
+                 if($ahora_dia<$dia)
+                 {
+                    $ultimodia = date("Y-m-t", strtotime($hoy));
+                    $valoresUl = explode('-', $ultimodia);
+                    $ultimoDiaMes= $valoresUl[2];;
+                    $dias=$ultimoDiaMes-($dia-$ahora_dia);
+                 }
+
+            if($edad == 0 && $meses == 0){
+                $edad = "0.0".$dias;
+                $datosP->edad = $edad;
+                $datosP->update();
+            }
+            if($edad !=0 ){
+                $edad = $edad;
+                $datosP->edad = $edad;
+                $datosP->update();
+            }
+            if($edad == 0 && $meses != 0){
+                $edad = "0.".$meses;
+                $datosP->edad = $edad;
+                $datosP->update();
+            }
+
+             
+
         }else{
             $datos->estado=0;
         }
-        $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+        //$datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'valor'=>$edad]);
     }
 
     /**
