@@ -283,6 +283,8 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
                             'error'
                           )
                       }else{
+                        const fecha = new Date();
+                        const fechaActual = fecha.getFullYear()+"-"+(fecha.getMonth() + 1)+"-"+fecha.getDate();                      
                         $.ajax({
             
                             url: "http://127.0.0.1:8000/api/Cita",
@@ -293,7 +295,8 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
                                 'fecha' : fecha,
                                 'id_turno' : turno,
                                 'estado': estado,
-                                'abono': abono
+                                'abono': abono,
+                                'fecha_actual':fechaActual,
                             }),
                             contentType: 'application/json; charset=utf-8',
                             success: function (data) {

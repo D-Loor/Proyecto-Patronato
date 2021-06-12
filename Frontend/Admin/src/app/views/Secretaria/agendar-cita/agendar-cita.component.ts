@@ -120,7 +120,6 @@ export class AgendarCitaComponent implements OnInit {
             'El paciente no cuenta con un historial clínico.',
             'error'
           );
-
         }else{
           Swal.fire(
             '¡Encontrado!',
