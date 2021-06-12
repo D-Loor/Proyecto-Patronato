@@ -170,7 +170,7 @@ class CitaController extends Controller
         }else{
             $datos->estado=0;
         }
-        //$datos->save();
+        $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'valor'=>$edad]);
     }
 
