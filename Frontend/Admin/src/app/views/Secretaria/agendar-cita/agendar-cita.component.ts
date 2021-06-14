@@ -63,7 +63,21 @@ export class AgendarCitaComponent implements OnInit {
   fechaActual:string;
 
   ngOnInit() {
-    this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+    if((this.today.getMonth()+1)<10 || this.today.getDate()<10){
+      if((this.today.getMonth()+1)<10 && this.today.getDate()<10){
+        this.fechaActual=this.today.getFullYear() + "-0" + (this.today.getMonth() +1) + "-0" + this.today.getDate();
+      }
+      if((this.today.getMonth()+1)<10 && this.today.getDate()>10){
+        this.fechaActual=this.today.getFullYear() + "-0" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+      }
+      if((this.today.getMonth()+1)>10 && this.today.getDate()<10){
+       this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-0" + this.today.getDate();
+      }
+    }else{
+      this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+    }
+
+    console.log(this.fechaActual);
     this.cargarRoles();
     this.idCita = localStorage.getItem('idCita');
     this.cedulaCita= localStorage.getItem('cedulaCita');

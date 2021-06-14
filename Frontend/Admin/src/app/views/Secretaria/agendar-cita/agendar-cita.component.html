@@ -18,7 +18,7 @@
                                           </div>
                                           <div class=" form-group col-md-6">
                                               <label for="date-input">Fecha de la cita</label>
-                                              <input required [class]="ClaseCFecha" (click)="ClaseCFecha='form-control form-input select-number'" id="fecha_consulta" type="date" autocomplete="off"  [(ngModel)]="fecha_consulta" name="fecha_consulta" (change)="Turnos(fecha_consulta)">
+                                              <input required [class]="ClaseCFecha" min="{{fechaActual}}" (click)="ClaseCFecha='form-control form-input select-number'" id="fecha_consulta" type="date" autocomplete="off"  [(ngModel)]="fecha_consulta" name="fecha_consulta" (change)="Turnos(fecha_consulta)">
                                           </div>
                                       </div>
                                       <div class="row">
