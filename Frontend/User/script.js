@@ -283,8 +283,8 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
                             'error'
                           )
                       }else{
-                        const fecha = new Date();
-                        const fechaActual = fecha.getFullYear()+"-"+(fecha.getMonth() + 1)+"-"+fecha.getDate();                      
+                        const fechaA = new Date();
+                        const fechaActual = fechaA.getFullYear()+"-"+(fechaA.getMonth() + 1)+"-"+fechaA.getDate();                      
                         $.ajax({
             
                             url: "http://127.0.0.1:8000/api/Cita",
