@@ -418,6 +418,7 @@ export class CuentasComponent implements OnInit {
                 'success'
               )
               this.limpiar();
+              this.cargarTablas();
             }).catch((error) => {
               console.log(error);
               this.spinner.hide('sample');

@@ -56,6 +56,7 @@ export class ReportesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaMGandRF');
     this.YearActual=this.today.getFullYear();
 
     this.cargarYears();

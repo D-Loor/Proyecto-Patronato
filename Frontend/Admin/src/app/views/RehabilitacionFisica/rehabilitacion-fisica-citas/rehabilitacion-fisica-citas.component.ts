@@ -61,6 +61,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
     this.cargar();
   }
   actualizar(){
+    localStorage.removeItem('cedulaMGandRF');
     this.spinner.show('sample');
     this.cargar();
 

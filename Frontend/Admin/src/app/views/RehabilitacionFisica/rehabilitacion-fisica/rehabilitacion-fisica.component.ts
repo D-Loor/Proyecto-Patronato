@@ -44,6 +44,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaMGandRF');
     this.cargar();
   }
 
