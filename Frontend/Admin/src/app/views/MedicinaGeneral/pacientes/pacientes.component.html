@@ -399,9 +399,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-3">
-                                        <label for="text-input">DBT: </label>
+                                        <label for="text-input">DBID: </label>
 
-                                            <input class="form-control col-sm-8" type="text" name="DBT"  [(ngModel)]="DBT" id="DBT" value="DBT" disabled>
+                                            <input class="form-control col-sm-8" type="text" name="DBID"  [(ngModel)]="DBID" id="DBID" value="DBID" disabled>
 
                                     </div>
                                     <div class="form-group col-sm-3">
@@ -409,12 +409,12 @@
                                         <input class="form-control col-sm-8" type="text" name="HTA"  [(ngModel)]="HTA" id="HTA" value="HTA" disabled>
                                     </div>
                                     <div class="form-group col-sm-3">
-                                        <label for="text-input">TBC:</label>
-                                        <input class="form-control col-sm-8" type="text" name="TBC"  [(ngModel)]="TBC" id="TBC" value="TBC" disabled>
+                                        <label for="text-input">TbP:</label>
+                                        <input class="form-control col-sm-8" type="text" name="TbP"  [(ngModel)]="TbP" id="TbP" value="TbP" disabled>
                                     </div>
                                     <div class="form-group col-sm-3">
-                                        <label for="text-input">GEMELAR:</label>
-                                        <input class="form-control col-sm-8" type="text" name="GEMELAR"  [(ngModel)]="GEMELAR" id="GEMELAR" value="1" disabled>
+                                        <label for="text-input">DBI:</label>
+                                        <input class="form-control col-sm-8" type="text" name="DBI"  [(ngModel)]="DBI" id="DBI" value="DBI" disabled>
                                     </div>
                                 </div><!--/.row-->
                             </form>
@@ -448,8 +448,8 @@
                                 <td>{{item.nombres}}</td>
                                 <td>{{item.union}}</td>
                                 <td>
-                                    <span *ngIf="item.vida != 1" class="badge badge-danger">Fallecido.</span>
-                                    <span *ngIf="item.vida != 0" class="badge badge-success">Vivito y Coleando.</span></td>
+                                    <span *ngIf="item.vida != 1" class="badge badge-danger">Fallecido</span>
+                                    <span *ngIf="item.vida != 0" class="badge badge-success">Vivo</span></td>
                                 <td>{{item.causas}}</td>
                               </tr>
                             </tbody>

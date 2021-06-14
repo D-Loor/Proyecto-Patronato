@@ -35,8 +35,8 @@ export class PacientesComponent implements OnInit {
   sexo:string; Lresidencia:string; Lprocedencia:string; fechanacimiento:string; raza:string; religion:string; alcoholT:string;
   tabacoT:string; drogasT:string; alimentacionT:string; diuresisT:string; somniaT:string; ninezT:string; adolescenciaT:string;
   adultezT:string; quirurgicosT:string; alergicosT:string; traumatologicosT:string; fum:string; fpp:string; edad_gestional:string;
-  menarquia:string; flujo_genital:string; Gestas:string; Partos:string; abortos:string; cesareas:string; DBT:string; HTA:string; TBC:string;
-  GEMELAR:string; examen_cabezaT:string; examen_cuelloT:string; examen_toraxT:string; examen_abdomenT:string; examen_msuperiorT:string; examen_minferioresT:string;
+  menarquia:string; flujo_genital:string; Gestas:string; Partos:string; abortos:string; cesareas:string; DBID:string; HTA:string; TbP:string;
+  DBI:string; examen_cabezaT:string; examen_cuelloT:string; examen_toraxT:string; examen_abdomenT:string; examen_msuperiorT:string; examen_minferioresT:string;
   examen_genitalT:string; examen_analT:string; examen_digestivoT:string; examen_respiratorioT:string; examen_cardiacoT:string; examen_genitourinarioT:string; examen_osteomuscularT:string;
   examen_nerviosoT:string; examen_laboratorioT:string; examen_electrocardiogramaT:string; examen_RToraxT:string; examen_otrosT:string; gad:string;
 
@@ -198,10 +198,10 @@ export class PacientesComponent implements OnInit {
     this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
     this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
     this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
-    this.DBT=data['result']['antecedentes_patologicos_personales'].DBT;
+    this.DBID=data['result']['antecedentes_patologicos_personales'].DBID;
     this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
-    this.TBC=data['result']['antecedentes_patologicos_personales'].TBC;
-    this.GEMELAR=data['result']['antecedentes_patologicos_personales'].GEMELAR;
+    this.TbP=data['result']['antecedentes_patologicos_personales'].TbP;
+    this.DBI=data['result']['antecedentes_patologicos_personales'].DBI;
     this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
     this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
     this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
