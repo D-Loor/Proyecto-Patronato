@@ -193,7 +193,7 @@ class CitaController extends Controller
     {
 
         $datos=Cita::with('turno')->where('fecha', $fecha)->get();
-        $turno=Turno::with('rroles')->get();
+        $turno=Turno::orderBy('hora')->with('rroles')->get();
         $roles=Role::where('rol', $tipo)->first();
         $posicion=0;
         $idrol=$roles['id_rol'];
@@ -214,6 +214,7 @@ class CitaController extends Controller
                         }
                         if($pase == 3){
                             unset($turno[$posicion]);
+                            
                             break;
                         }
                     }
@@ -235,8 +236,7 @@ class CitaController extends Controller
 
             $posicion++;
         }
-
-
+        
         $NTurnos = count($turno);
 
         if($NTurnos != 0){
