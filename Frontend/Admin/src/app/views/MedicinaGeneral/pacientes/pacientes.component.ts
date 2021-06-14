@@ -62,7 +62,6 @@ export class PacientesComponent implements OnInit {
   };
 
   ngOnInit(){
-    debugger
       if(localStorage.getItem('cedulaMGandRF') == null){
         this.search="";
       }else{
@@ -87,10 +86,11 @@ export class PacientesComponent implements OnInit {
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
     this.TotalPacientes=data['total'];
+    let validador = data['code'];
     if(this.TotalPacientes == null){
       this.TotalPacientes=0;
     }
-    if(data['code']=="202"){
+    if(validador=='202'){
       this.pacientesMG=null;
       this.pacientesMGPaginate=null;
     }else{
@@ -102,8 +102,6 @@ export class PacientesComponent implements OnInit {
     }
   }).catch(error =>{
     console.log(error);
-    this.spinner.hide('sample');
-    this.rutas.navigate(['/500']);
   });
 
   }
