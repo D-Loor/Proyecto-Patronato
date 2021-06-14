@@ -223,11 +223,15 @@
                 @foreach ($Resultados as $item)
                     <tr>
                         @for($i = 0; $i <= 15; $i++) 
-                            @if ($i===0) 
+                            @if ($i===0)
                                 <th class="numero">{{$item[$i]}}</th>
                             @endif
                             @if ($i >=1 && $i < 15) 
-                                <td class="grande" >{{$item[$i]}}</td>
+                                @if ($item[$i] == 0) 
+                                    <th> </th>
+                                @else
+                                    <td class="grande" >{{$item[$i]}}</td>
+                                @endif
                             @endif
                             @if($i===15)
                             <td class="grande" >{{$porcentajes[$aux]}}</td>
