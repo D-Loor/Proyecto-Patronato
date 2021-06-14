@@ -82,7 +82,7 @@
                 <td>{{item.nombres}}</td>
                 <td>{{item.apellidos}}</td>
                 <td>{{item.sexo}}</td>
-                <td>{{item.edad}}</td>
+                <td>{{CalcEdad(item.edad)}}</td>
                 <td>{{item.residencia}}</td>
                 <td>
                     <span *ngIf="item.gad != 1" class="badge badge-secondary">NO</span>

@@ -67,7 +67,7 @@ export class PacientesComponent implements OnInit {
       }else{
         this.search = localStorage.getItem('cedulaMGandRF');
       }
-      
+
       this.cargar();
   }
   actualizar(){
@@ -80,8 +80,54 @@ export class PacientesComponent implements OnInit {
       'success'
     )
   }
-  
 
+  CalcEdad(edad:string){
+    let valor = parseFloat(edad);
+    let pased=0;
+    let pasem=0;
+    let contadord=0.02;
+    let contadorm=0.2;
+    if(valor<=0.09){
+      if(valor==0.01)
+        return (valor*100)+" día";
+      else {
+        while(contadord<= 0.09){
+          if(valor==contadord){
+            pased=1;
+            return (valor*100)+" días";
+          }
+          contadord+=0.01;
+        }
+        if(pased==0){
+          return (valor*1000)+" días";
+        }
+
+      }
+    }
+    else if(valor<=0.9){
+      if(valor == 0.1)
+        return (valor*10)+" mes";
+      else{
+        while(contadorm<= 0.9){
+          if(valor==contadorm){
+            pasem=1;
+            return (valor*10)+" meses";
+          }
+          contadorm+=0.1;
+        }
+        if(pasem==0){
+          return (valor*100)+" meses";
+        }
+      }
+
+    }else{
+      if(valor == 1)
+       return valor+" año";
+      else
+        return valor+" años";
+    }
+
+  }
   cargar(){
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
@@ -157,7 +203,7 @@ export class PacientesComponent implements OnInit {
   ngOnDestroy(): void{
     this.pacientesMG = null;
     this.pacientesMGPaginate = null;
-    
+
   }
 
   DatosPaciente(id_paciente:number){
@@ -249,7 +295,7 @@ export class PacientesComponent implements OnInit {
       localStorage.setItem('CedulaExamenes', cedul);
       this.rutas.navigate(['/registrarhistoriaclinica']);
     }
-    
+
   }
 
 
