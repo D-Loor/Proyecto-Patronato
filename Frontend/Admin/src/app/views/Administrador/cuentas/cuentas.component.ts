@@ -172,16 +172,12 @@ export class CuentasComponent implements OnInit {
     }
   }
   CrearCuenta(){
-    if(this.foto==undefined || this.foto==null || this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+    if( this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para agregar la cuenta.'
       })
-
-      if(this.foto==undefined || this.foto== null){
-        this.ClaseFoto =  "invalido";
-      }
       if(this.nombres==undefined || this.nombres==""){
         this.ClaseNombre = "form-control is-invalid select-number";
       }
@@ -319,16 +315,13 @@ export class CuentasComponent implements OnInit {
   }
 
   ActualizarCuenta(){
-    if(this.foto==undefined || this.foto==null || this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+    if(this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para actualizar la cuenta.'
       })
 
-      if(this.foto==undefined || this.foto== null){
-        this.ClaseFoto =  "invalido";
-      }
       if(this.nombres==undefined || this.nombres==""){
         this.ClaseNombre = "form-control is-invalid select-number";
       }

@@ -51,14 +51,17 @@ class CuentaController extends Controller
         $picture = date('His').'-'.$name_File.'.'.$extension;
         $file->move(public_path('/imagenes'),$picture);
         $picture = '/imagenes/'.$picture;*/
-
-        $file=$request->file('imagen');
-        $nombre=$file->getClientMimeType();
-        $tipoImagen=str_replace('image/', '.',$nombre);
-        $fileName=uniqid() . $tipoImagen;
-        $path=public_path().'/imagenes';
-        $file->move($path,$fileName);
-        $picture = '/imagenes/'.$fileName;
+        if($file=$request->file('imagen') == null){
+            $picture = '/imagenes/undefined.png';
+        }else{
+            $file=$request->file('imagen');
+            $nombre=$file->getClientMimeType();
+            $tipoImagen=str_replace('image/', '.',$nombre);
+            $fileName=uniqid() . $tipoImagen;
+            $path=public_path().'/imagenes';
+            $file->move($path,$fileName);
+            $picture = '/imagenes/'.$fileName;
+        };
 
         $datos=new Cuenta();
         $datos->id_rol=$request->id_rol;
@@ -106,7 +109,7 @@ class CuentaController extends Controller
     public function update($id_cuenta)
     {
         $datos=Cuenta::find($id_cuenta);
-
+        
         if($datos != null){
             $datos->id_rol= request('id_rol');
             $datos->nombres= request('nombres');
@@ -124,28 +127,24 @@ class CuentaController extends Controller
     public function actualizar(Request $request)
     {
         $datos=Cuenta::where('id_cuenta', $request->id_cuenta)->get()->first();
-
+        
         if($datos != null){
-        $archivo=substr($datos->imagen,1);
-        File::delete($archivo);
+             if($request->file('imagen') == null){
+                $picture = $datos -> imagen;
+            }else{
+                if($datos -> imagen != '/imagenes/undefined.png' && $datos -> imagen != '/imagenes/administrador.png'){
+                    $archivo=substr($datos->imagen,1);
+                    File::delete($archivo);
+                }
+                $file=$request->file('imagen');
+                $nombre=$file->getClientMimeType();
+                $tipoImagen=str_replace('image/', '.',$nombre);
+                $fileName=uniqid() . $tipoImagen;
+                $path=public_path().'/imagenes';
+                $file->move($path,$fileName);
+                $picture = '/imagenes/'.$fileName;
+            };       
         
-        /*$file = $request->file('imagen');
-        $filename = $file->getClientOriginalName();
-        $filename = pathinfo($filename, PATHINFO_FILENAME);
-        $name_File = str_replace(" ", "_", $filename);
-        $extension = $file->getClientOriginalExtension();
-        $picture = date('His').'-'.$name_File.'.'.$extension;
-        $file->move(public_path('/imagenes'),$picture);
-        $picture = '/imagenes/'.$picture;*/
-        
-        $file=$request->file('imagen');
-        $nombre=$file->getClientMimeType();
-        $tipoImagen=str_replace('image/', '.',$nombre);
-        $fileName=uniqid() . $tipoImagen;
-        $path=public_path().'/imagenes';
-        $file->move($path,$fileName);
-        $picture = '/imagenes/'.$fileName;
-
         $datos->id_rol=$request->id_rol;
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
@@ -170,8 +169,10 @@ class CuentaController extends Controller
     {
         $datos=Cuenta::where('id_cuenta', $id)->get()->first();
         if($datos != null){
-            $archivo=substr($datos->imagen,1);
-            File::delete($archivo);
+            if($datos -> imagen != '/imagenes/undefined.png' && $datos -> imagen != '/imagenes/administrador.png'){
+                $archivo=substr($datos->imagen,1);
+                File::delete($archivo);
+            }
             $datos->delete();
             return response()->json(['result'=>'Registro Eliminado', 'code'=>'201']);
         }else{
