@@ -297,13 +297,13 @@ class PDFController extends Controller
                 $ContgruposEdad[17]=0;
 
                 foreach($Paciente as $item2){
-                    if($item2->paciente['edad']<'0.028'){
+                    if($item2->paciente['edad']<='0.028'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[0]++;
                         }else{
                             $ContgruposEdad[1]++;
                         }
-                    }else if($item2->paciente['edad']>='0.028' && $item2->paciente['edad'] < '1'){
+                    }else if($item2->paciente['edad']>='0.029' && $item2->paciente['edad'] < '1'){
                         if ($item2->paciente['sexo']=='Hombre'){
                             $ContgruposEdad[2]++;
                         }else{
@@ -708,7 +708,7 @@ class PDFController extends Controller
                 $edadesm[0]="X";
             }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
                 $edadesm[1]="X";
-            }else{
+            }else if($item->paciente['edad'] >= '20'){
                 $edadesm[2]="X";
             }
 
@@ -741,7 +741,7 @@ class PDFController extends Controller
                 $morbilidad[7]="X";
             }else if($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64'){
                 $morbilidad[8]="X";
-            }else{
+            }else if($item->paciente['edad'] >= '65'){
                 $morbilidad[9]="X";
             }
 
@@ -783,7 +783,6 @@ class PDFController extends Controller
 
         // return response()->json(['result'=>$Result]);
         return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
-
 
     }
 
@@ -1054,7 +1053,7 @@ class PDFController extends Controller
                     $edadesm[0] = 1;
                 } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
                     $edadesm[1] = 1;
-                } else {
+                } else if ($item->paciente['edad'] >= '20'){
                     $edadesm[2] = 1;
                 }
 
@@ -1087,7 +1086,7 @@ class PDFController extends Controller
                     $morbilidad[7] = 1;
                 } else if ($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64') {
                     $morbilidad[8] = 1;
-                } else {
+                } else if ($item->paciente['edad'] >= '65'){
                     $morbilidad[9] = 1;
                 }
 
@@ -1250,7 +1249,7 @@ class PDFController extends Controller
                     $edades[2] = 1;
                 } else if ($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '49') {
                     $edades[3] = 1;
-                } else{
+                } else if ($item->paciente['edad'] >= '50'){
                     $edades[4] = 1;
                 }
 
