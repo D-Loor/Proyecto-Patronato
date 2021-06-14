@@ -34,7 +34,6 @@ export class AdministradorService {
     formData.append('correo', data.correo);
     formData.append('password', data.password);
     formData.append('imagen', data.imagen);
-    debugger
     return new Promise ((resolve, reject) => {
       this.http.post(url, formData).subscribe(res => {
         resolve(res);

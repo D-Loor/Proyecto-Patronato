@@ -113,7 +113,6 @@ export class CuentasComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]); // read file as data url
   
         reader.onload = (event) => { // called once readAsDataURL is completed
-          debugger
           this.url = event.target.result;
         }
       }
@@ -287,6 +286,7 @@ export class CuentasComponent implements OnInit {
         data['result'];
         this.spinner.hide('sample');
         this.cargarTablas();
+        this.limpiar();
       })
       .catch((error) => {
         console.log(error);
@@ -319,7 +319,6 @@ export class CuentasComponent implements OnInit {
   }
 
   ActualizarCuenta(){
-
     if(this.foto==undefined || this.foto==null || this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
       Swal.fire({
         icon: 'error',
@@ -408,7 +407,7 @@ export class CuentasComponent implements OnInit {
               "imagen": this.foto
 
             }
-
+            debugger
             this.administradorService.updateCuenta(arrayUpdate).then(data =>{
               data['result'];
               this.spinner.hide('sample');
