@@ -12,7 +12,7 @@ class Turno extends Model
     protected $table = 'turnos';
     protected $primaryKey = 'id_turno';
     protected $fillable = [
-         'id_rol','hora',
+         'id_rol','hora','cantidad','estado',
     ];
 
      public function rcita(){

@@ -17,6 +17,8 @@ class CreateTurnosTable extends Migration
             $table->bigIncrements('id_turno');
             $table->unsignedBigInteger('id_rol');
             $table->string('hora');
+            $table->integer('cantidad');
+            $table->boolean('estado');
 
             $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
 

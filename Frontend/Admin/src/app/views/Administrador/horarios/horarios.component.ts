@@ -29,9 +29,15 @@ export class HorariosComponent implements OnInit {
   validarVacio="";
   id_turnos="";
   result="";
+  EstadoTur=1;
+  cantidad;
+  Ver=0;
+  contador=0;
 
   ClaseHora:string="form-control form-input select-number";
   ClaseCEspecialidad:string="form-control form-input select-number";
+  ClaseCantidad='form-control form-input select-number';
+  ClaseEstado='form-control form-input select-number';
 
   loadingText = 'Cargando...';
 
@@ -48,6 +54,25 @@ export class HorariosComponent implements OnInit {
   ngOnInit(): void {
     this.cargarTablas();
     this.CargarEspecialidad();
+  }
+   
+  CargarCantidad(){
+    this.administradorService.cargarRolId(this.especialidad).then(data =>{
+      let temporal = data['result'].rol;
+      if(temporal=="Medicina General"){
+        this.cantidad=1;
+        this.Ver=1;
+      }else if(this.contador==0){
+        this.cantidad="";
+        this.Ver=0;
+      }else if(this.contador != 0){
+        this.Ver=0;
+      }
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });    
   }
 
   CargarEspecialidad(){
@@ -66,7 +91,7 @@ export class HorariosComponent implements OnInit {
   }
 
   limpiar(){
-    this.hora = ""; this.id_turnos=""; this.result="";
+    this.hora = ""; this.id_turnos=""; this.result=""; this.cantidad=""; this.especialidad="";this.Ver=0;
   }
 
   cargarTablas(){
@@ -164,7 +189,9 @@ export class HorariosComponent implements OnInit {
   }
 
   CrearTurno(){
-    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""){
+    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
+       this.cantidad==undefined || this.cantidad==null
+      ){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
@@ -177,6 +204,10 @@ export class HorariosComponent implements OnInit {
       if(this.especialidad==undefined || this.especialidad==""){
         this.ClaseCEspecialidad = "form-control is-invalid select-number";
       }
+      if(this.cantidad==undefined || this.cantidad==null){
+        this.ClaseCantidad = "form-control is-invalid select-number";
+      }
+      
 
     }
     else{
@@ -237,7 +268,9 @@ export class HorariosComponent implements OnInit {
       this.spinner.show('sample');
       let array={
         "hora": this.hora,
-        "id_rol": this.especialidad
+        "id_rol": this.especialidad,
+        "cantidad":this.cantidad,
+        "estado":this.EstadoTur
       }
       this.administradorService.agregarTurno(array).then(data=>{
         this.limpiar();
@@ -267,6 +300,10 @@ export class HorariosComponent implements OnInit {
       this.hora=data['result'].hora;
       this.especialidad=data['result'].id_rol;
       this.id_turnos=data['result'].id_turno;
+      this.EstadoTur=data['result'].estado;
+      this.cantidad=data['result'].cantidad;
+      this.contador++;
+      this.CargarCantidad();
       window.scrollTo(0, 0);
     }).catch((error) => {
       console.log(error);
@@ -277,7 +314,9 @@ export class HorariosComponent implements OnInit {
 
 
   ActualizarTurno(){
-    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""){
+    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
+       this.cantidad==undefined || this.cantidad==null
+      ){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
@@ -289,6 +328,9 @@ export class HorariosComponent implements OnInit {
       }
       if(this.especialidad==undefined || this.especialidad==""){
         this.ClaseCEspecialidad = "form-control is-invalid select-number";
+      }
+      if(this.cantidad==undefined || this.cantidad==null){
+        this.ClaseCantidad = "form-control is-invalid select-number";
       }
 
     }
@@ -315,44 +357,32 @@ export class HorariosComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          let validator=0;
-          for (let item of Object.keys(this.turnos)) {
-            if(this.turnos[item]['hora'] == this.hora && this.turnos[item]['id_rol'] == this.especialidad){
-              validator=1;
-            }
+          this.loadingText = 'Cargando...';
+          this.spinner.show('sample');
+
+          let arrayUpdate={
+            "hora":this.hora,
+            "id_rol":this.especialidad,
+            "cantidad":this.cantidad,
+            "estado":this.EstadoTur
           }
-          if(validator==1){
-            Swal.fire({
-              icon: 'error',
-              title: '¡Turno ya Existe..!',
-              text: 'Ya existe un turno con estos datos.'
-            })
-          }else{
-            this.loadingText = 'Cargando...';
-            this.spinner.show('sample');
 
-            let arrayUpdate={
-              "hora":this.hora,
-              "id_rol":this.especialidad
-            }
+          this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
 
-            this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
-
-              data['result'];
-              this.spinner.hide('sample');
-              Swal.fire(
-                '¡Datos Actualizados..!',
-                'Datos actualizados correctamente.',
-                'success'
-              )
-              this.cargarTablas();
-              this.limpiar();
-            }).catch((error) => {
-              console.log(error);
-              this.spinner.hide('sample');
-              this.rutas.navigate(['/500']);
-            });
-          }
+            data['result'];
+            this.spinner.hide('sample');
+            Swal.fire(
+              '¡Datos Actualizados..!',
+              'Datos actualizados correctamente.',
+              'success'
+            )
+            this.cargarTablas();
+            this.limpiar();
+          }).catch((error) => {
+            console.log(error);
+            this.spinner.hide('sample');
+            this.rutas.navigate(['/500']);
+          });
 
         } else if (
           /* Read more about handling dismissals below */

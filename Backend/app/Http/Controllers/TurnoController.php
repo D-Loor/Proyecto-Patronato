@@ -60,6 +60,8 @@ class TurnoController extends Controller
         $datos=new Turno();
         $datos->hora=$request->hora;
         $datos->id_rol=$request->id_rol;
+        $datos->cantidad=$request->cantidad;
+        $datos->estado=$request->estado;
         $datos->save();
         $idRecienGuardado = $datos->id_turno;
         return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id'=>$idRecienGuardado]);
@@ -104,6 +106,8 @@ class TurnoController extends Controller
         if($datos != null){
             $datos->hora=$request->hora;
             $datos->id_rol=$request->id_rol;
+            $datos->cantidad=$request->cantidad;
+            $datos->estado=$request->estado;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else
