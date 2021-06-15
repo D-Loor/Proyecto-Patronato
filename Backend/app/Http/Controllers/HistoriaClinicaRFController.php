@@ -194,4 +194,14 @@ class HistoriaClinicaRFController extends Controller
         return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'patronato'=>$patro,'domicilio'=> $domi]);
 
     }
+
+    public function ConsultasPacientesRF($id){
+        $datos = Historia_Clinica_RF::where('id_paciente', $id)->with('paciente')->get();
+        $num_rows = count($datos);
+        if($num_rows != 0){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Datos vacios", 'code'=>'202']);
+
+    }
 }

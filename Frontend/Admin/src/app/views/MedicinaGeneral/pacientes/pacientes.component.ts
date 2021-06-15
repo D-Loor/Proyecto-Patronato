@@ -283,7 +283,12 @@ export class PacientesComponent implements OnInit {
 
   Consultar(id_paciente:string){
     localStorage.setItem('id_paciente', id_paciente);
-    this.rutas.navigate(['/medicinageneral']);
+    if(localStorage.getItem('rol')=="Medicina General"){
+      this.rutas.navigate(['/medicinageneral']);
+    }
+    if(localStorage.getItem('rol')=="Rehabilitación Física"){
+      this.rutas.navigate(['/rehabilitacionfisica']);
+    }  
   }
 
   IrHistorial(cedul:string){

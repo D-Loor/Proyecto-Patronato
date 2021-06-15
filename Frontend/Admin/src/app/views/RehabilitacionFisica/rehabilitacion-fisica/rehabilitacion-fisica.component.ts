@@ -30,6 +30,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
   //variables para el modal
   NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado;receta;
 
+  idPaciente = localStorage.getItem('id_paciente');
+
   loadingText = 'Guardando...';
 
   spinnerConfig: object = {
@@ -45,7 +47,19 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem('cedulaMGandRF');
-    this.cargar();
+    if(this.idPaciente == 'Undefined' || this.idPaciente == null){
+      this.cargar();
+    }else{
+        this.historial.ConsultasPacientes(this.idPaciente).then(data =>{
+        this.historialRF=data['result'];
+        this.historialRFPaginate = this.historialRF.slice(0, 10);
+        localStorage.removeItem('id_paciente');
+      }).catch(error =>{
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
+      });
+    }
   }
 
   buscarRH(){

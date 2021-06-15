@@ -49,6 +49,7 @@ Route::get('atender/{cedula}','PacienteController@Atender');
 Route::get('validarcita/{cedula}/{fechaActual}', 'CitaController@ValidarCita');
 Route::get('FechasRangosMG/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaMGController@FiltradoFecha');
 Route::get('pacientesConcultas/{id}', 'HistoriaClinicaMGController@ConsultasPacientes');
+Route::get('pacientesConcultasRF/{id}', 'HistoriaClinicaRFController@ConsultasPacientesRF');
 Route::get('FechasRangosRF/{fechaInicial}/{fechaFinal}', 'HistoriaClinicaRFController@FiltradoFecha');
 Route::delete('eliminarATPF/{id_familiar}/{id_paciente}','AntecedentePatologicoFamiliarController@eliminar');
 Route::get('estadisticas/{fechaInicial}/{fechaFinal}/{especialidad}', 'HistoriaClinicaMGController@DatosEstadisticos');
