@@ -62,11 +62,13 @@ export class HorariosComponent implements OnInit {
       if(temporal=="Medicina General"){
         this.cantidad=1;
         this.Ver=1;
+        this.contador=0;
       }else if(this.contador==0){
         this.cantidad="";
         this.Ver=0;
       }else if(this.contador != 0){
         this.Ver=0;
+        this.contador=0;
       }
     }).catch((error) => {
       console.log(error);
