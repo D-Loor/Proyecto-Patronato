@@ -12,7 +12,7 @@ class Historia_Clinica_RF extends Model
     protected $table = 'historias_clinicas_rf';
     protected $primaryKey = 'id_rf';
     protected $fillable = [
-        'id_paciente','id_tratamiento','receta','diagnostico','lugar_atencion','certificado','fecha','motivo_consulta', 'anamnesis'
+        'id_paciente','id_diagnostico','id_tratamiento','receta','lugar_atencion','certificado','fecha','motivo_consulta', 'anamnesis'
     ];
 
     public function paciente(){
@@ -20,6 +20,9 @@ class Historia_Clinica_RF extends Model
     }
     public function tratamiento(){
        return $this->belongsTo('App\Models\Tratamiento','id_tratamiento');
+    }
+    public function diagnostico(){
+        return $this->belongsTo('App\Models\Diagnostico','id_diagnostico');
     }
 
 }

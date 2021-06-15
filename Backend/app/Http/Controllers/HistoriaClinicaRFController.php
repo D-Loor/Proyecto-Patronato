@@ -17,7 +17,7 @@ class HistoriaClinicaRFController extends Controller
     public function index()
     {
         //$datos=Historia_Clinica_RF::all();
-        $datos=Historia_Clinica_RF::with('paciente', 'tratamiento')->get();
+        $datos=Historia_Clinica_RF::with('paciente', 'tratamiento','diagnostico')->get();
         $num_rows = count($datos);
         if($num_rows!=0){
            return response()->json(['result'=>$datos]);
@@ -47,7 +47,7 @@ class HistoriaClinicaRFController extends Controller
         $datos=new Historia_Clinica_RF();
         $datos->id_paciente=$request->id_paciente;
         $datos->id_tratamiento=$request->id_tratamiento;
-        $datos->diagnostico=$request->diagnostico;
+        $datos->id_diagnostico=$request->id_diagnostico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
         $datos->motivo_consulta=$request->motivo_consulta;
@@ -96,7 +96,7 @@ class HistoriaClinicaRFController extends Controller
         $datos=Historia_Clinica_RF::where('id_rf', $id)->get()->first();
         $datos->id_paciente=$request->id_paciente;
         $datos->id_tratamiento=$request->id_tratamiento;
-        $datos->diagnostico=$request->diagnostico;
+        $datos->id_diagnostico=$request->id_diagnostico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
         $datos->fecha=$request->fecha;
@@ -196,7 +196,7 @@ class HistoriaClinicaRFController extends Controller
     }
 
     public function ConsultasPacientesRF($id){
-        $datos = Historia_Clinica_RF::where('id_paciente', $id)->with('paciente')->get();
+        $datos = Historia_Clinica_RF::where('id_paciente', $id)->with('paciente','diagnostico')->get();
         $num_rows = count($datos);
         if($num_rows != 0){
             return response()->json(['result'=>$datos, 'code'=>'201']);
