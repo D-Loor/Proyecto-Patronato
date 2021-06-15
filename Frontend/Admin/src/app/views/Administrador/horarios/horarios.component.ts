@@ -93,7 +93,7 @@ export class HorariosComponent implements OnInit {
   }
 
   limpiar(){
-    this.hora = ""; this.id_turnos=""; this.result=""; this.cantidad=""; this.especialidad="";this.Ver=0;
+    this.hora = "";this.EstadoTur=1; this.id_turnos=""; this.result=""; this.cantidad=""; this.especialidad="";this.Ver=0;
   }
 
   cargarTablas(){
@@ -265,7 +265,6 @@ export class HorariosComponent implements OnInit {
         title: '¡Turno antes Registrado..!',
         text: 'Este turno ya se encuentra registrado.'
       })
-      this.limpiar();
     }else{
       this.spinner.show('sample');
       let array={
