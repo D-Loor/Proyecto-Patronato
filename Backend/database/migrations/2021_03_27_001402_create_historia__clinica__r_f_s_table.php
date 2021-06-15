@@ -17,7 +17,7 @@ class CreateHistoriaClinicaRFSTable extends Migration
             $table->bigIncrements('id_rf');
             $table->unsignedBigInteger('id_paciente');
             $table->unsignedBigInteger('id_tratamiento');
-            $table->string('diagnostico');
+            $table->unsignedBigInteger('id_diagnostico');
             $table->string('lugar_atencion');
             $table->string('motivo_consulta');
             $table->string('anamnesis');
@@ -25,6 +25,7 @@ class CreateHistoriaClinicaRFSTable extends Migration
             $table->date('fecha');
             $table->string('receta');
 
+            $table->foreign('id_diagnostico')->references('id_diagnostico')->on('diagnosticos')->onDelete('cascade');
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
             $table->foreign('id_tratamiento')->references('id_tratamiento')->on('tratamientos')->onDelete('cascade');
         });
