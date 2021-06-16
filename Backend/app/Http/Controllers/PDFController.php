@@ -7,6 +7,7 @@ use PDF;
 use App\Models\Historia_Clinica_MG;
 use App\Models\Historia_Clinica_RF;
 use App\Models\Paciente;
+use App\Models\Recaudacion;
 use DateTime;
 
 class PDFController extends Controller
@@ -1370,14 +1371,109 @@ class PDFController extends Controller
        return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
     }
 
-    public function RecaudacionDiarioMedicinaGeneral(){
-        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+    public function ValidarRecaudacionDiarioMedicinaGeneral($fecha,$id_rol){
+
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+
+        $ndatos=count( $datos);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
     }
-    public function RecaudacionDiarioTerapia(){
-        return \PDF::loadView('RecaudacionDiarioTerapia')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+
+    public function RecaudacionDiarioMedicinaGeneral($fecha,$id_rol){
+        $valores = explode('-', $fecha);
+        $year = $valores[0];
+        $mes = $valores[1];
+        $dia = $valores[2];
+
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+
+        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
     }
-    public function RecaudacionMensual(){
-        return \PDF::loadView('RecaudacionMensual')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+
+    public function ValidarRecaudacionDiarioTerapia($fecha,$id_rol){
+       
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+
+        $ndatos=count( $datos);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+    }
+
+    public function RecaudacionDiarioTerapia($fecha,$id_rol){
+        $valores = explode('-', $fecha);
+        $year = $valores[0];
+        $mes = $valores[1];
+        $dia = $valores[2];
+
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+        return \PDF::loadView('RecaudacionDiarioTerapia', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+    }
+
+    public function ValidarRecaudacionMensual($Mes, $Year){
+       
+        $dato=Recaudacion::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente','rol')->get();
+
+        $ndatos=count( $datos);
+        if($ndatos > 0){
+            return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
+        }else{
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }
+    }
+
+    public function RecaudacionMensual($Mes, $Year){
+
+        $result=[];
+        $posi=[];
+        $dato=Recaudacion::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente','rol')->get();
+
+        for ($i = 1; $i < 32; $i++) {
+            $result[$i] = [$i,0,0,0,0,0,0,0,0,0,0];
+        }
+        foreach ($dato as $item) {
+            $separar = explode('-', $item['fecha']);
+
+            if($item->rol['rol']=='Medicina General'){
+                if($item['exonera']==1){
+                    $posi[0]=[0,1,0,0,1,0,0,0,0,0,0];
+                }else{
+                    if($item['valor']==1){
+                        $posi[0]=[0,1,1,0,0,1,0,0,0,0,0];
+                    }else{
+                        $posi[0]=[0,1,0,1,0,0.5,0,0,0,0,0];
+                    }
+                }  
+            }else if($item->rol['rol']=='Rehabilitación Física'){
+                if($item['exonera']==1){
+                    $posi[0]=[0,0,0,0,0,0,1,0,0,1,0];
+                }else{
+                    if($item['valor']==2){
+                        $posi[0]=[0,0,0,0,0,0,1,1,0,0,2];
+                    }else{
+                        $posi[0]=[0,0,0,0,0,0,1,0,1,0,1];
+                    }
+                }  
+            }
+           
+            $result[$separar[2]] = [$result[$separar[2]][0], $posi[0][1]+$result[$separar[2]][1],$posi[0][2]+$result[$separar[2]][2],$posi[0][3]+$result[$separar[2]][3], $posi[0][4]+$result[$separar[2]][4], $posi[0][5]+$result[$separar[2]][5], $posi[0][6]+$result[$separar[2]][6],$posi[0][7]+$result[$separar[2]][7],$posi[0][8]+$result[$separar[2]][8],$posi[0][9]+$result[$separar[2]][9],$posi[0][10]+$result[$separar[2]][10]
+            ];
+
+            $total = [0,0,0,0,0,0,0,0,0,0];
+
+            for ($i = 1; $i < 32; $i++) {
+                $total[0] = [$total[$i][0] + $result[$i][1] , [$total[$i][1] + $result[$i][2] , [$total[$i][2] + $result[$i][3] , [$total[$i][3] + $result[$i][4] , [$total[$i][4] + $result[$i][5] , [$total[$i][5] + $result[$i][6] , [$total[$i][6] + $result[$i][7] , [$total[$i][7] + $result[$i][8] , [$total[$i][8] + $result[$i][9] , [$total[$i][9] + $result[$i][10]];
+            }
+
+
+        }
+        return \PDF::loadView('RecaudacionMensual', compact('Mes','Year','result','total'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
     }
 
 }
