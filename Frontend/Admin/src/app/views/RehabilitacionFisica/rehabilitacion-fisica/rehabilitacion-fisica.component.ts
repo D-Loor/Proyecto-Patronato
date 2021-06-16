@@ -141,7 +141,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.ocupacion=paciente['ocupacion'];
     this.residencia=paciente['residencia'];
     this.motivo=arreglo['motivo_consulta'];
-    this.diagnostico=arreglo['diagnostico'];
+    this.diagnostico=arreglo['diagnostico'].diagnostico;
     this.anamnesis=arreglo['anamnesis'];
     this.receta=arreglo['receta'];
     if(arreglo['certificado']==1){

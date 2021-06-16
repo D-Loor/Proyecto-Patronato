@@ -125,9 +125,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.containerSecretaria=0;
     cedula = localStorage.getItem('CedulaExamenes');
     cedulaSecretaria = localStorage.getItem('historiaClinica');
-    debugger
+    
     if(cedulaSecretaria!=null && cedulaSecretaria!=""){
-      debugger
       this.containerSecretaria=0;
       this.containerMGandRF=1;
       this.cedula=cedulaSecretaria;
@@ -136,7 +135,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
 
     if(cedula!=""&&cedula!=null){
-      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=1;
       this.cedula=cedula;
@@ -145,7 +143,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
     let rol=  localStorage.getItem('RolV');
     if(rol == "MG" || rol == "RF"){
-      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=0;
       this.edit=1;
