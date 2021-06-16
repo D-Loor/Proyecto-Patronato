@@ -57,7 +57,6 @@ class HistoriaClinicaMGController extends Controller
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
-        $datos->receta=$request->receta;
 
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
@@ -111,7 +110,6 @@ class HistoriaClinicaMGController extends Controller
         $datos->plan_terapeutico=$request->plan_terapeutico;
         $datos->lugar_atencion=$request->lugar_atencion;
         $datos->certificado=$request->certificado;
-        $datos->receta=$request->receta;
 
         $datos->update();
         return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
