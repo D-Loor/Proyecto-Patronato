@@ -752,12 +752,6 @@ section h3.section-subheading {
 
 @media (min-width: 992px) {
 
-  .col-md-6{
-    width: 40%;
-  }
-  .col-md-3{
-    width: 30%;
-  }
   .timeline > li {
     min-height: 100px;
   }
