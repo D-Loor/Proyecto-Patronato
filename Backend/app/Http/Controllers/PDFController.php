@@ -675,15 +675,15 @@ class PDFController extends Controller
                 $mujer[1]=" ";
                 $mujer[2]=" ";
                 $mujer[3]=" ";
-                $TOTAL[6]=$TOTAL[6]+1;
-                $TOTAL[7]=$TOTAL[7]+1;
+                //$TOTAL[6]=$TOTAL[6]+1;
+                //$TOTAL[7]=$TOTAL[7]+1;
             }else{
                 if($item['tipo_atencion'] == "Primera"){
-                    $mujer[2]="X";
-                    $TOTAL[8]=$TOTAL[8]+1;
+                    //$mujer[2]="X";
+                    //$TOTAL[8]=$TOTAL[8]+1;
                 }else{
-                    $mujer[3]="X";
-                    $TOTAL[9]=$TOTAL[9]+1;
+                    //$mujer[3]="X";
+                    //$TOTAL[9]=$TOTAL[9]+1;
                 }
 
                 $mujer[0]=" ";
@@ -1101,29 +1101,6 @@ class PDFController extends Controller
                 $ninos[2] = 0;
                 $ninos[3] = 0;
                 $ninos[4] = 0;
-
-                if ($item->paciente['edad'] < '1') {
-                    $ninos[0] = 1;
-                    $ninos[1] = 0;
-                } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
-                    $ninos[2] = 0;
-                    $ninos[3] = 1;
-                } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
-                    $ninos[4] = 1;
-                }
-
-                $edadesm[0] = 0;
-                $edadesm[1] = 0;
-                $edadesm[2] = 0;
-
-                if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
-                    $edadesm[0] = 1;
-                } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
-                    $edadesm[1] = 1;
-                } else if ($item->paciente['edad'] >= '20'){
-                    $edadesm[2] = 1;
-                }
-
                 $morbilidad[0] = 0;
                 $morbilidad[1] = 0;
                 $morbilidad[2] = 0;
@@ -1134,29 +1111,53 @@ class PDFController extends Controller
                 $morbilidad[7] = 0;
                 $morbilidad[8] = 0;
                 $morbilidad[9] = 0;
-
-                if ($item->paciente['edad'] < '0.1') {
-                    $morbilidad[0] = 1;
-                } else if ($item->paciente['edad'] >= '0.1' && $item->paciente['edad'] <= '0.11') {
-                    $morbilidad[1] = 1;
-                } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
-                    $morbilidad[2] = 1;
-                } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
-                    $morbilidad[3] = 1;
-                } else if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
-                    $morbilidad[4] = 1;
-                } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
-                    $morbilidad[5] = 1;
-                } else if ($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '35') {
-                    $morbilidad[6] = 1;
-                } else if ($item->paciente['edad'] >= '36' && $item->paciente['edad'] <= '49') {
-                    $morbilidad[7] = 1;
-                } else if ($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64') {
-                    $morbilidad[8] = 1;
-                } else if ($item->paciente['edad'] >= '65'){
-                    $morbilidad[9] = 1;
+                $edadesm[0] = 0;
+                    $edadesm[1] = 0;
+                    $edadesm[2] = 0;
+                if($item['tipo_atencion']=='Prevención'){
+                    if ($item->paciente['edad'] < '1') {
+                        $ninos[0] = 1;
+                        $ninos[1] = 0;
+                    } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
+                        $ninos[2] = 0;
+                        $ninos[3] = 1;
+                    } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
+                        $ninos[4] = 1;
+                    }
+    
+                    
+    
+                    if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
+                        $edadesm[0] = 1;
+                    } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
+                        $edadesm[1] = 1;
+                    } else if ($item->paciente['edad'] >= '20'){
+                        $edadesm[2] = 1;
+                    }
+                }else{
+                    if ($item->paciente['edad'] < '0.1') {
+                        $morbilidad[0] = 1;
+                    } else if ($item->paciente['edad'] >= '0.1' && $item->paciente['edad'] <= '0.11') {
+                        $morbilidad[1] = 1;
+                    } else if ($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4') {
+                        $morbilidad[2] = 1;
+                    } else if ($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9') {
+                        $morbilidad[3] = 1;
+                    } else if ($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14') {
+                        $morbilidad[4] = 1;
+                    } else if ($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19') {
+                        $morbilidad[5] = 1;
+                    } else if ($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '35') {
+                        $morbilidad[6] = 1;
+                    } else if ($item->paciente['edad'] >= '36' && $item->paciente['edad'] <= '49') {
+                        $morbilidad[7] = 1;
+                    } else if ($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64') {
+                        $morbilidad[8] = 1;
+                    } else if ($item->paciente['edad'] >= '65'){
+                        $morbilidad[9] = 1;
+                    }
                 }
-
+                
 
                 $tipo[0] = 0;
                 $tipo[1] = 0;
