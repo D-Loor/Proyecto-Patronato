@@ -69,6 +69,11 @@ Route::get('RegistroDiarioFisica/{fecha}','PDFController@RegistroDiarioFisica');
 Route::get('ConsolidadoMensualMedicinaGeneral/{mes}/{year}','PDFController@ConsolidadoMensualMedicinaGeneral');
 Route::get('ConsolidadoMensualTerapia/{mes}/{year}','PDFController@ConsolidadoMensualTerapia');
 Route::get('RecaudacionDiarioMedicinaGeneral','PDFController@RecaudacionDiarioMedicinaGeneral');
+Route::get('RecaudacionDiarioTerapia','PDFController@RecaudacionDiarioTerapia');
+Route::get('RecaudacionMensual','PDFController@RecaudacionMensual');
+
+
+
 
 //validar reportes
 Route::get('ValidarReportePacientesAnual/{year}','PDFController@ValidarReportePacientesAnual');

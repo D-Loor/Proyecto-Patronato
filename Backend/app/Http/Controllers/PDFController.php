@@ -1371,7 +1371,13 @@ class PDFController extends Controller
     }
 
     public function RecaudacionDiarioMedicinaGeneral(){
-        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral')->setPaper('a4', 'landscape')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+    }
+    public function RecaudacionDiarioTerapia(){
+        return \PDF::loadView('RecaudacionDiarioTerapia')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+    }
+    public function RecaudacionMensual(){
+        return \PDF::loadView('RecaudacionMensual')->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
     }
 
 }
