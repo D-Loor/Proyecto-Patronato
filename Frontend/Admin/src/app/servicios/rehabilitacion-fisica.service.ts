@@ -19,6 +19,29 @@ export class RehabilitacionFisicaService {
       });
     });
   }
+  diagnostico() {
+    let  url = 'http://127.0.0.1:8000/api/Diagnostico';
+
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  AgregarDiagnostico(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/Diagnostico';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data ).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
   FiltroFecha(fechaInicio:Date, fechaFin:Date){
     let  url = 'http://127.0.0.1:8000/api/FechasRangosRF/'+fechaInicio+"/"+fechaFin;

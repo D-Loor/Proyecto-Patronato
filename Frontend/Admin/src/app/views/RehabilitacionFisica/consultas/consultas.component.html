@@ -46,12 +46,44 @@
                                             <textarea autocomplete="off" required  [(ngModel)]="motivo_consultaT" id="motivo_consultaT" name="motivo_consultaT" rows="3" [class]="ClaseMotivoC" (click)="ClaseMotivoC='form-control'" placeholder="Descripción del motivo de la consulta.."></textarea>
                                         </div>
                                         </div><!--/.row-->
+
                                         <div class="row">
-                                            <div class="form-group col-sm-12">
-                                                <label for="text-input">Diagnóstico</label>
-                                                <textarea autocomplete="off" required  [(ngModel)]="diagnosticoT" id="diagnosticoT" name="diagnosticoT" rows="3" [class]="ClaseDiagnostico" (click)="ClaseDiagnostico='form-control'" placeholder="Descripción del diagnóstico.."></textarea>
+
+                                          <div class="form-group col-sm-12">
+                                            <label for="company" [class]="ClaseDiagnostico" >Diagnóstico</label>
+                                            <div class="input-group">
+                                              <div class="form-control auto">
+                                                <ng-autocomplete
+                                                  [data]="data"
+                                                  [searchKeyword]="enferme"
+                                                  placeholder="Escriba el diagnóstico"
+                                                  (selected)='selectEvent($event)'
+                                                  (inputChanged)='onChangeSearch($event)'
+                                                  [itemTemplate]="itemTemplate"
+                                                  [notFoundTemplate]="notFoundTemplate"
+                                                  paramName="valor"
+                                                   payloadPropName="valor"
+                                                   name="NuevaEnfermedad"
+                                                   [(ngModel)]="NuevaEnfermedad"
+                                                  >
+                                                </ng-autocomplete>
+
+                                                <ng-template #itemTemplate let-item>
+                                                <a [innerHTML]="item.name"></a>
+                                                </ng-template>
+
+                                                <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="salida"></div>
+                                                </ng-template>
+                                              </div>
+                                              <button type="submit" class="btn btn-lg btn-outline-info btex" (click)="IngresarEnfermedad()" ><i class="fa fa-heartbeat spa"></i>Agregar diagnóstico</button>
                                             </div>
-                                        </div><!--/.row-->
+
+                                          </div>
+
+
+                                        </div>
+
                                         <div class="row">
                                             <div class="form-group col-sm-12">
                                                 <label for="text-input">Anamnesis</label>

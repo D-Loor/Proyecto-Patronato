@@ -7,12 +7,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { RehabilitacionFisicaConsultasRoutingModule } from './consultas-routing.module';
 import { ConsultasComponent } from './consultas.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 @NgModule({
   imports: [
     RehabilitacionFisicaConsultasRoutingModule,
     CommonModule,
+    AutocompleteLibModule,
     PaginationModule,
     FiltroModule,
     NgxSpinnerModule,

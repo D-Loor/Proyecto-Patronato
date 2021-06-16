@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('Enfermedad','EnfermedadController');
+Route::resource('Diagnostico','DiagnosticoController');
 Route::resource('Cita','CitaController');
 Route::resource('AntecedenteEnfermedad','AntecedenteEnfermedadController');
 Route::resource('Familiar','FamiliaController');

@@ -288,7 +288,7 @@ export class PacientesComponent implements OnInit {
     }
     if(localStorage.getItem('rol')=="Rehabilitación Física"){
       this.rutas.navigate(['/rehabilitacionfisica']);
-    }  
+    }
   }
 
   IrHistorial(cedul:string){

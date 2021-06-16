@@ -22,17 +22,30 @@ export class ConsultasComponent implements OnInit {
   today = new Date();
   fechaActual:string;
   nombres:string; ocupacion:string; edad:string; idcita;
+  salida="¡No se encontró!";
+  enferme="name";
+  NuevaEnfermedad;
+  enfermedades: any[];
+  data = [];
+  confirma= false;
+  pase=false;
+  valor;
 
   //variables para agregar la consulta
   idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado; receta;
 
   //variables para el tratamiento
   idTratamiento; estimulacion_temprana=false; magnetoterapia=false; electroestimulacion=false; ultrasonido=false; CQC_OH=false;
-  masaje=false; ejercicios_PR=false; laser=false; otros=false; otrosT=""; 
+  masaje=false; ejercicios_PR=false; laser=false; otros=false; otrosT="";
 
   //Variables de Validacion
-  ClaseLugar='';ClaseMotivoC="form-control"; ClaseDiagnostico='form-control';ClaseAnammesi='form-control';
-  ClaseReceta='form-control';ClaseOtrosT='form-control'; ClaseTratamiento='';
+  ClaseLugar='';
+  ClaseMotivoC="form-control";
+  ClaseDiagnostico='';
+  ClaseAnammesi='form-control';
+  ClaseReceta='form-control';
+  ClaseOtrosT='form-control';
+  ClaseTratamiento='';
 
   loadingText = 'Guardando...';
 
@@ -53,12 +66,115 @@ export class ConsultasComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.cargar();
     this.CargarDatos();
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
   }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+
+  selectEvent(item) {
+    this.ClaseDiagnostico='';
+    this.valor=item.id;
+    this.confirma=true;
+    this.pase=true;
+  }
+
+  onChangeSearch(){
+    this.ClaseDiagnostico='';
+    this.confirma=false;
+    this.pase=false;
+  }
+  cargar(){
+
+    this.RFService.diagnostico().then(data =>{
+      this.enfermedades=data['result'];
+      this.completar();
+    }).catch(error =>{
+      console.log(error);
+     this.spinner.hide('sample');
+     this.rutas.navigate(['/500']);
+    });
+  }
+
+  completar(){
+    for (let x in this.enfermedades){
+      this.data.push({ "id":this.enfermedades[x]["id_diagnostico"], "name":this.enfermedades[x]["diagnostico"]});
+    }
+  }
+
+  IngresarEnfermedad(){
+
+    if(this.NuevaEnfermedad!=undefined){
+      if(this.confirma==false){
+
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-info',
+            cancelButton: 'btn btn-danger'
+
+          },
+          buttonsStyling: true
+        })
+        swalWithBootstrapButtons.fire({
+          title: '¿Agregar Diagnóstico?',
+          text: "Una vez agregada no se podrá cambiar.",
+          showCancelButton: true,
+          confirmButtonText: 'Agregar',
+          cancelButtonText: 'Cancelar',
+          confirmButtonColor: '#20a8d8',
+          cancelButtonColor: '#f86c6b',
+          reverseButtons: true
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.loadingText = 'Cargando...';
+            this.spinner.show('sample');
+            let datos;
+            datos = {
+              'diagnostico':this.NuevaEnfermedad,
+            }
+
+            this.RFService.AgregarDiagnostico(datos).then(data =>{
+              this.valor = data['id'];
+              this.data.push({ "id": this.valor, "name":this.NuevaEnfermedad});
+              this.confirma=true;
+              this.pase=true;
+              this.spinner.hide('sample');
+              Swal.fire('¡Diagnóstico Agregado..!', '', 'success')
+
+            }).catch((error) => {
+              console.log(error);
+              this.spinner.hide('sample');
+              this.rutas.navigate(['/500']);
+            });
+
+
+          } else if (result.isDenied) {
+            Swal.fire('¡Se ha cancelado!', '', 'error')
+          }
+        })
+
+
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: '¡Ya existe..!',
+          text: 'Este diagnóstico ya se encuentra registrada.'
+        })
+      }
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: '¡Campo vacío..!',
+        text: 'Ingrese el nombre de la enfermedad a registrar.'
+      })
+    }
+
+    console.log(this.NuevaEnfermedad);
+
   }
 
   EliminarCita(id:string) {
@@ -73,6 +189,7 @@ export class ConsultasComponent implements OnInit {
   }
 
   CargarDatos(){
+    debugger
     let cedula = localStorage.getItem('cedulaRF');
     this.idcita = localStorage.getItem('idCita');
     this.rehabilifacionF.AtenderPaciente(cedula).then(data => {
@@ -80,7 +197,7 @@ export class ConsultasComponent implements OnInit {
       this.ocupacion = data['result'].ocupacion;
       this.edad = data['result'].edad;
       this.idpaciente = data['result'].id_paciente;
-      localStorage.removeItem('cedulaMG');
+      localStorage.removeItem('cedulaRF');
       localStorage.removeItem('idCita');
     })
     .catch((error) => {
@@ -113,7 +230,7 @@ export class ConsultasComponent implements OnInit {
       if (result.isConfirmed) {
         this.spinner.show('sample');
         this.Tratamiento();
-        
+
         swalWithBootstrapButtons.fire(
           '¡Guardado!',
           'La consulta ha sido guardada.',
@@ -204,7 +321,7 @@ export class ConsultasComponent implements OnInit {
     let dataC={
       'id_paciente': this.idpaciente,
       'id_tratamiento' : this.idTratamiento,
-      'diagnostico': this.diagnosticoT,
+      'id_diagnostico': this.diagnosticoT,
       'lugar_atencion':this.lugar_atencion,
       'certificado':certificadoValor,
       'motivo_consulta':this.motivo_consultaT,
@@ -233,12 +350,12 @@ export class ConsultasComponent implements OnInit {
     }else
       return false
   }
-  
+
 
   ValidarVacios(){
     let tratamient=this.ValidarTratamiento();
     if(this.lugar_atencion==undefined||this.motivo_consultaT==undefined||this.motivo_consultaT==""||
-       this.diagnosticoT==undefined||this.diagnosticoT==""||this.anamnesisT==undefined||this.anamnesisT==""||
+       this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""||this.anamnesisT==undefined||this.anamnesisT==""||
        this.receta==undefined||this.receta==undefined||this.receta==""||tratamient==true||this.otros==true&&this.otrosT==""
     ){
 
@@ -254,8 +371,8 @@ export class ConsultasComponent implements OnInit {
       if(this.motivo_consultaT==undefined||this.motivo_consultaT==""){
         this.ClaseMotivoC="form-control is-invalid";
       }
-      if(this.diagnosticoT==undefined||this.diagnosticoT==""){
-        this.ClaseDiagnostico="form-control is-invalid";
+      if(this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""){
+        this.ClaseDiagnostico="invalido";
       }
       if(this.anamnesisT==undefined||this.anamnesisT==""){
         this.ClaseAnammesi="form-control is-invalid";
@@ -263,13 +380,20 @@ export class ConsultasComponent implements OnInit {
       if(this.receta==undefined||this.receta==""){
         this.ClaseReceta="form-control is-invalid";
       }
-            
+
 
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para registrar la consulta.'
       });
+    } else if(this.pase==false){
+      this.ClaseDiagnostico = "invalido";
+      Swal.fire(
+        'Error!',
+        'El  no diagnóstico no se encuentra registrado.',
+        'error'
+      )
     }else{
       this.Alert();
     }
