@@ -13,9 +13,17 @@ class CreateRecaudacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('recaudacions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('recaudaciones', function (Blueprint $table) {
+            $table->bigIncrements('id_recaudacion');
+            $table->unsignedBigInteger('id_paciente');
+            $table->unsignedBigInteger('id_rol');
+            $table->date('fecha');
+            $table->Integer('valor');
+            $table->boolean('exonera');
+
+            $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
+            $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
+        
         });
     }
 
