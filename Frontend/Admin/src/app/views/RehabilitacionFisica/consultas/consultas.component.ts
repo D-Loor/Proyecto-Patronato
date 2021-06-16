@@ -189,11 +189,10 @@ export class ConsultasComponent implements OnInit {
   }
 
   CargarDatos(){
-    debugger
     let cedula = localStorage.getItem('cedulaRF');
     this.idcita = localStorage.getItem('idCita');
     this.rehabilifacionF.AtenderPaciente(cedula).then(data => {
-      this.nombres = data['result'].nombres + '' +data['result'].apellidos;
+      this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
       this.ocupacion = data['result'].ocupacion;
       this.edad = data['result'].edad;
       this.idpaciente = data['result'].id_paciente;
@@ -321,7 +320,7 @@ export class ConsultasComponent implements OnInit {
     let dataC={
       'id_paciente': this.idpaciente,
       'id_tratamiento' : this.idTratamiento,
-      'id_diagnostico': this.diagnosticoT,
+      'id_diagnostico': this.valor,
       'lugar_atencion':this.lugar_atencion,
       'certificado':certificadoValor,
       'motivo_consulta':this.motivo_consultaT,
@@ -329,7 +328,6 @@ export class ConsultasComponent implements OnInit {
       'fecha':this.fechaActual,
       'receta':this.receta
     }
-
     this.RFService.AgregarConsulta(dataC).then(data=>{
       this.spinner.hide('sample');
       this.EliminarCita(this.idcita);

@@ -161,6 +161,11 @@ export const navItemsST: INavData[] = [
     icon: 'icon-list'
   },
   {
+    name: 'Pacientes',
+    url: '/pacientes',
+    icon: 'icon-people'
+  },
+  {
     name: 'Registrar Historia Clínica',
     url: '/registrarhistoriaclinica',
     icon: 'icon-user'

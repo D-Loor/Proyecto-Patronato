@@ -35,7 +35,6 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   edad:string;
   idPaciente;
   idCitas;
-  receta;
   gad;
   gadv;
   today = new Date();
@@ -49,7 +48,6 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   ClaseAntecedentes:string="form-control form-input";
   ClaseDiagnostico:string="form-control form-input";
   ClasePlan:string="form-control form-input";
-  ClaseReceta:string="form-control form-input";
 
   ClaseLugar:string="";
   ClaseTipo:string="";
@@ -115,7 +113,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.idCitas = localStorage.getItem('idCita');
 
     this.medicinag.AtenderPaciente(cedula).then(data => {
-      this.nombres = data['result'].nombres + '' +data['result'].apellidos;
+      this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
       this.idPaciente=data['result'].id_paciente;
       this.edad = data['result'].edad;
@@ -187,9 +185,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
         this.ClasePlan = "form-control is-invalid";
       }
-      if(this.receta==undefined||this.receta==""){
-        this.ClaseReceta = "form-control is-invalid";
-      }
+      
 
       this.NotiCampos();
     }
@@ -351,7 +347,6 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'diagnostico': this.diagnostico,
         'plan_terapeutico': this.plan_terapeutico,
         'lugar_atencion': this.lugar_atencion,
-        'receta':this.receta,
         'certificado': cert,
       }
 

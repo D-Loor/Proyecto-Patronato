@@ -96,7 +96,6 @@ export class CitasComponent implements OnInit {
     this.citasser.citas("Rehabilitación Física",fechaActual).then(data =>{
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
-      debugger
       if(this.validarVacioRF == '202'){
         this.citasRF=null;
         this.citasRFPaginate = null;
@@ -195,7 +194,6 @@ export class CitasComponent implements OnInit {
   }
 
   abonar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
-    debugger
     if(abono == true || abono == 1){
       return false;
     }else{
@@ -228,12 +226,9 @@ export class CitasComponent implements OnInit {
             "abono": 'DOADBA',
             "id_turno": id_turno,
         }
-          debugger
           this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
-            debugger
             if(especialidad=="Rehabilitacion Fisica"){
               this.cargarRF(this.fechaActual,0,false,true);
-              debugger
             }else{
               this.cargarMG(this.fechaActual,0,false,true);
             }
@@ -256,10 +251,8 @@ export class CitasComponent implements OnInit {
             'La cita no ha sido modificada.',
             'error'
           )
-          debugger
           if(especialidad=="Rehabilitacion Fisica"){
             this.cargarRF(this.fechaActual,0,false,true);
-            debugger
           }else{
             this.cargarMG(this.fechaActual,0,false,true);
           }

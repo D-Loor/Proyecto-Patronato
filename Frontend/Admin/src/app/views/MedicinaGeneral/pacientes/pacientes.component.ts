@@ -231,24 +231,109 @@ export class PacientesComponent implements OnInit {
     this.estado_civil=data['result'].estado_civil;
     this.gad=data['result'].gad;
 
-    this.alcoholT=data['result']['habitos'].alcohol;
-    this.tabacoT=data['result']['habitos'].tabaco;
-    this.drogasT=data['result']['habitos'].drogas;
-    this.alimentacionT=data['result']['habitos'].alimentacion;
-    this.diuresisT=data['result']['habitos'].diuresis;
-    this.somniaT=data['result']['habitos'].somnia;
+    if(data['result']['habitos'].alcohol==1){
+      this.alcoholT='Si';
+    }else{
+      this.alcoholT='No';
+    }
+
+    if(data['result']['habitos'].tabaco==1){
+      this.tabacoT='Si';
+    }else{
+      this.tabacoT='No';
+    }
+
+    if(data['result']['habitos'].drogas==1){
+      this.drogasT='Si';
+    }else{
+      this.drogasT='No';
+    }
+
+    if(data['result']['habitos'].alimentacion==1){
+      this.alimentacionT='Si';
+    }else{
+      this.alimentacionT='No';
+    }
+
+    if(data['result']['habitos'].diuresis==1){
+      this.diuresisT='Si';
+    }else{
+      this.diuresisT='No';
+    }
+
+    if(data['result']['habitos'].somnia==1){
+      this.somniaT='Si';
+    }else{
+      this.somniaT='No';
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].infancia==1){
+      this.ninezT = 'Sin antecedentes'; 
+    }else{
+      this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].adolecencia==1){
+      this.adolescenciaT = 'Sin antecedentes'; 
+    }else{
+      this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].adultez==1){
+      this.adultezT = 'Sin antecedentes'; 
+    }else{
+      this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].DBID==0){
+      this.DBID = 'No'; 
+    }else{
+      this.DBID = 'Si'; 
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].HTA==0){
+      this.HTA = 'No'; 
+    }else{
+      this.HTA = 'Si'; 
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].TbP==0){
+      this.TbP = 'No'; 
+    }else{
+      this.TbP = 'Si'; 
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].DBI==0){
+      this.DBI = 'No'; 
+    }else{
+      this.DBI = 'Si'; 
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].quirujircos==1){
+      this.quirurgicosT = 'Sin antecedentes'; 
+    }else{
+      this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].alergias==1){
+      this.alergicosT = 'Sin antecedentes'; 
+    }else{
+      this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
+    }
+
+    if(data['result']['antecedentes_patologicos_personales'].traumas==1){
+      this.traumatologicosT = 'Sin antecedentes'; 
+    }else{
+      this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
+    }
 
 
-    this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
-    this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
-    this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
-    this.DBID=data['result']['antecedentes_patologicos_personales'].DBID;
-    this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
-    this.TbP=data['result']['antecedentes_patologicos_personales'].TbP;
-    this.DBI=data['result']['antecedentes_patologicos_personales'].DBI;
-    this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
-    this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
-    this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
+    
+    
+    
+    
+    
+    
 
     this.APF=data['result']['familiares'];
 

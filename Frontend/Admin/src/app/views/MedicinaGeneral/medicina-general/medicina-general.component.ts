@@ -24,7 +24,7 @@ export class MedicinaGeneralComponent implements OnInit {
   historialMGFilter=[];
   historialMGPaginateFilter=[];
   gad; NPaciente=""; Fecha=""; motivo; enfermedades; lugar_atencion; condicion_diagnostico;
-  tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;receta;
+  tipo_atencion; antecedentes_enfermedad; diagnostico; diagno; plan_terapeutico; certificado;
   FechaFin; FechaInicio;
   idPaciente = localStorage.getItem('id_paciente');
 
@@ -136,7 +136,6 @@ export class MedicinaGeneralComponent implements OnInit {
     this.NPaciente=paciente['nombres']+" "+paciente['apellidos'];
     this.Fecha=arreglo['fecha'];
     this.gad =paciente['gad'];
-    this.receta =arreglo['receta'];
     this.lugar_atencion=arreglo['lugar_atencion'];
     this.tipo_atencion=arreglo['tipo_atencion'];
     this.motivo=arreglo["motivo_consulta"];
