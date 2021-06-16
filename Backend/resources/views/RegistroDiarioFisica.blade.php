@@ -135,6 +135,10 @@
             height:90px;
         }
 
+        .size{
+            font-size: 11px;
+        }
+
         .nvertical th , .nhorizontal th{
             font-size:11px;
             padding: 0px !important;
@@ -288,6 +292,19 @@
 
                 
             </tbody>
+            <tfoot>
+                <tr>
+                <th class="nborde" colspan="1"></th>
+                <th colspan="6" class="total"> TOTAL</th>
+                @for($i=0; $i < 19; $i++)
+                <th>{{$TOTAL[$i]}}</th>
+                    @if(($i==9))
+                        <th colspan="5"></th>
+                    @endif
+                @endfor
+                <th class="nborde"></th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 

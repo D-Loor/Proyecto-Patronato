@@ -628,7 +628,12 @@ class PDFController extends Controller
                 break;
         }
         $mes = strtoupper($mes);
-
+        $contador = 0;
+        $TOTAL=[];
+        $totalAtenciones=1;
+        for ($i=0; $i<34; $i++){
+            $TOTAL[$i]=0;
+        };
         foreach ($datosMG as $item){
 
             $nombres=$item->paciente['apellidos']." ".$item->paciente['nombres'];
@@ -638,21 +643,26 @@ class PDFController extends Controller
 
             if($item['lugar_atencion']=='Patronato'){
                 $lugar[0]="X";
+                $TOTAL[0]=$TOTAL[0]+1;
             }
             else if($item['lugar_atencion']=='Comunidad'){
                 $lugar[1]="X";
+                $TOTAL[1]=$TOTAL[1]+1;
             }
             else{
                 $lugar[2]="X";
+                $TOTAL[2]=$TOTAL[2]+1;
             }
-
+            $TOTAL[3]=$totalAtenciones;
             $sexo[0]=" ";
             $sexo[1]=" ";
 
             if($item->paciente['sexo']=='Hombre'){
                 $sexo[0]="X";
+                $TOTAL[4]=$TOTAL[4]+1;
             }else{
                 $sexo[1]="X";
+                $TOTAL[5]=$TOTAL[5]+1;
             }
 
             $mujer[0]=" ";
@@ -665,17 +675,20 @@ class PDFController extends Controller
                 $mujer[1]=" ";
                 $mujer[2]=" ";
                 $mujer[3]=" ";
+                $TOTAL[6]=$TOTAL[6]+1;
+                $TOTAL[7]=$TOTAL[7]+1;
             }else{
                 if($item['tipo_atencion'] == "Primera"){
                     $mujer[2]="X";
+                    $TOTAL[8]=$TOTAL[8]+1;
                 }else{
                     $mujer[3]="X";
+                    $TOTAL[9]=$TOTAL[9]+1;
                 }
 
                 $mujer[0]=" ";
                 $mujer[1]=" ";
-                $mujer[2]=" ";
-                $mujer[3]=" ";
+               
             }
 
             $ninos[0]=" ";
@@ -683,67 +696,91 @@ class PDFController extends Controller
             $ninos[2]=" ";
             $ninos[3]=" ";
             $ninos[4]=" ";
+                $morbilidad[0]="";
+                $morbilidad[1]="";
+                $morbilidad[2]="";
+                $morbilidad[3]="";
+                $morbilidad[4]="";
+                $morbilidad[5]="";
+                $morbilidad[6]="";
+                $morbilidad[7]="";
+                $morbilidad[8]="";
+                $morbilidad[9]="";
+                $edadesm[0]=" ";
+                $edadesm[1]=" ";
+                $edadesm[2]=" ";
 
-            if($item->paciente['edad'] < '1'){
-                if($item['tipo_atencion'] == "Primera"){
-                    $ninos[0]="X";
-                }else{
-                    $ninos[1]="X";
+            if($item['tipo_atencion']=='Prevención'){
+                if($item->paciente['edad'] < '1'){
+                    if($item['tipo_atencion'] == "Primera"){
+                        $ninos[0]="X";
+                        $TOTAL[10]=$TOTAL[10]+1;
+                    }else{
+                        $ninos[1]="X";
+                        $TOTAL[11]=$TOTAL[11]+1;
+                    }
+                }else if($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4'){
+                    if($item['tipo_atencion'] == "Primera"){
+                        $ninos[2]="X";
+                        $TOTAL[12]=$TOTAL[12]+1;
+                    }else{
+                        $ninos[3]="X";
+                        $TOTAL[13]=$TOTAL[13]+1;
+                    }
+                }else if($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9'){
+                    $ninos[4]="X";
+                    $TOTAL[14]=$TOTAL[14]+1;
                 }
-            }else if($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4'){
-                if($item['tipo_atencion'] == "Primera"){
-                    $ninos[2]="X";
-                }else{
-                    $ninos[3]="X";
+    
+                
+    
+                if($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14'){
+                    $edadesm[0]="X";
+                    $TOTAL[15]=$TOTAL[15]+1;
+                }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
+                    $edadesm[1]="X";
+                    $TOTAL[16]=$TOTAL[16]+1;
+                }else if($item->paciente['edad'] >= '20'){
+                    $edadesm[2]="X";
+                    $TOTAL[17]=$TOTAL[17]+1;
                 }
-            }else if($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9'){
-                $ninos[4]="X";
-            }
-
-            $edadesm[0]=" ";
-            $edadesm[1]=" ";
-            $edadesm[2]=" ";
-
-            if($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14'){
-                $edadesm[0]="X";
-            }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
-                $edadesm[1]="X";
-            }else if($item->paciente['edad'] >= '20'){
-                $edadesm[2]="X";
-            }
-
-            $morbilidad[0]="";
-            $morbilidad[1]="";
-            $morbilidad[2]="";
-            $morbilidad[3]="";
-            $morbilidad[4]="";
-            $morbilidad[5]="";
-            $morbilidad[6]="";
-            $morbilidad[7]="";
-            $morbilidad[8]="";
-            $morbilidad[9]="";
-
+            }else{
             if($item->paciente['edad'] < '0.1'){
                 $morbilidad[0]="X";
+                $TOTAL[18]=$TOTAL[18]+1;
             }else if($item->paciente['edad'] >= '0.1' && $item->paciente['edad'] <= '0.11'){
                 $morbilidad[1]="X";
+                $TOTAL[19]=$TOTAL[19]+1;
             }else if($item->paciente['edad'] >= '1' && $item->paciente['edad'] <= '4'){
                 $morbilidad[2]="X";
+                $TOTAL[20]=$TOTAL[20]+1;
             }else if($item->paciente['edad'] >= '5' && $item->paciente['edad'] <= '9'){
                 $morbilidad[3]="X";
+                $TOTAL[21]=$TOTAL[21]+1;
             }else if($item->paciente['edad'] >= '10' && $item->paciente['edad'] <= '14'){
                 $morbilidad[4]="X";
+                $TOTAL[22]=$TOTAL[22]+1;
             }else if($item->paciente['edad'] >= '15' && $item->paciente['edad'] <= '19'){
                 $morbilidad[5]="X";
+                $TOTAL[23]=$TOTAL[23]+1;
             }else if($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '35'){
                 $morbilidad[6]="X";
+                $TOTAL[24]=$TOTAL[25]+1;
             }else if($item->paciente['edad'] >= '36' && $item->paciente['edad'] <= '49'){
                 $morbilidad[7]="X";
+                $TOTAL[25]=$TOTAL[25]+1;
             }else if($item->paciente['edad'] >= '50' && $item->paciente['edad'] <= '64'){
                 $morbilidad[8]="X";
+                $TOTAL[26]=$TOTAL[26]+1;
             }else if($item->paciente['edad'] >= '65'){
                 $morbilidad[9]="X";
+                $TOTAL[27]=$TOTAL[27]+1;
             }
+            }
+
+            
+
+            
 
             $diagnostico=$item['diagnostico'];
 
@@ -753,10 +790,13 @@ class PDFController extends Controller
 
             if($item['tipo_atencion'] == "Prevención"){
                 $tipo[0]="X";
+                $TOTAL[28]=$TOTAL[28]+1;
             }else if($item['tipo_atencion'] == "Primera"){
                 $tipo[1]="X";
+                $TOTAL[29]=$TOTAL[29]+1;
             }else{
                 $tipo[2]="X";
+                $TOTAL[30]=$TOTAL[30]+1;
             }
 
             $diagno[0]=" ";
@@ -764,25 +804,28 @@ class PDFController extends Controller
 
             if($item['condicion_diagnostico'] == "Presuntivo"){
                 $diagno[0]="X";
+                $TOTAL[31]=$TOTAL[31]+1;
             }else{
                 $diagno[1]="X";
+                $TOTAL[32]=$TOTAL[32]+1;
             }
 
             $certificado=" ";
 
             if($item['certificado'] == 1){
                 $certificado="X";
+                $TOTAL[33]=$TOTAL[33]+1;
             }
 
             $Result[]=[$num,$nombres,$lugar[0],$lugar[1],$lugar[2],'1',$sexo[0],$sexo[1],$mujer[0],$mujer[1],$mujer[2],$mujer[3],$ninos[0],$ninos[1],$ninos[2],$ninos[3],$ninos[4],
             $edadesm[0],$edadesm[1],$edadesm[2],$morbilidad[0],$morbilidad[1],$morbilidad[2],$morbilidad[3],$morbilidad[4],$morbilidad[5],$morbilidad[6],$morbilidad[7],
             $morbilidad[8],$morbilidad[9],$diagnostico,$tipo[0],$tipo[1],$tipo[2],$diagno[0],$diagno[1],$certificado];
-
+            $totalAtenciones++;
             $num++;
         }
 
         // return response()->json(['result'=>$Result]);
-        return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+        return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
 
     }
 
@@ -806,23 +849,32 @@ class PDFController extends Controller
         $mes = $valores[1];
         $dia = $valores[2];
         $Result=[];
+        $TOTAL=[];
+        $totalAtenciones=1;
+        for ($i=0; $i<19; $i++){
+            $TOTAL[$i]=0;
+        };
         foreach ($datosRF as $item){
             $nombres=$item->paciente['apellidos']." ".$item->paciente['nombres'];
             $lugar[0]="";
             $lugar[1]="";
             if($item['lugar_atencion']=='Patronato'){
                 $lugar[0]="X";
+                $TOTAL[0]=$TOTAL[0]+1;
             }
             else{
                 $lugar[1]="X";
+                $TOTAL[1]=$TOTAL[1]+1;
             }
-
+            $TOTAL[2]=$TOTAL[2]+1;
             $sexo[0]="";
             $sexo[1]="";
             if($item->paciente['sexo']=='Hombre'){
                 $sexo[0]="X";
+                $TOTAL[3]=$TOTAL[3]+1;
             }else{
                 $sexo[1]="X";
+                $TOTAL[4]=$TOTAL[4]+1;
             }
 
             $morbilidad[0]="";
@@ -832,14 +884,19 @@ class PDFController extends Controller
             $morbilidad[4]="";
             if($item->paciente['edad'] >= '0' && $item->paciente['edad'] <= '3'){
                 $morbilidad[0]="X";
+                $TOTAL[5]=$TOTAL[5]+1;
             }else if($item->paciente['edad'] >= '4' && $item->paciente['edad'] <= '12'){
                 $morbilidad[1]="X";
+                $TOTAL[6]=$TOTAL[6]+1;
             }else if($item->paciente['edad'] >= '13' && $item->paciente['edad'] <= '19'){
                 $morbilidad[2]="X";
+                $TOTAL[7]=$TOTAL[7]+1;
             }else if($item->paciente['edad'] >= '20' && $item->paciente['edad'] <= '49'){
                 $morbilidad[3]="X";
+                $TOTAL[8]=$TOTAL[8]+1;
             }else if($item->paciente['edad'] >= '50'){
                 $morbilidad[4]="X";
+                $TOTAL[9]=$TOTAL[9]+1;
             }
 
             $diagnostico=$item['diagnostico'];
@@ -856,41 +913,49 @@ class PDFController extends Controller
             $tratamiento[8]="";
             if($item->tratamiento['estimulacion_temprana'] === "Estimulación temprana"){
                 $tratamiento[0]="X";
+                $TOTAL[10]=$TOTAL[10]+1;
             }else{
                 $tratamiento[0]="";
             }
             if($item->tratamiento['magnetoterapia'] === "Magnetoterapia"){
                 $tratamiento[1]="X";
+                $TOTAL[11]=$TOTAL[11]+1;
             }else{
                 $tratamiento[1]="";
             }
             if($item->tratamiento['electroestimulacion'] === "Electroestimulación"){
                 $tratamiento[2]="X";
+                $TOTAL[12]=$TOTAL[12]+1;
             }else{
                 $tratamiento[2]="";
             }
             if($item->tratamiento['ultrasonido'] === "Ultrasonido"){
                 $tratamiento[3]="X";
+                $TOTAL[13]=$TOTAL[13]+1;
             }else{
                 $tratamiento[3]="";
             }
             if($item->tratamiento['C_Q_C_O_H'] === "C.Q.C. O H."){
                 $tratamiento[4]="X";
+                $TOTAL[14]=$TOTAL[14]+1;
             }else{
                 $tratamiento[4]="";
             }
             if($item->tratamiento['masaje'] === "Masaje"){
                 $tratamiento[5]="X";
+                $TOTAL[15]=$TOTAL[15]+1;
             }else{
                 $tratamiento[5]="";
             }
             if($item->tratamiento['ejercicios_pasivos_resistidos'] === "Ejercicios pasivos y resistidos"){
                 $tratamiento[6]="X";
+                $TOTAL[16]=$TOTAL[16]+1;
             }else{
                 $tratamiento[6]="";
             }
             if($item->tratamiento['laser'] === "Láser"){
                 $tratamiento[7]="X";
+                $TOTAL[17]=$TOTAL[17]+1;
             }else{
                 $tratamiento[7]="";
             }
@@ -898,13 +963,15 @@ class PDFController extends Controller
                 $tratamiento[8]="";
             }else{
                 $tratamiento[8]="X";
+                $TOTAL[18]=$TOTAL[18]+1;
             }
 
             $Result[]=[$num,$nombres,$lugar[0],$lugar[1],'1',$sexo[0],$sexo[1],$morbilidad[0],$morbilidad[1],$morbilidad[2],$morbilidad[3],$morbilidad[4],$diagnostico,$tratamiento[0],$tratamiento[1],$tratamiento[2],$tratamiento[3],$tratamiento[4],$tratamiento[5],$tratamiento[6]
                     ,$tratamiento[7],$tratamiento[8]];
             $num++;
+            $totalAtenciones++;
         }
-        return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
+        return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
     }
 
     public function ValidarConsolidadoMensualMedicinaGeneral($Mes, $Year){

@@ -33,10 +33,14 @@
             text-align: center;
         }
 
+        .size{
+            font-size: 12px;
+        }
+
         th,td {
             width: 20px;
             height: 20px;
-            font-size: 9px;
+            font-size: 10px;
             font-weight: bold;
             text-align: center;
             border: solid 1px black;
@@ -199,8 +203,8 @@
             <thead>
                 <tr>
                     <th class="nborde" colspan="12"></th>
-                    <th colspan="11" class="tema">ATENCIÓN PREVENTIVA</th>
-                    <th colspan="16" class="tema">ATENCIÓN PREVENTIVA </th>
+                    <th colspan="12" class="tema">ATENCIÓN PREVENTIVA</th>
+                    <th colspan="15" class="tema">ATENCIÓN MORBILIDAD </th>
                     <th class="nborde"></th>
                 </tr>
                 <tr>
@@ -302,7 +306,7 @@
             </thead>
             <tbody>
                 @foreach ($Result as $item)
-                    <tr >
+                    <tr>
 
                         @for($i = 0; $i <= 36; $i++)
 
@@ -313,7 +317,7 @@
                                 <td colspan="5">{{$item[$i]}}</td>
                             @endif
                             @if ($i === 1)
-                                <td colspan="5">{{$item[$i]}}</td>
+                                <td class="size" colspan="5">{{$item[$i]}}</td>
                             @endif
                             @if ($i != 1 && $i != 30 && $i != 0 && $i != 36)
                                 <td>{{$item[$i]}}</td>
@@ -328,7 +332,21 @@
                 @endforeach
 
             </tbody>
+            <tfoot>
+                <tr>
+                <th class="nborde" colspan="1"></th>
+                <th colspan="5" class="total size"> TOTAL</th>
+                @for($i=0; $i < 34; $i++)
+                <th class="size">{{$TOTAL[$i]}}</th>
+                    @if(($i==27))
+                        <th colspan="5"></th>
+                    @endif
+                @endfor
+                <th class="nborde"></th>
+                </tr>
+            </tfoot>
         </table>
+        
     </div>
 
         <div>
