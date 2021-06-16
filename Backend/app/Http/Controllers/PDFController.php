@@ -1369,4 +1369,9 @@ class PDFController extends Controller
 
        return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
     }
+
+    public function RecaudacionDiarioMedicinaGeneral(){
+        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral')->setPaper('a4', 'landscape')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+    }
+
 }
