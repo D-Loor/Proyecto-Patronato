@@ -291,9 +291,9 @@
 
             </thead>
             <tbody>
-            @for($i=0 ; $i< 32; $i++)
+            @foreach($result as $item)
                 <tr>
-                    <th class="td" style="font-weight: bold;" colspan="2">1</th>
+                    <th class="td" style="font-weight: bold;" colspan="2"></th>
                     <td colspan="2"></td>
                     <td colspan="2"></td>
                     <td colspan="2"></td>
@@ -307,22 +307,22 @@
                     <td colspan="2"></td>
                     <th class="nborde"></th>
                 </tr>
-            @endfor
+            @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <th class="recauda" colspan="2">TOTAL RECAUD. MENSUAL</th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
+                    <th colspan="2">{{$total[0][0]}}</th>
+                    <th colspan="2">{{$total[0][1]}}</th>
+                    <th colspan="2">{{$total[0][2]}}</th>
+                    <th colspan="2">{{$total[0][3]}}</th>
+                    <th colspan="2">{{$total[0][4]}}</th>
                     <th class="nborde"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
-                    <th colspan="2"></th>
+                    <th colspan="2">{{$total[0][5]}}</th>
+                    <th colspan="2">{{$total[0][6]}}</th>
+                    <th colspan="2">{{$total[0][7]}}</th>
+                    <th colspan="2">{{$total[0][8]}}</th>
+                    <th colspan="2">{{$total[0][9]}}</th>
                     <th class="nborde"></th>
 
                 </tr>
