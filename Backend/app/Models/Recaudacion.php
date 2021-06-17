@@ -19,6 +19,6 @@ class Recaudacion extends Model
         return $this->belongsTo('App\Models\Paciente','id_paciente');
     }
     public function rol(){
-        return $this->belongsTo('App\Models\Rol','id_rol');
+        return $this->belongsTo('App\Models\Role','id_rol');
     }
 }

@@ -334,15 +334,15 @@
                 <thead>
                     <tr>
                         <th class="recauda2">TOTAL RECAUD. MENSUAL MEDICINA Y TERAPIA</th>
-                        <td class="recauda3"> 100$</td>
+                        <td class="recauda3"> {{$recaudacion}}$</td>
                     </tr>
                     <tr>
                         <th class="recauda2">EGRESO</th>
-                        <td class="recauda3"> 100$</td>
+                        <td class="recauda3"> {{$egresos}}$</td>
                     </tr>
                     <tr>
                         <th class="recauda2">SALDO</th>
-                        <td class="recauda3"> 100$</td>
+                        <td class="recauda3"> {{$saldo}}$</td>
                     </tr>
                 </thead>
             </table>
@@ -364,8 +364,8 @@
                     </thead>
                     <tbody>
                         <tr class="fecha">
-                            <th class="td">06</th>
-                            <td class="td">2021</td>
+                            <th class="td">{{$Mes}}</th>
+                            <td class="td">{{$Year}}</td>
                         </tr>
                     </tbody>
                 </table>

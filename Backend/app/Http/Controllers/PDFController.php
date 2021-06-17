@@ -1420,7 +1420,7 @@ class PDFController extends Controller
        
         $dato=Recaudacion::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente','rol')->get();
 
-        $ndatos=count( $datos);
+        $ndatos=count( $dato);
         if($ndatos > 0){
             return response()->json(['result'=>"Registro encontrado", 'code'=>'201']);
         }else{
