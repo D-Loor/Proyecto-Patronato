@@ -1,0 +1,133 @@
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i>
+          Control Diario
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed1 = !isCollapsed1"
+            [attr.aria-expanded]="!isCollapsed1" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed1" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+                      <div class="col-md-5 ">
+                        <label for="name">Fecha</label>
+                        <input name="FechaDia" id="FechaDia" name="FechaDia" [(ngModel)]="FechaDiaMG" type="date"
+                          placeholder="date" class="form-control">
+                      </div>
+                      <div class=" col-md-4">
+                        <label for="text-input">Especialidad</label>
+                        <select id="Espe" (change)="Turno()" (click)="ClaseMMes='form-control form-input select-number'" [class]="ClaseMMes" [(ngModel)]="Espe" name="Espe" required>
+                          <option *ngFor="let item of listaRoles" value="{{item.rol}}" >{{item.rol}}</option>
+
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button *ngIf="FechaDiaMG!='' && Espe !=''"  (click)="Reporte('DiarioMG')" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="FechaDiaMG=='' || Espe==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-chart"></i>  Consolidado Mensual de Recaudación
+
+          <button type="button" class="btn btn-ghost collaps botont" (click)="isCollapsed3 = !isCollapsed3"
+            [attr.aria-expanded]="!isCollapsed3" aria-controls="collapseBasic"><i
+              class="fa fa-chevron-down"></i>&nbsp;</button>
+        </div>
+
+        <div id="collapseBasic" [collapse]="isCollapsed3" [isAnimated]="true">
+
+          <div class="card-body">
+            <div class="form-group">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="row space">
+
+                      <div class=" col-md-4">
+                        <label for="text-input">Mes</label>
+                        <select id="MMes" (click)="ClaseMMes='form-control form-input select-number'" [class]="ClaseMMes" [(ngModel)]="MMes" name="MMes" required>
+                            <option value="01" selected>Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                      </div>
+                      <div class=" col-md-4">
+                        <label for="text-input">Año</label>
+                        <select  id="MYear" (click)="ClaseMYear='form-control form-input select-number'" [class]="ClaseMYear" [(ngModel)]="MYear" name="MYear" required>
+                            <option *ngFor="let item of YearD" value="{{item}}" selected>{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-3 ">
+                        <label for="name"><label for="name"></label></label>
+                        <button (click)="Reporte('Mensual')" *ngIf="MYear!='' && MMes!=''" type="button" class="btn btn-primary form-control"
+                          >&nbsp;Generar Reporte</button>
+                        <button *ngIf="MYear=='' || MMes==''" type="button" class="btn btn-primary form-control"
+                           disabled>&nbsp;Generar Reporte</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+
+<div *ngIf="spinnerConfig['fullScreen']">
+  <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
+    [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
+    [showSpinner]="spinnerConfig['showSpinner']">
+    <p style="color: white">{{loadingText}}</p>
+  </ngx-spinner>
+
+</div>

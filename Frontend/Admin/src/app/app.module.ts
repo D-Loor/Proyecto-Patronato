@@ -67,8 +67,8 @@ import { RolesModule } from './views/Administrador/roles/roles.module';
 import { HorariosModule } from './views/Administrador/horarios/horarios.module';
 import { ReportesModule } from './views/MedicinaGeneral/reportes/reportes.module';
 import { ReportesModuleRF } from './views/RehabilitacionFisica/reportes/reportes.module';
-import { ReportesComponent } from './views/Secretaria/reportes/reportes.component';
-import { EgresosComponent } from './views/Secretaria/egresos/egresos.component';
+import { EgresosModule } from './views/Secretaria/egresos/egresos.module';
+import { ReportesRecaudacionModule } from './views/Secretaria/reportesrecaudacion/reportesrecaudacion.module';
 
 
 
@@ -112,7 +112,9 @@ import { EgresosComponent } from './views/Secretaria/egresos/egresos.component';
     RolesModule,
     CuentasModule,
     ReportesModule,
-    ReportesModuleRF
+    ReportesModuleRF,
+    EgresosModule,
+    ReportesRecaudacionModule
 
 
   ],
@@ -122,10 +124,7 @@ import { EgresosComponent } from './views/Secretaria/egresos/egresos.component';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-    ReportesComponent,
-    EgresosComponent,
-
+    RegisterComponent
   ],
   providers: [
     {

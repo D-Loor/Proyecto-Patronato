@@ -105,6 +105,44 @@ export class ReportesService {
     });
   }
 
+  RecaudacionDiarioMedicina(fecha:String,id:String) {
+    let  url = 'http://127.0.0.1:8000/api/ValidarRecaudacionDiarioMedicinaGeneral/'+fecha+'/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  RecaudacionDiarioTerapia(fecha:String,id:String) {
+    let  url = 'http://127.0.0.1:8000/api/ValidarRecaudacionDiarioTerapia/'+fecha+'/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  RecaudacionMensual(mes:String,year:String) {
+    let  url = 'http://127.0.0.1:8000/api/ValidarRecaudacionMensual/'+mes+'/'+year;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+
+
 
 
 }

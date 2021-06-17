@@ -170,6 +170,17 @@ export const navItemsST: INavData[] = [
     url: '/registrarhistoriaclinica',
     icon: 'icon-user'
   },
+  {
+    name: 'Egresos',
+    url: '/egresos',
+    icon: 'icon-basket-loaded'
+  },
+  {
+    name: 'Generar Reporte',
+    url: '/reportesrecaudacion',
+    icon: 'icon-chart'
+  },
+
 ];
 export const navItemsAdmin: INavData[] = [
 

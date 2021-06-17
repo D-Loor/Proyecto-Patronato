@@ -7,11 +7,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ReportesRecaudacionRoutingModule } from './reportesrecaudacion-routing.module';
+import { ReportesRecaudacionComponent } from './reportesrecaudacion.component';
 
 
 @NgModule({
   imports: [
-   ReportesRoutingModule,
+    ReportesRecaudacionRoutingModule,
     CommonModule,
     PaginationModule,
     FiltroModule,
@@ -23,9 +25,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgxSpinnerModule,
   ],
   declarations:  [
-    ReportesComponent,
+    ReportesRecaudacionComponent,
   ]
 })
 
-export class ReportesModule { }
+export class ReportesRecaudacionModule { }
 
