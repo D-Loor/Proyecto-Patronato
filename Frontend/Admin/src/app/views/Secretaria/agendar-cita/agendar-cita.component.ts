@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import { CitasService } from '../../../servicios/citas.service';
 import { AdministradorService } from '../../../servicios/administrador.service';
+import { ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -20,8 +22,9 @@ export class AgendarCitaComponent implements OnInit {
 
   constructor(public rutas:Router,private administradorService:AdministradorService, public citasser:CitasService, private ServicioSecretaria:SecretariaService, private spinner: NgxSpinnerService) { }
 
-
+  @ViewChild('smallModal') public smallModal: ModalDirective;
   loadingText = 'Guardando...';
+  
 
 
   /**
@@ -52,15 +55,82 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCEspecialidad:string="form-control form-input select-number";
   ClaseCFecha:string="form-control form-input select-number";
   ClaseCHora:string="form-control form-input select-number";
+  ClasePrecio='form-control form-input select-number'
 
   //Variables para datos pacientes
   nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos;
   estado=0;
   ArrayTurnos: any = []
   listaRoles:any=[];
+  pago=0;
+  exo=0;
+  recau=0;
+  gad;
+
+  //Recaudacion
+  precio; idPaciente;
 
   today = new Date();
   fechaActual:string;
+
+  AbrirModal(){
+    if(this.fecha_consulta==undefined||this.fecha_consulta==null){
+      Swal.fire(
+        '¡Ops!',
+        'Debe de selecionar la fecha de la consulta primero.',
+        'warning'
+      );
+    }else{
+      this.smallModal.show();
+    }
+    
+    //this.smallModal.show({backdrop: 'static', keyboard: false });
+    //('#smallModal').modal({backdrop: 'static', keyboard: false})  
+  }
+
+  CargarRecaudacion(){
+    this.ServicioSecretaria.Roles(this.especialidad).then(data=>{
+      this.spinner.show('sample');
+      let idR = data['result'].id_rol;
+      let datosA={
+        'id_paciente':this.idPaciente,
+        'id_rol':idR,
+        'fecha':this.fecha_consulta,
+        'valor':this.precio,
+        'exonera':this.gad,
+      }
+      this.GuardarRecaudacion(datosA);
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
+    
+  }
+
+  GuardarRecaudacion(data:any){
+    this.ServicioSecretaria.Recaudacion(data).then(data=>{
+      this.LimpiarR();
+      this.smallModal.hide();
+      this.recau=1;
+      Swal.fire(
+        '¡Valor Registrado!',
+        'La recaudación fue ingresada correctamente.',
+        'success'
+      );
+      this.spinner.hide('sample');
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
+  }
+
+  LimpiarR(){
+    this.precio="";
+    this.gad="";
+  }
+  
 
   ngOnInit() {
     if((this.today.getMonth()+1)<10 || this.today.getDate()<10){
@@ -140,6 +210,7 @@ export class AgendarCitaComponent implements OnInit {
             'El paciente cuenta con un historial clínico.',
             'success'
           );
+          this.pago=1;
           this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
           this.spinner.hide('sample');
         }
@@ -156,13 +227,20 @@ export class AgendarCitaComponent implements OnInit {
 
   ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
+    this.pago=0;
+    if(cedula === "undefined" ||  cedula === "null"){
 
-    if(cedula.length === 9 || cedula === "undefined" ||  cedula === "null"){
       this.ClaseCdula="form-control form-input select-number";
-    }
 
-    else if (cedula.length === 10) {
-
+    }else if (cedula.length === 10) {
+      this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
+        this.idPaciente= data['result'].id_paciente;
+        this.pago=1;
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
+      });
       // Obtenemos el digito de la region que sonlos dos primeros digitos
       const digitoRegion = cedula.substring(0, 2);
 
@@ -224,7 +302,7 @@ export class AgendarCitaComponent implements OnInit {
         if (digitoValidador === 10) {
           digitoValidador = 0;
         }
-
+        
         // Validamos que el digito validador sea igual al de la cedula
         if (digitoValidador === ultimoDigito) {
           this.ClaseCdula = "form-control is-valid select-number";
@@ -250,6 +328,7 @@ export class AgendarCitaComponent implements OnInit {
     }
 
   }
+
   GuardarCita(name:string){
     let compro="";
     if(this.abono==true){
@@ -279,6 +358,10 @@ export class AgendarCitaComponent implements OnInit {
       this.fecha_consulta="";
       this.idT="";
       this.abono=false;
+      this.recau=0;
+      this.exo=0;
+      this.pago=0;
+      this.especialidad="Medicina General";
       this.ClaseCdula="form-control form-input select-number";
       this.ArrayTurnos = [];
     }).catch((error) => {
@@ -358,6 +441,7 @@ export class AgendarCitaComponent implements OnInit {
 
 
   }
+
   Actualizar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
 
     let abo="NoExiste"
@@ -517,9 +601,22 @@ export class AgendarCitaComponent implements OnInit {
       this.ArrayTurnos.push(turnos);
     }
   }
+
   LimpiarTurno(){
     this.fecha_consulta="";
     this.ArrayTurnos=undefined;
+  }
+
+  HabilitarValor(valor:number){
+    if(valor==1){
+      this.exo=1;
+      this.gad=1;
+      this.precio=0;
+    }else{
+      this.exo=0;
+      this.gad=0;
+    }  
+      
   }
 
 

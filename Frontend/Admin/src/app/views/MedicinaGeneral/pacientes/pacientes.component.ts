@@ -42,6 +42,7 @@ export class PacientesComponent implements OnInit {
 
   idPaciente:number; idPatologico:string; idEFisico:string; idEOrganoSistema:string; idEComplementario:string; idHabito:string;
 
+  rolP;
   isCollapsed = false;
   isCollapsed2 = false;
   isCollapsed3 = false;
@@ -62,6 +63,7 @@ export class PacientesComponent implements OnInit {
   };
 
   ngOnInit(){
+      this.rolP = localStorage.getItem('rol');
       if(localStorage.getItem('cedulaMGandRF') == null){
         this.search="";
       }else{

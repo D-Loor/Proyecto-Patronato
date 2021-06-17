@@ -128,4 +128,9 @@ class RoleController extends Controller
         }
 
     }
+
+    public function idRol($especialidad){
+        $datos=Role::where('rol', $especialidad)->get()->first();
+        return response()->json(['result'=>$datos, 'code'=>'201']);
+    }
 }

@@ -298,6 +298,28 @@ export class SecretariaService {
       });
     });
   }
+
+  Roles(rol:string) {
+    let  url = 'http://127.0.0.1:8000/api/idrol/'+rol;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  Recaudacion(data:any) {
+    let  url = 'http://127.0.0.1:8000/api/Recaudacion';
+    return new Promise ((resolve, reject) => {
+      this.http.post(url, data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
   
 
 }

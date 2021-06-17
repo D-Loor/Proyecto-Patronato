@@ -8,6 +8,8 @@ import { AgendarCitaRoutingModule } from './agendar-cita-routing.module';
 import { AgendarCitaComponent } from './agendar-cita.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserModule } from '@angular/platform-browser';
+import { ModalsComponent } from '../../notifications/modals.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -18,12 +20,13 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   declarations: [
-    AgendarCitaComponent
+    AgendarCitaComponent,
   ]
 })
 

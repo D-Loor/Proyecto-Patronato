@@ -52,11 +52,11 @@
                                                 <option *ngFor="let item of ArrayTurnos" value="{{item.id}}">{{item.hora}} </option>
                                               </select>
                                           </div>
-                                          <div class="form-group col-md-6" >
+                                          <div class="form-group col-md-6" *ngIf="pago==1" >
                                             <div _ngcontent-nko-c102="" class="col-md-12 col-form-label">
                                               <div _ngcontent-nko-c102="" class="form-check form-check-inline mr-1">
-                                                  <input _ngcontent-nko-c102="" autocomplete="off" type="checkbox" name="abono" id="abono" value="false" [(ngModel)]="abono" class="form-check-input ng-untouched ng-pristine ng-valid" ng-reflect-name="abono">
-                                                  <label _ngcontent-nko-c102="" for="inlineRadio2" class="form-check-label">Canceló el valor de la Cita Médica</label>
+                                                  <input  (click)="AbrirModal()" [disabled]="recau" _ngcontent-nko-c102="" autocomplete="off" type="checkbox" name="abono" id="abono" value="true" [(ngModel)]="abono" class="form-check-input ng-untouched ng-pristine ng-valid" ng-reflect-name="abono">
+                                                  <label _ngcontent-nko-c102="" for="inlineRadio2" class="form-check-label">Cancelar el valor de la Cita Médica</label>
                                               </div>
                                             </div>
                                         </div>
@@ -78,6 +78,8 @@
 
   </div>
 
+  
+
   <div *ngIf="spinnerConfig['fullScreen']">
     <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
       [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"
@@ -87,3 +89,41 @@
 
   </div>
 
+
+  <div bsModal #smallModal="bs-modal" data-backdrop="static" data-keyboard="false"  class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm"  data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Recaudación</h4>
+          <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-sm-8">
+                    <label for="inline-radios" [class]="ClaseGad">Exonerar</label>
+                    <div class="col-md-8 col-form-label">
+                        <div class="form-check form-check-inline mr-1" id="inline-radiosN">
+                            <input autocomplete="off" required class="form-check-input" (click)="HabilitarValor(1)" type="radio" name="gad" id="gad">
+                            <label class="form-check-label" for="inlineRadio1">Si</label>
+                        </div>
+                        <div  class="form-check form-check-inline mr-1">
+                            <input  autocomplete="off" required class="form-check-input" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
+                            <label class="form-check-label" for="inlineRadio2">No</label>
+                        </div>
+                    </div> 
+                </div>
+                <div class=" form-group col-md-4">
+                    <label for="text-input">Valor</label>
+                    <input  autocomplete="off" required type="number" [disabled]="exo" id="precio"  [(ngModel)]="precio" name="precio" [class]="ClasePrecio" placeholder="$" (click)="ClasePrecio='form-control form-input select-number'">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="smallModal.hide()" (click)="abono=false" >Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="CargarRecaudacion()">Guardar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

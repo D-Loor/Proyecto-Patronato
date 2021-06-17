@@ -40,6 +40,7 @@ Route::resource('Cuentas','CuentaController');
 Route::resource('HistorialEnfermedades','HistorialEnfermedadesController');
 Route::resource('Turnos','TurnoController');
 Route::resource('Especialidades','EspecialidadController');
+Route::resource('Recaudacion','RecaudacionController');
 Route::get('login/{correo}/{pass}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
 Route::post('agendarCita','CitaController@store');
@@ -58,6 +59,7 @@ Route::get('estadisticasRF/{fechaInicial}/{fechaFinal}/{especialidad}',  'Histor
 Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
 Route::post('actualizarCuenta','CuentaController@actualizar');
 Route::delete('eliminarCuenta/{id}','CuentaController@eliminar');
+Route::get('idrol/{especialidad}','RoleController@idRol');
 
 //reportes
 Route::get('ReportePacientesAnual/{year}','PDFController@ReportePacientesAnual');
