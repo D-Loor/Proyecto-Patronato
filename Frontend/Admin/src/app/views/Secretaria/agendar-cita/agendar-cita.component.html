@@ -55,7 +55,7 @@
                                           <div class="form-group col-md-6" *ngIf="pago==1" >
                                             <div _ngcontent-nko-c102="" class="col-md-12 col-form-label">
                                               <div _ngcontent-nko-c102="" class="form-check form-check-inline mr-1">
-                                                  <input  (click)="AbrirModal()" [disabled]="recau" _ngcontent-nko-c102="" autocomplete="off" type="checkbox" name="abono" id="abono" value="true" [(ngModel)]="abono" class="form-check-input ng-untouched ng-pristine ng-valid" ng-reflect-name="abono">
+                                                  <input  (click)="AbrirModal()" [disabled]="recau"  autocomplete="off" type="checkbox" name="abono" id="abono" value="true" [(ngModel)]="abono" class="form-check-input ng-untouched ng-pristine ng-valid" ng-reflect-name="abono" [checked]='Validar'>
                                                   <label _ngcontent-nko-c102="" for="inlineRadio2" class="form-check-label">Cancelar el valor de la Cita Médica</label>
                                               </div>
                                             </div>
@@ -90,12 +90,12 @@
   </div>
 
 
-  <div bsModal #smallModal="bs-modal" data-backdrop="static" data-keyboard="false"  class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"  data-backdrop="static" data-keyboard="false" role="document">
+  <div bsModal #smallModal="bs-modal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm"   role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Recaudación</h4>
-          <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+          <button type="button" class="close" (click)="abono=false" (click)="smallModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

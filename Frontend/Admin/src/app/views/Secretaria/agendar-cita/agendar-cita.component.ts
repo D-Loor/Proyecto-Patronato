@@ -66,6 +66,7 @@ export class AgendarCitaComponent implements OnInit {
   exo=0;
   recau=0;
   gad;
+  Validar;
 
   //Recaudacion
   precio; idPaciente;
@@ -80,12 +81,12 @@ export class AgendarCitaComponent implements OnInit {
         'Debe de selecionar la fecha de la consulta primero.',
         'warning'
       );
+      return false;
     }else{
       this.smallModal.show();
+      
     }
     
-    //this.smallModal.show({backdrop: 'static', keyboard: false });
-    //('#smallModal').modal({backdrop: 'static', keyboard: false})  
   }
 
   CargarRecaudacion(){
@@ -234,8 +235,13 @@ export class AgendarCitaComponent implements OnInit {
 
     }else if (cedula.length === 10) {
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
-        this.idPaciente= data['result'].id_paciente;
-        this.pago=1;
+        if(data['code']=="201"){
+          this.idPaciente= data['result'].id_paciente;
+          this.pago=1;
+        }else{
+          this.abono = false;
+        }
+        
       }).catch((error) => {
         console.log(error);
         this.spinner.hide('sample');
