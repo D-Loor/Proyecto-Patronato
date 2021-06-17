@@ -1468,10 +1468,10 @@ class PDFController extends Controller
             
         }
 
-        $total = [0,0,0,0,0,0,0,0,0,0];
+        $total[0] = [0,0,0,0,0,0,0,0,0,0];
 
         for ($i = 1; $i < 32; $i++) {
-            $total[0] = [$total[$i][0] + $result[$i][1] , [$total[$i][1] + $result[$i][2] , [$total[$i][2] + $result[$i][3] , [$total[$i][3] + $result[$i][4] , [$total[$i][4] + $result[$i][5] , [$total[$i][5] + $result[$i][6] , [$total[$i][6] + $result[$i][7] , [$total[$i][7] + $result[$i][8] , [$total[$i][8] + $result[$i][9] , [$total[$i][9] + $result[$i][10]];
+            $total[0] = [$total[0][0] + $result[$i][1] , $total[0][1] + $result[$i][2] , $total[0][2] + $result[$i][3] , $total[0][3] + $result[$i][4] , $total[0][4] + $result[$i][5] , $total[0][5] + $result[$i][6] , $total[0][6] + $result[$i][7] , $total[0][7] + $result[$i][8] , $total[0][8] + $result[$i][9] , $total[0][9] + $result[$i][10]];
         }
         $recaudacion=$total[0][4]+$total[0][9];
         $egresos=0;

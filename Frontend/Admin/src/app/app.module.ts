@@ -67,6 +67,8 @@ import { RolesModule } from './views/Administrador/roles/roles.module';
 import { HorariosModule } from './views/Administrador/horarios/horarios.module';
 import { ReportesModule } from './views/MedicinaGeneral/reportes/reportes.module';
 import { ReportesModuleRF } from './views/RehabilitacionFisica/reportes/reportes.module';
+import { ReportesComponent } from './views/Secretaria/reportes/reportes.component';
+import { EgresosComponent } from './views/Secretaria/egresos/egresos.component';
 
 
 
@@ -121,6 +123,8 @@ import { ReportesModuleRF } from './views/RehabilitacionFisica/reportes/reportes
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ReportesComponent,
+    EgresosComponent,
 
   ],
   providers: [
