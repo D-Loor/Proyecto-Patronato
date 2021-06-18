@@ -97,6 +97,7 @@ export class HorariosComponent implements OnInit {
   }
 
   cargarTablas(){
+    this.spinner.show('sample');
     this.administradorService.cargarTurnos().then(data =>{
       this.turnos=data['result'];
       this.validarVacio=data['code'];
@@ -111,6 +112,7 @@ export class HorariosComponent implements OnInit {
         this.dataPaginate(event);
       }
       this.estado=0;
+      this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
       this.spinner.hide('sample');
@@ -408,8 +410,8 @@ export class HorariosComponent implements OnInit {
 
       Swal.fire({
         icon: 'error',
-        title: 'Turno Inválido..!',
-        text: 'El turno a buscar no es válido.'
+        title: '¡Campo vacío...!',
+        text: 'Ingrese un turno a buscar.'
       })
 
     }else if(this.turnosPaginateFilter.length==0){

@@ -83,8 +83,8 @@ export class EgresosComponent implements OnInit {
     if(this.search== null || this.search.length==0){
       Swal.fire({
         icon: 'error',
-        title: 'Fecha Inválida..!',
-        text: 'La fecha a buscar no es válida.'
+        title: '¡Campo vacío...!',
+        text: 'Ingrese una fecha a buscar.'
       })
     }else if(this.egresosFilter.length==0){
       Swal.fire({
@@ -96,7 +96,7 @@ export class EgresosComponent implements OnInit {
   }
 
   cargarEgresos(){
-    debugger
+    
     this.spinner.show('sample');
 
     this.egresoservice.Egresos().then(data =>{
@@ -107,11 +107,11 @@ export class EgresosComponent implements OnInit {
       if(validarVacio == '202'){
       this.egresos.length = 0;
       this.egresosPaginate.length = 0;
-      debugger
+      
       }else{
         this.egresos=data['result'];
         this.egresosPaginate = this.egresos.slice(0, 10);
-        debugger
+        
       }
       if(this.search!=null){
         this.dataPaginate(event);

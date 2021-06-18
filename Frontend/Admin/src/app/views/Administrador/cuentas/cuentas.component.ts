@@ -77,6 +77,7 @@ export class CuentasComponent implements OnInit {
   }
 
   cargarTablas(){
+    this.spinner.show('sample');
     this.administradorService.cargarCuenta().then(data =>{
       this.cuentas=data['result'];
       this.validarVacio=data['code'];
@@ -91,7 +92,7 @@ export class CuentasComponent implements OnInit {
         this.spinner.hide('sample');
         this.dataPaginate(event);
       }
-
+      this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
       this.spinner.hide('sample');
@@ -129,7 +130,21 @@ export class CuentasComponent implements OnInit {
       this.ClaseFoto="";
     }
 
-  buscar(){}
+    buscar(){
+      if(this.search== null || this.search.length==0){
+        Swal.fire({
+          icon: 'error',
+          title: '¡Campo vacío...!',
+          text: 'Ingrese un nombre a buscar.'
+        })
+      }else if(this.cuentasFilter.length==0){
+        Swal.fire({
+          icon: 'error',
+          title: '¡No hay Nombres..!',
+          text: 'No hay nombres con esta fecha.'
+        })
+      }
+    }
 
   guardar(){
 
