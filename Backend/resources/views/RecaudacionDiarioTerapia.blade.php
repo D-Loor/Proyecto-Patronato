@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morbilidad Rehabilitación Física</title>
+    <title>Control diario de Terapia</title>
     <style>
 
         @page {
@@ -30,7 +30,7 @@
                 min-width: 100px;
                 width: 30px;
                 min-height: 20px;
-                height: 20px;
+                height: 28px;
                 padding: 2px;
                 padding-left: 30px;
                 padding-right: 30px;
@@ -68,13 +68,18 @@
                 border: solid 1px black;
 
         }
+         td{
+            padding: 12px;
+        }
+        th{
+            padding: 4px;
+        }
 
         th,td {
                 min-width: 100px;
                 width: 30px;
                 min-height: 20px;
                 height: 10px;
-                padding: 4px;
                 font-size: 12px;
                 font-weight: normal;
                 text-align: center;
@@ -110,13 +115,7 @@
         .cargo{
             margin-left: 12px;
         }
-        .th, .td {
-            width: 80px !important;
-            height: 6px !important;
-            padding: 1px;
-            text-align: center;
-            border: solid 1px black;
-        }
+        
         h4 {
             font-size: 21px;
             position: absolute;
@@ -126,18 +125,20 @@
             padding-top: 0px;
         }
         .LogoJunin{
-            height:90px;
+            margin-top:-2px !important;
+            height:80px;
             weight:150px;
         }
         .LogoPatronato{
             float:right;
+            margin-top:-10px !important;
             height:70px;
             weight:120px;
         }
 
 
         .separador{
-            height:25px;
+            height:45px;
         }
 
 
@@ -153,7 +154,13 @@
         }
 
         .fecha{
+            font-size: 13px;
             text-align: left;
+            color:  rgb(0, 112, 192);
+        }
+        span{
+            color:  rgb(0, 0, 0);
+            font-size: 15px;
         }
 
         .resul{
@@ -190,13 +197,14 @@
             width: 51px !important;
         }
         .titu{
-            font-size:14px;
-            margin-left:60px;
+            font-size:15px;
+            margin-left:-3px;
             margin-top:40px;
         }
         .subti{
-            margin-left:70px;
-            font-size:21px;
+            margin-top:10px;
+            margin-left:30px;
+            font-size:16px;
         }
 
         .nborde{
@@ -211,11 +219,11 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
+   <img src="imagenes/logoCompleto.png" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
     <h4 class="titu">DIRECCION DE DESARROLLO HUMANO</h4>
     <div class="contenedor2">
-    <table>
+    <table class="subti">
     <tr>
         <th class="tdcontenedor2">CONTROL DIARIO DE TERAPIA</th>
     </tr>
@@ -304,9 +312,9 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="fecha" colspan="5">DIA <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$dia}}</span></td>
-                    <td class="fecha" colspan="4">MES <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$mes}}</span></td>
-                    <td class="fecha" colspan="4">AÑO <span style="margin: left 30%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$year}}</span></td>
+                    <td class="fecha" colspan="4">DIA <span style="margin: left 45%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$dia}}</span></td>
+                    <td class="fecha" colspan="4">MES <span style="margin: left 35%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$mes}}</span></td>
+                    <td class="fecha" colspan="5">AÑO <span style="margin: left 45%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$year}}</span></td>
                 </tr>
             </tfoot>
             
