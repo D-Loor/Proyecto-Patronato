@@ -15,6 +15,7 @@ export class AdministradorService {
     formData.append('correo', data.correo);
     formData.append('password', data.password);
     formData.append('imagen', data.imagen);
+    formData.append('estado', data.estado);
     return new Promise ((resolve, reject) => {
       this.http.post(url, formData ).subscribe(res => {
         resolve(res);{
@@ -34,6 +35,7 @@ export class AdministradorService {
     formData.append('correo', data.correo);
     formData.append('password', data.password);
     formData.append('imagen', data.imagen);
+    formData.append('estado', data.estado);
     return new Promise ((resolve, reject) => {
       this.http.post(url, formData).subscribe(res => {
         resolve(res);
@@ -45,6 +47,18 @@ export class AdministradorService {
 
   cargarRoles(){
     let  url = 'http://127.0.0.1:8000/api/Roles';
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);{
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  cargarRolesMedicos(){
+    let  url = 'http://127.0.0.1:8000/api/cargarRoles';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);{

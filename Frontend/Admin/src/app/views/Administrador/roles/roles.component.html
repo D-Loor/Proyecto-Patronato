@@ -18,7 +18,7 @@
             <div class="form-group">
               <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <div class="row">
-                  <div class=" form-group col-md-6">
+                  <div class=" form-group col-md-4">
                     <label for="text-input">Rol</label>
                     <input autocomplete="off" required type="text" id="Rol" [(ngModel)]="Rol" name="Rol"
                       [class]="ClaseRol" placeholder="Ingrese rol"
@@ -30,6 +30,14 @@
                           [class]="ClaseEstado" [(ngModel)]="EstadoRol" name="EstadoRol">
                           <option value="1">Habilitado</option>
                           <option value="0">Deshabilitado</option>
+                    </select>
+                  </div>
+                  <div class=" form-group col-md-3">
+                    <label for="text-input">Categoría</label>
+                    <select id="categoria" (click)="ClaseCategoria='form-control form-input select-number'"
+                          [class]="ClaseCategoria" [(ngModel)]="categoria" name="categoria">
+                          <option value="1">Médico</option>
+                          <option value="0">Administrativo</option>
                     </select>
                   </div>
                 </div>

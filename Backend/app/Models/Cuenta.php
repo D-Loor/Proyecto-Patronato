@@ -11,8 +11,8 @@ class Cuenta extends Model
     public $timestamps=false;
     protected $table = 'cuentas';
     protected $primaryKey = 'id_cuenta';
-     protected $fillable = [
-        'id_rol', 'nombres', 'correo', 'password', 'imagen',
+    protected $fillable = [
+        'id_rol', 'nombres', 'correo', 'password', 'imagen','estado'
      ];
 
     public function role(){

@@ -68,6 +68,7 @@ class CuentaController extends Controller
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
+        $datos->estado=$request->estado;
         $datos->imagen=$picture;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
@@ -115,6 +116,7 @@ class CuentaController extends Controller
             $datos->nombres= request('nombres');
             $datos->correo= request('correo');
             $datos->password= request('password');
+            $datos->estado= request('estado');
             $datos->imagen=1;
             $datos->update();
             return response()->json(['mensaje'=>'Datos Actualizados', 'code'=>'201']);
@@ -149,6 +151,7 @@ class CuentaController extends Controller
         $datos->nombres=$request->nombres;
         $datos->correo=$request->correo;
         $datos->password=$request->password;
+        $datos->estado=$request->estado;
         $datos->imagen=$picture;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
@@ -188,7 +191,7 @@ class CuentaController extends Controller
         $num_rows = count($datos);
         if($num_rows != 0){
 
-            if($datos[0]['role']['estado'] == 1){
+            if($datos[0]['role']['estado'] == 1 && $datos[0]['estado'] == 1){
                 return response()->json(['result'=>$datos]);
             }else{
                 return response()->json(['mensaje'=>"Usuario desabilitado", 'code'=>'203']);

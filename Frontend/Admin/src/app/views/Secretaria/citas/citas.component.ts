@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-citas',
@@ -12,7 +13,19 @@ import { CitasService } from '../../../servicios/citas.service';
 })
 export class CitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router) { }
+  constructor(public citasser:CitasService, public rutas:Router, private spinner: NgxSpinnerService) { }
+
+  loadingText = 'Cargando...';
+
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
 
   isCollapsedMG = false;
   isCollapsedRF = false;
@@ -38,6 +51,7 @@ export class CitasComponent implements OnInit {
   fechaActual:string;
 
   ngOnInit(): void {
+    this.spinner.show('sample');
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargarMG(this.fechaActual,0,false,false);
     this.cargarRF(this.fechaActual,0,false,false);
@@ -45,6 +59,7 @@ export class CitasComponent implements OnInit {
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
+      this.spinner.hide('sample');
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
@@ -94,6 +109,7 @@ export class CitasComponent implements OnInit {
 
   cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Rehabilitación Física",fechaActual).then(data =>{
+      this.spinner.hide('sample');
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
       if(this.validarVacioRF == '202'){

@@ -61,6 +61,8 @@ Route::put('actualizarCita/{cedula}','CitaController@ActualizarEstado');
 Route::post('actualizarCuenta','CuentaController@actualizar');
 Route::delete('eliminarCuenta/{id}','CuentaController@eliminar');
 Route::get('idrol/{especialidad}','RoleController@idRol');
+Route::get('cargarRoles','RoleController@RolesMedicos');
+
 
 //reportes
 Route::get('ReportePacientesAnual/{year}','PDFController@ReportePacientesAnual');

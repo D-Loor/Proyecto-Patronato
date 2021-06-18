@@ -12,7 +12,7 @@ class Role extends Model
     protected $table = 'roles';
     protected $primaryKey = 'id_rol';
      protected $fillable = [
-       'rol','estado',
+       'rol','estado','atencion'
      ];
 
      public function rcuenta(){

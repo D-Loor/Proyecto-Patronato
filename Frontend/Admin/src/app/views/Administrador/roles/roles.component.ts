@@ -27,9 +27,11 @@ export class RolesComponent implements OnInit {
   id_rol="";
   result="";
   EstadoRol;
+  categoria;
 
   ClaseRol:string="form-control form-input select-number";
   ClaseEstado:string="form-control form-input select-number";
+  ClaseCategoria='form-control form-input select-number'
 
   loadingText = 'Cargando...';
 
@@ -46,6 +48,7 @@ export class RolesComponent implements OnInit {
   limpiar(){
     this.Rol="";
     this.EstadoRol="";
+    this.categoria="";
   }
 
   ngOnInit(): void {
@@ -73,6 +76,7 @@ export class RolesComponent implements OnInit {
       let array={
         "rol": this.Rol,
         "estado": this.EstadoRol,
+        "atencion":this.categoria
       }
       this.administradorService.agregarRol(array).then(data=>{
         this.limpiar();
@@ -228,6 +232,7 @@ export class RolesComponent implements OnInit {
             let arrayUpdate={
               "rol":this.Rol,
               "estado": this.EstadoRol,
+              "atencion":this.categoria
             }
 
             this.administradorService.updateRol(arrayUpdate,this.id_rol).then(data =>{
@@ -273,6 +278,7 @@ export class RolesComponent implements OnInit {
       this.id_rol=data['result'].id_rol;
       this.RolActualizar=data['result'].rol;
       this.EstadoRol =data['result'].estado;
+      this.categoria=data['result'].atencion;
       window.scrollTo(0, 0);
     }).catch((error) => {
       console.log(error);
@@ -324,6 +330,8 @@ export class RolesComponent implements OnInit {
       this.spinner.hide('sample');
       this.alertEliminado(this.result);
       this.cargarTablas();
+      this.limpiar();
+      this.estado=0;
     })
     .catch((error) => {
       console.log(error);

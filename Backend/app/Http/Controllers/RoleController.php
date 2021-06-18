@@ -54,6 +54,7 @@ class RoleController extends Controller
         $datos=new Role();
         $datos->rol=$request->rol;
         $datos->estado=$request->estado;
+        $datos->atencion=$request->atencion;
         $datos->save();
         $idRecienGuardado = $datos->id_rol;
         return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'id'=>$idRecienGuardado]);
@@ -98,6 +99,7 @@ class RoleController extends Controller
         if($datos != null){
             $datos->rol=$request->rol;
             $datos->estado=$request->estado;
+            $datos->atencion=$request->atencion;
             $datos->update();
             return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
         }else
@@ -132,5 +134,15 @@ class RoleController extends Controller
     public function idRol($especialidad){
         $datos=Role::where('rol', $especialidad)->get()->first();
         return response()->json(['result'=>$datos, 'code'=>'201']);
+    }
+
+    public function RolesMedicos(){
+        $datos=Role::where('atencion', 1)->get();
+        if($datos != null){
+                return response()->json(['result'=>$datos, 'code'=>'201']);
+            }else{
+                return response()->json(['result'=>"No hay datos", 'code'=>'202']);
+            }
+        
     }
 }

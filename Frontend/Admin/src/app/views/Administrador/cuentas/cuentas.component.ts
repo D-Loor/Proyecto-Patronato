@@ -31,6 +31,7 @@ export class CuentasComponent implements OnInit {
   id_cuenta="";
   rol="";
   password="";
+  Estado=1;
   foto=null;
   listaRoles:any=[];
   url; //editado
@@ -39,6 +40,7 @@ export class CuentasComponent implements OnInit {
   ClaseRol:string="form-control form-input select-number";
   ClasePassword:string="form-control form-input select-number";
   ClaseCHora:string="form-control form-input select-number";
+  ClaseEstado='form-control form-input select-number'
 
   ClaseFoto:string="";
 
@@ -56,7 +58,7 @@ export class CuentasComponent implements OnInit {
 
   
   limpiar(){
-    this.nombres="";this.password="";this.correo="";this.rol=""; this.foto=""; this.url="";
+    this.nombres="";this.password="";this.correo="";this.rol=""; this.foto=""; this.url="";this.Estado=1;
   }
 
   ngOnInit(): void {
@@ -150,7 +152,8 @@ export class CuentasComponent implements OnInit {
         "nombres":this.nombres,
         "correo":this.correo,
         "password":this.password,
-        "imagen": this.foto
+        "imagen": this.foto,
+        "estado": this.Estado
       }
 
       this.administradorService.AgregarCuenta(array).then(data =>{
@@ -283,6 +286,7 @@ export class CuentasComponent implements OnInit {
         this.spinner.hide('sample');
         this.cargarTablas();
         this.limpiar();
+        this.estado=0;
       })
       .catch((error) => {
         console.log(error);
@@ -304,6 +308,7 @@ export class CuentasComponent implements OnInit {
       this.correoEditar=data['result'].correo;
       this.rol=data['result']['role'].id_rol;
       this.editarA=data['result']['role'].rol;
+      this.Estado=data['result'].estado;
       //this.foto=data['result'].imagen;
       this.url="http://127.0.0.1:8000"+data['result'].imagen;
       window.scrollTo(0, 0);
@@ -397,13 +402,14 @@ export class CuentasComponent implements OnInit {
               "nombres":this.nombres,
               "correo":this.correo,
               "password":this.password,
-              "imagen": this.foto
+              "imagen": this.foto,
+              "estado": this.Estado
 
             }
-            debugger
             this.administradorService.updateCuenta(arrayUpdate).then(data =>{
               data['result'];
               this.spinner.hide('sample');
+              this.estado=0;
               Swal.fire(
                 '¡Datos Actualizados..!',
                 'Datos actualizados correctamente.',

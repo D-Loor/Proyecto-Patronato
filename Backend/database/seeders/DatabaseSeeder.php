@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             "correo" => "q",
             "password" => "q",
             "imagen" => "/imagenes/administrador.png",
+            "estado" => "1",
         ]);
 
     }

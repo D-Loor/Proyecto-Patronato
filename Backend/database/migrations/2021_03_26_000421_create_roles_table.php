@@ -17,31 +17,36 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id_rol');
             $table->string('rol');
             $table->boolean('estado');
+            $table->boolean('atencion');
 
         });
 
         DB::table("roles")
         ->insert([
             "rol" => "Administrador",
-            "estado" => 1
+            "estado" => 1,
+            "atencion" => 0,
 
 
         ]);
         DB::table("roles")
         ->insert([
             "rol" => "Medicina General",
-            "estado" => 1
+            "estado" => 1,
+            "atencion" => 1,
 
         ]);
         DB::table("roles")
         ->insert([
             "rol" => "Rehabilitación Física",
-            "estado" => 1
+            "estado" => 1,
+            "atencion" => 1,
         ]);
         DB::table("roles")
         ->insert([
             "rol" => "Secretaría",
-            "estado" => 1
+            "estado" => 1,
+            "atencion" => 0,
         ]);
     }
 

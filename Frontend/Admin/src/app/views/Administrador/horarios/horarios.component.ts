@@ -78,13 +78,13 @@ export class HorariosComponent implements OnInit {
   }
 
   CargarEspecialidad(){
-    this.administradorService.cargarRol().then(data =>{
-      let temporal = data['result'];
-      for (let i of temporal) {
-        if(i.rol != "Administrador" && i.rol != "Secretaría"){
-          this.Comboespecialidad.push(i);
-        }
+    this.administradorService.cargarRolesMedicos().then(data =>{
+      if(data['code']=="201"){
+        this.Comboespecialidad = data['result'];
+      }else{
+        this.Comboespecialidad =null;
       }
+      //for (let i of temporal)
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');
@@ -143,6 +143,8 @@ export class HorariosComponent implements OnInit {
       this.spinner.hide('sample');
       this.alertEliminado(this.result);
       this.cargarTablas();
+      this.limpiar();
+      this.estado=0;
     })
     .catch((error) => {
       console.log(error);
