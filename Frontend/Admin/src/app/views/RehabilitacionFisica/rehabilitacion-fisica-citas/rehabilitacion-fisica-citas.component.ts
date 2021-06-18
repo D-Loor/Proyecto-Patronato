@@ -97,8 +97,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       this.citasRFPaginate = this.citasRF.slice(0, 10);
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
-        this.citasRF=null;
-        this.citasRFPaginate = null;
+        this.citasRF=[];
+        this.citasRFPaginate = [];
 
       }else{
         this.citasRFPaginate = this.citasRF.slice(0, 10);
@@ -234,8 +234,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    this.citasRFPaginate = null;
-    this.citasRF = null;
+    this.citasRFPaginate = [];
+    this.citasRF = [];
   }
   ConsultarPaciente(cedula:string, idCita:string){
     this.rutas.navigate(['/rehabilitacionfisicaconsultas']);

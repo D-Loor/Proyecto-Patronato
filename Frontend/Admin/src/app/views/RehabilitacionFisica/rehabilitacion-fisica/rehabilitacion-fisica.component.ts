@@ -82,8 +82,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.historialRF=data['result'];
     let validarVacio=data['code'];
       if(validarVacio == '202'){
-        this.historialRF=null;
-        this.historialRFPaginate = null;
+        this.historialRF=[];
+        this.historialRFPaginate = [];
       }else{
         this.historialRFPaginate = this.historialRF.slice(0, 10);
       }
@@ -128,8 +128,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    this.historialRFPaginate = null;
-    this.historialRF = null;
+    this.historialRFPaginate = [];
+    this.historialRF = [];
   }
 
   DatosPaciente(arreglo:[]){
