@@ -122,8 +122,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.validarVacio=data['code'];
     if(this.validarVacio == '202'){
       this.spinner.hide('sample');
-      this.citasMG=null;
-      this.citasMGPaginate = null;
+      this.citasMG=[];
+      this.citasMGPaginate = [];
     }else{
       this.spinner.hide('sample');
       this.citasMGPaginate = this.citasMG.slice(0, 10);
@@ -254,9 +254,9 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    this.citasMG = null;
+    this.citasMG = [];
     this.Valida = null;
-    this.citasMGPaginate = null;
+    this.citasMGPaginate = [];
   }
 
   ConsultarPaciente(cedula:string,idCita:string){

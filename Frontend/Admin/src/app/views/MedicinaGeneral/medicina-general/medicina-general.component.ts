@@ -62,8 +62,8 @@ export class MedicinaGeneralComponent implements OnInit {
     this.historialMG=data['result'];
     let validarVacio=data['code'];
       if(validarVacio == '202'){
-        this.historialMG=null;
-        this.historialMGPaginate = null;
+        this.historialMG=[];
+        this.historialMGPaginate = [];
       }else{
         this.historialMGPaginate = this.historialMG.slice(0, 10);
       }
@@ -123,8 +123,8 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    this.historialMG = null;
-    this.historialMGPaginate = null;
+    this.historialMG = [];
+    this.historialMGPaginate = [];
   }
 
 
