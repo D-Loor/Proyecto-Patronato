@@ -18,8 +18,9 @@ class CreateRecaudacionsTable extends Migration
             $table->unsignedBigInteger('id_paciente');
             $table->unsignedBigInteger('id_rol');
             $table->date('fecha');
-            $table->Integer('valor');
+            $table->string('valor');
             $table->boolean('exonera');
+            $table->string('observaciones');
 
             $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');

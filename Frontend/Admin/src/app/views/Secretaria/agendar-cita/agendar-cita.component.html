@@ -95,7 +95,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Recaudación</h4>
-          <button type="button" class="close" (click)="abono=false" (click)="smallModal.hide()" aria-label="Close">
+          <button type="button" class="close" (click)="abono=false" (click)="LimpiarR()" (click)="smallModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -105,11 +105,11 @@
                     <label for="inline-radios" [class]="ClaseGad">Exonerar</label>
                     <div class="col-md-8 col-form-label">
                         <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                            <input autocomplete="off" required class="form-check-input" (click)="HabilitarValor(1)" type="radio" name="gad" id="gad">
+                            <input autocomplete="off" required class="form-check-input" (click)="ClaseGad=''" (click)="HabilitarValor(1)" type="radio" name="gad" id="gad">
                             <label class="form-check-label" for="inlineRadio1">Si</label>
                         </div>
                         <div  class="form-check form-check-inline mr-1">
-                            <input  autocomplete="off" required class="form-check-input" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
+                            <input  autocomplete="off" required class="form-check-input" (click)="ClaseGad=''" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
                             <label class="form-check-label" for="inlineRadio2">No</label>
                         </div>
                     </div> 
@@ -119,9 +119,17 @@
                     <input  autocomplete="off" required type="number" [disabled]="exo" id="precio"  [(ngModel)]="precio" name="precio" [class]="ClasePrecio" placeholder="$" (click)="ClasePrecio='form-control form-input select-number'">
                 </div>
             </div>
+            <div class="row">
+              <div class=" form-group col-md-12">
+                <div class="form-group">
+                  <label for="vat">Observaciones</label>
+                  <textarea id="observaciones" name="observaciones" [(ngModel)]="observaciones" rows="2" (click)="ClaseObser='form-control'" [class]="ClaseObser" required></textarea>
+                </div>
+            </div>
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="smallModal.hide()" (click)="abono=false" >Cerrar</button>
+          <button type="button" class="btn btn-secondary" (click)="smallModal.hide()" (click)="abono=false" (click)="LimpiarR()" >Cerrar</button>
           <button type="button" class="btn btn-primary" (click)="CargarRecaudacion()">Guardar</button>
         </div>
       </div><!-- /.modal-content -->

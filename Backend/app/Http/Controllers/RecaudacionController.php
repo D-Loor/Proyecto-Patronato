@@ -48,6 +48,7 @@ class RecaudacionController extends Controller
         $datos->fecha=$request->fecha;
         $datos->valor=$request->valor;
         $datos->exonera=$request->exonera;
+        $datos->observaciones=$request->observaciones;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }

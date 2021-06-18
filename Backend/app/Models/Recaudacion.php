@@ -12,7 +12,7 @@ class Recaudacion extends Model
     protected $table = 'recaudaciones';
     protected $primaryKey = 'id_recaudacion';
     protected $fillable = [
-        'id_rol','id_paciente','fecha','valor','exonera'
+        'id_rol','id_paciente','fecha','valor','exonera', 'observaciones'
     ];
 
     public function paciente(){

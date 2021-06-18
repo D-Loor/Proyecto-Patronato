@@ -55,7 +55,9 @@ export class AgendarCitaComponent implements OnInit {
   ClaseCEspecialidad:string="form-control form-input select-number";
   ClaseCFecha:string="form-control form-input select-number";
   ClaseCHora:string="form-control form-input select-number";
-  ClasePrecio='form-control form-input select-number'
+  ClasePrecio='form-control form-input select-number';
+  ClaseObser='form-control';
+  ClaseGad;
 
   //Variables para datos pacientes
   nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos;
@@ -66,7 +68,7 @@ export class AgendarCitaComponent implements OnInit {
   exo=0;
   recau=0;
   gad;
-  Validar;
+  Validar; observaciones;
 
   //Recaudacion
   precio; idPaciente;
@@ -84,28 +86,48 @@ export class AgendarCitaComponent implements OnInit {
       return false;
     }else{
       this.smallModal.show();
-      
     }
     
   }
 
   CargarRecaudacion(){
-    this.ServicioSecretaria.Roles(this.especialidad).then(data=>{
-      this.spinner.show('sample');
-      let idR = data['result'].id_rol;
-      let datosA={
-        'id_paciente':this.idPaciente,
-        'id_rol':idR,
-        'fecha':this.fecha_consulta,
-        'valor':this.precio,
-        'exonera':this.gad,
-      }
-      this.GuardarRecaudacion(datosA);
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    if(this.precio==null || this.precio==undefined || this.observaciones==""|| this.observaciones==undefined
+      || this.gad==undefined||this.gad==null
+      ){
+        Swal.fire({
+          icon: 'error',
+          title: '¡Hay campos vacíos..!',
+          text: 'Debe de completar todo el formulario para agregar la recaudación.'
+        })
+        if(this.observaciones=="" || this.observaciones == undefined){
+          this.ClaseObser ="form-control is-invalid";
+        }
+        if(this.precio == undefined||this.precio == null){
+          this.ClasePrecio ="form-control is-invalid";
+        }
+        if(this.gad==undefined||this.gad==null){
+          this.ClaseGad="invalido";
+        }
+    }else{
+      this.ServicioSecretaria.Roles(this.especialidad).then(data=>{
+        this.spinner.show('sample');
+        let idR = data['result'].id_rol;
+        let datosA={
+          'id_paciente':this.idPaciente,
+          'id_rol':idR,
+          'fecha':this.fecha_consulta,
+          'valor':this.precio,
+          'exonera':this.gad,
+          'observaciones':this.observaciones,
+        }
+        this.GuardarRecaudacion(datosA);
+      }).catch((error) => {
+        console.log(error);
+        this.spinner.hide('sample');
+        this.rutas.navigate(['/500']);
+      });
+    }
+    
     
   }
 
@@ -129,7 +151,12 @@ export class AgendarCitaComponent implements OnInit {
 
   LimpiarR(){
     this.precio="";
-    this.gad="";
+    this.gad=undefined;
+    this.observaciones="";
+    this.ClasePrecio='form-control form-input select-number';
+    this.ClaseObser='form-control';
+    this.ClaseGad="";
+    
   }
   
 
@@ -622,9 +649,12 @@ export class AgendarCitaComponent implements OnInit {
       this.exo=1;
       this.gad=1;
       this.precio=0;
+      this.ClasePrecio='form-control form-input select-number';
     }else{
       this.exo=0;
       this.gad=0;
+      this.precio=1;
+      this.ClasePrecio='form-control form-input select-number';
     }  
       
   }
