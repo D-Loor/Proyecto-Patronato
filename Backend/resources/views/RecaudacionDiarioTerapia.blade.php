@@ -241,23 +241,72 @@
                 </tr>
             </thead>
             <tbody>
+            @php($numDato = count($datos))
+                @for($i=0; $i < 22 ; $i++)
                     <tr>
-                        <th class="numero">1</th>
-                        <td class="grande">Bryan Mendoza</td>
-                        <td colspan="2">X</td>
-                        <td colspan="2"></td>
-                        <th class="numero">22</th>
-                        <td class="grande">Aldair Loor</td>
-                        <td colspan="2"></td>
-                        <td colspan="2">X</td>
-                        <td class="grande">Perro</td>
+                            @if( $numDato < 22 && $i < $numDato)
+                                <th class="numero">{{$i+1}}</th>
+                                <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
+                                    @if($datos[$i]->valor == 1)
+                                        <td colspan="2">X</td>
+                                        <td colspan="2"></td>
+                                    @else
+                                        <td colspan="2"></td>
+                                        <td colspan="2">X</td>
+                                    @endif
+                                <th class="numero">{{$i+23}}</th>
+                                <td class=""></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <td class="grande"></td>
+                            @elseif($numDato < 22)
+                                <th class="numero">{{$i+1}}</th>
+                                <td class="grande"></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <th class="numero">{{$i+23}}</th>
+                                <td class="grande"></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <td class="grande"></td>
+                            @endif
+                            @if( $numDato > 21)
+                                <th class="numero">{{$i+1}}</th>
+                                <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
+                                @if($datos[$i]->valor == 1)
+                                        <td colspan="2">X</td>
+                                        <td colspan="2"></td>
+                                 @else
+                                        <td colspan="2"></td>
+                                        <td colspan="2">X</td>
+                                @endif
+                                @if($numDato > $i+22)
+                                    <th class="numero">{{$i+23}}</th>
+                                    <td class="grande">{{$datos[22]->paciente['nombres']}}</td>
+                                        @if($datos[22]->valor == 1)
+                                            <td colspan="2">X</td>
+                                            <td colspan="2"></td>
+                                        @else
+                                            <td colspan="2"></td>
+                                            <td colspan="2">X</td>
+                                        @endif
+                                    <td class="grande"></td>
+                                @else
+                                    <th class="numero">{{$i+23}}</th>
+                                    <td class="grande"></td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2"></td>
+                                    <td class="grande"></td>
+                                @endif
+                            @endif
                     </tr>
+                @endfor
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="fecha" colspan="5">DIA <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">10</span></td>
-                    <td class="fecha" colspan="4">MES <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">06</span></td>
-                    <td class="fecha" colspan="4">AÑO <span style="margin: left 30%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">2021</span></td>
+                    <td class="fecha" colspan="5">DIA <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$dia}}</span></td>
+                    <td class="fecha" colspan="4">MES <span style="margin: left 35%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$mes}}</span></td>
+                    <td class="fecha" colspan="4">AÑO <span style="margin: left 30%; font: size 10px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{$year}}</span></td>
                 </tr>
             </tfoot>
             
