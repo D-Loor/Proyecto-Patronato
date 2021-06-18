@@ -28,7 +28,7 @@
         }
 
         table{
-            padding-top:10px;
+            padding-top:0px;
             border-collapse: collapse;
             text-align: center;
         }
@@ -40,8 +40,9 @@
         th,td {
             width: 20px;
             height: 20px;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: bold;
+            font-weight:none;
             text-align: center;
             border: solid 1px black;
         }
@@ -65,30 +66,32 @@
             margin-top: 70px;
             text-align: center;
             border-top: solid 1px black;
-            width:200px;
+            width:250px;
             height: 5px;
-            margin-left:-25px;
+            margin-left:-23px;
         }
         .doc {
             color: rgb(0, 112, 192);
-            font-size:9px;
-            font-weight: bold;
-            padding-left:37%;
+            font-size:12px;
+            padding-left:35%;
+            font-weight:bold;
             margin:0px;
         }
         .cargo{
-            margin-left: -10px;
+            margin-left: 3px;
+            font-size:10px;
         }
 
         h4 {
-            font-size: 13px;
+            font-size: 16px;
             color: rgb(0, 112, 192);
             position: absolute;
-            margin-top:0px !important;
+            margin-top:-12px !important;
             text-align: center;
-            padding-left: 100px;
+            font-weight:bolder !important;
+            padding-left: 90px;
             padding-right: 0px ;
-            padding-top: 0px;
+           
         }
         .fecha th {
             font-size: 12px;
@@ -97,13 +100,13 @@
             font-size: 12px;
         }
         .LogoJunin{
-            height:50px;
+            height:60px;
             weight:150px;
         }
         .LogoPatronato{
             float:right;
-            height:35px;
-            weight:120px;
+            height:40px;
+            weight:110px;
         }
 
 
@@ -192,6 +195,7 @@
 
         .td{
             color: rgb(0, 112, 192);
+            font-weight: bold;
         }
 
         .th, .td {
@@ -219,7 +223,7 @@
             font-weight: bold;
         } 
         .recauda3{
-            font-size: 11px;
+            font-size: 16px;
             width: 50px !important;
             height: 6px !important;
             padding: 1px;
@@ -228,12 +232,26 @@
             font-weight: bold;
         }     
 
+        .foter{
+            font-size: 16px;
+            
+        }
         .segt2{
             position: absolute;
             margin-left:0px;
             margin-top: 20px;
             margin-right:520px;
             padding-right:100px;
+        }
+        .pri{
+           font-size: 18px !important;
+           letter-spacing:0.5px;
+           padding-left:10px;
+           padding-top:5px;
+        }
+        .seg{
+            line-height : 17px;
+            margin-left: -20px !important;
         }
     </style>
 </head>
@@ -246,7 +264,8 @@
    <img src="imagenes/LogoJunin.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
 
-    <h4> UNIDAD DE ASISTENCIA SOCIAL DEL G.A.D JUNÍN <br> CONSOLIDADO MENSUAL DE RECAUDACIÓN DE MEDICINA GENERAL Y REHABILITACIÓN FÍSICA</h4>
+    <h4><strong  class="pri">  UNIDAD DE ASISTENCIA SOCIAL DEL GAD JUNÍN  </strong> <br>
+     CONSOLIDADO MENSUAL DE RECAUDACIÓN DE MEDICINA <br> <strong  class="seg"> GENERAL Y REHABILITACIÓN FÍSICA </strong> </h4>
     <div class="contenido">
 
 
@@ -312,17 +331,17 @@
             <tfoot>
                 <tr>
                     <th class="recauda" colspan="2">TOTAL RECAUD. MENSUAL</th>
-                    <th colspan="2">{{$total[0][0]}}</th>
-                    <th colspan="2">{{$total[0][1]}}</th>
-                    <th colspan="2">{{$total[0][2]}}</th>
-                    <th colspan="2">{{$total[0][3]}}</th>
-                    <th colspan="2">{{$total[0][4]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][0]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][1]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][2]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][3]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][4]}}</th>
                     <th class="nborde"></th>
-                    <th colspan="2">{{$total[0][5]}}</th>
-                    <th colspan="2">{{$total[0][6]}}</th>
-                    <th colspan="2">{{$total[0][7]}}</th>
-                    <th colspan="2">{{$total[0][8]}}</th>
-                    <th colspan="2">{{$total[0][9]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][5]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][6]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][7]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][8]}}</th>
+                    <th colspan="2" class="foter">{{$total[0][9]}}</th>
                     <th class="nborde"></th>
 
                 </tr>
@@ -334,15 +353,15 @@
                 <thead>
                     <tr>
                         <th class="recauda2">TOTAL RECAUD. MENSUAL MEDICINA Y TERAPIA</th>
-                        <td class="recauda3"> {{$recaudacion}}$</td>
+                        <td class="recauda3"> {{$recaudacion}}</td>
                     </tr>
                     <tr>
                         <th class="recauda2">EGRESO</th>
-                        <td class="recauda3"> {{$egresos}}$</td>
+                        <td class="recauda3"> {{$egresos}}</td>
                     </tr>
                     <tr>
                         <th class="recauda2">SALDO</th>
-                        <td class="recauda3"> {{$saldo}}$</td>
+                        <td class="recauda3"> {{$saldo}}</td>
                     </tr>
                 </thead>
             </table>
