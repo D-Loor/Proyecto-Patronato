@@ -8,6 +8,7 @@ use App\Models\Historia_Clinica_MG;
 use App\Models\Historia_Clinica_RF;
 use App\Models\Paciente;
 use App\Models\Recaudacion;
+use App\Models\Egreso;
 use DateTime;
 
 class PDFController extends Controller
@@ -1391,6 +1392,46 @@ class PDFController extends Controller
 
         $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
 
+        switch ($mes) {
+            case 1:
+                $mesL = "Enero";
+                break;
+            case 2:
+                $mesL = "Febrero";
+                break;
+            case 3:
+                $mesL = "Marzo";
+                break;
+            case 4:
+                $mesL = "Abril";
+                break;
+            case 5:
+                $mesL = "Mayo";
+                break;
+            case 6:
+                $mesL = "Junio";
+                break;
+            case 7:
+                $mesL = "Julio";
+                break;
+            case 8:
+                $mesL = "Agosto";
+                break;
+            case 9:
+                $mesL = "Septiembre";
+                break;
+            case 10:
+                $mesL = "Octubre";
+                break;
+            case 11:
+                $mesL = "Noviembre";
+                break;
+            case 12:
+                $mesL = "Diciembre";
+                break;
+        }
+        $mes = strtoupper($mesL);
+
         return \PDF::loadView('RecaudacionDiarioMedicinaGeneral', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
     }
 
@@ -1413,6 +1454,47 @@ class PDFController extends Controller
         $dia = $valores[2];
 
         $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+       
+        switch ($mes) {
+            case 1:
+                $mesL = "Enero";
+                break;
+            case 2:
+                $mesL = "Febrero";
+                break;
+            case 3:
+                $mesL = "Marzo";
+                break;
+            case 4:
+                $mesL = "Abril";
+                break;
+            case 5:
+                $mesL = "Mayo";
+                break;
+            case 6:
+                $mesL = "Junio";
+                break;
+            case 7:
+                $mesL = "Julio";
+                break;
+            case 8:
+                $mesL = "Agosto";
+                break;
+            case 9:
+                $mesL = "Septiembre";
+                break;
+            case 10:
+                $mesL = "Octubre";
+                break;
+            case 11:
+                $mesL = "Noviembre";
+                break;
+            case 12:
+                $mesL = "Diciembre";
+                break;
+        }
+        $mes = strtoupper($mesL);
+       
         return \PDF::loadView('RecaudacionDiarioTerapia', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
     }
 
@@ -1433,6 +1515,12 @@ class PDFController extends Controller
         $result=[];
         $posi=[];
         $dato=Recaudacion::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->with('paciente','rol')->get();
+        $egre=Egreso::whereMonth('fecha',$Mes)->whereYear('fecha',$Year)->get();
+        $egresos=0;
+
+        foreach($egre as $item) {
+            $egresos+=$item['valor'];
+        }
 
         for ($i = 1; $i < 32; $i++) {
             $result[$i] = [$i,0,0,0,0,0,0,0,0,0,0];
@@ -1441,7 +1529,7 @@ class PDFController extends Controller
             $separar = explode('-', $item['fecha']);
 
             if($item->rol['rol']=='Medicina General'){
-                if($item['exonera']==1){
+                if($item['exonera']==true){
                     $posi[0]=[0,1,0,0,1,0,0,0,0,0,0];
                 }else{
                     if($item['valor']==1){
@@ -1474,7 +1562,6 @@ class PDFController extends Controller
             $total[0] = [$total[0][0] + $result[$i][1] , $total[0][1] + $result[$i][2] , $total[0][2] + $result[$i][3] , $total[0][3] + $result[$i][4] , $total[0][4] + $result[$i][5] , $total[0][5] + $result[$i][6] , $total[0][6] + $result[$i][7] , $total[0][7] + $result[$i][8] , $total[0][8] + $result[$i][9] , $total[0][9] + $result[$i][10]];
         }
         $recaudacion=$total[0][4]+$total[0][9];
-        $egresos=0;
         $saldo=$recaudacion-$egresos;
 
         switch ($Mes) {

@@ -68,7 +68,13 @@ export class ReportesRecaudacionComponent implements OnInit {
   }
   Turno(){
 
-    this.idEspe=undefined;
+    for (const item of this.listaRoles) {
+      if(item['rol']==this.Espe){
+        this.idEspe=item['id_rol'];
+      }
+    }
+
+
   }
 
 
@@ -121,7 +127,7 @@ export class ReportesRecaudacionComponent implements OnInit {
                   'error'
                 )
               }else{
-                window.open('http://127.0.0.1:8000/api/RecaudacionDiarioMedicinaGeneral/'+this.FechaDiaMG+'/'+this.idEspe, '_blank');
+                window.open('http://127.0.0.1:8000/api/RecaudacionDiarioTerapia/'+this.FechaDiaMG+'/'+this.idEspe, '_blank');
               }
             }).catch((error) => {
               console.log(error);
