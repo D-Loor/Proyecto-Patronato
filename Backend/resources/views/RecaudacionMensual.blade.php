@@ -268,9 +268,9 @@
                     <th class="subtema2"  colspan="2"><p class="box-rotate">TOTAL RECAUDADO</p></th>
                     <th class="nborde"></th>
                     <th class="subtema2"  colspan="2"><p class="box-rotate">TOTAL DE ATENCIONES</p></th>
-                    <th class="subtema2" colspan="2" ><p class="box-rotate">VALOR POR ATENCION ($1,00)</p></th>
-                    <th class="subtema2" colspan="2" ><p class="box-rotate">VALOR REVISION DE EXAMEN ($0,50)</p></th>
-                    <th class="subtema2" colspan="2" ><p class="box-rotate">EXONERACIÓN O MUNICIPIALES</p></th>
+                    <th class="subtema2" colspan="2" ><p class="box-rotate">VALOR POR TERAPIA ($2,00)</p></th>
+                    <th class="subtema2" colspan="2" ><p class="box-rotate">VALOR POR TERAPIA ($1,00)</p></th>
+                    <th class="subtema2" colspan="2" ><p class="box-rotate">EXONERACIÓN</p></th>
                     <th class="subtema2" colspan="2" ><p class="box-rotate">TOTAL RECAUDADO</p></th>
                     <th class="nborde"></th>
                 </tr>
@@ -293,18 +293,18 @@
             <tbody>
             @foreach($result as $item)
                 <tr>
-                    <th class="td" style="font-weight: bold;" colspan="2"></th>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
+                    <th class="td" style="font-weight: bold;" colspan="2">{{$item[0]}}</th>
+                    <td colspan="2">{{$item[1]}}</td>
+                    <td colspan="2">{{$item[2]}}</td>
+                    <td colspan="2">{{$item[3]}}</td>
+                    <td colspan="2">{{$item[4]}}</td>
+                    <td colspan="2">{{$item[5]}}</td>
                     <th class="nborde"></th>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
-                    <td colspan="2"></td>
+                    <td colspan="2">{{$item[6]}}</td>
+                    <td colspan="2">{{$item[7]}}</td>
+                    <td colspan="2">{{$item[8]}}</td>
+                    <td colspan="2">{{$item[9]}}</td>
+                    <td colspan="2">{{$item[10]}}</td>
                     <th class="nborde"></th>
                 </tr>
             @endforeach
