@@ -139,8 +139,8 @@ export class PacientesComponent implements OnInit {
       this.TotalPacientes=0;
     }
     if(validador=='202'){
-      this.pacientesMG=null;
-      this.pacientesMGPaginate=null;
+      this.pacientesMG=[];
+      this.pacientesMGPaginate=[];
     }else{
       this.pacientesMGPaginate = this.pacientesMG.slice(0, 10);
       this.spinner.hide('sample');
@@ -203,8 +203,8 @@ export class PacientesComponent implements OnInit {
   }
 
   ngOnDestroy(): void{
-    this.pacientesMG = null;
-    this.pacientesMGPaginate = null;
+    this.pacientesMG = [];
+    this.pacientesMGPaginate = [];
 
   }
 

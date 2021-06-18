@@ -58,6 +58,7 @@ export class CitasComponent implements OnInit {
   }
 
   actualizarRF(){
+    debugger
     this.FechaRf="";
     this.citasRF=[];
     this.citasRFFilter=[];
@@ -67,6 +68,7 @@ export class CitasComponent implements OnInit {
   }
 
   actualizarMG(){
+    debugger
     this.FechaMg="";
     this.citasMG=[];
     this.citasMGFilter=[];
@@ -81,8 +83,8 @@ export class CitasComponent implements OnInit {
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
       if(this.validarVacio == '202'){
-        this.citasMG=null;
-        this.citasMGPaginate = null;
+        this.citasMG=[];
+        this.citasMGPaginate = [];
       }else{
         this.citasMGPaginate = this.citasMG.slice(0, 10);
       }
@@ -111,8 +113,8 @@ export class CitasComponent implements OnInit {
               text: 'No hay citas registradas en esta fecha.'
             })
         }else if(fecha!=1 && this.searchMG==null){
-          this.citasMG= null;
-          this.citasMGPaginate = null;
+          this.citasMG= [];
+          this.citasMGPaginate = [];
         }else{
           if(this.searchMG!=null){
             this.dataPaginateMG(event);
@@ -131,8 +133,8 @@ export class CitasComponent implements OnInit {
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
       if(this.validarVacioRF == '202'){
-        this.citasRF=null;
-        this.citasRFPaginate = null;
+        this.citasRF=[];
+        this.citasRFPaginate = [];
       }else{
         this.citasRFPaginate = this.citasRF.slice(0, 10);
       }
@@ -161,8 +163,8 @@ export class CitasComponent implements OnInit {
           text: 'No hay citas registradas en esta fecha.'
         })
       }else if(fecha!=1 && this.searchRF==null){
-        this.citasRF = null;
-        this.citasRFPaginate = null;
+        this.citasRF = [];
+        this.citasRFPaginate = [];
       }else{
         if(this.searchRF!=null){
           this.dataPaginateRF(event);

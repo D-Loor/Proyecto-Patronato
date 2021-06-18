@@ -58,7 +58,7 @@
                   <td>{{item.nombres}}</td>
                   <td>{{item.apellidos}}</td>
                   <td>{{item.sexo}}</td>
-                  <td>{{item.edad}}</td>
+                  <td>{{CalcEdad(item.edad)}}</td>
                   <td>{{item.residencia}}</td>
                   <td>
                     <span *ngIf="item.gad != 1" class="badge badge-secondary">NO</span>
@@ -69,8 +69,6 @@
                           class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                     <button *ngIf="rolP!='Secretaría'" type="button" class="btn btn-ghost-success botont" (click)="Consultar(item.id_paciente)"><i
                         class="fa fa-eye"></i>&nbsp;Consultas</button>
-                    <!--button type="button" class="btn btn-ghost-danger botont"><i
-                        class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
                   </td>
                 </tr>
               </ng-container>
@@ -93,8 +91,6 @@
                     class="fa fa-male"></i>&nbsp;Datos Paciente</button>
                   <button *ngIf="rolP!='Secretaría'" type="button" class="btn btn-ghost-success botont" (click)="Consultar(item.id_paciente)"><i
                       class="fa fa-eye"></i>&nbsp;Consultas</button>
-                  <!--button type="button" class="btn btn-ghost-danger botont"><i
-                      class="fa fa-trash-o"></i>&nbsp;Eliminar</button-->
                 </td>
               </tr>
             </ng-container>
