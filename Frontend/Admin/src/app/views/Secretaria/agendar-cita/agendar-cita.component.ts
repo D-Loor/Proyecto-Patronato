@@ -164,8 +164,12 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   cargarRoles(){
-    this.administradorService.RolesCitas().then(data=>{
-      this.listaRoles=data['result'];
+    this.administradorService.cargarRolesMedicos().then(data=>{
+      if(data['code']=="201"){
+        this.listaRoles = data['result'];
+      }else{
+        this.listaRoles =null;
+      }
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');

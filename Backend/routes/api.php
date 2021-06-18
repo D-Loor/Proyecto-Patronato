@@ -45,7 +45,6 @@ Route::resource('Egreso','EgresoController');
 Route::get('login/{correo}/{pass}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
 Route::post('agendarCita','CitaController@store');
-Route::get('CargarRoles','RoleController@mostrar');
 Route::get('validarturno/{fecha}/{tipo}', 'CitaController@validarHora');
 Route::get('filtroFecha/{fecha}', 'PacienteController@filtro');
 Route::get('atender/{cedula}','PacienteController@Atender');

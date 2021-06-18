@@ -48,7 +48,7 @@ export class ReportesRecaudacionComponent implements OnInit {
   }
 
   cargarRoles(){
-    this.administradorService.RolesCitas().then(data=>{
+    this.administradorService.cargarRolesMedicos().then(data=>{
       this.listaRoles=data['result'];
     }).catch((error) => {
       console.log(error);
@@ -63,18 +63,15 @@ export class ReportesRecaudacionComponent implements OnInit {
   cargarYears(){
     for(let i=this.YearInicio; i<=this.YearActual ;i++){
       this.YearD.push(i);
-
     }
   }
-  Turno(){
 
+  Turno(){
     for (const item of this.listaRoles) {
       if(item['rol']==this.Espe){
         this.idEspe=item['id_rol'];
       }
     }
-
-
   }
 
 

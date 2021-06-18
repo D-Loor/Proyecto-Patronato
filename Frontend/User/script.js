@@ -158,7 +158,7 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
 
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/api/CargarRoles",
+        url: "http://127.0.0.1:8000/api/cargarRoles",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {

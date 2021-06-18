@@ -39,6 +39,10 @@
                   <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control"
                     (click)="cargarMG(FechaMg,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
                 </div>
+                <div class="col-xs-2 searcht">
+                  <label style="height: 21px;"><label ></label></label>
+                  <button type="button" class="btn btn-primary form-control" (click)="actualizarMG()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+                </div>
               </div>
             </div>
           </div>
@@ -175,6 +179,10 @@
                   <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control"
                     (click)="cargarRF(FechaRf,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
                   <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                </div>
+                <div class="col-xs-2 searcht">
+                  <label style="height: 21px;"><label ></label></label>
+                  <button type="button" class="btn btn-primary form-control" (click)="actualizarRF()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
                 </div>
               </div>
             </div>

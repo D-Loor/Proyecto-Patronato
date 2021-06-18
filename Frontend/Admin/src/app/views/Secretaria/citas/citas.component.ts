@@ -57,6 +57,24 @@ export class CitasComponent implements OnInit {
     this.cargarRF(this.fechaActual,0,false,false);
   }
 
+  actualizarRF(){
+    this.FechaRf="";
+    this.citasRF=[];
+    this.citasRFFilter=[];
+    this.citasRFPaginate=[];
+    this.citasRFPaginateFilter=[];
+    this.cargarRF(this.fechaActual,0,false,false);
+  }
+
+  actualizarMG(){
+    this.FechaMg="";
+    this.citasMG=[];
+    this.citasMGFilter=[];
+    this.citasMGPaginate=[];
+    this.citasMGPaginateFilter=[];
+    this.cargarMG(this.fechaActual,0,false,false);
+  }
+
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.spinner.hide('sample');
