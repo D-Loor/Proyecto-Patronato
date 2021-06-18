@@ -24,6 +24,7 @@ class CreateHistoriaClinicaRFSTable extends Migration
             $table->boolean('certificado');
             $table->date('fecha');
             $table->string('receta');
+            $table->string('edad');
 
             $table->foreign('id_diagnostico')->references('id_diagnostico')->on('diagnosticos')->onDelete('cascade');
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');

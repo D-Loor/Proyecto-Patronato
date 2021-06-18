@@ -348,6 +348,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'plan_terapeutico': this.plan_terapeutico,
         'lugar_atencion': this.lugar_atencion,
         'certificado': cert,
+        'edad':this.edad
       }
 
 

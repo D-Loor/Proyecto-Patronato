@@ -155,11 +155,11 @@ export class PacientesComponent implements OnInit {
   }
 
   buscarMG(){
-    if(this.search== null || this.search.length==0 || this.search.length>10){
+    if(this.search== null || this.search==undefined || this.search==""){
       Swal.fire({
         icon: 'error',
-        title: '¡Cédula Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Campo vacío...!',
+        text: 'Ingrese una cédula a buscar.'
       })
     }else if(this.pacientesMGFilter.length==0){
       Swal.fire({

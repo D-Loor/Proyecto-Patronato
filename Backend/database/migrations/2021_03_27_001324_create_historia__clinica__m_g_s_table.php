@@ -26,6 +26,7 @@ class CreateHistoriaClinicaMGSTable extends Migration
             $table->string('plan_terapeutico');
             $table->string('lugar_atencion');
             $table->boolean('certificado');
+            $table->string('edad');
 
             $table->foreign('id_paciente')->references('id_paciente')->on('pacientes')->onDelete('cascade');
             $table->foreign('id_enfermedad')->references('id_enfermedad')->on('enfermedades')->onDelete('cascade');

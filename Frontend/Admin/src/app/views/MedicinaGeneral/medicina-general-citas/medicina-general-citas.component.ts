@@ -75,16 +75,14 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
   }
+
   buscarMG(){
-
-    if(this.search== null || this.search.length==0||this.search.length>10){
-
+    if(this.search== null || this.search==undefined || this.search==""){
       Swal.fire({
         icon: 'error',
-        title: '¡Cédula Inválida..!',
-        text: 'La cédula a buscar no es válida.'
+        title: '¡Campo vacío...!',
+        text: 'Ingrese una cédula a buscar.'
       })
-
     }else if(this.citasMGPaginateFilter.length==0){
 
       Swal.fire({
@@ -95,6 +93,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
 
     }
   }
+
   Estadisticas(Inicio:string, Fin:string, especialidad:string){
 
     this.medicina.Estadisticas(Inicio,Fin, especialidad).then(data =>{

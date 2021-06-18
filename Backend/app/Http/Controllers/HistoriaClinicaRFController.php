@@ -54,6 +54,7 @@ class HistoriaClinicaRFController extends Controller
         $datos->anamnesis=$request->anamnesis;
         $datos->receta=$request->receta;
         $datos->fecha=$request->fecha;
+        $datos->edad=$request->edad;
         $datos->save();
         return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
     }
@@ -101,6 +102,7 @@ class HistoriaClinicaRFController extends Controller
         $datos->certificado=$request->certificado;
         $datos->fecha=$request->fecha;
         $datos->receta=$request->receta;
+        $datos->edad=$request->edad;
         $datos->update();
 
         return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);

@@ -326,7 +326,8 @@ export class ConsultasComponent implements OnInit {
       'motivo_consulta':this.motivo_consultaT,
       'anamnesis':this.anamnesisT,
       'fecha':this.fechaActual,
-      'receta':this.receta
+      'receta':this.receta,
+      'edad':this.edad
     }
     this.RFService.AgregarConsulta(dataC).then(data=>{
       this.spinner.hide('sample');

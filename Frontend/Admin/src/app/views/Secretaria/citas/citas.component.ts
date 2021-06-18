@@ -58,7 +58,6 @@ export class CitasComponent implements OnInit {
   }
 
   actualizarRF(){
-    debugger
     this.FechaRf="";
     this.citasRF=[];
     this.citasRFFilter=[];
@@ -68,7 +67,6 @@ export class CitasComponent implements OnInit {
   }
 
   actualizarMG(){
-    debugger
     this.FechaMg="";
     this.citasMG=[];
     this.citasMGFilter=[];
@@ -301,12 +299,12 @@ export class CitasComponent implements OnInit {
 
 
   buscarMG(){
-    if(this.searchMG== null || this.searchMG.length==0 || this.searchMG.length>10){
-      Swal.fire({
-        icon: 'error',
-        title: '¡Cédula inválida..!',
-        text: 'La Cédula a buscar no es válida.'
-      })
+      if(this.searchMG== null || this.searchMG==undefined || this.searchMG==""){
+        Swal.fire({
+          icon: 'error',
+          title: '¡Campo vacío...!',
+          text: 'Ingrese una cédula a buscar.'
+        })
     }else if(this.citasMGPaginateFilter.length==0){
       Swal.fire({
         icon: 'error',
@@ -317,12 +315,12 @@ export class CitasComponent implements OnInit {
   }
 
   buscarRF(){
-    if(this.searchRF== null || this.searchRF.length==0 || this.searchRF.length>10){
-      Swal.fire({
-        icon: 'error',
-        title: '¡Cédula inválida..!',
-        text: 'La Cédula a buscar no es válida.'
-      })
+      if(this.searchRF== null || this.searchRF==undefined || this.searchRF==""){
+        Swal.fire({
+          icon: 'error',
+          title: '¡Campo vacío...!',
+          text: 'Ingrese una cédula a buscar.'
+        })
     } else if(this.citasRFPaginateFilter.length==0){
       Swal.fire({
         icon: 'error',
