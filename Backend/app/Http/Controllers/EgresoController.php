@@ -14,7 +14,13 @@ class EgresoController extends Controller
      */
     public function index()
     {
-        //
+        $datos=Egreso::all();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
@@ -35,7 +41,13 @@ class EgresoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos=new Egreso();
+        $datos->valor=$request->valor;
+        $datos->fecha=$request->fecha;
+        $datos->descripcion=$request->descripcion;
+        $datos->save();
+        return response()->json(['result'=>"Datos guardados", 'code'=>'201']);
+    
     }
 
     /**
@@ -44,9 +56,13 @@ class EgresoController extends Controller
      * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function show(Egreso $egreso)
+    public function show( $id)
     {
-        //
+        $datos=Egreso::where('id_egreso', $id)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -67,9 +83,14 @@ class EgresoController extends Controller
      * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Egreso $egreso)
+    public function update(Request $request, $id)
     {
-        //
+        $datos=Egreso::find($id);
+        $datos->valor=$request->valor;
+        $datos->fecha=$request->fecha;
+        $datos->descripcion=$request->descripcion;
+        $datos->update();
+        return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
     }
 
     /**
@@ -78,8 +99,13 @@ class EgresoController extends Controller
      * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Egreso $egreso)
+    public function destroy($id)
     {
-        //
+        $datos=Egreso::find($id);
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 }
