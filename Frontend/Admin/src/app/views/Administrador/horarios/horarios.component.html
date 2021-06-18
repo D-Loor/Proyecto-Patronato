@@ -52,6 +52,8 @@
                   (click)="CrearTurno('sample')">Crear Turno</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
                   (click)="ActualizarTurno()">Editar Turno</button>
+                <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-success boto"
+                  (click)="limpiar()">Nuevo</button>
               </form>
             </div>
           </div>

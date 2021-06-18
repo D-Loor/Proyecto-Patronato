@@ -131,6 +131,7 @@ export class PacientesComponent implements OnInit {
 
   }
   cargar(){
+    this.spinner.show('sample');
     this.medicina_general.pacientes().then(data =>{
     this.pacientesMG=data['result'];
     this.TotalPacientes=data['total'];
@@ -148,6 +149,7 @@ export class PacientesComponent implements OnInit {
     if(this.search!=null){
       this.dataPaginate(event);
     }
+    this.spinner.hide('sample');
   }).catch(error =>{
     console.log(error);
   });

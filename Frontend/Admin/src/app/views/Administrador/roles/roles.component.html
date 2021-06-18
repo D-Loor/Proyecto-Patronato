@@ -45,6 +45,8 @@
                   (click)="CrearRol('sample')">Crear Rol</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
                   (click)="ActualizarRol()">Editar Rol</button>
+                <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-success boto"
+                  (click)="limpiar()">Nuevo</button>
               </form>
             </div>
           </div>

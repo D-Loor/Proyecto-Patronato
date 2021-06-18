@@ -153,6 +153,7 @@ export class RolesComponent implements OnInit {
   }
 
   cargarTablas(){
+    this.spinner.show('sample');
     this.administradorService.cargarRol().then(data =>{
 
       this.rol=data['result'];
@@ -169,6 +170,7 @@ export class RolesComponent implements OnInit {
         this.dataPaginate(event);
       }
       this.estado=0;
+      this.spinner.hide('sample');
     }).catch(error =>{
       console.log(error);
       this.spinner.hide('sample');
@@ -293,8 +295,8 @@ export class RolesComponent implements OnInit {
 
       Swal.fire({
         icon: 'error',
-        title: '¡Rol Inválido..!',
-        text: 'El rol a buscar no es válido.'
+        title: '¡Campo vacío...!',
+        text: 'Ingrese un rol a buscar.'
       })
 
     }else if(this.rolPaginateFilter.length==0){
