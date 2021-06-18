@@ -21,7 +21,7 @@ export class EgresosComponent implements OnInit {
   valor;
   descripcion;
   estado=0;
-  search;
+  search=null;
   egresos=[];
   egresosPaginate=[];
   egresosFilter=[];
@@ -59,8 +59,8 @@ export class EgresosComponent implements OnInit {
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
 
-    this.egresosFilter=[];
-    this.egresosPaginateFilter=[];
+    this.egresosFilter.length = 0;
+    this.egresosPaginateFilter.length = 0;
     if(this.search==null){
 
       this.egresosPaginate = this.egresos.slice(0, 10);
@@ -68,7 +68,7 @@ export class EgresosComponent implements OnInit {
 
       for (const x of this.egresos) {
 
-        if(x.valor.indexOf(this.search)> -1){
+        if(x.fecha.indexOf(this.search)> -1){
 
          this.egresosFilter.push(x);
        };
@@ -96,6 +96,7 @@ export class EgresosComponent implements OnInit {
   }
 
   cargarEgresos(){
+    debugger
     this.spinner.show('sample');
 
     this.egresoservice.Egresos().then(data =>{
@@ -104,14 +105,14 @@ export class EgresosComponent implements OnInit {
       validarVacio=data['code'];
 
       if(validarVacio == '202'){
-      this.egresos=[];
-      this.egresosPaginateFilter = [];
+      this.egresos.length = 0;
+      this.egresosPaginate.length = 0;
+      debugger
       }else{
         this.egresos=data['result'];
         this.egresosPaginate = this.egresos.slice(0, 10);
         debugger
       }
-
       if(this.search!=null){
         this.dataPaginate(event);
       }

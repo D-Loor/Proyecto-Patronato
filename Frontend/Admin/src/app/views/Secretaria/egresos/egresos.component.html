@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="card">
+      <div class="card"> 
         <div class="card-header">
           <i class="fa fa-usd"></i>
           Registrar Egreso
@@ -112,7 +112,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_egreso,item.valor,item.fecha,item.descripcion)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button type="button" [hidden]="item.role.rol =='Administrador'" class="btn btn-ghost-danger botont" (click)="verificarEliminar(item.id_egreso)"><i
+                      <button type="button" class="btn btn-ghost-danger botont" (click)="verificarEliminar(item.id_egreso)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
@@ -126,7 +126,7 @@
                     <td>
                       <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_egreso,item.valor,item.fecha,item.descripcion)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
-                      <button [hidden]="item.role.rol =='Administrador'" type="button" class="btn btn-ghost-danger botont" (click)="verificarEliminar(item.id_egreso)"><i
+                      <button  type="button" class="btn btn-ghost-danger botont" (click)="verificarEliminar(item.id_egreso)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>
                   </tr>
