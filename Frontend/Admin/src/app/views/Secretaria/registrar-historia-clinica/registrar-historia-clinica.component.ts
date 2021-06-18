@@ -629,10 +629,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               })
                swalWithBootstrapButtons.fire({
                 title: 'El paciente cuenta con historial clínico',
-                text: "Desea observar sus datos para poderlos editar",
+                text: "Desea cargar sus datos para editarlos.",
                 icon: 'success',
                 showCancelButton: true,
-                confirmButtonText: 'Si, editar registros!',
+                confirmButtonText: 'Si, cargar registros!',
                 cancelButtonText: 'No, cancelar!',
                 confirmButtonColor: '#4BB543',
                 cancelButtonColor: '#d33',
@@ -648,8 +648,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
                   this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
                   this.limpiar();
                   swalWithBootstrapButtons.fire(
-                    'Cancelado',
-                    'Se ha cancelado correctamente',
+                    '¡Cancelado..!',
+                    'No se han cargado los datos.',
                     'error'
                   )
                 }
@@ -1089,15 +1089,15 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   VaidarPaciente(){
     let mujer = this.ValidarMujer();
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
-       this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
-       this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
-       this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
-       this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
-       this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
-       this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 && 
-       this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
-       this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined
-    ){
+    this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
+    this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
+    this.fechanacimiento==undefined||this.fechanacimiento==""||this.religion==undefined||this.religion==""||
+    this.nivel_instruccion==undefined||this.nivel_instruccion==""||this.estado_civil==undefined||this.estado_civil==""||
+    this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
+    this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 && 
+    this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
+    this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined
+ ){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
@@ -1107,19 +1107,49 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       
       
     }else{
-      this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
-        if(data ['code'] == '201'){
-          Swal.fire(
-            'Error!',
-            'El paciente ya cuenta con historial clínico',
-            'error'
-          )
-        }else{
-          this.spinner.show('sample');
-          this.IngresarDatosPaciente();
-        }
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+        })
+         swalWithBootstrapButtons.fire({
+          title: '¿Crear Historia Clínica?',
+          text: "Una vez creada podrá ser atendida.",
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonText: 'Si, crear!',
+          cancelButtonText: 'No, cancelar!',
+          confirmButtonColor: '#4BB543',
+          cancelButtonColor: '#d33',
+          reverseButtons: true
           
-      });
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
+              if(data ['code'] == '201'){
+                Swal.fire(
+                  'Error!',
+                  'El paciente ya cuenta con historial clínico',
+                  'error'
+                )
+              }else{
+                this.spinner.show('sample');
+                this.IngresarDatosPaciente();
+              }
+                
+            });
+          }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+              '¡Cancelado..!',
+              'No se ha creado la historia clínica.',
+              'error'
+            )
+          }
+        })
+
     }
     
     
@@ -1246,7 +1276,28 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.validacionTotal();
 
     }else{  
-    this.spinner.show('sampleA');
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+        })
+         swalWithBootstrapButtons.fire({
+          title: '¿Actualizar Historia Clínica?',
+          text: "La historia clínica se modificará.",
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonText: 'Si, actualizar!',
+          cancelButtonText: 'No, cancelar!',
+          confirmButtonColor: '#4BB543',
+          cancelButtonColor: '#d33',
+          reverseButtons: true
+          
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            this.spinner.show('sampleA');
     let pacientesActualizar = {
       'id_patologico':this.id_patologico,
       'id_e_fisico':this.id_e_fisico,
@@ -1396,13 +1447,22 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.spinner.hide('sampleA');
       Swal.fire(
         'Correcto',
-        'Datos actualizados correctamente',
+        'Datos actualizados correctamente.',
         'success'
       )
       this.limpiar();
       this.rutas.navigate(['/pacientes']);
     });
-  }
+
+          }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+              '¡Cancelado..!',
+              'No se ha actualizado la historia clínica.',
+              'error'
+            )
+          }
+        })
+    }
 }
 
   aggArrayDB(){
