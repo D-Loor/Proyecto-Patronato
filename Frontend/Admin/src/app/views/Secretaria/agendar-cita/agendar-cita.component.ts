@@ -24,7 +24,7 @@ export class AgendarCitaComponent implements OnInit {
 
   @ViewChild('smallModal') public smallModal: ModalDirective;
   loadingText = 'Guardando...';
-  
+
 
 
   /**
@@ -79,15 +79,15 @@ export class AgendarCitaComponent implements OnInit {
   AbrirModal(){
     if(this.fecha_consulta==undefined||this.fecha_consulta==null){
       Swal.fire(
-        '¡Ops!',
-        'Debe de selecionar la fecha de la consulta primero.',
-        'warning'
+        '¡La fecha no ha sido seleccionada..!',
+        'Debe selecionar la fecha de la cita primero.',
+        'error'
       );
       return false;
     }else{
       this.smallModal.show();
     }
-    
+
   }
 
   CargarRecaudacion(){
@@ -127,8 +127,8 @@ export class AgendarCitaComponent implements OnInit {
         this.rutas.navigate(['/500']);
       });
     }
-    
-    
+
+
   }
 
   GuardarRecaudacion(data:any){
@@ -156,9 +156,9 @@ export class AgendarCitaComponent implements OnInit {
     this.ClasePrecio='form-control form-input select-number';
     this.ClaseObser='form-control';
     this.ClaseGad="";
-    
+
   }
-  
+
 
   ngOnInit() {
     if((this.today.getMonth()+1)<10 || this.today.getDate()<10){
@@ -272,7 +272,7 @@ export class AgendarCitaComponent implements OnInit {
         }else{
           this.abono = false;
         }
-        
+
       }).catch((error) => {
         console.log(error);
         this.spinner.hide('sample');
@@ -339,7 +339,7 @@ export class AgendarCitaComponent implements OnInit {
         if (digitoValidador === 10) {
           digitoValidador = 0;
         }
-        
+
         // Validamos que el digito validador sea igual al de la cedula
         if (digitoValidador === ultimoDigito) {
           this.ClaseCdula = "form-control is-valid select-number";
@@ -655,8 +655,8 @@ export class AgendarCitaComponent implements OnInit {
       this.gad=0;
       this.precio=1;
       this.ClasePrecio='form-control form-input select-number';
-    }  
-      
+    }
+
   }
 
 
