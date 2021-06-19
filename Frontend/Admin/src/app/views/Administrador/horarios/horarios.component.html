@@ -44,7 +44,7 @@
                           <option value="0">Deshabilitado</option>
                     </select>
                   </div>
-                  
+
 
                 </div>
 
@@ -101,7 +101,7 @@
                 <tr>
                   <th>Especialidad</th>
                   <th>Hora</th>
-                  <th>Cantidad</th>
+                  <th>Atenciones</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -117,7 +117,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno,item.hora,item.id_rol,item.estado,item.cantidad)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_turno)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
@@ -135,8 +135,8 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno)"><i
-                          class="fa fa-pencil-square-o" ></i>&nbsp;Editar</button>
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_turno,item.hora,item.id_rol,item.estado,item.cantidad)"><i
+                        class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_turno)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>

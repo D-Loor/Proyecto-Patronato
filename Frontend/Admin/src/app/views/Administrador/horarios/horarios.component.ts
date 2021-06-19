@@ -55,7 +55,7 @@ export class HorariosComponent implements OnInit {
     this.cargarTablas();
     this.CargarEspecialidad();
   }
-   
+
   CargarCantidad(){
     this.administradorService.cargarRolId(this.especialidad).then(data =>{
       let temporal = data['result'].rol;
@@ -74,7 +74,7 @@ export class HorariosComponent implements OnInit {
       console.log(error);
       this.spinner.hide('sample');
       this.rutas.navigate(['/500']);
-    });    
+    });
   }
 
   CargarEspecialidad(){
@@ -93,7 +93,17 @@ export class HorariosComponent implements OnInit {
   }
 
   limpiar(){
-    this.hora = "";this.EstadoTur=1; this.id_turnos=""; this.result=""; this.cantidad=""; this.especialidad="";this.Ver=0;
+    this.estado=0;
+    this.ClaseHora="form-control form-input select-number";
+    this.ClaseCEspecialidad="form-control form-input select-number";
+    this.ClaseCantidad='form-control form-input select-number';
+    this.ClaseEstado='form-control form-input select-number';
+    this.hora = "";
+    this.id_turnos="";
+    this.result="";
+    this.cantidad=undefined;
+     this.especialidad="";
+     this.Ver=0;
   }
 
   cargarTablas(){
@@ -195,7 +205,7 @@ export class HorariosComponent implements OnInit {
   }
 
   CrearTurno(){
-    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
+    if(this.EstadoTur==undefined ||this.EstadoTur==null || this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
        this.cantidad==undefined || this.cantidad==null
       ){
       Swal.fire({
@@ -204,6 +214,9 @@ export class HorariosComponent implements OnInit {
         text: 'Debe de completar todo el formulario para agregar el turno.'
       })
 
+      if(this.EstadoTur==undefined ||this.EstadoTur==null){
+        this.ClaseEstado= "form-control is-invalid select-number";
+      }
       if(this.hora==undefined || this.hora==""){
         this.ClaseHora = "form-control is-invalid select-number";
       }
@@ -213,7 +226,7 @@ export class HorariosComponent implements OnInit {
       if(this.cantidad==undefined || this.cantidad==null){
         this.ClaseCantidad = "form-control is-invalid select-number";
       }
-      
+
 
     }
     else{
@@ -297,29 +310,28 @@ export class HorariosComponent implements OnInit {
 
   }
 
-  cargarEditar(id:string){
+  cargarEditar(id:string,hora:string,id_rol:string,estado:number,cantidad:string){
     this.estado=1;
     this.isCollapsed1=false;
+    this.ClaseHora="form-control form-input select-number";
+    this.ClaseCEspecialidad="form-control form-input select-number";
+    this.ClaseCantidad='form-control form-input select-number';
+    this.ClaseEstado='form-control form-input select-number';
 
-    this.administradorService.cargarTurnosId(id).then(data =>{
-      this.hora=data['result'].hora;
-      this.especialidad=data['result'].id_rol;
-      this.id_turnos=data['result'].id_turno;
-      this.EstadoTur=data['result'].estado;
-      this.cantidad=data['result'].cantidad;
+      this.hora=hora;
+      this.especialidad=id_rol;
+      this.id_turnos=id;
+      this.EstadoTur=estado;
+      this.cantidad=cantidad;
       this.contador++;
       this.CargarCantidad();
       window.scrollTo(0, 0);
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+
   }
 
 
   ActualizarTurno(){
-    if(this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
+    if(this.EstadoTur==undefined ||this.EstadoTur==null || this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
        this.cantidad==undefined || this.cantidad==null
       ){
       Swal.fire({
@@ -327,6 +339,10 @@ export class HorariosComponent implements OnInit {
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para actualizar el turno.'
       })
+
+      if(this.EstadoTur==undefined ||this.EstadoTur==null){
+        this.ClaseEstado= "form-control is-invalid select-number";
+      }
 
       if(this.hora==undefined || this.hora==""){
         this.ClaseHora = "form-control is-invalid select-number";

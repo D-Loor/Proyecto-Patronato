@@ -31,7 +31,7 @@ export class CuentasComponent implements OnInit {
   id_cuenta="";
   rol="";
   password="";
-  Estado=1;
+  Estado= undefined;
   foto=null;
   listaRoles:any=[];
   url; //editado
@@ -56,8 +56,17 @@ export class CuentasComponent implements OnInit {
     showSpinner: false
   };
 
-  
+
   limpiar(){
+    this.estado=0;
+    this.editarA="";
+    this.Estado=undefined;
+    this.ClaseCorreo="form-control form-input select-number";
+    this.ClaseNombre="form-control form-input select-number";
+    this.ClaseRol="form-control form-input select-number";
+    this.ClasePassword="form-control form-input select-number";
+    this.ClaseCHora="form-control form-input select-number";
+    this.ClaseEstado='form-control form-input select-number';
     this.nombres="";this.password="";this.correo="";this.rol=""; this.foto=""; this.url="";this.Estado=1;
   }
 
@@ -112,9 +121,9 @@ export class CuentasComponent implements OnInit {
       this.foto = (<HTMLInputElement>files.target).files[0];
       if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
-  
+
         reader.readAsDataURL(event.target.files[0]); // read file as data url
-  
+
         reader.onload = (event) => { // called once readAsDataURL is completed
           this.url = event.target.result;
         }
@@ -140,8 +149,8 @@ export class CuentasComponent implements OnInit {
       }else if(this.cuentasFilter.length==0){
         Swal.fire({
           icon: 'error',
-          title: '¡No hay Nombres..!',
-          text: 'No hay nombres con esta fecha.'
+          title: '¡No hay Registros..!',
+          text: 'No hay una cuenta registrada con este nombre.'
         })
       }
     }
@@ -190,12 +199,15 @@ export class CuentasComponent implements OnInit {
     }
   }
   CrearCuenta(){
-    if( this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+    if( this.Estado== undefined|| this.Estado == null ||this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para agregar la cuenta.'
       })
+      if(this.Estado== undefined|| this.Estado == null){
+        this.ClaseEstado = "form-control is-invalid select-number";
+      }
       if(this.nombres==undefined || this.nombres==""){
         this.ClaseNombre = "form-control is-invalid select-number";
       }
@@ -309,39 +321,42 @@ export class CuentasComponent implements OnInit {
         this.rutas.navigate(['/500']);
       });
   }
-  cargarEditar(id:any){
+  cargarEditar(id:any,nombres:string,correo:string,password:string,id_rol:string,rol:string,estado:string,imagen:string){
     this.estado=1;
     this.isCollapsed1=false;
 
+    this.ClaseCorreo="form-control form-input select-number";
+    this.ClaseNombre="form-control form-input select-number";
+    this.ClaseRol="form-control form-input select-number";
+    this.ClasePassword="form-control form-input select-number";
+    this.ClaseCHora="form-control form-input select-number";
+    this.ClaseEstado='form-control form-input select-number';
 
-    this.administradorService.cargarCuentaId(id).then(data => {
-      this.id_cuenta=data['result'].id_cuenta;
-      this.nombres=data['result'].nombres;
-      this.nombresEditar=data['result'].nombres;
-      this.correo=data['result'].correo;
-      this.password=data['result'].password;
-      this.correoEditar=data['result'].correo;
-      this.rol=data['result']['role'].id_rol;
-      this.editarA=data['result']['role'].rol;
-      this.Estado=data['result'].estado;
-      //this.foto=data['result'].imagen;
-      this.url="http://127.0.0.1:8000"+data['result'].imagen;
+      this.id_cuenta=id;
+      this.nombres=nombres;
+      this.nombresEditar=nombres;
+      this.correo=correo;
+      this.password=password;
+      this.correoEditar=correo;
+      this.rol=id_rol;
+      this.editarA=rol;
+      this.Estado=estado;
+      this.url="http://127.0.0.1:8000"+imagen;
       window.scrollTo(0, 0);
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+
   }
 
   ActualizarCuenta(){
-    if(this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
+    if(this.Estado== undefined|| this.Estado == null|| this.nombres==undefined || this.nombres==""||this.correo==undefined || this.correo=="" || this.rol==undefined || this.rol==""|| this.password==undefined || this.password==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para actualizar la cuenta.'
       })
 
+      if(this.Estado== undefined|| this.Estado == null){
+        this.ClaseEstado = "form-control is-invalid select-number";
+      }
       if(this.nombres==undefined || this.nombres==""){
         this.ClaseNombre = "form-control is-invalid select-number";
       }

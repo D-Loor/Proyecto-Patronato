@@ -136,7 +136,7 @@ export class CitasComponent implements OnInit {
       }else{
         this.citasRFPaginate = this.citasRF.slice(0, 10);
       }
-      
+
       if(check==true){}else{
         if(data['code']!="202"){
           if(cambio==true){
@@ -309,7 +309,7 @@ export class CitasComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: '¡Sin Registros..!',
-        text: 'No hay Citas Registradas con esta Cédula.'
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }
@@ -325,7 +325,7 @@ export class CitasComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: '¡Sin Registros..!',
-        text: 'No hay Citas Registradas con esta Cedula.'
+        text: 'No hay citas registradas con esta cédula.'
       })
     }
   }

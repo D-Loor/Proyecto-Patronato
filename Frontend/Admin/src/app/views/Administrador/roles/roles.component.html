@@ -106,7 +106,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button"  [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)"><i
+                      <button type="button"  [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol,item.rol,item.estado,item.atencion)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
@@ -122,8 +122,8 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" [hidden]="item.rol == 'Administrador'" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol)" ><i
-                          class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
+                      <button type="button"  [hidden]="item.rol == 'Administrador'"  class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_rol,item.rol,item.estado,item.atencion)"><i
+                        class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" [hidden]="item.rol =='Administrador'" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_rol)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>

@@ -65,9 +65,9 @@
                   </div>
                   <div class=" form-group col-md-6">
                     <label for="text-input">Estado</label>
-                    <select id="Estado" (click)="ClaseEstado='form-control form-input select-number'"
+                    <select id="Estado" [disabled]="editarA == 'Administrador'" (click)="ClaseEstado='form-control form-input select-number'"
                           [class]="ClaseEstado" [(ngModel)]="Estado" name="Estado">
-                          <option value="1">Habilitado</option>
+                          <option value="1" selected>Habilitado</option>
                           <option value="0">Deshabilitado</option>
                     </select>
                   </div>
@@ -78,7 +78,7 @@
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-primary boto"
                   (click)="ActualizarCuenta()">Editar Cuenta</button>
                 <button *ngIf="estado==1" type="submit" class="btn btn-lg btn-success boto"
-                  (click)="limpiar()">Nuevo</button> 
+                  (click)="limpiar()">Nuevo</button>
               </form>
             </div>
           </div>
@@ -142,7 +142,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta)"><i
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta,item.nombres,item.correo,item.password,item.id_rol,item.role.rol,item.estado,item.imagen)"><i
                           class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button type="button" [hidden]="item.role.rol =='Administrador'" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
@@ -160,8 +160,8 @@
                       <span *ngIf="item.estado==0" class="badge badge-danger">Deshabilitado</span>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta)"><i
-                          class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
+                      <button type="button" class="btn btn-ghost-info botont" (click)="cargarEditar(item.id_cuenta,item.nombres,item.correo,item.password,item.id_rol,item.role.rol,item.estado,item.imagen)"><i
+                        class="fa fa-pencil-square-o"></i>&nbsp;Editar</button>
                       <button [hidden]="item.role.rol =='Administrador'" type="button" class="btn btn-ghost-danger botont" (click)="notificacion(item.id_cuenta)"><i
                           class="fa fa-trash-o"></i>&nbsp;Eliminar</button>
                     </td>

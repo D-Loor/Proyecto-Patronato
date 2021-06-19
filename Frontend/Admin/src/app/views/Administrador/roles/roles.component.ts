@@ -27,11 +27,11 @@ export class RolesComponent implements OnInit {
   id_rol="";
   result="";
   EstadoRol;
-  categoria;
+  categoria="";
 
   ClaseRol:string="form-control form-input select-number";
   ClaseEstado:string="form-control form-input select-number";
-  ClaseCategoria='form-control form-input select-number'
+  ClaseCategoria='form-control form-input select-number';
 
   loadingText = 'Cargando...';
 
@@ -49,6 +49,10 @@ export class RolesComponent implements OnInit {
     this.Rol="";
     this.EstadoRol="";
     this.categoria="";
+    this.estado=0;
+    this.ClaseRol="form-control form-input select-number";
+    this.ClaseEstado="form-control form-input select-number";
+    this.ClaseCategoria='form-control form-input select-number';
   }
 
   ngOnInit(): void {
@@ -96,12 +100,15 @@ export class RolesComponent implements OnInit {
 
   }
   CrearRol(){
-    if(this.Rol==undefined || this.Rol=="" || this.EstadoRol==undefined || this.EstadoRol==""){
+    if(this.categoria=="" || this.categoria==undefined ||  this.Rol==undefined || this.Rol=="" || this.EstadoRol==undefined || this.EstadoRol==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para agregar el rol.'
       })
+      if(this.categoria==undefined || this.categoria==""){
+        this.ClaseCategoria = "form-control is-invalid select-number";
+      }
       if(this.Rol==undefined || this.Rol==""){
         this.ClaseRol = "form-control is-invalid select-number";
       }
@@ -179,15 +186,22 @@ export class RolesComponent implements OnInit {
   }
 
   ActualizarRol(){
-
-    if(this.Rol==undefined || this.Rol==""){
+    debugger
+    if(this.Rol==undefined || this.Rol=="" || this.categoria==undefined  || this.EstadoRol==undefined || this.EstadoRol==""){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para actualizar el rol.'
       })
+      if(this.Rol==undefined || this.Rol==""){
         this.ClaseRol = "form-control is-invalid select-number";
-
+      }
+      if(this.categoria==undefined){
+        this.ClaseCategoria = "form-control is-invalid select-number";
+      }
+      if(this.EstadoRol==undefined || this.EstadoRol==""){
+        this.ClaseEstado ="form-control is-invalid select-number";
+      }
 
     }else{
       const swalWithBootstrapButtons = Swal.mixin({
@@ -270,23 +284,21 @@ export class RolesComponent implements OnInit {
 
   }
 
-  cargarEditar(id:string){
+  cargarEditar(id:string,rol:string,estado:number,atencion:string){
     this.estado=1;
     this.isCollapsed1=false;
 
-    this.administradorService.cargarRolId(id).then(data =>{
+    this.ClaseRol="form-control form-input select-number";
+    this.ClaseEstado="form-control form-input select-number";
+    this.ClaseCategoria='form-control form-input select-number';
 
-      this.Rol=data['result'].rol;
-      this.id_rol=data['result'].id_rol;
-      this.RolActualizar=data['result'].rol;
-      this.EstadoRol =data['result'].estado;
-      this.categoria=data['result'].atencion;
-      window.scrollTo(0, 0);
-    }).catch((error) => {
-      console.log(error);
-      this.spinner.hide('sample');
-      this.rutas.navigate(['/500']);
-    });
+    this.Rol=rol;
+    this.id_rol=id;
+    this.RolActualizar=rol;
+    this.EstadoRol =estado;
+    this.categoria=atencion;
+    window.scrollTo(0, 0);
+
 
   }
 

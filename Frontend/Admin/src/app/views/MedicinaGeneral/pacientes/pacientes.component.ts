@@ -167,7 +167,7 @@ export class PacientesComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: '¡No hay Registros..!',
-        text: 'No hay citas registradas con esta cédula.'
+        text: 'No hay pacientes registrados con esta cédula.'
       })
     }
   }
@@ -272,72 +272,72 @@ export class PacientesComponent implements OnInit {
     }
 
     if(data['result']['antecedentes_patologicos_personales'].infancia==1){
-      this.ninezT = 'Sin antecedentes'; 
+      this.ninezT = 'Sin antecedentes';
     }else{
       this.ninezT=data['result']['antecedentes_patologicos_personales'].infancia;
     }
 
     if(data['result']['antecedentes_patologicos_personales'].adolecencia==1){
-      this.adolescenciaT = 'Sin antecedentes'; 
+      this.adolescenciaT = 'Sin antecedentes';
     }else{
       this.adolescenciaT=data['result']['antecedentes_patologicos_personales'].adolecencia;
     }
 
     if(data['result']['antecedentes_patologicos_personales'].adultez==1){
-      this.adultezT = 'Sin antecedentes'; 
+      this.adultezT = 'Sin antecedentes';
     }else{
       this.adultezT=data['result']['antecedentes_patologicos_personales'].adultez;
     }
 
     if(data['result']['antecedentes_patologicos_personales'].DBID==0){
-      this.DBID = 'No'; 
+      this.DBID = 'No';
     }else{
-      this.DBID = 'Si'; 
+      this.DBID = 'Si';
     }
 
     if(data['result']['antecedentes_patologicos_personales'].HTA==0){
-      this.HTA = 'No'; 
+      this.HTA = 'No';
     }else{
-      this.HTA = 'Si'; 
+      this.HTA = 'Si';
     }
 
     if(data['result']['antecedentes_patologicos_personales'].TbP==0){
-      this.TbP = 'No'; 
+      this.TbP = 'No';
     }else{
-      this.TbP = 'Si'; 
+      this.TbP = 'Si';
     }
 
     if(data['result']['antecedentes_patologicos_personales'].DBI==0){
-      this.DBI = 'No'; 
+      this.DBI = 'No';
     }else{
-      this.DBI = 'Si'; 
+      this.DBI = 'Si';
     }
 
     if(data['result']['antecedentes_patologicos_personales'].quirujircos==1){
-      this.quirurgicosT = 'Sin antecedentes'; 
+      this.quirurgicosT = 'Sin antecedentes';
     }else{
       this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
     }
 
     if(data['result']['antecedentes_patologicos_personales'].alergias==1){
-      this.alergicosT = 'Sin antecedentes'; 
+      this.alergicosT = 'Sin antecedentes';
     }else{
       this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
     }
 
     if(data['result']['antecedentes_patologicos_personales'].traumas==1){
-      this.traumatologicosT = 'Sin antecedentes'; 
+      this.traumatologicosT = 'Sin antecedentes';
     }else{
       this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
     }
 
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
     this.APF=data['result']['familiares'];
 

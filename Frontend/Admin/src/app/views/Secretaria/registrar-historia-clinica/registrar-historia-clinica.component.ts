@@ -663,8 +663,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
           this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
           this.limpiar();
           Swal.fire(
-            'Paciente no encontrado',
-            'El paciente con la cedula ' + this.cedula + ' no cuenta con historial clínico',
+            '¡Paciente no encontrado..!',
+            'No se cuenta con un historial clínico con esta cédula.',
             'error'
           )
           this.edit=0;
