@@ -7,6 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { CitasRoutingModule } from './citas-routing.module';
 import { CitasComponent } from './citas.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { CitasComponent } from './citas.component';
     FiltroModule,
     FormsModule,
     NgxSpinnerModule,
+    ModalModule.forRoot(),
   ],
   declarations: [
     CitasComponent

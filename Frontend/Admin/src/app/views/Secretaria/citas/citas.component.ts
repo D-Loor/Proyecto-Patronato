@@ -5,6 +5,9 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ViewChild } from '@angular/core';
+import { SecretariaService } from '../../../servicios/secretaria.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-citas',
@@ -13,7 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CitasComponent implements OnInit {
 
-  constructor(public citasser:CitasService, public rutas:Router, private spinner: NgxSpinnerService) { }
+  constructor(public citasser:CitasService, private ServicioSecretaria:SecretariaService, public rutas:Router, private spinner: NgxSpinnerService) { }
 
   loadingText = 'Cargando...';
 
@@ -50,6 +53,193 @@ export class CitasComponent implements OnInit {
   today = new Date();
   fechaActual:string;
 
+  @ViewChild('smallModal') public smallModal: ModalDirective;
+
+   //Recaudacion
+  precio; idPaciente;
+  fecha_consulta="";
+  abono=false;
+  exo=0;
+  recau=0;
+  gad=0;
+  Validar=0;
+  observaciones;
+  idrolmodal;
+
+  idcitamodal;
+  nombresmodal;
+  cedulamodal;
+  estadomodal;
+  id_turnomodal;
+
+  ClasePrecio='form-control form-input select-number';
+  ClaseObser='form-control';
+  ClaseGad;
+
+  HabilitarValor(valor:number){
+    if(valor==1){
+      this.exo=1;
+      this.gad=1;
+      this.precio=0;
+      this.ClasePrecio='form-control form-input select-number';
+    }else{
+      this.exo=0;
+      this.gad=0;
+      this.precio=1;
+      this.ClasePrecio='form-control form-input select-number';
+    }
+
+  }
+
+  AbrirModal(idcitamodal:string,nombre:string, cedula:string,  fecha:string,abono, id_turnomodal:string,idrol:string){
+
+    if(abono == true || abono == 1){
+      return false;
+    }else{
+    this.smallModal.show();
+
+    this.idcitamodal=idcitamodal,
+    this.nombresmodal=nombre,
+    this.cedulamodal=cedula,
+    this.id_turnomodal=id_turnomodal,
+    this.fecha_consulta= fecha;
+    this.idrolmodal=idrol;
+
+    this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
+        this.idPaciente = data['result'].id_paciente;
+
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
+
+    }
+  }
+
+
+  CargarRecaudacion(){
+    this.Validar=0;
+    this.abono=false;
+    if(this.precio==null || this.precio==undefined || this.observaciones==""|| this.observaciones==undefined
+      || this.gad==undefined||this.gad==null
+      ){
+        Swal.fire({
+          icon: 'error',
+          title: '¡Hay campos vacíos..!',
+          text: 'Debe de completar todo el formulario para agregar la recaudación.'
+        })
+        if(this.observaciones=="" || this.observaciones == undefined){
+          this.ClaseObser ="form-control is-invalid";
+        }
+        if(this.precio == undefined||this.precio == null){
+          this.ClasePrecio ="form-control is-invalid";
+        }
+        if(this.gad==undefined||this.gad==null){
+          this.ClaseGad="invalido";
+        }
+        return false;
+
+    }else{
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: true
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: '¿Desea marcar como abonado?',
+          text: "Una vez marcado no se podrá cambiar el mismo.",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Si, marcar abonado!',
+          cancelButtonText: 'No, cancelar!',
+          confirmButtonColor: '#20a8d8',
+          cancelButtonColor: '#f86c6b',
+          reverseButtons: true
+        }).then((result) => {
+          this.spinner.show('sample');
+          if (result.isConfirmed) {
+
+            this.abono=true;
+            this.Validar=1;
+
+            let datosA={
+              'id_paciente':this.idPaciente,
+              'id_rol':this.idrolmodal,
+              'fecha':this.fecha_consulta,
+              'valor':this.precio,
+              'exonera':this.gad,
+              'observaciones':this.observaciones,
+            }
+
+            this.GuardarRecaudacion(datosA);
+
+            let arrayLocal = {
+              "id_cita": this.idcitamodal,
+              "nombres": this.nombresmodal,
+              "cedula": this.cedulamodal,
+              "fecha": this.fecha_consulta,
+              "abono": 'DOADBA',
+              "id_turno": this.id_turnomodal,
+           }
+            this.citasser.updatecitas(arrayLocal,this.cedulamodal).then(data =>{
+
+                this.cargarRF(this.fechaActual,0,false,true);
+                this.cargarMG(this.fechaActual,0,false,true);
+
+
+            }).catch((error) => {
+              console.log(error);
+              this.rutas.navigate(['/500']);
+            });
+            this.smallModal.hide();
+            swalWithBootstrapButtons.fire(
+              '¡Cita Actualizada..!',
+              'La cita ha sido actualizada.',
+              'success'
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              '¡Cancelado..!',
+              'La cita no ha sido actualizada.',
+              'error'
+            )
+
+          }
+        })
+
+    }
+
+  }
+
+  GuardarRecaudacion(data:any){
+    this.ServicioSecretaria.Recaudacion(data).then(data=>{
+      this.LimpiarR();
+      this.recau=1;
+      this.spinner.hide('sample');
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
+  }
+
+  LimpiarR(){
+    this.precio="";
+    this.gad=0;
+    this.observaciones="";
+    this.ClasePrecio='form-control form-input select-number';
+    this.ClaseObser='form-control';
+    this.ClaseGad="";
+
+  }
+
   ngOnInit(): void {
     this.spinner.show('sample');
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
@@ -62,7 +252,7 @@ export class CitasComponent implements OnInit {
   alertActualizado(){
     Swal.fire({
       icon: 'success',
-      title: '¡Citas Actualizada..!',
+      title: '¡Citas Actualizadas..!',
       text: 'Se actualizó las citas con la fecha seleccionada.'
     })
   }
@@ -98,7 +288,7 @@ export class CitasComponent implements OnInit {
       }
 
       if(check==true){
-        
+
       }else{
         if(data['code']!="202"){
           if(cambio==true){
@@ -239,74 +429,13 @@ export class CitasComponent implements OnInit {
       });
   }
 
-  abonar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
-    if(abono == true || abono == 1){
-      return false;
-    }else{
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: true
-      })
 
-      swalWithBootstrapButtons.fire({
-        title: '¿Desea marcar como abonado?',
-        text: "Una vez marcado no se podrá cambiar el mismo.",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Si, marcar abonado!',
-        cancelButtonText: 'No, cancelar!',
-        confirmButtonColor: '#20a8d8',
-        cancelButtonColor: '#f86c6b',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let arrayLocal = {
-            "id_cita": id_cita,
-            "nombres": nombres,
-            "cedula": cedula,
-            "especialidad": especialidad,
-            "fecha": fecha,
-            "abono": 'DOADBA',
-            "id_turno": id_turno,
-        }
-          this.citasser.updatecitas(arrayLocal,cedula).then(data =>{
-            if(especialidad=="Rehabilitacion Fisica"){
-              this.cargarRF(this.fechaActual,0,false,true);
-            }else{
-              this.cargarMG(this.fechaActual,0,false,true);
-            }
 
-          }).catch((error) => {
-            console.log(error);
-            this.rutas.navigate(['/500']);
-          });
-          swalWithBootstrapButtons.fire(
-            'Modificado..!',
-            'La cita ha sido modificada.',
-            'success'
-          )
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            '¡Cancelado..!',
-            'La cita no ha sido modificada.',
-            'error'
-          )
-          if(especialidad=="Rehabilitacion Fisica"){
-            this.cargarRF(this.fechaActual,0,false,true);
-          }else{
-            this.cargarMG(this.fechaActual,0,false,true);
-          }
-        }
-      })
-    }
+  recaudar(){
+
+    this.cargarRF(this.fechaActual,0,false,true);
+    this.cargarMG(this.fechaActual,0,false,true);
   }
-
 
 
 

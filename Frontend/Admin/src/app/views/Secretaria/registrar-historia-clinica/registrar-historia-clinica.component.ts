@@ -874,8 +874,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.limpiar();
       this.spinner.hide('sample');
       Swal.fire(
-        'Correcto',
-        'Datos guardados correctamente',
+        '¡Historial Clínico Creado..!',
+        'El historial clínico se ha creado correctamente',
         'success'
       )
     });
