@@ -90,8 +90,8 @@
   </div>
 
 
-  <div bsModal #smallModal="bs-modal" class="modal fade" id="modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
-    <div class="modal-dialog modal-sm"   role="document" data-backdrop="static" data-keyboard="false">
+  <div bsModal #smallModal="bs-modal" data-backdrop="static" data-keyboard="false" class="modal fade" id="modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-sm"   role="document" >
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Recaudación</h4>
@@ -109,7 +109,7 @@
                             <label class="form-check-label" for="inlineRadio1">Si</label>
                         </div>
                         <div  class="form-check form-check-inline mr-1">
-                            <input  autocomplete="off" required class="form-check-input" (click)="ClaseGad=''" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
+                            <input  autocomplete="off" required class="form-check-input" checked (click)="ClaseGad=''" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
                             <label class="form-check-label" for="inlineRadio2">No</label>
                         </div>
                     </div>
