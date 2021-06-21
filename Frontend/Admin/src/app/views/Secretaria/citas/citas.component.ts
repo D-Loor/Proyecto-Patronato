@@ -53,25 +53,35 @@ export class CitasComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show('sample');
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+    this.FechaMg = this.fechaActual;
+    this.FechaRf = this.fechaActual;
     this.cargarMG(this.fechaActual,0,false,false);
     this.cargarRF(this.fechaActual,0,false,false);
   }
 
+  alertActualizado(){
+    Swal.fire({
+      icon: 'success',
+      title: '¡Citas Actualizada..!',
+      text: 'Se actualizó las citas con la fecha seleccionada.'
+    })
+  }
+
   actualizarRF(){
-    this.FechaRf="";
     this.citasRF=[];
     this.citasRFFilter=[];
     this.citasRFPaginate=[];
     this.citasRFPaginateFilter=[];
+    this.alertActualizado();
     this.cargarRF(this.fechaActual,0,false,false);
   }
 
   actualizarMG(){
-    this.FechaMg="";
     this.citasMG=[];
     this.citasMGFilter=[];
     this.citasMGPaginate=[];
     this.citasMGPaginateFilter=[];
+    this.alertActualizado();
     this.cargarMG(this.fechaActual,0,false,false);
   }
 
@@ -87,7 +97,9 @@ export class CitasComponent implements OnInit {
         this.citasMGPaginate = this.citasMG.slice(0, 10);
       }
 
-      if(check==true){}else{
+      if(check==true){
+        
+      }else{
         if(data['code']!="202"){
           if(cambio==true){
             Swal.fire({
