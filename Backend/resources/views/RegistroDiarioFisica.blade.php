@@ -229,14 +229,14 @@
                     <th class="subtema2" ><p class="box-rotate">13-19 AÑOS</p></th>
                     <th class="subtema2" ><p class="box-rotate">20-49 AÑOS</p></th>
                     <th class="subtema2" ><p class="box-rotate">50 AÑOS Y MÁS</p></th>
-                    <th class="subtema2" ><p class="box-rotate">ESTIMULACION TEMPRANA</p></th>
+                    <th class="subtema2" ><p class="box-rotate">ESTIMULACIÓN TEMPRANA</p></th>
                     <th class="subtema2" ><p class="box-rotate">MAGNETOTERAPIA</p></th>
-                    <th class="subtema2" ><p class="box-rotate">ELECTRO ESTIMULACION</p></th>
+                    <th class="subtema2" ><p class="box-rotate">ELECTRO ESTIMULACIÓN</p></th>
                     <th class="subtema2" ><p class="box-rotate">ULTRASONIDO</p></th>
                     <th class="subtema2" ><p class="box-rotate">C.Q.C. O H.</p></th>
                     <th class="subtema2" ><p class="box-rotate">MASAJE</p></th>
                     <th class="subtema2" ><p class="box-rotate">EJERCICIOS PASIVOS/ RESISTIDOS</p></th>
-                    <th class="subtema2" ><p class="box-rotate">LASER</p></th>
+                    <th class="subtema2" ><p class="box-rotate">LÁSER</p></th>
                     <th class="subtema2" ><p class="box-rotate">OTROS</p></th>
                     <th class="nborde"></th>
                 </tr>
@@ -312,7 +312,7 @@
             <div class="doc">
                 <div class="firma"></div>
                 LCDO.  CARLOS ZAMBRANO MOREIRA
-                    <div class="cargo"> ÁREA DE REHABILITACIÓN FISICA
+                    <div class="cargo"> ÁREA DE REHABILITACIÓN FÍSICA
                 </div>
 
             </div>

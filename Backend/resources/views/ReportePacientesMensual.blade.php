@@ -139,7 +139,7 @@
   
                     </tr>
                     <tr class="azul">
-                        <th> REHABILITACION FISICA </th>
+                        <th> REHABILITACIÓN FÍSICA </th>
 
                         @if($RFcontH != 0){
                             <td>{{$RFcontH}}</td>

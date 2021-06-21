@@ -146,9 +146,9 @@
                     <tr>
                         <th class="hinicio"> {{$year}} </th>
                         <th class="hmedio"  colspan="2"> MEDICINA GENERAL</th>
-                        <th class="hmedio"  colspan="2"> REHABILITACION FISICA</th>
+                        <th class="hmedio"  colspan="2"> REHABILITACIÓN FÍSICA</th>
                         <th class="hmedio"  colspan="2"> SUBTOTAL</th>
-                        <th class="hfin" rowspan="2"> TOTAL DE PACIENTES ATENDIDOS MEDICINA GENERAL Y REHABILITACION FISICA</th>
+                        <th class="hfin" rowspan="2"> TOTAL DE PACIENTES ATENDIDOS MEDICINA GENERAL Y REHABILITACIÓN FÍSICA</th>
                     </tr>
                     <tr>
                         <th class="tinicio"> MESES </th>

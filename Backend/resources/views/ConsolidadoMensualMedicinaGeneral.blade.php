@@ -277,10 +277,10 @@
                             <p class="box-rotate"> 1-11 MESES</p>
                         </th>
                         <th rowspan="2" class="subtema2">
-                            <p class="box-rotate"> 1-4 AÑOS</p>
+                            <p class="box-rotate"> 1- 4 AÑOS</p>
                         </th>
                         <th rowspan="2" class="subtema2">
-                            <p class="box-rotate"> 5-9 AÑOS</p>
+                            <p class="box-rotate"> 5- 9 AÑOS</p>
                         </th>
                         <th rowspan="2" class="subtema2">
                             <p class="box-rotate"> 10-14 AÑOS</p>

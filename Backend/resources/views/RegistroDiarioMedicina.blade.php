@@ -232,10 +232,10 @@
                     <th class="subtema2" rowspan="2"><p class="box-rotate">MUJER</p></th>
                     <th class="subtema" colspan="2">PRE NATAL</th>
                     <th class="subtema" colspan="2">PLANIF. FAMILIAR</th>
-                    <th class="subtema" colspan="2">1 AÑO</th>
+                    <th class="subtema" colspan="2"> &lt; 1 AÑO</th>
                     <th class="subtema" colspan="2">1 - 4 AÑOS</th>
                     <th class="subtema2" rowspan="2"><p class="box-rotate">5-9 AÑOS</p></th>
-                    <th class="subtema2" rowspan="2"><p class="box-rotate"> MENOR  1MES </p></th>
+                    <th class="subtema2" rowspan="2"><p class="box-rotate"> MENOR  1 MES </p></th>
                     <th class="subtema2" rowspan="2"><p class="box-rotate">1-11 MESES</p></th>
                     <th class="subtema2" rowspan="2"><p class="box-rotate">1-4 AÑOS</p></th>
                     <th class="subtema2" rowspan="2"><p class="box-rotate">5-9 AÑOS</p></th>

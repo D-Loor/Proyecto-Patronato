@@ -205,7 +205,7 @@
                     <th colspan="1" style="border-top: none !important; border-bottom: none !important" ></th>
                 </tr>
                 <tr>
-                    <th class="numero" colspan="4"> Menores de 1 AÑO </th>
+                    <th class="numero" colspan="4"> &lt; 1 AÑO </th>
                     <th class="tmedio" colspan="2" rowspan="2"> 1 a 4 AÑOS</th>
                     <th class="tmedio" colspan="2" rowspan="2"> 5 a 14 AÑOS</th>
                     <th class="tmedio" colspan="2" rowspan="2"> 15 a 49 AÑOS</th>
