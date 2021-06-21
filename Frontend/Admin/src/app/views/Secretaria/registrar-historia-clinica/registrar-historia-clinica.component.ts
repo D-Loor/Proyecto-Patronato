@@ -632,12 +632,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
                swalWithBootstrapButtons.fire({
                 title: 'Historial encontrado, ¿Cargar Datos?',
                 text: "Cargar sus datos para editarlos.",
-                icon: 'success',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Si, cargar registros!',
                 cancelButtonText: 'No, cancelar!',
-                confirmButtonColor: '#4BB543',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#20a8d8',
+                cancelButtonColor: '#f86c6b',
                 reverseButtons: true
 
               }).then((result) => {
@@ -1118,13 +1118,13 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         })
          swalWithBootstrapButtons.fire({
           title: '¿Crear Historia Clínica?',
-          text: "Una vez creada podrá ser atendida.",
-          icon: 'success',
+          text: "Una vez creada podrá ser atendido el paciente.",
+          icon: 'question',
           showCancelButton: true,
           confirmButtonText: 'Si, crear!',
           cancelButtonText: 'No, cancelar!',
-          confirmButtonColor: '#4BB543',
-          cancelButtonColor: '#d33',
+          confirmButtonColor: '#20a8d8',
+          cancelButtonColor: '#f86c6b',
           reverseButtons: true
 
         }).then((result) => {
@@ -1133,7 +1133,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
             this.ServicioSecretaria.ValidarIngreso(this.cedula).then(data =>{
               if(data ['code'] == '201'){
                 Swal.fire(
-                  'Error!',
+                  '¡Paciente ya Registrado..!',
                   'El paciente ya cuenta con historial clínico',
                   'error'
                 )
@@ -1288,12 +1288,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
          swalWithBootstrapButtons.fire({
           title: '¿Actualizar Historia Clínica?',
           text: "La historia clínica se modificará.",
-          icon: 'success',
+          icon: 'question',
           showCancelButton: true,
           confirmButtonText: 'Si, actualizar!',
           cancelButtonText: 'No, cancelar!',
-          confirmButtonColor: '#4BB543',
-          cancelButtonColor: '#d33',
+          confirmButtonColor: '#20a8d8',
+          cancelButtonColor: '#f86c6b',
           reverseButtons: true
 
         }).then((result) => {
@@ -1448,7 +1448,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.ServicioSecretaria.updateComplementario( examenesComplementariosActualizar, this.id_complementario ).then(data =>{
       this.spinner.hide('sampleA');
       Swal.fire(
-        'Correcto',
+        '¡Correcto..!',
         'Datos actualizados correctamente.',
         'success'
       )
