@@ -67,7 +67,7 @@ export class AgendarCitaComponent implements OnInit {
   pago=0;
   exo=0;
   recau=0;
-  gad;
+  gad=0;
   Validar=0;
   observaciones;
 
@@ -76,6 +76,10 @@ export class AgendarCitaComponent implements OnInit {
 
   today = new Date();
   fechaActual:string;
+
+
+
+
 
   AbrirModal(){
     if(this.fecha_consulta==undefined||this.fecha_consulta==null){
@@ -160,7 +164,7 @@ export class AgendarCitaComponent implements OnInit {
 
   LimpiarR(){
     this.precio="";
-    this.gad=undefined;
+    this.gad=0;
     this.observaciones="";
     this.ClasePrecio='form-control form-input select-number';
     this.ClaseObser='form-control';
@@ -442,7 +446,9 @@ export class AgendarCitaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.spinner.show('sample');
-        this.Recaudacion();
+        if(this.abono){
+          this.Recaudacion();
+        }
         this.GuardarCita('sample');
 
       } else if (
@@ -450,7 +456,7 @@ export class AgendarCitaComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
+          '¡Cancelado..!',
           'No se ha agendado la cita médica.',
           'error'
         )
@@ -555,7 +561,7 @@ export class AgendarCitaComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
+          '¡Cancelado..!',
           'No se ha reagendado la cita médica.',
           'error'
         )
