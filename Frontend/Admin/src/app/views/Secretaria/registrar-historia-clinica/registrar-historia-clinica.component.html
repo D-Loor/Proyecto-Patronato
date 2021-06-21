@@ -3,7 +3,7 @@
         <div class="col-md-12">
 
             <div class="card">
-                
+
                     <div class="card-header">
                         <i class="icon-user-follow"></i>
                             <strong>Datos de Afiliación</strong>
@@ -26,7 +26,7 @@
                                             <label for="text-input">Nombres</label>
                                             <input autocomplete="off" required type="text" id="nombresP"  [(ngModel)]="nombresP"   name="nombresP" [class]="Classnombres" (click)="Classnombres='form-control'" placeholder="Ingrese los nombres">
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="row">
                                         <div class="form-group col-sm-8">
                                             <label for="text-input">Cédula</label>
@@ -36,12 +36,13 @@
                                                     <button type="button" class="btn btn-primary" (click)="Consultar()">Consultar</button>
                                                 </span>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="text-input">Edad</label>
-                                            <input required type="text" id="edadM" disabled autocomplete="off"  [(ngModel)]="edadM" name="edadM" [class]="ClaseEdad" (click)="ClaseEdad='form-control'" placeholder="Ingrese la edad">
-                                        </div>
+                                          <label for="date-input">Fecha de nacimiento</label>
+                                          <input required id="fechanacimiento" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" [class]="ClaseFecha" (click)="ClaseFecha='form-control'" (change)="CalcularEdad()" placeholder="Seleccione la fecha de nacimiento">
+                                      </div>
+
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-5">
@@ -63,20 +64,17 @@
                                                     <input *ngIf="gadCNo=='2'" (click)="checkRadioNo('gad')" (click)="this.ClaseGad=''" autocomplete="off" required class="form-check-input" type="radio" name="gad"  id="gad" value="0" >
                                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label for="select1">Sexo</label>
-                                            <select id="sexo" [class]="ClaseSexo" (click)="ClaseSexo='form-control'" [(ngModel)]="sexo" name="sexo"  required>
-                                                <option value="Hombre">Hombre</option>
-                                                <option value="Mujer">Mujer</option>
-                                            </select>
-                                        </div> 
+                                          <label for="text-input">Edad</label>
+                                          <input required type="text" id="edadM" disabled autocomplete="off"  [(ngModel)]="edadM" name="edadM" [class]="ClaseEdad" (click)="ClaseEdad='form-control'" placeholder="Ingrese la edad">
+                                      </div>
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="text-input">Lugar de residencia</label>
-                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" [class]="ClaseLR" (click)="ClaseLR='form-control'" placeholder="Ingrese el lugar de residencia">    
+                                            <input required type="text" id="text-input"  autocomplete="off"  [(ngModel)]="Lresidencia" name="Lresidencia" [class]="ClaseLR" (click)="ClaseLR='form-control'" placeholder="Ingrese el lugar de residencia">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="text-input">Lugar de procedencia</label>
@@ -85,12 +83,16 @@
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-4">
-                                            <label for="date-input">Fecha de nacimiento</label>
-                                            <input required id="fechanacimiento" type="date" autocomplete="off"  [(ngModel)]="fechanacimiento" name="fechanacimiento" [class]="ClaseFecha" (click)="ClaseFecha='form-control'" (change)="CalcularEdad()" placeholder="Seleccione la fecha de nacimiento">    
-                                        </div>
+                                          <label for="select1">Sexo</label>
+                                          <select id="sexo" [class]="ClaseSexo" (click)="ClaseSexo='form-control'" [(ngModel)]="sexo" name="sexo"  required>
+                                              <option value="Hombre">Hombre</option>
+                                              <option value="Mujer">Mujer</option>
+                                          </select>
+                                      </div>
+
                                         <div class="form-group col-sm-4">
                                             <label for="raza">Raza</label>
-                                            <select id="raza" name="raza" class="form-control" [(ngModel)]="raza" [class]="ClaseRaza" (click)="ClaseRaza='form-control'"> 
+                                            <select id="raza" name="raza" class="form-control" [(ngModel)]="raza" [class]="ClaseRaza" (click)="ClaseRaza='form-control'">
                                                 <option value="Mestizo">Mestizo</option>
                                                 <option value="Blanco">Blanco</option>
                                                 <option value="Montubio">Montubio</option>
@@ -113,7 +115,7 @@
                                       </div><!--/.row-->
                                       <div class="row">
                                         <div class="form-group col-sm-8">
-                                            <label for="nivel_instruccion">Nivel de instrucción</label>    
+                                            <label for="nivel_instruccion">Nivel de instrucción</label>
                                             <select id="nivel_instruccion" name="nivel_instruccion"  [class]="ClaseNivel" (click)="ClaseNivel='form-control'" [(ngModel)]="nivel_instruccion" >
                                                 <option value="Educación Básica">Educación Básica</option>
                                                 <option value="Bachillerato">Bachillerato</option>
@@ -139,7 +141,7 @@
             </div>
 
             <div class="card">
-                
+
                 <div class="card-header">
                     <i class="icon-book-open"></i>
                         <strong>Antecedentes Patológicos Personales</strong>
@@ -162,7 +164,7 @@
                                         </div>
                                         <div id="collapseBasic" *ngIf="!ninezC">
                                             <textarea autocomplete="off" required [(ngModel)]="ninezT" id="ninezT" name="ninezT" rows="3" [class]="ClaseTninez" (click)="ClaseTninez='form-control'" placeholder="Descripción de los antecedentes patológicos.."></textarea>
-                                        </div> 
+                                        </div>
                                         <br>
                                         <label for="inline-radios">Adolescencia</label>
                                         <div class="col-md-4 col-form-label">
@@ -173,9 +175,9 @@
                                         </div>
                                         <div id="collapseBasic" *ngIf="!adolescenciaC">
                                             <textarea autocomplete="off" required [(ngModel)]="adolescenciaT" id="adolescenciaT" name="adolescenciaT" rows="3" [class]="ClaseTadolecencia" (click)="ClaseTadolecencia='form-control'" placeholder="Descripción de los antecedentes patológicos.."></textarea>
-                                        </div> 
-                                        <br>  
-                                        <label for="inline-radios">Adultez</label>  
+                                        </div>
+                                        <br>
+                                        <label for="inline-radios">Adultez</label>
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1">
                                                 <input autocomplete="off" required class="form-check-input" type="checkbox" (click)="Restaurar()" name="adultezC"  [(ngModel)]="adultezC" id="adultezC" value="1">
@@ -201,10 +203,10 @@
                                                             <input *ngIf="dbidCNo=='2'" (click)="checkRadioNo('dbid')" (click)="ClaseDbid=''" autocomplete="off" required class="form-check-input" type="radio" name="DBID" id="DBID" value="0" >
                                                             <label class="form-check-label" for="inlineRadio2">No</label>
                                                         </div>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-sm-3">
-                                                    <label for="inline-radios" [class]="ClaseDbi">DBI</label>  
+                                                    <label for="inline-radios" [class]="ClaseDbi">DBI</label>
                                                     <div class="col-md-8 col-form-label">
                                                         <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                             <input *ngIf="dbiCSi=='1'" (click)="checkRadioSi('dbi')" (click)="ClaseDbi=''" autocomplete="off" required class="form-check-input" type="radio" name="DBI" id="DBI" value="1" checked>
@@ -238,7 +240,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-3">
-                                                    <label for="inline-radios" [class]="ClaseTbp">TbP</label>  
+                                                    <label for="inline-radios" [class]="ClaseTbp">TbP</label>
                                                     <div class="col-md-8 col-form-label">
                                                         <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                             <input *ngIf="tbpCSi=='1'" (click)="checkRadioSi('tbp')" (click)="ClaseTbp=''" autocomplete="off" required class="form-check-input" type="radio" name="TbP" id="TbP" value="1" checked>
@@ -257,7 +259,7 @@
                                             </div><!--/.row-->
                                         </div>
                                         <br>
-                                        <label for="inline-radios">Antecedentes quirúrgicos</label>  
+                                        <label for="inline-radios">Antecedentes quirúrgicos</label>
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1">
                                                 <input autocomplete="off" required class="form-check-input" type="checkbox" name="quirurgicosC" (click)="ClaseTquirurjicos='form-control'" [(ngModel)]="quirurgicosC" id="quirurgicosC" value="1">
@@ -268,7 +270,7 @@
                                             <textarea autocomplete="off" required [(ngModel)]="quirurgicosT" id="quirurgicosT" name="quirurgicosT" rows="3" [class]="ClaseTquirurjicos" (click)="ClaseTquirurjicos='form-control'" placeholder="Descripción de los antecedentes quirúrgicos.."></textarea>
                                         </div>
                                         <br>
-                                        <label for="inline-radios">Antecedentes alérgicos</label>  
+                                        <label for="inline-radios">Antecedentes alérgicos</label>
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1">
                                                 <input autocomplete="off" required class="form-check-input" type="checkbox" name="alergicosC" (click)="ClaseTalergicos='form-control'" [(ngModel)]="alergicosC" id="alergicosC" value="1">
@@ -279,7 +281,7 @@
                                             <textarea autocomplete="off" required [(ngModel)]="alergicosT" id="alergicosT" name="alergicosT" rows="3" (click)="ClaseTalergicos='form-control'" [class]="ClaseTalergicos" placeholder="Descripción de los antecedentes alérgicos.."></textarea>
                                         </div>
                                         <br>
-                                        <label for="inline-radios">Antecedentes traumatológicos</label>  
+                                        <label for="inline-radios">Antecedentes traumatológicos</label>
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1">
                                                 <input autocomplete="off" required class="form-check-input" type="checkbox" name="traumatologicosC" (click)="ClaseTtraumatologicos='form-control'" [(ngModel)]="traumatologicosC" id="traumatologicosC" value="1">
@@ -344,14 +346,14 @@
                                         </div><!--/.row-->
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
             </div>
 
             <div class="card">
-                
+
                 <div class="card-header">
                     <i class="icon-people"></i>
                         <strong>Antecedentes Patológicos Familiares</strong>
@@ -387,9 +389,9 @@
                                             <span class="input-group-append">
                                                 <button *ngIf="DatosFamiliaresDB==0" type="button" class="btn btn-primary" (click)="LlenarArray()">Agregar</button>
                                                 <button *ngIf="DatosFamiliaresDB==1" type="button" class="btn btn-primary" (click)="aggArrayDB()">Agregar</button>
-                                            </span> 
+                                            </span>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="union">Unión</label>
@@ -417,10 +419,10 @@
                                                 <th>Causas</th>
                                                 <th>Opciones</th>
                                               </tr>
-                                            </thead> 
+                                            </thead>
                                             <tbody>
                                                 <!--*ngIf="actualizar==0"-->
-                                                <ng-container *ngIf="DatosFamiliaresDB==0; else array2">    
+                                                <ng-container *ngIf="DatosFamiliaresDB==0; else array2">
                                                 <tr *ngFor="let item of DatosFamiliares" >
                                                 <td class="table-titulo">{{item.nombres}}</td>
                                                 <td>{{item.union}}</td>
@@ -451,7 +453,7 @@
                                                     </td>
                                                   </tr>
                                             </ng-template>
-                                            
+
 
                                             </tbody>
                                           </table>
@@ -464,7 +466,7 @@
             </div>
 
             <div class="card">
-                
+
                 <div class="card-header">
                     <i class="icon-user"></i>
                         <strong>Hábitos Personales</strong>
@@ -492,10 +494,10 @@
                                                 <input *ngIf="alcoholCNo=='2'" (click)="checkRadioNo('alcohol')" (click)="ClaseAlcohol=''" autocomplete="off" required class="form-check-input" type="radio" name="Alcohol" id="Alcohol" value="0" >
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="inline-radios" [class]="ClaseTabaco">Tabaco</label>  
+                                        <label for="inline-radios" [class]="ClaseTabaco">Tabaco</label>
                                         <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                 <input *ngIf="tabacoCSi=='1'" (click)="checkRadioSi('tabaco')" (click)="ClaseTabaco=''" autocomplete="off" required class="form-check-input" type="radio" name="Tabaco" id="Tabaco" value="1" checked>
@@ -529,7 +531,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="inline-radios" [class]="ClaseAliemtacion">Alimentacion</label>  
+                                        <label for="inline-radios" [class]="ClaseAliemtacion">Alimentacion</label>
                                         <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                 <input *ngIf="alimentacionCSi=='1'" (click)="checkRadioSi('alimentacion')" (click)="ClaseAliemtacion=''" autocomplete="off" required class="form-check-input" type="radio" name="Alimentacion" id="Alimentacion" value="1" checked>
@@ -546,7 +548,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="inline-radios" [class]="ClaseDiurisis">Diuresis</label>  
+                                        <label for="inline-radios" [class]="ClaseDiurisis">Diuresis</label>
                                         <div class="col-md-8 col-form-label" >
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                 <input *ngIf="diuresisCSi=='1'" (click)="checkRadioSi('diuresis')" (click)="ClaseDiurisis=''" autocomplete="off" required class="form-check-input" type="radio" name="Diuresis" id="Diuresis" value="1" checked>
@@ -561,9 +563,9 @@
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="inline-radios" [class]="ClaseSomnia">Somnia</label>  
+                                        <label for="inline-radios" [class]="ClaseSomnia">Somnia</label>
                                         <div class="col-md-8 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                 <input *ngIf="somniaCSi=='1'" (click)="checkRadioSi('somnia')" (click)="ClaseSomnia=''" autocomplete="off" required class="form-check-input" type="radio" name="Somnia" id="Somnia" value="1" checked>
@@ -590,7 +592,7 @@
 
             <ng-container *ngIf="containerSecretaria==1">
                 <div class="card">
-                
+
                     <div class="card-header">
                         <i class="icon-layers"></i>
                             <strong>Examenes Físicos Generales</strong>
@@ -598,13 +600,13 @@
                             [attr.aria-expanded]="!isCollapsed5" aria-controls="collapseBasic"><i
                             class="fa fa-chevron-down"></i>&nbsp;</button>
                     </div>
-    
+
                         <div id="collapseBasic" [collapse]="isCollapsed5" [isAnimated]="true">
                             <div class="card-body">
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <div class="row">
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Cabeza</label>  
+                                            <label class="habito" for="inline-radios">Cabeza</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cabezaC" (click)="ClaseTexamen_cabeza='form-control'" [(ngModel)]="examen_cabezaC" id="examen_cabeza" value="1">
@@ -616,7 +618,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Cuello</label>  
+                                            <label class="habito" for="inline-radios">Cuello</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cuelloC" (click)="ClaseTexamen_cuello='form-control'"  [(ngModel)]="examen_cuelloC" id="examen_cuelloC" value="1">
@@ -628,7 +630,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Tórax</label>  
+                                            <label class="habito" for="inline-radios">Tórax</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_toraxC" (click)="ClaseTexamen_torax='form-control'"  [(ngModel)]="examen_toraxC" id="examen_toraxC" value="1">
@@ -640,7 +642,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Abdomen</label>  
+                                            <label class="habito" for="inline-radios">Abdomen</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_abdomenC" (click)="ClaseTexamen_abdomen='form-control'"  [(ngModel)]="examen_abdomenC" id="examen_abdomenC" value="1">
@@ -652,7 +654,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Miembros Superiores</label>  
+                                            <label class="habito" for="inline-radios">Miembros Superiores</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_msuperiorC" (click)="ClaseTexamen_msuperior='form-control'" [(ngModel)]="examen_msuperiorC" id="examen_msuperiorC" value="1">
@@ -664,7 +666,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Miembros Inferiores</label>  
+                                            <label class="habito" for="inline-radios">Miembros Inferiores</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_minferioresC" (click)="ClaseTexamen_minferiores='form-control'"  [(ngModel)]="examen_minferioresC" id="examen_minferioresC" value="1">
@@ -676,7 +678,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Región Genital</label>  
+                                            <label class="habito" for="inline-radios">Región Genital</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitalC" (click)="ClaseTexamen_genital='form-control'" [(ngModel)]="examen_genitalC" id="examen_genitalC" value="1">
@@ -688,7 +690,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Región Anal</label>  
+                                            <label class="habito" for="inline-radios">Región Anal</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_analC" (click)="ClaseTexamen_anal='form-control'" [(ngModel)]="examen_analC" id="examen_analC" value="1">
@@ -700,14 +702,14 @@
                                             </div>
                                         </div>
                                     </div><!--/.row-->
-    
+
                                 </form>
                             </div>
                         </div>
                 </div>
-    
+
                 <div class="card">
-                    
+
                     <div class="card-header">
                         <i class="icon-docs"></i>
                             <strong>Examenes de Organos y Sistemas</strong>
@@ -715,13 +717,13 @@
                             [attr.aria-expanded]="!isCollapsed6" aria-controls="collapseBasic"><i
                             class="fa fa-chevron-down"></i>&nbsp;</button>
                     </div>
-    
+
                         <div id="collapseBasic" [collapse]="isCollapsed6" [isAnimated]="true">
                             <div class="card-body">
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <div class="row">
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Digestivo</label>  
+                                            <label class="habito" for="inline-radios">Sistema Digestivo</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_digestivoC" (click)="ClaseTexamen_digestivo='form-control'"  [(ngModel)]="examen_digestivoC" id="examen_digestivoC" value="1">
@@ -733,7 +735,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Respiratorio</label>  
+                                            <label class="habito" for="inline-radios">Sistema Respiratorio</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_respiratorioC" (click)="ClaseTexamen_respiratorio='form-control'" [(ngModel)]="examen_respiratorioC" id="examen_respiratorioC" value="1">
@@ -745,7 +747,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Cardíaco</label>  
+                                            <label class="habito" for="inline-radios">Sistema Cardíaco</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_cardiacoC" (click)="ClaseTexamen_cardiaco='form-control'" [(ngModel)]="examen_cardiacoC" id="examen_cardiacoC" value="1">
@@ -757,7 +759,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Genitourinario</label>  
+                                            <label class="habito" for="inline-radios">Sistema Genitourinario</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_genitourinarioC" (click)="ClaseTexamen_genitourinario='form-control'"  [(ngModel)]="examen_genitourinarioC" id="examen_genitourinarioC" value="1">
@@ -769,7 +771,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Osteomuscular</label>  
+                                            <label class="habito" for="inline-radios">Sistema Osteomuscular</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_osteomuscularC" (click)="ClaseTexamen_osteomuscular='form-control'" [(ngModel)]="examen_osteomuscularC" id="examen_osteomuscularC" value="1">
@@ -781,7 +783,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Sistema Nervioso</label>  
+                                            <label class="habito" for="inline-radios">Sistema Nervioso</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_nervioso" (click)="ClaseTexamen_nervioso='form-control'" [(ngModel)]="examen_nerviosoC" id="examen_nerviosoC" value="1">
@@ -793,14 +795,14 @@
                                             </div>
                                         </div>
                                     </div><!--/.row-->
-    
+
                                 </form>
                             </div>
                         </div>
                 </div>
-    
+
                 <div class="card">
-                    
+
                     <div class="card-header">
                         <i class="icon-note"></i>
                             <strong>Examenes Complementarios</strong>
@@ -808,13 +810,13 @@
                             [attr.aria-expanded]="!isCollapsed7" aria-controls="collapseBasic"><i
                             class="fa fa-chevron-down"></i>&nbsp;</button>
                     </div>
-    
+
                         <div id="collapseBasic" [collapse]="isCollapsed7" [isAnimated]="true">
                             <div class="card-body">
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <div class="row">
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Laboratorio</label>  
+                                            <label class="habito" for="inline-radios">Laboratorio</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_laboratorioC" (click)="ClaseTexamen_laboratorio='form-control'" [(ngModel)]="examen_laboratorioC" id="examen_laboratorioC" value="1">
@@ -823,10 +825,10 @@
                                             </div>
                                             <div *ngIf="!examen_laboratorioC">
                                                 <textarea autocomplete="off" required [(ngModel)]="examen_laboratorioT" id="examen_laboratorioT" name="examen_laboratorioT" rows="3" (click)="ClaseTexamen_laboratorio='form-control'" [class]="ClaseTexamen_laboratorio" placeholder="Descripción del examen.."></textarea>
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Electrocardiograma</label>  
+                                            <label class="habito" for="inline-radios">Electrocardiograma</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_electrocardiogramaC" (click)="ClaseTexamen_electrocardiograma='form-control'" [(ngModel)]="examen_electrocardiogramaC" id="examen_electrocardiogramaC" value="1">
@@ -838,7 +840,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Radiografía de Tórax</label>  
+                                            <label class="habito" for="inline-radios">Radiografía de Tórax</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_RToraxC" (click)="ClaseTexamen_RTorax='form-control'" [(ngModel)]="examen_RToraxC" id="examen_RToraxC" value="1">
@@ -850,7 +852,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12">
-                                            <label class="habito" for="inline-radios">Otros Estudios</label>  
+                                            <label class="habito" for="inline-radios">Otros Estudios</label>
                                             <div class="col-md-4 col-form-label">
                                                 <div class="form-check form-check-inline mr-1" id="inline-radiosAD">
                                                     <input autocomplete="off" required class="form-check-input" type="checkbox" name="examen_otrosC" (click)="ClaseTexamen_otros='form-control'" [(ngModel)]="examen_otrosC" id="examen_otrosC" value="1">
@@ -862,21 +864,21 @@
                                             </div>
                                         </div>
                                     </div><!--/.row-->
-    
+
                                 </form>
                                 <button *ngIf="containerMGandRF==0" type="submit" class="btn btn-lg btn-primary boto" (click)="VaidarPaciente()">Generar Historia Clínica</button>
                                 <!--button *ngIf="edit==1" type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Actualizar Historia Clínica</button-->
                                 <button *ngIf="containerMGandRF==1"  type="submit" class="btn btn-lg btn-primary boto" (click)="actualizarDatos()">Actualizar Historia Clínica</button>
                             </div>
                         </div>
-                       
-                </div> 
+
+                </div>
             </ng-container>
-            
-            
-            
+
+
+
         </div>
-        
+
     </div><!--/.row-->
 
 </div>
