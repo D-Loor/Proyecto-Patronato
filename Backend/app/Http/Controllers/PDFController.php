@@ -901,7 +901,7 @@ class PDFController extends Controller
                 $TOTAL[9]=$TOTAL[9]+1;
             }
 
-            $diagnostico=$item['diagnostico'];
+            $diagnostico=$item['diagnostico']['diagnostico'];
 
             //Tratamiento
             $tratamiento[0]="";
@@ -1333,23 +1333,23 @@ class PDFController extends Controller
                 $tratamiento[7] = 0;
                 $tratamiento[8] = 0;
 
-                if ($item->tratamiento['estimulacion_temprana'] == 'Estimulación temprana') {
+                if ($item->tratamiento['estimulacion_temprana'] == "Estimulación temprana") {
                     $tratamiento[0] = 1;
-                }else if ($item->tratamiento['magnetoterapia'] == 'Magnetoterapia') {
+                }if ($item->tratamiento['magnetoterapia'] == "Magnetoterapia") {
                     $tratamiento[1] = 1;
-                } else if ($item->tratamiento['electroestimulacion'] == 'Electroestimulación') {
+                }if ($item->tratamiento['electroestimulacion'] == "Electroestimulación") {
                     $tratamiento[2] = 1;
-                } else if ($item->tratamiento['ultrasonido'] == 'Ultrasonido') {
+                }if ($item->tratamiento['ultrasonido'] == "Ultrasonido") {
                     $tratamiento[3] = 1;
-                } else if ($item->tratamiento['C_Q_C_O_H'] == 'C.Q.C. O H.') {
+                }if ($item->tratamiento['C_Q_C_O_H'] == "C.Q.C. O H.") {
                     $tratamiento[4] = 1;
-                } else if ($item->tratamiento['masaje'] == 'Masaje') {
+                }if ($item->tratamiento['masaje'] == "Masaje") {
                     $tratamiento[5] = 1;
-                } else if ($item->tratamiento['ejercicios_pasivos_resistidos'] == 'Ejercicios pasivos y resistidos') {
+                }if ($item->tratamiento['ejercicios_pasivos_resistidos'] == "Ejercicios pasivos y resistidos") {
                     $tratamiento[6] = 1;
-                } else if ($item->tratamiento['laser'] == 'Láser') {
+                }if ($item->tratamiento['laser'] == "Láser") {
                     $tratamiento[7] = 1;
-                } else if ($item->tratamiento['otros'] != 'No aplica') {
+                }if ($item->tratamiento['otros'] != "No aplica") {
                     $tratamiento[8] = 1;
                 }
 
@@ -1367,7 +1367,7 @@ class PDFController extends Controller
             ];
         }
 
-          //  return response()->json(['result'=>$Result, 'code'=>$Total]);
+          // return response()->json(['result'=>$Result, 'code'=>$Total]);
 
        return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
     }
