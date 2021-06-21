@@ -29,15 +29,13 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaMg" id="FechaMg" name="FechaMg" [(ngModel)]="FechaMg" type="date" placeholder="date"
+                  <input name="FechaMg" id="FechaMg" name="FechaMg" [ngModel]="FechaMg | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaMg = $event" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
                   <label for="name"><label for="name"></label></label>
-                  <button *ngIf="FechaMg!=''" type="button" class="btn btn-primary form-control"
-                    (click)="cargarMG(FechaMg,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-                  <button *ngIf="FechaMg==''" type="button" class="btn btn-primary form-control"
-                    (click)="cargarMG(FechaMg,1,true)" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                  <button  type="button" class="btn btn-primary form-control"
+                    (click)="cargarMG(FechaMg,1,true,false)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
                 </div>
                 <div class="col-xs-2 searcht">
                   <label style="height: 21px;"><label ></label></label>
@@ -171,14 +169,13 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaRf" id="FechaRf" name="FechaRf" [(ngModel)]="FechaRf" type="date" placeholder="date"
+                  <input name="FechaRf" id="FechaRf" name="FechaRf" [ngModel]="FechaRf | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaRf= $event" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
                   <label for="name"><label for="name"></label></label>
-                  <button *ngIf="FechaRf!=''" type="button" class="btn btn-primary form-control"
-                    (click)="cargarRF(FechaRf,1,true)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-                  <button *ngIf="FechaRf==''" type="button" class="btn btn-primary form-control" disabled><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
+                  <button type="button" class="btn btn-primary form-control"
+                    (click)="cargarRF(FechaRf,1,true,false)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
                 </div>
                 <div class="col-xs-2 searcht">
                   <label style="height: 21px;"><label ></label></label>
