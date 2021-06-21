@@ -56,6 +56,32 @@ export class MedicinaGeneralComponent implements OnInit {
       });
     }
   }
+  
+  CalcEdad(edad:string){
+    var coma = "";
+    let sepa = edad.split(coma);
+    let punto = sepa[1]
+    let almacenar = sepa[2];
+    let dias =sepa[3]
+    let valor;
+    if(sepa.length==5){
+      dias=sepa[3]+""+sepa[4];
+    }
+    if(punto=="."){
+      if(almacenar=="0"){
+        return  valor = dias+" dias";
+      }else if(almacenar!="0"){
+        if(sepa.length==4){
+          almacenar = sepa[2]+""+sepa[3];
+        }
+        return  valor = almacenar+" meses";
+      }
+    }else{
+      return valor = edad+" años";
+    }
+    
+
+  }
 
   cargar(){
     this.loadingText = 'Cargando...';

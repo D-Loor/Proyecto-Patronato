@@ -84,52 +84,31 @@ export class PacientesComponent implements OnInit {
   }
 
   CalcEdad(edad:string){
-    let valor = parseFloat(edad);
-    let pased=0;
-    let pasem=0;
-    let contadord=0.02;
-    let contadorm=0.2;
-    if(valor<=0.09){
-      if(valor==0.01)
-        return (valor*100)+" día";
-      else {
-        while(contadord<= 0.09){
-          if(valor==contadord){
-            pased=1;
-            return (valor*100)+" días";
-          }
-          contadord+=0.01;
-        }
-        if(pased==0){
-          return (valor*1000)+" días";
-        }
-
-      }
+    var coma = "";
+    let sepa = edad.split(coma);
+    let punto = sepa[1]
+    let almacenar = sepa[2];
+    let dias =sepa[3]
+    let valor;
+    if(sepa.length==5){
+      dias=sepa[3]+""+sepa[4];
     }
-    else if(valor<=0.9){
-      if(valor == 0.1)
-        return (valor*10)+" mes";
-      else{
-        while(contadorm<= 0.9){
-          if(valor==contadorm){
-            pasem=1;
-            return (valor*10)+" meses";
-          }
-          contadorm+=0.1;
+    if(punto=="."){
+      if(almacenar=="0"){
+        return  valor = dias+" dias";
+      }else if(almacenar!="0"){
+        if(sepa.length==4){
+          almacenar = sepa[2]+""+sepa[3];
         }
-        if(pasem==0){
-          return (valor*100)+" meses";
-        }
+        return  valor = almacenar+" meses";
       }
-
     }else{
-      if(valor == 1)
-       return valor+" año";
-      else
-        return valor+" años";
+      return valor = edad+" años";
     }
+    
 
   }
+
   cargar(){
     this.spinner.show('sample');
     this.medicina_general.pacientes().then(data =>{
@@ -223,7 +202,7 @@ export class PacientesComponent implements OnInit {
     this.apellidos=data['result'].apellidos;
     this.nombres=data['result'].nombres;
     this.cedula=data['result'].cedula;
-    this.edad=data['result'].edad;
+    this.edad=this.CalcEdad(data['result'].edad);
     this.ocupacion=data['result'].ocupacion;
     this.sexo=data['result'].sexo;
     this.Lresidencia=data['result'].residencia;
