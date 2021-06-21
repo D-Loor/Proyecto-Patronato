@@ -78,6 +78,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
     }
   }
   cargar(){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     this.historial.historialrf().then(data =>{
     this.historialRF=data['result'];
     let validarVacio=data['code'];
@@ -87,7 +89,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
       }else{
         this.historialRFPaginate = this.historialRF.slice(0, 10);
       }
-    
+      this.spinner.hide('sample');
   }).catch((error) => {
     console.log(error);
     this.spinner.hide('sample');

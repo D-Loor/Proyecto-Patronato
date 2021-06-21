@@ -92,6 +92,7 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
   }
 
   cargar(){
+    this.spinner.show('sample');
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
       this.citasRF=data['result'];
       this.citasRFPaginate = this.citasRF.slice(0, 10);

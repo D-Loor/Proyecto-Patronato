@@ -58,14 +58,18 @@ export class MedicinaGeneralComponent implements OnInit {
   }
 
   cargar(){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     this.medicina_general.historiasClinicasMg().then(data =>{
     this.historialMG=data['result'];
     let validarVacio=data['code'];
       if(validarVacio == '202'){
         this.historialMG=[];
         this.historialMGPaginate = [];
+        this.spinner.hide('sample');
       }else{
         this.historialMGPaginate = this.historialMG.slice(0, 10);
+        this.spinner.hide('sample');
       }
     
   }).catch(error =>{
