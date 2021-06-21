@@ -178,12 +178,18 @@
 
                     </div>
 
+                    <div class="form-group">
+                      <label for="vat">Tratamientos aplicados</label>
+                         <textarea  id="tratamiento" name="tratamiento" disabled rows="5" class="form-control" [(ngModel)]="tratamiento" placeholder="Escriba la receta para el paciente..." required></textarea>
+
+                    </div>
+
                     <div class="form-group ">
 
                       <div class="col-md-9 col-form-label">
                         <div class="form-check form-check-inline mr-1">
 
-                          <label class="form-check-label" for="inline-checkbox1"> <i class="fa fa-file-text-o"></i> {{certificado}}</label>
+                          <label class="form-check-label" for="inline-checkbox1"> <i class="fa fa-file-text-o"></i>{{certificado}}</label>
                         </div>
 
                       </div>
@@ -203,6 +209,7 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
   <div *ngIf="spinnerConfig['fullScreen']">
     <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
       [color]="spinnerConfig['color']" [type]="spinnerConfig['type']" [template]="spinnerConfig['template']"

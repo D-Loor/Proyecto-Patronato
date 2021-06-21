@@ -28,7 +28,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
   @ViewChild('Principal') public Principal: ModalDirective;
   FechaFin; FechaInicio;
   //variables para el modal
-  NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado;receta;
+  NPaciente; Fecha; lugar_atencion; ocupacion; residencia; motivo; diagnostico; anamnesis; certificado;receta; tratamiento="";
 
   idPaciente = localStorage.getItem('id_paciente');
 
@@ -144,6 +144,76 @@ export class RehabilitacionFisicaComponent implements OnInit {
     this.diagnostico=arreglo['diagnostico'].diagnostico;
     this.anamnesis=arreglo['anamnesis'];
     this.receta=arreglo['receta'];
+
+    let conta=0;
+    if(tratamiento['estimulacion_temprana']!="No aplica"){
+      this.tratamiento = tratamiento['estimulacion_temprana'];
+      conta++;
+    }
+    if(tratamiento['magnetoterapia']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['magnetoterapia'];
+      }else{
+        this.tratamiento = tratamiento['magnetoterapia'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['electroestimulacion']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['electroestimulacion'];
+      }else{
+        this.tratamiento = tratamiento['electroestimulacion'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['C_Q_C_O_H']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['C_Q_C_O_H'];
+      }else{
+        this.tratamiento = tratamiento['C_Q_C_O_H'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['masaje']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['masaje'];
+      }else{
+        this.tratamiento = tratamiento['masaje'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['ejercicios_pasivos_resistidos']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['ejercicios_pasivos_resistidos'];
+      }else{
+        this.tratamiento = tratamiento['ejercicios_pasivos_resistidos'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['laser']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['laser'];
+      }else{
+        this.tratamiento = tratamiento['laser'];
+        conta++;
+      }
+      
+    }
+    if(tratamiento['otros']!="No aplica"){
+      if(conta>=1){
+        this.tratamiento = this.tratamiento+"\r\n"+tratamiento['otros'];
+      }else{
+        this.tratamiento = tratamiento['otros'];
+        conta++
+      }
+      
+    }
+    
     if(arreglo['certificado']==1){
       this.certificado="Se entregó certificado al paciente.";
     }else
