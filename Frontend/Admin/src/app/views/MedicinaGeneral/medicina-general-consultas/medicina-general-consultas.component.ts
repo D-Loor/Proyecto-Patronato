@@ -43,6 +43,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   confirma= false;
   pase=false;
   tipo="Dianóstico";
+  edadR;
 
   ClaseMotivo:string="form-control form-input";
   ClaseAntecedentes:string="form-control form-input";
@@ -116,7 +117,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
       this.cedula = data['result'].cedula;
       this.idPaciente=data['result'].id_paciente;
-      this.edad = data['result'].edad;
+      this.edad = this.CalcEdad(data['result'].edad);
+      this.edadR = data['result'].edad;
       this.gad = data['result'].gad;
       localStorage.removeItem('cedulaMG');
       localStorage.removeItem('idCita');
@@ -348,7 +350,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'plan_terapeutico': this.plan_terapeutico,
         'lugar_atencion': this.lugar_atencion,
         'certificado': cert,
-        'edad':this.edad
+        'edad':this.edadR
       }
 
 
@@ -362,6 +364,32 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.spinner.hide('sample');
       this.rutas.navigate(['/500']);
     });
+  }
+
+  CalcEdad(edad:string){
+    var coma = "";
+    let sepa = edad.split(coma);
+    let punto = sepa[1]
+    let almacenar = sepa[2];
+    let dias =sepa[3]
+    let valor;
+    if(sepa.length==5){
+      dias=sepa[3]+""+sepa[4];
+    }
+    if(punto=="."){
+      if(almacenar=="0"){
+        return  valor = dias+" dias";
+      }else if(almacenar!="0"){
+        if(sepa.length==4){
+          almacenar = sepa[2]+""+sepa[3];
+        }
+        return  valor = almacenar+" meses";
+      }
+    }else{
+      return valor = edad+" años";
+    }
+    
+
   }
 
 

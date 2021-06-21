@@ -30,6 +30,7 @@ export class ConsultasComponent implements OnInit {
   confirma= false;
   pase=false;
   valor;
+  edadR;
 
   //variables para agregar la consulta
   idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado; receta;
@@ -194,7 +195,8 @@ export class ConsultasComponent implements OnInit {
     this.rehabilifacionF.AtenderPaciente(cedula).then(data => {
       this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
       this.ocupacion = data['result'].ocupacion;
-      this.edad = data['result'].edad;
+      this.edad = this.CalcEdad(data['result'].edad);
+      this.edadR = data['result'].edad;
       this.idpaciente = data['result'].id_paciente;
       localStorage.removeItem('cedulaRF');
       localStorage.removeItem('idCita');
@@ -327,7 +329,7 @@ export class ConsultasComponent implements OnInit {
       'anamnesis':this.anamnesisT,
       'fecha':this.fechaActual,
       'receta':this.receta,
-      'edad':this.edad
+      'edad':this.edadR
     }
     this.RFService.AgregarConsulta(dataC).then(data=>{
       this.spinner.hide('sample');
@@ -396,6 +398,32 @@ export class ConsultasComponent implements OnInit {
     }else{
       this.Alert();
     }
+  }
+
+  CalcEdad(edad:string){
+    var coma = "";
+    let sepa = edad.split(coma);
+    let punto = sepa[1]
+    let almacenar = sepa[2];
+    let dias =sepa[3]
+    let valor;
+    if(sepa.length==5){
+      dias=sepa[3]+""+sepa[4];
+    }
+    if(punto=="."){
+      if(almacenar=="0"){
+        return  valor = dias+" dias";
+      }else if(almacenar!="0"){
+        if(sepa.length==4){
+          almacenar = sepa[2]+""+sepa[3];
+        }
+        return  valor = almacenar+" meses";
+      }
+    }else{
+      return valor = edad+" años";
+    }
+    
+
   }
 
 }
