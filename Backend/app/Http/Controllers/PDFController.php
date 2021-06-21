@@ -1333,23 +1333,23 @@ class PDFController extends Controller
                 $tratamiento[7] = 0;
                 $tratamiento[8] = 0;
 
-                if ($item->tratamiento['estimulacion_temprana'] == 1) {
+                if ($item->tratamiento['estimulacion_temprana'] == 'Estimulación temprana') {
                     $tratamiento[0] = 1;
-                }else if ($item->tratamiento['magnetoterapia'] == 1) {
+                }else if ($item->tratamiento['magnetoterapia'] == 'Magnetoterapia') {
                     $tratamiento[1] = 1;
-                } else if ($item->tratamiento['electroestimulacion'] == 1) {
+                } else if ($item->tratamiento['electroestimulacion'] == 'Electroestimulación') {
                     $tratamiento[2] = 1;
-                } else if ($item->tratamiento['ultrasonido'] == 1) {
+                } else if ($item->tratamiento['ultrasonido'] == 'Ultrasonido') {
                     $tratamiento[3] = 1;
-                } else if ($item->tratamiento['C_Q_C_O_H'] == 1) {
+                } else if ($item->tratamiento['C_Q_C_O_H'] == 'C.Q.C. O H.') {
                     $tratamiento[4] = 1;
-                } else if ($item->tratamiento['masaje'] == 1) {
+                } else if ($item->tratamiento['masaje'] == 'Masaje') {
                     $tratamiento[5] = 1;
-                } else if ($item->tratamiento['ejercicios_pasivos_resistidos'] == 1) {
+                } else if ($item->tratamiento['ejercicios_pasivos_resistidos'] == 'Ejercicios pasivos y resistidos') {
                     $tratamiento[6] = 1;
-                } else if ($item->tratamiento['laser'] == 1) {
+                } else if ($item->tratamiento['laser'] == 'Láser') {
                     $tratamiento[7] = 1;
-                } else if ($item->tratamiento['otros'] == 1) {
+                } else if ($item->tratamiento['otros'] != 'No aplica') {
                     $tratamiento[8] = 1;
                 }
 
