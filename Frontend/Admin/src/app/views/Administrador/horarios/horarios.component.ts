@@ -63,6 +63,7 @@ export class HorariosComponent implements OnInit {
         this.cantidad=1;
         this.Ver=1;
         this.contador=0;
+        this.ClaseCantidad='form-control form-input select-number';
       }else if(this.contador==0){
         this.cantidad="";
         this.Ver=0;
@@ -102,8 +103,9 @@ export class HorariosComponent implements OnInit {
     this.id_turnos="";
     this.result="";
     this.cantidad=undefined;
-     this.especialidad="";
-     this.Ver=0;
+    this.especialidad="";
+    this.Ver=0;
+    this.EstadoTur=1;
   }
 
   cargarTablas(){
@@ -206,7 +208,7 @@ export class HorariosComponent implements OnInit {
 
   CrearTurno(){
     if(this.EstadoTur==undefined ||this.EstadoTur==null || this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
-       this.cantidad==undefined || this.cantidad==null
+       this.cantidad==undefined || this.cantidad==null ||this.cantidad==""
       ){
       Swal.fire({
         icon: 'error',
@@ -223,7 +225,7 @@ export class HorariosComponent implements OnInit {
       if(this.especialidad==undefined || this.especialidad==""){
         this.ClaseCEspecialidad = "form-control is-invalid select-number";
       }
-      if(this.cantidad==undefined || this.cantidad==null){
+      if(this.cantidad==undefined || this.cantidad==null ||this.cantidad==""){
         this.ClaseCantidad = "form-control is-invalid select-number";
       }
 
@@ -332,7 +334,7 @@ export class HorariosComponent implements OnInit {
 
   ActualizarTurno(){
     if(this.EstadoTur==undefined ||this.EstadoTur==null || this.hora==undefined || this.hora=="" || this.especialidad==undefined || this.especialidad==""||
-       this.cantidad==undefined || this.cantidad==null
+       this.cantidad==undefined || this.cantidad==null||this.cantidad==""
       ){
       Swal.fire({
         icon: 'error',
@@ -350,7 +352,7 @@ export class HorariosComponent implements OnInit {
       if(this.especialidad==undefined || this.especialidad==""){
         this.ClaseCEspecialidad = "form-control is-invalid select-number";
       }
-      if(this.cantidad==undefined || this.cantidad==null){
+      if(this.cantidad==undefined || this.cantidad==null||this.cantidad==""){
         this.ClaseCantidad = "form-control is-invalid select-number";
       }
 
