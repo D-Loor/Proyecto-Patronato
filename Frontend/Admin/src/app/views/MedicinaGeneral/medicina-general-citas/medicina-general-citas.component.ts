@@ -116,6 +116,8 @@ export class MedicinaGeneralCitasComponent implements OnInit {
   }
 
   cargar(){
+    this.loadingText = 'Cargando...';
+    this.spinner.show('sample');
     this.citasser.citas(this.especialidad,this.fechaActual).then(data =>{
     this.citasMG=data['result'];
     this.validarVacio=data['code'];

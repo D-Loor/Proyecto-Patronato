@@ -152,12 +152,12 @@
                     </tr>
                     <tr>
                         <th class="tinicio"> MESES </th>
+                        <th class="tmedio"  > H</th>
                         <th class="tmedio"  > M</th>
-                        <th class="tmedio"  > F</th>
+                        <th class="tmedio"  > H</th>
                         <th class="tmedio"  > M</th>
-                        <th class="tmedio"  > F</th>
+                        <th class="tmedio"  > H</th>
                         <th class="tmedio"  > M</th>
-                        <th class="tmedio"  > F</th>
                     </tr>
                 </thead>
                 <tbody>

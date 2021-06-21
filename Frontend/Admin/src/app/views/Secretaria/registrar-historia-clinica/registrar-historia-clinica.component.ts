@@ -81,9 +81,6 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   id_familiar:number; id_PacienteDA:number; id_gineco:number;
 
 
-  //cheak
-  gadCSi:string='0';gadCNo:string='1'; dbidCSi:string='0';dbidCNo:string='1'; htaCSi:string='0';htaCNo:string='1'; tbpCSi:string='0';tbpCNo:string='1'; dbiCSi:string='0';dbiCNo:string='1';
-  alcoholCSi:string='0';alcoholCNo:string='1'; tabacoCSi:string='0';tabacoCNo:string='1'; drogasCSi:string='0'; drogasCNo:string='1'; alimentacionCSi:string='0';alimentacionCNo:string='1'; diuresisCSi:string='0';diuresisCNo:string='1'; somniaCSi:string='0';somniaCNo:string='1';
   //Variables de  Datos de Afiliación
   apellidos; nombresP; cedula; edad; ocupacion; sexo; Lresidencia; Lprocedencia; fechanacimiento;
   raza; religion; nivel_instruccion; estado_civil; gad; edadM;
@@ -235,8 +232,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
     this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
     this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
-    this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
-    this.alcoholCSi='2';this.alcoholCNo='2'; this.tabacoCSi='2';this.tabacoCNo='2'; this.drogasCSi='2'; this.drogasCNo='2'; this.alimentacionCSi='2';this.alimentacionCNo='2'; this.diuresisCSi='2';this.diuresisCNo='2'; this.somniaCSi='2';this.somniaCNo='2';
+    
 
     this.DatosFamiliares=[]; this.DatosFamiliaresbasedatos=[]; this.DatosFamiliaresDB=0; this.number=0; this.actualizar=0;
     //variables de los id Para relacionar y actualiar
@@ -419,36 +415,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   }
 
-   //Es para actualizar...
-
-   checkRadioSi(radioCheck:string){
-    if(radioCheck=='gad'){this.gad=1;}
-    if(radioCheck=='dbid'){this.DBID=1;}
-    if(radioCheck=='hta'){this.HTA=1;}
-    if(radioCheck=='tbp'){this.TbP=1;}
-    if(radioCheck=='dbi'){this.DBI=1;}
-    if(radioCheck=='alcohol'){this.alcohol=1;}
-    if(radioCheck=='tabaco'){this.tabaco=1;}
-    if(radioCheck=='drogas'){this.drogas=1;}
-    if(radioCheck=='alimentacion'){this.alimentacion=1;}
-    if(radioCheck=='diuresis'){this.diuresis=1;}
-    if(radioCheck=='somnia'){this.somnia=1;}
-
-   }
-   checkRadioNo(radioCheck:string){
-    if(radioCheck=='gad'){this.gad=0;}
-    if(radioCheck=='dbid'){this.DBID=0;}
-    if(radioCheck=='hta'){this.HTA=0;}
-    if(radioCheck=='tbp'){this.TbP=0;}
-    if(radioCheck=='dbi'){this.DBI=0;}
-    if(radioCheck=='alcohol'){this.alcohol=0;}
-    if(radioCheck=='tabaco'){this.tabaco=0;}
-    if(radioCheck=='drogas'){this.drogas=0;}
-    if(radioCheck=='alimentacion'){this.alimentacion=0;}
-    if(radioCheck=='diuresis'){this.diuresis=0;}
-    if(radioCheck=='somnia'){this.somnia=0;}
-
-  }
+   
 
   cargarGinecoPersonal(id_gineco:number){
     this.ServicioSecretaria.datoGinecoObstetricos(id_gineco).then(data => {
@@ -491,7 +458,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.edad=data['result'].edad;
               this.sexo=data['result'].sexo;
               this.gad=data['result'].gad;
-              if(this.gad == 1){this.gadCSi='1'; this.gadCNo='1'; }else{this.gadCNo='0'; this.gadCSi='0';}
+              if(this.gad == 1){this.gad=true }else if(this.gad == 0){this.gad=false;}
               this.ocupacion=data['result'].ocupacion;
               this.Lresidencia=data['result'].residencia;
               this.Lprocedencia=data['result'].procedencia;
@@ -514,10 +481,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.HTA=data['result']['antecedentes_patologicos_personales'].HTA;
               this.TbP=data['result']['antecedentes_patologicos_personales'].TbP;
               this.DBI=data['result']['antecedentes_patologicos_personales'].DBI;
-              if(this.DBID == 1){this.dbidCSi='1'; this.dbidCNo='1'; }else{this.dbidCNo='0'; this.dbidCSi='0';}
-              if(this.HTA == 1){this.htaCSi='1'; this.htaCNo='1'; }else{this.htaCNo='0'; this.htaCSi='0';}
-              if(this.TbP == 1){this.tbpCSi='1'; this.tbpCNo='1'; }else{this.tbpCNo='0'; this.tbpCSi='0';}
-              if(this.DBI == 1){this.dbiCSi='1'; this.dbiCNo='1'; }else{this.dbiCNo='0'; this.dbiCSi='0';}
+              if(this.DBID == 1){this.DBID=true; }else{this.DBID=false;}
+              if(this.HTA == 1){this.HTA=true; }else{this.HTA=false;}
+              if(this.TbP == 1){this.TbP=true; }else{this.TbP=false;}
+              if(this.DBI == 1){this.DBI=true; }else{this.DBI=false;}
               this.quirurgicosT=data['result']['antecedentes_patologicos_personales'].quirujircos;
               this.alergicosT=data['result']['antecedentes_patologicos_personales'].alergias;
               this.traumatologicosT=data['result']['antecedentes_patologicos_personales'].traumas;
@@ -541,12 +508,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.diuresis=data['result']['habitos'].diuresis;
               this.somnia=data['result']['habitos'].somnia;
               //Condiciones para los check
-              if(this.alcohol == 1){this.alcoholCSi='1'; this.alcoholCNo='1'; }else{this.alcoholCNo='0'; this.alcoholCSi='0';}
-              if(this.tabaco == 1){this.tabacoCSi='1'; this.tabacoCNo='1'; }else{this.tabacoCNo='0'; this.tabacoCSi='0';}
-              if(this.drogas == 1){this.drogasCSi='1'; this.drogasCNo='1'; }else{this.drogasCNo='0'; this.drogasCSi='0';}
-              if(this.alimentacion == 1){this.alimentacionCSi='1'; this.alimentacionCNo='1'; }else{this.alimentacionCNo='0'; this.alimentacionCSi='0';}
-              if(this.diuresis == 1){this.diuresisCSi='1'; this.diuresisCNo='1'; }else{this.diuresisCNo='0'; this.diuresisCSi='0';}
-              if(this.somnia == 1){this.somniaCSi='1'; this.somniaCNo='1'; }else{this.somniaCNo='0'; this.somniaCSi='0';}
+              if(this.alcohol == 1){this.alcohol=true; }else{this.alcohol=false;}
+              if(this.tabaco == 1){this.tabaco=true;}else{this.tabaco=false;}
+              if(this.drogas == 1){this.drogas=true; }else{this.drogas=false;}
+              if(this.alimentacion == 1){this.alimentacion=true; }else{this.alimentacion=false;}
+              if(this.diuresis == 1){this.diuresis=true; }else{this.diuresis=false;}
+              if(this.somnia == 1){this.somnia=true;}else{this.somnia=false;}
 
               //this.DatosFamiliaresDB=data['result']['familiares'];
               this.DatosFamiliaresbasedatos=data['result']['familiares'];
@@ -605,7 +572,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     ce=  localStorage.getItem('CedulaExamenes');
     ce2 = localStorage.getItem('historiaClinica');
     if(this.cedula== undefined || this.cedula=="undefined"){
-      this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
+      
       this.limpiar();
       Swal.fire({
         icon: 'error',
@@ -615,8 +582,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
     }else{
       this.medicinag.AtenderPaciente(this.cedula).then(data => {
-        this.alcoholCSi='2';this.alcoholCNo='2'; this.tabacoCSi='2';this.tabacoCNo='2'; this.drogasCSi='2'; this.drogasCNo='2'; this.alimentacionCSi='2';this.alimentacionCNo='2'; this.diuresisCSi='2';this.diuresisCNo='2'; this.somniaCSi='2';this.somniaCNo='2';
-        this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
         if(data['code'] === '201'){
           if((ce!=""&&ce!=null) || (ce2!=""&&ce2!=null) ){
             this.CargarDatosPaciente(data);
@@ -646,9 +611,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
                   this.CargarDatosPaciente(data);
 
                 }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
-                  this.edit=0;
-                  this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
-                  this.limpiar();
+                  this.edit=0; this.limpiar();
                   swalWithBootstrapButtons.fire(
                     '¡Cancelado..!',
                     'No se han cargado los datos.',
@@ -660,7 +623,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
          }
          else{
-          this.gadCSi='2'; this.gadCNo='2'; this.dbidCSi='2';this.dbidCNo='2'; this.htaCSi='2';this.htaCNo='2'; this.tbpCSi='2';this.tbpCNo='2'; this.dbiCSi='2';this.dbiCNo='2';
           this.limpiar();
           Swal.fire(
             '¡Paciente no encontrado..!',
@@ -835,6 +797,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'diuresis':this.diuresis,
       'somnia':this.somnia,
     }
+    debugger
     this.ServicioSecretaria.HabitosPaciente(habitosA).then(data =>{
       this.id_habito = data['id'];
       this.Pacientes();

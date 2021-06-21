@@ -279,12 +279,7 @@ class CitaController extends Controller
             $datos->cedula = $request->cedula;
             $datos->fecha = $request->fecha;
             $datos->id_turno = $request->id_turno;
-            $datosP=Paciente::where('cedula', $cedula)->get()->first();
-            if($datosP != null){
-                $datos->estado=1;
-            }else{
-                $datos->estado=0;
-            }
+            $datos->estado=$datos->estado;
             $datos->update();
             return response()->json(['result'=>"Datos actualizados", 'code'=>'201']);
         } else{
