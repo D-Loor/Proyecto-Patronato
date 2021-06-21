@@ -68,7 +68,8 @@ export class AgendarCitaComponent implements OnInit {
   exo=0;
   recau=0;
   gad;
-  Validar; observaciones;
+  Validar=0;
+  observaciones;
 
   //Recaudacion
   precio; idPaciente;
@@ -90,7 +91,10 @@ export class AgendarCitaComponent implements OnInit {
 
   }
 
+
   CargarRecaudacion(){
+    this.Validar=0;
+    this.abono=false;
     if(this.precio==null || this.precio==undefined || this.observaciones==""|| this.observaciones==undefined
       || this.gad==undefined||this.gad==null
       ){
@@ -108,40 +112,45 @@ export class AgendarCitaComponent implements OnInit {
         if(this.gad==undefined||this.gad==null){
           this.ClaseGad="invalido";
         }
+        return false;
+
     }else{
-      this.ServicioSecretaria.Roles(this.especialidad).then(data=>{
-        this.spinner.show('sample');
-        let idR = data['result'].id_rol;
-        let datosA={
-          'id_paciente':this.idPaciente,
-          'id_rol':idR,
-          'fecha':this.fecha_consulta,
-          'valor':this.precio,
-          'exonera':this.gad,
-          'observaciones':this.observaciones,
-        }
-        this.GuardarRecaudacion(datosA);
-      }).catch((error) => {
-        console.log(error);
-        this.spinner.hide('sample');
-        this.rutas.navigate(['/500']);
-      });
+      this.abono=true;
+      this.Validar=1;
+      this.smallModal.hide();
     }
 
 
   }
 
+
+  Recaudacion(){
+
+    this.ServicioSecretaria.Roles(this.especialidad).then(data=>{
+      this.spinner.show('sample');
+      let idR = data['result'].id_rol;
+      let datosA={
+        'id_paciente':this.idPaciente,
+        'id_rol':idR,
+        'fecha':this.fecha_consulta,
+        'valor':this.precio,
+        'exonera':this.gad,
+        'observaciones':this.observaciones,
+      }
+      debugger
+      this.GuardarRecaudacion(datosA);
+    }).catch((error) => {
+      console.log(error);
+      this.spinner.hide('sample');
+      this.rutas.navigate(['/500']);
+    });
+  }
+
   GuardarRecaudacion(data:any){
     this.ServicioSecretaria.Recaudacion(data).then(data=>{
       this.LimpiarR();
-      this.smallModal.hide();
       this.recau=1;
-      Swal.fire(
-        '¡Valor Registrado!',
-        'La recaudación fue ingresada correctamente.',
-        'success'
-      );
-      this.spinner.hide('sample');
+
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');
@@ -238,7 +247,7 @@ export class AgendarCitaComponent implements OnInit {
           );
         }else{
           Swal.fire(
-            '¡Encontrado!',
+            '¡Encontrado..!',
             'El paciente cuenta con un historial clínico.',
             'success'
           );
@@ -265,9 +274,11 @@ export class AgendarCitaComponent implements OnInit {
       this.ClaseCdula="form-control form-input select-number";
 
     }else if (cedula.length === 10) {
+
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         if(data['code']=="201"){
           this.idPaciente= data['result'].id_paciente;
+          debugger
           this.pago=1;
         }else{
           this.abono = false;
@@ -431,6 +442,7 @@ export class AgendarCitaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.spinner.show('sample');
+        this.Recaudacion();
         this.GuardarCita('sample');
 
       } else if (

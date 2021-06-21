@@ -6,10 +6,10 @@
 
                     <div class="card-header">
                         <i class="icon-user-follow"></i>
-                            <strong>Angendar Cita Médica</strong>
+                            <strong>Agendar Cita Médica</strong>
                     </div>
 
-                            <div class="card-body">
+                            <div class="card-body"  >
                                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                       <div class="row">
                                           <div class=" form-group col-md-6">
@@ -78,7 +78,7 @@
 
   </div>
 
-  
+
 
   <div *ngIf="spinnerConfig['fullScreen']">
     <ngx-spinner name='sample' [bdColor]="spinnerConfig['bdColor']" [size]="spinnerConfig['size']"
@@ -90,8 +90,8 @@
   </div>
 
 
-  <div bsModal #smallModal="bs-modal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"   role="document">
+  <div bsModal #smallModal="bs-modal" class="modal fade" id="modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-sm"   role="document" data-backdrop="static" data-keyboard="false">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Recaudación</h4>
@@ -112,7 +112,7 @@
                             <input  autocomplete="off" required class="form-check-input" (click)="ClaseGad=''" type="radio" (click)="HabilitarValor(0)" name="gad" id="gad">
                             <label class="form-check-label" for="inlineRadio2">No</label>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class=" form-group col-md-4">
                     <label for="text-input">Valor</label>
