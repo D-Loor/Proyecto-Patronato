@@ -230,6 +230,7 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Consultar(cedula:string){
+    
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
 
@@ -258,6 +259,7 @@ export class AgendarCitaComponent implements OnInit {
           this.pago=1;
           this.nombres = data['result'].nombres+ " " + data['result'].apellidos;
           this.spinner.hide('sample');
+          this.ClaseCNombre="form-control form-input select-number";
         }
       }).catch((error) => {
         console.log(error);

@@ -42,7 +42,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   NuevaEnfermedad;
   confirma= false;
   pase=false;
-  tipo="Dianóstico";
+  tipo="Diagnóstico";
   edadR;
 
   ClaseMotivo:string="form-control form-input";
