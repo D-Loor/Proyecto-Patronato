@@ -237,10 +237,50 @@ class CitaController extends Controller
             $posicion++;
         }
         
+        
+        $turnoVal=[];
+        $horaminDB=[];
+        $posicion=0;
+        $posicion2=0;
         $NTurnos = count($turno);
+        date_default_timezone_set('America/Bogota');
+        $horaActual = date('H:i', time());
+        $horaActual = strtotime ( '+1 hour' , strtotime ($horaActual) );
+        $minActual = date('i', $horaActual );
+        $horaActual = date('H', $horaActual );
+        $horaActual = intval($horaActual);
+        $minActual = intval($minActual);
+        $fechaActual = date("Y-m-d",time());
+        $fechaActual = strtotime($fechaActual);
+        $fecha = strtotime($fecha);
+
+        if($fecha === $fechaActual){
+            foreach ($turno as $item){
+                $prueH = $item->hora;
+                $horaminDB = explode(':', $prueH);
+                $minDB = intval($horaminDB[1]);
+                $horaDB = intval($horaminDB[0]);
+                if($horaActual <= $horaDB){
+                    if(($horaDB - $horaActual) < 1){
+                        if($minActual <= $minDB)
+                        $turnoVal[$posicion2]=$item;
+                        $posicion2++;
+                    }else{
+                        $turnoVal[$posicion2]=$item;
+                        $posicion2++;
+                    }
+                    
+                }
+                $posicion++;
+            }
+        }else{
+            $turnoVal=$turno;
+        }
+        
+        
 
         if($NTurnos != 0){
-            return response()->json(['result'=>$turno, 'code'=>'201']);
+            return response()->json(['result'=>$turnoVal, 'code'=>'201']);
         }else
         return response()->json(['result'=>"Sin Turnos ", 'code'=>'202']);
 
