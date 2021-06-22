@@ -146,6 +146,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.cedula=cedula;
       localStorage.removeItem('RolV');
     }
+    let sesion = localStorage.getItem('sesionLoginInicio');
+    if(sesion=="Secretaría"){
+      this.containerSecretaria=0;
+    }
   }
 
   CalcularEdad(){
