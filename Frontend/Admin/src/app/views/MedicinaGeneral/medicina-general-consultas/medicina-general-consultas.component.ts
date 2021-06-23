@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ReportesService } from '../../../servicios/reportes.service';
 
 @Component({
   selector: 'app-medicina-general-consultas',
@@ -15,7 +16,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 })
 export class MedicinaGeneralConsultasComponent implements OnInit {
 
-  constructor(public medicinag:MedicinaGeneralService, public rutas:Router,public citasser:CitasService, private spinner: NgxSpinnerService) { }
+  constructor(public GReceta:ReportesService ,public medicinag:MedicinaGeneralService, public rutas:Router,public citasser:CitasService, private spinner: NgxSpinnerService) { }
   isCollapsed = false;
   presun=false;
   defini=false;
@@ -56,7 +57,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   ClaseprescripcionR='form-control form-input';
   Claserp='form-control form-input';
 
-  //Variables del modal receta 
+  //Variables del modal receta
   nombresR; pesoR; tallaR; taR; edadRe; fechaR; rpR; prescripcionR;
 
   ClaseLugar:string="";
@@ -160,8 +161,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.confirma=false;
     this.pase=false;
   }
-  
+
   NotiCampos(){
+    window.scrollTo(0, 0);
     Swal.fire({
       icon: 'error',
       title: '¡Hay campos vacíos..!',
@@ -201,68 +203,82 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       if(this.indicaciones==undefined||this.indicaciones==""){
         this.ClaseIndicaciones = "form-control is-invalid";
       }
-      
+
 
       this.NotiCampos();
     }
     else if(this.pase==false){
       this.ClaseEnfermedad = "invalido";
       Swal.fire(
-        'Error!',
+        '¡Error..!',
         'La enfermedad no se encuentra registrada.',
         'error'
       )
     }else{
         this.Modal.show();
-        debugger
+
         this.nombresR = this.nombres;
         this.edadRe = this.edad;
-        this.rpR = this.plan_terapeutico;
-        this.prescripcionR =this.indicaciones;
         this.fechaR = this.fechaActual;
     }
   }
 
   GuardarConsulta(){
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-info',
-        cancelButton: 'btn btn-danger'
-
-      },
-      buttonsStyling: true
-    })
-    swalWithBootstrapButtons.fire({
-      title: '¿Está seguro de guardar?',
-      text: "Una vez guardada no se podrá cambiar.",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Guardar',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#20a8d8',
-      cancelButtonColor: '#f86c6b',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.IngresarConsulta();
-
-        swalWithBootstrapButtons.fire(
-          '¡Guardado!',
-          'La consulta ha sido guardada.',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          '¡Cancelado!',
-          'No se ha resgistrado.',
-          'error'
-        )
+    if(this.plan_terapeutico==""|| this.plan_terapeutico== null || this.indicaciones==""|| this.indicaciones== null){
+      if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
+        this.ClasePlan = "form-control is-invalid";
       }
-    })
+      if(this.indicaciones==undefined||this.indicaciones==""){
+        this.ClaseIndicaciones = "form-control is-invalid";
+      }
+      Swal.fire(
+        '¡Campos Vacíos..!',
+        'La enfermedad no se encuentra registrada.',
+        'error'
+      )
+
+    }else{
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-info',
+          cancelButton: 'btn btn-danger'
+
+        },
+        buttonsStyling: true
+      })
+      swalWithBootstrapButtons.fire({
+        title: '¿Está seguro de guardar?',
+        text: "Una vez guardada no se podrá cambiar.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#20a8d8',
+        cancelButtonColor: '#f86c6b',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.IngresarConsulta();
+
+          swalWithBootstrapButtons.fire(
+            '¡Guardado!',
+            'La consulta ha sido guardada.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '¡Cancelado!',
+            'No se ha resgistrado.',
+            'error'
+          )
+        }
+      })
+    }
+
   }
 
   eliminarCita(id:string) {
@@ -353,7 +369,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   IngresarConsulta(){
     this.loadingText = 'Guardando...';
     this.spinner.show('sample');
-    
+
 
     let data;
     let cert=0;
@@ -389,6 +405,41 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     });
   }
 
+  GenerarReceta(){
+
+    if(this.plan_terapeutico==""|| this.plan_terapeutico== null || this.indicaciones==""|| this.indicaciones== null){
+      if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
+        this.ClasePlan = "form-control is-invalid";
+      }
+      if(this.indicaciones==undefined||this.indicaciones==""){
+        this.ClaseIndicaciones = "form-control is-invalid";
+      }
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario.'
+      })
+
+    }
+    else{
+      let data;
+      data = {
+       'nombre':this.nombresR,
+       'peso':this.motivo,
+       'talla': this.tallaR,
+       'ta': this.taR,
+       'edad':this.edadR,
+       'fecha': this.fechaActual,
+       'rp': this.plan_terapeutico,
+       'pres': this.indicaciones
+       }
+
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.nombresR+'/'+this.motivo+'/'+this.tallaR+'/'+this.taR+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
+
+    }
+
+  }
+
   CalcEdad(edad:string){
     var coma = "";
     let sepa = edad.split(coma);
@@ -411,7 +462,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     }else{
       return valor = edad+" años";
     }
-    
+
 
   }
 

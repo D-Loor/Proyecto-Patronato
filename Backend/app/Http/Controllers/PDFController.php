@@ -1627,7 +1627,7 @@ class PDFController extends Controller
         return \PDF::loadView('RecaudacionMensual', compact('Mes','Year','result','total','recaudacion','egresos','saldo'))->setPaper('a4', 'lands')->stream('RecaudacionMensual'.$Mes.'-'.$Year.'pdf');
     }
 
-    public function GenerarReceta($fecha){
+    public function GenerarReceta($nombre,$peso,$talla,$ta,$edad,$fecha,$rp,$pres){
 
         $valores = explode('-', $fecha);
         $year = $valores[0];

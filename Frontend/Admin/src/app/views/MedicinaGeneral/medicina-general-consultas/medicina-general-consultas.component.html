@@ -228,19 +228,19 @@
         <div class="row">
           <div class="form-group col-sm-12">
               <label for="vat">Rp.</label>
-              <textarea  id="rpR" name="rpR" [(ngModel)]="rpR" rows="3" [class]="Claserp" (click)="Claserp='form-control form-input'" placeholder="Escriba la receta..." required></textarea>
+              <textarea  id="plan_terapeutico" name="plan_terapeutico" [(ngModel)]="plan_terapeutico" rows="3" [class]="ClasePlan" (click)="ClasePlan='form-control form-input'" placeholder="Escriba la receta..." required></textarea>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-sm-12">
               <label for="vat">Prescripción</label>
-              <textarea  id="prescripcionR" name="prescripcionR" [(ngModel)]="prescripcionR" rows="3" [class]="ClaseprescripcionR" (click)="ClaseprescripcionR='form-control form-input'" required></textarea>
+              <textarea  id="indicaciones" name="indicaciones" [(ngModel)]="indicaciones" rows="3" [class]="ClaseIndicaciones" (click)="ClaseIndicaciones='form-control form-input'" required></textarea>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-success">Imprimir</button>
+        <button type="button" class="btn btn-success" (click)="GenerarReceta()">Generar Receta</button>
         <button type="button" class="btn btn-primary" (click)="GuardarConsulta()">Finalizar</button>
       </div>
     </div><!-- /.modal-content -->
