@@ -582,7 +582,7 @@ class PDFController extends Controller
 
     public function RegistroDiarioMedicina($fecha){
 
-        $datosMG=Historia_Clinica_MG::where('fecha',$fecha)->with('paciente')->get();
+        $datosMG=Historia_Clinica_MG::where('fecha',$fecha)->with('paciente','enfermedad')->get();
 
         $Result=[];
         $num=1;
@@ -672,24 +672,30 @@ class PDFController extends Controller
             $mujer[2]=" ";
             $mujer[3]=" ";
 
-            if($item->paciente['sexo']=='Hombre'){
-                $mujer[0]=" ";
-                $mujer[1]=" ";
-                $mujer[2]=" ";
-                $mujer[3]=" ";
-                //$TOTAL[6]=$TOTAL[6]+1;
-                //$TOTAL[7]=$TOTAL[7]+1;
-            }else{
-                if($item['tipo_atencion'] == "Primera"){
-                    //$mujer[2]="X";
-                    //$TOTAL[8]=$TOTAL[8]+1;
-                }else{
-                    //$mujer[3]="X";
-                    //$TOTAL[9]=$TOTAL[9]+1;
+            if($item->paciente['sexo'] == 'Mujer'){
+                if($item->enfermedad['enfermedad']== 'Control de Embarazo'){
+                    
+                    if($item['tipo_atencion'] == "Primera"){
+                        $mujer[0]="X";
+                        $TOTAL[6]=$TOTAL[6]+1;
+                    }else{
+                        $mujer[1]="X";
+                        $TOTAL[7]=$TOTAL[7]+1;
+                    }
+
+                   
+                }
+                else if($item->enfermedad['enfermedad']== 'Planificación Familiar'){
+
+                    if($item['tipo_atencion'] == "Primera"){
+                        $mujer[2]="X";
+                        $TOTAL[8]=$TOTAL[8]+1;
+                    }else{
+                        $mujer[3]="X";
+                        $TOTAL[9]=$TOTAL[9]+1;
+                    }
                 }
 
-                $mujer[0]=" ";
-                $mujer[1]=" ";
                
             }
 
@@ -1086,17 +1092,29 @@ class PDFController extends Controller
                 $mujer[2] = 0;
                 $mujer[3] = 0;
 
-                if ($item->paciente['sexo'] == 'Hombre') {
-                    $mujer[0] = 0;
-                    $mujer[1] = 0;
-                    $mujer[2] = 0;
-                    $mujer[3] = 0;
-                } else {
-                    $mujer[0] = 0;
-                    $mujer[1] = 0;
-                    $mujer[2] = 0;
-                    $mujer[3] = 0;
+                if($item->paciente['sexo'] == 'Mujer'){
+                    if($item->enfermedad['enfermedad']== 'Control de Embarazo'){
+                        
+                        if($item['tipo_atencion'] == "Primera"){
+                            $mujer[0]=1;
+                        }else{
+                            $mujer[1]=1;
+                        }
+    
+                       
+                    }
+                    else if($item->enfermedad['enfermedad']== 'Planificación Familiar'){
+    
+                        if($item['tipo_atencion'] == "Primera"){
+                            $mujer[2]=1;
+                        }else{
+                            $mujer[3]=1;
+                        }
+                    }
+    
+                    
                 }
+
 
                 $ninos[0] = 0;
                 $ninos[1] = 0;
@@ -1432,7 +1450,7 @@ class PDFController extends Controller
         }
         $mes = strtoupper($mesL);
 
-        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+        return \PDF::loadView('RecaudacionDiarioMedicinaGeneral', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudaciónDiarioMedicinaGeneral'.$fecha.'.pdf');
     }
 
     public function ValidarRecaudacionDiarioTerapia($fecha,$id_rol){
@@ -1495,7 +1513,7 @@ class PDFController extends Controller
         }
         $mes = strtoupper($mesL);
        
-        return \PDF::loadView('RecaudacionDiarioTerapia', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+        return \PDF::loadView('RecaudacionDiarioTerapia', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudaciónDiarioTerapia'.$fecha.'.pdf');
     }
 
     public function ValidarRecaudacionMensual($Mes, $Year){
@@ -1606,7 +1624,58 @@ class PDFController extends Controller
 
         //return response()->json(['result'=>$result]);
 
-        return \PDF::loadView('RecaudacionMensual', compact('Mes','Year','result','total','recaudacion','egresos','saldo'))->setPaper('a4', 'lands')->stream('RecaudacionDiarioMedicinaGeneral.pdf');
+        return \PDF::loadView('RecaudacionMensual', compact('Mes','Year','result','total','recaudacion','egresos','saldo'))->setPaper('a4', 'lands')->stream('RecaudacionMensual'.$Mes.'-'.$Year.'pdf');
+    }
+
+    public function GenerarReceta($fecha){
+
+        $valores = explode('-', $fecha);
+        $year = $valores[0];
+        $mes = $valores[1];
+        $dia = $valores[2];
+
+
+        switch ($mes) {
+            case 1:
+                $mesL = "Enero";
+                break;
+            case 2:
+                $mesL = "Febrero";
+                break;
+            case 3:
+                $mesL = "Marzo";
+                break;
+            case 4:
+                $mesL = "Abril";
+                break;
+            case 5:
+                $mesL = "Mayo";
+                break;
+            case 6:
+                $mesL = "Junio";
+                break;
+            case 7:
+                $mesL = "Julio";
+                break;
+            case 8:
+                $mesL = "Agosto";
+                break;
+            case 9:
+                $mesL = "Septiembre";
+                break;
+            case 10:
+                $mesL = "Octubre";
+                break;
+            case 11:
+                $mesL = "Noviembre";
+                break;
+            case 12:
+                $mesL = "Diciembre";
+                break;
+        }
+        $mes = strtoupper($mesL);
+
+        return \PDF::loadView('Receta', compact('dia','mes','year'))->setPaper('a5', 'landscape')->stream('Receta.pdf');
     }
 
 }

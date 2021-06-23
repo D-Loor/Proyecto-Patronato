@@ -255,10 +255,10 @@
                     
                 </tr>
                 <tr>
+                    <th class="numero" colspan="2" rowspan="1"> $0.50 </th>
                     <th class="numero" colspan="2" rowspan="1"> $1 </th>
-                    <th class="numero" colspan="2" rowspan="1"> $2 </th>
+                    <th class="numero" colspan="2" rowspan="1"> $0.50 </th>
                     <th class="numero" colspan="2" rowspan="1"> $1 </th>
-                    <th class="numero" colspan="2" rowspan="1"> $2 </th>
                     
                 </tr>
             </thead>
@@ -270,11 +270,11 @@
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
                                     @if($datos[$i]->valor == 1)
-                                        <td colspan="2">X</td>
                                         <td colspan="2"></td>
+                                        <td colspan="2">X</td>
                                     @else
-                                        <td colspan="2"></td>
                                         <td colspan="2">X</td>
+                                        <td colspan="2"></td>
                                     @endif
                                 <th class="numero">{{$i+23}}</th>
                                 <td class=""></td>
@@ -296,11 +296,11 @@
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
                                 @if($datos[$i]->valor == 1)
-                                        <td colspan="2">X</td>
                                         <td colspan="2"></td>
+                                        <td colspan="2">X</td>
                                  @else
-                                        <td colspan="2"></td>
                                         <td colspan="2">X</td>
+                                        <td colspan="2"></td>
                                 @endif
                                 @if($numDato > $i+22)
                                     <th class="numero">{{$i+23}}</th>
