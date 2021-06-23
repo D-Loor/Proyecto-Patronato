@@ -313,17 +313,66 @@
             @foreach($result as $item)
                 <tr>
                     <th class="td" style="font-weight: bold;" colspan="2">{{$item[0]}}</th>
-                    <td colspan="2">{{$item[1]}}</td>
-                    <td colspan="2">{{$item[2]}}</td>
-                    <td colspan="2">{{$item[3]}}</td>
-                    <td colspan="2">{{$item[4]}}</td>
-                    <td colspan="2">{{$item[5]}}</td>
+                    @if($item[1]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[1]}}</td>
+                    @endif
+                    
+                    @if($item[2]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[2]}}</td>
+                    @endif
+
+                    @if($item[3]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[3]}}</td>
+                    @endif
+
+                    @if($item[4]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[4]}}</td>
+                    @endif
+
+                    @if($item[5]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[5]}}</td>
+                    @endif
                     <th class="nborde"></th>
-                    <td colspan="2">{{$item[6]}}</td>
-                    <td colspan="2">{{$item[7]}}</td>
-                    <td colspan="2">{{$item[8]}}</td>
-                    <td colspan="2">{{$item[9]}}</td>
-                    <td colspan="2">{{$item[10]}}</td>
+                    @if($item[6]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[6]}}</td>
+                    @endif
+
+                    @if($item[7]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[7]}}</td>
+                    @endif
+
+                    @if($item[8]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[8]}}</td>
+                    @endif
+
+                    @if($item[9]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[9]}}</td>
+                    @endif
+
+                    @if($item[10]==0)
+                        <td colspan="2"></td>
+                    @else
+                        <td colspan="2">{{$item[10]}}</td>
+                    @endif
+                    
                     <th class="nborde"></th>
                 </tr>
             @endforeach

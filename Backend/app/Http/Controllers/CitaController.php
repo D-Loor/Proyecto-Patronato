@@ -242,7 +242,6 @@ class CitaController extends Controller
         $horaminDB=[];
         $posicion=0;
         $posicion2=0;
-        $NTurnos = count($turno);
         date_default_timezone_set('America/Bogota');
         $horaActual = date('H:i', time());
         $horaActual = strtotime ( '+1 hour' , strtotime ($horaActual) );
@@ -278,7 +277,8 @@ class CitaController extends Controller
         }
         
         
-
+        
+        $NTurnos = count($turnoVal);
         if($NTurnos != 0){
             return response()->json(['result'=>$turnoVal, 'code'=>'201']);
         }else
