@@ -144,7 +144,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.containerMGandRF=0;
       this.edit=1;
       this.cedula=cedula;
-      localStorage.removeItem('RolV');
+      
     }
     let sesion = localStorage.getItem('sesionLoginInicio');
     if(sesion=="Secretaría"){
@@ -950,6 +950,100 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   validacionTotal(){
+    debugger
+    if(this.examen_cabezaC==0){
+      if(this.examen_cabezaT=="" ||this.examen_cabezaT==undefined){
+        this.ClaseTexamen_cabeza="form-control is-invalid";
+      }
+    }
+    if(this.examen_cuelloC==0){
+      if(this.examen_cuelloT==""||this.examen_cuelloT==undefined){
+        this.ClaseTexamen_cuello="form-control is-invalid";
+      }
+    }
+    if(this.examen_toraxC==0){
+      if(this.examen_toraxT==""||this.examen_toraxT==undefined){
+        this.ClaseTexamen_torax="form-control is-invalid";
+      }
+    }
+    if(this.examen_abdomenC==0){
+      if(this.examen_abdomenT==""||this.examen_abdomenT==undefined){
+        this.ClaseTexamen_abdomen="form-control is-invalid";
+      }
+    }
+    if(this.examen_msuperiorC==0){
+      if(this.examen_msuperiorT==""||this.examen_msuperiorT==undefined){
+        this.ClaseTexamen_msuperior="form-control is-invalid";
+      }
+    }
+    if(this.examen_minferioresC==0){
+      if(this.examen_minferioresT==""||this.examen_minferioresT==undefined){
+        this.ClaseTexamen_minferiores="form-control is-invalid";
+      }
+    }
+    if(this.examen_genitalC==0){
+      if(this.examen_genitalT==""||this.examen_genitalT==undefined){
+        this.ClaseTexamen_genital="form-control is-invalid";
+      }
+    }
+    if(this.examen_analC==0){
+      if(this.examen_analT==""||this.examen_analT==undefined){
+        this.ClaseTexamen_anal="form-control is-invalid";
+      }
+    }
+    if(this.examen_otrosC==0){
+      if(this.examen_otrosT==""||this.examen_otrosT==undefined){
+        this.ClaseTexamen_otros="form-control is-invalid";
+      }
+    }
+    if(this.examen_digestivoC==0){
+      if(this.examen_digestivoT==""||this.examen_digestivoT==undefined){
+        this.ClaseTexamen_digestivo="form-control is-invalid";
+      }
+    }
+    if(this.examen_respiratorioC==0){
+      if(this.examen_respiratorioT==""||this.examen_respiratorioT==undefined){
+        this.ClaseTexamen_respiratorio="form-control is-invalid";
+      }
+    }
+    if(this.examen_cardiacoC==0){
+      if(this.examen_cardiacoT==""||this.examen_cardiacoT==undefined){
+        this.ClaseTexamen_cardiaco="form-control is-invalid";
+      }
+    }
+    if(this.examen_genitourinarioC==0){
+      if(this.examen_genitourinarioT==""||this.examen_genitourinarioT==undefined){
+        this.ClaseTexamen_genitourinario="form-control is-invalid";
+      }
+    }
+    if(this.examen_osteomuscularC==0){
+      if(this.examen_osteomuscularT==""||this.examen_osteomuscularT==undefined){
+        this.ClaseTexamen_osteomuscular="form-control is-invalid";
+      }
+    }
+    if(this.examen_nerviosoC==0){
+      if(this.examen_nerviosoT==""||this.examen_nerviosoT==undefined){
+        this.ClaseTexamen_nervioso="form-control is-invalid";
+      }
+    }
+    if(this.examen_laboratorioC==0){
+      if(this.examen_laboratorioT==""||this.examen_laboratorioT==undefined){
+        this.ClaseTexamen_laboratorio="form-control is-invalid";
+      }
+    }
+    if(this.examen_electrocardiogramaC==0){
+      if(this.examen_electrocardiogramaT==""||this.examen_electrocardiogramaT==undefined){
+        this.ClaseTexamen_electrocardiograma="form-control is-invalid";
+      }
+    }
+    debugger
+    if(this.examen_RToraxC==0){
+      if(this.examen_RToraxT==""||this.examen_RToraxT==undefined){
+        this.ClaseTexamen_RTorax="form-control is-invalid";
+      }
+    }
+    
+
     if(this.alcohol==undefined){
       this.ClaseAlcohol="invalido";
     }
@@ -1065,13 +1159,18 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
     this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 &&
     this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
-    this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined
+    this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
+    this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
+    this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
+    this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
+    this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_toraxC==0 && this.examen_toraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
  ){
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para registrar el historial clínico.'
       })
+      
       this.validacionTotal();
 
 
@@ -1146,102 +1245,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para actualizar el historial clínico.'
       })
-      if(this.examen_cabezaC==0){
-        if(this.examen_cabezaT==""){
-          this.ClaseTexamen_cabeza="form-control is-invalid";
-        }
-      }
-      if(this.examen_cuelloC==0){
-        if(this.examen_cuelloT==""){
-          this.ClaseTexamen_cuello="form-control is-invalid";
-        }
-      }
-      if(this.examen_toraxC==0){
-        if(this.examen_toraxT==""){
-          this.ClaseTexamen_torax="form-control is-invalid";
-        }
-      }
-      if(this.examen_abdomenC==0){
-        if(this.examen_abdomenT==""){
-          this.ClaseTexamen_abdomen="form-control is-invalid";
-        }
-      }
-      if(this.examen_msuperiorC==0){
-        if(this.examen_msuperiorT==""){
-          this.ClaseTexamen_msuperior="form-control is-invalid";
-        }
-      }
-      if(this.examen_minferioresC==0){
-        if(this.examen_minferioresT==""){
-          this.ClaseTexamen_minferiores="form-control is-invalid";
-        }
-      }
-      if(this.examen_genitalC==0){
-        if(this.examen_genitalT==""){
-          this.ClaseTexamen_genital="form-control is-invalid";
-        }
-      }
-      if(this.examen_analC==0){
-        if(this.examen_analT==""){
-          this.ClaseTexamen_anal="form-control is-invalid";
-        }
-      }
-      if(this.examen_otrosC==0){
-        if(this.examen_otrosT==""){
-          this.ClaseTexamen_otros="form-control is-invalid";
-        }
-      }
-      if(this.examen_digestivoC==0){
-        if(this.examen_digestivoT==""){
-          this.ClaseTexamen_digestivo="form-control is-invalid";
-        }
-      }
-      if(this.examen_respiratorioC==0){
-        if(this.examen_respiratorioT==""){
-          this.ClaseTexamen_respiratorio="form-control is-invalid";
-        }
-      }
-      if(this.examen_cardiacoC==0){
-        if(this.examen_cardiacoT==""){
-          this.ClaseTexamen_cardiaco="form-control is-invalid";
-        }
-      }
-      if(this.examen_genitourinarioC==0){
-        if(this.examen_genitourinarioT==""){
-          this.ClaseTexamen_genitourinario="form-control is-invalid";
-        }
-      }
-      if(this.examen_osteomuscularC==0){
-        if(this.examen_osteomuscularT==""){
-          this.ClaseTexamen_osteomuscular="form-control is-invalid";
-        }
-      }
-      if(this.examen_nerviosoC==0){
-        if(this.examen_nerviosoT==""){
-          this.ClaseTexamen_nervioso="form-control is-invalid";
-        }
-      }
-      if(this.examen_laboratorioC==0){
-        if(this.examen_laboratorioT==""){
-          this.ClaseTexamen_laboratorio="form-control is-invalid";
-        }
-      }
-      if(this.examen_electrocardiogramaC==0){
-        if(this.examen_electrocardiogramaT==""){
-          this.ClaseTexamen_electrocardiograma="form-control is-invalid";
-        }
-      }
-      if(this.examen_toraxC==0){
-        if(this.examen_toraxT==""){
-          this.ClaseTexamen_torax="form-control is-invalid";
-        }
-      }
-      if(this.examen_toraxC==0){
-        if(this.examen_toraxT==""){
-          this.ClaseTexamen_torax="form-control is-invalid";
-        }
-      }
-
       this.validacionTotal();
 
     }else{

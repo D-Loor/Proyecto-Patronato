@@ -29,7 +29,7 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaMg" id="FechaMg" name="FechaMg" [ngModel]="FechaMg | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaMg = $event" type="date" placeholder="date"
+                  <input name="FechaMg" id="FechaMg" name="FechaMg" min="{{fechaActual}}" [ngModel]="FechaMg | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaMg = $event" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
@@ -169,7 +169,7 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaRf" id="FechaRf" name="FechaRf" [ngModel]="FechaRf | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaRf= $event" type="date" placeholder="date"
+                  <input name="FechaRf" id="FechaRf" name="FechaRf" min="{{fechaActual}}" [ngModel]="FechaRf | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaRf= $event" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
