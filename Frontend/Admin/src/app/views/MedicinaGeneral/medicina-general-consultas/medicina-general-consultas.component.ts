@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { CitasService } from '../../../servicios/citas.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-medicina-general-consultas',
@@ -44,11 +46,18 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   pase=false;
   tipo="Diagnóstico";
   edadR;
+  indicaciones;
 
   ClaseMotivo:string="form-control form-input";
   ClaseAntecedentes:string="form-control form-input";
   ClaseDiagnostico:string="form-control form-input";
   ClasePlan:string="form-control form-input";
+  ClaseIndicaciones='form-control form-input';
+  ClaseprescripcionR='form-control form-input';
+  Claserp='form-control form-input';
+
+  //Variables del modal receta 
+  nombresR; pesoR; tallaR; taR; edadRe; fechaR; rpR; prescripcionR;
 
   ClaseLugar:string="";
   ClaseTipo:string="";
@@ -66,7 +75,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     template: null,
     showSpinner: false
   };
-
+  @ViewChild('largeModal') public Modal: ModalDirective;
 
   ngOnInit(): void {
     localStorage.removeItem('cedulaMGandRF');
@@ -151,6 +160,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     this.confirma=false;
     this.pase=false;
   }
+  
   NotiCampos(){
     Swal.fire({
       icon: 'error',
@@ -158,6 +168,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       text: 'Debe de completar todo el formulario para registrar la consulta.'
     })
   }
+
   notificacion(){
 
     if(this.antecedentes_enfermedad==undefined||this.condicion_diagnostico==undefined||this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""||this.NuevaEnfermedad==null||this.condicion_diagnostico==""||this.lugar_atencion==undefined||this.lugar_atencion==""||this.tipo_atencion==undefined||this.tipo_atencion==""||this.antecedentes_enfermedad==""||this.motivo==undefined||this.motivo==""||this.diagnostico==undefined||this.diagnostico==""||this.plan_terapeutico==undefined||this.plan_terapeutico==""){
@@ -187,6 +198,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
         this.ClasePlan = "form-control is-invalid";
       }
+      if(this.indicaciones==undefined||this.indicaciones==""){
+        this.ClaseIndicaciones = "form-control is-invalid";
+      }
       
 
       this.NotiCampos();
@@ -198,49 +212,57 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'La enfermedad no se encuentra registrada.',
         'error'
       )
+    }else{
+        this.Modal.show();
+        debugger
+        this.nombresR = this.nombres;
+        this.edadRe = this.edad;
+        this.rpR = this.plan_terapeutico;
+        this.prescripcionR =this.indicaciones;
+        this.fechaR = this.fechaActual;
     }
-    else{
+  }
 
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-info',
-          cancelButton: 'btn btn-danger'
+  GuardarConsulta(){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-info',
+        cancelButton: 'btn btn-danger'
 
-        },
-        buttonsStyling: true
-      })
-      swalWithBootstrapButtons.fire({
-        title: '¿Está seguro de guardar?',
-        text: "Una vez guardada no se podrá cambiar.",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Guardar',
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#20a8d8',
-        cancelButtonColor: '#f86c6b',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
+      },
+      buttonsStyling: true
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Está seguro de guardar?',
+      text: "Una vez guardada no se podrá cambiar.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#20a8d8',
+      cancelButtonColor: '#f86c6b',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-          this.IngresarConsulta();
+        this.IngresarConsulta();
 
-          swalWithBootstrapButtons.fire(
-            '¡Guardado!',
-            'La consulta ha sido guardada.',
-            'success'
-          )
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            '¡Cancelado!',
-            'No se ha resgistrado.',
-            'error'
-          )
-        }
-      })
-    }
+        swalWithBootstrapButtons.fire(
+          '¡Guardado!',
+          'La consulta ha sido guardada.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          '¡Cancelado!',
+          'No se ha resgistrado.',
+          'error'
+        )
+      }
+    })
   }
 
   eliminarCita(id:string) {
@@ -331,6 +353,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   IngresarConsulta(){
     this.loadingText = 'Guardando...';
     this.spinner.show('sample');
+    
 
     let data;
     let cert=0;

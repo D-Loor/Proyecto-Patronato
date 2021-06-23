@@ -134,9 +134,14 @@
 
               </div>
 
-              <div class="form-group " *ngIf="gad==1">
+              <div class="form-group ">
                 <label for="vat">Plan terapéutico</label>
                    <textarea  id="plan_terapeutico" name="plan_terapeutico" [(ngModel)]="plan_terapeutico" rows="3" [class]="ClasePlan" (click)="ClasePlan='form-control form-input'" placeholder="Escriba el plan terapéutico..." required></textarea>
+              </div>
+
+              <div class="form-group ">
+                <label for="vat">Indicaciones</label>
+                   <textarea  id="indicaciones" name="indicaciones" [(ngModel)]="indicaciones" rows="3" [class]="ClaseIndicaciones" (click)="ClaseIndicaciones='form-control form-input'" placeholder="Escriba las indicaciones..." required></textarea>
               </div>
 
               <div class="form-group ">
@@ -169,3 +174,75 @@
   </ngx-spinner>
 
 </div>
+
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Receta Médica</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <div class="form-group">
+              <label for="vat">Nombres</label>
+                <input  class="form-control" type="text" name="nombresR"   [(ngModel)]="nombresR" id="nombresR">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <div class="form-group">
+              <label for="vat">Peso</label>
+                <input  class="form-control" type="text" name="pesoR" placeholder="Kg"  [(ngModel)]="pesoR" id="pesoR">
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <div class="form-group">
+              <label for="vat">Talla</label>
+                <input  class="form-control" type="text" name="tallaR"  placeholder="m" [(ngModel)]="tallaR" id="tallaR">
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <div class="form-group">
+              <label for="vat">T.A</label>
+                <input  class="form-control" type="text" name="taR" placeholder="T.A"  [(ngModel)]="taR" id="taR">
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <div class="form-group">
+              <label for="vat">Edad</label>
+                <input  class="form-control" disabled type="text" name="edadRe"   [(ngModel)]="edadRe" id="edadRe">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+              <label for="vat">Fecha</label>
+              <input  class="form-control" type="text" disabled name="fechaR"   [(ngModel)]="fechaR" id="fechaR">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+              <label for="vat">Rp.</label>
+              <textarea  id="rpR" name="rpR" [(ngModel)]="rpR" rows="3" [class]="Claserp" (click)="Claserp='form-control form-input'" placeholder="Escriba la receta..." required></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+              <label for="vat">Prescripción</label>
+              <textarea  id="prescripcionR" name="prescripcionR" [(ngModel)]="prescripcionR" rows="3" [class]="ClaseprescripcionR" (click)="ClaseprescripcionR='form-control form-input'" required></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
+        <button type="button" class="btn btn-success">Imprimir</button>
+        <button type="button" class="btn btn-primary" (click)="GuardarConsulta()">Finalizar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

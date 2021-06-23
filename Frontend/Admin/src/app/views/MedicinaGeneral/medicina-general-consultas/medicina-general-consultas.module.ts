@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FiltroModule } from '../../../pipes/filtro.module';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -20,7 +21,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-
+    ModalModule.forRoot(),
   ],
   declarations: [
     MedicinaGeneralConsultasComponent
