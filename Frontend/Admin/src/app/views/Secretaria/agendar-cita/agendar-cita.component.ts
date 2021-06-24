@@ -631,10 +631,11 @@ export class AgendarCitaComponent implements OnInit {
         if(data['code']=='202'){
           Swal.fire(
             '¡Lo sentimos..!',
-            'No existen citas disponibles en esta fecha.',
+            'No existen turnos disponibles en esta fecha.',
             'error'
           )
           this.spinner.hide('sample');
+          this.fecha_consulta="";
           this.ArrayTurnos = [];
         }else{
         array = data['result'];
