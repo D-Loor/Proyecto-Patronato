@@ -198,8 +198,6 @@ export class ConsultasComponent implements OnInit {
       this.edad = this.CalcEdad(data['result'].edad);
       this.edadR = data['result'].edad;
       this.idpaciente = data['result'].id_paciente;
-      localStorage.removeItem('cedulaRF');
-      localStorage.removeItem('idCita');
     })
     .catch((error) => {
       console.log(error);

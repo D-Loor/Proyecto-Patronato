@@ -130,8 +130,6 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.edad = this.CalcEdad(data['result'].edad);
       this.edadR = data['result'].edad;
       this.gad = data['result'].gad;
-      localStorage.removeItem('cedulaMG');
-      localStorage.removeItem('idCita');
       if(this.gad==1)
        this.gadv="Miembro activo";
       else
