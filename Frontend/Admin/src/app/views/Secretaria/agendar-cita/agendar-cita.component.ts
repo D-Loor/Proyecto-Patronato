@@ -141,7 +141,7 @@ export class AgendarCitaComponent implements OnInit {
         'exonera':this.gad,
         'observaciones':this.observaciones,
       }
-      debugger
+      
       this.GuardarRecaudacion(datosA);
     }).catch((error) => {
       console.log(error);
@@ -192,6 +192,7 @@ export class AgendarCitaComponent implements OnInit {
     this.cargarRoles();
     this.idCita = localStorage.getItem('idCita');
     this.cedulaCita= localStorage.getItem('cedulaCita');
+    
     if(localStorage.getItem('abonoCita')=="1"){
       this.abono=true;
     }
@@ -200,6 +201,7 @@ export class AgendarCitaComponent implements OnInit {
       this.nombres=localStorage.getItem('nombres');
       this.cedula=localStorage.getItem('cedulaCita');
       this.estado=1;
+      this.ValidarCedula(this.cedula);
     }
   }
 
@@ -284,7 +286,7 @@ export class AgendarCitaComponent implements OnInit {
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         if(data['code']=="201"){
           this.idPaciente= data['result'].id_paciente;
-          debugger
+          
           this.pago=1;
         }else{
           this.abono = false;
@@ -500,10 +502,10 @@ export class AgendarCitaComponent implements OnInit {
   }
 
   Actualizar(id_cita,nombres,cedula,especialidad,fecha,abono,id_turno){
-
-    let abo="NoExiste"
     if(abono==1){
-      abo='DOADBA';
+      abono='DOADBA';
+    }else{
+      abono="no existe";
     }
     let arrayLocal = {
       "id_cita": id_cita,
@@ -511,7 +513,7 @@ export class AgendarCitaComponent implements OnInit {
       "cedula": cedula,
       "especialidad": especialidad,
       "fecha": fecha,
-      "abono": abo,
+      "abono": abono,
       "id_turno": id_turno,
       'fecha_actual':this.fechaActual,
     }

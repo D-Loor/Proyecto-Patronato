@@ -165,7 +165,6 @@ export class CitasComponent implements OnInit {
 
             this.abono=true;
             this.Validar=1;
-
             let datosA={
               'id_paciente':this.idPaciente,
               'id_rol':this.idrolmodal,
@@ -444,7 +443,6 @@ export class CitasComponent implements OnInit {
 
 
   recaudar(){
-
     this.cargarRF(this.fechaActual,0,false,true);
     this.cargarMG(this.fechaActual,0,false,true);
   }

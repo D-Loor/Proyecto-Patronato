@@ -2,4 +2,3 @@ npm install sweetalert2
 npm install ngx-spinner --save
 npm i @bbortt/ngx-autocomplete
 composer require barryvdh/laravel-dompdf
-npm install ng2-pdf-viewer --save
