@@ -189,7 +189,7 @@
           <div class="form-group col-sm-12">
             <div class="form-group">
               <label for="vat">Nombres</label>
-                <input  class="form-control" type="text" name="nombresR"   [(ngModel)]="nombresR" id="nombresR">
+                <input [class]="ClaseNombre" (click)="ClaseNombre='form-control form-input'"  type="text" name="nombresR"   [(ngModel)]="nombresR" id="nombresR">
             </div>
           </div>
         </div>

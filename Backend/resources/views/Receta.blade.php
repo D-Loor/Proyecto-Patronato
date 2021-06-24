@@ -9,63 +9,107 @@
     <style>
 
         @page {
-            margin-top:20px;
+            margin-top:0px;
             margin-bottom:0px;
             margin-right:20px;
-            margin-left:20px;
+            margin-left:3px;
            
         }
-        
-        .contenedor{
-            max-width: 800px;
-            height: 516px;
-            border: 1px solid rgb(0,200,0); 
+        .datos{
+           
+            font-size:18px;
+            position: relative;
+            padding-top: 127px;
         }
-        .LogoJunin{
-            margin-left: 20px;
-            margin-top: 10px !important;
-            height:60px;
-            weight:125px;
-        }
-        .LogoPatronato{
-            float:right;
-            margin-right: 20px;
-            margin-top:10px !important;
-            height:55px;
-            weight:100px;
-        }
-        .LogoCentral{
+        .portada{
+            width: 789px;
+            height: 559px;
             position: absolute;
-            opacity:0.3;
-            margin-top: 150px !important;
-            margin-left: 100px !important;
-            max-height: 130px;
         }
-       .Doctor{
+        .nombre{
+            margin-left:85px;
+            
+        }
+        .peso{
             position: absolute;
-            margin-top: 275px !important;
-            margin-left: 385px !important;
-            max-height: 130px;
-            color:#125D98; 
-            font-family: "Segoe IU", sans-serif;
+            font-size:17px;
+            word-spacing: -8px !important;
+            letter-spacing: -1px;
+            margin-left:60px;
+        }
+        .talla{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -5px !important;
+            letter-spacing: -2px;
+            margin-left:144px;
+        }
+        .ta{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -6px !important;
+            letter-spacing: -1px;
+            margin-left:230px;
+        }
+        .edad{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -4px !important;
+            letter-spacing: -2px;
+            margin-left:327px;
+        }
+        .dia{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -5px !important;
+            letter-spacing: -2px;
+            margin-left:98px;
+        }
+        .mes{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -6px !important;
+            letter-spacing: -1px;
+            margin-left:208px;
+        }
+        .anio{
+            position: absolute;
+            font-size:17px;
+            word-spacing: -4px !important;
+            letter-spacing: -2px;
+            margin-left:348px;
+        }
+        .fecha{
+            padding-top:-2px !important;
+        }
+        .rp{          
+            
+            word-spacing: -4px !important;
+            letter-spacing: -1px; 
+           font-size:19px;
+           position: relative;
+           
+           
+       }
+       .pres{
+            word-spacing: -4px !important;
+            letter-spacing: -1px;
+           font-size:19px;
+           position: relative;
 
        }
-       .Rol{
-            margin-left: 55px !important;
-            font-size:9px;
+       .cont1{
+            
+           position: absolute;
+           padding-top: 50px;
+           max-width: 365px;
+           padding-left: 20px;
        }
-       .Nombre{
-            letter-spacing: 0.03em;
-            font-size:12px;
-       }
-       .texto{
-           margin-top:20px;
-           margin-left:20px;
-           font-family: "Segoe IU", sans-serif;
-           color:#125D98;  
-       }
-       .linea1{
-           
+       .cont2{
+           position: absolute;
+           padding-top: 20px;
+           max-width: 377px;
+           padding-left: 410px;
        }
 
     </style>
@@ -73,43 +117,41 @@
 <body>
 
     
+    <img src="imagenes/receta1.jpg" class="portada">
+  
+  <div class="datos">
+  <samp class="nombre"> {{$nombre}}</samp>
+  <br>
+  <samp class="peso"> {{$peso}}</samp>
+  <samp class="talla"> {{$talla}}</samp>
+  <samp class="ta">  {{$ta}} </samp>
+  <samp class="edad">  {{$edad}}</samp>
+ <br>
+  <div class="fecha">
+    <samp class="dia">  {{$dia}}</samp>
+    <samp class="mes">  {{$mes}}</samp>
+    <samp class="anio">  {{$year}}</samp>
+  </div>
+  
+  
+  </div>
 
-    <div class="contenedor">
-    <img src="imagenes/logoCompleto.png" class="LogoJunin">
-    <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
-    
-    <div class="texto">
-       <span>Nombre</span> <span class="linea1">Diego Oswaldo Loor Morán</span>
+  
+  <span class="rp">
+    $lineas=0;
+    @foreach($rp as $item)
+        
+        <samp class="cont1">{{$item}}</samp> 
 
-       <br>
+        <br>
 
-       <span>Peso</span> <span class="linea1">60 Kg</span> 
-       <span>Talla</span> <span class="linea1">1.76 m</span> 
-       <span>T.A.</span> <span class="linea1">xxxx</span>
-       <span>Edad</span> <span class="linea1">21 años</span>
+        $lineas++;
+    @endforeach
+  </span>
 
-       <br>
-
-       <span>Fecha</span> <span class="linea1">22</span>
-       <span>de</span> <span class="linea1">Junio</span>
-       <span>de 20</span> <span class="linea1">21</span>
-       
-       <br>
-       <br>
-
-       <span>Rp.</span> 
-
-    </div>
-
-    <img src="imagenes/logoCompleto.png" class="LogoCentral">
-
-
-        <div class="Doctor">
-            <div class="Nombre"> DR. MARTÍN DUEÑAS INTRIAGO</div>
-            <div class="Rol">MÉDICO CIRUJANO</div>
-        </div>
-    </div>
-
+  <span class="pres">
+        <samp class="cont2">{{$pres}}</samp>
+  </span>
 
 </body>
 </html>

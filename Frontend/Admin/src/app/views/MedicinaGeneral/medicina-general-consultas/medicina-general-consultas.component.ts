@@ -54,6 +54,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   ClaseDiagnostico:string="form-control form-input";
   ClasePlan:string="form-control form-input";
   ClaseIndicaciones='form-control form-input';
+  ClaseNombre='form-control form-input';
   ClaseprescripcionR='form-control form-input';
   Claserp='form-control form-input';
 
@@ -118,7 +119,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
     }
 
   }
-
+  ngOnDestroy() {
+    localStorage.removeItem('cedulaMG');
+    localStorage.removeItem('idCita');
+  }
   CargarDatos(){
     let cedula = localStorage.getItem('cedulaMG');
     this.idCitas = localStorage.getItem('idCita');
@@ -130,6 +134,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.edad = this.CalcEdad(data['result'].edad);
       this.edadR = data['result'].edad;
       this.gad = data['result'].gad;
+
       if(this.gad==1)
        this.gadv="Miembro activo";
       else
@@ -161,12 +166,13 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   }
 
   NotiCampos(){
-    window.scrollTo(0, 0);
+
     Swal.fire({
       icon: 'error',
       title: '¡Hay campos vacíos..!',
       text: 'Debe de completar todo el formulario para registrar la consulta.'
     })
+    window.scrollTo(0, 0);
   }
 
   notificacion(){
@@ -412,6 +418,9 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       if(this.indicaciones==undefined||this.indicaciones==""){
         this.ClaseIndicaciones = "form-control is-invalid";
       }
+      if(this.nombresR==undefined||this.nombresR==""){
+        this.ClaseNombre = "form-control is-invalid";
+      }
       Swal.fire({
         icon: 'error',
         title: '¡Hay campos vacíos..!',
@@ -419,11 +428,31 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       })
 
     }
+
     else{
+      let peso="";
+      let talla="";
+      let ta="";
+
+      if(this.pesoR==null || this.pesoR==undefined)
+        peso="---";
+      else
+        peso=this.pesoR;
+
+      if(this.tallaR==null || this.tallaR==undefined)
+        talla="---";
+      else
+        talla=this.tallaR;
+
+      if(this.taR==null || this.taR==undefined)
+        ta="---";
+      else
+        ta=this.taR;
+
       let data;
       data = {
        'nombre':this.nombresR,
-       'peso':this.motivo,
+       'peso':this.pesoR,
        'talla': this.tallaR,
        'ta': this.taR,
        'edad':this.edadR,
@@ -432,7 +461,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
        'pres': this.indicaciones
        }
 
-      window.open('http://127.0.0.1:8000/api/Receta/'+this.nombresR+'/'+this.motivo+'/'+this.tallaR+'/'+this.taR+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
 
     }
 

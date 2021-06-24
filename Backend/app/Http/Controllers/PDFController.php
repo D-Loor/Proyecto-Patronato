@@ -90,7 +90,7 @@ class PDFController extends Controller
 
             //return response()->json(['MGH'=>$MGH, 'RFH'=>$RFH,'MGM'=>$MGM, 'RFM'=>$RFM,'STH'=>$STH,'STM'=>$STM,'Total'=>$Total]);
 
-            return \PDF::loadView('ReportePacientesAnual',compact('MGH','MGM','RFH','RFM','STH','STM','Total','year'))->setPaper('a4', 'landscape')->stream('ReportePacientesAnual.pdf');
+            return \PDF::loadView('ReportePacientesAnual',compact('MGH','MGM','RFH','RFM','STH','STM','Total','year'))->setPaper('a4', 'landscape')->stream('ReportePacientesAnual-'.$year.'.pdf');
 
 
     }
@@ -184,7 +184,7 @@ class PDFController extends Controller
 
         //return response()->json(['HombresMG'=>$MGcontH, 'MujeresMG'=>$MGcontM, 'TotalMG'=>$datosMG, 'HombresRF'=>$RFcontH, 'MujeresRF'=>$RFcontM, 'TotalRF'=>$datosRF, 'TotalH'=>$TotalH, 'TotalM'=>$TotalM, 'Total'=>$Total]);
 
-        return \PDF::loadView('ReportePacientesMensual', compact('MGcontH','MGcontM','datosMG','RFcontH','RFcontM','datosRF','TotalH','TotalM','Total', 'mes','Year'))->setPaper('a4', 'landscape')->stream('ReportePacientesMensual.pdf');
+        return \PDF::loadView('ReportePacientesMensual', compact('MGcontH','MGcontM','datosMG','RFcontH','RFcontM','datosRF','TotalH','TotalM','Total', 'mes','Year'))->setPaper('a4', 'landscape')->stream('ReportePacientesMensual-'.$Mes.'-'.$Year.'.pdf');
 
     }
 
@@ -374,7 +374,7 @@ class PDFController extends Controller
             
 
             //return response()->json(['result'=>$Result]);
-        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','total','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral.pdf');
+        return \PDF::loadView('MorbilidadMedicinaGeneral', compact('Result','mes','Year','total','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadMedicinaGeneral-'.$Mes.'-'.$Year.'.pdf');
 
     }
 
@@ -564,7 +564,7 @@ class PDFController extends Controller
         }
 
         //return response()->json(['result'=>$TotalF]);
-        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia.pdf');
+        return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia-'.$Mes.'-'.$Year.'.pdf');
     }
 
     public function ValidarRegistroDiarioMedicina($fecha){
@@ -833,7 +833,7 @@ class PDFController extends Controller
         }
 
         // return response()->json(['result'=>$Result]);
-        return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina.pdf');
+        return \PDF::loadView('RegistroDiarioMedicina', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioMedicina'.$fecha.'.pdf');
 
     }
 
@@ -979,7 +979,7 @@ class PDFController extends Controller
             $num++;
             $totalAtenciones++;
         }
-        return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica.pdf');
+        return \PDF::loadView('RegistroDiarioFisica', compact('Result','dia','mes','anio','TOTAL'))->setPaper('a3', 'landscape')->stream('RegistroDiarioFisica-'.$fecha.'.pdf');
     }
 
     public function ValidarConsolidadoMensualMedicinaGeneral($Mes, $Year){
@@ -1230,7 +1230,7 @@ class PDFController extends Controller
         }
 
 
-        return \PDF::loadView('ConsolidadoMensualMedicinaGeneral', compact('Result','mesL','anio', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral.pdf');
+        return \PDF::loadView('ConsolidadoMensualMedicinaGeneral', compact('Result','mesL','anio', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualMedicinaGeneral-'.$Mes.'-'.$Year.'.pdf');
     }
 
     public function ValidarConsolidadoMensualTerapia($Mes, $Year){
@@ -1387,7 +1387,7 @@ class PDFController extends Controller
 
           // return response()->json(['result'=>$Result, 'code'=>$Total]);
 
-       return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia.pdf');
+       return \PDF::loadView('ConsolidadoMensualTerapia', compact('Result','mes','Year', 'Total'))->setPaper('a3', 'landscape')->stream('ConsolidadoMensualTerapia-'.$Mes.'-'.$Year.'.pdf');
     }
 
     public function ValidarRecaudacionDiarioMedicinaGeneral($fecha,$id_rol){
@@ -1630,11 +1630,11 @@ class PDFController extends Controller
     public function GenerarReceta($nombre,$peso,$talla,$ta,$edad,$fecha,$rp,$pres){
 
         $valores = explode('-', $fecha);
-        $year = $valores[0];
         $mes = $valores[1];
         $dia = $valores[2];
-
-
+        $final= explode('20', $valores[0]);
+        $year=$final[1];
+        
         switch ($mes) {
             case 1:
                 $mesL = "Enero";
@@ -1673,9 +1673,35 @@ class PDFController extends Controller
                 $mesL = "Diciembre";
                 break;
         }
-        $mes = strtoupper($mesL);
 
-        return \PDF::loadView('Receta', compact('dia','mes','year'))->setPaper('a5', 'landscape')->stream('Receta.pdf');
+        $rp = explode('..', $rp);
+        $pres = explode('..', $pres);
+        
+        $espaciosrp=[];
+        foreach($rp as $item) {
+
+            $conteo = strlen($item);
+            $espa= $conteo/35;
+            array_push ( $espaciosrp , (int)$espa );
+           
+        }
+        
+        $espaciospres=[];
+        foreach($pres as $item) {
+
+            $conteo = strlen($item);
+            $espa= $conteo/35;
+            array_push ( $espaciospres , (int)$espa );
+           
+        }
+
+
+
+        return response()->json(['result'=>$rp,'result2'=>$espaciosrp]);
+
+        $mes = strtoupper($mesL);
+        //return response()->json(['result'=>$final]);
+        return \PDF::loadView('Receta', compact('dia','mes','year','nombre','talla','peso','ta','edad','rp','pres'))->setPaper('a5', 'landscape')->stream('Receta-'.$nombre.'.pdf');
     }
 
 }
