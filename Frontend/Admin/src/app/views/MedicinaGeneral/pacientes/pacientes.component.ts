@@ -313,33 +313,105 @@ export class PacientesComponent implements OnInit {
 
     this.APF=data['result']['familiares'];
 
-    this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
-    this.examen_toraxT=data['result']['examen_fisicos'].torax;
-    this.examen_abdomenT=data['result']['examen_fisicos'].abdomen;
-    this.examen_msuperiorT=data['result']['examen_fisicos'].miembros_superiores;
-    this.examen_minferioresT=data['result']['examen_fisicos'].miembros_inferiores;
-    this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
-    this.examen_analT=data['result']['examen_fisicos'].region_anal;
-
     if(data['result']['examen_fisicos'].cabeza==1){
       this.examen_cabezaT = 'Sin antecedentes';
     }else{
       this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
     }
 
+    if(data['result']['examen_fisicos'].cuello==1){
+      this.examen_cuelloT = 'Sin antecedentes';
+    }else{
+      this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
+    }
+
+    if(data['result']['examen_fisicos'].torax==1){
+      this.examen_toraxT = 'Sin antecedentes';
+    }else{
+      this.examen_toraxT = data['result']['examen_fisicos'].torax;
+    }
+
+    if(data['result']['examen_fisicos'].abdomen==1){
+      this.examen_abdomenT = 'Sin antecedentes';
+    }else{
+      this.examen_abdomenT = data['result']['examen_fisicos'].abdomen;
+    }
+
+    if(data['result']['examen_fisicos'].miembros_superiores==1){
+      this.examen_msuperiorT = 'Sin antecedentes';
+    }else{
+      this.examen_msuperiorT = data['result']['examen_fisicos'].miembros_superiores;
+    }
+
+    if(data['result']['examen_fisicos'].miembros_inferiores==1){
+      this.examen_minferioresT = 'Sin antecedentes';
+    }else{
+      this.examen_minferioresT = data['result']['examen_fisicos'].miembros_inferiores;
+    }
+
+    if(data['result']['examen_fisicos'].region_genital==1){
+      this.examen_genitalT = 'Sin antecedentes';
+    }else{
+      this.examen_genitalT = data['result']['examen_fisicos'].region_genital;
+    }
+
+    if(data['result']['examen_fisicos'].region_anal==1){
+      this.examen_analT = 'Sin antecedentes';
+    }else{
+      this.examen_analT = data['result']['examen_fisicos'].region_anal;
+    }
     
+    if(data['result']['examen_organo_sistemas'].sistema_digestivo==1){
+      this.examen_digestivoT = 'Sin antecedentes';
+    }else{
+      this.examen_digestivoT = data['result']['examen_organo_sistemas'].sistema_digestivo;
+    }
+    if(data['result']['examen_organo_sistemas'].sistema_respiratorio==1){
+      this.examen_respiratorioT = 'Sin antecedentes';
+    }else{
+      this.examen_respiratorioT = data['result']['examen_organo_sistemas'].sistema_respiratorio;
+    }
+    if(data['result']['examen_organo_sistemas'].sistema_cardiaco==1){
+      this.examen_cardiacoT = 'Sin antecedentes';
+    }else{
+      this.examen_cardiacoT = data['result']['examen_organo_sistemas'].sistema_cardiaco;
+    }
+    if(data['result']['examen_organo_sistemas'].sistema_genitourinarion==1){
+      this.examen_genitourinarioT = 'Sin antecedentes';
+    }else{
+      this.examen_genitourinarioT = data['result']['examen_organo_sistemas'].sistema_genitourinarion;
+    }
+    if(data['result']['examen_organo_sistemas'].sistema_osteomuscular==1){
+      this.examen_osteomuscularT = 'Sin antecedentes';
+    }else{
+      this.examen_osteomuscularT = data['result']['examen_organo_sistemas'].sistema_osteomuscular;
+    }
+    if(data['result']['examen_organo_sistemas'].sistema_nervioso==1){
+      this.examen_nerviosoT = 'Sin antecedentes';
+    }else{
+      this.examen_nerviosoT = data['result']['examen_organo_sistemas'].sistema_nervioso;
+    }
 
-    this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
-    this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;
-    this.examen_cardiacoT=data['result']['examen_organo_sistemas'].sistema_cardiaco;
-    this.examen_genitourinarioT=data['result']['examen_organo_sistemas'].sistema_genitourinarion;
-    this.examen_osteomuscularT=data['result']['examen_organo_sistemas'].sistema_osteomuscular;
-    this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
-
-    this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
-    this.examen_electrocardiogramaT=data['result']['examene_complementarios'].laboratorio;
-    this.examen_RToraxT=data['result']['examene_complementarios'].laboratorio;
-    this.examen_otrosT=data['result']['examene_complementarios'].laboratorio;
+    if(data['result']['examene_complementarios'].laboratorio==1){
+      this.examen_laboratorioT = 'Sin antecedentes';
+    }else{
+      this.examen_laboratorioT = data['result']['examene_complementarios'].laboratorio;
+    }
+    if(data['result']['examene_complementarios'].electrocardiograma==1){
+      this.examen_electrocardiogramaT = 'Sin antecedentes';
+    }else{
+      this.examen_electrocardiogramaT = data['result']['examene_complementarios'].electrocardiograma;
+    }
+    if(data['result']['examene_complementarios'].radiografia_torax==1){
+      this.examen_RToraxT = 'Sin antecedentes';
+    }else{
+      this.examen_RToraxT = data['result']['examene_complementarios'].radiografia_torax;
+    }
+    if(data['result']['examene_complementarios'].otros==1){
+      this.examen_otrosT = 'Sin antecedentes';
+    }else{
+      this.examen_otrosT = data['result']['examene_complementarios'].otros;
+    }
   }).catch(error =>{
     console.log(error);
     this.spinner.hide('sample');
