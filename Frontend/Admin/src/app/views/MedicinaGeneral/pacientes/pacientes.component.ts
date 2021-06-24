@@ -311,16 +311,8 @@ export class PacientesComponent implements OnInit {
     }
 
 
-
-
-
-
-
-
-
     this.APF=data['result']['familiares'];
 
-    this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
     this.examen_cuelloT=data['result']['examen_fisicos'].cuello;
     this.examen_toraxT=data['result']['examen_fisicos'].torax;
     this.examen_abdomenT=data['result']['examen_fisicos'].abdomen;
@@ -328,6 +320,14 @@ export class PacientesComponent implements OnInit {
     this.examen_minferioresT=data['result']['examen_fisicos'].miembros_inferiores;
     this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
     this.examen_analT=data['result']['examen_fisicos'].region_anal;
+
+    if(data['result']['examen_fisicos'].cabeza==1){
+      this.examen_cabezaT = 'Sin antecedentes';
+    }else{
+      this.examen_cabezaT=data['result']['examen_fisicos'].cabeza;
+    }
+
+    
 
     this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
     this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;

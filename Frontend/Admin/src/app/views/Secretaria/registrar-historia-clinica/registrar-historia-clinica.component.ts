@@ -117,6 +117,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   contador
   ngOnInit() {
+    debugger
     let cedula="";
     let cedulaSecretaria = "";
     this.containerSecretaria=0;
@@ -1155,7 +1156,18 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
 
   VaidarPaciente(){
+    debugger
     let mujer = this.ValidarMujer();
+    let validarCampoMGandRF=0;
+    if(this.containerSecretaria!=0){
+      if(this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
+      this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
+      this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
+      this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
+      this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_RToraxC==0 && this.examen_RToraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""){
+        validarCampoMGandRF=1;
+      }
+    };
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
     this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
     this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
@@ -1164,11 +1176,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
     this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 &&
     this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
-    this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
-    this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
-    this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
-    this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
-    this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_RToraxC==0 && this.examen_RToraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
+    this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||validarCampoMGandRF==1
  ){
       Swal.fire({
         icon: 'error',
@@ -1231,6 +1239,16 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   actualizarDatos(){
     let mujer = this.ValidarMujer();
+    let validarCampoMGandRF=0;
+    if(this.containerSecretaria!=0){
+      if(this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
+      this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
+      this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
+      this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
+      this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_RToraxC==0 && this.examen_RToraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""){
+        validarCampoMGandRF=1;
+      }
+    };
     if(this.apellidos==undefined||this.apellidos==""||this.nombresP==undefined||this.nombresP==""||
        this.cedula==undefined||this.cedula==""||this.edad==undefined||this.edad==null||this.gad==undefined||this.ocupacion==undefined||this.ocupacion==""||this.sexo==undefined||this.sexo==""||
        this.Lresidencia==undefined||this.Lresidencia==""||this.Lprocedencia==undefined||this.Lprocedencia==""||
@@ -1239,11 +1257,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
        this.raza==undefined||this.raza==""||this.ninezC==0 && this.ninezT==""||this.adolescenciaC==0 && this.adolescenciaT==""||this.adultezC==0 &&this.adultezT==""||
        this.quirurgicosC==0 && this.quirurgicosT==""||this.alergicosC==0 && this.alergicosT==""||this.traumatologicosC==0 &&
        this.traumatologicosT==""||mujer==true||this.alcohol==undefined||this.tabaco==undefined||this.drogas==undefined||
-       this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||this.examen_cabezaC==0 && this.examen_cabezaT==""||this.examen_cuelloC==0 && this.examen_cuelloT==""||
-       this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
-       this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
-       this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
-       this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_toraxC==0 && this.examen_toraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
+       this.alimentacion==undefined||this.diuresis==undefined||this.somnia==undefined||validarCampoMGandRF==1
     ){
       Swal.fire({
         icon: 'error',
