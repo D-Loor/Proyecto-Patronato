@@ -258,6 +258,7 @@ export class CitasComponent implements OnInit {
     this.FechaRf = this.fechaActual;
     this.cargarMG(this.fechaActual,0,false,false);
     this.cargarRF(this.fechaActual,0,false,false);
+    localStorage.removeItem('cedulaMGandRF');
   }
 
   alertActualizado(){

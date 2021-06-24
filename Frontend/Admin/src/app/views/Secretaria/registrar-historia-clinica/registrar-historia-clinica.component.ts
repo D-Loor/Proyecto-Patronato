@@ -73,7 +73,7 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
   ClaseTexamen_cabeza='form-control'; ClaseTexamen_cuello='form-control'; ClaseTexamen_torax='form-control'; ClaseTexamen_abdomen='form-control'; ClaseTexamen_msuperior='form-control'; ClaseTexamen_minferiores='form-control'; ClaseTexamen_genital='form-control'; ClaseTexamen_anal='form-control';
   ClaseTexamen_digestivo='form-control'; ClaseTexamen_respiratorio='form-control'; ClaseTexamen_cardiaco='form-control'; ClaseTexamen_genitourinario="form-control"; ClaseTexamen_osteomuscular="form-control"; ClaseTexamen_nervioso="form-control";
   ClaseTexamen_laboratorio='form-control'; ClaseTexamen_electrocardiograma='form-control'; ClaseTexamen_RTorax='form-control'; ClaseTexamen_otros='form-control';
-
+  ClaseAntecedentePato="form-control"; ClaseEstados = ""; ClaseUnion="form-control";
 
   //id para relaciones
   id_obstetrico:number; id_patologico:number; id_e_fisico:number;
@@ -292,13 +292,35 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   LlenarArray(){
+    if(this.nombres == undefined || this.nombres=='' || this.estado == undefined || this.estado == ''||this.union==undefined || this.union == ''){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para registrar el historial clínico.'
+      })
 
+        if(this.nombres==""||this.nombres == undefined){
+          this.ClaseAntecedentePato="form-control is-invalid";
+        }
+
+        if(this.estado==undefined || this.estado==''){
+          this.ClaseEstados="invalido";
+        }
+
+        if(this.union==undefined||this.union==""){
+          this.ClaseUnion="form-control is-invalid";
+        }
+      
+    }else{
     this.DatosFamiliaresDB=0;
     this.number ++;
     if(this.union == "Otro"){
       this.union = this.union2;
     }
     if(this.estadoT == null || this.estadoT== ""){
+      this.estadoT = "Sin causas";
+    }
+    if(this.estado==1){
       this.estadoT = "Sin causas";
     }
     let DatosFamiliares2 = [
@@ -316,7 +338,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.estadoT = "";
 
   }
-
+  }
 
   EliminarDatosArray(elimina:string){
     for (var i=0;i<this.DatosFamiliares.length;i++){
@@ -1457,12 +1479,35 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 }
 
   aggArrayDB(){
+    if(this.nombres == undefined || this.nombres=='' || this.estado == undefined || this.estado == ''||this.union==undefined || this.union == ''){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario para registrar el historial clínico.'
+      })
+
+        if(this.nombres==""||this.nombres == undefined){
+          this.ClaseAntecedentePato="form-control is-invalid";
+        }
+
+        if(this.estado==undefined || this.estado==''){
+          this.ClaseEstados="invalido";
+        }
+
+        if(this.union==undefined||this.union==""){
+          this.ClaseUnion="form-control is-invalid";
+        }
+      
+    }else{
     let  arrayLocal:any;
 
     if(this.union == "Otro"){
       this.union = this.union2;
     }
     if(this.estadoT == null || this.estadoT== ""){
+      this.estadoT = "Sin causas";
+    }
+    if(this.estado==1){
       this.estadoT = "Sin causas";
     }
       arrayLocal = {
@@ -1476,6 +1521,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         this.AntecedentesPatologicosDB();
       });
   }
+}
 
 
   AntecedentesPatologicosDB(){

@@ -349,16 +349,16 @@
                                 <div class="row">
                                     <div class="form-group col-sm-8">
                                         <label for="company">Antecedentes patológicos</label>
-                                        <input autocomplete="off" type="text" class="form-control" required [(ngModel)]="nombres" id="nombres" name="nombres" placeholder="Ingrese los antecedentes">
+                                        <input autocomplete="off" [class]="ClaseAntecedentePato" (click)="ClaseAntecedentePato='form-control'" type="text" class="form-control" required [(ngModel)]="nombres" id="nombres" name="nombres" placeholder="Ingrese los antecedentes">
                                         <br>
-                                        <label >Estado</label>
+                                        <label for="inline-radios" [class]="ClaseEstados">Estado</label>
                                         <div class="col-md-4 col-form-label">
                                             <div class="form-check form-check-inline mr-1" id="inline-radiosN">
-                                                <input autocomplete="off" required class="form-check-input" type="radio" name="estado"  [(ngModel)]="estado" id="estado" value="1" (click)="vidaVer()">
+                                                <input (click)="this.ClaseEstados=''" autocomplete="off" required class="form-check-input" type="radio" name="estado"  [(ngModel)]="estado" id="estado" value="1" (click)="vidaVer()">
                                                 <label class="form-check-label" for="inlineRadio1">Vive</label>
                                             </div>
                                             <div class="form-check form-check-inline mr-1">
-                                                <input autocomplete="off" class="form-check-input" type="radio" name="estado"  [(ngModel)]="estado" id="estado" value="0" (click)="vidaOcultar()">
+                                                <input (click)="this.ClaseEstados=''" autocomplete="off" class="form-check-input" type="radio" name="estado"  [(ngModel)]="estado" id="estado" value="0" (click)="vidaOcultar()">
                                                 <label class="form-check-label" for="inlineRadio2">Fallecido</label>
                                             </div>
                                         </div>
@@ -376,7 +376,7 @@
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="union">Unión</label>
-                                        <select id="union" class="form-control" [(ngModel)]="union" name="union" required>
+                                        <select id="union" class="form-control" [class]="ClaseUnion" (click)="ClaseUnion='form-control'" [(ngModel)]="union" name="union" required>
                                             <option value="Padre">Padre</option>
                                             <option value="Madre">Madre</option>
                                             <option value="Hermano(a)">Hermano(a)</option>

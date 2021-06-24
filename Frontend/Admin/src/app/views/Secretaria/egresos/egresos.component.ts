@@ -55,6 +55,7 @@ export class EgresosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEgresos();
+    localStorage.removeItem('cedulaMGandRF');
   }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes

@@ -203,6 +203,7 @@ export class AgendarCitaComponent implements OnInit {
       this.estado=1;
       this.ValidarCedula(this.cedula);
     }
+    localStorage.removeItem('cedulaMGandRF');
   }
 
   cargarRoles(){
