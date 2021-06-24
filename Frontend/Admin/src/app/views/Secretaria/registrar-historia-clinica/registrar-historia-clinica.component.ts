@@ -100,18 +100,18 @@ export class RegistrarHistoriaClinicaComponent implements OnInit {
 
 
   //Variables de Examenes Físicos Generales
-  examen_cabezaT; examen_cuelloT; examen_toraxT; examen_abdomenT; examen_msuperiorT; examen_minferioresT; examen_genitalT; examen_analT;
+  examen_cabezaT=""; examen_cuelloT=""; examen_toraxT=""; examen_abdomenT=""; examen_msuperiorT=""; examen_minferioresT=""; examen_genitalT=""; examen_analT="";
   //Check Variables Examenes Físicos Generales
 examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_msuperiorC=0; examen_minferioresC=0; examen_genitalC=0; examen_analC=0;
 
 
   //Variables de Examenes de Organos y Sistemas
-  examen_digestivoT; examen_respiratorioT; examen_cardiacoT; examen_genitourinarioT; examen_osteomuscularT; examen_nerviosoT;
+  examen_digestivoT=""; examen_respiratorioT=""; examen_cardiacoT=""; examen_genitourinarioT=""; examen_osteomuscularT=""; examen_nerviosoT="";
   //Check Variables Examenes de Organos y Sistemass
   examen_digestivoC=0; examen_respiratorioC=0; examen_cardiacoC=0; examen_genitourinarioC=0; examen_osteomuscularC=0; examen_nerviosoC=0;
 
   //Variables de Examenes Complementarios
-  examen_laboratorioT; examen_electrocardiogramaT; examen_RToraxT; examen_otrosT;
+  examen_laboratorioT=""; examen_electrocardiogramaT=""; examen_RToraxT=""; examen_otrosT="";
   //Check Variables Examenes Complementarioss
   examen_laboratorioC=0; examen_electrocardiogramaC=0; examen_RToraxC=0; examen_otrosC=0;
 
@@ -132,6 +132,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
 
     if(cedula!=""&&cedula!=null){
+      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=1;
       this.cedula=cedula;
@@ -142,6 +143,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     if(rol == "MG" || rol == "RF"){
       this.containerSecretaria=1;
       this.containerMGandRF=0;
+      if(cedula!=""&&cedula!=null){
+        this.containerSecretaria=1;
+        this.containerMGandRF=1;
+      }
       this.edit=1;
       this.cedula=cedula;
       
@@ -536,14 +541,14 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.examen_genitalT=data['result']['examen_fisicos'].region_genital;
               this.examen_analT=data['result']['examen_fisicos'].region_anal;
               //Condiciones para los check
-              if(this.examen_cabezaT==1){this.examen_cabezaC=1; this.examen_cabezaT='';}
-              if(this.examen_cuelloT==1){this.examen_cuelloC=1;this.examen_cuelloT='';}
-              if(this.examen_toraxT==1){this.examen_toraxC=1;this.examen_toraxT='';}
-              if(this.examen_abdomenT==1){this.examen_abdomenC=1;this.examen_abdomenT='';}
-              if(this.examen_msuperiorT==1){this.examen_msuperiorC=1;this.examen_msuperiorT='';}
-              if(this.examen_minferioresT==1){this.examen_minferioresC=1;this.examen_minferioresT='';}
-              if(this.examen_genitalT==1){this.examen_genitalC=1;this.examen_genitalT='';}
-              if(this.examen_analT==1){this.examen_analC=1;this.examen_analT='';}
+              if(this.examen_cabezaT=="1"){this.examen_cabezaC=1; this.examen_cabezaT='';}
+              if(this.examen_cuelloT=="1"){this.examen_cuelloC=1;this.examen_cuelloT='';}
+              if(this.examen_toraxT=="1"){this.examen_toraxC=1;this.examen_toraxT='';}
+              if(this.examen_abdomenT=="1"){this.examen_abdomenC=1;this.examen_abdomenT='';}
+              if(this.examen_msuperiorT=="1"){this.examen_msuperiorC=1;this.examen_msuperiorT='';}
+              if(this.examen_minferioresT=="1"){this.examen_minferioresC=1;this.examen_minferioresT='';}
+              if(this.examen_genitalT=="1"){this.examen_genitalC=1;this.examen_genitalT='';}
+              if(this.examen_analT=="1"){this.examen_analC=1;this.examen_analT='';}
 
               this.examen_digestivoT=data['result']['examen_organo_sistemas'].sistema_digestivo;
               this.examen_respiratorioT=data['result']['examen_organo_sistemas'].sistema_respiratorio;
@@ -552,22 +557,22 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
               this.examen_osteomuscularT=data['result']['examen_organo_sistemas'].sistema_osteomuscular;
               this.examen_nerviosoT=data['result']['examen_organo_sistemas'].sistema_nervioso;
               //Condiciones para los check
-              if(this.examen_digestivoT==1){this.examen_digestivoC=1; this.examen_digestivoT='';}
-              if(this.examen_respiratorioT==1){this.examen_respiratorioC=1;this.examen_respiratorioT='';}
-              if(this.examen_cardiacoT==1){this.examen_cardiacoC=1;this.examen_cardiacoT='';}
-              if(this.examen_genitourinarioT==1){this.examen_genitourinarioC=1;this.examen_genitourinarioT='';}
-              if(this.examen_osteomuscularT==1){this.examen_osteomuscularC=1;this.examen_osteomuscularT='';}
-              if(this.examen_nerviosoT==1){this.examen_nerviosoC=1;this.examen_nerviosoT='';}
+              if(this.examen_digestivoT=="1"){this.examen_digestivoC=1; this.examen_digestivoT='';}
+              if(this.examen_respiratorioT=="1"){this.examen_respiratorioC=1;this.examen_respiratorioT='';}
+              if(this.examen_cardiacoT=="1"){this.examen_cardiacoC=1;this.examen_cardiacoT='';}
+              if(this.examen_genitourinarioT=="1"){this.examen_genitourinarioC=1;this.examen_genitourinarioT='';}
+              if(this.examen_osteomuscularT=="1"){this.examen_osteomuscularC=1;this.examen_osteomuscularT='';}
+              if(this.examen_nerviosoT=="1"){this.examen_nerviosoC=1;this.examen_nerviosoT='';}
 
               this.examen_laboratorioT=data['result']['examene_complementarios'].laboratorio;
               this.examen_electrocardiogramaT=data['result']['examene_complementarios'].electrocardiograma;
               this.examen_RToraxT=data['result']['examene_complementarios'].radiografia_torax;
               this.examen_otrosT=data['result']['examene_complementarios'].otros;
               //Condiciones para los check
-              if(this.examen_laboratorioT==1){this.examen_laboratorioC=1; this.examen_laboratorioT='';}
-              if(this.examen_electrocardiogramaT==1){this.examen_electrocardiogramaC=1;this.examen_electrocardiogramaT='';}
-              if(this.examen_RToraxT==1){this.examen_RToraxC=1;this.examen_RToraxT='';}
-              if(this.examen_otrosT==1){this.examen_otrosC=1;this.examen_otrosT='';}
+              if(this.examen_laboratorioT=="1"){this.examen_laboratorioC=1; this.examen_laboratorioT='';}
+              if(this.examen_electrocardiogramaT=="1"){this.examen_electrocardiogramaC=1;this.examen_electrocardiogramaT='';}
+              if(this.examen_RToraxT=="1"){this.examen_RToraxC=1;this.examen_RToraxT='';}
+              if(this.examen_otrosT=="1"){this.examen_otrosC=1;this.examen_otrosT='';}
   }
 
 
@@ -585,6 +590,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       })
 
     }else{
+      this.containerMGandRF=1;
       this.medicinag.AtenderPaciente(this.cedula).then(data => {
         if(data['code'] === '201'){
           if((ce!=""&&ce!=null) || (ce2!=""&&ce2!=null) ){
@@ -700,14 +706,14 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   ExamenesFisicos(){
 
-    if(this.examen_cabezaC==1){this.examen_cabezaT=1;}
-    if(this.examen_cuelloC==1){this.examen_cuelloT=1;}
-    if(this.examen_toraxC==1){this.examen_toraxT=1;}
-    if(this.examen_abdomenC==1){this.examen_abdomenT=1;}
-    if(this.examen_msuperiorC==1){this.examen_msuperiorT=1;}
-    if(this.examen_minferioresC==1){this.examen_minferioresT=1;}
-    if(this.examen_genitalC==1){this.examen_genitalT=1;}
-    if(this.examen_analC==1){this.examen_analT=1;}
+    if(this.examen_cabezaC==1){this.examen_cabezaT="1";}
+    if(this.examen_cuelloC==1){this.examen_cuelloT="1";}
+    if(this.examen_toraxC==1){this.examen_toraxT="1";}
+    if(this.examen_abdomenC==1){this.examen_abdomenT="1";}
+    if(this.examen_msuperiorC==1){this.examen_msuperiorT="1";}
+    if(this.examen_minferioresC==1){this.examen_minferioresT="1";}
+    if(this.examen_genitalC==1){this.examen_genitalT="1";}
+    if(this.examen_analC==1){this.examen_analT="1";}
     if(this.containerSecretaria==0){
       this.examen_cabezaT='*';
       this.examen_cuelloT='*';
@@ -736,12 +742,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   ExamenesOrganos(){
 
-    if(this.examen_digestivoC==1){this.examen_digestivoT=1;}
-    if(this.examen_respiratorioC==1){this.examen_respiratorioT=1;}
-    if(this.examen_cardiacoC==1){this.examen_cardiacoT=1;}
-    if(this.examen_genitourinarioC==1){this.examen_genitourinarioT=1;}
-    if(this.examen_osteomuscularC==1){this.examen_osteomuscularT=1;}
-    if(this.examen_nerviosoC==1){this.examen_nerviosoT=1;}
+    if(this.examen_digestivoC==1){this.examen_digestivoT="1";}
+    if(this.examen_respiratorioC==1){this.examen_respiratorioT="1";}
+    if(this.examen_cardiacoC==1){this.examen_cardiacoT="1";}
+    if(this.examen_genitourinarioC==1){this.examen_genitourinarioT="1";}
+    if(this.examen_osteomuscularC==1){this.examen_osteomuscularT="1";}
+    if(this.examen_nerviosoC==1){this.examen_nerviosoT="1";}
 
     if(this.containerSecretaria==0){
       this.examen_digestivoT='*';
@@ -767,10 +773,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   ExamenesComplemenrarios(){
 
-      if(this.examen_laboratorioC==1){this.examen_laboratorioT=1; }
-      if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT=1;}
-      if(this.examen_RToraxC==1){this.examen_RToraxT=1;}
-      if(this.examen_otrosC==1){this.examen_otrosT=1;}
+      if(this.examen_laboratorioC==1){this.examen_laboratorioT="1"; }
+      if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT="1";}
+      if(this.examen_RToraxC==1){this.examen_RToraxT="1";}
+      if(this.examen_otrosC==1){this.examen_otrosT="1";}
 
       if(this.containerSecretaria==0){
         this.examen_laboratorioT='*';
@@ -1036,7 +1042,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         this.ClaseTexamen_electrocardiograma="form-control is-invalid";
       }
     }
-    debugger
     if(this.examen_RToraxC==0){
       if(this.examen_RToraxT==""||this.examen_RToraxT==undefined){
         this.ClaseTexamen_RTorax="form-control is-invalid";
@@ -1163,7 +1168,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.examen_toraxC==0 && this.examen_toraxT==""||this.examen_abdomenC==0 && this.examen_abdomenT==""||this.examen_msuperiorC==0 && this.examen_msuperiorT==""||this.examen_minferioresC==0 && this.examen_minferioresT==""||
     this.examen_genitalC==0 && this.examen_genitalT==""||this.examen_analC==0 && this.examen_analT==""|| this.examen_digestivoC==0 && this.examen_digestivoT==""||this.examen_respiratorioC==0 && this.examen_respiratorioT==""||
     this.examen_cardiacoC==0 && this.examen_cardiacoT=="" || this.examen_genitourinarioC==0 && this.examen_genitourinarioT==""|| this.examen_osteomuscularC==0 && this.examen_osteomuscularT==""|| this.examen_nerviosoC==0 && this.examen_nerviosoT==""||
-    this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_toraxC==0 && this.examen_toraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
+    this.examen_laboratorioC==0 && this.examen_laboratorioT==""|| this.examen_electrocardiogramaC==0 && this.examen_electrocardiogramaT==""||this.examen_RToraxC==0 && this.examen_RToraxT==""|| this.examen_otrosC==0 && this.examen_otrosT==""
  ){
       Swal.fire({
         icon: 'error',
@@ -1366,14 +1371,14 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
     this.ServicioSecretaria.updateHabitos( habitosActualizar, this.id_habito ).then(data =>{});
 
-    if(this.examen_cabezaC==1){this.examen_cabezaT=1;}
-    if(this.examen_cuelloC==1){this.examen_cuelloT=1;}
-    if(this.examen_toraxC==1){this.examen_toraxT=1;}
-    if(this.examen_abdomenC==1){this.examen_abdomenT=1;}
-    if(this.examen_msuperiorC==1){this.examen_msuperiorT=1;}
-    if(this.examen_minferioresC==1){this.examen_minferioresT=1;}
-    if(this.examen_genitalC==1){this.examen_genitalT=1;}
-    if(this.examen_analC==1){this.examen_analT=1;}
+    if(this.examen_cabezaC==1){this.examen_cabezaT="1";}
+    if(this.examen_cuelloC==1){this.examen_cuelloT="1";}
+    if(this.examen_toraxC==1){this.examen_toraxT="1";}
+    if(this.examen_abdomenC==1){this.examen_abdomenT="1";}
+    if(this.examen_msuperiorC==1){this.examen_msuperiorT="1";}
+    if(this.examen_minferioresC==1){this.examen_minferioresT="1";}
+    if(this.examen_genitalC==1){this.examen_genitalT="1";}
+    if(this.examen_analC==1){this.examen_analT="1";}
 
     let EFGActualizar = {
       'cabeza':this.examen_cabezaT,
@@ -1387,12 +1392,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     }
 
     this.ServicioSecretaria.updateEFG( EFGActualizar, this.id_e_fisico ).then(data =>{});
-    if(this.examen_digestivoC==1){this.examen_digestivoT=1;}
-    if(this.examen_respiratorioC==1){this.examen_respiratorioT=1;}
-    if(this.examen_cardiacoC==1){this.examen_cardiacoT=1;}
-    if(this.examen_genitourinarioC==1){this.examen_genitourinarioT=1;}
-    if(this.examen_osteomuscularC==1){this.examen_osteomuscularT=1;}
-    if(this.examen_nerviosoC==1){this.examen_nerviosoT=1;}
+    if(this.examen_digestivoC==1){this.examen_digestivoT="1";}
+    if(this.examen_respiratorioC==1){this.examen_respiratorioT="1";}
+    if(this.examen_cardiacoC==1){this.examen_cardiacoT="1";}
+    if(this.examen_genitourinarioC==1){this.examen_genitourinarioT="1";}
+    if(this.examen_osteomuscularC==1){this.examen_osteomuscularT="1";}
+    if(this.examen_nerviosoC==1){this.examen_nerviosoT="1";}
     let EOSActualizar = {
       'sistema_digestivo':this.examen_digestivoT,
       'sistema_respiratorio':this.examen_respiratorioT,
@@ -1404,10 +1409,10 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
     this.ServicioSecretaria.updateEOS( EOSActualizar, this.id_sistema ).then(data =>{});
 
-    if(this.examen_laboratorioC==1){this.examen_laboratorioT=1; }
-    if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT=1;}
-    if(this.examen_RToraxC==1){this.examen_RToraxT=1;}
-    if(this.examen_otrosC==1){this.examen_otrosT=1;}
+    if(this.examen_laboratorioC==1){this.examen_laboratorioT="1"; }
+    if(this.examen_electrocardiogramaC==1){this.examen_electrocardiogramaT="1";}
+    if(this.examen_RToraxC==1){this.examen_RToraxT="1";}
+    if(this.examen_otrosC==1){this.examen_otrosT="1";}
     let examenesComplementariosActualizar = {
       'laboratorio':this.examen_laboratorioT,
       'electrocardiograma':this.examen_electrocardiogramaT,
