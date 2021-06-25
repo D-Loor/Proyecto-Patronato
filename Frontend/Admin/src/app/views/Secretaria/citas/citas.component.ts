@@ -241,6 +241,8 @@ export class CitasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     this.spinner.show('sample');
     if((this.today.getMonth()+1)<10 || this.today.getDate()<10){
       if((this.today.getMonth()+1)<10 && this.today.getDate()<10){

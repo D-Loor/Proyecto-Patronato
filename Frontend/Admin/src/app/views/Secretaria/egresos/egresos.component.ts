@@ -54,6 +54,8 @@ export class EgresosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     this.cargarEgresos();
     localStorage.removeItem('cedulaMGandRF');
   }

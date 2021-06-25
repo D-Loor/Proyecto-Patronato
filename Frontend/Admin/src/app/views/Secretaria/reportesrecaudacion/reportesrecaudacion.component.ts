@@ -41,6 +41,8 @@ export class ReportesRecaudacionComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     localStorage.removeItem('cedulaMGandRF');
     this.YearActual=this.today.getFullYear();
     this.cargarRoles();

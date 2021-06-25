@@ -63,6 +63,8 @@ export class PacientesComponent implements OnInit {
   };
 
   ngOnInit(){
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
       this.rolP = localStorage.getItem('rol');
       if(localStorage.getItem('cedulaMGandRF') == null){
         this.search="";

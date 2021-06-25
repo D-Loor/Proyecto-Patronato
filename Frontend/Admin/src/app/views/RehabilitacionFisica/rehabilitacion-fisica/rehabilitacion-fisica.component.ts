@@ -46,6 +46,8 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     localStorage.removeItem('cedulaMGandRF');
     if(this.idPaciente == 'Undefined' || this.idPaciente == null){
       this.cargar();

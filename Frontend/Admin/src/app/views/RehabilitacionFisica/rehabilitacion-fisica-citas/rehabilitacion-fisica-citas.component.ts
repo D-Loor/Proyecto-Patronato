@@ -56,6 +56,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     this.Estadisticas(this.FechaInicio,this.FechaFin, this.especialidad);
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
     this.cargar();
