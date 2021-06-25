@@ -115,30 +115,34 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   //Check Variables Examenes Complementarioss
   examen_laboratorioC=0; examen_electrocardiogramaC=0; examen_RToraxC=0; examen_otrosC=0;
 
-  contador
+  contador; contadorP="";
+
   ngOnInit() {
-    debugger
     let cedula="";
     let cedulaSecretaria = "";
     this.containerSecretaria=0;
     cedula = localStorage.getItem('CedulaExamenes');
     cedulaSecretaria = localStorage.getItem('historiaClinica');
+    this.contadorP=localStorage.getItem('contadorT');
+    if(this.contadorP=="1"){
+      this.cedula=localStorage.getItem('cedulaTemporal');
+      this.Consultar('0');
+    }
 
     if(cedulaSecretaria!=null && cedulaSecretaria!=""){
       this.containerSecretaria=0;
       this.containerMGandRF=1;
       this.cedula=cedulaSecretaria;
-      this.Consultar();
-      localStorage.removeItem('historiaClinica');
+      this.Consultar('0');
+      //localStorage.removeItem('historiaClinica');
     }
 
     if(cedula!=""&&cedula!=null){
-      debugger
       this.containerSecretaria=1;
       this.containerMGandRF=1;
       this.cedula=cedula;
-      this.Consultar();
-      localStorage.removeItem('CedulaExamenes');
+      this.Consultar('0');
+      //localStorage.removeItem('CedulaExamenes');
     }
     let rol=  localStorage.getItem('RolV');
     if(rol == "MG" || rol == "RF"){
@@ -273,8 +277,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   //Variables de Examenes Complementarios
   this.examen_laboratorioT=""; this.examen_electrocardiogramaT=""; this.examen_RToraxT=""; this.examen_otrosT="";
   }
-
-
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -599,7 +601,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
 
-  Consultar(){
+  Consultar(n:string){
     let ce=""; let ce2="";
     ce=  localStorage.getItem('CedulaExamenes');
     ce2 = localStorage.getItem('historiaClinica');
@@ -616,9 +618,12 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.containerMGandRF=1;
       this.medicinag.AtenderPaciente(this.cedula).then(data => {
         if(data['code'] === '201'){
-          if((ce!=""&&ce!=null) || (ce2!=""&&ce2!=null) ){
+          if((ce!=""&&ce!=null) && n=="0" ){
             this.CargarDatosPaciente(data);
-            localStorage.removeItem('CedulaExamenes');
+            ce=""; ce2="";
+            //localStorage.removeItem('CedulaExamenes');
+          }else if(this.contadorP=="1" && n=="0"){
+            this.CargarDatosPaciente(data);
           }else{
             const swalWithBootstrapButtons = Swal.mixin({
               customClass: {
@@ -642,7 +647,11 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
                 if (result.isConfirmed) {
                   this.CargarDatosPaciente(data);
-
+                  localStorage.removeItem('CedulaExamenes');
+                  this.contadorP="1";
+                  localStorage.setItem('cedulaTemporal', this.cedula);
+                  localStorage.setItem('contadorT', this.contadorP);
+                  debugger
                 }else if (/* Read more about handling dismissals below */result.dismiss === Swal.DismissReason.cancel) {
                   this.edit=0; this.limpiar();
                   swalWithBootstrapButtons.fire(
@@ -830,7 +839,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       'diuresis':this.diuresis,
       'somnia':this.somnia,
     }
-    debugger
     this.ServicioSecretaria.HabitosPaciente(habitosA).then(data =>{
       this.id_habito = data['id'];
       this.Pacientes();
@@ -979,7 +987,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   validacionTotal(){
-    debugger
     if(this.examen_cabezaC==0){
       if(this.examen_cabezaT=="" ||this.examen_cabezaT==undefined){
         this.ClaseTexamen_cabeza="form-control is-invalid";
@@ -1178,7 +1185,6 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
 
   VaidarPaciente(){
-    debugger
     let mujer = this.ValidarMujer();
     let validarCampoMGandRF=0;
     if(this.containerSecretaria!=0){
