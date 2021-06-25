@@ -58,6 +58,7 @@ export class AgendarCitaComponent implements OnInit {
   ClasePrecio='form-control form-input select-number';
   ClaseObser='form-control';
   ClaseGad;
+  desabilitarPago;
 
   //Variables para datos pacientes
   nombres; fecha_consulta; cedula; especialidad="Medicina General"; idT:string;abono=false; HorasTurnos;
@@ -121,6 +122,7 @@ export class AgendarCitaComponent implements OnInit {
     }else{
       this.abono=true;
       this.Validar=1;
+      this.recau=1;
       this.smallModal.hide();
     }
 
