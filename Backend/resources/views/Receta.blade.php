@@ -98,6 +98,7 @@
            position: relative;
 
        }
+      
        .cont1{
             
            position: absolute;
@@ -105,53 +106,92 @@
            max-width: 365px;
            padding-left: 20px;
        }
-       .cont2{
-           position: absolute;
-           padding-top: 20px;
-           max-width: 377px;
-           padding-left: 410px;
+       .tdatos{
+           
+           font-size:18px;
+           top:5px;
+           left:20px;
+           position: relative;
+
        }
+       .celdai{
+        padding-top:5px;
+        width: 365px !important;
+       }
+       .celdad{
+        width: 365px !important;
+       }
+        tr td{
+            font: oblique lighter monospace;
+            font-weight:0;
+        }
+        strong{
+            font: oblique 300 monospace;
+
+        }
 
     </style>
 </head>
 <body>
 
-    
-    <img src="imagenes/receta1.jpg" class="portada">
+    @if ($color === 1) 
+    <img src='imagenes/receta1.jpg' class="portada">
+    @endif
+    @if ($color === 2) 
+    <img src='imagenes/receta2.jpg' class="portada">
+    @endif
+   
+  
   
   <div class="datos">
-  <samp class="nombre"> {{$nombre}}</samp>
-  <br>
-  <samp class="peso"> {{$peso}}</samp>
-  <samp class="talla"> {{$talla}}</samp>
-  <samp class="ta">  {{$ta}} </samp>
-  <samp class="edad">  {{$edad}}</samp>
- <br>
-  <div class="fecha">
-    <samp class="dia">  {{$dia}}</samp>
-    <samp class="mes">  {{$mes}}</samp>
-    <samp class="anio">  {{$year}}</samp>
+    <samp class="nombre"> {{$nombre}}</samp>
+    <br>
+    <samp class="peso"> {{$peso}}</samp>
+    <samp class="talla"> {{$talla}}</samp>
+    <samp class="ta">  {{$ta}} </samp>
+    <samp class="edad">  {{$edad}}</samp>
+    <br>
+    <div class="fecha">
+        <samp class="dia">  {{$dia}}</samp>
+        <samp class="mes">  {{$mes}}</samp>
+        <samp class="anio">  {{$year}}</samp>
+    </div>
+    
   </div>
-  
-  
+
+  <div class="tdatos">
+       <table>
+        @for($i = 0; $i<= $conteo; $i++) 
+ 
+                @if ($i === 0) 
+
+                    <tr>
+                        <td class="celdai">  </td>
+                        <td class="celdad"> <strong>{{$i+1}})</strong> {{$pres[$i]}}</td>
+                    </tr>
+
+                @endif
+                @if ($i === $conteo)     
+
+                    <tr>
+                        <td class="celdai"> <strong>{{$i}})</strong> {{$rp[$i-1]}} </td>
+                        <td class="celdad"> </td>
+                    </tr> 
+
+                @endif
+                @if ($i != $conteo && $i != 0)     
+
+                    <tr>
+                        <td class="celdai"> <strong>{{$i}})</strong> {{$rp[$i-1]}} </td>
+                        <td class="celdad"> <strong>{{$i+1}})</strong>  {{$pres[$i]}}</td>
+                    </tr> 
+
+                @endif
+
+        @endfor
+       </table>
   </div>
 
-  
-  <span class="rp">
-    $lineas=0;
-    @foreach($rp as $item)
-        
-        <samp class="cont1">{{$item}}</samp> 
-
-        <br>
-
-        $lineas++;
-    @endforeach
-  </span>
-
-  <span class="pres">
-        <samp class="cont2">{{$pres}}</samp>
-  </span>
 
 </body>
 </html>

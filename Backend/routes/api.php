@@ -75,7 +75,7 @@ Route::get('ConsolidadoMensualTerapia/{mes}/{year}','PDFController@ConsolidadoMe
 Route::get('RecaudacionDiarioMedicinaGeneral/{fecha}/{id}','PDFController@RecaudacionDiarioMedicinaGeneral');
 Route::get('RecaudacionDiarioTerapia/{fecha}/{id}','PDFController@RecaudacionDiarioTerapia');
 Route::get('RecaudacionMensual/{mes}/{year}','PDFController@RecaudacionMensual');
-Route::get('Receta/{nombre}/{peso}/{talla}/{ta}/{edad}/{fecha}/{rp}/{pres}','PDFController@GenerarReceta');
+Route::get('Receta/{color}/{nombre}/{peso}/{talla}/{ta}/{edad}/{fecha}/{rp}/{pres}','PDFController@GenerarReceta');
 
 
 

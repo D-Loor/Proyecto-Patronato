@@ -80,8 +80,10 @@ export class LoginComponent implements OnInit {
           if(data['result'][0].role.rol == "Administrador"){
             this.rutas.navigate(['/cuentas']);
           }else if(data['result'][0].role.rol == "Medicina General"){
+            localStorage.setItem('color', '1');
             this.rutas.navigate(['/medicinageneralcitas']);
           }else if(data['result'][0].role.rol == "Rehabilitación Física"){
+            localStorage.setItem('color', '1');
             this.rutas.navigate(['/rehabilitacionfisicacitas']);
           }else if(data['result'][0].role.rol == "Secretaría"){
             this.rutas.navigate(['/citas']);

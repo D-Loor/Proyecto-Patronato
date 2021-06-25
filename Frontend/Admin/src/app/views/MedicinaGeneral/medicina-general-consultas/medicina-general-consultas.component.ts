@@ -39,6 +39,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   idPaciente;
   idCitas;
   gad;
+  color="1";
   gadv;
   today = new Date();
   fechaActual;
@@ -80,6 +81,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
   @ViewChild('largeModal') public Modal: ModalDirective;
 
   ngOnInit(): void {
+
     localStorage.removeItem('cedulaMGandRF');
     this.cargar();
     this.CargarDatos();
@@ -460,8 +462,14 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
        'rp': this.plan_terapeutico,
        'pres': this.indicaciones
        }
-
-      window.open('http://127.0.0.1:8000/api/Receta/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
+       debugger
+      if(localStorage.getItem('color')=='1'){
+        localStorage.setItem('color', '2');
+      }else if(localStorage.getItem('color')=='2'){
+        localStorage.setItem('color', '1');
+      }
+      this.color=localStorage.getItem('color');
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
 
     }
 

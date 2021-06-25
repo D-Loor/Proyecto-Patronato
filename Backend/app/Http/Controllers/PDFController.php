@@ -1627,13 +1627,14 @@ class PDFController extends Controller
         return \PDF::loadView('RecaudacionMensual', compact('Mes','Year','result','total','recaudacion','egresos','saldo'))->setPaper('a4', 'lands')->stream('RecaudacionMensual'.$Mes.'-'.$Year.'pdf');
     }
 
-    public function GenerarReceta($nombre,$peso,$talla,$ta,$edad,$fecha,$rp,$pres){
+    public function GenerarReceta($color,$nombre,$peso,$talla,$ta,$edad,$fecha,$rp,$pres){
 
         $valores = explode('-', $fecha);
         $mes = $valores[1];
         $dia = $valores[2];
         $final= explode('20', $valores[0]);
         $year=$final[1];
+        $tab=0;
         
         switch ($mes) {
             case 1:
@@ -1674,18 +1675,19 @@ class PDFController extends Controller
                 break;
         }
 
-        $rp = explode('..', $rp);
-        $pres = explode('..', $pres);
+        $rp = explode('.', $rp);
+        $pres = explode('.', $pres);
         
         $espaciosrp=[];
         foreach($rp as $item) {
-
+            $tab+=20;
             $conteo = strlen($item);
             $espa= $conteo/35;
+            $tab+=(int)$espa*20;
             array_push ( $espaciosrp , (int)$espa );
            
         }
-        
+        //return response()->json(['result'=>$tab."px"]);
         $espaciospres=[];
         foreach($pres as $item) {
 
@@ -1697,11 +1699,14 @@ class PDFController extends Controller
 
 
 
-        return response()->json(['result'=>$rp,'result2'=>$espaciosrp]);
-
+        //return response()->json(['result'=>$rp,'result2'=>$espaciosrp]);
+        
+        $conteo=count($rp);
+        
         $mes = strtoupper($mesL);
-        //return response()->json(['result'=>$final]);
-        return \PDF::loadView('Receta', compact('dia','mes','year','nombre','talla','peso','ta','edad','rp','pres'))->setPaper('a5', 'landscape')->stream('Receta-'.$nombre.'.pdf');
+        $color=(int) $color;
+        //return response()->json(['result'=>$color]);
+        return \PDF::loadView('Receta', compact('color','conteo','dia','mes','year','nombre','talla','peso','ta','edad','rp','pres'))->setPaper('a5', 'landscape')->stream('Receta-'.$nombre.'-'.$fecha.'.pdf');
     }
 
 }
