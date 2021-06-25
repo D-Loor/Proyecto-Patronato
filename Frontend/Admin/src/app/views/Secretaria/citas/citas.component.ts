@@ -279,6 +279,7 @@ export class CitasComponent implements OnInit {
       this.spinner.hide('sample');
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
+      debugger
       if(this.validarVacio == '202'){
         this.citasMG=[];
         this.citasMGPaginate = [];
@@ -289,7 +290,10 @@ export class CitasComponent implements OnInit {
       if(check==true){
 
       }else{
-        if(data['code']!="202"){
+        if(this.citasMG.length==0){
+          data['code']="202";
+        };
+        if(data['code']!="202" || this.citasMG.length!=0){
           if(cambio==true){
             if(actualizado==true){
               this.alertActualizado();
@@ -299,6 +303,7 @@ export class CitasComponent implements OnInit {
                 title: '¡Citas Filtradas..!',
                 text: 'Se filtró las citas con la fecha seleccionada.'
               })
+              
             }
           }
 
@@ -343,8 +348,14 @@ export class CitasComponent implements OnInit {
         this.citasRFPaginate = this.citasRF.slice(0, 10);
       }
 
-      if(check==true){}else{
+      if(check==true){
+
+      }else{
+        if(this.citasRF.length==0){
+          data['code']="202";
+        };
         if(data['code']!="202"){
+          if(cambio==true){
           if(actualizado==true){
             this.alertActualizado();
           }else{
@@ -353,7 +364,9 @@ export class CitasComponent implements OnInit {
               title: '¡Citas Filtradas..!',
               text: 'Se filtró las citas con la fecha seleccionada.'
             })
+            
           }
+        }
 
         if(this.searchRF!=null){
           this.dataPaginateRF(event);
