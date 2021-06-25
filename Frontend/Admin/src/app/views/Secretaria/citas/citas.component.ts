@@ -49,6 +49,7 @@ export class CitasComponent implements OnInit {
   FechaRf:string='';
   validarVacio;
   validarVacioRF;
+  filtfecha=0;
 
   today = new Date();
   fechaActual:string;
@@ -186,8 +187,8 @@ export class CitasComponent implements OnInit {
            }
             this.citasser.updatecitas(arrayLocal,this.cedulamodal).then(data =>{
 
-                this.cargarRF(this.fechaActual,0,false,true);
-                this.cargarMG(this.fechaActual,0,false,true);
+                this.cargarRF(this.fechaActual,0,false,true,false);
+                this.cargarMG(this.fechaActual,0,false,true,false);
 
 
             }).catch((error) => {
@@ -256,8 +257,8 @@ export class CitasComponent implements OnInit {
     }
     this.FechaMg = this.fechaActual;
     this.FechaRf = this.fechaActual;
-    this.cargarMG(this.fechaActual,0,false,false);
-    this.cargarRF(this.fechaActual,0,false,false);
+    this.cargarMG(this.fechaActual,0,false,false,false);
+    this.cargarRF(this.fechaActual,0,false,false,false);
     localStorage.removeItem('cedulaMGandRF');
   }
 
@@ -269,25 +270,11 @@ export class CitasComponent implements OnInit {
     })
   }
 
-  actualizarRF(){
-    this.citasRF=[];
-    this.citasRFFilter=[];
-    this.citasRFPaginate=[];
-    this.citasRFPaginateFilter=[];
-    this.alertActualizado();
-    this.cargarRF(this.fechaActual,0,false,false);
-  }
+  
 
-  actualizarMG(){
-    this.citasMG=[];
-    this.citasMGFilter=[];
-    this.citasMGPaginate=[];
-    this.citasMGPaginateFilter=[];
-    this.alertActualizado();
-    this.cargarMG(this.fechaActual,0,false,false);
-  }
+  
 
-  cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
+  cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean,actualizado:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
       this.spinner.hide('sample');
       this.citasMG=data['result'];
@@ -304,11 +291,15 @@ export class CitasComponent implements OnInit {
       }else{
         if(data['code']!="202"){
           if(cambio==true){
-            Swal.fire({
-              icon: 'success',
-              title: '¡Citas Filtradas..!',
-              text: 'Se filtró las citas con la fecha seleccionada.'
-            })
+            if(actualizado==true){
+              this.alertActualizado();
+            }else{
+              Swal.fire({
+                icon: 'success',
+                title: '¡Citas Filtradas..!',
+                text: 'Se filtró las citas con la fecha seleccionada.'
+              })
+            }
           }
 
           if(this.searchMG!=null){
@@ -339,11 +330,12 @@ export class CitasComponent implements OnInit {
     });
   }
 
-  cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean){
+  cargarRF(fechaActual:string,fecha:number,cambio:boolean,check:boolean,actualizado:boolean){
     this.citasser.citas("Rehabilitación Física",fechaActual).then(data =>{
       this.spinner.hide('sample');
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
+      debugger
       if(this.validarVacioRF == '202'){
         this.citasRF=[];
         this.citasRFPaginate = [];
@@ -353,7 +345,9 @@ export class CitasComponent implements OnInit {
 
       if(check==true){}else{
         if(data['code']!="202"){
-          if(cambio==true){
+          if(actualizado==true){
+            this.alertActualizado();
+          }else{
             Swal.fire({
               icon: 'success',
               title: '¡Citas Filtradas..!',
@@ -428,10 +422,10 @@ export class CitasComponent implements OnInit {
         this.citasEliminarMG=data['result'];
 
         if(this.FechaMg==''){
-          this.cargarMG(this.fechaActual,0,false,false);
+          this.cargarMG(this.fechaActual,0,false,false,false);
 
         }else{
-          this.cargarMG(this.FechaMg,0,false,false);
+          this.cargarMG(this.FechaMg,0,false,false,false);
         }
 
 
@@ -444,8 +438,8 @@ export class CitasComponent implements OnInit {
 
 
   recaudar(){
-    this.cargarRF(this.fechaActual,0,false,true);
-    this.cargarMG(this.fechaActual,0,false,true);
+    this.cargarRF(this.fechaActual,0,false,true,false);
+    this.cargarMG(this.fechaActual,0,false,true,false);
   }
 
 
@@ -523,12 +517,12 @@ export class CitasComponent implements OnInit {
         this.citasEliminarRF=data['result'];
         if(this.FechaRf==''){
 
-          this.cargarRF(this.fechaActual,0,false,false);
+          this.cargarRF(this.fechaActual,0,false,false,false);
 
 
         }else{
 
-          this.cargarRF(this.FechaRf,0,false,false);
+          this.cargarRF(this.FechaRf,0,false,false,false);
 
         }
 

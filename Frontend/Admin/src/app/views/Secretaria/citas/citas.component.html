@@ -29,17 +29,12 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaMg" id="FechaMg" name="FechaMg" min="{{fechaActual}}" [ngModel]="FechaMg | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaMg = $event" type="date" placeholder="date"
+                  <input name="FechaMg" id="FechaMg" name="FechaMg" min="{{fechaActual}}" [ngModel]="FechaMg | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaMg = $event" (ngModelChange)="cargarMG(FechaMg,1,true,false,false)" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
-                  <label for="name"><label for="name"></label></label>
-                  <button  type="button" class="btn btn-primary form-control"
-                    (click)="cargarMG(FechaMg,1,true,false)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-                </div>
-                <div class="col-xs-2 searcht">
                   <label style="height: 21px;"><label ></label></label>
-                  <button type="button" class="btn btn-primary form-control" (click)="actualizarMG()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+                  <button type="button" class="btn btn-primary form-control" (click)="cargarMG(FechaMg,1,true,false,true)"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
                 </div>
               </div>
             </div>
@@ -173,17 +168,12 @@
               <div class="row space">
                 <div class="col-md-3 searcht">
                   <label for="name">Filtrar por Fecha</label>
-                  <input name="FechaRf" id="FechaRf" name="FechaRf" min="{{fechaActual}}" [ngModel]="FechaRf | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaRf= $event" type="date" placeholder="date"
+                  <input name="FechaRf" id="FechaRf" name="FechaRf" min="{{fechaActual}}" [ngModel]="FechaRf | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="FechaRf= $event" (ngModelChange)="cargarRF(FechaRf,1,true,false,false)" type="date" placeholder="date"
                     class="form-control">
                 </div>
                 <div class="col-xs-2 searcht">
-                  <label for="name"><label for="name"></label></label>
-                  <button type="button" class="btn btn-primary form-control"
-                    (click)="cargarRF(FechaRf,1,true,false)"><i class="icon-equalizer "></i>&nbsp;Filtrar</button>
-                </div>
-                <div class="col-xs-2 searcht">
                   <label style="height: 21px;"><label ></label></label>
-                  <button type="button" class="btn btn-primary form-control" (click)="actualizarRF()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
+                  <button type="button" class="btn btn-primary form-control" (click)="cargarRF(FechaRf,1,true,false,true)"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Actualizar</button>
                 </div>
               </div>
             </div>
