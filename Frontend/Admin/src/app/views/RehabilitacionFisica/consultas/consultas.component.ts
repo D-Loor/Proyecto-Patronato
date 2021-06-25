@@ -6,6 +6,8 @@ import { CitasService } from '../../../servicios/citas.service';
 import { RehabilitacionFisicaService } from '../../../servicios/rehabilitacion-fisica.service';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-consultas',
@@ -31,9 +33,11 @@ export class ConsultasComponent implements OnInit {
   pase=false;
   valor;
   edadR;
+  indicaciones='';
+  color='1';
 
   //variables para agregar la consulta
-  idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado; receta;
+  idpaciente; lugar_atencion; motivo_consultaT; diagnosticoT; anamnesisT; certificado; receta='';
 
   //variables para el tratamiento
   idTratamiento; estimulacion_temprana=false; magnetoterapia=false; electroestimulacion=false; ultrasonido=false; CQC_OH=false;
@@ -47,8 +51,15 @@ export class ConsultasComponent implements OnInit {
   ClaseReceta='form-control';
   ClaseOtrosT='form-control';
   ClaseTratamiento='';
+  ClaseIndicaciones='form-control form-input';
+  ClaseNombre='form-control form-input';
+  ClaseprescripcionR='form-control form-input';
+  Claserp='form-control form-input';
+
+  nombresR; pesoR; tallaR; taR; edadRe; fechaR; rpR; prescripcionR;
 
   loadingText = 'Guardando...';
+  @ViewChild('largeModal') public Modal: ModalDirective;
 
   /**
    * Spinner configuration
@@ -66,10 +77,79 @@ export class ConsultasComponent implements OnInit {
     showSpinner: false
   };
 
+
   ngOnInit(): void {
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     this.cargar();
     this.CargarDatos();
     this.fechaActual=this.today.getFullYear() + "-" + (this.today.getMonth() +1) + "-" + this.today.getDate();
+
+  }
+
+  GenerarReceta(){
+
+    if(this.receta==""|| this.receta== null || this.indicaciones==""|| this.indicaciones== null || this.nombresR==undefined||this.nombresR==""){
+      if(this.receta==undefined||this.receta==""){
+        this.ClaseReceta = "form-control is-invalid";
+      }
+      if(this.indicaciones==undefined||this.indicaciones==""){
+        this.ClaseIndicaciones = "form-control is-invalid";
+      }
+      if(this.nombresR==undefined||this.nombresR==""){
+        this.ClaseNombre = "form-control is-invalid";
+      }
+
+      Swal.fire({
+        icon: 'error',
+        title: '¡Hay campos vacíos..!',
+        text: 'Debe de completar todo el formulario.'
+      })
+
+    }
+
+    else{
+      let peso="";
+      let talla="";
+      let ta="";
+
+      if(this.pesoR==null || this.pesoR==undefined)
+        peso="---";
+      else
+        peso=this.pesoR;
+
+      if(this.tallaR==null || this.tallaR==undefined)
+        talla="---";
+      else
+        talla=this.tallaR;
+
+      if(this.taR==null || this.taR==undefined)
+        ta="---";
+      else
+        ta=this.taR;
+
+      let data;
+      data = {
+       'nombre':this.nombresR,
+       'peso':this.pesoR,
+       'talla': this.tallaR,
+       'ta': this.taR,
+       'edad':this.edadR,
+       'fecha': this.fechaActual,
+       'rp': this.receta,
+       'pres': this.indicaciones
+       }
+       debugger
+      if(localStorage.getItem('color')=='1'){
+        localStorage.setItem('color', '2');
+      }else if(localStorage.getItem('color')=='2'){
+        localStorage.setItem('color', '1');
+      }
+      this.color=localStorage.getItem('color');
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.receta+'/'+this.indicaciones, '_blank');
+
+    }
+
   }
 
   toggleMinimize(e) {
@@ -196,8 +276,10 @@ export class ConsultasComponent implements OnInit {
       this.nombres = data['result'].nombres + ' ' +data['result'].apellidos;
       this.ocupacion = data['result'].ocupacion;
       this.edad = this.CalcEdad(data['result'].edad);
-      this.edadR = data['result'].edad;
+      this.edadR = this.edad;
       this.idpaciente = data['result'].id_paciente;
+      this.nombresR = this.nombres;
+      this.fechaR = this.fechaActual;
     })
     .catch((error) => {
       console.log(error);
@@ -317,6 +399,9 @@ export class ConsultasComponent implements OnInit {
     if(this.certificado==true){
       certificadoValor=1;
     }
+    if(this.receta=="" || this.receta== undefined || this.receta== null){
+      this.receta="*";
+    }
     let dataC={
       'id_paciente': this.idpaciente,
       'id_tratamiento' : this.idTratamiento,
@@ -355,7 +440,7 @@ export class ConsultasComponent implements OnInit {
     let tratamient=this.ValidarTratamiento();
     if(this.lugar_atencion==undefined||this.motivo_consultaT==undefined||this.motivo_consultaT==""||
        this.NuevaEnfermedad==undefined||this.NuevaEnfermedad==""||this.anamnesisT==undefined||this.anamnesisT==""||
-       this.receta==undefined||this.receta==undefined||this.receta==""||tratamient==true||this.otros==true&&this.otrosT==""
+       tratamient==true||this.otros==true&&this.otrosT==""
     ){
 
       if(this.otros==true&&this.otrosT==""){
@@ -376,9 +461,7 @@ export class ConsultasComponent implements OnInit {
       if(this.anamnesisT==undefined||this.anamnesisT==""){
         this.ClaseAnammesi="form-control is-invalid";
       }
-      if(this.receta==undefined||this.receta==""){
-        this.ClaseReceta="form-control is-invalid";
-      }
+
 
 
       Swal.fire({
@@ -395,7 +478,13 @@ export class ConsultasComponent implements OnInit {
       )
     }else{
       this.Alert();
-    }
+
+  }
+  }
+  AbrirModal(){
+    this.nombresR = this.nombres;
+    this.ClaseNombre='form-control form-input';
+    this.Modal.show();
   }
 
   CalcEdad(edad:string){
@@ -420,7 +509,7 @@ export class ConsultasComponent implements OnInit {
     }else{
       return valor = edad+" años";
     }
-    
+
 
   }
 

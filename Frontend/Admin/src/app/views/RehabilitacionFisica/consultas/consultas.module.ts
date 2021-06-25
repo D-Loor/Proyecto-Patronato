@@ -8,6 +8,7 @@ import { FiltroModule } from '../../../pipes/filtro.module';
 import { RehabilitacionFisicaConsultasRoutingModule } from './consultas-routing.module';
 import { ConsultasComponent } from './consultas.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     FiltroModule,
     NgxSpinnerModule,
     FormsModule,
+    ModalModule.forRoot(),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

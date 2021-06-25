@@ -82,6 +82,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   ngOnInit(): void {
 
+    localStorage.removeItem('cedulaTemporal');
+    localStorage.removeItem('contadorT');
     localStorage.removeItem('cedulaMGandRF');
     this.cargar();
     this.CargarDatos();
@@ -134,7 +136,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       this.cedula = data['result'].cedula;
       this.idPaciente=data['result'].id_paciente;
       this.edad = this.CalcEdad(data['result'].edad);
-      this.edadR = data['result'].edad;
+      this.edadR = this.edad;
+      this.fechaR = this.fechaActual;
       this.gad = data['result'].gad;
 
       if(this.gad==1)
@@ -221,11 +224,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
         'error'
       )
     }else{
-        this.Modal.show();
+      this.nombresR = this.nombres;
+      this.ClaseNombre='form-control form-input';
+      this.Modal.show();
 
-        this.nombresR = this.nombres;
-        this.edadRe = this.edad;
-        this.fechaR = this.fechaActual;
     }
   }
 
@@ -413,7 +415,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
 
   GenerarReceta(){
 
-    if(this.plan_terapeutico==""|| this.plan_terapeutico== null || this.indicaciones==""|| this.indicaciones== null){
+    if(this.plan_terapeutico==""|| this.plan_terapeutico== null || this.indicaciones==""|| this.indicaciones== null || this.nombresR==undefined||this.nombresR==""){
       if(this.plan_terapeutico==undefined||this.plan_terapeutico==""){
         this.ClasePlan = "form-control is-invalid";
       }

@@ -11,9 +11,10 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 .boto{
+  margin-left: 10px !important;
     float: right;
     margin-bottom: 15px;
-  }
+}
   .invalido{
     color:red;
   }
