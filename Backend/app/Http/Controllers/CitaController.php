@@ -170,8 +170,17 @@ class CitaController extends Controller
         }else{
             $datos->estado=0;
         }
-        $datos->save();
-        return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'valor'=>$edad]);
+        
+        $validarI=Cita::where('fecha',$request->fecha)->where('id_turno',$request->id_turno)->get();
+
+        $contV=count($validarI);
+        if($contV != 0){
+            return response()->json(['result'=>"El turno ya se encuentra registrado", 'code'=>'202']); 
+        }else{
+           $datos->save();
+           return response()->json(['result'=>"Datos guardados", 'code'=>'201', 'valor'=>$edad]); 
+        }
+        
     }
 
     /**

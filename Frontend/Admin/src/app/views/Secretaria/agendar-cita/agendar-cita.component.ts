@@ -407,22 +407,34 @@ export class AgendarCitaComponent implements OnInit {
 
     this.ServicioSecretaria.AddCitas(paciente).then(data =>{
       this.spinner.hide(name);
-      Swal.fire(
-        '¡Cita Agendada..!',
-        'La cita médica fue agendada correctamente.',
-        'success'
-      );
-      this.nombres="";
-      this.cedula ="";
-      this.fecha_consulta="";
-      this.idT="";
-      this.abono=false;
-      this.recau=0;
-      this.exo=0;
-      this.pago=0;
-      this.especialidad="Medicina General";
-      this.ClaseCdula="form-control form-input select-number";
-      this.ArrayTurnos = [];
+      if(data['code']=='201'){
+        Swal.fire(
+          '¡Cita Agendada..!',
+          'La cita médica fue agendada correctamente.',
+          'success'
+        );
+        this.nombres="";
+        this.cedula ="";
+        this.fecha_consulta="";
+        this.idT="";
+        this.abono=false;
+        this.recau=0;
+        this.exo=0;
+        this.pago=0;
+        this.especialidad="Medicina General";
+        this.ClaseCdula="form-control form-input select-number";
+        this.ArrayTurnos = [];
+      }else{
+        Swal.fire(
+          '¡Turno agendado..!',
+          'El turno ya se encuentra agendado.',
+          'error'
+        );
+        this.ArrayTurnos = [];
+        this.idT="";
+        this.fecha_consulta="";
+      }
+      
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');

@@ -300,29 +300,43 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
                             }),
                             contentType: 'application/json; charset=utf-8',
                             success: function (data) {
+                                if(data['code']=='201'){
+                                    document.getElementById("nombres").value="";
+                                    document.getElementById("cedula").value="";
+                                    document.getElementById("fecha").value="";
+                                    document.getElementById("nombres").value="";
+                                    document.querySelector("#certi").checked = false;
+                                    const $select = document.getElementById("hora");
+                    
+                                    for (let i = $select.options.length; i >= 0; i--) {
+                                        $select.remove(i);
+                                    }
+                                    var valido=document.getElementById("vcedula");
+                                    valido.className = "fa fa-times fa-2x";
+                                    valido.style.visibility="hidden";   
+                                    cedula="";
+                                    fecha="";
+                                    turno="";
+                                    comprotido=false;
+                                    swal(
+                                        '¡Cita Agendada..!',
+                                        'La cita médica fue agendada correctamente.',
+                                        'success'
+                                    );
+                                }else{
+                                    swal(
+                                        '¡Turno agendado..!',
+                                        'El turno ya se encuentra agendado.',
+                                        'error'
+                                      );
+                                      document.getElementById("fecha").value="";
+                                      const $select = document.getElementById("hora");
+                                      for (let i = $select.options.length; i >= 0; i--) {
+                                        $select.remove(i);
+                                    }
+                                }
                                 
-                            document.getElementById("nombres").value="";
-                            document.getElementById("cedula").value="";
-                            document.getElementById("fecha").value="";
-                            document.getElementById("nombres").value="";
-                            document.querySelector("#certi").checked = false;
-                            const $select = document.getElementById("hora");
-               
-                            for (let i = $select.options.length; i >= 0; i--) {
-                                $select.remove(i);
-                            }
-                            var valido=document.getElementById("vcedula");
-                            valido.className = "fa fa-times fa-2x";
-                            valido.style.visibility="hidden";   
-                             cedula="";
-                             fecha="";
-                             turno="";
-                             comprotido=false;
-                             swal(
-                                '¡Cita Agendada..!',
-                                'La cita médica fue agendada correctamente.',
-                                'success'
-                              );
+                            
                             },
                             error: function (data)
                             {
