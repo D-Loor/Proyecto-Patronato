@@ -113,17 +113,17 @@ export class ConsultasComponent implements OnInit {
       let talla="";
       let ta="";
 
-      if(this.pesoR==null || this.pesoR==undefined)
+      if(this.pesoR==null || this.pesoR==undefined ||this.pesoR=="")
         peso="---";
       else
         peso=this.pesoR;
 
-      if(this.tallaR==null || this.tallaR==undefined)
+      if(this.tallaR==null || this.tallaR==undefined || this.tallaR=="")
         talla="---";
       else
         talla=this.tallaR;
 
-      if(this.taR==null || this.taR==undefined)
+      if(this.taR==null || this.taR==undefined || this.taR=="")
         ta="---";
       else
         ta=this.taR;

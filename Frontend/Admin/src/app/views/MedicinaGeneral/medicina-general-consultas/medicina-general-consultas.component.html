@@ -240,8 +240,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-success" (click)="GenerarReceta()">Generar Receta</button>
-        <button type="button" class="btn btn-primary" (click)="GuardarConsulta()">Finalizar</button>
+        <button type="button" class="btn btn-success" *ngIf="plan_terapeutico !='' && indicaciones !=''" (click)="GenerarReceta()">Generar Receta</button>
+        <button type="button" class="btn btn-primary"  (click)="GuardarConsulta()">Finalizar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

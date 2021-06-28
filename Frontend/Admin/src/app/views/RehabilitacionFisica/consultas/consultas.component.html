@@ -244,7 +244,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
-          <button type="button" class="btn btn-success" (click)="GenerarReceta()">Generar Receta</button>
+          <button type="button" class="btn btn-success" *ngIf="receta !='' && indicaciones !=''" (click)="GenerarReceta()">Generar Receta</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
