@@ -933,7 +933,7 @@ section#contact .text-danger {
   outline: 0;
 }
 .modal-completo {
-  width: 85%;
+  width: 100%;
   background-color: #f7f7f7;
   margin: 20px auto;
   border: 1px solid transparent;
@@ -945,6 +945,11 @@ section#contact .text-danger {
     calc(100% - 8px) calc(100% - 8px);
   background-position: left bottom, left bottom, right top, right top, 4px 4px;
   padding: 20px;
+}
+.modal{
+  width: 90% !important;
+  left: 5% !important;
+  top: 5% !important;
 }
 
 .modal-contenido{
@@ -968,8 +973,6 @@ ul li strong{
 .portfolio-modal .modal-content {
   padding-top:5px;
   padding-bottom:5px;
-
-  min-height: 100%;
   border: 0;
   border-radius: 0;
   text-align: center;
@@ -1002,6 +1005,10 @@ ul li strong{
 
 .portfolio-modal .modal-content img {
   margin-bottom: 5px;
+}
+.modal-content{
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .portfolio-modal .close-modal {
@@ -1343,13 +1350,13 @@ input[type=number] { -moz-appearance:textfield; }
   font-family: "Merriweather", serif;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0;
+  margin: 0px;
 }
 .person {
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 350px;
+  width: 295px;
 }
 .conter {
   border-radius: 50%;
@@ -1415,10 +1422,17 @@ input[type=number] { -moz-appearance:textfield; }
   top: 224px;
   width: 478px;
 }
+.margder{
+  margin-right: 20px;
+}
+.margizq{
+  margin-left: 20px;
+}
+
 .divider {
   background-color: #668f4b;
   height: 1px;
-  width: 160px;
+  width: 220px;
 }
 .name {
   color: #404245;
@@ -1684,8 +1698,8 @@ input[type=number] { -moz-appearance:textfield; }
 
 
 .containern .cardn .face {
-  width: 300px;
   height: 200px;
+  width: 280px !important;
   transition: 0.5s;
 }
 
@@ -1736,7 +1750,7 @@ input[type=number] { -moz-appearance:textfield; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px !important;
   box-sizing: border-box;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
   transform: translateY(-100px);
@@ -1753,6 +1767,8 @@ input[type=number] { -moz-appearance:textfield; }
 .containern .cardn .face.face2 .contentn p {
   margin: 0;
   padding-top: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
   text-align: justify;
 }
 

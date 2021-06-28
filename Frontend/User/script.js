@@ -56,6 +56,7 @@ $(document).ready(function() {
 			"margin-bottom" : siteFooterHeight + 50
 		});
 	};
+
 });
 
 //Validar cédula
