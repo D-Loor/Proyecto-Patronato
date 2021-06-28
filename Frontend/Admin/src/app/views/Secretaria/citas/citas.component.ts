@@ -66,6 +66,7 @@ export class CitasComponent implements OnInit {
   Validar=0;
   observaciones;
   idrolmodal;
+  cancelomg=false;
 
   idcitamodal;
   nombresmodal;
@@ -281,7 +282,6 @@ export class CitasComponent implements OnInit {
       this.spinner.hide('sample');
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
-      debugger
       if(this.validarVacio == '202'){
         this.citasMG=[];
         this.citasMGPaginate = [];
@@ -342,7 +342,6 @@ export class CitasComponent implements OnInit {
       this.spinner.hide('sample');
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
-      debugger
       if(this.validarVacioRF == '202'){
         this.citasRF=[];
         this.citasRFPaginate = [];

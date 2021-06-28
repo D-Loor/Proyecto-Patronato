@@ -67,7 +67,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
                     </td>
                     <td>
-                      <input  *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                      <input  *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" [(ngModel)]="cancelomg" name="cancelomg"
                         (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"
                         id="cancelomg" [checked]='item.abono'>
                         <input *ngIf="item.estado==0" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
@@ -100,7 +100,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
                     </td>
                     <td>
-                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" [(ngModel)]="cancelomg" name="cancelomg"
                         (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"
                         id="cancelomg" [checked]='item.abono'>
                         <input *ngIf="item.estado==0" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
@@ -205,7 +205,7 @@
                     </td>
 
                     <td>
-                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox"  [(ngModel)]="cancelomg" name="cancelomg"
                       (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"
                       id="cancelomg" [checked]='item.abono' >
                       <input *ngIf="item.estado==0" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
@@ -240,7 +240,7 @@
                       <span *ngIf="item.estado==0" class="badge badge-secondary">Sin registro</span>
                     </td>
                     <td>
-                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
+                      <input *ngIf="item.estado==1" autocomplete="off" required class="form-check-input" type="checkbox" [(ngModel)]="cancelomg" name="cancelomg"
                       (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"
                       id="cancelomg" [checked]='item.abono'>
                       <input *ngIf="item.estado==0" autocomplete="off" required class="form-check-input" type="checkbox" name="cancelomg"
@@ -293,7 +293,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Recaudación</h4>
-        <button type="button" class="close" (click)="abono=false" (click)="LimpiarR()" (click)="smallModal.hide()" aria-label="Close">
+        <button type="button" class="close" (click)="cancelomg=false" (click)="LimpiarR()" (click)="smallModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -327,7 +327,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="smallModal.hide()" (click)="abono=false" (click)="LimpiarR()" >Cerrar</button>
+        <button type="button" class="btn btn-secondary" (click)="smallModal.hide()" (click)="cancelomg=false" (click)="LimpiarR()" >Cerrar</button>
         <button type="button" class="btn btn-primary" (click)="CargarRecaudacion()">Guardar</button>
       </div>
     </div><!-- /.modal-content -->

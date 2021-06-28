@@ -133,7 +133,7 @@
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula,item.id_cita)"><i
+                    <button *ngIf="item.estado==1 && item.abono==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula,item.id_cita)"><i
                         class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
                     <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                         class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
@@ -155,7 +155,7 @@
                     <span *ngIf="item.estado==0"class="badge badge-secondary">Sin registro</span>
                   </td>
                   <td>
-                    <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula,item.id_cita)"><i
+                    <button *ngIf="item.estado==1 && item.abono==1" type="button" class="btn btn-ghost-info botont" (click)="ConsultarPaciente(item.cedula,item.id_cita)"><i
                         class="fa fa-stethoscope" ></i>&nbsp;Atender</button>
                     <button *ngIf="item.estado==1" type="button" class="btn btn-ghost-success botont"  (click)="HistoriaPaciente(item.cedula)"><i
                         class="fa fa-eye"></i>&nbsp;Historia Clinica</button>
