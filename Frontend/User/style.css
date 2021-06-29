@@ -956,7 +956,6 @@ section#contact .text-danger {
   padding: 0 30px;
 }
 .modal-contenido p {
-  font-size: calc(0.6em + 0.6vw) !important;
   text-align: justify;
 }
 
@@ -966,9 +965,6 @@ section#contact .text-danger {
 }
 ul li strong{
   color: #668f4b;
-}
-.tama li{
-  font-size: calc(0.55em + 0.55vw) !important;
 }
 .portfolio-modal .modal-content {
   padding-top:5px;
