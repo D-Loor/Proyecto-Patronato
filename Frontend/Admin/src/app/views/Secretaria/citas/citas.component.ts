@@ -50,7 +50,7 @@ export class CitasComponent implements OnInit {
   validarVacio;
   validarVacioRF;
   filtfecha=0;
-
+  checkMG=false;
   today = new Date();
   fechaActual:string;
 
@@ -67,7 +67,7 @@ export class CitasComponent implements OnInit {
   observaciones;
   idrolmodal;
   cancelomg=false;
-
+  cancelorf=false;
   idcitamodal;
   nombresmodal;
   cedulamodal;
@@ -99,7 +99,6 @@ export class CitasComponent implements OnInit {
       return false;
     }else{
     this.smallModal.show();
-
     this.idcitamodal=idcitamodal,
     this.nombresmodal=nombre,
     this.cedulamodal=cedula,
@@ -109,6 +108,7 @@ export class CitasComponent implements OnInit {
 
     this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         this.idPaciente = data['result'].id_paciente;
+        
 
     }).catch((error) => {
       console.log(error);
@@ -123,6 +123,7 @@ export class CitasComponent implements OnInit {
   CargarRecaudacion(){
     this.Validar=0;
     this.abono=false;
+    debugger
     if(this.precio==null || this.precio==undefined || this.observaciones==""|| this.observaciones==undefined
       || this.gad==undefined||this.gad==null
       ){
@@ -177,7 +178,7 @@ export class CitasComponent implements OnInit {
             }
 
             this.GuardarRecaudacion(datosA);
-
+            debugger
             let arrayLocal = {
               "id_cita": this.idcitamodal,
               "nombres": this.nombresmodal,
@@ -186,10 +187,11 @@ export class CitasComponent implements OnInit {
               "abono": 'DOADBA',
               "id_turno": this.id_turnomodal,
            }
+           debugger
             this.citasser.updatecitas(arrayLocal,this.cedulamodal).then(data =>{
-
-                this.cargarRF(this.fechaActual,0,false,true,false);
-                this.cargarMG(this.fechaActual,0,false,true,false);
+              debugger
+                this.cargarRF(this.FechaRf,0,false,true,false);
+                this.cargarMG(this.FechaMg,0,false,true,false);
 
 
             }).catch((error) => {
@@ -218,6 +220,7 @@ export class CitasComponent implements OnInit {
     }
 
   }
+
 
   GuardarRecaudacion(data:any){
     this.ServicioSecretaria.Recaudacion(data).then(data=>{
@@ -279,6 +282,7 @@ export class CitasComponent implements OnInit {
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean,actualizado:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
+      debugger
       this.spinner.hide('sample');
       this.citasMG=data['result'];
       this.validarVacio=data['code'];
@@ -290,7 +294,7 @@ export class CitasComponent implements OnInit {
       }
 
       if(check==true){
-
+        this.dataPaginateMG(event);
       }else{
         if(this.citasMG.length==0){
           data['code']="202";
@@ -342,6 +346,7 @@ export class CitasComponent implements OnInit {
       this.spinner.hide('sample');
       this.citasRF=data['result'];
       this.validarVacioRF=data['code'];
+      debugger
       if(this.validarVacioRF == '202'){
         this.citasRF=[];
         this.citasRFPaginate = [];
@@ -350,7 +355,7 @@ export class CitasComponent implements OnInit {
       }
 
       if(check==true){
-
+        this.dataPaginateRF(event);
       }else{
         if(this.citasRF.length==0){
           data['code']="202";
@@ -400,8 +405,8 @@ export class CitasComponent implements OnInit {
   dataPaginateMG(event){//Función para el filtrado con paginado sin los pipes
     this.citasMGFilter = [];
     this.citasMGPaginateFilter = [];
-
-    if(this.searchMG==null){
+    debugger
+    if(this.searchMG==null || this.searchMG==undefined){
       if(this.citasMG==null || this.citasMG[0]=="R"){
         this.citasMG=[];
       this.citasMGPaginate=[];
@@ -497,7 +502,7 @@ export class CitasComponent implements OnInit {
 
     this.citasRFFilter=[];
     this.citasRFPaginateFilter=[];
-    if(this.searchRF==null){
+    if(this.searchRF==null || this.searchRF==undefined){
       if(this.citasRF==null || this.citasRF[0]=="R"){
       this.citasRF=[];
     this.citasRFPaginate=[];
