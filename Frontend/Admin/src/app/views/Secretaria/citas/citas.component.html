@@ -304,14 +304,14 @@
                   </div>
               </div>
               <div class="form-group col-md-5" *ngIf="ingresoMG==1">
-                  <label for="text-input">Especialidad</label>
+                  <label for="text-input">Valor</label>
                   <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
                     <option value="0.50">$ 0,50</option>
                     <option value="1">$ 1,00</option>
                   </select>
               </div>
               <div class="form-group col-md-5" *ngIf="ingresoRF==1">
-                <label for="text-input">Especialidad</label>
+                <label for="text-input">Valor</label>
                 <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
                   <option value="1">$ 1,00</option>
                   <option value="2">$ 2,00</option>
