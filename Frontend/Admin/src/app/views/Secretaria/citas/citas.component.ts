@@ -53,6 +53,7 @@ export class CitasComponent implements OnInit {
   checkMG=false;
   today = new Date();
   fechaActual:string;
+  desabilitar;
 
   @ViewChild('smallModal') public smallModal: ModalDirective;
 
@@ -73,6 +74,8 @@ export class CitasComponent implements OnInit {
   cedulamodal;
   estadomodal;
   id_turnomodal;
+  ingresoMG;
+  ingresoRF;
 
   ClasePrecio='form-control form-input select-number';
   ClaseObser='form-control';
@@ -83,21 +86,32 @@ export class CitasComponent implements OnInit {
       this.exo=1;
       this.gad=1;
       this.precio=0;
+      this.desabilitar=true;
       this.ClasePrecio='form-control form-input select-number';
     }else{
       this.exo=0;
       this.gad=0;
-      this.precio=1;
+      this.desabilitar=false;
       this.ClasePrecio='form-control form-input select-number';
     }
 
   }
 
-  AbrirModal(idcitamodal:string,nombre:string, cedula:string,  fecha:string,abono, id_turnomodal:string,idrol:string){
+  AbrirModal(idcitamodal:string,nombre:string, cedula:string,  fecha:string,abono, id_turnomodal:string,idrol:string,especialidad:string){
 
     if(abono == true || abono == 1){
       return false;
     }else{
+    if(especialidad == 'MG'){
+      this.ingresoMG=1;
+      this.ingresoRF=0;
+      this.desabilitar=false;
+    }else if(especialidad == 'RF'){
+      this.ingresoRF=1;
+      this.ingresoMG=0;
+      this.desabilitar=false;
+    }
+
     this.smallModal.show();
     this.idcitamodal=idcitamodal,
     this.nombresmodal=nombre,
@@ -135,7 +149,7 @@ export class CitasComponent implements OnInit {
         if(this.observaciones=="" || this.observaciones == undefined){
           this.ClaseObser ="form-control is-invalid";
         }
-        if(this.precio == undefined||this.precio == null){
+        if(this.precio == undefined||this.precio == ""){
           this.ClasePrecio ="form-control is-invalid";
         }
         if(this.gad==undefined||this.gad==null){
@@ -241,6 +255,7 @@ export class CitasComponent implements OnInit {
     this.ClasePrecio='form-control form-input select-number';
     this.ClaseObser='form-control';
     this.ClaseGad="";
+    
 
   }
 
