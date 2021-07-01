@@ -1408,7 +1408,7 @@ class PDFController extends Controller
         $mes = $valores[1];
         $dia = $valores[2];
 
-        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->where('exonera',0)->with('paciente','rol')->get();
 
         switch ($mes) {
             case 1:
@@ -1450,6 +1450,8 @@ class PDFController extends Controller
         }
         $mes = strtoupper($mesL);
 
+
+
         return \PDF::loadView('RecaudacionDiarioMedicinaGeneral', compact('dia','mes','year','datos'))->setPaper('a4', 'lands')->stream('RecaudaciónDiarioMedicinaGeneral'.$fecha.'.pdf');
     }
 
@@ -1471,7 +1473,7 @@ class PDFController extends Controller
         $mes = $valores[1];
         $dia = $valores[2];
 
-        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->where('exonera',0)->with('paciente','rol')->get();
        
         switch ($mes) {
             case 1:
@@ -1545,6 +1547,7 @@ class PDFController extends Controller
         }
         foreach ($dato as $item) {
             $separar = explode('-', $item['fecha']);
+            $separar[2] = intval($separar[2]);
 
             if($item->rol['rol']=='Medicina General'){
                 if($item['exonera']==true){
