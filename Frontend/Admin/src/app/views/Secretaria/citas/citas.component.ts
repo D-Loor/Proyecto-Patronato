@@ -192,7 +192,6 @@ export class CitasComponent implements OnInit {
             }
 
             this.GuardarRecaudacion(datosA);
-            debugger
             let arrayLocal = {
               "id_cita": this.idcitamodal,
               "nombres": this.nombresmodal,
@@ -201,9 +200,7 @@ export class CitasComponent implements OnInit {
               "abono": 'DOADBA',
               "id_turno": this.id_turnomodal,
            }
-           debugger
             this.citasser.updatecitas(arrayLocal,this.cedulamodal).then(data =>{
-              debugger
                 this.cargarRF(this.FechaRf,0,false,true,false);
                 this.cargarMG(this.FechaMg,0,false,true,false);
 
@@ -222,6 +219,8 @@ export class CitasComponent implements OnInit {
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
           ) {
+            this.smallModal.hide();
+            this.spinner.hide('sample');
             swalWithBootstrapButtons.fire(
               '¡Cancelado..!',
               'La cita no ha sido actualizada.',

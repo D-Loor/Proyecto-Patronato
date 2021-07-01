@@ -13,7 +13,7 @@
               <label for="name">Buscar por Cédula:</label>
               <div class="input-group">
 
-                <input type="number" id="search" name="search" class="form-control" placeholder="Escriba la cédula" [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
+                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="search" name="search" class="form-control" placeholder="Escriba la cédula" [(ngModel)]="search" (ngModelChange)="dataPaginate($event)">
                 <span class="input-group-prepend">
                   <button type="button" class="btn btn-primary" (click)="buscarMG()"><i class="fa fa-search"></i>&nbsp;Buscar</button>
                 </span>
