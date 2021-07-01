@@ -101,9 +101,10 @@
       </div>
       <div class="modal-body">
           <div class="row">
-              <div class="form-group col-sm-8">
+              <div>
+                <div class="form-group col-sm-8">
                   <label for="inline-radios" [class]="ClaseGad">Exonerar</label>
-                  <div class="col-md-8 col-form-label">
+                  <div class="col-md-8  col-form-label" >
                       <div class="form-check form-check-inline mr-1" id="inline-radiosN">
                           <input autocomplete="off" required class="form-check-input" (click)="ClaseGad=''" (click)="HabilitarValor(1)" type="radio" name="gad" id="gad">
                           <label class="form-check-label" for="inlineRadio1">Si</label>
@@ -113,15 +114,16 @@
                           <label class="form-check-label" for="inlineRadio2">No</label>
                       </div>
                   </div>
+                </div>
               </div>
-              <div class="form-group col-md-5" *ngIf="ingresoMG==1">
+              <div class="form-group col-md-5 col-sm-4" *ngIf="ingresoMG==1">
                   <label for="text-input">Valor</label>
                   <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
                     <option value="0.50">$ 0,50</option>
                     <option value="1">$ 1,00</option>
                   </select>
               </div>
-              <div class="form-group col-md-5" *ngIf="ingresoRF==1">
+              <div class="form-group col-md-5 col-sm-4" *ngIf="ingresoRF==1">
                 <label for="text-input">Valor</label>
                 <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
                   <option value="1">$ 1,00</option>
