@@ -231,7 +231,7 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/logoCompleto.png" class="LogoJunin">
+   <img src="imagenes/logoCompleto.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
     <h4 class="titu">DIRECCION DE DESARROLLO HUMANO</h4>
     <div class="contenedor2">
