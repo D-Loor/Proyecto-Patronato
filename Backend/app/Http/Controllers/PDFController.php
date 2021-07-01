@@ -1690,6 +1690,14 @@ class PDFController extends Controller
             array_push ( $espaciosrp , (int)$espa );
            
         }
+        $cont=0;
+        $medicamento=[];
+        foreach($rp as $item) {
+            $medicamento_complemento = explode('-', $rp[$cont]);
+            $medicamento[$cont] = $medicamento_complemento[0];
+            $complementosin_[$cont] = $medicamento_complemento[0].$medicamento_complemento[1];
+            $cont++;
+        }
         //return response()->json(['result'=>$tab."px"]);
         $espaciospres=[];
         foreach($pres as $item) {
@@ -1699,6 +1707,13 @@ class PDFController extends Controller
             array_push ( $espaciospres , (int)$espa );
            
         }
+        $pres2  = $pres;
+        $cont=0;
+        foreach($pres2 as $item) {
+           $pres[$cont] = $medicamento[$cont].': '.$item; 
+           $cont++;
+        }
+        
 
 
 
@@ -1709,7 +1724,7 @@ class PDFController extends Controller
         $mes = strtoupper($mesL);
         $color=(int) $color;
         //return response()->json(['result'=>$color]);
-        return \PDF::loadView('Receta', compact('color','conteo','dia','mes','year','nombre','talla','peso','ta','edad','rp','pres'))->setPaper('a5', 'landscape')->stream('Receta-'.$nombre.'-'.$fecha.'.pdf');
+        return \PDF::loadView('Receta', compact('color','conteo','dia','mes','year','nombre','talla','peso','ta','edad','rp','pres','complementosin_'))->setPaper('a5', 'landscape')->stream('Receta-'.$nombre.'-'.$fecha.'.pdf');
     }
 
 }
