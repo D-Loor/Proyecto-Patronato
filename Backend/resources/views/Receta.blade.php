@@ -174,7 +174,7 @@
                 @if ($i === $conteo)     
 
                     <tr>
-                        <td class="celdai"> <strong>{{$i}})</strong> {{$rp[$i-1]}} </td>
+                        <td class="celdai"> <strong>{{$i}})</strong> {{$complementosin_[$i-1]}} </td>
                         <td class="celdad"> </td>
                     </tr> 
 
@@ -182,7 +182,7 @@
                 @if ($i != $conteo && $i != 0)     
 
                     <tr>
-                        <td class="celdai"> <strong>{{$i}})</strong> {{$rp[$i-1]}} </td>
+                        <td class="celdai"> <strong>{{$i}})</strong> {{$complementosin_[$i-1]}} </td>
                         <td class="celdad"> <strong>{{$i+1}})</strong>  {{$pres[$i]}}</td>
                     </tr> 
 
