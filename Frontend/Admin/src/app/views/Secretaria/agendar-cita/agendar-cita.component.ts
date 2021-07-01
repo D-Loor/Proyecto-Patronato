@@ -49,6 +49,7 @@ export class AgendarCitaComponent implements OnInit {
   idCita="";
   abonoCita="";
   cedulaCita="";
+  desabilitar=false;
   //Variables para validar
   ClaseCdula:string="form-control form-input select-number";
   ClaseCNombre:string="form-control form-input select-number";
@@ -58,6 +59,8 @@ export class AgendarCitaComponent implements OnInit {
   ClasePrecio='form-control form-input select-number';
   ClaseObser='form-control';
   ClaseGad;
+  ingresoMG;
+  ingresoRF;
   desabilitarPago;
 
   //Variables para datos pacientes
@@ -91,6 +94,15 @@ export class AgendarCitaComponent implements OnInit {
       );
       return false;
     }else{
+      if(this.especialidad == 'Medicina General'){
+        this.ingresoMG=1;
+        this.ingresoRF=0;
+        this.desabilitar=false;
+      }else if(this.especialidad == 'Rehabilitación Física'){
+        this.ingresoRF=1;
+        this.ingresoMG=0;
+        this.desabilitar=false;
+      }
       this.smallModal.show();
     }
 
@@ -143,7 +155,7 @@ export class AgendarCitaComponent implements OnInit {
         'exonera':this.gad,
         'observaciones':this.observaciones,
       }
-      
+      debugger
       this.GuardarRecaudacion(datosA);
     }).catch((error) => {
       console.log(error);
@@ -280,16 +292,17 @@ export class AgendarCitaComponent implements OnInit {
   ValidarCedula(cedulaV: number) {
     let cedula = String(cedulaV);
     this.pago=0;
+    debugger
     if(cedula === "undefined" ||  cedula === "null"){
 
       this.ClaseCdula="form-control form-input select-number";
 
-    }else if (cedula.length === 10) {
+    }else if (cedula.length === 10 ) {
 
       this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         if(data['code']=="201"){
           this.idPaciente= data['result'].id_paciente;
-          
+          debugger
           this.pago=1;
         }else{
           this.abono = false;
@@ -687,11 +700,12 @@ export class AgendarCitaComponent implements OnInit {
       this.exo=1;
       this.gad=1;
       this.precio=0;
+      this.desabilitar=true;
       this.ClasePrecio='form-control form-input select-number';
     }else{
       this.exo=0;
       this.gad=0;
-      this.precio=1;
+      this.desabilitar=false;
       this.ClasePrecio='form-control form-input select-number';
     }
 

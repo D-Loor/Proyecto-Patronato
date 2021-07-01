@@ -68,7 +68,8 @@
                     </td>
                     <td>
                       <i *ngIf="item.abono==1" class="fa fa-check-square-o"></i>
-                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"  *ngIf="item.abono==0" class="fa fa-square-o"></i>
+                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol,'MG')"  *ngIf="item.estado==1 && item.abono==0" class="fa fa-square-o"></i>
+                      <i *ngIf="item.estado==0" class="fa fa-square-o"></i>
                     </td>
                     <td>
 
@@ -98,7 +99,8 @@
                     </td>
                     <td>
                       <i *ngIf="item.abono==1" class="fa fa-check-square-o"></i>
-                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"  *ngIf="item.abono==0" class="fa fa-square-o"></i>
+                      <i *ngIf="item.estado==1 && item.abono==0" (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol,'MG')"  class="fa fa-square-o"></i>
+                      <i *ngIf="item.estado==0" class="fa fa-square-o"></i>
                     </td>
                     <td>
 
@@ -200,8 +202,8 @@
 
                     <td>
                       <i *ngIf="item.abono==1" class="fa fa-check-square-o"></i>
-                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"  *ngIf="item.abono==0" class="fa fa-square-o"></i>
-
+                      <i  (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol,'RF')" *ngIf="item.estado==1 && item.abono==0" class="fa fa-square-o"></i>
+                      <i *ngIf="item.estado==0" class="fa fa-square-o"></i>
                     </td>
                     <td>
 
@@ -232,7 +234,8 @@
                     </td>
                     <td>
                       <i *ngIf="item.abono==1" class="fa fa-check-square-o"></i>
-                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol)"  *ngIf="item.abono==0" class="fa fa-square-o"></i>
+                      <i (click)="AbrirModal(item.id_cita , item.nombres , item.cedula , item.fecha , item.abono , item.turno.id_turno, item.turno.id_rol,'RF')"  *ngIf="item.estado==1 && item.abono==0" class="fa fa-square-o"></i>
+                      <i *ngIf="item.estado==0" class="fa fa-square-o"></i>
                     </td>
                     <td>
 
@@ -300,10 +303,20 @@
                       </div>
                   </div>
               </div>
-              <div class=" form-group col-md-4">
+              <div class="form-group col-md-5" *ngIf="ingresoMG==1">
                   <label for="text-input">Valor</label>
-                  <input  autocomplete="off" required type="number" [disabled]="exo" id="precio"  [(ngModel)]="precio" name="precio" [class]="ClasePrecio" placeholder="$" (click)="ClasePrecio='form-control form-input select-number'">
+                  <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
+                    <option value="0.50">$ 0,50</option>
+                    <option value="1">$ 1,00</option>
+                  </select>
               </div>
+              <div class="form-group col-md-5" *ngIf="ingresoRF==1">
+                <label for="text-input">Valor</label>
+                <select [disabled]="desabilitar" id="precio" [class]="ClasePrecio" (click)="ClasePrecio='form-control form-input select-number'" [(ngModel)]="precio" name="precio" required>
+                  <option value="1">$ 1,00</option>
+                  <option value="2">$ 2,00</option>
+                </select>
+            </div>
           </div>
           <div class="row">
             <div class=" form-group col-md-12">

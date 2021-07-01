@@ -256,10 +256,13 @@
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
                                     @if($datos[$i]->valor == 1)
+                                        <td colspan="2">X</td>
+                                        <td colspan="2"></td>
+                                    @elseif($datos[$i]->valor == 2)
                                         <td colspan="2"></td>
                                         <td colspan="2">X</td>
                                     @else
-                                        <td colspan="2">X</td>
+                                        <td colspan="2"></td>
                                         <td colspan="2"></td>
                                     @endif
                                 <th class="numero">{{$i+23}}</th>
@@ -282,22 +285,28 @@
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande">{{$datos[$i]->paciente['nombres']}}</td>
                                 @if($datos[$i]->valor == 1)
-                                        <td colspan="2"></td>
-                                        <td colspan="2">X</td>
-                                 @else
                                         <td colspan="2">X</td>
                                         <td colspan="2"></td>
-                                @endif
+                                    @elseif($datos[$i]->valor == 2)
+                                        <td colspan="2"></td>
+                                        <td colspan="2">X</td>
+                                    @else
+                                        <td colspan="2"></td>
+                                        <td colspan="2"></td>
+                                    @endif
                                 @if($numDato > $i+22)
                                     <th class="numero">{{$i+23}}</th>
                                     <td class="grande">{{$datos[$i+22]->paciente['nombres']}}</td>
-                                        @if($datos[$i+22]->valor == 1)
-                                            <td colspan="2">X</td>
-                                            <td colspan="2"></td>
-                                        @else
-                                            <td colspan="2"></td>
-                                            <td colspan="2">X</td>
-                                        @endif
+                                    @if($datos[$i+22]->valor == 1)
+                                        <td colspan="2">X</td>
+                                        <td colspan="2"></td>
+                                    @elseif($datos[$i+22]->valor == 2)
+                                        <td colspan="2"></td>
+                                        <td colspan="2">X</td>
+                                    @else
+                                        <td colspan="2"></td>
+                                        <td colspan="2"></td>
+                                    @endif
                                     <td class="obser" class="grande"> <span class="numeroSpan">{{$i+1}}:</span> {{$datos[$i]->observaciones}} 
                                        <br> <span class="numeroSpan"> {{$i+23}}: </span>{{$datos[$i+22]->observaciones}} </td>
                                 @else
