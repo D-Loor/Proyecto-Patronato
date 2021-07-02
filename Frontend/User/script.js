@@ -103,7 +103,7 @@ function validarC() {
             if(data['code']=="202"){
                   swal(
                     '¡Lo sentimos..!',
-                    'No existen citas disponibles en esta fecha.',
+                    'No existen AgendarCita disponibles en esta fecha.',
                     'error'
                   )
 
