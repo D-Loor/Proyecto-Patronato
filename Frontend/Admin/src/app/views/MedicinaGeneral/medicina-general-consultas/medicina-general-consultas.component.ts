@@ -453,7 +453,11 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       else
         ta=this.taR;
 
+      debugger
       let data;
+
+     
+
       data = {
        'nombre':this.nombresR,
        'peso':this.pesoR,
@@ -470,8 +474,12 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       }else if(localStorage.getItem('color')=='2'){
         localStorage.setItem('color', '1');
       }
+      let plan_terapeutico = this.plan_terapeutico.replace(/#/gi,"%23");
+      let indicaciones = this.indicaciones.replace(/#/gi,"%23");
+      debugger
       this.color=localStorage.getItem('color');
-      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.plan_terapeutico+'/'+this.indicaciones, '_blank');
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+plan_terapeutico+'/'+indicaciones, '_blank');
+      //window.open('http://127.0.0.1:8000/api/Receta2?'+'color='+this.color+'&nombre='+this.nombresR+'&peso='+peso+'&talla='+talla+'&ta='+ta+'&edad='+this.edadR+'&fecha='+this.fechaActual+'&rp='+plan_terapeutico+'&pres='+indicaciones);
 
     }
 
