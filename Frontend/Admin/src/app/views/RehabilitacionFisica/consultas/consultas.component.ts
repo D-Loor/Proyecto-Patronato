@@ -131,9 +131,9 @@ export class ConsultasComponent implements OnInit {
       let data;
       data = {
        'nombre':this.nombresR,
-       'peso':this.pesoR,
-       'talla': this.tallaR,
-       'ta': this.taR,
+       'peso':peso,
+       'talla': talla,
+       'ta': ta,
        'edad':this.edadR,
        'fecha': this.fechaActual,
        'rp': this.receta,
@@ -146,8 +146,11 @@ export class ConsultasComponent implements OnInit {
         localStorage.setItem('color', '1');
       }
       this.color=localStorage.getItem('color');
-      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+this.receta+'/'+this.indicaciones, '_blank');
-
+      let plan_terapeutico = this.receta.replace(/#/gi,"%23");
+      let indicaciones = this.indicaciones.replace(/#/gi,"%23");
+      debugger
+      this.color=localStorage.getItem('color');
+      window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+plan_terapeutico+'/'+indicaciones, '_blank');
     }
 
   }
