@@ -28,37 +28,6 @@ $(window).load(function() {
 var comprotido=false;
 
 
-//Animacion Footer
-$(document).ready(function() {
-	
-	// INITIATE THE FOOTER
-  siteFooter();
-	// COULD BE SIMPLIFIED FOR THIS PEN BUT I WANT TO MAKE IT AS EASY TO PUT INTO YOUR SITE AS POSSIBLE
-	$(window).resize(function() {
-		siteFooter();
-	});
-	
-	function siteFooter() {
-		var siteContent = $('#site-content');
-		var siteContentHeight = siteContent.height();
-		var siteContentWidth = siteContent.width();
-
-		var siteFooter = $('#site-foot');
-		var siteFooterHeight = siteFooter.height();
-		var siteFooterWidth = siteFooter.width();
-
-		console.log('Content Height = ' + siteContentHeight + 'px');
-		console.log('Content Width = ' + siteContentWidth + 'px');
-		console.log('Footer Height = ' + siteFooterHeight + 'px');
-		console.log('Footer Width = ' + siteFooterWidth + 'px');
-
-		siteContent.css({
-			"margin-bottom" : siteFooterHeight + 50
-		});
-	};
-
-});
-
 //Validar cédula
 
 function validarC() {
@@ -103,7 +72,7 @@ function validarC() {
             if(data['code']=="202"){
                   swal(
                     '¡Lo sentimos..!',
-                    'No existen AgendarCita disponibles en esta fecha.',
+                    'No existen citas disponibles en esta fecha.',
                     'error'
                   )
 
@@ -156,7 +125,7 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
     for (let i = $select.options.length; i >= 0; i--) {
         $select.remove(i);
     }
-
+  
     $.ajax({
         type: "GET",
         url: "http://127.0.0.1:8000/api/cargarRoles",
@@ -175,7 +144,8 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
 
                 document.getElementById("fecha").setCustomValidity('No hay turno para esta fecha!');
                 document.getElementById("fecha").reportValidity();
-            }else{
+            }
+          else{
                 $.each(espe, function (i, item) {
                     const option = document.createElement('option');
                                                           
@@ -220,7 +190,7 @@ document.getElementsByName("fecha")[0].setAttribute('min', today);*/
     }
 
    }
-    $("#AgendarCita").click(function () {
+    $("#AgendarCitaBT").click(function () {
        
         event.preventDefault();
         
