@@ -115,11 +115,13 @@ export class CuentasComponent implements OnInit {
   }
 
   //Editado
-  public onSelectFile(event,files:Event) { // called each time file input changes
-      let tipoImagen = (<HTMLInputElement>files.target).files[0].type;
+  public onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      debugger
+      let tipoImagen = event.target.files[0].type;
       if( tipoImagen == "image/jpeg"  || tipoImagen == "image/png" || tipoImagen == "image/svg"){
-      this.foto = (<HTMLInputElement>files.target).files[0];
-      if (event.target.files && event.target.files[0]) {
+      this.foto = event.target.files[0];
+      
         var reader = new FileReader();
 
         reader.readAsDataURL(event.target.files[0]); // read file as data url
@@ -127,7 +129,7 @@ export class CuentasComponent implements OnInit {
         reader.onload = (event) => { // called once readAsDataURL is completed
           this.url = event.target.result;
         }
-      }
+      
       }else{
         Swal.fire({
           icon: 'error',
@@ -137,6 +139,7 @@ export class CuentasComponent implements OnInit {
       this.foto="";
       }
       this.ClaseFoto="";
+      }
     }
 
     buscar(){
