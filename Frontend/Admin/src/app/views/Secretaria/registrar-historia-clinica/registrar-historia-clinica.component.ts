@@ -1516,6 +1516,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     if(this.estado==1){
       this.estadoT = "Sin causas";
     }
+    this.spinner.show('sampleA');
       arrayLocal = {
           "nombres": this.nombres,
           "union": this.union,
@@ -1556,9 +1557,11 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       this.estado = "";
       this.estadoT = "";
     });
+    this.spinner.hide('sampleA');
   }
 
   eliminarFamiliarBD(id_familiar:number){
+    this.spinner.show('sampleA');
     this.ServicioSecretaria.eliFamiliares(id_familiar,this.id_PacienteDA).then(data =>{
       this.LlenarArrayDB();
     });
