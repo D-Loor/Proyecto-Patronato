@@ -10,6 +10,8 @@ use App\Models\Paciente;
 use App\Models\Recaudacion;
 use App\Models\Egreso;
 use DateTime;
+use App\Models\Diagnostico;
+use Illuminate\Support\Facades\DB;
 
 class PDFController extends Controller
 {
@@ -381,10 +383,12 @@ class PDFController extends Controller
 
     public function ValidarMorbilidadTerapia($Mes, $Year){
 
-        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->select('motivo_consulta')
-            ->groupBy('motivo_consulta')
+        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)
+            ->select('id_diagnostico')
+            ->groupBy('id_diagnostico')
             ->orderByRaw('COUNT(*) DESC')
             ->take(20)
+            ->with('diagnostico')
             ->get();
 
         $ndatos=count( $datosCausas);
@@ -440,13 +444,19 @@ class PDFController extends Controller
                 break;
         }
         $mes = strtoupper($mes);
-        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->select('motivo_consulta')
-            ->groupBy('motivo_consulta')
+
+        $datosCausas = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)
+            ->select('id_diagnostico')
+            ->groupBy('id_diagnostico')
             ->orderByRaw('COUNT(*) DESC')
             ->take(20)
+            ->with('diagnostico')
             ->get();
 
-        $datos = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)->with('paciente')->get();
+           // return response()->json(['result'=>$datosCausas]);
+        $datos = Historia_Clinica_RF::whereMonth('fecha', $Mes)->whereYear('fecha', $Year)
+            ->with('paciente')
+            ->get();
         $aggTotales=[];
         $porcentajes=[];
         $ContgruposEdadCont=[];
@@ -464,6 +474,7 @@ class PDFController extends Controller
         $TotalF[10]=0;
         $TotalF[11]=0;
         $TotalF[12]=0;
+
         foreach($datosCausas as $itemC)
         {
             $Edad[0] = 0;
@@ -481,7 +492,7 @@ class PDFController extends Controller
             $Edad[12] = 0;
             foreach($datos as $item)
             {
-                if($item['motivo_consulta'] === $itemC['motivo_consulta'])
+                if($item['id_diagnostico'] === $itemC['id_diagnostico'])
                 {
                     $Edad[12] +=1;
                     if($item->paciente['edad']>'0' && $item->paciente['edad']<='3')
@@ -550,7 +561,7 @@ class PDFController extends Controller
 
         $ContgruposEdadCont[$n]=$Edad[12];
 
-                $Resultados [] = [$cont, $itemC['motivo_consulta'], $Edad[0], $Edad[1], $Edad[2], $Edad[3],$Edad[4], $Edad[5], $Edad[6],
+                $Resultados [] = [$cont, $itemC->diagnostico['diagnostico'], $Edad[0], $Edad[1], $Edad[2], $Edad[3],$Edad[4], $Edad[5], $Edad[6],
                                   $Edad[7], $Edad[8], $Edad[9], $Edad[10], $Edad[11], $Edad[12]
                              ];
             $n++;

@@ -339,7 +339,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
               this.confirma=true;
               this.pase=true;
               this.spinner.hide('sample');
-              Swal.fire('¡Enfermedad Agregada..!', '', 'success')
+              Swal.fire('¡Enfermedad Agregada..!', '', 'success');
+              this.ClaseEnfermedad="";
 
             }).catch((error) => {
               console.log(error);
