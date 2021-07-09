@@ -1076,7 +1076,7 @@ class PDFController extends Controller
         foreach ($datosMG as $item) {
 
             $separar = explode('-', $item['fecha']);
-
+            $separar[2] = intval($separar[2]);
                 $lugar[0] = 0;
                 $lugar[1] = 0;
                 $lugar[2] = 0;
@@ -1314,7 +1314,7 @@ class PDFController extends Controller
         foreach ($RF as $item) {
 
             $separar = explode('-', $item['fecha']);
-
+            $separar[2] = intval($separar[2]);
                 $lugar[0] = 0;
                 $lugar[1] = 0;
 
