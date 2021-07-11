@@ -103,15 +103,20 @@ class TurnoController extends Controller
     public function update(Request $request, $id)
     {
         $datos=Turno::find($id);
-        if($datos != null){
-            $datos->hora=$request->hora;
-            $datos->id_rol=$request->id_rol;
-            $datos->cantidad=$request->cantidad;
-            $datos->estado=$request->estado;
-            $datos->update();
-            return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
-        }else
-            return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
+        if($datos->hora===$request->hora && $datos->id_rol===$request->id_rol && $datos->cantidad===$request->cantidad && $datos->estado=$request->estado){
+            return response()->json(['mensaje'=>"Registro repetido", 'code'=>'203']);
+        }else{
+            if($datos != null){
+                $datos->hora=$request->hora;
+                $datos->id_rol=$request->id_rol;
+                $datos->cantidad=$request->cantidad;
+                $datos->estado=$request->estado;
+                $datos->update();
+                return response()->json(['mensaje'=>"Dato Actualizado.", 'code'=>'201']);
+            }else
+                return response()->json(['mensaje'=>"Registro no encontrado", 'code'=>'202']);
+        }
+        
     }
 
     /**

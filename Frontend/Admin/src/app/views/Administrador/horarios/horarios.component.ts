@@ -391,16 +391,25 @@ export class HorariosComponent implements OnInit {
           }
 
           this.administradorService.updateTurno(arrayUpdate,this.id_turnos).then(data =>{
-
-            data['result'];
-            this.spinner.hide('sample');
-            Swal.fire(
-              '¡Datos Actualizados..!',
-              'Datos actualizados correctamente.',
-              'success'
-            )
-            this.cargarTablas();
-            this.limpiar();
+            if(data['code']=='203'){
+              this.spinner.hide('sample');
+              Swal.fire({
+                icon: 'error',
+                title: '¡Turno antes Registrado..!',
+                text: 'Este turno ya se encuentra registrado.'
+              })
+            }else{
+              data['result'];
+              this.spinner.hide('sample');
+              Swal.fire(
+                '¡Datos Actualizados..!',
+                'Datos actualizados correctamente.',
+                'success'
+              )
+              this.cargarTablas();
+              this.limpiar();
+            }
+            
           }).catch((error) => {
             console.log(error);
             this.spinner.hide('sample');

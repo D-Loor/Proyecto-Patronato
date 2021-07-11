@@ -237,7 +237,7 @@ export class CuentasComponent implements OnInit {
 
       swalWithBootstrapButtons.fire({
         title: '¿Desea crear esta Cuenta?',
-        text: "Una vez agregado podrá verlo en registros.",
+        text: "Una vez agregada podrá verla en los registros.",
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Si, crear cuenta!',
@@ -386,7 +386,7 @@ export class CuentasComponent implements OnInit {
 
       swalWithBootstrapButtons.fire({
         title: '¿Desea Actualizar esta Cuenta?',
-        text: "Una vez actualizado podrá verlo en registros.",
+        text: "Una vez actualizada podrá verla en los registros.",
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Si, actualizar cuenta!',
