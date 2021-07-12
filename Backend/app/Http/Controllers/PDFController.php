@@ -574,7 +574,7 @@ class PDFController extends Controller
             $porcentajes[$i]=$redondear;
         }
 
-        //return response()->json(['result'=>$TotalF]);
+        //return response()->json(['result'=>$Resultados]);
         return \PDF::loadView('MorbilidadTerapia', compact('Resultados', 'mes', 'Year','TotalF','porcentajes'))->setPaper('a3', 'landscape')->stream('MorbilidadTerapia-'.$Mes.'-'.$Year.'.pdf');
     }
 

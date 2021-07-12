@@ -227,7 +227,8 @@
                                 <th class="numero">{{$item[$i]}}</th>
                             @endif
                             @if ($i >=1 && $i < 15) 
-                                @if ($item[$i] == 0) 
+                               
+                                @if ($item[$i] === 0) 
                                     <th> </th>
                                 @else
                                     <td class="grande" >{{$item[$i]}}</td>
@@ -271,7 +272,7 @@
                         @if($i !=12)
                         <td>{{$TotalF[$i]}}</td>
                         @endif
-                        @if($i==12)
+                        @if($i===12)
                         <td class="ver">{{$TotalF[$i]}}</td>
                         @endif
                     @endfor
