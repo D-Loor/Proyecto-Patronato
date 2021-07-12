@@ -379,4 +379,8 @@ export class EgresosComponent implements OnInit {
     this.egresosPaginate = this.egresos.slice(startItem, endItem);
   }
 
+  ngOnDestroy():void{
+    localStorage.removeItem('historiaClinica');
+  }
+
 }

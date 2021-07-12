@@ -53,7 +53,8 @@ export class CitasComponent implements OnInit {
   checkMG=false;
   today = new Date();
   fechaActual:string;
-  desabilitar;
+  desabilitar=true;
+  desabilitarTxt=true;
 
   @ViewChild('smallModal') public smallModal: ModalDirective;
 
@@ -65,7 +66,7 @@ export class CitasComponent implements OnInit {
   recau=0;
   gad=0;
   Validar=0;
-  observaciones;
+  observaciones="*";
   idrolmodal;
   cancelomg=false;
   cancelorf=false;
@@ -87,12 +88,17 @@ export class CitasComponent implements OnInit {
       this.gad=1;
       this.precio=0;
       this.desabilitar=true;
+      this.desabilitarTxt=false;
+      this.observaciones="";
       this.ClasePrecio='form-control form-input select-number';
     }else{
       this.exo=0;
       this.gad=0;
       this.desabilitar=false;
+      this.precio="";
       this.ClasePrecio='form-control form-input select-number';
+      this.desabilitarTxt=true;
+      this.observaciones="*";
     }
 
   }
@@ -138,7 +144,17 @@ export class CitasComponent implements OnInit {
     this.Validar=0;
     this.abono=false;
     debugger
-    if(this.precio==null || this.precio==undefined || this.observaciones==""|| this.observaciones==undefined
+    let validacion=0;
+    let validacion2=0;
+    if(this.desabilitar==true && (this.observaciones=="" || this.observaciones==undefined)){
+      debugger
+      validacion=1;
+    }
+    if(this.desabilitarTxt==true && (this.precio=="" || this.precio==undefined)){
+      debugger
+      validacion2=1;
+    }
+    if(this.precio==null || this.precio==undefined || validacion==1 || validacion2==1
       || this.gad==undefined||this.gad==null
       ){
         Swal.fire({
@@ -146,12 +162,18 @@ export class CitasComponent implements OnInit {
           title: '¡Hay campos vacíos..!',
           text: 'Debe de completar todo el formulario para agregar la recaudación.'
         })
-        if(this.observaciones=="" || this.observaciones == undefined){
-          this.ClaseObser ="form-control is-invalid";
+        if(this.desabilitar==true){
+          if(this.observaciones=="" || this.observaciones == undefined){
+            this.ClaseObser ="form-control is-invalid";
+          }
         }
-        if(this.precio == undefined||this.precio == ""){
-          this.ClasePrecio ="form-control is-invalid";
+        
+        if(this.desabilitar==false){
+          if(this.precio == undefined||this.precio == ""){
+            this.ClasePrecio ="form-control is-invalid";
+          }
         }
+        
         if(this.gad==undefined||this.gad==null){
           this.ClaseGad="invalido";
         }
@@ -638,6 +660,7 @@ export class CitasComponent implements OnInit {
     this.citasMGPaginate = null;
     this.citasRF = null;
     this.citasRFPaginate = null;
+      localStorage.removeItem('historiaClinica');
   }
 
   HistoriaPaciente(cedula:string){

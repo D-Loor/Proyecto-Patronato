@@ -166,6 +166,9 @@ export class ReportesRecaudacionComponent implements OnInit {
 
   }
 
+  ngOnDestroy():void{
+    localStorage.removeItem('historiaClinica');
+  }
 
 
 }

@@ -1419,7 +1419,7 @@ class PDFController extends Controller
         $mes = $valores[1];
         $dia = $valores[2];
 
-        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->where('exonera',0)->with('paciente','rol')->get();
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
 
         switch ($mes) {
             case 1:
@@ -1484,7 +1484,7 @@ class PDFController extends Controller
         $mes = $valores[1];
         $dia = $valores[2];
 
-        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->where('exonera',0)->with('paciente','rol')->get();
+        $datos=Recaudacion::where('fecha',$fecha)->where('id_rol',$id_rol)->with('paciente','rol')->get();
        
         switch ($mes) {
             case 1:

@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control diario de Terapia</title>
     <style>
-
         @page {
             margin: 0cm 1cm;
         }
-
         *{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
         }
         img{
             padding-top:75px;
@@ -25,7 +22,6 @@
             position:relative;
             margin-top:-30px
         }
-
         .tdcontenedor2{
                 min-width: 100px;
                 width: 30px;
@@ -39,23 +35,19 @@
                 text-align: center;
                 border: solid 1px black;
         }
-
         .contenedor{
             padding:15px;
             padding-top: 0px !important;
             margin-top: 0px !important;
         }
-
         table{
             padding-top:10px;
             border-collapse: collapse;
             text-align: center;
         }
-
         th{
             font-weight: bold!important;
         }
-
         .recobs{
                 width: 50px;
                 min-height: 20px;
@@ -66,27 +58,23 @@
                 font-weight: normal;
                 text-align: center;
                 border: solid 1px black;
-
         }
-         td{
-            padding: 12px;
+        td{
+            padding: 10px;
         }
         th{
             padding: 4px;
         }
-
         th,td {
                 min-width: 100px;
                 width: 30px;
                 min-height: 20px;
-                height: 10px;
+                height: 14px !important;
                 font-size: 12px;
                 font-weight: normal;
                 text-align: center;
                 border: solid 1px black;
         }
-
-
         thead tr th{
             color: rgb(0, 112, 192);
         }
@@ -135,24 +123,23 @@
             height:70px;
             weight:120px;
         }
-
-
         .separador{
             height:45px;
         }
-
-
         .numero{
             color: rgb(0, 112, 192);
         }
-
+        .numeroSpan{
+            color: rgb(0, 112, 192);
+            font-size:13px;
+            font-weight:bold;
+        }
         .total{
             color: rgb(0, 112, 192);
         }
         tfoot tr td{
             font-size: 12px;
         }
-
         .fecha{
             font-size: 13px;
             text-align: left;
@@ -162,7 +149,6 @@
             color:  rgb(0, 0, 0);
             font-size: 15px;
         }
-
         .resul{
             color: rgb(255, 0, 0);
         }
@@ -178,7 +164,6 @@
         .subt{
             padding-left:275px ;
         }
-
         .items{
             font-size:15px;
             font-weight:bold;
@@ -203,14 +188,18 @@
         }
         .subti{
             margin-top:10px;
-            margin-left:30px;
+            margin-left:27px;
             font-size:16px;
         }
-
         .nborde{
             border: none;
         }
-
+        .obser{
+            margin:none;
+            padding:none;
+            padding-left:5px;
+            text-align:left;
+        }
     </style>
 </head>
 <body>
@@ -219,7 +208,7 @@
 
     <div class="contenedor">
 
-   <img src="imagenes/logoCompleto.jpg" class="LogoJunin">
+    <img src="imagenes/logoCompleto.jpg" class="LogoJunin">
     <img src="imagenes/LogoPatronato.jpg" class="LogoPatronato">
     <h4 class="titu">DIRECCION DE DESARROLLO HUMANO</h4>
     <div class="contenedor2">
@@ -240,12 +229,14 @@
                     <th rowspan="2" class="tamnio"> NOMBRES Y APELLIDOS</th>
                     <th class="recobs" colspan="4"> RECAUDACIÓN </th>
                     <th class="recobs" class="nborder" rowspan="2"> OBSERVACIÓN</th>
+                    
                 </tr>
                 <tr>
                     <th class="numero" colspan="2" rowspan="1"> $1 </th>
                     <th class="numero" colspan="2" rowspan="1"> $2 </th>
                     <th class="numero" colspan="2" rowspan="1"> $1 </th>
                     <th class="numero" colspan="2" rowspan="1"> $2 </th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -269,7 +260,12 @@
                                 <td class=""></td>
                                 <td colspan="2"></td>
                                 <td colspan="2"></td>
-                                <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                @if($datos[$i]->observaciones=="*")
+                                    <td class="grande"></td>
+                                @else
+                                    <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                @endif
+                                    
                             @elseif($numDato < 22)
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande"></td>
@@ -287,34 +283,51 @@
                                 @if($datos[$i]->valor == 1)
                                         <td colspan="2">X</td>
                                         <td colspan="2"></td>
-                                    @elseif($datos[$i]->valor == 2)
+                                 @elseelseif($datos[$i]->valor == 2)
                                         <td colspan="2"></td>
                                         <td colspan="2">X</td>
-                                    @else
+                                        @else
                                         <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    @endif
+                                        <td colspan="2"></td>    
+                                @endif
                                 @if($numDato > $i+22)
                                     <th class="numero">{{$i+23}}</th>
                                     <td class="grande">{{$datos[$i+22]->paciente['nombres']}}</td>
-                                    @if($datos[$i+22]->valor == 1)
-                                        <td colspan="2">X</td>
+                                        @if($datos[$i+22]->valor == 1)
+                                            <td colspan="2">X</td>
+                                            <td colspan="2"></td>
+                                        @elseelseif($datos[$i+22]->valor == 2)
+                                            <td colspan="2"></td>
+                                            <td colspan="2">X</td>
+                                            @else
                                         <td colspan="2"></td>
-                                    @elseif($datos[$i+22]->valor == 2)
                                         <td colspan="2"></td>
-                                        <td colspan="2">X</td>
-                                    @else
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    @endif
-                                    <td class="obser" class="grande"> <span class="numeroSpan">{{$i+1}}:</span> {{$datos[$i]->observaciones}} 
-                                       <br> <span class="numeroSpan"> {{$i+23}}: </span>{{$datos[$i+22]->observaciones}} </td>
+                                        @endif
+                                        <td class="obser" class="grande"> 
+                                            @if($datos[$i]->observaciones=='*')
+                                                <span class="numeroSpan">{{$i+1}}:</span> 
+                                            @else
+                                                <span class="numeroSpan">{{$i+1}}:</span> {{$datos[$i]->observaciones}} 
+                                            @endif 
+                                            <br> 
+                                            @if($datos[$i+22]->observaciones=='*')
+                                                <span class="numeroSpan"> {{$i+23}}: </span> 
+                                            @else
+                                                <span class="numeroSpan"> {{$i+23}}: </span>{{$datos[$i+22]->observaciones}}
+                                            @endif 
+                                           
+                                        </td>
                                 @else
                                     <th class="numero">{{$i+23}}</th>
                                     <td class="grande"></td>
                                     <td colspan="2"></td>
                                     <td colspan="2"></td>
-                                    <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                         @if($datos[$i]->observaciones=='*')
+                                            <td class="grande"></td>
+                                            @else
+                                            <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                            @endif 
+                                    
                                 @endif
                             @endif
                     </tr>
@@ -336,5 +349,3 @@
 
 </body>
 </html>
-
-

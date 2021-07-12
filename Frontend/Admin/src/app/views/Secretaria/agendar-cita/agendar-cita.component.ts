@@ -244,7 +244,10 @@ export class AgendarCitaComponent implements OnInit {
     localStorage.removeItem('idCita');
     localStorage.removeItem('abonoCita');
     localStorage.removeItem('nombres');
-  }
+  
+      localStorage.removeItem('historiaClinica');
+    }
+  
 
   Consultar(cedula:string){
     

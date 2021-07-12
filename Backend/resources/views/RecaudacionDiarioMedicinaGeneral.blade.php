@@ -283,7 +283,11 @@
                                 <td class=""></td>
                                 <td colspan="2"></td>
                                 <td colspan="2"></td>
-                                <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                @if($datos[$i]->observaciones=="*")
+                                    <td class="grande"></td>
+                                @else
+                                    <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                @endif
                             @elseif($numDato < 22)
                                 <th class="numero">{{$i+1}}</th>
                                 <td class="grande"></td>
@@ -321,14 +325,29 @@
                                         <td colspan="2"></td>
                                         <td colspan="2"></td>
                                     @endif
-                                    <td class="obser" class="grande"> <span class="numeroSpan">{{$i+1}}:</span> {{$datos[$i]->observaciones}} 
-                                       <br> <span class="numeroSpan"> {{$i+23}}: </span>{{$datos[$i+22]->observaciones}} </td>
-                                @else
+                                    <td class="obser" class="grande"> 
+                                            @if($datos[$i]->observaciones=='*')
+                                                <span class="numeroSpan">{{$i+1}}:</span> 
+                                            @else
+                                                <span class="numeroSpan">{{$i+1}}:</span> {{$datos[$i]->observaciones}} 
+                                            @endif 
+                                            <br> 
+                                            @if($datos[$i+22]->observaciones=='*')
+                                                <span class="numeroSpan"> {{$i+23}}: </span> 
+                                            @else
+                                                <span class="numeroSpan"> {{$i+23}}: </span>{{$datos[$i+22]->observaciones}}
+                                            @endif 
+                                           
+                                        </td>@else
                                     <th class="numero">{{$i+23}}</th>
                                     <td class="grande"></td>
                                     <td colspan="2"></td>
                                     <td colspan="2"></td>
-                                    <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                    @if($datos[$i]->observaciones=='*')
+                                            <td class="grande"></td>
+                                            @else
+                                            <td class="grande">{{$datos[$i]->observaciones}}</td>
+                                            @endif 
                                 @endif
                             @endif
                     </tr>

@@ -324,7 +324,7 @@
             <div class=" form-group col-md-12">
               <div class="form-group">
                 <label for="vat">Observaciones</label>
-                <textarea id="observaciones" name="observaciones" [(ngModel)]="observaciones" rows="2" (click)="ClaseObser='form-control'" [class]="ClaseObser" required></textarea>
+                <textarea [disabled]="desabilitarTxt" id="observaciones" name="observaciones" [(ngModel)]="observaciones" rows="2" (click)="ClaseObser='form-control'" [class]="ClaseObser" required></textarea>
               </div>
           </div>
           </div>
