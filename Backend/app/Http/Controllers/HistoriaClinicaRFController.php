@@ -191,9 +191,29 @@ class HistoriaClinicaRFController extends Controller
             }
         }
 
+        $diaslab=[];
+        $arreglo=[];
+        foreach ($pacientes as $item){
+            $pase=0;
+           
+           
+            $arreglo=['fecha'=>$item['fecha']];
+            
+
+            foreach ($diaslab as $dia){
+            
+                if($item['fecha']=== $dia['fecha'])
+                    $pase=1;
+               
+            }
+
+            if($pase== 0)
+               array_push( $diaslab,$arreglo);
+        }
+        $horas=count($diaslab);;
         $TotalPacientes = count($pacientes);
 
-        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'patronato'=>$patro,'domicilio'=> $domi]);
+        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'patronato'=>$patro,'domicilio'=> $domi,'horas'=>$horas]);
 
     }
 

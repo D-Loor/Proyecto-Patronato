@@ -30,6 +30,13 @@ class CitaController extends Controller
 
     public function validarMGandRF($especialidad,$fechaActual){
 
+        $citaspasadas=Cita::orwhere('fecha', '<', $fechaActual)->get();
+        
+        foreach ($citaspasadas as $item)
+        {
+            $item->delete();
+        }
+        
         $datos=Cita::where('fecha',$fechaActual)->with('turno')->get();
         $roles=Role::where('rol', $especialidad)->first();
         $idrol=$roles['id_rol'];
@@ -194,7 +201,7 @@ class CitaController extends Controller
 
     public function validarHora($fecha, $tipo)
     {
-
+        
         $datos=Cita::with('turno')->where('fecha', $fecha)->get();
         $turno=Turno::orderBy('hora')->where('estado', 1)->with('rroles')->get();
         $roles=Role::where('rol', $tipo)->first();

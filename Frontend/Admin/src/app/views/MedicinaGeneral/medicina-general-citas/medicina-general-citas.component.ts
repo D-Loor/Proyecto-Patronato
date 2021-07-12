@@ -107,9 +107,10 @@ export class MedicinaGeneralCitasComponent implements OnInit {
       this.presun= data['presuntivo'];
       this.defini= data['definitivo'];
       let tiempocita=this.TotalPacientes*20;
-      this.horas=tiempocita/60;
-      this.horas=parseInt(this.horas);
-      this.minutos = tiempocita%60;
+      //this.horas=tiempocita/60;
+      this.horas=data['horas']*8;
+      //this.horas=parseInt(this.horas);
+      this.minutos = 0;
     }).catch(error =>{
       console.log(error);
       this.spinner.hide('sample');
@@ -162,7 +163,7 @@ export class MedicinaGeneralCitasComponent implements OnInit {
     this.citasMGFilter=[];
       this.citasMGPaginateFilter=[];
     if(this.search==null){
-      
+
       this.citasMGPaginate = this.citasMG.slice(0, 10);
     }else{
       for (const x of this.citasMG) {

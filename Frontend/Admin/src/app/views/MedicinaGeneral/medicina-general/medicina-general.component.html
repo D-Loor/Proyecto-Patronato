@@ -4,7 +4,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-archive "></i> 
+          <i class="fa fa-archive "></i>
           <strong>Historial de Consultas</strong>
         </div>
 
@@ -55,7 +55,7 @@
                   <th>Opciones</th>
                 </tr>
               </thead>
-              <tbody> 
+              <tbody>
                 <ng-container *ngIf="search == null; else filtroMG">
                   <tr *ngFor="let item of historialMGPaginate">
                     <td>{{item.paciente.cedula}}</td>
@@ -175,12 +175,12 @@
                   </div>
 
 
-                  <div class="form-group " *ngIf="gad==1">
+                  <div class="form-group ">
                     <label for="vat">{{diagno}} </label>
                        <textarea id="diagnostico" name="diagnostico" disabled [(ngModel)]="diagnostico" rows="2" class="form-control"  required></textarea>
                   </div>
 
-                  <div class="form-group " *ngIf="gad==1">
+                  <div class="form-group ">
                     <label for="vat">Plan terapéutico</label>
                        <textarea id="plan_terapeutico" name="plan_terapeutico" disabled rows="2" [(ngModel)]="plan_terapeutico" class="form-control" required></textarea>
                   </div>

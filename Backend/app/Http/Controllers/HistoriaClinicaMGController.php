@@ -175,6 +175,8 @@ class HistoriaClinicaMGController extends Controller
         $cont = 0;
         $contH = 0;
         $contM =0;
+        $horas =0;
+
 
         $citasPendientes = Cita::with('turno')->get();
         $rol = Role::all();
@@ -213,10 +215,29 @@ class HistoriaClinicaMGController extends Controller
             }
 
         }
+        $diaslab=[];
+        $arreglo=[];
+        foreach ($pacientes as $item){
+            $pase=0;
+           
+           
+            $arreglo=['fecha'=>$item['fecha']];
+            
 
+            foreach ($diaslab as $dia){
+            
+                if($item['fecha']=== $dia['fecha'])
+                    $pase=1;
+               
+            }
+
+            if($pase== 0)
+               array_push( $diaslab,$arreglo);
+        }
+        $horas=count($diaslab);;
         $TotalPacientes = count($pacientes);
 
-        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'presuntivo'=>$presunt,'definitivo'=> $defini]);
+        return response()->json(['totalP'=>$TotalPacientes, 'totalC'=>$TotalcitasPendientes, 'totalG'=>$cont, 'totalH'=>$contH, 'totalM'=>$contM, 'presuntivo'=>$presunt,'definitivo'=> $defini,'horas'=>$horas]);
         //return response()->json(['result'=>$TotalcitasPendientes, 'code'=>'202']);
 
     }

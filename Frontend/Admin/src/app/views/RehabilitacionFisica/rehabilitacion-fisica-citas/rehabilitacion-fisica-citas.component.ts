@@ -82,10 +82,8 @@ export class RehabilitacionFisicaCitasComponent implements OnInit {
       this.TotalMujeres = data['totalM'];
       this.patronato= data['patronato'];
       this.domicilio= data['domicilio'];
-      let tiempocita=this.TotalPacientes*20;
-      this.horas=tiempocita/60;
-      this.horas=parseInt(this.horas);
-      this.minutos = tiempocita%60;
+      this.horas=data['horas']*8;
+      this.minutos = 0;
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');

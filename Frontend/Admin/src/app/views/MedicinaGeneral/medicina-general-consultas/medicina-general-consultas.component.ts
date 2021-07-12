@@ -145,9 +145,8 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       else
         this.gadv="No consta como miembro activo";
       if(this.gad==0){
-        this.condicion_diagnostico='Presuntivo';
-        this.diagnostico='No admite';
-        this.plan_terapeutico='No admite';
+        this.diagnostico='';
+        this.plan_terapeutico='';
       }
     })
     .catch((error) => {
@@ -454,10 +453,10 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       else
         ta=this.taR;
 
-      
+
       let data;
 
-     
+
 
       data = {
        'nombre':this.nombresR,
@@ -469,7 +468,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
        'rp': this.plan_terapeutico,
        'pres': this.indicaciones
        }
-       
+
       if(localStorage.getItem('color')=='1'){
         localStorage.setItem('color', '2');
       }else if(localStorage.getItem('color')=='2'){
@@ -477,7 +476,7 @@ export class MedicinaGeneralConsultasComponent implements OnInit {
       }
       let plan_terapeutico = this.plan_terapeutico.replace(/#/gi,"%23");
       let indicaciones = this.indicaciones.replace(/#/gi,"%23");
-      
+
       this.color=localStorage.getItem('color');
       window.open('http://127.0.0.1:8000/api/Receta/'+this.color+'/'+this.nombresR+'/'+peso+'/'+talla+'/'+ta+'/'+this.edadR+'/'+this.fechaActual+'/'+plan_terapeutico+'/'+indicaciones, '_blank');
 

@@ -62,7 +62,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-sm-4" *ngIf="gad==1">
+                <div class="form-group col-sm-4">
                   <label for="inline-radios" [class]="ClaseCondicion">Condición de diagnóstico</label>
                   <div class="col-md-8 col-form-label">
                     <div class="form-check form-check-inline mr-3" id="inline-radios">
@@ -128,7 +128,7 @@
 
               </div>
 
-              <div class="form-group " *ngIf="gad==1">
+              <div class="form-group " >
                 <label for="vat">{{tipo}}</label>
                    <textarea id="diagnostico" name="diagnostico" [(ngModel)]="diagnostico" rows="3" [class]="ClaseDiagnostico" (click)="ClaseDiagnostico='form-control form-input'" placeholder="Escriba el diagnostico.." required></textarea>
 
