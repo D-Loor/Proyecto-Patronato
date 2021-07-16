@@ -63,6 +63,7 @@ export class PacientesComponent implements OnInit {
   };
 
   ngOnInit(){
+    localStorage.removeItem('historiaClinica');
     localStorage.removeItem('cedulaTemporal');
     localStorage.removeItem('contadorT');
       this.rolP = localStorage.getItem('rol');
@@ -107,7 +108,7 @@ export class PacientesComponent implements OnInit {
     }else{
       return valor = edad+" años";
     }
-    
+
 
   }
 
@@ -188,7 +189,6 @@ export class PacientesComponent implements OnInit {
   ngOnDestroy(): void{
     this.pacientesMG = [];
     this.pacientesMGPaginate = [];
-
   }
 
   DatosPaciente(id_paciente:number){
@@ -362,7 +362,7 @@ export class PacientesComponent implements OnInit {
     }else{
       this.examen_analT = data['result']['examen_fisicos'].region_anal;
     }
-    
+
     if(data['result']['examen_organo_sistemas'].sistema_digestivo==1){
       this.examen_digestivoT = 'Sin antecedentes';
     }else{

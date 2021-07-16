@@ -154,7 +154,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
       }
       this.edit=1;
       this.cedula=cedula;
-      
+
     }
     let sesion = localStorage.getItem('sesionLoginInicio');
     if(sesion=="Secretaría"){
@@ -246,7 +246,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     this.examen_cabezaC=0; this.examen_cuelloC=0; this.examen_toraxC=0; this.examen_abdomenC=0; this.examen_msuperiorC=0; this.examen_minferioresC=0; this.examen_genitalC=0; this.examen_analC=0;
     this.examen_digestivoC=0; this.examen_respiratorioC=0; this.examen_cardiacoC=0; this.examen_genitourinarioC=0; this.examen_osteomuscularC=0; this.examen_nerviosoC=0;
     this.examen_laboratorioC=0; this.examen_electrocardiogramaC=0; this.examen_RToraxC=0; this.examen_otrosC=0;
-    
+
 
     this.DatosFamiliares=[]; this.DatosFamiliaresbasedatos=[]; this.DatosFamiliaresDB=0; this.number=0; this.actualizar=0;
     //variables de los id Para relacionar y actualiar
@@ -312,7 +312,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         if(this.union==undefined||this.union==""){
           this.ClaseUnion="form-control is-invalid";
         }
-      
+
     }else{
     this.DatosFamiliaresDB=0;
     this.number ++;
@@ -449,7 +449,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
 
   }
 
-   
+
 
   cargarGinecoPersonal(id_gineco:number){
     this.ServicioSecretaria.datoGinecoObstetricos(id_gineco).then(data => {
@@ -606,7 +606,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
     ce=  localStorage.getItem('CedulaExamenes');
     ce2 = localStorage.getItem('historiaClinica');
     if(this.cedula== undefined || this.cedula=="undefined"){
-      
+
       this.limpiar();
       Swal.fire({
         icon: 'error',
@@ -1077,7 +1077,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         this.ClaseTexamen_RTorax="form-control is-invalid";
       }
     }
-    
+
 
     if(this.alcohol==undefined){
       this.ClaseAlcohol="invalido";
@@ -1211,7 +1211,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         title: '¡Hay campos vacíos..!',
         text: 'Debe de completar todo el formulario para registrar el historial clínico.'
       })
-      
+
       this.validacionTotal();
 
 
@@ -1503,7 +1503,7 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
         if(this.union==undefined||this.union==""){
           this.ClaseUnion="form-control is-invalid";
         }
-      
+
     }else{
     let  arrayLocal:any;
 
@@ -1568,7 +1568,8 @@ examen_cabezaC=0; examen_cuelloC=0; examen_toraxC=0; examen_abdomenC=0; examen_m
   }
 
   ngOnDestroy(): void{
-    
+    localStorage.removeItem('CedulaExamenes');
+    localStorage.removeItem('historiaClinica');
   }
 }
 

@@ -100,31 +100,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
 
   }
 
-  CalcEdad(edad:string){
-    var coma = "";
-    let sepa = edad.split(coma);
-    let punto = sepa[1]
-    let almacenar = sepa[2];
-    let dias =sepa[3]
-    let valor;
-    if(sepa.length==5){
-      dias=sepa[3]+""+sepa[4];
-    }
-    if(punto=="."){
-      if(almacenar=="0"){
-        return  valor = dias+" dias";
-      }else if(almacenar!="0"){
-        if(sepa.length==4){
-          almacenar = sepa[2]+""+sepa[3];
-        }
-        return  valor = almacenar+" meses";
-      }
-    }else{
-      return valor = edad+" años";
-    }
-    
 
-  }
 
   dataPaginate(event){//Función para el filtrado con paginado sin los pipes
     this.historialRFFilter=[];
@@ -187,7 +163,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['magnetoterapia'];
         conta++;
       }
-      
+
     }
     if(tratamiento['electroestimulacion']!="No aplica"){
       if(conta>=1){
@@ -196,7 +172,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['electroestimulacion'];
         conta++;
       }
-      
+
     }
     if(tratamiento['C_Q_C_O_H']!="No aplica"){
       if(conta>=1){
@@ -205,7 +181,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['C_Q_C_O_H'];
         conta++;
       }
-      
+
     }
     if(tratamiento['masaje']!="No aplica"){
       if(conta>=1){
@@ -214,7 +190,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['masaje'];
         conta++;
       }
-      
+
     }
     if(tratamiento['ejercicios_pasivos_resistidos']!="No aplica"){
       if(conta>=1){
@@ -223,7 +199,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['ejercicios_pasivos_resistidos'];
         conta++;
       }
-      
+
     }
     if(tratamiento['laser']!="No aplica"){
       if(conta>=1){
@@ -232,7 +208,7 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['laser'];
         conta++;
       }
-      
+
     }
     if(tratamiento['otros']!="No aplica"){
       if(conta>=1){
@@ -241,9 +217,9 @@ export class RehabilitacionFisicaComponent implements OnInit {
         this.tratamiento = tratamiento['otros'];
         conta++
       }
-      
+
     }
-    
+
     if(arreglo['certificado']==1){
       this.certificado="Se entregó certificado al paciente.";
     }else
@@ -264,7 +240,7 @@ FiltroFecha(){
     this.spinner.show('sample');
 
     this.historial.FiltroFecha(this.FechaInicio, this.FechaFin).then(data =>{
-  
+
       if(data['code']=='203'){
         Swal.fire(
           '¡Fecha Incorrecta..!',

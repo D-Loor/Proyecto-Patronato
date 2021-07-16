@@ -128,7 +128,7 @@ export class CitasComponent implements OnInit {
 
     this.ServicioSecretaria.ValidarIngreso(cedula).then(data =>{
         this.idPaciente = data['result'].id_paciente;
-        
+
 
     }).catch((error) => {
       console.log(error);
@@ -167,13 +167,13 @@ export class CitasComponent implements OnInit {
             this.ClaseObser ="form-control is-invalid";
           }
         }
-        
+
         if(this.desabilitar==false){
           if(this.precio == undefined||this.precio == ""){
             this.ClasePrecio ="form-control is-invalid";
           }
         }
-        
+
         if(this.gad==undefined||this.gad==null){
           this.ClaseGad="invalido";
         }
@@ -276,7 +276,7 @@ export class CitasComponent implements OnInit {
     this.ClasePrecio='form-control form-input select-number';
     this.ClaseObser='form-control';
     this.ClaseGad="";
-    
+
 
   }
 
@@ -312,9 +312,9 @@ export class CitasComponent implements OnInit {
     })
   }
 
-  
 
-  
+
+
 
   cargarMG(fechaActual:string,fecha:number,cambio:boolean,check:boolean,actualizado:boolean){
     this.citasser.citas("Medicina General",fechaActual).then(data =>{
@@ -345,7 +345,7 @@ export class CitasComponent implements OnInit {
                 title: '¡Citas Filtradas..!',
                 text: 'Se filtró las citas con la fecha seleccionada.'
               })
-              
+
             }
           }
 
@@ -406,7 +406,7 @@ export class CitasComponent implements OnInit {
               title: '¡Citas Filtradas..!',
               text: 'Se filtró las citas con la fecha seleccionada.'
             })
-            
+
           }
         }
 
@@ -660,7 +660,7 @@ export class CitasComponent implements OnInit {
     this.citasMGPaginate = null;
     this.citasRF = null;
     this.citasRFPaginate = null;
-      localStorage.removeItem('historiaClinica');
+
   }
 
   HistoriaPaciente(cedula:string){

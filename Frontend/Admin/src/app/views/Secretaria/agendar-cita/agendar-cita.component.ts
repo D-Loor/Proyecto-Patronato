@@ -206,7 +206,7 @@ export class AgendarCitaComponent implements OnInit {
     this.cargarRoles();
     this.idCita = localStorage.getItem('idCita');
     this.cedulaCita= localStorage.getItem('cedulaCita');
-    
+
     if(localStorage.getItem('abonoCita')=="1"){
       this.abono=true;
     }
@@ -244,13 +244,12 @@ export class AgendarCitaComponent implements OnInit {
     localStorage.removeItem('idCita');
     localStorage.removeItem('abonoCita');
     localStorage.removeItem('nombres');
-  
-      localStorage.removeItem('historiaClinica');
+    localStorage.removeItem('historiaClinica');
     }
-  
+
 
   Consultar(cedula:string){
-    
+
     this.loadingText = 'Cargando...';
     this.spinner.show('sample');
 
@@ -450,7 +449,7 @@ export class AgendarCitaComponent implements OnInit {
         this.idT="";
         this.fecha_consulta="";
       }
-      
+
     }).catch((error) => {
       console.log(error);
       this.spinner.hide('sample');

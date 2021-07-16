@@ -99,7 +99,7 @@ export class EgresosComponent implements OnInit {
   }
 
   cargarEgresos(){
-    
+
     this.spinner.show('sample');
 
     this.egresoservice.Egresos().then(data =>{
@@ -110,11 +110,11 @@ export class EgresosComponent implements OnInit {
       if(validarVacio == '202'){
       this.egresos.length = 0;
       this.egresosPaginate.length = 0;
-      
+
       }else{
         this.egresos=data['result'];
         this.egresosPaginate = this.egresos.slice(0, 10);
-        
+
       }
       if(this.search!=null){
         this.dataPaginate(event);
@@ -381,6 +381,7 @@ export class EgresosComponent implements OnInit {
 
   ngOnDestroy():void{
     localStorage.removeItem('historiaClinica');
+
   }
 
 }
