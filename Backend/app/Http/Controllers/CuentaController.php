@@ -184,15 +184,15 @@ class CuentaController extends Controller
         
     }
 
-    public function validar ($correo, $pass){
+    public function validar ($correo){
 
-        $datos=Cuenta::where('correo', $correo)->where('password', $pass)->with('role')->get();
+        $datos=Cuenta::where('correo', $correo)->with('role')->get();
 
         $num_rows = count($datos);
         if($num_rows != 0){
 
             if($datos[0]['role']['estado'] == 1 && $datos[0]['estado'] == 1){
-                return response()->json(['result'=>$datos]);
+                return response()->json(['result'=>$datos, 'code'=>'201']);
             }else{
                 return response()->json(['mensaje'=>"Usuario desabilitado", 'code'=>'203']);
             }

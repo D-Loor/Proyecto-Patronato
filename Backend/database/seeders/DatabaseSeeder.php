@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         DB::table('cuentas')->insert([
             "id_rol" => 1,
             "nombres" => "Administrador",
-            "correo" => "q",
-            "password" => "q",
+            "correo" => "admin",
+            "password" => "U2FsdGVkX19H9kIlJ+SUWrG5uS4ZckzyhFaAeOjhUVg=",
             "imagen" => "/imagenes/administrador.png",
             "estado" => "1",
         ]);

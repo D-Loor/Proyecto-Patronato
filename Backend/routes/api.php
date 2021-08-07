@@ -42,7 +42,7 @@ Route::resource('Turnos','TurnoController');
 Route::resource('Especialidades','EspecialidadController');
 Route::resource('Recaudacion','RecaudacionController');
 Route::resource('Egreso','EgresoController');
-Route::get('login/{correo}/{pass}', 'CuentaController@validar');
+Route::get('login/{correo}', 'CuentaController@validar');
 Route::get('citasMGandRF/{especialidad}/{fechaActual}', 'CitaController@validarMGandRF');
 Route::post('agendarCita','CitaController@store');
 Route::get('validarturno/{fecha}/{tipo}', 'CitaController@validarHora');

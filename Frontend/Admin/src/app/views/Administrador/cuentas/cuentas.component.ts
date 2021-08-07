@@ -4,6 +4,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-cuentas',
@@ -117,7 +118,7 @@ export class CuentasComponent implements OnInit {
   //Editado
   public onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
-      debugger
+      
       let tipoImagen = event.target.files[0].type;
       if( tipoImagen == "image/jpeg"  || tipoImagen == "image/png" || tipoImagen == "image/svg"){
       this.foto = event.target.files[0];
@@ -174,11 +175,15 @@ export class CuentasComponent implements OnInit {
       })
     }else{
       this.spinner.show('sample');
+      let encPass="DOADBA";
+      let textoEncriptado = CryptoJS.AES.encrypt(this.password.trim(), encPass.trim()).toString();
+      
+
       let array={
         "id_rol":this.rol,
         "nombres":this.nombres,
         "correo":this.correo,
-        "password":this.password,
+        "password":textoEncriptado,
         "imagen": this.foto,
         "estado": this.Estado
       }
@@ -335,11 +340,14 @@ export class CuentasComponent implements OnInit {
     this.ClaseCHora="form-control form-input select-number";
     this.ClaseEstado='form-control form-input select-number';
 
+    let desPass = "DOADBA";
+    let textoDesencriptado = CryptoJS.AES.decrypt(password.trim(), desPass.trim()).toString(CryptoJS.enc.Utf8);
+
       this.id_cuenta=id;
       this.nombres=nombres;
       this.nombresEditar=nombres;
       this.correo=correo;
-      this.password=password;
+      this.password=textoDesencriptado;
       this.correoEditar=correo;
       this.rol=id_rol;
       this.editarA=rol;
@@ -429,12 +437,16 @@ export class CuentasComponent implements OnInit {
             this.spinner.show('sample');
 
             this.editarA="";
+
+            let encPass="DOADBA";
+            let textoEncriptado = CryptoJS.AES.encrypt(this.password.trim(), encPass.trim()).toString();
+      
             let arrayUpdate={
               "id_rol":this.rol,
               "id_cuenta":this.id_cuenta,
               "nombres":this.nombres,
               "correo":this.correo,
-              "password":this.password,
+              "password":textoEncriptado,
               "imagen": this.foto,
               "estado": this.Estado
 
